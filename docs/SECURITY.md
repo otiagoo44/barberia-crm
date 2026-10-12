@@ -33,3 +33,8 @@ Borrado/anonymization legal y export completo de portabilidad están preparados 
 Tests reales de PostgreSQL incluyen tenant spoofing, FKs, membresía desactivada, organization_id inmutable, permisos directos, helpers y rol/branch. Auth fixture y Auth real se reportan por separado en [VERIFICATION](VERIFICATION.md).
 
 Advisors: las tablas privadas con RLS y cero políticas producen INFO deliberado (deny by default). No quitar RLS ni agregar políticas permisivas para silenciarlo. Índices “unused” en una base vacía no justifican eliminarlos.
+
+
+## Continuación financiera — 12/10/2026
+
+Anon sin acceso financiero. Authenticated solo SELECT por RLS; writes vía invoker→definer privado search_path vacío, actor/tenant/branch/rol/estado/idempotencia y audit. Finance sin gestión de cuentas. Snapshots de recepción no incluyen comisión global. Import limitado/ZIP expansion/XML sin entidades; no ejecutar fórmulas/macros ni usar nombres como customer identity. CSV seguro y export auditado. MFA platform_admin/owner/finance requiere configuración Auth real. Preview falla cerrado con Production o aislamiento incompleto.

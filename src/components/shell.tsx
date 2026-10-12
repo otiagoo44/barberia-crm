@@ -19,6 +19,8 @@ const links = [
   ["servicios", "Servicios", "✂"],
   ["sucursales", "Sucursales", "⌂"],
   ["metas", "Metas", "⚑"],
+  ["caja", "Caja", "$"],
+  ["finanzas", "Finanzas", "%"],
   ["reportes", "Reportes", "▥"],
   ["configuracion", "Configuración", "⚙"],
 ];
@@ -29,9 +31,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const [activity, setActivity] = useState(false);
   const allowed = links.filter(([key]) =>
     w.role === "barber"
-      ? ["inicio", "agenda", "clientes", "equipo"].includes(key)
+      ? ["inicio", "agenda", "clientes", "equipo", "reportes"].includes(key)
+      : w.role === "finance"
+        ? ["inicio", "caja", "finanzas", "reportes"].includes(key)
       : w.role === "receptionist"
-        ? ["inicio", "agenda", "clientes", "walk-ins", "retencion"].includes(
+        ? ["inicio", "agenda", "clientes", "walk-ins", "retencion", "caja"].includes(
             key,
           )
         : w.role === "manager"

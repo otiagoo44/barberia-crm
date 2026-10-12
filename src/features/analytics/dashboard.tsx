@@ -9,6 +9,7 @@ import { Notice, Loading, Empty } from "@/components/ui";
 import type { Page, Staff, DataRow } from "@/lib/types";
 import { currencyScale } from "@/features/configuration/record-manager";
 import { GoalCard } from "@/features/goals/goals";
+import { FinancialDashboard } from "@/features/finance/dashboard";
 type DashboardData = {
   totals: Record<string, number | null>;
   by_staff: {
@@ -324,6 +325,7 @@ export function Dashboard({ report = false }: { report?: boolean }) {
           </div>
         </>
       )}
+      {w.role !== 'barber' && w.role !== 'receptionist' && <FinancialDashboard compact periodFrom={from} periodTo={to} branchId={branch||w.branchId} />}
     </section>
   );
 }

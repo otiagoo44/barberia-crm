@@ -10,7 +10,7 @@ Disponibilidad: intersección de horario de sucursal y reglas/excepciones del st
 
 Outbox transaccional `domain_events` + `automation_jobs`, worker con lease y retries; proveedores externos después del commit. Métricas diarias por dimensión, recalculables desde citas. Realtime únicamente para filas operativas visibles; canal limpio al salir y refetch limitado tras reconexión.
 
-Finanzas completas y oportunidades comerciales no son parte del núcleo. La arquitectura permite agregar módulos sin duplicar organización, sucursal, cliente, staff ni cita.
+Finanzas operativas se agregan al núcleo; oportunidades comerciales siguen fuera. La arquitectura permite agregar módulos sin duplicar organización, sucursal, cliente, staff ni cita.
 
 Auditoría inicial: [AUDIT.md](AUDIT.md). Los resultados medidos y límites de verificación se registran en `VERIFICATION.md` al terminar.
 
@@ -35,3 +35,8 @@ flowchart LR
 ```
 
 La moneda usa unidades menores enteras y precios opcionales. Los reportes muestran valor estimado solo para servicios con precio; no representan cobros. Cambiar moneda se bloquea cuando ya hay precios o historial valuado. Metas usan días locales completos y fin exclusivo.
+
+
+## Continuación financiera — 12/10/2026
+
+Cuatro migrations financieras aditivas conservan las 15 originales y las entidades operativas. Venta/pago/fee/comisión/gasto/caja/liquidación separados; lock tenant, idempotencia, snapshots, RLS, audit y eventos privados. Agregados diarios acotados. Booking contrato website_booking_version=1, website_category/consultation_required y deep link service validado contra catálogo. Consulta previa no permite reserva pública directa. 1717barber consume este contrato con un único motor de booking.

@@ -129,6 +129,8 @@ export const definitions: Record<string, Definition> = {
         type: "checkbox",
       },
       { key: "category", label: "Categoría" },
+      { key: "website_category", label: "Categoría para la web", type: "select", options: [["corte","Corte"],["barba","Barba"],["infantil","Infantil"],["cejas","Cejas"],["lavado","Lavado"],["rulos","Rulos"],["tinte","Tinte"],["otro","Otro"]] },
+      { key: "consultation_required", label: "Requiere consulta previa para reservar desde la web", type: "checkbox" },
       { key: "color", label: "Color", type: "color", default: "#d8d3ff" },
       active,
     ],

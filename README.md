@@ -61,6 +61,11 @@ El script rechaza cualquier host remoto. Crea Barbería Demo, dos sucursales, ci
 - [Multi-tenancy](docs/MULTITENANCY.md), [seguridad](docs/SECURITY.md), [matriz RLS](docs/RLS_MATRIX.md).
 - [Reservas](docs/BOOKING_ENGINE.md), [disponibilidad](docs/AVAILABILITY_ENGINE.md), [capacidad y escalado](docs/CAPACITY_AND_SCALING.md).
 - [Backups y recovery](docs/BACKUP_AND_RECOVERY.md), [rollback](docs/ROLLBACK_PLAN.md), [checklist de producción](docs/PRODUCTION_RELEASE_CHECKLIST.md).
-- [Nueva organización](docs/NEW_ORGANIZATION_ONBOARDING.md), [finanzas pendientes](docs/FINANCE_MODULE_PENDING.md), [evidencia y limitaciones](docs/VERIFICATION.md).
+- [Nueva organización](docs/NEW_ORGANIZATION_ONBOARDING.md), [finanzas operativas](docs/FINANCE.md), [evidencia y limitaciones](docs/VERIFICATION.md).
 
 La documentación distingue IMPLEMENTADO, PROBADO, NO PROBADO y PENDIENTE. El release no se considera habilitado para clientes reales hasta completar los controles externos de la checklist, incluidos correo, worker, backups y restore del proyecto real.
+
+
+## Continuación financiera — 12/10/2026
+
+Finanzas operativas implementadas: Caja, checkout/split, POS, comisiones, gastos, adelantos, salario, liquidaciones y reversals. Ver [FINANCE](docs/FINANCE.md), [import](docs/FINANCE_IMPORT_1717.md) y [auditoría](docs/CONTINUATION_AUDIT.md). config/onboarding/1717.json es preparación, no seed automático. Preview exige staging distinto de Production; scheduler compatible debe configurarse.

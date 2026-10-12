@@ -42,6 +42,22 @@ Variables runtime: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KE
 
 Data API expone solo public. Realtime publication ya incluye tablas operativas/horarios requeridas por migrations. Configurar Auth site URL, redirects `/auth/callback` y recuperación, SMTP real, verificación email/límites/CAPTCHA según exposición. No usar redirects wildcard de producción.
 
-Vercel: importar Git repo, framework Next, Node 24, variables separadas Preview/Production y dominio HTTPS. `vercel.json` agenda worker cada minuto, lo que requiere plan con esa frecuencia; [límites oficiales de Cron](https://vercel.com/docs/cron-jobs/usage-and-pricing). Alternativa: scheduler externo seguro con Authorization Bearer CRON_SECRET y quitar cron de Vercel. No poner el secreto en query string. Probar worker y queue lag antes de operar.
+Vercel: importar Git repo, framework Next, Node 24, variables separadas Preview/Production y dominio HTTPS. Configurar scheduler compatible antes de operar; [límites oficiales de Cron](https://vercel.com/docs/cron-jobs/usage-and-pricing). Alternativa: scheduler externo seguro con Authorization Bearer CRON_SECRET. No poner el secreto en query string. Probar worker y queue lag antes de operar.
 
 Preview debe usar Supabase de staging, nunca credenciales/datos reales de producción. Completar [checklist](PRODUCTION_RELEASE_CHECKLIST.md), backups/restore y evidencias antes del primer cliente.
+
+## Onboarding de 17:17
+
+1. Revisar config/onboarding/1717.json; confirmar correo del owner y registro Auth. No crear usuarios para Jonatan/Esteban sin correos.
+2. Platform admin crea 17:17 Barbería, slug propuesto 1717-barberia, America/Asuncion, PYG, owner registrado. Confirmar slug y dominio final.
+3. Crear branch Luque (slug propuesto luque), dirección Cap. Dado esq. Gobernador Irala, Luque, Paraguay. Staff Jonatan/Esteban sin profile_id; capacidades y horarios individuales confirmados.
+4. Validar composición y duración. Combo/tinte no publicar hasta confirmar duración. Tinte global 250000 y mechas 180000 separados; no adoptar editorial Tinte 200000. Rulos requiere consulta previa.
+5. Configurar métodos efectivo/transferencia/débito/crédito y reglas prospectivas 0/0/300/500 bps, cargo fijo cero, exclusivamente de este tenant. Crear categorías/items del manifiesto. Matriz staff+servicio cero solo con confirmación owner. Política adelantos explícita.
+6. Staging: abrir caja y ensayar venta/split/gasto/adelanto/salario/liquidación/reversal. No demo cloud.
+7. Dry-run XLSX definitivo, revisar cuatro anomalías/mappings y reglas históricas demostrables; unknown si no hay evidencia. Importar solo desde preview confirmado.
+8. 1717barber: BARBERIA_OS_PUBLIC_URL HTTPS, BARBERIA_OS_ORGANIZATION_SLUG y BARBERIA_OS_BRANCH_SLUG reales. Build valida catálogo v1/slugs/precios/duraciones/consulta. Sin keys Supabase.
+9. Completar SMTP/redirects/MFA/backup/scheduler y checklist antes del piloto.
+
+Production: APP_URL HTTPS exacto, public Supabase URL/publishable key y BOOKING_GATEWAY_SECRET/WORKER_SECRET/CRON_SECRET privados independientes; SUPABASE_ENVIRONMENT=production. Preview: SUPABASE_ENVIRONMENT=staging, credenciales distintas, PRODUCTION_SUPABASE_PROJECT_REF y APP_URL de preview. Runtime rechaza Production. No service_role frontend ni secretos NEXT_PUBLIC.
+
+vercel.json ya no activa cron en un plan no verificado. Plan compatible: agregar cron cada minuto. Alternativa scheduler HTTPS con Authorization Bearer CRON_SECRET, timeout/retries controlados; secreto nunca en query. No operar sin probar worker/queue lag.

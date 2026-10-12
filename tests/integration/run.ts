@@ -1,5 +1,6 @@
 import { isolatedDatabase } from "./database";
 import { contracts } from "../security/contracts";
+import { financeContracts } from "./finance";
 const db = await isolatedDatabase();
 try {
   const result = await contracts(db.pool);
@@ -13,4 +14,15 @@ try {
   );
 } finally {
   await db.stop();
+}
+const financeDb = await isolatedDatabase();
+try {
+  console.log(
+    JSON.stringify({
+      suite: "operational-finance",
+      ...(await financeContracts(financeDb.pool)),
+    }),
+  );
+} finally {
+  await financeDb.stop();
 }

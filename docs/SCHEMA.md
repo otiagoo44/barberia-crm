@@ -49,3 +49,8 @@ Onboarding/configuración: create_organization_for_email, manage_membership, man
 Agenda: list_availability, create_booking, reschedule_booking, transition_booking, cancel_booking. Walk-in: create_walkin, assign_walkin, close_walkin. Público: public_rate_check, public_catalog, public_availability, public_booking, gateway_health. Worker: worker_tick, claim_jobs, process_job, fail_job. record_export autoriza/audita export.
 
 Todos los wrappers expuestos son SECURITY INVOKER; los checks reales están en app_private. No hay RPC que acepte SQL arbitrario. JSON configurable admite exclusivamente campos permitidos para cada entidad.
+
+
+## Continuación financiera — 12/10/2026
+
+27 tablas: finance_settings, payment_methods, payment_method_fee_rules, commission_rules, finance_items, expense_categories, cash_sessions, checkouts, checkout_lines, payments, expenses, commission_entries, staff_advances, salary_payments, staff_settlements, settlement_commission_entries, settlement_advances, settlement_adjustments, financial_adjustments, financial_reversals, cash_movements, daily_closures, finance_import_batches, finance_import_rows, daily_financial_metrics, daily_payment_method_metrics, daily_staff_financial_metrics. organization_id/FKs compuestas/RLS en todas; money_minor bigint 0..9e12, rate_bps 0..10000; exclusión temporal de reglas; unicidad ventas/cajas/reversals/reservas/batches. Triggers sellan históricos; constraints diferidas validan posted balance. Servicios agregan website_category/consultation_required; finanzas bloquea cambios de moneda/timezone con historia.

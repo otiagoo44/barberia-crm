@@ -56,6 +56,138 @@ test.describe("Real Supabase Auth and domain flows", () => {
     !real,
     "Requires isolated local Supabase; never substitutes mocked Auth",
   );
+  test("Cash UI posts a split checkout, closes a session and keeps reception reports private", async ({
+    page,
+  }) => {
+    await login(page);
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    const date = new Date().toISOString().slice(0, 10);
+    const base = `org=${f.orgA}&branch=${f.branches.a1}&from=${date}&to=${date}`;
+    const command = async (action: string, data: Record<string, unknown>) => {
+      const r = await page.request.post("/api/finance/command", {
+        headers: { Origin: "http://localhost:3000" },
+        data: {
+          org: f.orgA,
+          branch: f.branches.a1,
+          action,
+          data,
+          key: crypto.randomUUID(),
+        },
+      });
+      expect(r.ok()).toBeTruthy();
+      return (await r.json()) as { id: string };
+    };
+    const cash = (
+      await command("configure", {
+        entity: "payment_methods",
+        name: "E2E efectivo",
+        code: "e2e_cash",
+        type: "cash",
+      })
+    ).id;
+    const transfer = (
+      await command("configure", {
+        entity: "payment_methods",
+        name: "E2E transferencia",
+        code: "e2e_transfer",
+        type: "bank",
+      })
+    ).id;
+    for (const method of [cash, transfer])
+      await command("configure", {
+        entity: "payment_method_fee_rules",
+        payment_method_id: method,
+        percentage_bps: 0,
+        fixed_amount_minor: 0,
+      });
+    await command("configure", {
+      entity: "finance_items",
+      name: "E2E producto",
+      kind: "product",
+      price_minor: 100000,
+    });
+    let state = await (
+      await page.request.get(`/api/finance/cash?${base}`)
+    ).json();
+    if (state.session?.status !== "open")
+      await command("open_cash_session", { opening_amount_minor: 1000 });
+    await page.goto("/fixture-a/caja");
+    await expect(
+      page.getByRole("heading", { name: "Caja", exact: true }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Venta sin cita" }).click();
+    await page
+      .getByLabel("Producto, curso u otro ingreso")
+      .selectOption({ label: "E2E producto" });
+    await page.getByRole("button", { name: "Preparar checkout" }).click();
+    await expect(
+      page.getByRole("button", { name: "Dividir pago" }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Dividir pago" }).click();
+    await page
+      .getByLabel("Medio de pago", { exact: true })
+      .nth(0)
+      .selectOption(cash);
+    await page
+      .getByLabel("Medio de pago", { exact: true })
+      .nth(1)
+      .selectOption(transfer);
+    await page
+      .getByLabel("Importe en unidad mínima", { exact: true })
+      .nth(0)
+      .fill("60000");
+    await page
+      .getByLabel("Importe en unidad mínima", { exact: true })
+      .nth(1)
+      .fill("40000");
+    await page.getByRole("button", { name: "Cobrar y registrar" }).click();
+    await expect(page.getByText("Venta cobrada y registrada.")).toBeVisible();
+    await page
+      .getByRole("button", { name: "Volver y ofrecer próximo turno" })
+      .click();
+    for (const width of [360, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBeTruthy();
+      await page.screenshot({
+        path: `test-results/cash-${width}.png`,
+        fullPage: true,
+      });
+    }
+    state = await (await page.request.get(`/api/finance/cash?${base}`)).json();
+    await page
+      .getByRole("button", { name: "Cerrar caja", exact: true })
+      .click();
+    await page
+      .getByLabel("Efectivo contado en unidad mínima")
+      .fill(String(state.session.expected_cash_minor));
+    await page.getByRole("button", { name: "Confirmar cierre" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Caja cerrada", exact: true }),
+    ).toBeVisible();
+    await page.goto("/fixture-a/finanzas");
+    await expect(
+      page.getByRole("heading", { name: "Finanzas", exact: true }),
+    ).toBeVisible();
+    await page.screenshot({
+      path: "test-results/finance-desktop.png",
+      fullPage: true,
+    });
+    await page.context().clearCookies();
+    await login(page, "receptionA");
+    await page.goto("/fixture-a/caja");
+    await expect(
+      page.getByRole("link", { name: "Finanzas", exact: true }),
+    ).toHaveCount(0);
+    expect(
+      (await page.request.get(`/api/finance/summary?${base}`)).status(),
+    ).toBe(403);
+    expect(errors).toEqual([]);
+  });
   test("Signed sessions enforce tenant, branch, role and anonymous database permissions", async ({
     page,
   }) => {

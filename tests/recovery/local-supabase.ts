@@ -23,6 +23,50 @@ const env = {
 const start = performance.now();
 let restored: Pool | undefined;
 try {
+  // Financial source data belongs only to the isolated Auth fixtures, never a cloud project.
+  const finance = async (action: string, data: object) =>
+    (
+      await asUser<{ result: { id: string } }>(
+        pool,
+        f.users.ownerA,
+        "select public.finance_command($1,$2,$3,$4,$5) result",
+        [f.orgA, f.branches.a1, action, JSON.stringify(data), randomUUID()],
+      )
+    )[0].result.id;
+  const method = await finance("configure", {
+    entity: "payment_methods",
+    name: "Recovery cash",
+    code: "recovery_cash",
+    type: "cash",
+  });
+  await finance("configure", {
+    entity: "payment_method_fee_rules",
+    payment_method_id: method,
+    percentage_bps: 0,
+    fixed_amount_minor: 0,
+  });
+  const item = await finance("configure", {
+    entity: "finance_items",
+    name: "Recovery product",
+    kind: "product",
+    price_minor: 10000,
+  });
+  const session = await finance("open_cash_session", {
+    opening_amount_minor: 1000,
+  });
+  const checkout = await finance("create_checkout", {
+    lines: [{ item_id: item, quantity: 1 }],
+  });
+  await finance("post_checkout", {
+    id: checkout,
+    payments: [
+      {
+        payment_method_id: method,
+        amount_minor: 10000,
+        cash_session_id: session,
+      },
+    ],
+  });
   const dump = execFileSync(
     "docker",
     [
@@ -57,6 +101,7 @@ try {
       "-d",
       "recovery_drill",
       "--exit-on-error",
+      "--no-owner",
     ],
     {
       env,
@@ -69,7 +114,7 @@ try {
   target.pathname = "/recovery_drill";
   restored = new Pool({ connectionString: target.toString() });
   const countsSql =
-    "select (select count(*)::int from public.organizations) organizations,(select count(*)::int from public.customers) customers,(select count(*)::int from public.staff) staff,(select count(*)::int from auth.users) auth_users,(select count(*)::int from public.audit_logs) audit_logs";
+    "select (select count(*)::int from public.organizations) organizations,(select count(*)::int from public.customers) customers,(select count(*)::int from public.staff) staff,(select count(*)::int from auth.users) auth_users,(select count(*)::int from public.audit_logs) audit_logs,(select count(*)::int from public.checkouts) checkouts,(select count(*)::int from public.payments) payments,(select count(*)::int from public.cash_movements) cash_movements";
   const source = (await pool.query(countsSql)).rows[0];
   assert.deepEqual((await restored.query(countsSql)).rows[0], source);
   assert.equal(
@@ -100,6 +145,20 @@ try {
     )
   ).rows[0];
   assert.equal(rls.total, rls.protected);
+  const restoredFinance = await asUser<{
+    result: { session: { expected_cash_minor: number } };
+  }>(
+    restored,
+    f.users.ownerA,
+    "select public.finance_read($1,$2,'cash',current_date,current_date) result",
+    [f.orgA, f.branches.a1],
+  );
+  assert.equal(restoredFinance[0].result.session.expected_cash_minor, 11000);
+  assert.equal(
+    (await asUser(restored, f.users.ownerB, "select id from public.payments"))
+      .length,
+    0,
+  );
   const tomorrow = new Date();
   tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
   tomorrow.setUTCHours(9, 0, 0, 0);
@@ -156,8 +215,11 @@ try {
       "manager branch isolation",
       "idempotent booking",
       "GiST overlap constraint",
+      "financial row counts, cash balance and tenant isolation",
     ],
     production_restore: "NOT_TESTED",
+    ownership:
+      "Portable local restore --no-owner; ACLs and RLS retained. Cloud ownership restoration not exercised.",
   };
   await mkdir("docs/verification", { recursive: true });
   await writeFile(

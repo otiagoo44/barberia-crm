@@ -8,6 +8,7 @@ import { statusLabels } from "@/lib/validation";
 import { Modal, Badge, Notice } from "@/components/ui";
 import type { Appointment } from "@/lib/types";
 import { BookingForm } from "./booking-form";
+import { CheckoutDialog } from "@/features/finance/checkout";
 export function AppointmentDialog({
   appointment,
   onClose,
@@ -22,6 +23,7 @@ export function AppointmentDialog({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [reason, setReason] = useState("");
+  const [checkout, setCheckout] = useState(false);
   const [booking, setBooking] = useState<"reschedule" | "rebooking" | null>(
     null,
   );
@@ -57,12 +59,14 @@ export function AppointmentDialog({
       const next = { ...a, status };
       setA(next);
       onChanged(next);
+      if(status === "completed" && operator) setCheckout(true);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error");
     } finally {
       setBusy(false);
     }
   }
+  if(checkout) return <CheckoutDialog appointmentId={a.id} branchId={a.branch_id} onClose={()=>setCheckout(false)} />;
   if (booking)
     return (
       <BookingForm
@@ -144,6 +148,7 @@ export function AppointmentDialog({
         )}
         {a.status === "completed" && (
           <div className="panel stack">
+            {operator&&<button className="primary" onClick={()=>setCheckout(true)}>Cobrar / ver checkout</button>}
             <h3>Â¿Agendar prÃ³xima visita?</h3>
             <p className="muted">
               Te sugeriremos una fecha segÃºn los servicios y la frecuencia del

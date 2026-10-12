@@ -29,3 +29,8 @@ Las lecturas de agenda/clientes reutilizan autorización viva dentro del request
 Observar DB connections/espera del pooler, CPU, RAM, tamaño DB/índices, queries lentas, locks, p95/p99 de HTTP, Realtime connections, invocaciones worker/Edge si se agregan, error rate, oldest pending job, queue depth, retries/dead y awaiting_configuration. Correlacionar request_id con audit/event/logs.
 
 Health `/api/health` verifica proceso; `/api/health/ready` verifica acceso al gateway/schema. No demuestra SMTP/WhatsApp/backups. SSE dura como máximo cuatro minutos y reconecta con refetch acotado; los canales se cierran al salir. Una vista de recepción con agenda y cola puede abrir dos canales independientes; medir coste de conexiones/invocaciones en staging. Realtime carga y fallback bajo pérdida de red requieren prueba administrada específica.
+
+
+## Continuación financiera — 12/10/2026
+
+Tres agregados diarios recalculan solo branch/fecha afectada. Ledger conserva autoridad. Movimientos 50/máximo100, rango3660d, export máximo9999filas. Import1500movimientos/8MB comprimidos, límites XML/ZIP y transacción por batch. Lock tenant asegura snapshots concurrentes; medir latencia antes de cambiar granularidad. No inferir rendimiento cloud.

@@ -160,6 +160,7 @@ function Memberships() {
                 <option value="receptionist">Recepción</option>
                 <option value="manager">Encargado</option>
                 <option value="barber">Barbero</option>
+                <option value="finance">Finanzas</option>
                 <option value="organization_owner">Propietario</option>
               </select>
             </Field>

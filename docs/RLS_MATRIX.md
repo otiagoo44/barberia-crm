@@ -62,8 +62,27 @@ Las cuatro vistas `visits`, `daily_organization_metrics`, `daily_branch_metrics`
 | Métricas/jobs/notifications | Solo worker privado | — | — | — | Gateway worker con secreto específico |
 | Export CSV activos | Organización | Branch autorizada/relevantes | — | — | — |
 
-No existe DELETE normal de customers/staff/branches/services/appointments. Quitar una regla/exception/capacidad sí tiene RPC explícita, comprobando alcance y citas futuras; no elimina historial operacional. Perfil/Auth global se administra fuera del CRUD de tenant. Finance está reservado, sin flujo ni writes operativos V1.
+No existe DELETE normal de customers/staff/branches/services/appointments. Quitar una regla/exception/capacidad sí tiene RPC explícita, comprobando alcance y citas futuras; no elimina historial operacional. Perfil/Auth global se administra fuera del CRUD de tenant. Finance habilitado por RPC.
 
 Membresía/profile/organización activos se evalúan en cada request; el owner accede a toda la organización, manager solo branches asignadas y barber a su recurso. `can_access_branch` permite leer historia de branches archivadas; `can_operate_branch` exige activación.
 
 Fuente exacta: migrations authorization/reporting_access/archived_branch_history y guards de cada RPC. Tests cross-tenant y de permisos en `tests/security/contracts.ts`; la evidencia distingue fixture Auth de Auth real.
+
+
+## Matriz financiera
+
+Writes directos INSERT/UPDATE/DELETE denegados. O=tenant,B=branch autorizada,P=staff propio.
+
+|Área|Owner|Finance|Manager|Reception|Barber|Anon|
+|---|---|---|---|---|---|---|
+|Checkout/pago/caja RPC y lectura|O|O|B|B|—|—|
+|Gasto normal|O|O|B|B|—|—|
+|Adelanto/salario/comisión/liquidación/ajuste|O|O|B|—|P lectura|—|
+|Reportes/cierres sellados|O|O|B|—|P resumen|—|
+|Métodos/items/categorías catálogo|O|O|O|O|O lectura|—|
+|Reglas POS/config global|O|O|—|—|—|—|
+|Reglas comisión|O|O|B lectura|—|—|—|
+|Import/export|O|O|—|—|—|—|
+|Usuarios/seguridad|O|—|—|—|—|—|
+
+Recepción recibe snapshot operativo sin financial. Cierres completos requieren report. Finance.* audit disponible finance/manager de branches. Helpers comprueban profile/membership/organization/branch. Finance all_branches para su función financiera, manager asignación explícita. No se concede seguridad a finance.

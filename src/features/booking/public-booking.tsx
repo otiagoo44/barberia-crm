@@ -6,18 +6,21 @@ import { normalizePhone } from "@/lib/validation";
 import { Field, Notice, Empty, Loading } from "@/components/ui";
 import { ServicePicker } from "@/features/services/service-picker";
 import { brandStyle } from "@/lib/branding";
+import { preselectedServices } from "@/lib/booking-links";
 type PublicService = {
   slug: string;
   name: string;
   composition_mode: string;
   base_service_slug: string | null;
   price_minor: number | null;
+  consultation_required?: boolean;
 };
 type PublicBranch = {
   slug: string;
   name: string;
   timezone: string;
   address: string;
+  phone?: string|null;
   services: PublicService[];
   staff: { slug: string; name: string; services: string[] }[];
 };
@@ -38,15 +41,17 @@ type Slot = {
 export function PublicBooking({
   organization,
   branchSlug,
+  requestedService,
 }: {
   organization: string;
   branchSlug?: string;
+  requestedService?: string;
 }) {
   const catalog = useResource<Catalog>(
     `/api/public/catalog?organization=${encodeURIComponent(organization)}${branchSlug ? "&branch=" + encodeURIComponent(branchSlug) : ""}`,
   );
   const [branch, setBranch] = useState(branchSlug ?? "");
-  const [services, setServices] = useState<string[]>([]);
+  const [selection, setServices] = useState<string[]|null>(null);
   const [staff, setStaff] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -62,6 +67,7 @@ export function PublicBooking({
   const b = catalog.data?.branches.find(
     (b) => b.slug === (branch || catalog.data?.branches[0]?.slug),
   );
+  const services=selection??preselectedServices(requestedService,b?.services??[]);
   const today = formatInTimeZone(
     new Date(),
     b?.timezone ?? "Etc/UTC",
@@ -199,7 +205,7 @@ export function PublicBooking({
           {b.address ? " · " + b.address : ""}
         </p>
         <ServicePicker
-          services={b.services.map((s) => ({
+          services={b.services.filter(s=>!s.consultation_required).map((s) => ({
             id: s.slug,
             name: s.name,
             composition_mode: s.composition_mode,
@@ -211,6 +217,7 @@ export function PublicBooking({
             setTime("");
           }}
         />
+        {b.services.some(s=>s.consultation_required)&&<Notice>Requieren consulta previa: {b.services.filter(s=>s.consultation_required).map(s=>s.name).join(', ')}. {b.phone&&<a href={'tel:'+b.phone.replace(/[^+0-9]/g,'')}>Contactar a la barbería</a>}</Notice>}
         <div className="form-grid">
           <Field label="Barbero">
             <select

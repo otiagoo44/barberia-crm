@@ -35,10 +35,15 @@ Advisors tras hardening: ninguna advertencia/error de seguridad; cuatro INFO por
 
 ## PENDIENTE por datos/configuración externa
 
-Cuenta real de administrador/propietario, nombre/branding/dominio/branches/staff/servicios/precios/horarios del negocio; configuración SMTP/Auth/plan/backups/PITR, evidencia de restore y scheduler de producción; proveedor de WhatsApp/webhooks cuando se elija. Finanzas, caja/comisiones/liquidaciones requieren Google Sheet real y definición validada.
+Cuenta real de administrador/propietario, nombre/branding/dominio/branches/staff/servicios/precios/horarios del negocio; configuración SMTP/Auth/plan/backups/PITR, evidencia de restore y scheduler de producción; proveedor de WhatsApp/webhooks cuando se elija. Finanzas implementadas; onboarding/reglas históricas/piloto requieren verificación.
 
 ## Límites de V1
 
 Un principal por booking, servicios de hasta 480 min y reserva dentro de un día local. Sin buffers/traslados entre branches. Agenda máximo 8 días/2000 filas con advertencia; listas de lookup limitadas a 100 y referencias necesitan filtro si se alcanza; exports activos ≤9999 clientes. El owner puede reactivar clientes/branches archivados explícitamente. Importador masivo/pipeline/portal público firmado/legal anonymization son extensiones, no flujos implementados. Todos los límites están visibles/documentados; no hay números de escalabilidad de producción inventados.
 
 Ver [checklist](PRODUCTION_RELEASE_CHECKLIST.md) para los controles necesarios antes de abrir reservas con clientes reales.
+
+
+## Continuación financiera — 12/10/2026
+
+Baseline lint/typecheck/5unit/47DB/build pasó. Las 15 migrations originales intactas; remoto tenía14/cero organizaciones. Nuevas migrations desde cero y47regresiones+13contratos financieros pasaron Postgres aislado. Unit ampliado11/11; audit high cero; build financiero pasó. Dry-run539/535READY/4NEEDS_REVIEW/cero writes. Browser local1passed/4Auth real skipped (sinDocker). CI original [38311824540](https://github.com/otiagoo44/barberia-crm/actions/runs/38311824540): quality success, restore failure SET ROLE supabase_admin; browser omitido. Corrección portable/finanzas/browser añadida, resultado final pendiente de su ejecución. Vercel no encontró proyecto barberia-crm ni equipos; plan no demostrado.

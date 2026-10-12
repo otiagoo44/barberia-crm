@@ -23,6 +23,8 @@
     "@supabase/supabase-js": "2.117.3",
     "date-fns": "4.4.0",
     "date-fns-tz": "3.2.0",
+    "fast-xml-parser": "5.11.2",
+    "fflate": "0.8.3",
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",

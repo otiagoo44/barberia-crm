@@ -52,9 +52,10 @@ export const roleLabels: Record<string, string> = {
   manager: "Encargado",
   receptionist: "Recepción",
   barber: "Barbero",
+  finance: "Finanzas",
 };
 export function csvCell(value: unknown) {
   const text = String(value ?? "");
-  const safe = /^[=+\-@\t\r]/.test(text) ? "'" + text : text;
+  const safe = /^[\s]*[=+\-@]|^[\t\r\n]/.test(text) ? "'" + text : text;
   return '"' + safe.replaceAll('"', '""') + '"';
 }

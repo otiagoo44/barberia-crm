@@ -30,7 +30,7 @@ const writes = {
     .object({
       org: uuid,
       email: z.email(),
-      role: z.enum(["organization_owner", "manager", "receptionist", "barber"]),
+      role: z.enum(["organization_owner", "manager", "receptionist", "barber", "finance"]),
       all_branches: z.boolean(),
       branches: z.array(uuid).max(100),
       active: z.boolean(),

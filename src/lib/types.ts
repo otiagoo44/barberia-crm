@@ -10,6 +10,7 @@ export type DataRow = {
 export type Role =
   | "platform_admin"
   | "organization_owner"
+  | "finance"
   | "manager"
   | "receptionist"
   | "barber";

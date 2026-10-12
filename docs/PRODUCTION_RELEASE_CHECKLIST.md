@@ -37,4 +37,13 @@ Estado por control y evidencia en [VERIFICATION](VERIFICATION.md). Esta lista es
 - [ ] Política de privacidad/consentimiento/retención definida; notas sin datos sensibles innecesarios.
 - [ ] Operación piloto controlada: reservar, atender, completar, rebook, revisar dashboard/historia, cancelar una cita de prueba.
 
-WhatsApp/API externa, webhooks y finanzas siguen pendientes hasta disponer de proveedor/credenciales/reglas reales. Jobs externos deben permanecer awaiting_configuration; no simular envío exitoso.
+WhatsApp/API externa/webhooks requieren proveedor y credenciales. Finanzas implementadas; habilitación sujeta a onboarding y verificación. Jobs externos deben permanecer awaiting_configuration; no simular envío exitoso.
+
+
+## Continuación financiera — 12/10/2026
+
+- [ ] Checkout/split/fees/comisiones/caja/gasto/adelanto/salario/liquidación/reversal con Auth real staging.
+- [ ] Reglas/adelantos/onboarding confirmados, snapshots preservados, preview XLSX revisado.
+- [ ] Preview rechaza Production; scheduler operativo; backup financiero/restore aislado.
+- [ ] CI final con migrations/finanzas/restore/browser sin omisiones por fallos previos.
+- [ ] Catálogo/duraciones/horarios/capacidades/owner/landing real validados.

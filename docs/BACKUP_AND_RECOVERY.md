@@ -24,3 +24,8 @@ Usar backup administrado/PITR y copia lógica cifrada independiente cuando el pl
 En incidente: pausar writes en gateway, conservar logs y backup posterior al incidente, elegir punto de restauración anterior, restaurar en destino aislado, validar datos, conmutar variables/URL y reabrir. No sobrescribir primero la única copia dañada. [Rollback de migrations](ROLLBACK_PLAN.md).
 
 Repetir simulacro tras cambios importantes y periódicamente. Registrar evidencia en `docs/verification/restore-YYYY-MM-DD.md`; hasta entonces el restore de producción permanece NO PROBADO.
+
+
+## Continuación financiera — 12/10/2026
+
+Backup incluye ventas/líneas/pagos/fees/comisiones, gastos/adelantos/salarios, liquidaciones/reservas/ajustes/reversals, cajas/movimientos/cierres, imports/raw, agregados/audit. Restore drill CI compara filas financieras/saldo/RLS; --no-owner evita SET ROLE supabase_admin en otra DB local, conserva ACL/RLS y strict exit-on-error. No demuestra ownership/cloud/PITR reales; configuración/retención/RPO/RTO y restore cloud aislado requieren evidencia.

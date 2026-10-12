@@ -3,7 +3,9 @@ import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { cookies, headers } from "next/headers";
 import { secureCookies } from "@/lib/cookie-security";
+import { assertEnvironmentBoundary } from "@/lib/environment-boundary";
 export function publicEnvironment() {
+  assertEnvironmentBoundary(process.env);
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key) throw new Error("supabase_not_configured");

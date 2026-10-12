@@ -1,0 +1,26 @@
+{
+  "organization": {"name":"17:17 Barbería","slug":"1717-barberia","timezone":"America/Asuncion","currency":"PYG"},
+  "branch": {"name":"Luque","slug":"luque","address":"Cap. Dado esq. Gobernador Irala, Luque, Paraguay"},
+  "staff": [{"name":"Jonatan","slug":"jonatan","profile_id":null},{"name":"Esteban","slug":"esteban","profile_id":null}],
+  "payment_methods": [
+    {"name":"Efectivo","code":"cash","type":"cash","percentage_bps":0,"fixed_amount_minor":0},
+    {"name":"Transferencia","code":"transfer","type":"bank","percentage_bps":0,"fixed_amount_minor":0},
+    {"name":"Débito","code":"debit","type":"card","percentage_bps":300,"fixed_amount_minor":0},
+    {"name":"Crédito","code":"credit","type":"card","percentage_bps":500,"fixed_amount_minor":0}
+  ],
+  "services": [
+    {"name":"Corte de pelo","slug":"corte-de-pelo","price_minor":30000,"duration_minutes":40,"website_category":"corte","consultation_required":false,"source":"sheet + landing"},
+    {"name":"Barba","slug":"barba","price_minor":30000,"duration_minutes":40,"website_category":"barba","consultation_required":false,"source":"sheet + landing"},
+    {"name":"Perfilado de cejas","slug":"perfilado-de-cejas","price_minor":10000,"duration_minutes":40,"website_category":"cejas","consultation_required":false,"source":"sheet + landing; validate whether standalone or included"},
+    {"name":"Lavado","slug":"lavado","price_minor":10000,"duration_minutes":10,"website_category":"lavado","consultation_required":false,"source":"sheet + landing; confirm combination mode"},
+    {"name":"Rulos","slug":"rulos","price_minor":180000,"duration_minutes":120,"website_category":"rulos","consultation_required":true,"source":"sheet + landing"},
+    {"name":"Combo rulos y corte","slug":"combo-rulos-y-corte","price_minor":200000,"duration_minutes":null,"website_category":"rulos","consultation_required":true,"source":"sheet; duration unconfirmed"},
+    {"name":"Tinte global","slug":"tinte-global","price_minor":250000,"duration_minutes":null,"website_category":"tinte","consultation_required":true,"source":"sheet; reconcile editorial Tinte 200000 and duration"},
+    {"name":"Tinte mechas","slug":"tinte-mechas","price_minor":180000,"duration_minutes":null,"website_category":"tinte","consultation_required":true,"source":"sheet; duration unconfirmed"}
+  ],
+  "finance_items": [{"name":"Venta de productos","kind":"product","price_minor":null},{"name":"Curso","kind":"course","price_minor":null}],
+  "expense_categories": [{"name":"Alquiler","code":"rent","kind":"operating"},{"name":"Contadora","code":"accountant","kind":"operating"},{"name":"Servicios","code":"utilities","kind":"operating"},{"name":"Adelantos","code":"staff_advance","kind":"advance"},{"name":"Salario","code":"salary","kind":"salary"},{"name":"Liquidación de comisión","code":"commission_payment","kind":"commission_payment"}],
+  "commission_matrix": {"rate_bps":0,"effective_from":"onboarding time; not retroactive","source":"sheet configuration; owner must confirm activation"},
+  "advances_deductible":false,
+  "unconfirmed": ["Owner email/account","Staff shift hours and capabilities","Combination modes","Combo/tinte durations","Deduction policy for future advances","Historical rule validity","Production deployment URL"]
+}

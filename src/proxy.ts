@@ -1,7 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { secureCookies } from "@/lib/cookie-security";
+import { assertEnvironmentBoundary } from "@/lib/environment-boundary";
 export async function proxy(request: NextRequest) {
+  try {assertEnvironmentBoundary(process.env);}catch{return NextResponse.json({error:'preview_database_not_configured'},{status:503,headers:{'Cache-Control':'private, no-store'}});}
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const development = process.env.NODE_ENV !== "production";
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
