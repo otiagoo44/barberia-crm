@@ -83,6 +83,7 @@ export async function POST(
         customer: customerInput,
         key: uuid,
         website: z.string().max(200),
+        source: z.enum(["website"]).optional(),
       })
       .strict()
       .parse(await readJson(request, 4096));
@@ -98,6 +99,7 @@ export async function POST(
       p_customer_data: p.customer,
       p_key: p.key,
       p_honeypot: p.website,
+      p_attribution: p.source ?? null,
     });
     if (error) throw error;
     return response(data, id, 201);

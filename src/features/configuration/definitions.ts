@@ -95,6 +95,13 @@ export const definitions: Record<string, Definition> = {
       { key: "slug", label: "Identificador público", required: true },
       { key: "description", label: "Descripción" },
       {
+        key: "website_category",
+        label: "Sección del sitio web (opcional)",
+        type: "select",
+        options: [["", "Sin sección"], ["corte", "Corte"], ["rulos", "Rulos"], ["tinte", "Tintes"], ["barba", "Barba"], ["infantil", "Infantil"], ["cejas", "Perfilado"], ["lavado", "Lavado"]],
+      },
+      { key: "consultation_required", label: "Requiere consulta previa (obligatorio para Rulos)", type: "checkbox" },
+      {
         key: "default_duration_minutes",
         label: "Duración (minutos)",
         type: "number",
