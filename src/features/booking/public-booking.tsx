@@ -6,21 +6,21 @@ import { normalizePhone } from "@/lib/validation";
 import { Field, Notice, Empty, Loading } from "@/components/ui";
 import { ServicePicker } from "@/features/services/service-picker";
 import { brandStyle } from "@/lib/branding";
-import { preselectedServices } from "@/lib/booking-links";
+import { preselectedServices, directlyBookable } from "@/lib/public-booking";
 type PublicService = {
   slug: string;
   name: string;
   composition_mode: string;
   base_service_slug: string | null;
   price_minor: number | null;
-  consultation_required?: boolean;
+  consultation_required: boolean;
+  website_category: string | null;
 };
 type PublicBranch = {
   slug: string;
   name: string;
   timezone: string;
   address: string;
-  phone?: string|null;
   services: PublicService[];
   staff: { slug: string; name: string; services: string[] }[];
 };
@@ -42,16 +42,18 @@ export function PublicBooking({
   organization,
   branchSlug,
   requestedService,
+  source,
 }: {
   organization: string;
   branchSlug?: string;
   requestedService?: string;
+  source?: "website";
 }) {
   const catalog = useResource<Catalog>(
     `/api/public/catalog?organization=${encodeURIComponent(organization)}${branchSlug ? "&branch=" + encodeURIComponent(branchSlug) : ""}`,
   );
   const [branch, setBranch] = useState(branchSlug ?? "");
-  const [selection, setServices] = useState<string[]|null>(null);
+  const [chosenServices, setServices] = useState<string[] | null>(null);
   const [staff, setStaff] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -67,7 +69,9 @@ export function PublicBooking({
   const b = catalog.data?.branches.find(
     (b) => b.slug === (branch || catalog.data?.branches[0]?.slug),
   );
-  const services=selection??preselectedServices(requestedService,b?.services??[]);
+  const pickable = b?.services.map(s => ({ ...s, id: s.slug, base_service_id: s.base_service_slug })) ?? [];
+  const services = chosenServices ?? preselectedServices(pickable, requestedService);
+  const hasPrimary = pickable.some(s => s.composition_mode === "standalone" && services.includes(s.id));
   const today = formatInTimeZone(
     new Date(),
     b?.timezone ?? "Etc/UTC",
@@ -82,7 +86,7 @@ export function PublicBooking({
   services.forEach((s) => query.append("service", s));
   if (staff) query.set("staff", staff);
   const availability = useResource<Slot[]>(
-    b && services.length ? `/api/public/availability?${query}` : null,
+    b && hasPrimary ? `/api/public/availability?${query}` : null,
   );
   const times = [...new Set(availability.data?.map((s) => s.starts_at) ?? [])];
   if (catalog.loading && !catalog.data) return <Loading />;
@@ -146,6 +150,7 @@ export function PublicBooking({
         },
         key,
         website: String(form.get("website") ?? ""),
+        source,
       });
       setConfirmed(result);
     } catch (e) {
@@ -205,7 +210,7 @@ export function PublicBooking({
           {b.address ? " · " + b.address : ""}
         </p>
         <ServicePicker
-          services={b.services.filter(s=>!s.consultation_required).map((s) => ({
+          services={b.services.filter(s => directlyBookable({ ...s, id: s.slug, base_service_id: s.base_service_slug })).map((s) => ({
             id: s.slug,
             name: s.name,
             composition_mode: s.composition_mode,
@@ -217,7 +222,9 @@ export function PublicBooking({
             setTime("");
           }}
         />
-        {b.services.some(s=>s.consultation_required)&&<Notice>Requieren consulta previa: {b.services.filter(s=>s.consultation_required).map(s=>s.name).join(', ')}. {b.phone&&<a href={'tel:'+b.phone.replace(/[^+0-9]/g,'')}>Contactar a la barbería</a>}</Notice>}
+        {b.services.some(s => s.consultation_required || s.website_category === "rulos") && (
+          <small>Los servicios que requieren evaluación previa se coordinan con recepción antes de reservar.</small>
+        )}
         <div className="form-grid">
           <Field label="Barbero">
             <select
@@ -252,7 +259,8 @@ export function PublicBooking({
             />
           </Field>
         </div>
-        {services.length > 0 && (
+        {services.length > 0 && !hasPrimary && <small>Elegí un servicio principal para acompañar los adicionales.</small>}
+        {hasPrimary && (
           <>
             <h3>Horarios disponibles</h3>
             <small>Horarios del local · {b.timezone}</small>
