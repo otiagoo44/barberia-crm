@@ -1,0 +1,545 @@
+{
+  "executed_at": "2026-10-12T18:37:43.030Z",
+  "environment": {
+    "postgres": "17 embedded",
+    "platform": "win32",
+    "node": "v24.15.0",
+    "cpu": "Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz",
+    "logical_cpus": 4,
+    "ram_gib": 4,
+    "scope": "SQL and PostgreSQL RLS only; not HTTP, managed network, or production capacity"
+  },
+  "reports": [
+    {
+      "organizations": 10,
+      "counts": {
+        "organizations": "10",
+        "branches": "20",
+        "staff": "50",
+        "customers": "1000",
+        "appointments": "1100"
+      },
+      "metrics": [
+        {
+          "name": "dashboard",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 410.64,
+          "p95_ms": 3278.83,
+          "p99_ms": 3962.59,
+          "errors": 0
+        },
+        {
+          "name": "agenda",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 26.92,
+          "p95_ms": 2383.55,
+          "p99_ms": 2782.58,
+          "errors": 0
+        },
+        {
+          "name": "customer_search",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 26.66,
+          "p95_ms": 2005.35,
+          "p99_ms": 2107.23,
+          "errors": 0
+        },
+        {
+          "name": "retention",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 35.64,
+          "p95_ms": 1996.8,
+          "p99_ms": 3051.71,
+          "errors": 0
+        },
+        {
+          "name": "booking",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 50.91,
+          "p95_ms": 3612.28,
+          "p99_ms": 3728.28,
+          "errors": 0
+        }
+      ],
+      "phone_search_plan": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 27.75,
+            "Total Cost": 27.87,
+            "Plan Rows": 50,
+            "Plan Width": 29,
+            "Actual Startup Time": 0.431,
+            "Actual Total Time": 0.437,
+            "Actual Rows": 50,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 3,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Sort",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 27.75,
+                "Total Cost": 28,
+                "Plan Rows": 100,
+                "Plan Width": 29,
+                "Actual Startup Time": 0.431,
+                "Actual Total Time": 0.433,
+                "Actual Rows": 50,
+                "Actual Loops": 1,
+                "Sort Key": [
+                  "normalized_phone"
+                ],
+                "Sort Method": "quicksort",
+                "Sort Space Used": 32,
+                "Sort Space Type": "Memory",
+                "Shared Hit Blocks": 3,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Bitmap Heap Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Relation Name": "customers",
+                    "Alias": "customers",
+                    "Startup Cost": 4.93,
+                    "Total Cost": 24.43,
+                    "Plan Rows": 100,
+                    "Plan Width": 29,
+                    "Actual Startup Time": 0.033,
+                    "Actual Total Time": 0.052,
+                    "Actual Rows": 100,
+                    "Actual Loops": 1,
+                    "Recheck Cond": "(organization_id = '9cb7c6d9-7d4e-4c36-ab34-42d51d7cbced'::uuid)",
+                    "Rows Removed by Index Recheck": 0,
+                    "Filter": "(normalized_phone ~~ '+1202555%'::text)",
+                    "Rows Removed by Filter": 0,
+                    "Exact Heap Blocks": 2,
+                    "Lossy Heap Blocks": 0,
+                    "Shared Hit Blocks": 3,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0,
+                    "Plans": [
+                      {
+                        "Node Type": "Bitmap Index Scan",
+                        "Parent Relationship": "Outer",
+                        "Parallel Aware": false,
+                        "Async Capable": false,
+                        "Index Name": "customers_organization_id_preferred_staff_id_fkey_idx",
+                        "Startup Cost": 0,
+                        "Total Cost": 4.9,
+                        "Plan Rows": 100,
+                        "Plan Width": 0,
+                        "Actual Startup Time": 0.02,
+                        "Actual Total Time": 0.02,
+                        "Actual Rows": 100,
+                        "Actual Loops": 1,
+                        "Index Cond": "(organization_id = '9cb7c6d9-7d4e-4c36-ab34-42d51d7cbced'::uuid)",
+                        "Shared Hit Blocks": 1,
+                        "Shared Read Blocks": 0,
+                        "Shared Dirtied Blocks": 0,
+                        "Shared Written Blocks": 0,
+                        "Local Hit Blocks": 0,
+                        "Local Read Blocks": 0,
+                        "Local Dirtied Blocks": 0,
+                        "Local Written Blocks": 0,
+                        "Temp Read Blocks": 0,
+                        "Temp Written Blocks": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 29,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.306,
+          "Triggers": [],
+          "Execution Time": 0.454
+        }
+      ],
+      "realtime": {
+        "status": "NOT_TESTED",
+        "reason": "Native PostgreSQL benchmark does not contain Supabase Realtime"
+      }
+    },
+    {
+      "organizations": 50,
+      "counts": {
+        "organizations": "50",
+        "branches": "100",
+        "staff": "250",
+        "customers": "5000",
+        "appointments": "5200"
+      },
+      "metrics": [
+        {
+          "name": "dashboard",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 589.46,
+          "p95_ms": 3623.77,
+          "p99_ms": 4026.6,
+          "errors": 0
+        },
+        {
+          "name": "agenda",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 35.09,
+          "p95_ms": 2006.86,
+          "p99_ms": 2639.66,
+          "errors": 0
+        },
+        {
+          "name": "customer_search",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 23.43,
+          "p95_ms": 1608.54,
+          "p99_ms": 1801.64,
+          "errors": 0
+        },
+        {
+          "name": "retention",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 39.51,
+          "p95_ms": 2564.51,
+          "p99_ms": 2842.21,
+          "errors": 0
+        },
+        {
+          "name": "booking",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 51.04,
+          "p95_ms": 2494.69,
+          "p99_ms": 3679.47,
+          "errors": 0
+        }
+      ],
+      "phone_search_plan": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 101.2,
+            "Total Cost": 101.33,
+            "Plan Rows": 50,
+            "Plan Width": 29,
+            "Actual Startup Time": 0.149,
+            "Actual Total Time": 0.155,
+            "Actual Rows": 50,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 4,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Sort",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 101.2,
+                "Total Cost": 101.45,
+                "Plan Rows": 100,
+                "Plan Width": 29,
+                "Actual Startup Time": 0.149,
+                "Actual Total Time": 0.151,
+                "Actual Rows": 50,
+                "Actual Loops": 1,
+                "Sort Key": [
+                  "normalized_phone"
+                ],
+                "Sort Method": "quicksort",
+                "Sort Space Used": 32,
+                "Sort Space Type": "Memory",
+                "Shared Hit Blocks": 4,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Bitmap Heap Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Relation Name": "customers",
+                    "Alias": "customers",
+                    "Startup Cost": 5.06,
+                    "Total Cost": 97.88,
+                    "Plan Rows": 100,
+                    "Plan Width": 29,
+                    "Actual Startup Time": 0.049,
+                    "Actual Total Time": 0.072,
+                    "Actual Rows": 100,
+                    "Actual Loops": 1,
+                    "Recheck Cond": "(organization_id = '9cb7c6d9-7d4e-4c36-ab34-42d51d7cbced'::uuid)",
+                    "Rows Removed by Index Recheck": 0,
+                    "Filter": "(normalized_phone ~~ '+1202555%'::text)",
+                    "Rows Removed by Filter": 0,
+                    "Exact Heap Blocks": 2,
+                    "Lossy Heap Blocks": 0,
+                    "Shared Hit Blocks": 4,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0,
+                    "Plans": [
+                      {
+                        "Node Type": "Bitmap Index Scan",
+                        "Parent Relationship": "Outer",
+                        "Parallel Aware": false,
+                        "Async Capable": false,
+                        "Index Name": "customers_organization_id_preferred_staff_id_fkey_idx",
+                        "Startup Cost": 0,
+                        "Total Cost": 5.03,
+                        "Plan Rows": 100,
+                        "Plan Width": 0,
+                        "Actual Startup Time": 0.028,
+                        "Actual Total Time": 0.028,
+                        "Actual Rows": 100,
+                        "Actual Loops": 1,
+                        "Index Cond": "(organization_id = '9cb7c6d9-7d4e-4c36-ab34-42d51d7cbced'::uuid)",
+                        "Shared Hit Blocks": 2,
+                        "Shared Read Blocks": 0,
+                        "Shared Dirtied Blocks": 0,
+                        "Shared Written Blocks": 0,
+                        "Local Hit Blocks": 0,
+                        "Local Read Blocks": 0,
+                        "Local Dirtied Blocks": 0,
+                        "Local Written Blocks": 0,
+                        "Temp Read Blocks": 0,
+                        "Temp Written Blocks": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 29,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.444,
+          "Triggers": [],
+          "Execution Time": 0.174
+        }
+      ],
+      "realtime": {
+        "status": "NOT_TESTED",
+        "reason": "Native PostgreSQL benchmark does not contain Supabase Realtime"
+      }
+    },
+    {
+      "organizations": 100,
+      "counts": {
+        "organizations": "100",
+        "branches": "200",
+        "staff": "500",
+        "customers": "10000",
+        "appointments": "10300"
+      },
+      "metrics": [
+        {
+          "name": "dashboard",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 576.67,
+          "p95_ms": 3041.91,
+          "p99_ms": 4649.31,
+          "errors": 0
+        },
+        {
+          "name": "agenda",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 26.7,
+          "p95_ms": 2329.25,
+          "p99_ms": 3025.54,
+          "errors": 0
+        },
+        {
+          "name": "customer_search",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 22.56,
+          "p95_ms": 2917.67,
+          "p99_ms": 3586.21,
+          "errors": 0
+        },
+        {
+          "name": "retention",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 35.23,
+          "p95_ms": 2655.97,
+          "p99_ms": 2872.66,
+          "errors": 0
+        },
+        {
+          "name": "booking",
+          "samples": 100,
+          "concurrency": 10,
+          "p50_ms": 53.28,
+          "p95_ms": 3726.44,
+          "p99_ms": 4225.7,
+          "errors": 0
+        }
+      ],
+      "phone_search_plan": [
+        {
+          "Plan": {
+            "Node Type": "Limit",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 0.29,
+            "Total Cost": 161.11,
+            "Plan Rows": 50,
+            "Plan Width": 29,
+            "Actual Startup Time": 0.024,
+            "Actual Total Time": 0.045,
+            "Actual Rows": 50,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 3,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Index Scan",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Scan Direction": "Forward",
+                "Index Name": "customers_organization_id_normalized_phone_key",
+                "Relation Name": "customers",
+                "Alias": "customers",
+                "Startup Cost": 0.29,
+                "Total Cost": 321.94,
+                "Plan Rows": 100,
+                "Plan Width": 29,
+                "Actual Startup Time": 0.023,
+                "Actual Total Time": 0.04,
+                "Actual Rows": 50,
+                "Actual Loops": 1,
+                "Index Cond": "(organization_id = '9cb7c6d9-7d4e-4c36-ab34-42d51d7cbced'::uuid)",
+                "Rows Removed by Index Recheck": 0,
+                "Filter": "(normalized_phone ~~ '+1202555%'::text)",
+                "Rows Removed by Filter": 0,
+                "Shared Hit Blocks": 3,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              }
+            ]
+          },
+          "Planning": {
+            "Shared Hit Blocks": 29,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0
+          },
+          "Planning Time": 0.351,
+          "Triggers": [],
+          "Execution Time": 0.058
+        }
+      ],
+      "realtime": {
+        "status": "NOT_TESTED",
+        "reason": "Native PostgreSQL benchmark does not contain Supabase Realtime"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+interface:
+  display_name: UI UX Pro Max
+  short_description: Consulta estilos, tipografías y criterios de UX
+  default_prompt: Usa $ui-ux-pro-max para mejorar mi landing profesional.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

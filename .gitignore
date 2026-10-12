@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.env*
+!.env.example
+.tools/
+.test-data/
+test-results/
+playwright-report/
+coverage/
+*.tsbuildinfo
+supabase/.temp/
+supabase/.branches/
+__pycache__/
+*.py[cod]

@@ -1,0 +1,29 @@
+{
+  "source": "https://github.com/Leonxlnx/taste-skill",
+  "commit": "ce26fc25c0e5e8cab638f883de62d9a86ee5e45b",
+  "retrieved": "2026-10-03",
+  "adaptations": [
+    "Gu\u00eda principal dividida por secciones; wrapper contextual para Codex; no se importa la variante gpt-taste ni sus verificaciones simuladas."
+  ],
+  "files": {
+    "references/taste-00.md": "c4f0dfe5076f19b4ee4ef86a7dc4f8d7729a7c5f6a48ff9705c989de30c1f19e",
+    "references/taste-01.md": "4a03d1d2728673ca5077986e4dae59fca2ad3cd45cf9abdb7587893f87cdff82",
+    "references/taste-02.md": "801b82144caf95ce9bb8085372e64992b3e23cdb85469c54fcd9d5b1ce29f084",
+    "references/taste-03.md": "ac1a5a970a84f6bc40f02e4f89ef6da50f8ed6eedc6fb1ae9981662ccdf9a859",
+    "references/taste-04.md": "c66ce92fa2efa7d5ec235b0113da08389a7c86f7efb7170b5582b1d232b4fd39",
+    "references/taste-05.md": "1729f1ce25dbf36d406eee5da4fec6844116e7ff51fe576d1b1e848157102310",
+    "references/taste-06.md": "4fa88e9e604a994721ef9e442e6efc8beec8c85b6294aef45213663dd0495d13",
+    "references/taste-07.md": "f9d14be480a9da19e7ba4a1092e52a1dc584ecaa5e621e9b5f507f27b21b1690",
+    "references/taste-08.md": "92eda98f687850eae45417d7ce2a77257b3e95f496ba657f8dca71c6e28ce118",
+    "references/taste-09.md": "f4ec062c9848207c52d45545631ae13ca9d17983edf8fabd9639360f883b772d",
+    "references/taste-10.md": "cae326bf75fb69185592813daac259f6234be2f8636d4a01fb91ba96d5c93cbb",
+    "references/taste-11.md": "243baf44f7dba3e5e668e1d5b0db0f98f6bcd84f7d84aa2020d3dc94b41a8f36",
+    "references/taste-12.md": "491f0d8aee669b3f3a0b06cf3911e560df9dbc652c8fccb3d1904d93e8483ec2",
+    "references/taste-13.md": "1cc553c632eab1409174b511c21a747ce59b35b628dcaaef54fa79e0703430ce",
+    "references/taste-14.md": "7b69a35b7ea1b3a20491bb5c1cebea0590ea7a6f4d62e70273ea12ac229b1f1b",
+    "references/taste-15.md": "afd89b8bad7d88082d050a76ef0cebaffff7c4fb3f31be9f476f76563c3566e3",
+    "references/taste-16.md": "e680860b812289b5fd5a59081aaea7f4e2c64ad2c1b634cb13957447a3641a79",
+    "references/taste-17.md": "ac20f3527504945045475f4b7a0f5f76ad87dd17cd3571d63a9d839403a830f3",
+    "references/taste-18.md": "0587a35c52c9a138a667371c42ec52443e57bea2c024ca70aabc88e5fb87b712"
+  }
+}

@@ -1,0 +1,13 @@
+interface:
+  display_name: Google DESIGN.md
+  short_description: Define y verifica tokens, formato y contraste
+  default_prompt: Usa $google-design-md para mejorar mi landing profesional.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

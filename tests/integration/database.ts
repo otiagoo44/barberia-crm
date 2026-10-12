@@ -1,0 +1,124 @@
+import EmbeddedPostgres from "embedded-postgres";
+import { Pool } from "pg";
+import { randomBytes } from "node:crypto";
+import { createServer } from "node:net";
+import { readFile, readdir, mkdir, rm } from "node:fs/promises";
+import path from "node:path";
+
+export async function isolatedDatabase() {
+  if (process.env.TEST_DATABASE_URL)
+    throw new Error(
+      "Embedded test runner does not accept external database URLs. Use the dedicated staging runner.",
+    );
+  const server = createServer();
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const port = (server.address() as { port: number }).port;
+  await new Promise<void>((resolve) => server.close(() => resolve()));
+  const root = path.resolve(".test-data");
+  const databaseDir = path.resolve(
+    root,
+    `pg-${process.pid}-${randomBytes(4).toString("hex")}`,
+  );
+  if (!databaseDir.startsWith(root + path.sep))
+    throw new Error("Unsafe test path");
+  await mkdir(root, { recursive: true });
+  const password = randomBytes(32).toString("hex");
+  const pg = new EmbeddedPostgres({
+    databaseDir,
+    user: "postgres",
+    password,
+    port,
+    persistent: true,
+    postgresFlags: [
+      "-c",
+      "listen_addresses=127.0.0.1",
+      "-c",
+      "max_connections=150",
+    ],
+    onLog: () => {},
+    onError: (message) => {
+      if (String(message).includes("FATAL"))
+        console.error("PostgreSQL test process failed");
+    },
+  });
+  await pg.initialise();
+  await pg.start();
+  const pool = new Pool({
+    host: "127.0.0.1",
+    port,
+    user: "postgres",
+    password,
+    database: "postgres",
+    max: 110,
+  });
+  await pool.query(`
+    create role anon nologin;
+    create role authenticated nologin;
+    create role service_role nologin bypassrls;
+    create schema auth;
+    create table auth.users(id uuid primary key,email text unique,raw_user_meta_data jsonb not null default '{}');
+    create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
+    grant usage on schema auth to anon,authenticated;
+    grant execute on function auth.uid() to anon,authenticated;
+  `);
+  const files = (await readdir("supabase/migrations"))
+    .filter((f) => f.endsWith(".sql"))
+    .sort();
+  try {
+    for (const file of files) {
+      const sql = await readFile(
+        path.join("supabase/migrations", file),
+        "utf8",
+      );
+      if (!sql.trim()) continue;
+      await pool.query("begin");
+      await pool.query(sql);
+      await pool.query("commit");
+      console.log(`Migration OK: ${file}`);
+    }
+  } catch (error) {
+    await pool.query("rollback");
+    await pool.end();
+    await pg.stop();
+    throw error;
+  }
+  return {
+    pool,
+    stop: async () => {
+      await pool.end();
+      await pg.stop();
+      if (!databaseDir.startsWith(root + path.sep))
+        throw new Error("Unsafe cleanup");
+      await rm(databaseDir, {
+        recursive: true,
+        force: true,
+        maxRetries: 20,
+        retryDelay: 250,
+      });
+    },
+  };
+}
+
+export async function asUser<T>(
+  pool: Pool,
+  user: string | null,
+  query: string,
+  params: unknown[] = [],
+): Promise<T[]> {
+  const client = await pool.connect();
+  try {
+    await client.query("begin");
+    await client.query(`set local role ${user ? "authenticated" : "anon"}`);
+    await client.query("select set_config('request.jwt.claim.sub',$1,true)", [
+      user ?? "",
+    ]);
+    const result = await client.query(query, params);
+    await client.query("commit");
+    return result.rows as T[];
+  } catch (error) {
+    await client.query("rollback");
+    throw error;
+  } finally {
+    client.release();
+  }
+}

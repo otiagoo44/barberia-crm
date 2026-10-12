@@ -1,0 +1,11 @@
+{
+  "source": "https://github.com/pbakaus/impeccable",
+  "commit": "e103efe779e2dd01274dabae83531fef00bf2563",
+  "retrieved": "2026-10-03",
+  "adaptations": [
+    "Adaptaci\u00f3n personal de criterios de dise\u00f1o y revisi\u00f3n. La instalaci\u00f3n original fue rechazada por el an\u00e1lisis de seguridad sin diagn\u00f3stico espec\u00edfico. Se excluyen ejecutor, directivas de autonom\u00eda, agentes auxiliares y playbooks operativos originales. Se incluye una gu\u00eda propia y se conserva licencia, procedencia y avisos."
+  ],
+  "files": {
+    "references/design-review.md": "4dfce775c44eebe7c17c8aa2aa8ca0ecf522aaf101834bc73f7c887842cccec1"
+  }
+}

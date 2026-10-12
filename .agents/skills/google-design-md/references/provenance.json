@@ -1,0 +1,21 @@
+{
+  "source": "https://github.com/google-labs-code/design.md",
+  "commit": "9bf8eae67128b6cc55ad9bf86665767deb4c11cd",
+  "retrieved": "2026-10-03",
+  "adaptations": [
+    "Spec y referencia oficial incluidas; wrapper port\u00e1til fija CLI 0.4.0; no se importan las skills de desarrollo internas de Google.",
+    "Bundle de CLI oficial incluido para validaci\u00f3n sin red; index.js renombrado a index.mjs sin cambiar su contenido."
+  ],
+  "files": {
+    "references/spec.md": "8f297a7bd38cf08bde06c96f5eea2ebfcd9930a8bc1dfe964f8e8dec894e691a",
+    "references/cli-reference.md": "0cb9242992168cccfb79585000612c90c5c3e054d66d1ff90672dcc51288e91d",
+    "scripts/google-cli/spec.md": "8f297a7bd38cf08bde06c96f5eea2ebfcd9930a8bc1dfe964f8e8dec894e691a",
+    "scripts/google-cli/spec-config.yaml": "6244e829849e63b55316258f32e1110833d193b79943ec79f245b33ebeec2ef8",
+    "scripts/google-cli/index.mjs": "874a6a4dde402f563882621f01b4789a7a12c64bc8a7abb1e18731e97eb271f0"
+  },
+  "package": {
+    "name": "@google/design.md",
+    "version": "0.4.0",
+    "tarball_sha256": "c23ee409c6f9997a972e8e14215fe03fb17b1786435a8d4a8e93ca4e9f06f2ca"
+  }
+}
