@@ -38,3 +38,5 @@ Ningún tenant o servicio productivo existe en la base auditada. Se conserva el 
 La URL pública prevista es https://barberia-crm.vercel.app. Variables públicas: BARBERIA_OS_PUBLIC_URL, BARBERIA_OS_ORGANIZATION_SLUG, BARBERIA_OS_BRANCH_SLUG; SITE_URL es opcional y pertenece sólo al SEO de la landing. Los slugs siguen pendientes hasta que el CRM los configure. [Activación](BOOKING_SETUP.md) y [auditoría](BOOKING_AUDIT.md).
 
 La migración se entrega en el repositorio del CRM; no se aplicó a ninguna base remota. La organización 17:17 debe crearse desde configuración real, sin copiar fixtures.
+
+Verificación pública final: la URL prevista responde con un starter NextSpark; /api/public/catalog devuelve HTML de Not Found, no el contrato JSON del motor auditado. Desplegar/asociar el CRM real a la URL antes de activar 17:17. El build de la landing rechaza ese contenido aun con HTTP 200. La base remota sigue sin organizaciones, sucursales ni servicios.
