@@ -108,6 +108,8 @@ try {
       "recovery_drill",
       "--exit-on-error",
       "--no-owner",
+      "--clean",
+      "--if-exists",
     ],
     {
       env,
