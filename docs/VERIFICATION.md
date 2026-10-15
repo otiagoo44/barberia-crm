@@ -54,9 +54,10 @@ Baseline lint/typecheck/5unit/47DB/build pasó. Las 15 migrations originales int
 
 - `npm ci`: 216 paquetes, cero vulnerabilidades; audit high también sin hallazgos.
 - Lint, typecheck, 14 unitarios y build de producción aprobados.
-- Las 22 migrations se aplicaron desde cero en PostgreSQL aislado: 51 contratos de seguridad/reservas y 19 financieros aprobados. Se agregó regresión para lectura de auditoría del rol finance y denegación a recepción.
+- Las 23 migrations se aplicaron desde cero en PostgreSQL aislado: 51 contratos de seguridad/reservas y 19 financieros aprobados. Regresiones para lectura de auditoría finance/denegación a recepción y worker_tick con tenants activos/inactivos, autorización y reintentos sin duplicados.
 - Pruebas de atención real independientes de medianoche UTC. Booking UI portable con Playwright: doce combinaciones de query/viewport y envío de formulario aprobados, con API interceptada.
 - Browser local de login/responsive/headers/teclado: un caso aprobado y cuatro de Auth real omitidos por falta de Docker local. CI es responsable de ejecutar esos cuatro con Supabase local real.
 - Supabase remoto: 67 tablas de aplicación con RLS, sin definers públicos, sin organizaciones/citas/ventas; cuenta Auth existente conservada. Migrations alineadas con el repositorio, sin reset ni demo cloud. Gateway health devuelve ready y SELECT anónimo sobre payments es rechazado con 42501.
 - Vercel confirmado por API/CLI: proyecto GitHub correcto y main, Node 24.x, instalación/build, dominio barberia-crm-kappa.vercel.app y nueve variables de Production. Tres secretos sensibles; Preview con controles de aislamiento y sin base de producción.
-- Plan Vercel Hobby verificado. Scheduler externo, staging separado, SMTP/redirects, onboarding y restore cloud siguen pendientes. Advisors/CI finales se registran en el informe de release.
+- Deployment automático READY; login, health y ready responden 200. Worker autenticado devuelve completed=0/failed=0/awaiting_configuration=0; Bearer incorrecto devuelve 403. Site URL y dos callbacks exactos de Auth guardados y verificados en el dashboard.
+- Plan Vercel Hobby verificado. Scheduler externo, staging separado, SMTP/correo, onboarding y restore cloud siguen pendientes. Advisors/CI finales se registran en el informe de release.

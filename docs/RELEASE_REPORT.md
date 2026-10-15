@@ -59,7 +59,7 @@ Dry-run anterior: 539 movimientos, 535 estructuralmente válidos y cuatro NEEDS_
 
 ## 13. Tests reales
 
-`npm ci` y audit: cero vulnerabilidades. Lint/typecheck y catorce tests unitarios pasan. PostgreSQL aislado: 51 contratos de reservas/seguridad y 19 financieros; incluyen 100 solicitudes concurrentes, idempotencia, snapshots, cierres y permisos. Browser local: login/responsive/headers/teclado aprobado; cuatro casos con Auth real omitidos por falta de Docker local. QA de booking: doce combinaciones de query/viewport y envío con API interceptada aprobados. No equivalen a una reserva comercial real. Gateway cloud devuelve ready; lectura anónima de payments rechazada con 42501.
+`npm ci` y audit: cero vulnerabilidades. Lint/typecheck y catorce tests unitarios pasan. PostgreSQL aislado: 51 contratos de reservas/seguridad y 19 financieros; incluyen 100 solicitudes concurrentes, idempotencia, snapshots, cierres, permisos y scheduler con/reintentos/sin tenants activos. Browser local: login/responsive/headers/teclado aprobado; cuatro casos con Auth real omitidos por falta de Docker local. QA de booking: doce combinaciones de query/viewport y envío con API interceptada aprobados. No equivalen a una reserva comercial real. Gateway cloud devuelve ready; lectura anónima de payments rechazada con 42501. Worker desplegado: Bearer incorrecto 403; Bearer correcto 200 con cero fallos.
 
 ## 14. Build
 
@@ -83,7 +83,7 @@ Confirmar propietario registrado y bootstrap admin; crear organización `1717-ba
 
 ## 19. Pendientes reales
 
-Base/secretos propios de staging; scheduler externo; SMTP/redirects y recuperación; protección de contraseñas filtradas; backup/restore cloud con RPO/RTO; owner, horarios, capacidades y reglas confirmadas; onboarding e import revisado. La cuenta Auth existente no recibió privilegios de plataforma automáticamente. No se habilitan reservas de 17:17 sin configuración real.
+Base/secretos propios de staging; scheduler externo; SMTP y recuperación por correo; protección de contraseñas filtradas; backup/restore cloud con RPO/RTO; owner, horarios, capacidades y reglas confirmadas; onboarding e import revisado. Dashboard Supabase confirmado en Free, sin backups del proyecto incluidos; no se contrató un plan. Site URL y callbacks de registro/recuperación ya guardados para el dominio de Vercel, sin wildcards. La cuenta Auth existente no recibió privilegios de plataforma automáticamente. No se habilitan reservas de 17:17 sin configuración real.
 
 ## 20. Veredicto
 

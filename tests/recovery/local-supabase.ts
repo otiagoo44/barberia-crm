@@ -90,7 +90,13 @@ try {
     ],
     { env, maxBuffer: 32 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"] },
   );
-  await pool.query("create database recovery_drill");
+  await pool.query("create database recovery_drill template template0");
+  const target = new URL(connection);
+  target.pathname = "/recovery_drill";
+  restored = new Pool({ connectionString: target.toString() });
+  // Only the fresh, disposable recovery database: pg_dump includes CREATE SCHEMA
+  // public when schemas are selected explicitly. No application tables exist here.
+  await restored.query("drop schema public");
   execFileSync(
     "docker",
     [
@@ -108,8 +114,6 @@ try {
       "recovery_drill",
       "--exit-on-error",
       "--no-owner",
-      "--clean",
-      "--if-exists",
     ],
     {
       env,
@@ -118,9 +122,6 @@ try {
       stdio: ["pipe", "pipe", "pipe"],
     },
   );
-  const target = new URL(connection);
-  target.pathname = "/recovery_drill";
-  restored = new Pool({ connectionString: target.toString() });
   const countsSql =
     "select (select count(*)::int from public.organizations) organizations,(select count(*)::int from public.customers) customers,(select count(*)::int from public.staff) staff,(select count(*)::int from auth.users) auth_users,(select count(*)::int from public.audit_logs) audit_logs,(select count(*)::int from public.checkouts) checkouts,(select count(*)::int from public.payments) payments,(select count(*)::int from public.cash_movements) cash_movements";
   const source = (await pool.query(countsSql)).rows[0];

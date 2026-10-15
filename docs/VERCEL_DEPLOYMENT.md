@@ -25,7 +25,7 @@ Los tres secretos deben ser distintos y de al menos 32 caracteres aleatorios. Re
 
 La API de dominios confirmó `https://barberia-crm-kappa.vercel.app` como dominio verificado del proyecto. Production quedó configurado con ese APP_URL. `https://barberia-crm.vercel.app` era una URL prevista de la auditoría anterior y corresponde a otro contenido; usar el dominio con `-kappa` también en la landing. Si se agrega un dominio propio, actualizar APP_URL y Auth juntos.
 
-En Supabase Auth, establecer Site URL al mismo origen y autorizar exactamente `/auth/callback` y el flujo de recuperación utilizado por la aplicación. Configurar SMTP y probar confirmación/recuperación. Conservar Deployment Protection según la política del equipo; los previews protegidos se inspeccionan con acceso autorizado.
+Supabase Auth quedó guardado con Site URL `https://barberia-crm-kappa.vercel.app` y dos redirects exactos: `/auth/callback` y `/auth/callback?next=reset-password`, sin wildcards. Falta configurar SMTP y probar confirmación/recuperación por correo. Conservar Deployment Protection según la política del equipo; los previews protegidos se inspeccionan con acceso autorizado.
 
 ## Scheduler
 

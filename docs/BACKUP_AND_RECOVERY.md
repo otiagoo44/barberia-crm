@@ -4,6 +4,8 @@
 
 PENDIENTE de habilitar/verificar en el proyecto real: plan, retención de backups, PITR y restore. Aplicar migrations o pasar tests no demuestra que un backup real sea recuperable. La primera barbería no debe operar hasta registrar un restore satisfactorio aislado.
 
+Verificación del dashboard el 15/10/2026: el proyecto está en **Free** y la pestaña Scheduled backups indica que ese plan no incluye backups del proyecto. No se contrató ningún plan. Antes del piloto se necesita una estrategia de copias/retención y un restore aislado demostrado; la presencia de migrations no reemplaza esas copias.
+
 Supabase documenta backups/PITR y restauración en [Database Backups](https://supabase.com/docs/guides/platform/backups). La disponibilidad depende del plan/configuración. Los backups DB no sustituyen una copia de objetos de Storage ni configuración de Auth/proveedores/secretos externos.
 
 ## Estrategia
