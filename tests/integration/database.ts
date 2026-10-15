@@ -1,5 +1,5 @@
 import EmbeddedPostgres from "embedded-postgres";
-import { Pool } from "pg";
+import { Pool, type PoolClient } from "pg";
 import { randomBytes } from "node:crypto";
 import { createServer } from "node:net";
 import { readFile, readdir, mkdir, rm } from "node:fs/promises";
@@ -51,6 +51,18 @@ export async function isolatedDatabase() {
     database: "postgres",
     max: 110,
   });
+  const connections = new Set<PoolClient>();
+  pool.on("connect", (client) => connections.add(client));
+  pool.on("remove", (client) => connections.delete(client));
+  async function closePool() {
+    // pg-pool resolves end() after scheduling client.end(), before every socket
+    // has closed. Wait for client end events before stopping the local server.
+    const closed = [...connections].map(
+      (client) => new Promise<void>((resolve) => client.once("end", resolve)),
+    );
+    await pool.end();
+    await Promise.all(closed);
+  }
   await pool.query(`
     create role anon nologin;
     create role authenticated nologin;
@@ -78,14 +90,14 @@ export async function isolatedDatabase() {
     }
   } catch (error) {
     await pool.query("rollback");
-    await pool.end();
+    await closePool();
     await pg.stop();
     throw error;
   }
   return {
     pool,
     stop: async () => {
-      await pool.end();
+      await closePool();
       await pg.stop();
       if (!databaseDir.startsWith(root + path.sep))
         throw new Error("Unsafe cleanup");

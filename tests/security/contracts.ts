@@ -800,6 +800,47 @@ export async function contracts(pool: Pool) {
   await check(
     "Queue leases, notifications, metrics and provider pending status work",
     async () => {
+      const empty = await pool.connect();
+      try {
+        await empty.query("begin");
+        await empty.query("update public.organizations set active=false");
+        await empty.query("set local role anon");
+        const tick = await empty.query("select public.worker_tick($1) result", [
+          f.workerSecret,
+        ]);
+        assert.equal(tick.rows[0].result.ok, true);
+      } finally {
+        await empty.query("rollback");
+        empty.release();
+      }
+      await assert.rejects(
+        asUser(pool, null, "select public.worker_tick($1)", [
+          "wrong-worker-secret",
+        ]),
+      );
+      const tick = await asUser<{ result: { ok: boolean } }>(
+        pool,
+        null,
+        "select public.worker_tick($1) result",
+        [f.workerSecret],
+      );
+      assert.equal(tick[0].result.ok, true);
+      const jobsBeforeRetry = (
+        await pool.query(
+          "select count(*)::int count from public.automation_jobs",
+        )
+      ).rows[0].count;
+      await asUser(pool, null, "select public.worker_tick($1)", [
+        f.workerSecret,
+      ]);
+      assert.equal(
+        (
+          await pool.query(
+            "select count(*)::int count from public.automation_jobs",
+          )
+        ).rows[0].count,
+        jobsBeforeRetry,
+      );
       for (let batch = 0; batch < 15; batch++) {
         const claimed = await asUser<{
           result: { id: string; lease_token: string }[];

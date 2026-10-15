@@ -10,7 +10,7 @@ Next.js/TypeScript, las quince migrations originales, el motor único de reserva
 
 ## 3. Nuevas migrations
 
-Se aplicaron las seis pendientes: customer_detail_branding, website_booking, finance_schema, finance_transactions, finance_read_import y booking_finance_hardening. Dos adicionales de esta revisión: `20261015190206_booking_attribution_rls.sql` y `20261015190657_consolidate_financial_audit_policy.sql`. Las versiones remotas se alinean con los archivos CLI y la instalación desde cero se verifica en PostgreSQL aislado.
+Se aplicaron las seis pendientes: customer_detail_branding, website_booking, finance_schema, finance_transactions, finance_read_import y booking_finance_hardening. Tres adicionales de esta revisión: `20261015190206_booking_attribution_rls.sql`, `20261015190657_consolidate_financial_audit_policy.sql` y `20261015191802_worker_tick_record_scope.sql`. Las versiones remotas se alinean con los archivos CLI y la instalación desde cero se verifica en PostgreSQL aislado. La última evita el choque entre records PL/pgSQL y aliases SQL en el scheduler, detectado al invocar el endpoint real.
 
 ## 4. Nuevas tablas
 
@@ -67,15 +67,15 @@ Build de producción completado. Prebuild de Vercel valida origen HTTPS, variabl
 
 ## 15. CI
 
-Se conserva el workflow completo de quality, Supabase local con Auth real, restore financiero y navegador. Resultado del commit publicado: se registra tras finalizar su ejecución. No se considera verde por los controles locales.
+Se conserva el workflow completo de quality, Supabase local con Auth real, restore financiero y navegador. La [primera ejecución de esta continuación](https://github.com/otiagoo44/barberia-crm/actions/runs/38792012187) detectó dos fallos del entorno de verificación: sockets de PostgreSQL pendientes al apagar el servidor Linux y restore de funciones administradas de Realtime con parámetros privilegiados. Se corrigieron esperando los cierres reales y delimitando el backup de aplicación/Auth, conservando pruebas RLS, financieras y de concurrencia. El resultado de la siguiente ejecución se registra al finalizar; no se considera verde por controles locales.
 
 ## 16. Supabase advisors
 
-Después de las migrations se repiten seguridad/rendimiento. El aviso de protección contra contraseñas filtradas está pendiente de configuración de Auth; la función requiere Pro o superior según [Supabase](https://supabase.com/docs/guides/auth/password-security). No se cambia de plan automáticamente. Los INFO de tablas privadas sin policies son deny-by-default intencional; índices sin uso son esperables sin negocio/tráfico. La política duplicada de audit_logs se consolida conservando permisos.
+Advisors: cero ERROR; rendimiento sin WARN después de consolidar audit_logs. Seguridad conserva un WARN por protección contra contraseñas filtradas, pendiente de configuración de Auth; la función requiere Pro o superior según [Supabase](https://supabase.com/docs/guides/auth/password-security). No se cambia de plan automáticamente. Los INFO de tablas privadas sin policies son deny-by-default intencional; índices sin uso son esperables sin negocio/tráfico.
 
 ## 17. Configuración de Vercel
 
-Proyecto `barberia-crm`, GitHub `otiagoo44/barberia-crm`, Production Branch `main`, Node 24.x, npm ci/build. Dominio verificado `https://barberia-crm-kappa.vercel.app`. Nueve variables de Production configuradas; booking/worker/cron como secretos privados. Preview solo tiene sus dos controles de aislamiento y falla cerrado hasta configurar staging separado. Equipo Hobby: cron por minuto requiere scheduler externo; no se configura un cron incompatible. [Guía exacta](VERCEL_DEPLOYMENT.md).
+Proyecto `barberia-crm`, GitHub `otiagoo44/barberia-crm`, Production Branch `main`, Node 24.x, npm ci/build. Dominio verificado `https://barberia-crm-kappa.vercel.app`. El push disparó un deployment READY; `/login`, `/api/health` y `/api/health/ready` respondieron 200. Nueve variables de Production configuradas; booking/worker/cron como secretos privados. Preview solo tiene sus dos controles de aislamiento y falla cerrado hasta configurar staging separado. Equipo Hobby: cron por minuto requiere scheduler externo; no se configura un cron incompatible. [Guía exacta](VERCEL_DEPLOYMENT.md).
 
 ## 18. Onboarding de 17:17
 

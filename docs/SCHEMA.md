@@ -42,7 +42,7 @@ Vistas invoker: visits (completed appointments); daily_organization_metrics, dai
 
 Versiones creadas mediante CLI y registradas en Supabase. Local/staging usan las mismas migrations. Índices adicionales son aditivos; cambios de funciones/policies se versionan. [Rollback](ROLLBACK_PLAN.md).
 
-Continuación: 16 website_booking; 17 finance_schema; 18 finance_transactions; 19 finance_read_import; 20 booking_finance_hardening; 21 booking_attribution_rls; 22 consolidate_financial_audit_policy. Las dos últimas activan RLS en el ledger privado de atribución y consolidan el predicado de auditoría para authenticated sin cambiar su alcance; la policy anterior se conserva para el rol de mantenimiento BYPASSRLS.
+Continuación: 16 website_booking; 17 finance_schema; 18 finance_transactions; 19 finance_read_import; 20 booking_finance_hardening; 21 booking_attribution_rls; 22 consolidate_financial_audit_policy; 23 worker_tick_record_scope. Las últimas activan RLS en el ledger privado de atribución, consolidan el predicado de auditoría para authenticated sin cambiar su alcance y separan records de aliases SQL en worker_tick. La policy anterior se conserva para el rol de mantenimiento BYPASSRLS.
 
 ## API de dominio
 

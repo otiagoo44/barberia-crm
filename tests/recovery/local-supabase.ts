@@ -80,6 +80,12 @@ try {
       "-h",
       "127.0.0.1",
       "-Fc",
+      "--schema=public",
+      "--schema=app_private",
+      "--schema=auth",
+      "--schema=extensions",
+      "--no-publications",
+      "--no-subscriptions",
       "postgres",
     ],
     { env, maxBuffer: 32 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"] },
@@ -141,7 +147,7 @@ try {
   );
   const rls = (
     await restored.query(
-      "select count(*)::int total,count(*) filter(where relrowsecurity)::int protected from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r'",
+      "select count(*)::int total,count(*) filter(where relrowsecurity)::int protected from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','app_private') and c.relkind='r'",
     )
   ).rows[0];
   assert.equal(rls.total, rls.protected);
@@ -218,6 +224,9 @@ try {
       "financial row counts, cash balance and tenant isolation",
     ],
     production_restore: "NOT_TESTED",
+    schemas: ["public", "app_private", "auth", "extensions"],
+    managed_platform_restore:
+      "NOT_TESTED: Realtime/Storage infrastructure and publications are provisioned separately, not restored by this application drill.",
     ownership:
       "Portable local restore --no-owner; ACLs and RLS retained. Cloud ownership restoration not exercised.",
   };
