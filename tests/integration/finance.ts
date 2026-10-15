@@ -541,6 +541,28 @@ export async function financeContracts(pool: Pool) {
       },
       id,
     );
+    const audit = await asUser<{ organization_id: string; action: string }>(
+      pool,
+      id,
+      "select organization_id,action from public.audit_logs",
+    );
+    assert.ok(audit.length > 0);
+    assert.ok(
+      audit.every(
+        (row) =>
+          row.organization_id === f.orgA && row.action.startsWith("finance."),
+      ),
+    );
+    assert.equal(
+      (
+        await asUser(
+          pool,
+          f.users.receptionA,
+          "select id from public.audit_logs",
+        )
+      ).length,
+      0,
+    );
     await assert.rejects(() =>
       asUser(
         pool,
@@ -712,11 +734,42 @@ export async function financeContracts(pool: Pool) {
     ]);
     assert.equal(catalog[0].result.website_booking_version, 1);
   });
-  await test('posting retries and concurrent commission rule edits produce one consistent snapshot',async()=>{
-    const id=(await sale()).id;await command('record_payment',{checkout_id:id,payment_method_id:methods.transfer,amount_minor:100000});const key=randomUUID();
-    await Promise.all([command('post_checkout',{id},f.users.ownerA,f.branches.a1,key),command('configure',{entity:'commission_rules',staff_id:f.staff.a1,service_id:f.services.cut,rate_bps:6000})]);
-    const retry=await command('post_checkout',{id},f.users.ownerA,f.branches.a1,key);assert.equal(retry.id,id);
-    const rows=await pool.query('select rate_bps,amount_minor,snapshot from public.commission_entries where checkout_id=$1',[id]);assert.equal(rows.rows.length,1);assert.ok([5000,6000].includes(rows.rows[0].rate_bps));assert.equal(Number(rows.rows[0].amount_minor),Number(rows.rows[0].rate_bps)*10);assert.equal(rows.rows[0].snapshot.rule.rate_bps,rows.rows[0].rate_bps);
+  await test("posting retries and concurrent commission rule edits produce one consistent snapshot", async () => {
+    const id = (await sale()).id;
+    await command("record_payment", {
+      checkout_id: id,
+      payment_method_id: methods.transfer,
+      amount_minor: 100000,
+    });
+    const key = randomUUID();
+    await Promise.all([
+      command("post_checkout", { id }, f.users.ownerA, f.branches.a1, key),
+      command("configure", {
+        entity: "commission_rules",
+        staff_id: f.staff.a1,
+        service_id: f.services.cut,
+        rate_bps: 6000,
+      }),
+    ]);
+    const retry = await command(
+      "post_checkout",
+      { id },
+      f.users.ownerA,
+      f.branches.a1,
+      key,
+    );
+    assert.equal(retry.id, id);
+    const rows = await pool.query(
+      "select rate_bps,amount_minor,snapshot from public.commission_entries where checkout_id=$1",
+      [id],
+    );
+    assert.equal(rows.rows.length, 1);
+    assert.ok([5000, 6000].includes(rows.rows[0].rate_bps));
+    assert.equal(
+      Number(rows.rows[0].amount_minor),
+      Number(rows.rows[0].rate_bps) * 10,
+    );
+    assert.equal(rows.rows[0].snapshot.rule.rate_bps, rows.rows[0].rate_bps);
   });
   return { passed };
 }

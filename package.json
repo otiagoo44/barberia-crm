@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/validate-deployment.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -16,6 +17,7 @@
     "test:db": "tsx tests/integration/run.ts",
     "test:load": "tsx tests/load/run.ts",
     "test:e2e": "playwright test",
+    "test:booking-ui": "node scripts/qa-website-booking.mjs",
     "check": "npm run lint && npm run typecheck && npm test && npm run test:db && npm run build"
   },
   "dependencies": {

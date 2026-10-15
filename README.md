@@ -1,6 +1,6 @@
 # Barbería OS
 
-Sistema operativo multi-tenant para barberías. Una aplicación Next.js/TypeScript y un proyecto Supabase: organizaciones, sucursales, equipo, servicios, disponibilidad por intervalos, agenda, reservas públicas, walk-ins, clientes, retención, rebooking, metas y reportes. No contiene contabilidad, caja ni comisiones.
+Sistema operativo multi-tenant para barberías. Una aplicación Next.js/TypeScript y un proyecto Supabase: organizaciones, sucursales, equipo, servicios, disponibilidad por intervalos, agenda, reservas públicas, walk-ins, clientes, retención, rebooking, metas, reportes y finanzas operativas (caja, cobros, gastos, comisiones y liquidaciones). No incluye contabilidad fiscal.
 
 La fuente de verdad es PostgreSQL. Los permisos se resuelven en DB; los writes se realizan por RPC transaccional, con auditoría, eventos, idempotencia y exclusión GiST contra double booking. No hay datos comerciales hardcodeados ni seed automático.
 
@@ -39,6 +39,10 @@ npm run test:e2e
 npm run test:load
 ```
 
+Para publicar en Vercel, seguir [la guía de despliegue](docs/VERCEL_DEPLOYMENT.md). El build de Vercel valida las variables, el origen HTTPS y la separación de bases entre Production y Preview; falla con el nombre del control, sin imprimir secretos.
+
+Con el build de producción servido localmente (`npm start`), `npm run test:booking-ui` verifica doce combinaciones de preselección/responsive y el payload de reserva mediante respuestas API interceptadas. Usa el Chromium de Playwright (`npx playwright install chromium`), sin rutas de programas ni dependencias de otra computadora. Esta prueba no sustituye Auth/DB E2E real.
+
 `test:db` crea PostgreSQL 17 efímero en `.test-data`, aplica todas las migrations y ejecuta aislamiento, permisos, flujos y concurrencia real. Rechaza URLs externas. Su Auth es un fixture mínimo, no Supabase Auth.
 
 `test:e2e` usa Chromium. Sin `E2E_REAL_SUPABASE=1` solo verifica login responsive/seguridad/teclado; los casos de Auth y negocio se omiten explícitamente. El CI arranca Supabase aislado, crea usuarios reales de Auth y ejecuta esos casos. No cuenta un caso omitido como aprobado.
@@ -56,6 +60,8 @@ node --env-file=.env.local --import tsx scripts/seed-demo.ts
 El script rechaza cualquier host remoto. Crea Barbería Demo, dos sucursales, cinco barberos, servicios, clientes y reservas, además del tenant B para probar aislamiento. Login `ownerA@fixture.invalid` con la contraseña que estableciste. Los secretos de booking/worker del fixture se usan únicamente para el entorno demo; no reemplazan los de producción. El seed no corre durante migrations, build ni deploy.
 
 ## Documentación
+
+- [Informe de continuación y estado de publicación](docs/RELEASE_REPORT.md), [configuración de Vercel](docs/VERCEL_DEPLOYMENT.md).
 
 - [Auditoría inicial](docs/AUDIT.md), [arquitectura](docs/ARCHITECTURE.md), [schema y migrations](docs/SCHEMA.md).
 - [Multi-tenancy](docs/MULTITENANCY.md), [seguridad](docs/SECURITY.md), [matriz RLS](docs/RLS_MATRIX.md).

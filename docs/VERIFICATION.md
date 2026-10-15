@@ -1,5 +1,7 @@
 # Evidencia de verificación
 
+Estado actualizado de la continuación del 15/10/2026: [informe de release](RELEASE_REPORT.md) y [configuración verificada de Vercel](VERCEL_DEPLOYMENT.md). Las secciones fechadas 12/10 debajo conservan evidencia histórica y no sustituyen el informe actual.
+
 Fecha: 2026-10-12. Los resultados se actualizan al ejecutar cada control; presencia de código no significa prueba realizada.
 
 ## IMPLEMENTADO
@@ -47,3 +49,14 @@ Ver [checklist](PRODUCTION_RELEASE_CHECKLIST.md) para los controles necesarios a
 ## Continuación financiera — 12/10/2026
 
 Baseline lint/typecheck/5unit/47DB/build pasó. Las 15 migrations originales intactas; remoto tenía14/cero organizaciones. Nuevas migrations desde cero y47regresiones+13contratos financieros pasaron Postgres aislado. Unit ampliado11/11; audit high cero; build financiero pasó. Dry-run539/535READY/4NEEDS_REVIEW/cero writes. Browser local1passed/4Auth real skipped (sinDocker). CI original [38311824540](https://github.com/otiagoo44/barberia-crm/actions/runs/38311824540): quality success, restore failure SET ROLE supabase_admin; browser omitido. Corrección portable/finanzas/browser añadida, resultado final pendiente de su ejecución. Vercel no encontró proyecto barberia-crm ni equipos; plan no demostrado.
+
+## Continuación verificada — 15/10/2026
+
+- `npm ci`: 216 paquetes, cero vulnerabilidades; audit high también sin hallazgos.
+- Lint, typecheck, 14 unitarios y build de producción aprobados.
+- Las 22 migrations se aplicaron desde cero en PostgreSQL aislado: 51 contratos de seguridad/reservas y 19 financieros aprobados. Se agregó regresión para lectura de auditoría del rol finance y denegación a recepción.
+- Pruebas de atención real independientes de medianoche UTC. Booking UI portable con Playwright: doce combinaciones de query/viewport y envío de formulario aprobados, con API interceptada.
+- Browser local de login/responsive/headers/teclado: un caso aprobado y cuatro de Auth real omitidos por falta de Docker local. CI es responsable de ejecutar esos cuatro con Supabase local real.
+- Supabase remoto: 67 tablas de aplicación con RLS, sin definers públicos, sin organizaciones/citas/ventas; cuenta Auth existente conservada. Migrations alineadas con el repositorio, sin reset ni demo cloud. Gateway health devuelve ready y SELECT anónimo sobre payments es rechazado con 42501.
+- Vercel confirmado por API/CLI: proyecto GitHub correcto y main, Node 24.x, instalación/build, dominio barberia-crm-kappa.vercel.app y nueve variables de Production. Tres secretos sensibles; Preview con controles de aislamiento y sin base de producción.
+- Plan Vercel Hobby verificado. Scheduler externo, staging separado, SMTP/redirects, onboarding y restore cloud siguen pendientes. Advisors/CI finales se registran en el informe de release.

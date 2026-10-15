@@ -15,6 +15,24 @@ export async function contracts(pool: Pool) {
     console.log(`PASS ${name}`);
   }
   const user = f.users.ownerA;
+  // Real-time services must fit inside one local day, even near UTC midnight.
+  // Date-based fixtures retain UTC outside these two checks.
+  async function currentTimeCheck(name: string, run: () => Promise<void>) {
+    const offset = new Date().getUTCHours() - 12;
+    const zone = `Etc/GMT${offset >= 0 ? "+" : ""}${offset}`;
+    await pool.query("update public.branches set timezone=$1 where id=$2", [
+      zone,
+      f.branches.a1,
+    ]);
+    try {
+      await check(name, run);
+    } finally {
+      await pool.query(
+        "update public.branches set timezone='Etc/UTC' where id=$1",
+        [f.branches.a1],
+      );
+    }
+  }
   const tomorrow = new Date();
   tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
   tomorrow.setUTCHours(9, 0, 0, 0);
@@ -197,10 +215,10 @@ export async function contracts(pool: Pool) {
     );
   });
   await check(
-    "Every exposed table has RLS; public functions are invoker",
+    "Every application table has RLS; public functions are invoker",
     async () => {
       const { rows } = await pool.query(
-        "select c.relname from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r' and not c.relrowsecurity",
+        "select c.relname from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','app_private') and c.relkind='r' and not c.relrowsecurity",
       );
       assert.equal(rows.length, 0);
       assert.equal(
@@ -615,7 +633,7 @@ export async function contracts(pool: Pool) {
       { code: "22023" },
     );
   });
-  await check(
+  await currentTimeCheck(
     "State machine: check-in, start, complete; reverse transition denied",
     async () => {
       const current = await booking(
@@ -672,7 +690,7 @@ export async function contracts(pool: Pool) {
       assert.equal(next.length, 1);
     },
   );
-  await check(
+  await currentTimeCheck(
     "Walk-in becomes real appointment without duplicate customer",
     async () => {
       const key = randomUUID();
@@ -1177,44 +1195,226 @@ export async function contracts(pool: Pool) {
     },
   );
 
-  await check("Website metadata can be configured by owner, not reception", async () => {
-    await assert.rejects(asUser(pool, f.users.receptionA, "select public.manage_record($1,'services',$2,null,$3)", [f.orgA,f.services.curl,{website_category:"rulos",consultation_required:true}]), {code:"42501"});
-    await asUser(pool, f.users.ownerA, "select public.manage_record($1,'services',$2,null,$3)", [f.orgA,f.services.curl,{website_category:"rulos",consultation_required:true}]);
-    await assert.rejects(pool.query("update public.services set consultation_required=false where id=$1",[f.services.curl]),{code:"23514"});
-    const r=await asUser<{result: {website_booking_version:number;branches: {services:{slug:string;consultation_required:boolean}[]}[]}}>(pool,null,"select public.public_catalog($1,$2,$3) result",[f.bookingSecret,"fixture-a","a1"]);
-    assert.equal(r[0].result.website_booking_version,1);
-    assert.equal(r[0].result.branches[0].services.find(s=>s.slug==="cut")?.consultation_required,false);
-    assert.equal(r[0].result.branches[0].services.find(s=>s.slug==="curl")?.consultation_required,true);
-  });
-  await check("Consultation service rejects forged public availability and booking",async()=>{
-    await assert.rejects(asUser(pool,null,"select public.public_availability($1,$2,$3,$4,null,current_date+1)",[f.bookingSecret,"fixture-a","a1",["curl"]]),{code:"22023"});
-    await assert.rejects(asUser(pool,null,"select public.public_booking($1,$2,$3,$4,null,$5,$6,$7,'',$8)",[f.bookingSecret,"fixture-a","a1",["curl"],at(25),{name:"Consultation fixture",normalized_phone:"+12025550222"},randomUUID(),"website"]),{code:"22023"});
-    // Authenticated reception retains the engine for evaluated services.
-    const r=await asUser<{result:{id:string}}>(pool,f.users.receptionA,"select public.create_booking($1,$2,$3,$4,$5,$6,null,$7,null) result",[f.orgA,f.branches.a1,[f.services.curl],f.staff.a3,at(25),f.customers.a1,randomUUID()]);
-    assert.ok(r[0].result.id);
-  });
-  await check("Website attribution preserves public rules, tenant isolation and idempotency",async()=>{
-    const key=randomUUID();
-    const args=[f.bookingSecret,"fixture-a","a1",["cut"],null,at(26),{name:"Website fixture",normalized_phone:"+12025550223"},key,"","website"];
-    const sql="select public.public_booking($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) result";
-    const a=await asUser<{result:{reference:string}}>(pool,null,sql,args);
-    assert.deepEqual(await asUser(pool,null,sql,args),a);
-    const row=(await pool.query("select id,source,booking_attribution,duration_minutes from public.appointments where public_reference=$1",[a[0].result.reference])).rows[0];
-    assert.equal(row.source,"public");assert.equal(row.booking_attribution,"website");assert.equal(row.duration_minutes,40);
-    const events=await pool.query("select payload from public.domain_events where entity_id=$1 and event_type='appointment.created'",[row.id]);
-    assert.equal(events.rows.length,1);
-    const attributionEvents=await pool.query("select payload from public.domain_events where entity_id=$1 and event_type='booking.attributed'",[row.id]);
-    assert.equal(attributionEvents.rows.length,1);assert.equal(attributionEvents.rows[0].payload.attribution,"website");
-    await assert.rejects(asUser(pool,null,sql,[...args.slice(0,9),null]),{code:"22023"});
-    await assert.rejects(asUser(pool,null,sql,[...args.slice(0,9),"internal"]),{code:"22023"});
-    await assert.rejects(asUser(pool,null,sql,[f.bookingSecret,"fixture-b","a1",["cut"],null,at(27),args[6],randomUUID(),"","website"]),{code:"P0002"});
-    await pool.query("update public.organization_settings set booking_lead_minutes=120 where organization_id=$1",[f.orgA]);
-    await assert.rejects(asUser(pool,null,sql,[...args.slice(0,5),new Date(Date.now()+60000).toISOString(),args[6],randomUUID(),"","website"]),{code:"22023"});
-    await pool.query("update public.organization_settings set booking_lead_minutes=0 where organization_id=$1",[f.orgA]);
-  });
-  await check("Anonymous cannot access attribution ledger or unattributed engine",async()=>{
-    await assert.rejects(asUser(pool,null,"select * from app_private.booking_attributions"),{code:"42501"});
-    await assert.rejects(asUser(pool,null,"select app_private.public_booking_unattributed($1,$2,$3,$4,null,$5,$6,$7,'')",[f.bookingSecret,"fixture-a","a1",["cut"],at(28),{name:"Bypass",normalized_phone:"+12025550224"},randomUUID()]),{code:"42501"});
-  });
+  await check(
+    "Website metadata can be configured by owner, not reception",
+    async () => {
+      await assert.rejects(
+        asUser(
+          pool,
+          f.users.receptionA,
+          "select public.manage_record($1,'services',$2,null,$3)",
+          [
+            f.orgA,
+            f.services.curl,
+            { website_category: "rulos", consultation_required: true },
+          ],
+        ),
+        { code: "42501" },
+      );
+      await asUser(
+        pool,
+        f.users.ownerA,
+        "select public.manage_record($1,'services',$2,null,$3)",
+        [
+          f.orgA,
+          f.services.curl,
+          { website_category: "rulos", consultation_required: true },
+        ],
+      );
+      await assert.rejects(
+        pool.query(
+          "update public.services set consultation_required=false where id=$1",
+          [f.services.curl],
+        ),
+        { code: "23514" },
+      );
+      const r = await asUser<{
+        result: {
+          website_booking_version: number;
+          branches: {
+            services: { slug: string; consultation_required: boolean }[];
+          }[];
+        };
+      }>(pool, null, "select public.public_catalog($1,$2,$3) result", [
+        f.bookingSecret,
+        "fixture-a",
+        "a1",
+      ]);
+      assert.equal(r[0].result.website_booking_version, 1);
+      assert.equal(
+        r[0].result.branches[0].services.find((s) => s.slug === "cut")
+          ?.consultation_required,
+        false,
+      );
+      assert.equal(
+        r[0].result.branches[0].services.find((s) => s.slug === "curl")
+          ?.consultation_required,
+        true,
+      );
+    },
+  );
+  await check(
+    "Consultation service rejects forged public availability and booking",
+    async () => {
+      await assert.rejects(
+        asUser(
+          pool,
+          null,
+          "select public.public_availability($1,$2,$3,$4,null,current_date+1)",
+          [f.bookingSecret, "fixture-a", "a1", ["curl"]],
+        ),
+        { code: "22023" },
+      );
+      await assert.rejects(
+        asUser(
+          pool,
+          null,
+          "select public.public_booking($1,$2,$3,$4,null,$5,$6,$7,'',$8)",
+          [
+            f.bookingSecret,
+            "fixture-a",
+            "a1",
+            ["curl"],
+            at(25),
+            { name: "Consultation fixture", normalized_phone: "+12025550222" },
+            randomUUID(),
+            "website",
+          ],
+        ),
+        { code: "22023" },
+      );
+      // Authenticated reception retains the engine for evaluated services.
+      const r = await asUser<{ result: { id: string } }>(
+        pool,
+        f.users.receptionA,
+        "select public.create_booking($1,$2,$3,$4,$5,$6,null,$7,null) result",
+        [
+          f.orgA,
+          f.branches.a1,
+          [f.services.curl],
+          f.staff.a3,
+          at(25),
+          f.customers.a1,
+          randomUUID(),
+        ],
+      );
+      assert.ok(r[0].result.id);
+    },
+  );
+  await check(
+    "Website attribution preserves public rules, tenant isolation and idempotency",
+    async () => {
+      const key = randomUUID();
+      const args = [
+        f.bookingSecret,
+        "fixture-a",
+        "a1",
+        ["cut"],
+        null,
+        at(26),
+        { name: "Website fixture", normalized_phone: "+12025550223" },
+        key,
+        "",
+        "website",
+      ];
+      const sql =
+        "select public.public_booking($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) result";
+      const a = await asUser<{ result: { reference: string } }>(
+        pool,
+        null,
+        sql,
+        args,
+      );
+      assert.deepEqual(await asUser(pool, null, sql, args), a);
+      const row = (
+        await pool.query(
+          "select id,source,booking_attribution,duration_minutes from public.appointments where public_reference=$1",
+          [a[0].result.reference],
+        )
+      ).rows[0];
+      assert.equal(row.source, "public");
+      assert.equal(row.booking_attribution, "website");
+      assert.equal(row.duration_minutes, 40);
+      const events = await pool.query(
+        "select payload from public.domain_events where entity_id=$1 and event_type='appointment.created'",
+        [row.id],
+      );
+      assert.equal(events.rows.length, 1);
+      const attributionEvents = await pool.query(
+        "select payload from public.domain_events where entity_id=$1 and event_type='booking.attributed'",
+        [row.id],
+      );
+      assert.equal(attributionEvents.rows.length, 1);
+      assert.equal(attributionEvents.rows[0].payload.attribution, "website");
+      await assert.rejects(
+        asUser(pool, null, sql, [...args.slice(0, 9), null]),
+        { code: "22023" },
+      );
+      await assert.rejects(
+        asUser(pool, null, sql, [...args.slice(0, 9), "internal"]),
+        { code: "22023" },
+      );
+      await assert.rejects(
+        asUser(pool, null, sql, [
+          f.bookingSecret,
+          "fixture-b",
+          "a1",
+          ["cut"],
+          null,
+          at(27),
+          args[6],
+          randomUUID(),
+          "",
+          "website",
+        ]),
+        { code: "P0002" },
+      );
+      await pool.query(
+        "update public.organization_settings set booking_lead_minutes=120 where organization_id=$1",
+        [f.orgA],
+      );
+      await assert.rejects(
+        asUser(pool, null, sql, [
+          ...args.slice(0, 5),
+          new Date(Date.now() + 60000).toISOString(),
+          args[6],
+          randomUUID(),
+          "",
+          "website",
+        ]),
+        { code: "22023" },
+      );
+      await pool.query(
+        "update public.organization_settings set booking_lead_minutes=0 where organization_id=$1",
+        [f.orgA],
+      );
+    },
+  );
+  await check(
+    "Anonymous cannot access attribution ledger or unattributed engine",
+    async () => {
+      await assert.rejects(
+        asUser(pool, null, "select * from app_private.booking_attributions"),
+        { code: "42501" },
+      );
+      await assert.rejects(
+        asUser(
+          pool,
+          null,
+          "select app_private.public_booking_unattributed($1,$2,$3,$4,null,$5,$6,$7,'')",
+          [
+            f.bookingSecret,
+            "fixture-a",
+            "a1",
+            ["cut"],
+            at(28),
+            { name: "Bypass", normalized_phone: "+12025550224" },
+            randomUUID(),
+          ],
+        ),
+        { code: "42501" },
+      );
+    },
+  );
   return { passed, timings };
 }

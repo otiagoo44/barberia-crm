@@ -12,3 +12,5 @@ supabase/.temp/
 supabase/.branches/
 __pycache__/
 *.py[cod]
+.vercel/
+codex-session-*.md

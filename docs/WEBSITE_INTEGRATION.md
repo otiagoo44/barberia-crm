@@ -35,8 +35,8 @@ La atribución no contiene IP, campaña libre, PII ni secretos. El ledger privad
 
 Ningún tenant o servicio productivo existe en la base auditada. Se conserva el contenido confirmado de Corte/Barba/Perfilado/Lavado/Rulos durante la puesta en marcha, con WhatsApp. El precio/duración dudosos de Tinte quedan sin publicar. Una vez activado el catálogo, sólo se muestran servicios clasificados y activos de esa sucursal y sus precios/duraciones efectivos. Global y Mechas se muestran por separado si ambos existen bajo categoría tinte. La disponibilidad no se duplica en la landing.
 
-La URL pública prevista es https://barberia-crm.vercel.app. Variables públicas: BARBERIA_OS_PUBLIC_URL, BARBERIA_OS_ORGANIZATION_SLUG, BARBERIA_OS_BRANCH_SLUG; SITE_URL es opcional y pertenece sólo al SEO de la landing. Los slugs siguen pendientes hasta que el CRM los configure. [Activación](BOOKING_SETUP.md) y [auditoría](BOOKING_AUDIT.md).
+El dominio verificado del proyecto es https://barberia-crm-kappa.vercel.app. Variables públicas de la landing: BARBERIA_OS_PUBLIC_URL, BARBERIA_OS_ORGANIZATION_SLUG, BARBERIA_OS_BRANCH_SLUG; SITE_URL es opcional y pertenece sólo al SEO de la landing. Los slugs siguen pendientes hasta que el CRM los configure. Ver [despliegue](VERCEL_DEPLOYMENT.md) y [onboarding](NEW_ORGANIZATION_ONBOARDING.md).
 
-La migración se entrega en el repositorio del CRM; no se aplicó a ninguna base remota. La organización 17:17 debe crearse desde configuración real, sin copiar fixtures.
+Las migraciones del contrato se aplicaron al proyecto Supabase conectado el 15/10/2026. La organización 17:17 debe crearse desde configuración real, sin copiar fixtures.
 
-Verificación pública final: la URL prevista responde con un starter NextSpark; /api/public/catalog devuelve HTML de Not Found, no el contrato JSON del motor auditado. Desplegar/asociar el CRM real a la URL antes de activar 17:17. El build de la landing rechaza ese contenido aun con HTTP 200. La base remota sigue sin organizaciones, sucursales ni servicios.
+La URL anterior sin `-kappa` respondió con un starter NextSpark; no usarla para activar 17:17. El build de la landing rechaza contenido que no cumple el catálogo incluso con HTTP 200. La base remota sigue sin organizaciones, sucursales ni servicios; completar el onboarding antes de activar el catálogo en la landing.

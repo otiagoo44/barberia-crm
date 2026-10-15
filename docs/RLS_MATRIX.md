@@ -86,3 +86,5 @@ Writes directos INSERT/UPDATE/DELETE denegados. O=tenant,B=branch autorizada,P=s
 |Usuarios/seguridad|O|—|—|—|—|—|
 
 Recepción recibe snapshot operativo sin financial. Cierres completos requieren report. Finance.* audit disponible finance/manager de branches. Helpers comprueban profile/membership/organization/branch. Finance all_branches para su función financiera, manager asignación explícita. No se concede seguridad a finance.
+
+Revisión 15/10/2026: todas las tablas de aplicación, incluido `app_private.booking_attributions`, tienen RLS. La lectura de audit_logs usa un único predicado para authenticated que conserva la unión owner/manager/finance anterior. La regresión verifica que finance solo obtiene acciones finance.* de su tenant y recepción no obtiene filas de auditoría.
