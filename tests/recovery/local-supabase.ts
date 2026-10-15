@@ -110,13 +110,12 @@ try {
       container,
       "pg_restore",
       "-U",
-      "postgres",
+      "supabase_admin",
       "-h",
       "127.0.0.1",
       "-d",
       "recovery_drill",
       "--exit-on-error",
-      "--no-owner",
     ],
     {
       env,
@@ -235,7 +234,7 @@ try {
     managed_platform_restore:
       "NOT_TESTED: Realtime/Storage infrastructure and publications are provisioned separately, not restored by this application drill.",
     ownership:
-      "Portable local restore --no-owner; ACLs and RLS retained. Cloud ownership restoration not exercised.",
+      "Original local owners, ACLs and RLS restored using the isolated container's existing supabase_admin role. No production privileges changed; cloud recovery not exercised.",
   };
   await mkdir("docs/verification", { recursive: true });
   await writeFile(
