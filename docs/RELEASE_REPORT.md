@@ -67,7 +67,7 @@ Build de producción completado. Prebuild de Vercel valida origen HTTPS, variabl
 
 ## 15. CI
 
-Se conserva el workflow completo de quality, Supabase local con Auth real, restore financiero y navegador. La [primera ejecución de esta continuación](https://github.com/otiagoo44/barberia-crm/actions/runs/38792012187) detectó dos fallos del entorno de verificación: sockets de PostgreSQL pendientes al apagar el servidor Linux y restore de funciones administradas de Realtime con parámetros privilegiados. Se corrigieron esperando los cierres reales y delimitando el backup de aplicación/Auth, conservando pruebas RLS, financieras y de concurrencia. El resultado de la siguiente ejecución se registra al finalizar; no se considera verde por controles locales.
+**CI completo aprobado** para el código `4c9f8e4`: [ejecución 38796594266](https://github.com/otiagoo44/barberia-crm/actions/runs/38796594266). Quality y supabase-e2e terminaron success: instalación/audit/lint/typecheck/unitarios/PostgreSQL/build, Auth real local, restore con owners/ACLs/RLS/datos financieros y cinco pruebas de navegador sin omisiones. Las correcciones de esta revisión cubren el cierre real de conexiones antes de apagar PostgreSQL, dependencias y permisos del restore, selectores accesibles y retries de E2E. El código de aplicación no se considera probado solo por existir o compilar.
 
 ## 16. Supabase advisors
 

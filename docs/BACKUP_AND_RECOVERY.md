@@ -2,7 +2,7 @@
 
 ## Estado
 
-PENDIENTE de habilitar/verificar en el proyecto real: plan, retención de backups, PITR y restore. Aplicar migrations o pasar tests no demuestra que un backup real sea recuperable. La primera barbería no debe operar hasta registrar un restore satisfactorio aislado.
+PENDIENTE en el proyecto real: política/retención de copias, PITR si se elige y restore cloud. El plan Free se verificó en el dashboard. Aplicar migrations o pasar un restore local no demuestra que un backup del proyecto real sea recuperable. La primera barbería no debe operar hasta registrar un restore satisfactorio aislado de sus copias reales.
 
 Verificación del dashboard el 15/10/2026: el proyecto está en **Free** y la pestaña Scheduled backups indica que ese plan no incluye backups del proyecto. No se contrató ningún plan. Antes del piloto se necesita una estrategia de copias/retención y un restore aislado demostrado; la presencia de migrations no reemplaza esas copias.
 
@@ -33,3 +33,5 @@ Repetir simulacro tras cambios importantes y periódicamente. Registrar evidenci
 Backup incluye ventas/líneas/pagos/fees/comisiones, gastos/adelantos/salarios, liquidaciones/reservas/ajustes/reversals, cajas/movimientos/cierres, imports/raw, agregados/audit. Restore drill CI compara filas financieras/saldo/RLS y conserva strict exit-on-error. No demuestra recovery cloud/PITR reales; configuración/retención/RPO/RTO y restore cloud aislado requieren evidencia.
 
 El drill lógico se limita a `public`, `app_private`, `auth` y `extensions`, con usuarios Auth reales y las dependencias btree_gist/pg_trgm/pgcrypto explícitas. Restaura owners, RLS y ACLs mediante el rol administrador `supabase_admin` ya existente en el contenedor local aislado; no modifica roles ni privilegios de producción. El rol de aplicación postgres no puede reasignar owners o defaults de supabase_auth_admin. No se omiten ACLs para hacer pasar la prueba. No copia funciones administradas de Realtime/Storage ni publicaciones/subscripciones: esas piezas se provisionan con Supabase y no pertenecen al backup de aplicación probado. El informe distingue el restore de aplicación de la recuperación de plataforma/cloud, que sigue pendiente.
+
+Drill local aprobado en [CI 38796594266](https://github.com/otiagoo44/barberia-crm/actions/runs/38796594266). El artefacto browser-verification contiene `docs/verification/restore-local.json` con tamaño/tiempo, conteos y controles ejecutados; production_restore y managed_platform_restore permanecen NOT_TESTED.
