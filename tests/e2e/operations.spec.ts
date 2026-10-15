@@ -63,6 +63,8 @@ test.describe("Real Supabase Auth and domain flows", () => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     const date = new Date().toISOString().slice(0, 10);
+    const suffix = crypto.randomUUID().slice(0, 8);
+    const productName = `E2E producto ${suffix}`;
     const base = `org=${f.orgA}&branch=${f.branches.a1}&from=${date}&to=${date}`;
     const command = async (action: string, data: Record<string, unknown>) => {
       const r = await page.request.post("/api/finance/command", {
@@ -82,7 +84,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
       await command("configure", {
         entity: "payment_methods",
         name: "E2E efectivo",
-        code: "e2e_cash",
+        code: `e2e_cash_${suffix}`,
         type: "cash",
       })
     ).id;
@@ -90,7 +92,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
       await command("configure", {
         entity: "payment_methods",
         name: "E2E transferencia",
-        code: "e2e_transfer",
+        code: `e2e_transfer_${suffix}`,
         type: "bank",
       })
     ).id;
@@ -103,7 +105,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
       });
     await command("configure", {
       entity: "finance_items",
-      name: "E2E producto",
+      name: productName,
       kind: "product",
       price_minor: 100000,
     });
@@ -119,18 +121,18 @@ test.describe("Real Supabase Auth and domain flows", () => {
     await page.getByRole("button", { name: "Venta sin cita" }).click();
     await page
       .getByLabel("Producto, curso u otro ingreso")
-      .selectOption({ label: "E2E producto" });
+      .selectOption({ label: productName });
     await page.getByRole("button", { name: "Preparar checkout" }).click();
     await expect(
       page.getByRole("button", { name: "Dividir pago" }),
     ).toBeVisible();
     await page.getByRole("button", { name: "Dividir pago" }).click();
     await page
-      .getByLabel("Medio de pago", { exact: true })
+      .getByRole("combobox", { name: "Medio de pago", exact: true })
       .nth(0)
       .selectOption(cash);
     await page
-      .getByLabel("Medio de pago", { exact: true })
+      .getByRole("combobox", { name: "Medio de pago", exact: true })
       .nth(1)
       .selectOption(transfer);
     await page
@@ -301,7 +303,8 @@ test.describe("Real Supabase Auth and domain flows", () => {
     ]) {
       await page.goto(`/fixture-a/${module}`);
       await expect(page.locator("main h1").first()).toBeVisible();
-      await expect(page.getByRole("alert")).toHaveCount(0);
+      // Next's route announcer is an empty alert outside the application main.
+      await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
     }
     await page.goto("/fixture-a/clientes");
     await page
