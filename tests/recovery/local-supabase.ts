@@ -84,6 +84,9 @@ try {
       "--schema=app_private",
       "--schema=auth",
       "--schema=extensions",
+      "--extension=btree_gist",
+      "--extension=pg_trgm",
+      "--extension=pgcrypto",
       "--no-publications",
       "--no-subscriptions",
       "postgres",
@@ -228,6 +231,7 @@ try {
     ],
     production_restore: "NOT_TESTED",
     schemas: ["public", "app_private", "auth", "extensions"],
+    extensions: ["btree_gist", "pg_trgm", "pgcrypto"],
     managed_platform_restore:
       "NOT_TESTED: Realtime/Storage infrastructure and publications are provisioned separately, not restored by this application drill.",
     ownership:
