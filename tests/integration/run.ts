@@ -1,6 +1,7 @@
 import { isolatedDatabase } from "./database";
 import { contracts } from "../security/contracts";
 import { financeContracts } from "./finance";
+import { onboardingContracts } from "./onboarding";
 const db = await isolatedDatabase();
 try {
   const result = await contracts(db.pool);
@@ -12,6 +13,7 @@ try {
         "PostgreSQL roles and fixture auth.users; real Supabase Auth not exercised",
     }),
   );
+  await onboardingContracts(db.pool);
 } finally {
   await db.stop();
 }

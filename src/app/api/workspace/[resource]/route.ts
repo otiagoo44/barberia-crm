@@ -30,7 +30,13 @@ const writes = {
     .object({
       org: uuid,
       email: z.email(),
-      role: z.enum(["organization_owner", "manager", "receptionist", "barber", "finance"]),
+      role: z.enum([
+        "organization_owner",
+        "manager",
+        "receptionist",
+        "barber",
+        "finance",
+      ]),
       all_branches: z.boolean(),
       branches: z.array(uuid).max(100),
       active: z.boolean(),
@@ -287,6 +293,20 @@ export async function GET(
     const org = uuid.parse(q.get("org"));
     const branch = q.get("branch") ? uuid.parse(q.get("branch")) : null;
     const staff = q.get("staff") ? uuid.parse(q.get("staff")) : null;
+    if (resource === "daily_availability") {
+      if (!branch) throw new HttpError(400, "branch_required");
+      const day = date.parse(q.get("date"));
+      const { data, error } = await db
+        .from("staff_availability_exceptions")
+        .select("id,staff_id,local_date,starts_at,ends_at,available,reason")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .eq("local_date", day)
+        .order("starts_at")
+        .limit(200);
+      if (error) throw error;
+      return response({ items: data ?? [] }, requestId);
+    }
     let name: string;
     let args: Record<string, unknown>;
     switch (resource) {

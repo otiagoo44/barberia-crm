@@ -10,6 +10,7 @@ import type { Page, Staff, DataRow } from "@/lib/types";
 import { currencyScale } from "@/features/configuration/record-manager";
 import { GoalCard } from "@/features/goals/goals";
 import { FinancialDashboard } from "@/features/finance/dashboard";
+import { LaunchGuide } from "@/features/organizations/launch-guide";
 type DashboardData = {
   totals: Record<string, number | null>;
   by_staff: {
@@ -128,6 +129,9 @@ export function Dashboard({ report = false }: { report?: boolean }) {
           Ver agenda →
         </Link>
       </div>
+      {!report && ["organization_owner", "platform_admin"].includes(w.role) && (
+        <LaunchGuide />
+      )}
       <div className="toolbar">
         <select
           aria-label="Período"
@@ -325,7 +329,14 @@ export function Dashboard({ report = false }: { report?: boolean }) {
           </div>
         </>
       )}
-      {w.role !== 'barber' && w.role !== 'receptionist' && <FinancialDashboard compact periodFrom={from} periodTo={to} branchId={branch||w.branchId} />}
+      {w.role !== "barber" && w.role !== "receptionist" && (
+        <FinancialDashboard
+          compact
+          periodFrom={from}
+          periodTo={to}
+          branchId={branch || w.branchId}
+        />
+      )}
     </section>
   );
 }

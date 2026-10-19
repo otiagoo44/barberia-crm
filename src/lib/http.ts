@@ -81,8 +81,19 @@ export function fail(error: unknown, requestId: string) {
   console.error(
     JSON.stringify({ level: "error", request_id: requestId, code, status }),
   );
+  const authMessages: Record<string, string> = {
+    invalid_credentials:
+      "Correo o contraseña incorrectos. Si recién creaste tu cuenta, confirmá tu correo.",
+    profile_inactive:
+      "Tu acceso está desactivado. Contactá al propietario de la barbería.",
+    signup_failed:
+      "No se pudo crear la cuenta. Revisá los datos o contactá al administrador.",
+    password_update_failed:
+      "No se pudo guardar la contraseña. Solicitá un nuevo enlace de recuperación.",
+  };
   const message =
-    status === 409
+    authMessages[code] ??
+    (status === 409
       ? "Ese horario dejó de estar disponible. Elegí otro."
       : status === 403
         ? "No tenés permiso para realizar esta acción."
@@ -92,6 +103,6 @@ export function fail(error: unknown, requestId: string) {
             ? "Revisá los datos y el estado de la operación."
             : status === 404
               ? "No encontramos este recurso."
-              : "No pudimos completar la operación. Intentá nuevamente.";
+              : "No pudimos completar la operación. Intentá nuevamente.");
   return response({ error: message, request_id: requestId }, requestId, status);
 }

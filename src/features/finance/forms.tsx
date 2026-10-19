@@ -1,10 +1,12 @@
 "use client";
 import { useState, type FormEvent } from "react";
+import { fromZonedTime } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { Modal, Field, Notice } from "@/components/ui";
 import {
   financeCommand,
   integerInput,
+  amountLabel,
   type FinanceCatalog,
   type FinanceRow,
 } from "./client";
@@ -117,8 +119,10 @@ export function FinanceForm({
             bps;
           delete data.percentage;
           if (data.effective_from)
-            data.effective_from = new Date(
+            data.effective_from = fromZonedTime(
               String(data.effective_from),
+              w.branches.find((b) => b.id === w.branchId)?.timezone ??
+                w.organization.timezone,
             ).toISOString();
           else delete data.effective_from;
         }
@@ -171,7 +175,7 @@ export function FinanceForm({
               catalog.payment_methods,
             )}
             {action !== "pay_staff_settlement" && (
-              <Field label="Importe en unidad mínima">
+              <Field label={amountLabel(w.organization.currency)}>
                 <input
                   name="amount_minor"
                   required
@@ -229,7 +233,9 @@ export function FinanceForm({
         ].includes(action) && (
           <>
             {action !== "reverse_financial_transaction" && (
-              <Field label="Importe en unidad mínima (negativo para descontar)">
+              <Field
+                label={`${amountLabel(w.organization.currency)} (negativo para descontar)`}
+              >
                 <input
                   name="signed_amount_minor"
                   inputMode="text"
@@ -249,9 +255,9 @@ export function FinanceForm({
                   value={cashSessionId ?? ""}
                 />
                 <Notice>
-                  Se conserva el original y se registra la reversión. Los fees
-                  POS originales se mantienen salvo ajuste confirmado del
-                  proveedor.
+                  Se conserva el original y se registra la reversión. Las
+                  tarifas de tarjeta originales se mantienen salvo ajuste
+                  confirmado del proveedor.
                 </Notice>
               </>
             )}
@@ -306,7 +312,9 @@ export function FinanceForm({
                     <option value="other">Otro ingreso</option>
                   </select>
                 </Field>
-                <Field label="Precio en unidad mínima (vacío: requiere precio autorizado)">
+                <Field
+                  label={`Precio · ${amountLabel(w.organization.currency)} (opcional)`}
+                >
                   <input
                     name="price_minor"
                     inputMode="numeric"
@@ -336,7 +344,9 @@ export function FinanceForm({
                   />
                 </Field>
                 {entity === "payment_method_fee_rules" && (
-                  <Field label="Cargo fijo en unidad mínima">
+                  <Field
+                    label={`Cargo fijo · ${amountLabel(w.organization.currency)}`}
+                  >
                     <input
                       name="fixed_amount_minor"
                       required
@@ -345,7 +355,9 @@ export function FinanceForm({
                     />
                   </Field>
                 )}
-                <Field label="Vigencia desde (vacío: ahora)">
+                <Field
+                  label={`Vigencia desde · ${w.branches.find((b) => b.id === w.branchId)?.timezone ?? w.organization.timezone} (vacío: ahora)`}
+                >
                   <input name="effective_from" type="datetime-local" />
                 </Field>
                 <Field label="Referencia de evidencia (obligatoria para fechas históricas)">

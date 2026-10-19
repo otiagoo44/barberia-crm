@@ -1,5 +1,7 @@
 # Barbería OS
 
+> Continuación del 19/10/2026: [operación diaria de 17:17](docs/OPERACION_1717.md) y [estado de esta revisión](docs/RELEASE_2026_10_19.md). Incluye disponibilidad por día y reparto de ganancias en partes iguales.
+
 Sistema operativo multi-tenant para barberías. Una aplicación Next.js/TypeScript y un proyecto Supabase: organizaciones, sucursales, equipo, servicios, disponibilidad por intervalos, agenda, reservas públicas, walk-ins, clientes, retención, rebooking, metas, reportes y finanzas operativas (caja, cobros, gastos, comisiones y liquidaciones). No incluye contabilidad fiscal.
 
 La fuente de verdad es PostgreSQL. Los permisos se resuelven en DB; los writes se realizan por RPC transaccional, con auditoría, eventos, idempotencia y exclusión GiST contra double booking. No hay datos comerciales hardcodeados ni seed automático.

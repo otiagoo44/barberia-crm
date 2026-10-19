@@ -55,3 +55,8 @@ export function integerInput(value: string) {
     throw new Error("Importe fuera de rango.");
   return n;
 }
+export function amountLabel(currency: string) {
+  return currency === "PYG"
+    ? "Importe en guaraníes (Gs.)"
+    : `Importe en centavos (${currency})`;
+}

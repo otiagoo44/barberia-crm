@@ -122,7 +122,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
     await page
       .getByLabel("Producto, curso u otro ingreso")
       .selectOption({ label: productName });
-    await page.getByRole("button", { name: "Preparar checkout" }).click();
+    await page.getByRole("button", { name: "Preparar cobro" }).click();
     await expect(
       page.getByRole("button", { name: "Dividir pago" }),
     ).toBeVisible();
@@ -136,11 +136,11 @@ test.describe("Real Supabase Auth and domain flows", () => {
       .nth(1)
       .selectOption(transfer);
     await page
-      .getByLabel("Importe en unidad mínima", { exact: true })
+      .getByLabel("Importe en centavos (USD)", { exact: true })
       .nth(0)
       .fill("60000");
     await page
-      .getByLabel("Importe en unidad mínima", { exact: true })
+      .getByLabel("Importe en centavos (USD)", { exact: true })
       .nth(1)
       .fill("40000");
     await page.getByRole("button", { name: "Cobrar y registrar" }).click();
@@ -165,7 +165,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
       .getByRole("button", { name: "Cerrar caja", exact: true })
       .click();
     await page
-      .getByLabel("Efectivo contado en unidad mínima")
+      .getByLabel("Efectivo contado · Importe en centavos (USD)")
       .fill(String(state.session.expected_cash_minor));
     await page.getByRole("button", { name: "Confirmar cierre" }).click();
     await expect(

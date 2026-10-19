@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { useWorkspace } from "@/features/organizations/context";
 import { RecordManager } from "./record-manager";
 import { definitions } from "./definitions";
+import { DailyAvailability } from "./daily-availability";
 import { useResource, resourceUrl, api } from "@/lib/client";
 import { Field, Notice, Loading } from "@/components/ui";
 import { roleLabels } from "@/lib/validation";
@@ -25,12 +26,14 @@ export function Configuration({
     equipo:
       w.role === "barber"
         ? [
+            "daily_availability",
             "staff_availability_rules",
             "staff_availability_exceptions",
             "staff_time_off",
           ]
         : owner
           ? [
+              "daily_availability",
               "staff",
               "staff_branch_assignments",
               "staff_service_capabilities",
@@ -39,6 +42,7 @@ export function Configuration({
               "staff_time_off",
             ]
           : [
+              "daily_availability",
               "staff_branch_assignments",
               "staff_availability_rules",
               "staff_availability_exceptions",
@@ -59,6 +63,7 @@ export function Configuration({
       : null,
   );
   const labels: Record<string, string> = {
+    daily_availability: "Turnos del día",
     memberships: "Usuarios y permisos",
     branding: "Identidad del negocio",
     audit: "Auditoría",
@@ -92,7 +97,15 @@ export function Configuration({
           </button>
         ))}
       </div>
-      {tab === "memberships" ? (
+      {tab === "daily_availability" ? (
+        <DailyAvailability
+          key={w.branchId}
+          readOnly={
+            w.role === "barber" &&
+            !settings.data?.items[0]?.barber_can_edit_availability
+          }
+        />
+      ) : tab === "memberships" ? (
         <Memberships />
       ) : tab === "branding" ? (
         <Branding />

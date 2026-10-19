@@ -9,6 +9,7 @@ import {
   financeCommand,
   money,
   integerInput,
+  amountLabel,
   type FinanceRow,
   type FinanceCatalog,
 } from "./client";
@@ -238,8 +239,8 @@ export function Cash() {
             <Field
               label={
                 action === "open"
-                  ? "Efectivo inicial en unidad mínima"
-                  : "Efectivo contado en unidad mínima"
+                  ? `Efectivo inicial · ${amountLabel(w.organization.currency)}`
+                  : `Efectivo contado · ${amountLabel(w.organization.currency)}`
               }
             >
               <input

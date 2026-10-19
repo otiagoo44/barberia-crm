@@ -49,7 +49,9 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
           ? "Entrá para organizar el día, atender a tus clientes y ver cómo va tu barbería."
           : mode === "signup"
             ? "Después de confirmar tu correo, el propietario podrá asignarte acceso."
-            : "Usá una contraseña de al menos 12 caracteres."}
+            : mode === "recover"
+              ? "Ingresá tu correo y te enviaremos un enlace para recuperar el acceso."
+              : "Usá una contraseña de al menos 12 caracteres."}
       </p>
       <form onSubmit={submit} className="stack">
         {mode === "signup" && (

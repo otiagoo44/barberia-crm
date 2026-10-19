@@ -12,7 +12,13 @@ import {
 } from "./client";
 import { FinanceForm } from "./forms";
 import { FinanceImport } from "./import-ui";
+import {
+  ProfitSharing,
+  RemunerationSettings,
+  type ProfitSharingSummary,
+} from "./profit-sharing";
 type Summary = {
+  profit_sharing?: ProfitSharingSummary | null;
   totals?: Record<string, number | string | null>;
   staff: FinanceRow[];
   methods?: FinanceRow[];
@@ -27,7 +33,17 @@ const tabs = [
   ["closures", "Cierres"],
   ["catalog", "Configuración financiera"],
 ] as const;
-export function FinancialDashboard({ compact = false,periodFrom,periodTo,branchId }: { compact?: boolean;periodFrom?:string;periodTo?:string;branchId?:string }) {
+export function FinancialDashboard({
+  compact = false,
+  periodFrom,
+  periodTo,
+  branchId,
+}: {
+  compact?: boolean;
+  periodFrom?: string;
+  periodTo?: string;
+  branchId?: string;
+}) {
   const w = useWorkspace();
   const org = w.organization.id;
   const branch = branchId || w.branchId;
@@ -55,7 +71,7 @@ export function FinancialDashboard({ compact = false,periodFrom,periodTo,branchI
   ].includes(w.role);
   const r = useResource<Summary & { items?: FinanceRow[] }>(
     branch
-      ? financeUrl(tab, org, branch, periodFrom??from, periodTo??to, {
+      ? financeUrl(tab, org, branch, periodFrom ?? from, periodTo ?? to, {
           q: query,
           offset: String(offset),
         })
@@ -108,7 +124,12 @@ export function FinancialDashboard({ compact = false,periodFrom,periodTo,branchI
   ] as const;
   return (
     <section className="stack">
-      {compact&&<h2>Finanzas · {w.branches.find(b=>b.id===branch)?.name} · {periodFrom??from} a {periodTo??to}</h2>}
+      {compact && (
+        <h2>
+          Finanzas · {w.branches.find((b) => b.id === branch)?.name} ·{" "}
+          {periodFrom ?? from} a {periodTo ?? to}
+        </h2>
+      )}
       {!compact && (
         <>
           <div className="page-heading">
@@ -116,7 +137,7 @@ export function FinancialDashboard({ compact = false,periodFrom,periodTo,branchI
               <span className="eyebrow">FINANZAS OPERATIVAS</span>
               <h1>{w.role === "barber" ? "Mis números" : "Finanzas"}</h1>
               <p className="muted">
-                Ventas, cobros y comisiones con trazabilidad.
+                Ventas, cobros, gastos y ganancias del negocio.
               </p>
             </div>
             {privileged && (
@@ -197,6 +218,9 @@ export function FinancialDashboard({ compact = false,periodFrom,periodTo,branchI
                   </div>
                 ))}
               </div>
+              {r.data?.profit_sharing && (
+                <ProfitSharing summary={r.data.profit_sharing} />
+              )}
               {!compact && (
                 <>
                   <p>
@@ -270,6 +294,11 @@ export function FinancialDashboard({ compact = false,periodFrom,periodTo,branchI
         </>
       ) : tab === "catalog" && catalog.data ? (
         <>
+          <RemunerationSettings
+            key={String(catalog.data.settings?.updated_at ?? "initial")}
+            catalog={catalog.data}
+            onSaved={reload}
+          />
           <button
             className="primary"
             onClick={() => setForm({ action: "configure" })}

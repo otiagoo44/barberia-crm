@@ -1,5 +1,7 @@
 # Publicación en Vercel
 
+> Estado actualizado del 19/10/2026: [revisión y rollout](RELEASE_2026_10_19.md). El código nuevo requiere las migraciones de scheduler y reparto de ganancias antes de publicarse. El SQL generado permite usar pg_cron dentro de Supabase; su activación cloud debe verificarse con `cron.job` y `cron.job_run_details`.
+
 Repositorio: `otiagoo44/barberia-crm`, rama de producción `main`, raíz del repositorio. Proyecto descubierto: `barberia-crm` (`prj_5T3VMAuA8qXr3G6zzDSc94pHMpCQ`), equipo `team_fHImRjkE8m0NyoHDOZHtaNH1`. Next.js, Node 24.x, instalación `npm ci`, build `npm run build`, output automático. `vercel.json` conserva esa selección de framework/build.
 
 ## Variables por entorno

@@ -9,6 +9,7 @@ import {
   financeCommand,
   money,
   integerInput,
+  amountLabel,
   type FinanceCatalog,
   type FinanceRow,
 } from "./client";
@@ -211,7 +212,7 @@ export function CheckoutDialog({
                     ))}
                   </select>
                 </Field>
-                <Field label="Importe en unidad mínima">
+                <Field label={amountLabel(w.organization.currency)}>
                   <input
                     inputMode="numeric"
                     pattern="[0-9]*"
@@ -284,7 +285,9 @@ export function CheckoutDialog({
                 </Field>
                 {catalog.data?.items.find((i) => i.id === item)?.price_minor ===
                   null && (
-                  <Field label="Precio autorizado en unidad mínima">
+                  <Field
+                    label={`Precio autorizado · ${amountLabel(w.organization.currency)}`}
+                  >
                     <input
                       inputMode="numeric"
                       value={manualPrice}
@@ -308,7 +311,7 @@ export function CheckoutDialog({
               </>
             )}
             <button className="primary" disabled={busy} onClick={create}>
-              Preparar checkout
+              Preparar cobro
             </button>
           </>
         )}

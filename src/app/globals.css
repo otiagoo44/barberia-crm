@@ -19,6 +19,65 @@
     sans-serif;
   font-size: 15px;
 }
+.launch-guide {
+  margin: 0 0 28px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.launch-guide summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px;
+  cursor: pointer;
+}
+.launch-guide summary small {
+  display: block;
+  margin-top: 5px;
+}
+.launch-guide-body {
+  padding: 0 22px 22px;
+}
+.launch-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+}
+.launch-checklist a {
+  display: block;
+  padding: 16px 0;
+}
+.launch-checklist a:hover strong {
+  color: var(--accent);
+}
+.launch-checklist span {
+  display: block;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.55;
+}
+.launch-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .launch-checklist {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .launch-guide summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
 * {
   box-sizing: border-box;
 }
