@@ -1,6 +1,6 @@
 # Publicación en Vercel
 
-> Estado actualizado del 19/10/2026: [revisión y rollout](RELEASE_2026_10_19.md). El código nuevo requiere las migraciones de scheduler y reparto de ganancias antes de publicarse. El SQL generado permite usar pg_cron dentro de Supabase; su activación cloud debe verificarse con `cron.job` y `cron.job_run_details`.
+> Estado actualizado del 19/10/2026: [revisión y rollout](RELEASE_2026_10_19.md). Las tres migraciones nuevas están aplicadas y el scheduler por minuto está activo y verificado dentro de Supabase mediante `cron.job` y `cron.job_run_details`. No depende del cron de Vercel Hobby.
 
 Repositorio: `otiagoo44/barberia-crm`, rama de producción `main`, raíz del repositorio. Proyecto descubierto: `barberia-crm` (`prj_5T3VMAuA8qXr3G6zzDSc94pHMpCQ`), equipo `team_fHImRjkE8m0NyoHDOZHtaNH1`. Next.js, Node 24.x, instalación `npm ci`, build `npm run build`, output automático. `vercel.json` conserva esa selección de framework/build.
 
@@ -31,15 +31,17 @@ Supabase Auth quedó guardado con Site URL `https://barberia-crm-kappa.vercel.ap
 
 ## Scheduler
 
-La API del equipo confirmó plan **Hobby** el 15/10/2026. `vercel.json` no habilita cron por minuto porque ese plan no lo permite. Para operación diaria se necesita un scheduler externo verificado que invoque `GET /api/jobs` cada minuto con `Authorization: Bearer CRON_SECRET`. El handler tiene presupuesto de 60 segundos y procesa hasta diez jobs por llamada; comprobar retries y queue lag con carga real. [Límites oficiales](https://vercel.com/docs/cron-jobs/usage-and-pricing).
+La API del equipo confirmó plan **Hobby** el 15/10/2026. `vercel.json` no habilita cron por minuto porque ese plan no lo permite. Desde el 19/10 se usa `pg_cron` dentro de Supabase: `barberia-internal-worker` invoca `app_private.run_scheduled_jobs()` cada minuto como postgres. No necesita HTTP ni secretos externos. El SQL se versiona en `20261019220146_enable_database_cron.sql`; PostgreSQL sin esa extensión omite la activación con un NOTICE explícito y requiere un worker externo. [Cron de Supabase](https://supabase.com/docs/guides/cron).
 
-Si el plan permite cron por minuto, agregar `crons: [{"path":"/api/jobs","schedule":"* * * * *"}]` a `vercel.json`; Vercel envía el Bearer a partir de CRON_SECRET. Si el plan no lo permite, usar un scheduler externo HTTPS con el mismo header. Nunca poner secretos en la URL. Un cron diario no satisface el funcionamiento oportuno de recordatorios/cola.
+`GET /api/jobs` conserva el mecanismo alternativo con `Authorization: Bearer CRON_SECRET`, presupuesto de 60 segundos y hasta diez jobs por llamada. No configurar dos schedulers por defecto. Medir retries y queue lag con tráfico real.
+
+Si se decide reemplazar pg_cron por Vercel Cron, verificar primero que el plan permita esa frecuencia, desactivar el job de pg_cron y configurar `crons: [{"path":"/api/jobs","schedule":"* * * * *"}]`. Vercel envía el Bearer mediante CRON_SECRET. Nunca poner secretos en la URL. Un cron diario no satisface el funcionamiento oportuno de recordatorios/cola.
 
 ## Comprobación y publicación
 
 1. Confirmar CI del commit de `main`, incluidas las pruebas de Supabase Auth y restore local. No contar tests omitidos como aprobados.
 2. Confirmar que el historial de migrations de Supabase coincide con los archivos del repositorio y que advisors no tiene errores/advertencias sin resolver.
-3. Las nueve variables de Production están configuradas; los tres secretos son privados. Preview tiene SUPABASE_ENVIRONMENT y PRODUCTION_SUPABASE_PROJECT_REF, pero falla cerrado hasta completar una base/secretos de staging propios.
+3. Las ocho variables de Production están configuradas; los tres secretos son privados. Preview tiene SUPABASE_ENVIRONMENT y PRODUCTION_SUPABASE_PROJECT_REF, pero falla cerrado hasta completar una base/secretos de staging propios.
 4. La API confirmó la conexión GitHub `otiagoo44/barberia-crm` y Production Branch `main`. El proyecto usa Node 24.x, `npm ci` y `npm run build`. Revisar dominio y APP_URL si cambia esa conexión.
 5. Publicar el commit verificado. Comprobar `/api/health` y `/api/health/ready` (este último debe devolver `ready: true`), login y recuperación. Un origen ajeno debe rechazarse.
 6. Probar el worker con el Bearer correcto y verificar que uno incorrecto devuelve 403. No marcar integraciones externas como entregadas sin proveedor.

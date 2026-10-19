@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 const migrations = [
   ["20261019154027", "database_scheduler"],
   ["20261019213732", "profit_sharing"],
+  ["20261019220146", "enable_database_cron"],
 ];
 let sql =
   "begin;\nselect pg_advisory_xact_lock(hashtextextended('barberia:release:20261019',0));\n";
