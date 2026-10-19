@@ -2,6 +2,8 @@
 
 Estado por control y evidencia en [VERIFICATION](VERIFICATION.md). Esta lista es el gate operacional, no una declaración de controles ya ejecutados.
 
+Auditoría final del 19/10: [FINAL_HARDENING_AUDIT](FINAL_HARDENING_AUDIT.md), [matriz de permisos](FINAL_PERMISSION_MATRIX.md) y [procedimientos de incidentes](OPERATIONAL_INCIDENTS.md). CI del candidato incluye 13 pruebas con Auth real y restore financiero local; migración restrictiva 27 aplicada. SMTP, MFA, staging independiente, backup/restore cloud, alertas y piloto conservan sus gates abiertos. Ruleset main 25439970 activo con PR y ambos checks obligatorios.
+
 ## Código y DB
 
 - [ ] CI del commit en main verde: install/audit/lint/typecheck/unit/build/Postgres/Supabase local/Auth E2E.

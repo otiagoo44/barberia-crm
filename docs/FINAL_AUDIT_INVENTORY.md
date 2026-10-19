@@ -1,9 +1,10 @@
 # Inventario de revisión final
 
-Base: `7a8fe7b7c91d3aa7fbe42d0fa8f1903b02db91ae`. 130 archivos inventariados. SHA256, líneas, frontera cliente/servidor y llamadas DB extraídas del AST en [inventario JSON](verification/final-file-inventory.json). Los checks estáticos recorren todos los archivos; la evidencia dinámica es por contrato y flujo, no una afirmación de cobertura exhaustiva de cada estado o lectura humana de cada línea. Archivos declarativos/assets se incluyen por su impacto en despliegue/interfaz.
+Base: `7a8fe7b7c91d3aa7fbe42d0fa8f1903b02db91ae`. 131 archivos inventariados. SHA256, líneas, frontera cliente/servidor y llamadas DB extraídas del AST en [inventario JSON](verification/final-file-inventory.json). Los checks estáticos recorren todos los archivos; la evidencia dinámica es por contrato y flujo, no una afirmación de cobertura exhaustiva de cada estado o lectura humana de cada línea. Archivos declarativos/assets se incluyen por su impacto en despliegue/interfaz.
 
 | Archivo | Revisión y frontera |
 |---|---|
+| `.github/rulesets/main.json` | CI/deploy, secretos y scheduler único |
 | `.github/workflows/ci.yml` | CI/deploy, secretos y scheduler único |
 | `.github/workflows/load.yml` | CI/deploy, secretos y scheduler único |
 | `eslint.config.mjs` | Compilación/lectura estática; ver límites de evidencia |

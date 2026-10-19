@@ -2,7 +2,7 @@
 
 Fecha: 19/10/2026. Base obtenida con fetch de `origin/main`: `7a8fe7b7c91d3aa7fbe42d0fa8f1903b02db91ae`. Rama: `audit/final-hardening-20261019`. Se conserva Next.js + Supabase + PostgreSQL, monolito modular, RLS, motor por intervalos y reparto `equal_profit_share`.
 
-**Veredicto del candidato: LISTO PARA STAGING una vez aprobada la CI de esta rama. Producción: NO LISTO.** SMTP/recuperación real, MFA privilegiado, backup/restore cloud, staging independiente y piloto siguen siendo gates abiertos. La existencia de un deployment y de CI verde no los satisface.
+**Veredicto del candidato: LISTO PARA STAGING. Producción: NO LISTO.** SMTP/recuperación real, MFA privilegiado, backup/restore cloud, staging independiente y piloto siguen siendo gates abiertos. La existencia de un deployment y de CI verde no los satisface.
 
 ## Evidencia de la base
 
@@ -14,7 +14,7 @@ Fecha: 19/10/2026. Base obtenida con fetch de `origin/main`: `7a8fe7b7c91d3aa7fb
 
 ## Hallazgos y correcciones
 
-No se confirmó un hallazgo crítico mediante las pruebas ejecutadas. Esto no afirma ausencia de vulnerabilidades. “Corregido” describe el código de esta rama; no implica instalación en producción.
+No se confirmó un hallazgo crítico mediante las pruebas ejecutadas. Esto no afirma ausencia de vulnerabilidades. Los cambios PostgreSQL se instalaron y verificaron después de aprobar CI; los cambios de aplicación requieren integrar/desplegar el commit correspondiente.
 
 | ID | Severidad | Ubicación original / evidencia | Corrección |
 |---|---|---|---|
@@ -62,11 +62,13 @@ Hay límites conocidos: SSE puede abrir dos canales por pantalla de recepción y
 
 ## Verificación y release
 
-Resultados de la rama se actualizan al cerrar la revisión. Base local verificada: 51 contratos de seguridad + 19 financieros + onboarding/reparto/scheduler. Nuevos: 23 contratos de hardening. Unit incluye XML/ZIP/encoding, mapping y secreto UTF-8. CI conserva quality/supabase-e2e y se activa también al push de ramas audit/**.
+Validación: [CI 39338558618](https://github.com/otiagoo44/barberia-crm/actions/runs/39338558618), commit `be7ce5a`, **quality y supabase-e2e aprobados**. 16 unitarias, 51 contratos de seguridad + 19 financieros + 23 nuevos de hardening, además de onboarding/reparto/scheduler; 13 pruebas browser/HTTP con Auth real, sin skips. Unit incluye XML/ZIP/encoding, mapping y secreto UTF-8. CI conserva ambos jobs y se activa también al push de ramas audit/**. El inventario estático incluye 131 archivos y cero errores de parseo; no certifica cobertura dinámica total.
 
-`tests/e2e/permissions.spec.ts` añade Auth real por seis roles, HTTP/RPC/Data API/SELECT/write/export y cambio de branch. `tests/recovery/local-supabase.ts` amplía restore a gastos, adelantos, salarios, cierre sellado y retry financiero posterior al restore. Estos tests requieren el Supabase Docker aislado de CI; Docker no existe en esta estación. No se cuentan como aprobados por ejecutarlos con skips localmente. El smoke de producción agregado solo hace GET health/ready y rechazo de worker sin secreto, sin reservas/pagos/cambios.
+`tests/e2e/permissions.spec.ts` añade Auth real por seis roles, HTTP/RPC/Data API/SELECT/write/export, retries y cambio de branch. Restore real local Docker aprobado: 1.017.553 bytes, restore + validación 1.144 ms, gastos/adelantos/salarios/cierre sellado, RLS y retry financiero conservados. [Evidencia recuperada del log de CI](verification/restore-final-local.json). **No es restore cloud ni RTO de producción**. Docker no existe en esta estación; la evidencia de Auth/restore proviene de CI, sin sustituirlos por mocks. Smoke de Vercel con CLI autorizado: health 200 JSON, ready 200 con ready:true, jobs sin secreto 403. Cero reservas/pagos/cambios mediante smoke.
 
-La consulta de rulesets GitHub devuelve `[]`. Branch protection clásico devuelve **403 Resource not accessible by integration**, así que no se afirma ausencia de protección clásica ni configuración aplicada. El conector carece de administración. No se alteraron permisos de GitHub para eludirlo.
+Rollout PostgreSQL: migración `20261019223415_final_authorization_hardening` aplicada por MCP después de CI. El MCP generó versión 20261019230245; se alineó únicamente esa clave de metadata al archivo local, conservando SQL ejecutado y sin repetir DDL. Postflight: **27 migraciones**, dos FKs tenant/event validadas, cero tablas public/app_private sin RLS, helper de membresía sin bypass de plataforma, un cron activo, cero ventas y ambos flags de booking false. Advisors posteriores: cero ERROR, cero WARN de rendimiento; persiste WARN de contraseñas filtradas. No se cambiaron filas comerciales.
+
+El conector devolvió rulesets `[]` y protection clásico **403 Resource not accessible by integration**. Se utilizó después la autenticación Git ya autorizada, exclusivamente en memoria: confirmó admin=true y protection clásico **404 Branch not protected**. Se creó el [PR #1](https://github.com/otiagoo44/barberia-crm/pull/1) y el [ruleset 25439970](https://github.com/otiagoo44/barberia-crm/rules/25439970), activo sobre refs/heads/main: PR obligatorio, quality y supabase-e2e de GitHub Actions (app 15368), rama actualizada, conversaciones resueltas, sin force-push/borrado ni actores de bypass. Configuración revisable en `.github/rulesets/main.json`. No exige aprobaciones humanas (0) porque no hay un segundo revisor confirmado; no se presenta como revisión independiente. Ninguna credencial se guardó en archivos o salidas.
 
 ## Acciones humanas externas y gates
 
@@ -77,8 +79,8 @@ La consulta de rulesets GitHub devuelve `[]`. Branch protection clásico devuelv
 | Staging | No hay proyecto independiente confirmado. Crear destino Supabase separado sin clientes reales, aplicar migrations sin seed comercial cloud, configurar Auth redirects y secretos propios. Preview exige SUPABASE_ENVIRONMENT=staging, URL distinta y PRODUCTION_SUPABASE_PROJECT_REF correcto. No reutilizar secretos de prod. No se contrató/creó un proyecto inventado. |
 | Backup/restore | Última evidencia de plan Free no incluía backups programados. Elegir responsable/frecuencia/retención/almacenamiento privado o plan; tomar copia real, registrar hash/hora/inventario y restaurar a destino aislado con salidas deshabilitadas. Verificar Auth/RLS/EXCLUDE/ledgers/saldos/imports/auditoría/idempotencia, medir RPO/RTO y documentar acta. [Procedimiento](BACKUP_AND_RECOVERY.md). Valores propuestos no son SLA existente. |
 | Observabilidad | Elegir responsable/canal y configurar health/ready, cron, dead/backlog/leases, p95/error rate/recursos. Provocar falla controlada en staging y probar recepción de alerta. No hay proveedor ni alerta efectiva inventada. |
-| Main | En GitHub → Settings → Rules → Rulesets, crear regla activa para refs/heads/main: PR requerido, al menos revisión acordada, checks quality y supabase-e2e, conversaciones resueltas, bloquear force-push/deletion, sin bypass silencioso. Verificar disponibilidad del plan. Protección clásica y administradores deben comprobarla en UI por el 403 del conector. |
+| Main | Ruleset activo 25439970 ya aplicado y verificable por API; PR/checks obligatorios y sin bypass. Pendiente acordar revisor humano y subir required_approving_review_count cuando exista; actualmente 0. No se cambió el plan ni la cuenta. |
 | Deployments sensibles | Configurar environment Production con revisión y ramas permitidas donde el plan lo soporte; mantener Preview separado. Verificar Vercel por CLI autorizado y smoke JSON; no interpretar HTML de protección como health exitoso. No se elude el rechazo previo de navegador autenticado. |
 | Datos y piloto | Confirmar tarifas/duraciones faltantes, disponibilidad diaria real y clasificación de cuatro filas XLSX. Piloto aislado con recepción/barbero/owner/finance: reserva, check-in, atención, split, cierre, gasto, liquidación, devolución, próxima cita y conciliación. Registrar resultados y responsables antes de abrir reservas públicas. |
 
-El inventario archivo por archivo y su nivel de revisión se conserva en `FINAL_AUDIT_INVENTORY.md`. Las verificaciones cloud de esta revisión fueron de solo lectura. No se hizo seed cloud, restore sobre producción ni apertura pública.
+El inventario archivo por archivo y su nivel de revisión se conserva en `FINAL_AUDIT_INVENTORY.md`. Las lecturas cloud precedieron al rollout restrictivo documentado. No se hizo seed cloud, restore sobre producción ni apertura pública.

@@ -3,6 +3,15 @@
   "scope": "Static inventory, source review and targeted executable contracts; not exhaustive dynamic state coverage or a formal security proof",
   "files": [
     {
+      "path": ".github/rulesets/main.json",
+      "sha256": "86a0cdb0ec102f586065c3e69a1f4e92c373d712f73c17b1b1c2795c36eb89af",
+      "lines": 34,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "CI/deploy, secretos y scheduler único"
+    },
+    {
       "path": ".github/workflows/ci.yml",
       "sha256": "d7552424653339e4a4a6001a60ab2328dd5e80e0fa9255f2795544b979e608ca",
       "lines": 65,

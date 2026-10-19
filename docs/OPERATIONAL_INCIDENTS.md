@@ -1,6 +1,6 @@
 # Incidentes y recuperación
 
-No se detectó evidencia de explotación o pérdida de datos reales en esta revisión. Los hallazgos se reprodujeron con fixtures aislados. La versión cloud permanece en 26 migraciones hasta un rollout revisado. No confundir una corrección en la rama con mitigación ya instalada.
+No se detectó evidencia de explotación o pérdida de datos reales en esta revisión. Los hallazgos se reprodujeron con fixtures aislados. El rollout restrictivo cloud quedó en 27 migraciones después de CI; no modificó historia comercial. Para cada incidente verificar también qué commit de aplicación está desplegado: una corrección en main no demuestra por sí sola su instalación en Vercel.
 
 ## Acceso indebido / sospecha de aislamiento
 
