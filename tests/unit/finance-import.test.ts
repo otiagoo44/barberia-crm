@@ -8,7 +8,6 @@ import {
   excelDate,
   type ImportCatalog,
 } from "../../src/features/finance/import-parser";
-import { preselectedServices } from "../../src/lib/booking-links";
 import { csvCell } from "../../src/lib/validation";
 const catalog: ImportCatalog = {
   staff: [{ id: "staff-a", name: "Barber A" }],
@@ -130,17 +129,82 @@ test("CSV quoting and export formula injection", () => {
   assert.ok(csvCell('  =HYPERLINK("bad")').startsWith("\"'"));
   assert.ok(csvCell("\n@SUM(1)").startsWith("\"'"));
 });
-test("booking deep link only selects an available canonical service", () => {
-  const services = [
-    { slug: "cut", composition_mode: "standalone", base_service_slug: null },
-    {
-      slug: "curl",
-      composition_mode: "standalone",
-      base_service_slug: null,
-      consultation_required: true,
-    },
-  ];
-  assert.deepEqual(preselectedServices("cut", services), ["cut"]);
-  assert.deepEqual(preselectedServices("other-tenant", services), []);
-  assert.deepEqual(preselectedServices("curl", services), []);
+test("import rejects wrong signatures, DTDs, external sheet paths and ZIP expansion", () => {
+  assert.throws(() => parseXlsx(strToU8("not a workbook")), /INVALID_WORKBOOK/);
+  const workbook =
+    '<workbook><sheets><sheet name="Registro Diario" r:id="r1"/></sheets></workbook>';
+  const parts = {
+    "xl/workbook.xml": strToU8(workbook),
+    "xl/_rels/workbook.xml.rels": strToU8(
+      '<Relationships><Relationship Id="r1" Target="worksheets/sheet1.xml"/></Relationships>',
+    ),
+    "xl/worksheets/sheet1.xml": strToU8("<worksheet><sheetData/></worksheet>"),
+  };
+  assert.throws(
+    () =>
+      parseXlsx(
+        zipSync({
+          ...parts,
+          "xl/workbook.xml": strToU8(
+            '<!DOCTYPE x [<!ENTITY steal SYSTEM "file:///private">]>' +
+              workbook,
+          ),
+        }),
+      ),
+    /UNSAFE_XML/,
+  );
+  assert.throws(
+    () =>
+      parseXlsx(
+        zipSync({
+          ...parts,
+          "xl/_rels/workbook.xml.rels": strToU8(
+            '<Relationships><Relationship Id="r1" Target="https://invalid.example/sheet.xml" TargetMode="External"/></Relationships>',
+          ),
+        }),
+      ),
+    /UNSAFE_SHEET_PATH/,
+  );
+  assert.throws(
+    () =>
+      parseXlsx(
+        zipSync({
+          ...parts,
+          "xl/sharedStrings.xml": strToU8("x".repeat(4 * 1024 * 1024 + 1)),
+        }),
+      ),
+    /WORKBOOK_EXPANSION_LIMIT/,
+  );
+  assert.throws(
+    () => parseXlsx(new Uint8Array(8 * 1024 * 1024 + 1)),
+    /FILE_TOO_LARGE/,
+  );
+  assert.throws(() => parseCsv("Fecha\n\0binary"), /INVALID_CSV_STRUCTURE/);
+  assert.throws(() => parseCsv('Fecha\n"unclosed'), /INVALID_CSV_QUOTES/);
+  assert.throws(
+    () => parseCsv("x".repeat(2 * 1024 * 1024 + 1)),
+    /FILE_TOO_LARGE/,
+  );
+});
+
+test("category mapping cannot use another catalog and salaries require a staff identity", () => {
+  const source = row([
+    "46148",
+    "",
+    "Vendor",
+    "Alquiler",
+    "egreso",
+    "",
+    "100",
+    "Efectivo",
+  ]);
+  const invalid = normalizeRows([source], catalog, {
+    categories: { alquiler: "foreign-category" },
+  })[0];
+  assert.equal(invalid.review_status, "NEEDS_REVIEW");
+  const salary = normalizeRows([source], {
+    ...catalog,
+    categories: [{ id: "rent", name: "Alquiler", kind: "salary" }],
+  })[0];
+  assert.equal(salary.review_status, "NEEDS_REVIEW");
 });

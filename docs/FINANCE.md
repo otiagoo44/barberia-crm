@@ -37,6 +37,10 @@ Producción de servicios completados, cobrado y pendiente actual se muestran sep
 
 ## API y permisos
 
+El resumen `equal_profit_share` usa ventas posteadas y reversiones por fecha local, no el total de cobros del período. Un checkout se postea solo al quedar totalmente pagado; los pagos parciales pueden pertenecer a un período anterior. Los gastos pendientes sin registrar no se deducen. Las tarifas originales se conservan al devolver una venta; salarios sí son gasto operativo; adelantos, retiros y pagos de comisiones no duplican el gasto devengado. El reparto positivo entero deja el resto en el negocio y no registra un pago a socios. Ver [extensión mínima diseñada](PARTNER_DISTRIBUTIONS_DESIGN.md).
+
+El detalle individual de comisiones y saldo es **acumulado histórico por sucursal**, identificado así en pantalla; los resúmenes diarios y por rango conservan sus filtros. No interpretar el saldo histórico como producción del rango.
+
 `/api/finance/{view}` devuelve catalog/checkout/cash/summary/movements/expenses/settlements/closures/staff. `/api/finance/command` valida sesión/Origin/payload y llama `finance_command`. RPCs públicas son invoker; privadas definer con search_path vacío, grants explícitos y validación de actor/tenant/branch/rol/estado. Toda mutación se serializa por tenant, resuelve idempotencia, audita y registra domain event sin enviar datos financieros a notificaciones generales. Ver RLS_MATRIX y FINANCE_IMPORT_1717.
 
 RPCs individuales: create_checkout, record_payment, post_checkout, create_expense, open/close/reopen_cash_session, record_cash_movement, record_staff_advance, record_salary_payment, create/review/pay/close_staff_settlement, record_financial_adjustment, reverse_financial_transaction. Configuración pasa por finance_command; import y export tienen RPCs acotadas propias.

@@ -2,6 +2,7 @@ import { isolatedDatabase } from "./database";
 import { contracts } from "../security/contracts";
 import { financeContracts } from "./finance";
 import { onboardingContracts } from "./onboarding";
+import { hardeningContracts } from "./hardening";
 const db = await isolatedDatabase();
 try {
   const result = await contracts(db.pool);
@@ -27,4 +28,15 @@ try {
   );
 } finally {
   await financeDb.stop();
+}
+const hardeningDb = await isolatedDatabase();
+try {
+  console.log(
+    JSON.stringify({
+      suite: "final-hardening",
+      ...(await hardeningContracts(hardeningDb.pool)),
+    }),
+  );
+} finally {
+  await hardeningDb.stop();
 }

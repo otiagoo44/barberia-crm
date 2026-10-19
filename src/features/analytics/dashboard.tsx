@@ -129,9 +129,7 @@ export function Dashboard({ report = false }: { report?: boolean }) {
           Ver agenda →
         </Link>
       </div>
-      {!report && ["organization_owner", "platform_admin"].includes(w.role) && (
-        <LaunchGuide />
-      )}
+      {!report && w.role === "organization_owner" && <LaunchGuide />}
       <div className="toolbar">
         <select
           aria-label="Período"

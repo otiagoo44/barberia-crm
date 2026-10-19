@@ -33,4 +33,4 @@ Health `/api/health` verifica proceso; `/api/health/ready` verifica acceso al ga
 
 ## Continuación financiera — 12/10/2026
 
-Tres agregados diarios recalculan solo branch/fecha afectada. Ledger conserva autoridad. Movimientos 50/máximo100, rango3660d, export máximo9999filas. Import1500movimientos/8MB comprimidos, límites XML/ZIP y transacción por batch. Lock tenant asegura snapshots concurrentes; medir latencia antes de cambiar granularidad. No inferir rendimiento cloud.
+Tres agregados diarios recalculan solo branch/fecha afectada. Ledger conserva autoridad. Movimientos 50/máximo100, rango3660d, export máximo9999filas. Import1500movimientos, 2 MiB por archivo en HTTP (8 MiB solo analizador CLI XLSX), límites XML/ZIP y transacción por batch. Lock tenant asegura snapshots concurrentes; medir latencia antes de cambiar granularidad. No inferir rendimiento cloud.

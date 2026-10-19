@@ -46,7 +46,7 @@ export default async function WorkspaceLayout({
       db.rpc("session_context"),
     ]);
   const platformAdmin = !!session?.platform_admin;
-  if (!membership && !platformAdmin) notFound();
+  if (!membership) notFound();
   const ownStaff =
     (
       session?.staff as { organization_id: string; id: string }[] | undefined
@@ -57,7 +57,7 @@ export default async function WorkspaceLayout({
       workspace={{
         organization: organization as Organization,
         branches: (branches ?? []) as Branch[],
-        role: platformAdmin ? "platform_admin" : (membership!.role as Role),
+        role: membership.role as Role,
         profileId: user.id,
         fullName: profile.full_name,
         platformAdmin,

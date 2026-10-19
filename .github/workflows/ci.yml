@@ -1,7 +1,7 @@
 name: Product verification
 on:
   push:
-    branches: [main]
+    branches: [main, "audit/**"]
   pull_request:
 permissions:
   contents: read

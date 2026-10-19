@@ -15,9 +15,11 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/unit/*.test.ts",
     "test:db": "tsx tests/integration/run.ts",
+    "test:hardening": "tsx tests/integration/run-hardening.ts",
     "test:load": "tsx tests/load/run.ts",
     "test:e2e": "playwright test",
     "test:booking-ui": "node scripts/qa-website-booking.mjs",
+    "test:smoke:production": "node scripts/smoke-production.mjs",
     "check": "npm run lint && npm run typecheck && npm test && npm run test:db && npm run build"
   },
   "dependencies": {

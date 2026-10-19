@@ -180,6 +180,13 @@ function value(v: unknown): string {
 }
 export function parseXlsx(bytes: Uint8Array): SourceRow[] {
   if (bytes.byteLength > 8 * 1024 * 1024) throw new Error("FILE_TOO_LARGE");
+  if (
+    bytes[0] !== 0x50 ||
+    bytes[1] !== 0x4b ||
+    bytes[2] !== 3 ||
+    bytes[3] !== 4
+  )
+    throw new Error("INVALID_WORKBOOK");
   let total = 0;
   const parts = unzipSync(bytes, {
     filter: (file) => {
@@ -269,6 +276,7 @@ export function parseXlsx(bytes: Uint8Array): SourceRow[] {
 export function parseCsv(text: string): SourceRow[] {
   if (Buffer.byteLength(text) > 2 * 1024 * 1024)
     throw new Error("FILE_TOO_LARGE");
+  if (text.includes("\0")) throw new Error("INVALID_CSV_STRUCTURE");
   const rows: string[][] = [];
   let row: string[] = [];
   let cell = "";

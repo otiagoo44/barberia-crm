@@ -59,14 +59,21 @@ export function AppointmentDialog({
       const next = { ...a, status };
       setA(next);
       onChanged(next);
-      if(status === "completed" && operator) setCheckout(true);
+      if (status === "completed" && operator) setCheckout(true);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error");
     } finally {
       setBusy(false);
     }
   }
-  if(checkout) return <CheckoutDialog appointmentId={a.id} branchId={a.branch_id} onClose={()=>setCheckout(false)} />;
+  if (checkout)
+    return (
+      <CheckoutDialog
+        appointmentId={a.id}
+        branchId={a.branch_id}
+        onClose={() => setCheckout(false)}
+      />
+    );
   if (booking)
     return (
       <BookingForm
@@ -85,16 +92,15 @@ export function AppointmentDialog({
         <div className="row between">
           <Badge status={a.status} label={statusLabels[a.status]} />
           <span>
-            {formatInTimeZone(a.starts_at, tz, "dd/MM Â· HH:mm")}â€“
+            {formatInTimeZone(a.starts_at, tz, "dd/MM · HH:mm")}–
             {formatInTimeZone(a.ends_at, tz, "HH:mm")}
           </span>
         </div>
         <p>
-          {a.services.map((s) => s.name).join(" + ")} Â· {a.duration_minutes}{" "}
-          min
+          {a.services.map((s) => s.name).join(" + ")} · {a.duration_minutes} min
         </p>
         <p className="muted">
-          {a.staff_name} Â· {tz}
+          {a.staff_name} · {tz}
         </p>
         {error && <Notice error>{error}</Notice>}
         <div className="row wrap">
@@ -139,7 +145,7 @@ export function AppointmentDialog({
             ["scheduled", "confirmed"].includes(a.status) &&
             new Date(a.starts_at).valueOf() <= now && (
               <button disabled={busy} onClick={() => change("no_show")}>
-                No asistiÃ³
+                No asistió
               </button>
             )}
         </div>
@@ -148,14 +154,18 @@ export function AppointmentDialog({
         )}
         {a.status === "completed" && (
           <div className="panel stack">
-            {operator&&<button className="primary" onClick={()=>setCheckout(true)}>Cobrar / ver checkout</button>}
-            <h3>Â¿Agendar prÃ³xima visita?</h3>
+            {operator && (
+              <button className="primary" onClick={() => setCheckout(true)}>
+                Cobrar / ver checkout
+              </button>
+            )}
+            <h3>¿Agendar próxima visita?</h3>
             <p className="muted">
-              Te sugeriremos una fecha segÃºn los servicios y la frecuencia del
+              Te sugeriremos una fecha según los servicios y la frecuencia del
               cliente.
             </p>
             <button className="primary" onClick={() => setBooking("rebooking")}>
-              Agendar prÃ³ximo turno
+              Agendar próximo turno
             </button>
           </div>
         )}
@@ -177,7 +187,7 @@ export function AppointmentDialog({
                   disabled={busy}
                   onClick={() => change("cancelled")}
                 >
-                  Confirmar cancelaciÃ³n
+                  Confirmar cancelación
                 </button>
               </div>
             </details>

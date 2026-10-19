@@ -18,8 +18,8 @@ export function ProfitSharing({ summary }: { summary: ProfitSharingSummary }) {
       <div>
         <h2>Ganancia a repartir</h2>
         <p>
-          Ventas cobradas menos tarifas POS, gastos operativos y comisiones
-          registradas de otros barberos.
+          Ventas posteadas del período menos devoluciones, tarifas POS, gastos
+          operativos (incluidos salarios) y comisiones de otros barberos.
         </p>
       </div>
       <strong>{money(summary.profit_minor, organization.currency)}</strong>

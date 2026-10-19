@@ -350,7 +350,7 @@ function RecordEditor({
             })}
         </div>
         {(entity === "goals" || entity === "staff_time_off") &&
-          ["organization_owner", "platform_admin"].includes(w.role) && (
+          w.role === "organization_owner" && (
             <label className="check-label">
               <input
                 type="checkbox"
