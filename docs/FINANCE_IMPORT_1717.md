@@ -25,6 +25,8 @@ Comisión barbero por servicio en Configuración: Jonatan/Esteban, valores cero.
 
 ## Procedimiento seguro
 
+Verificación del 19/10/2026 durante hardening: el archivo disponible conserva el SHA256 indicado arriba. No se importó a cloud. La interfaz y API aceptan hasta **2 MiB** por archivo y **3 MiB** de JSON (base64 incluido), dentro del límite de 4,5 MB de Vercel Functions. El analizador CLI XLSX mantiene su límite local de 8 MiB; no implica que la API admita 8 MiB. Una previsualización revisada excluye con trazabilidad las filas omitidas; confirmar exige su hash actual no nulo. El contenido no se guarda en Git.
+
 1. Onboard organización/branch/catalog/staff/métodos/categorías; confirmar IDs y reglas históricas con evidencia.
 2. Finanzas → Importar histórico → archivo XLSX/CSV; empezar con **Solo simulación**.
 3. Revisar filas y mapping. Nunca mapear ambiguos por parecido. Corregir el archivo con evidencia o excluir anomalías explícitamente; revalidar.

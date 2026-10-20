@@ -124,6 +124,7 @@ async function addTenant(index: number) {
 async function measure(
   name: string,
   run: (tenant: (typeof tenants)[number], index: number) => Promise<unknown>,
+  concentrated = false,
 ) {
   const timings: number[] = [];
   let errors = 0;
@@ -133,7 +134,7 @@ async function measure(
     await Promise.all(
       Array.from({ length: concurrency }, async (_, offset) => {
         const index = start + offset;
-        const t = tenants[index % tenants.length];
+        const t = tenants[concentrated ? 0 : index % tenants.length];
         const begin = performance.now();
         try {
           await run(t, index);
@@ -234,6 +235,52 @@ try {
     reports.push(report);
     console.log(JSON.stringify({ organizations: size, counts, metrics }));
   }
+  const concentratedOrganization = await Promise.all([
+    measure(
+      "one_tenant_dashboard_366_days",
+      (t) =>
+        asUser(db.pool, t.user, "select public.dashboard($1,null,null,$2,$3)", [
+          t.org,
+          day(-365),
+          day(0),
+        ]),
+      true,
+    ),
+    measure(
+      "one_tenant_agenda",
+      (t) =>
+        asUser(
+          db.pool,
+          t.user,
+          "select public.list_agenda($1,$2,null,null,null,$3,$4)",
+          [t.org, t.branch, day(-6) + "T00:00:00Z", day(1) + "T00:00:00Z"],
+        ),
+      true,
+    ),
+    measure(
+      "one_tenant_customer_search",
+      (t) =>
+        asUser(
+          db.pool,
+          t.user,
+          "select public.list_customers($1,null,'Cliente',null,50,'all')",
+          [t.org],
+        ),
+      true,
+    ),
+  ]);
+  reports.push({
+    concentrated_organization: true,
+    branches: 2,
+    staff: 5,
+    metrics: concentratedOrganization,
+  });
+  console.log(
+    JSON.stringify({
+      concentrated_organization: true,
+      metrics: concentratedOrganization,
+    }),
+  );
   await mkdir("docs/verification", { recursive: true });
   await writeFile(
     "docs/verification/load-results.json",

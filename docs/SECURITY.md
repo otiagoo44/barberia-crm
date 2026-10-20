@@ -30,6 +30,10 @@ Borrado/anonymization legal y export completo de portabilidad están preparados 
 
 ## Evidencia
 
+La migración `20261019223415_final_authorization_hardening` elimina el bypass comercial de platform_admin. Su flag permite onboarding explícito y `platform_support_snapshot(org, branch, ticket)`, una proyección de salud sin clientes, nombres ni dinero que registra auditoría. Para operar un negocio debe tener una membresía activa con el rol y las sucursales correspondientes. Las membresías finance pueden limitarse a sucursales; pertenecer a plataforma no eleva una membresía receptionist. Ver [matriz vigente](FINAL_PERMISSION_MATRIX.md).
+
+La configuración financiera de socios solo se entrega a owner/finance, también por SELECT directo. Las claves `finance.*` de idempotencia no caducan con el mantenimiento de 30 días: suprimirlas permitiría repetir egresos antiguos. Planificar crecimiento sin borrar esas claves antes de disponer de un ledger alternativo de deduplicación.
+
 Tests reales de PostgreSQL incluyen tenant spoofing, FKs, membresía desactivada, organization_id inmutable, permisos directos, helpers y rol/branch. Auth fixture y Auth real se reportan por separado en [VERIFICATION](VERIFICATION.md).
 
 Advisors: las tablas privadas con RLS y cero políticas producen INFO deliberado (deny by default). No quitar RLS ni agregar políticas permisivas para silenciarlo. Índices “unused” en una base vacía no justifican eliminarlos.

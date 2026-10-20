@@ -3,6 +3,7 @@ import { useState } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource } from "@/lib/client";
+import { hasCapability } from "@/lib/capabilities";
 import { Field, Notice, Loading, Empty } from "@/components/ui";
 import {
   financeUrl,
@@ -64,11 +65,7 @@ export function FinancialDashboard({
   } | null>(null);
   const [importing, setImporting] = useState(false);
   const [staff, setStaff] = useState("");
-  const privileged = [
-    "organization_owner",
-    "finance",
-    "platform_admin",
-  ].includes(w.role);
+  const privileged = hasCapability(w.role, "finance.configure");
   const r = useResource<Summary & { items?: FinanceRow[] }>(
     branch
       ? financeUrl(tab, org, branch, periodFrom ?? from, periodTo ?? to, {
@@ -530,6 +527,11 @@ export function FinancialDashboard({
           )}
           {own.data && (
             <>
+              <p className="muted">
+                Acumulado histórico de esta sucursal. El saldo pendiente incluye
+                movimientos de todos los períodos; no cambia con el filtro de
+                fechas.
+              </p>
               <div className="kpi-grid">
                 {[
                   ["commission_minor", "Comisión generada"],

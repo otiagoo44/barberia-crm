@@ -14,7 +14,7 @@ export function Configuration({
   module: "equipo" | "servicios" | "sucursales" | "configuracion";
 }) {
   const w = useWorkspace();
-  const owner = ["organization_owner", "platform_admin"].includes(w.role);
+  const owner = w.role === "organization_owner";
   const lists = {
     sucursales: [
       "branches",

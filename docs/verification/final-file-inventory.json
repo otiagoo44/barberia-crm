@@ -1,0 +1,1258 @@
+{
+  "base": "7a8fe7b7c91d3aa7fbe42d0fa8f1903b02db91ae",
+  "scope": "Static inventory, source review and targeted executable contracts; not exhaustive dynamic state coverage or a formal security proof",
+  "files": [
+    {
+      "path": ".github/rulesets/main.json",
+      "sha256": "86a0cdb0ec102f586065c3e69a1f4e92c373d712f73c17b1b1c2795c36eb89af",
+      "lines": 34,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "CI/deploy, secretos y scheduler único"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "d7552424653339e4a4a6001a60ab2328dd5e80e0fa9255f2795544b979e608ca",
+      "lines": 65,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "CI/deploy, secretos y scheduler único"
+    },
+    {
+      "path": ".github/workflows/load.yml",
+      "sha256": "043dd1eac86ed5527b1c0dbd701ec421941f2a435dc206aec414755914698630",
+      "lines": 22,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "CI/deploy, secretos y scheduler único"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "sha256": "3ab11acc49f75d2fd04c6a579d743738bd103344ca55f1341db503abe9ea54e1",
+      "lines": 38,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "8884c878be64938f78780ee16bfffde97040156c9e8bc8f0dab107f439fff4c4",
+      "lines": 26,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "4910b947766141b5b689e8d3cf4679e792ab5fa06f34b5b78227787b280e9c0e",
+      "lines": 23,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "scripts/ci-environment.mjs",
+      "sha256": "d8ffa328df3b181e00368ebe1e01a858ff8d5594d52be37c4d4d0a2a9217a93f",
+      "lines": 51,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/configure-1717-operations.sql",
+      "sha256": "5a0ac7bd9b2e658b2876c6029948af84cd43d5192a42e86dbc2ff7cf1fd3095a",
+      "lines": 27,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/enable-scheduler.sql",
+      "sha256": "d3ac11034e21fa1704ac99a3ab6f65caf8e0ce17262f6943acd56caf9f5ca97f",
+      "lines": 11,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/finance-dry-run.ts",
+      "sha256": "d57a85057de9f25b1e99f41bb5aa1ae7bb35ae77d3a2482a64f0651ceb65929a",
+      "lines": 71,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/onboard-1717.d.mts",
+      "sha256": "fa1f80eb12277e478b9d14e2e7a679bf7356efdd16fcfb0d7aa437f91d7b8f98",
+      "lines": 2,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/onboard-1717.mjs",
+      "sha256": "5f157afdea76dfebb1de611167608b3f6823c174166eb5eebca7d5856da9fab0",
+      "lines": 99,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/prepare-release.mjs",
+      "sha256": "5fc3ae1d4f6f1dc2ee80da53deee9b1b8f8e18a551dab71abb169c0897451173",
+      "lines": 36,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/qa-website-booking.mjs",
+      "sha256": "1131c196f9a0a23f433979ccd765feb203c81f60fee627fad640176453a3c5e5",
+      "lines": 176,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/seed-demo.ts",
+      "sha256": "41c59e419b7ba9f0a2c15c66fe1c925042527953fa731cb210b561a4dcde0f65",
+      "lines": 103,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/smoke-production.mjs",
+      "sha256": "94956edc322d13b61cc478e0a887954554c7c1d08f8509c8e1e545cfe33b8667",
+      "lines": 40,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "scripts/validate-deployment.mjs",
+      "sha256": "a14d88c8590e8b45a81e62b7bed5be109abc2a8086ae86606ab03b29cfa6614e",
+      "lines": 14,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Destino/secretos/side effects revisados; smoke y generadores sin writes cloud"
+    },
+    {
+      "path": "src/app/(workspace)/[organization]/[module]/page.tsx",
+      "sha256": "19edfb150d1c5307d0a3668c6aff738a4f083e5ed02769b77ea077b1e23e8960",
+      "lines": 99,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:organization_memberships",
+        "from:organizations"
+      ],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/(workspace)/[organization]/layout.tsx",
+      "sha256": "82378536639d375c7d0c72809ffb824a28c39a99fa9d6190de85a9a066da05cb",
+      "lines": 71,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:branches",
+        "from:organization_memberships",
+        "from:organizations",
+        "rpc:session_context"
+      ],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/api/auth/[action]/route.ts",
+      "sha256": "c7454e470f2bfe6e9eef6e88fc20b0bfde6af1d681564a939be42f786f61f7f0",
+      "lines": 94,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:profiles"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/export/customers/route.ts",
+      "sha256": "7990a739412aad9ebcdd9fdb5bc675df650af1a1179d1f22ae3195f4c37e326b",
+      "lines": 68,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "rpc:list_customers",
+        "rpc:record_export"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/finance/[resource]/route.ts",
+      "sha256": "bcd96b4d334b77f7d4c0b2d761624ca37f4d1531280c74039e5683ed50ef818d",
+      "lines": 147,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>",
+        "rpc:finance_command",
+        "rpc:finance_read",
+        "rpc:financial_export"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/finance/import/route.ts",
+      "sha256": "5e6247deda2c59fe3929ddf4bb616eadd5f8c1007fcb41bbd5c7d897f262cbd9",
+      "lines": 131,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>",
+        "from:organization_memberships",
+        "rpc:finance_import",
+        "rpc:finance_read"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/health/ready/route.ts",
+      "sha256": "9f9e305a806745c50a831a5462be65989b5e4be797f246d726ca708dc2429d98",
+      "lines": 22,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "rpc:gateway_health"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/health/route.ts",
+      "sha256": "797205d2211fdfe9ca0846eaf9e807986165a766302ae6dcb56be2bb72ac2fcf",
+      "lines": 7,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/jobs/route.ts",
+      "sha256": "96b49fa65d88aa00b424dd3faa9a60ad09e90d3d5c8c69ca6ad2c2a84d5360d2",
+      "lines": 62,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "rpc:claim_jobs",
+        "rpc:fail_job",
+        "rpc:process_job",
+        "rpc:worker_tick"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/live/route.ts",
+      "sha256": "b18fd93369d2ce8e0b34185db6bfb8103d2eb01ac2dffcb02390e58499217c7e",
+      "lines": 106,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:branches"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/public/[resource]/route.ts",
+      "sha256": "9a1f96658a0cd525f88191881bb578934234843ac8a95680a8fc7177c07fd361",
+      "lines": 110,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "rpc:<dynamic>",
+        "rpc:public_booking",
+        "rpc:public_rate_check"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/api/workspace/[resource]/route.ts",
+      "sha256": "b3a34e102db71026916acfd107b772712ca56260d1a42f39a757ee6e370f9feb",
+      "lines": 525,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>",
+        "from:services",
+        "from:staff",
+        "from:staff_availability_exceptions",
+        "rpc:<dynamic>"
+      ],
+      "review": "Auth o gateway; shape/Origin/grants/RPC/RLS/errores/proyección"
+    },
+    {
+      "path": "src/app/auth/callback/route.ts",
+      "sha256": "3ca184e18f818502e54218a3f0f5c8a149e47cc6209d7a6392b933e94dc25a82",
+      "lines": 32,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/book/[organization]/[[...branch]]/page.tsx",
+      "sha256": "bee1579d97fa70fe9e5606f9c925ddfe23c8cbdcbaf2e7126efc24d8fb2a0f66",
+      "lines": 27,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/error.tsx",
+      "sha256": "7d6a4b23b8d651ae4637b996288e770d5ab4d6f3c6f5d710a764e20ad856cecd",
+      "lines": 13,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/globals.css",
+      "sha256": "155296acc54e0abf3f6801a02764c68da191ba8e583cde655344bf1d41107c70",
+      "lines": 1240,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/icon.svg",
+      "sha256": "29eb9d4f6c28cd77cb1887c5b92462c2c52505574f2e26774e804ce0d6da32e9",
+      "lines": 2,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "sha256": "fa1e78122fe4cc8f8fd494388ff50ebf156cb24f4ff8650bfb8337968a7cbf3c",
+      "lines": 24,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/login/page.tsx",
+      "sha256": "5e52a5ebe958c6b14049b3efcac49aadf50c5ebb2d67388a2d92e6ee57aa450f",
+      "lines": 10,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/not-found.tsx",
+      "sha256": "4c78f019fef217d91b1854b03cf6e2e6a9045ecd25cab2697bf8e1456b1bfde2",
+      "lines": 10,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/page.tsx",
+      "sha256": "d4778c6a296cee76d1bc4c47dd9cbee2178ec38f715e0e1df7ad87d2eed73f8b",
+      "lines": 61,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:organizations",
+        "rpc:session_context"
+      ],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/app/reset-password/page.tsx",
+      "sha256": "c812150637f0b68d1213a1ba34ff3b0ac7d36e4d4501eb8eee1209907bbfa1a9",
+      "lines": 10,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/components/shell.tsx",
+      "sha256": "b424098f5804fba8f989f87325bdf387f99392e32f3c7d5d772780cf254993a5",
+      "lines": 250,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/components/ui.tsx",
+      "sha256": "deb5418d6e43d5be28e14b4ad50692c39edf8debcd5d14475158de432e21d7bb",
+      "lines": 87,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/analytics/dashboard.tsx",
+      "sha256": "6aab7a84cd3fd757827f35b7bac0049e6cfc8cf7bfce30e8ff9ec1039f93406b",
+      "lines": 341,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/appointments/agenda.tsx",
+      "sha256": "e8a20a761e9971a8b6a55e7dc8e2f23077da542f722a602362fd368762bccfc9",
+      "lines": 345,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Intervalos/servicios, cambio de branch y validación server-side"
+    },
+    {
+      "path": "src/features/appointments/appointment-dialog.tsx",
+      "sha256": "85f29d75ecee6296e5e28bd9fd43384f9c670921e22e9bdac99a4fb86ddf9b20",
+      "lines": 199,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Intervalos/servicios, cambio de branch y validación server-side"
+    },
+    {
+      "path": "src/features/appointments/booking-form.tsx",
+      "sha256": "498f82ef92b6be5585b0309c526dae8a6d45413e91d348a402baf33812bf26e1",
+      "lines": 375,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Intervalos/servicios, cambio de branch y validación server-side"
+    },
+    {
+      "path": "src/features/auth/auth-form.tsx",
+      "sha256": "1e8a48f25a48ee0392641bf384f727a479ba42414f355dca5958f4e027f09304",
+      "lines": 134,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/booking/public-booking.tsx",
+      "sha256": "7154b096d84e5a47106d6df9a7b5cd3e0a66b2e3b371849cda43c911cbc050ad",
+      "lines": 336,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Intervalos/servicios, cambio de branch y validación server-side"
+    },
+    {
+      "path": "src/features/configuration/configuration.tsx",
+      "sha256": "c883c18b018e00cc3b74fe16de472b9430d1dde2c173c762b44a034767fd1dbe",
+      "lines": 368,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Whitelist tipada/editor; RPC vuelve a comprobar rol y scope"
+    },
+    {
+      "path": "src/features/configuration/daily-availability.tsx",
+      "sha256": "f46d47b6e21ed5c85dbaa39fdd020883a42c96d8b7a7618444fb2d32b905b888",
+      "lines": 234,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Whitelist tipada/editor; RPC vuelve a comprobar rol y scope"
+    },
+    {
+      "path": "src/features/configuration/definitions.ts",
+      "sha256": "4f2b79d2e3b2720ce54bfad5e03ebffd8cb04bfbed9e1e5c991e901a2af76ffa",
+      "lines": 378,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Whitelist tipada/editor; RPC vuelve a comprobar rol y scope"
+    },
+    {
+      "path": "src/features/configuration/record-manager.tsx",
+      "sha256": "ae8759e5f3da9fe43d03ca9585e4f1ab5c8da9e5ed05e6d5e95e3881825edec5",
+      "lines": 431,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Whitelist tipada/editor; RPC vuelve a comprobar rol y scope"
+    },
+    {
+      "path": "src/features/customers/customers.tsx",
+      "sha256": "e8269afe986b2a474059e46a43324f92f17d8b3f5db8e6083fc49f36269df44b",
+      "lines": 746,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Cliente pertinente, búsqueda, historial/export; RLS/RPC"
+    },
+    {
+      "path": "src/features/finance/cash.tsx",
+      "sha256": "be2a5b0cc2d2650d9bccc268e83a2cb62e981b43d806e7c5fcc1f473c865a7a7",
+      "lines": 285,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/checkout.tsx",
+      "sha256": "1457115e65b7cd0417ac0c121a506adb686eaf7116912e7f475f4baa79aa5827",
+      "lines": 322,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/client.ts",
+      "sha256": "68319ebb69efa461e49061c5736eb7024e30b2785f5e0340f8502d6d9ce46d08",
+      "lines": 63,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/dashboard.tsx",
+      "sha256": "1399bab95a0040d26235cd123ef7b9634dc77c7eba5122993f4ff0af3a6e0811",
+      "lines": 711,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/forms.tsx",
+      "sha256": "cf191c3943a4d12468c392fef1a9ec875cf01a1751919880cdb8e31df900b24d",
+      "lines": 389,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/import-limits.ts",
+      "sha256": "95492d99f808bae1b20b4a640d3915176f5cc815853f6f73d86ace1c52d06b48",
+      "lines": 6,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/import-parser.ts",
+      "sha256": "7391261b2e72b4f294f00f0719f6302ce71297a492b4556e79e4b5e4113ac381",
+      "lines": 322,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/import-ui.tsx",
+      "sha256": "5fae81cb134e9446be7420408ecc9a470fe7a10b7b178fc70d6bba4a643ddbcd",
+      "lines": 269,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/finance/profit-sharing.tsx",
+      "sha256": "b99e25f83ed3f6568666228482ea6bd8a339cf8d58804f08bd7458cd9e2d012a",
+      "lines": 155,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Importes, confirmación, idempotencia, scopes; autoridad en PostgreSQL"
+    },
+    {
+      "path": "src/features/goals/goals.tsx",
+      "sha256": "70a45680a74f2c9794e218741be8cf992a7441eea8af4e3c31c58cfaf91f155d",
+      "lines": 81,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/organizations/context.tsx",
+      "sha256": "a30ca9d0ef4525c4e917176253dcc70da78ae8039b31f586e375cf0c932cf534",
+      "lines": 28,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/organizations/create-organization.tsx",
+      "sha256": "c7f64f83c38db23f691fbf1155bf1d55996f6999daac62ac74496a7d0e86dd53",
+      "lines": 71,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/organizations/launch-guide.tsx",
+      "sha256": "3da6912734cbd00143ad50b73867afd16535f4fa5fe5f49ecd43be42fde5364a",
+      "lines": 107,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/services/service-picker.tsx",
+      "sha256": "d892c0e8fb7ae8539f179fe962e024cd51f31370c983e339ce3bc2b08b4505fa",
+      "lines": 83,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/features/walk-ins/queue.tsx",
+      "sha256": "3790031fb3ec9f49af78a48c4bcb4fc9697dd47de7b533cfdd392ec9302ca87b",
+      "lines": 207,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/hooks/use-clock.ts",
+      "sha256": "180529d0e12802d2e6e726f55cc15bbfcadd57ac7e88db91005102ef81131787",
+      "lines": 11,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/hooks/use-live.ts",
+      "sha256": "30f4cb6cfa2d67d8d4b4ccf0d11ca45f0f502b3fb793efd4e226cbfbff2c7aa8",
+      "lines": 41,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/lib/auth.ts",
+      "sha256": "fd72c8d81fff19b1068a506b5930d64980c8a65966b41ad0fc10d1a3fed3fda6",
+      "lines": 21,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:profiles"
+      ],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/branding.ts",
+      "sha256": "18518dfdf08842ea2af42005dbf44c625667eddf9038bb2ecda1f792e9ccf2e0",
+      "lines": 39,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/capabilities.ts",
+      "sha256": "dbec72c6ff2759ebaa589148e650908a1e630d3ab35420afdbdaac420e81484e",
+      "lines": 20,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/client.ts",
+      "sha256": "e30040d5b8b7444c4679468584f5320ff5799aa36c8ebe04f095b6ca1840ad5e",
+      "lines": 76,
+      "client": true,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/cookie-security.ts",
+      "sha256": "2ef9f372a900502ff37d20d9b42b1cf49b9441718a99a71acf7e125a8d690cb2",
+      "lines": 8,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/environment-boundary.ts",
+      "sha256": "9ee13c2b3a894be43f6141a9a7f03c69f44bcb0b798d88152d35e5709a04965e",
+      "lines": 65,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/http.ts",
+      "sha256": "5bb6ed40010bd4516d30f0503cc8da435448d533536ab17171ddd0262aa1a14e",
+      "lines": 109,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/public-booking.ts",
+      "sha256": "11e99f94d1079520c628d713145ceb474c548ed864b9b6c781bf00b9f490ad2a",
+      "lines": 23,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/secret-auth.ts",
+      "sha256": "14bc1be11ae099f7c1badef86e9c6cadb6b1ca3cea0332887beb333bc4088e46",
+      "lines": 12,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/supabase/server.ts",
+      "sha256": "81a3265f2978e6bb63e170c351e7aec6a7931506f0953dc92948f532062a972f",
+      "lines": 57,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/types.ts",
+      "sha256": "25924eec18377696e12b68b5719a6941be7a1964ad6812cafea953547c8cf2b7",
+      "lines": 79,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/lib/validation.ts",
+      "sha256": "d061e3055fa588ce68c8f377c3452fa3d18957071aad16d746b13df415e42734",
+      "lines": 62,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Frontera servidor/cliente, validación, sesión y scopes"
+    },
+    {
+      "path": "src/proxy.ts",
+      "sha256": "1b12ad84828bb1883ae7e7b5b0de2f669d71a65f1fee2978c684143a27590601",
+      "lines": 54,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "src/services/automation/provider.ts",
+      "sha256": "bd19bfa1303e2e3f0228066553c56dd7c1a92123ad4dfee1cc6cbadae18791de",
+      "lines": 17,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "supabase/config.toml",
+      "sha256": "6c674a95bf731f458f93afddf4d4d9c2c45b3998332ce7650eedb84c42401a39",
+      "lines": 416,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "supabase/migrations/20261012171437_tenant_core.sql",
+      "sha256": "2768c8fd190bc4ec9dcee59672012b43ee257f4db634c94752cfc8d52e76cb11",
+      "lines": 117,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012171442_authorization.sql",
+      "sha256": "6b891e7a37f13a6f3bc0978c8f2f9e67f683d5d240707a2eb62d6280aa4ba293",
+      "lines": 71,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012171446_configuration.sql",
+      "sha256": "4a40c4d5c5706dec8abd82e9a8231f6563786adaa09f23b3b83162b7f6d70b87",
+      "lines": 139,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012171451_scheduling.sql",
+      "sha256": "3442d235343e71c9db16dcc904fe246f361c4f48874dde200fe149e48268857b",
+      "lines": 237,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012171456_operations.sql",
+      "sha256": "87cba8b43ad89f021a131df9b421a50dd9fe1d92d8d642ec517174d9a310a793",
+      "lines": 122,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012171501_analytics_automation.sql",
+      "sha256": "183a554442731504e666330f5bf848f79dd16a97732b134c1dabed76e8957d50",
+      "lines": 139,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012173606_read_models.sql",
+      "sha256": "3d1998a657f6208cd47fc3e6a77dd8dbb6945724eb62d0c366b5c5c832d32f30",
+      "lines": 39,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012180348_product_hardening.sql",
+      "sha256": "60107f8637e3467c53e89c7f352e3322ff49cf4b3bc72ddb34436b97c7495da7",
+      "lines": 312,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012181534_final_read_models.sql",
+      "sha256": "b73b36ca782b5f6ab74e224cda3ffbb35f06011d7695b7ca61b3f11c3d4347ca",
+      "lines": 46,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012182755_advisor_foreign_key_indexes.sql",
+      "sha256": "fc2b6e0177a565514e6847f7e0736d9554e9eccb800fb92f198de38537ef976c",
+      "lines": 8,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012183007_reporting_access.sql",
+      "sha256": "78d6b23a6e8272a813495b51593141b28fb861cdf7176ca3024c6b316d44c9fb",
+      "lines": 12,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012183207_bounded_read_permissions.sql",
+      "sha256": "75fe589c6d0af36f3e69bab11797bbafddd125d300bc2ba61748d596914a6e4c",
+      "lines": 34,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012183541_archived_branch_history.sql",
+      "sha256": "e0148240a22cf295f064a8d762b582871944658e7ebcd00c899583bdf58f0b0c",
+      "lines": 40,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012183917_platform_admin_audit.sql",
+      "sha256": "d8bdcbdac831a541ed183216381e2c0df4694937fd8c661ebdf7060a93eb0c79",
+      "lines": 13,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012184839_customer_detail_branding.sql",
+      "sha256": "325d7ad14025383cf7459e4b32ae4c15acf18101e6539e80b2d745383db9c311",
+      "lines": 29,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012210000_website_booking.sql",
+      "sha256": "8c32e0f74f95810de4d3357c5c0cb8667594d108adb3dfba4cfb6aa2acabd7c1",
+      "lines": 116,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012223818_finance_schema.sql",
+      "sha256": "0bd9cad905077083775d2592dae7b0260f45f9ab908f12c7e2836ff9d525a6fa",
+      "lines": 137,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012223852_finance_transactions.sql",
+      "sha256": "0ec5426c18793df80a40b4bd642414bbdf9a963483dbb0659e5040889cbe9c67",
+      "lines": 305,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012224111_finance_read_import.sql",
+      "sha256": "a3f58c64e9107c82a55f92904bb043cc6f56e7cf1d59e2cc71d5652a1aa26500",
+      "lines": 139,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261012224355_booking_finance_hardening.sql",
+      "sha256": "8f40aed5d8e6f642167a062c3c5d6d3dc64428ca0e2d6b15ed689cf84acb0e0b",
+      "lines": 62,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261015190206_booking_attribution_rls.sql",
+      "sha256": "5bbea8b1fc724c77899b6d672cac682b29fd597cac2192b56408efebc1116079",
+      "lines": 4,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261015190657_consolidate_financial_audit_policy.sql",
+      "sha256": "7231dad890478bf92104773912e1761959236f167980b9010d859efce51bdf47",
+      "lines": 21,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261015191802_worker_tick_record_scope.sql",
+      "sha256": "887f1b8d6464a60608e1181692be82dde6158de41ed1b5ffce920501eb793983",
+      "lines": 44,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261019154027_database_scheduler.sql",
+      "sha256": "39912ac9f65699012ba226e68015457f2b83a1502f65e0ecbb2b7beaf2b5a6d3",
+      "lines": 126,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261019213732_profit_sharing.sql",
+      "sha256": "f6e75884aa9ffd20277918cfd3efb6988c91aa238e42347f4da50f9f1b9e02e6",
+      "lines": 81,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261019220146_enable_database_cron.sql",
+      "sha256": "642243b5064b8aa0ee95418ec98c7f18e5936f716db6ec683192a89a2ceefa63",
+      "lines": 12,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "supabase/migrations/20261019223415_final_authorization_hardening.sql",
+      "sha256": "d35d2ba3d01d16c1a3c559f171a5ad4caec56629413587b2069272dc94c97152",
+      "lines": 206,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Replay transaccional + contratos RLS/RPC/finanzas; historial preservado"
+    },
+    {
+      "path": "tests/e2e/operations.spec.ts",
+      "sha256": "cc9115fcb20f9b0f2e2e21d023af06ceb62e3497292c7a23c91d984a0b3c11b2",
+      "lines": 339,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:customers",
+        "rpc:list_customers",
+        "rpc:manage_membership"
+      ],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/e2e/permissions.spec.ts",
+      "sha256": "3f6b7cf3effe0d80c85b6eacc0dc669706a983e4b30cda8a2370be330bc4054e",
+      "lines": 200,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>",
+        "from:customers",
+        "from:finance_settings",
+        "from:not an XLSX",
+        "rpc:finance_read"
+      ],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/e2e/setup.ts",
+      "sha256": "4088a8e367076036e9d2dc7c5ad186018157e9cf8138affda70bbca93cd86129",
+      "lines": 68,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/database.ts",
+      "sha256": "20fb7d643400a27f854e412de507d479512e518cc08a993310ad03698d8fbfcc",
+      "lines": 137,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/finance.ts",
+      "sha256": "7e797ae574b992c6ba970186da4bbb93a2a268a6c7e5526ba00df70d88ff5bd7",
+      "lines": 776,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/fixtures.ts",
+      "sha256": "5616337dee4e983cc8897070e7e8d4e5424752f813436da1ddbef0e253a35440",
+      "lines": 184,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/hardening.ts",
+      "sha256": "76fd06cc1f6ab9599b20daeacfb96c77b88a7e54958cc12768a4dac9df8b10c3",
+      "lines": 892,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/onboarding.ts",
+      "sha256": "c40b3d74ab05b8155e9c0fdeeefd4e97264d38e3ce6478e10d307b7f2f1bd30e",
+      "lines": 249,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/run-hardening.ts",
+      "sha256": "5ef49cdf0d838616b4754cdda802b0f9e858d8d5e0fbf3023a9e8b45a4335dbb",
+      "lines": 14,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/integration/run.ts",
+      "sha256": "4c182951a392f1c467aa936e07570b9d8c5094aed38fb85087d18c0a1999bc1d",
+      "lines": 43,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/load/run.ts",
+      "sha256": "a5d9450297ae04bcc196f1a2e86d346297629890799304126d139267557d6fe7",
+      "lines": 315,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/recovery/local-supabase.ts",
+      "sha256": "6a1eae9bb6fec6ae59434b885f953148ea5c8cbb8b6d93d29f01e325b41b25ef",
+      "lines": 318,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/security/contracts.ts",
+      "sha256": "7df84ead3f3dc0925c9d8e1ee62b7f428ec8f4f5da27c6d7894ab2e2dc68f83d",
+      "lines": 1462,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [
+        "from:<dynamic>"
+      ],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/unit/domain.test.ts",
+      "sha256": "81ce593aa401d4994bff4062a79e2d43a2524ea2d95a4fad5c98afd7b172daab",
+      "lines": 104,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/unit/environment.test.ts",
+      "sha256": "c9f511f12c158754f1a1697cc00a515e8e9811526ad02b16a27a958b42d3c229",
+      "lines": 64,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/unit/finance-import.test.ts",
+      "sha256": "c0d11bce9a3a4fb2fe1a581ce91681414cf3c41c3d6df237a13b4e53ca4c5026",
+      "lines": 211,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/unit/public-booking.test.ts",
+      "sha256": "8ff2080d5efc1783225181b578592b3a4768cf2446988ab1a6ee90d8138a341d",
+      "lines": 23,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tests/unit/secret-auth.test.ts",
+      "sha256": "4170a4c49f4428600102245257e4d663c6cba140c0bf68b5f9aae344773dc906",
+      "lines": 13,
+      "client": false,
+      "parse_errors": 0,
+      "database_calls": [],
+      "review": "Pruebas/fixtures aislados; Auth real y restore solo en CI Docker"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "b2ad1540ef68464d575f4eb697181d3943f71b6638ec14d7fa569bb3572bbb2b",
+      "lines": 28,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "Compilación/lectura estática; ver límites de evidencia"
+    },
+    {
+      "path": "vercel.json",
+      "sha256": "1bde306be076c87e649f061ffdd813fba7675910e98e240f6413df2e6bdf1531",
+      "lines": 5,
+      "client": false,
+      "parse_errors": null,
+      "database_calls": [],
+      "review": "CI/deploy, secretos y scheduler único"
+    }
+  ]
+}

@@ -130,15 +130,14 @@ export function Customers({ retention = false }: { retention?: boolean }) {
           }}
         />
         <button onClick={r.reload}>Actualizar</button>
-        {["organization_owner", "platform_admin", "manager"].includes(w.role) &&
-          !retention && (
-            <a
-              className="primary"
-              href={`/api/export/customers?org=${w.organization.id}${w.branchId ? "&branch=" + w.branchId : ""}`}
-            >
-              Exportar CSV
-            </a>
-          )}
+        {["organization_owner", "manager"].includes(w.role) && !retention && (
+          <a
+            className="primary"
+            href={`/api/export/customers?org=${w.organization.id}${w.branchId ? "&branch=" + w.branchId : ""}`}
+          >
+            Exportar CSV
+          </a>
+        )}
       </div>
       {(r.error || error) && <Notice error>{r.error || error}</Notice>}
       {r.loading && !r.data && <Loading />}
@@ -631,7 +630,7 @@ function CustomerForm({
               name="home_branch"
               defaultValue={String(customer?.home_branch_id ?? w.branchId)}
             >
-              {["organization_owner", "platform_admin"].includes(w.role) && (
+              {w.role === "organization_owner" && (
                 <option value="">Sin preferencia</option>
               )}
               {w.branches.map((b) => (

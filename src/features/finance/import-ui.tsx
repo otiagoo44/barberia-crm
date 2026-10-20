@@ -5,6 +5,7 @@ import { api } from "@/lib/client";
 import { Modal, Field, Notice } from "@/components/ui";
 import type { FinanceCatalog } from "./client";
 import type { PreviewRow, ImportMapping } from "./import-parser";
+import { MAX_IMPORT_UPLOAD_BYTES } from "./import-limits";
 type Preview = {
   id?: string;
   preview_hash?: string;
@@ -43,8 +44,10 @@ export function FinanceImport({
     setBusy(true);
     setError("");
     try {
-      if (file.size > 8 * 1024 * 1024)
-        throw new Error("El archivo supera 8 MB.");
+      if (file.size > MAX_IMPORT_UPLOAD_BYTES)
+        throw new Error(
+          "El archivo supera 2 MiB. Prepará un CSV con los movimientos necesarios.",
+        );
       const content = await new Promise<string>((resolve, reject) => {
         const r = new FileReader();
         r.onerror = () => reject(new Error("No se pudo leer el archivo."));
@@ -138,6 +141,7 @@ export function FinanceImport({
                 }}
               />
             </Field>
+            <p className="muted">Máximo 2 MiB por archivo.</p>
             <label>
               <input
                 type="checkbox"

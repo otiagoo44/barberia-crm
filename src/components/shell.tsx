@@ -34,13 +34,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
       ? ["inicio", "agenda", "clientes", "equipo", "reportes"].includes(key)
       : w.role === "finance"
         ? ["inicio", "caja", "finanzas", "reportes"].includes(key)
-      : w.role === "receptionist"
-        ? ["inicio", "agenda", "clientes", "walk-ins", "retencion", "caja"].includes(
-            key,
-          )
-        : w.role === "manager"
-          ? key !== "configuracion"
-          : true,
+        : w.role === "receptionist"
+          ? [
+              "inicio",
+              "agenda",
+              "clientes",
+              "walk-ins",
+              "retencion",
+              "caja",
+            ].includes(key)
+          : w.role === "manager"
+            ? key !== "configuracion"
+            : true,
   );
   const nav = (
     <>
@@ -103,6 +108,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <span className="sr-only">Sucursal activa</span>
               <select
                 value={w.branchId}
+                title="Cambiar de sucursal cierra los formularios sin guardar"
                 onChange={(e) => w.setBranchId(e.target.value)}
               >
                 {w.branches.map((b) => (
@@ -125,7 +131,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             ◉
           </button>
         </header>
-        <main id="content" className="workspace">
+        <main id="content" className="workspace" key={w.branchId}>
           {children}
         </main>
       </div>

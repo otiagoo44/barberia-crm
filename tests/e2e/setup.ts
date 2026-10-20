@@ -3,6 +3,7 @@ import { Pool } from "pg";
 import { randomBytes } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { fixtures, type FixtureUsers } from "../integration/fixtures";
+import { asUser } from "../integration/database";
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 if (
   process.env.E2E_REAL_SUPABASE !== "1" ||
@@ -38,6 +39,20 @@ for (const key of [
 const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
 try {
   const f = await fixtures(pool, users);
+  const { data: financeAccount, error: financeError } =
+    await admin.auth.admin.createUser({
+      email: "financeA@fixture.invalid",
+      password,
+      email_confirm: true,
+    });
+  if (financeError || !financeAccount.user)
+    throw new Error("Failed finance Auth fixture setup");
+  await asUser(
+    pool,
+    users.ownerA,
+    "select public.manage_membership($1,'financeA@fixture.invalid','finance',false,$2,true)",
+    [f.orgA, [f.branches.a1]],
+  );
   await mkdir(".test-data/e2e", { recursive: true });
   await writeFile(
     ".test-data/e2e/fixtures.json",
@@ -45,7 +60,7 @@ try {
     { mode: 0o600 },
   );
   console.log(
-    "Prepared six real Supabase Auth users and two isolated tenants.",
+    "Prepared seven real Supabase Auth users and two isolated tenants.",
   );
 } finally {
   await pool.end();

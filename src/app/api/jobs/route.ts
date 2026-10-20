@@ -1,4 +1,4 @@
-import { timingSafeEqual } from "node:crypto";
+import { matchesSecret } from "@/lib/secret-auth";
 import { gatewayClient } from "@/lib/supabase/server";
 import { response, fail, HttpError, correlationId } from "@/lib/http";
 export const dynamic = "force-dynamic";
@@ -10,12 +10,7 @@ export async function GET(request: Request) {
     const supplied = request.headers
       .get("authorization")
       ?.replace(/^Bearer /, "");
-    if (
-      !expected ||
-      !supplied ||
-      expected.length !== supplied.length ||
-      !timingSafeEqual(Buffer.from(expected), Buffer.from(supplied))
-    )
+    if (!matchesSecret(expected, supplied))
       throw new HttpError(403, "forbidden");
     const secret = process.env.WORKER_SECRET;
     if (!secret) throw new HttpError(503, "worker_not_configured");

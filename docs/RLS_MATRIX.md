@@ -1,5 +1,7 @@
 # Matriz RLS y permisos
 
+La ampliación vigente por rol/objeto/registro/campo y soporte de plataforma está en [FINAL_PERMISSION_MATRIX](FINAL_PERMISSION_MATRIX.md). La migración final elimina el bypass comercial de platform_admin.
+
 Cada celda contiene **SELECT / INSERT / UPDATE / DELETE directos**. `—` = denegado; O = organización propia; B = branches autorizadas; P = staff propio; C = cliente relevante; U = usuario propio. Todas las escrituras comerciales directas se revocaron; que una RPC permita escribir no significa que exista INSERT/UPDATE directo.
 
 | Tabla | Owner S/I/U/D | Manager S/I/U/D | Reception S/I/U/D | Barber S/I/U/D | Anon S/I/U/D |
@@ -75,16 +77,16 @@ Writes directos INSERT/UPDATE/DELETE denegados. O=tenant,B=branch autorizada,P=s
 
 |Área|Owner|Finance|Manager|Reception|Barber|Anon|
 |---|---|---|---|---|---|---|
-|Checkout/pago/caja RPC y lectura|O|O|B|B|—|—|
-|Gasto normal|O|O|B|B|—|—|
-|Adelanto/salario/comisión/liquidación/ajuste|O|O|B|—|P lectura|—|
-|Reportes/cierres sellados|O|O|B|—|P resumen|—|
+|Checkout/pago/caja RPC y lectura|O|B|B|B|—|—|
+|Gasto normal|O|B|B|B|—|—|
+|Adelanto/salario/comisión/liquidación/ajuste|O|B|B|—|P lectura|—|
+|Reportes/cierres sellados|O|B|B|—|P resumen|—|
 |Métodos/items/categorías catálogo|O|O|O|O|O lectura|—|
 |Reglas POS/config global|O|O|—|—|—|—|
 |Reglas comisión|O|O|B lectura|—|—|—|
-|Import/export|O|O|—|—|—|—|
+|Import/export|O|B|—|—|—|—|
 |Usuarios/seguridad|O|—|—|—|—|—|
 
-Recepción recibe snapshot operativo sin financial. Cierres completos requieren report. Finance.* audit disponible finance/manager de branches. Helpers comprueban profile/membership/organization/branch. Finance all_branches para su función financiera, manager asignación explícita. No se concede seguridad a finance.
+Recepción recibe snapshot operativo sin financial. Cierres completos requieren report. Finance.* audit disponible finance/manager de branches autorizadas. Helpers comprueban profile/membership/organization/branch. Finance puede usar sucursales asignadas o all_branches explícito; manager requiere asignación explícita. No se concede seguridad a finance.
 
 Revisión 15/10/2026: todas las tablas de aplicación, incluido `app_private.booking_attributions`, tienen RLS. La lectura de audit_logs usa un único predicado para authenticated que conserva la unión owner/manager/finance anterior. La regresión verifica que finance solo obtiene acciones finance.* de su tenant y recepción no obtiene filas de auditoría.

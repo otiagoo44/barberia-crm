@@ -5,7 +5,7 @@ import { addDays, format, startOfWeek } from "date-fns";
 import { fromZonedTime, formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource, resourceUrl, api } from "@/lib/client";
-import { statusLabels, statuses } from "@/lib/validation";
+import { statusLabels, statuses, date as validDate } from "@/lib/validation";
 import { useLive } from "@/hooks/use-live";
 import { Badge, Empty, Loading, Notice } from "@/components/ui";
 import type { Appointment, Page, Staff, Service, DataRow } from "@/lib/types";
@@ -17,9 +17,12 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
   const tz =
     w.branches.find((b) => b.id === w.branchId)?.timezone ??
     w.organization.timezone;
-  const [selectedDate, setDate] = useState(
+  const [requestedDate, setDate] = useState(
     q.get("date") ?? formatInTimeZone(new Date(), tz, "yyyy-MM-dd"),
   );
+  const selectedDate = validDate.safeParse(requestedDate).success
+    ? requestedDate
+    : formatInTimeZone(new Date(), tz, "yyyy-MM-dd");
   const [mode, setMode] = useState("day");
   const [staff, setStaff] = useState(
     w.role === "barber" ? (w.staffId ?? "") : (q.get("staff") ?? ""),

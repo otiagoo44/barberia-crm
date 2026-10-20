@@ -1,0 +1,199 @@
+import { test, expect } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+import { createClient } from "@supabase/supabase-js";
+import type { fixtures } from "../integration/fixtures";
+type Fixture = Awaited<ReturnType<typeof fixtures>> & { password: string };
+const real = process.env.E2E_REAL_SUPABASE === "1";
+let f: Fixture;
+test.beforeAll(async () => {
+  if (real)
+    f = JSON.parse(await readFile(".test-data/e2e/fixtures.json", "utf8"));
+});
+test.describe("HTTP and Data API permission matrix with real Auth", () => {
+  test.skip(
+    !real,
+    "Requires isolated local Supabase; no cloud fixtures or mocked Auth",
+  );
+  test("concurrent HTTP financial retries create one expense; malformed upload returns 400", async ({
+    request,
+  }) => {
+    const headers = { Origin: "http://localhost:3000" };
+    expect(
+      (
+        await request.post("/api/auth/signin", {
+          headers,
+          data: { email: "ownerA@fixture.invalid", password: f.password },
+        })
+      ).ok(),
+    ).toBeTruthy();
+    const call = async (
+      action: string,
+      data: object,
+      key = crypto.randomUUID(),
+    ) =>
+      request.post("/api/finance/command", {
+        headers,
+        data: { org: f.orgA, branch: f.branches.a1, action, data, key },
+      });
+    const suffix = crypto.randomUUID().slice(0, 8);
+    const methodResponse = await call("configure", {
+      entity: "payment_methods",
+      name: "HTTP retry bank",
+      code: `http_bank_${suffix}`,
+      type: "bank",
+    });
+    expect(methodResponse.ok()).toBeTruthy();
+    const categoryResponse = await call("configure", {
+      entity: "expense_categories",
+      name: "HTTP retry rent",
+      code: `http_rent_${suffix}`,
+      kind: "operating",
+    });
+    expect(categoryResponse.ok()).toBeTruthy();
+    const data = {
+      payment_method_id: (await methodResponse.json()).id,
+      category_id: (await categoryResponse.json()).id,
+      amount_minor: 100,
+      description: "HTTP retry fixture",
+    };
+    const key = crypto.randomUUID();
+    const results = await Promise.all(
+      Array.from({ length: 6 }, () => call("create_expense", data, key)),
+    );
+    for (const result of results) expect(result.status()).toBe(201);
+    const bodies = await Promise.all(results.map((r) => r.json()));
+    expect(new Set(bodies.map((b) => b.id)).size).toBe(1);
+    const badUpload = await request.post("/api/finance/import", {
+      headers,
+      data: {
+        org: f.orgA,
+        branch: f.branches.a1,
+        key: crypto.randomUUID(),
+        action: "preview",
+        filename: "bad.xlsx",
+        content: Buffer.from("not an XLSX").toString("base64"),
+        dry_run: true,
+      },
+    });
+    expect(badUpload.status()).toBe(400);
+  });
+  test("branch changes close unsaved financial dialogs and malformed agenda dates recover", async ({
+    page,
+  }) => {
+    const login = await page.request.post("/api/auth/signin", {
+      headers: { Origin: "http://localhost:3000" },
+      data: { email: "ownerA@fixture.invalid", password: f.password },
+    });
+    expect(login.ok()).toBeTruthy();
+    await page.goto("/fixture-a/caja");
+    await page
+      .getByRole("button", { name: "Venta sin cita", exact: true })
+      .click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.getByLabel("Sucursal activa").selectOption(f.branches.a2);
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto("/fixture-a/agenda?date=malformed");
+    await expect(
+      page.getByRole("heading", { name: "Agenda", exact: true }),
+    ).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+  for (const role of [
+    "ownerA",
+    "managerA1",
+    "receptionA",
+    "barberA",
+    "financeA",
+    "platform",
+  ] as const) {
+    test(`${role}: tenant, branch, write, field projection and export denial`, async ({
+      request,
+    }) => {
+      const credentials = {
+        email: `${role}@fixture.invalid`,
+        password: f.password,
+      };
+      const login = await request.post("/api/auth/signin", {
+        headers: { Origin: "http://localhost:3000" },
+        data: credentials,
+      });
+      expect(login.status()).toBe(200);
+      const today = new Date().toISOString().slice(0, 10);
+      const base = `org=${f.orgA}&branch=${f.branches.a1}&from=${today}&to=${today}`;
+      const foreign = await request.get(
+        `/api/finance/cash?org=${f.orgB}&branch=${f.branches.b1}&from=${today}&to=${today}`,
+      );
+      expect(foreign.ok()).toBe(false);
+      const exportResult = await request.get(
+        `/api/finance/export?${base}&view=expenses`,
+      );
+      expect(exportResult.ok()).toBe(["ownerA", "financeA"].includes(role));
+      const write = await request.post("/api/workspace/membership", {
+        headers: { Origin: "http://localhost:3000" },
+        data: {
+          org: f.orgB,
+          email: "ownerA@fixture.invalid",
+          role: "organization_owner",
+          all_branches: true,
+          branches: [],
+          active: true,
+        },
+      });
+      expect(write.status()).toBe(403);
+      if (["managerA1", "financeA"].includes(role)) {
+        const otherBranch = await request.get(
+          `/api/finance/expenses?org=${f.orgA}&branch=${f.branches.a2}&from=${today}&to=${today}`,
+        );
+        expect(otherBranch.status()).toBe(403);
+      }
+      if (["receptionA", "barberA", "platform"].includes(role)) {
+        const settlements = await request.get(
+          `/api/finance/settlements?${base}`,
+        );
+        expect(settlements.ok()).toBe(false);
+      }
+      // Bypass the BFF with an ordinary user token, never a service-role key.
+      const db = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+        { auth: { persistSession: false, autoRefreshToken: false } },
+      );
+      const auth = await db.auth.signInWithPassword(credentials);
+      expect(auth.error).toBeNull();
+      const settings = await db
+        .from("finance_settings")
+        .select("profit_share_staff_ids")
+        .eq("organization_id", f.orgA);
+      expect(settings.error).toBeNull();
+      if (!["ownerA", "financeA"].includes(role))
+        expect(settings.data).toEqual([]);
+      const rows = await db
+        .from("customers")
+        .select("id")
+        .eq("organization_id", f.orgB);
+      expect(rows.error).toBeNull();
+      expect(rows.data).toEqual([]);
+      const directWrite = await db.from("customers").insert({
+        organization_id: f.orgA,
+        home_branch_id: f.branches.a1,
+        name: "forged",
+        normalized_phone: "+12025559998",
+      });
+      expect(directWrite.error).not.toBeNull();
+      if (role === "barberA") {
+        const otherStaff = await db.rpc("finance_read", {
+          p_org: f.orgA,
+          p_branch: f.branches.a1,
+          p_view: "staff",
+          p_from: today,
+          p_to: today,
+          p_id: f.staff.a2,
+        });
+        expect(otherStaff.error?.code).toBe("42501");
+      }
+      await db.auth.signOut();
+    });
+  }
+});
