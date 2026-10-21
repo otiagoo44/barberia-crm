@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { verifyRequest } from "./mfa-helper";
+import { Pool } from "pg";
+import { fixtures } from "../integration/fixtures";
 test.describe("Daily work and accessible navigation with real Auth", () => {
   test.skip(
     process.env.E2E_REAL_SUPABASE !== "1",
@@ -29,6 +31,16 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
         await page.evaluate(() => !!document.activeElement?.closest("dialog")),
       ).toBeTruthy();
     }
+    for (let i = 0; i < 20; i++) {
+      await page.keyboard.press("Shift+Tab");
+      expect(
+        await page.evaluate(() => !!document.activeElement?.closest("dialog")),
+      ).toBeTruthy();
+    }
+    await page.keyboard.press("Control+k");
+    expect(
+      await page.evaluate(() => !!document.activeElement?.closest("dialog")),
+    ).toBeTruthy();
     await page.keyboard.press("Escape");
     await expect(dialog).toHaveCount(0);
     await expect(trigger).toBeFocused();
@@ -109,9 +121,32 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     page,
   }) => {
     test.setTimeout(90000);
-    const f = JSON.parse(
+    const baseFixture = JSON.parse(
       await readFile(".test-data/e2e/fixtures.json", "utf8"),
     );
+    // Each attempt gets its own tenant/ledger. A failed walk-in must not leave
+    // an open cash session or occupied staff behind for the retry.
+    if (
+      !["127.0.0.1", "localhost"].includes(
+        new URL(process.env.LOCAL_DB_URL!).hostname,
+      )
+    )
+      throw new Error("Daily fixtures require isolated localhost Supabase");
+    const namespace = `daily-${crypto.randomUUID().slice(0, 8)}`;
+    const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
+    const f = await (async () => {
+      try {
+        return {
+          ...baseFixture,
+          ...(await fixtures(pool, baseFixture.users, namespace)),
+        };
+      } finally {
+        await pool.end();
+      }
+    })();
+    const workspace = `/${namespace}-a`;
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
     const headers = { Origin: "http://localhost:3000" };
     await page.request.post("/api/auth/signin", {
       headers,
@@ -157,7 +192,7 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
       headers,
       data: { email: "receptionA@fixture.invalid", password: f.password },
     });
-    await page.goto("/fixture-a/caja");
+    await page.goto(`${workspace}/caja`);
     await page.getByRole("button", { name: "Abrir caja", exact: true }).click();
     await page
       .getByLabel("Efectivo inicial · Importe en centavos (USD)")
@@ -166,13 +201,15 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     await expect(
       page.getByRole("heading", { name: "Caja abierta", exact: true }),
     ).toBeVisible();
-    await page.goto("/fixture-a/walk-ins");
+    await page.goto(`${workspace}/walk-ins`);
     await page
       .getByRole("button", { name: "+ Agregar a la cola", exact: true })
       .click();
     const name = "Piloto aislado " + suffix;
     await page.getByLabel("cut", { exact: true }).check();
-    await page.getByLabel("Barbero", { exact: true }).selectOption(f.staff.a1);
+    await page
+      .getByRole("combobox", { name: "Barbero", exact: true })
+      .selectOption(f.staff.a1);
     await page
       .getByRole("button", { name: "Nuevo cliente", exact: true })
       .click();
@@ -222,6 +259,10 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     await expect(
       page.getByText("Venta cobrada y registrada.", { exact: true }),
     ).toBeVisible();
+    await page.screenshot({
+      path: "test-results/daily-split-paid.png",
+      fullPage: true,
+    });
     await page
       .getByRole("button", { name: "Volver y ofrecer próximo turno" })
       .click();
@@ -229,7 +270,7 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
       page.getByRole("button", { name: "Agendar próximo turno" }),
     ).toBeVisible();
     await page.keyboard.press("Escape");
-    await page.goto("/fixture-a/caja");
+    await page.goto(`${workspace}/caja`);
     await page
       .getByRole("button", { name: "Cerrar caja", exact: true })
       .click();
@@ -240,23 +281,30 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     await expect(
       page.getByRole("heading", { name: "Caja cerrada", exact: true }),
     ).toBeVisible();
+    await page.screenshot({
+      path: "test-results/daily-cash-closed.png",
+      fullPage: true,
+    });
     await page.request.post("/api/auth/signout", { headers, data: {} });
     await page.request.post("/api/auth/signin", {
       headers,
       data: { email: "ownerA@fixture.invalid", password: f.password },
     });
     await verifyRequest(page.request, "ownerA");
-    await page.goto("/fixture-a/finanzas");
+    await page.goto(`${workspace}/finanzas`);
     await expect(
       page.getByRole("heading", { name: "Ventas y dinero cobrado" }),
     ).toBeVisible();
     await page
       .getByRole("button", { name: "Movimientos", exact: true })
       .click();
-    await page
-      .getByLabel("Buscar concepto, cliente o proveedor")
-      .fill(name);
+    await page.getByLabel("Buscar concepto, cliente o proveedor").fill(name);
     await expect(page.getByRole("cell", { name, exact: true })).toBeVisible();
+    await page.screenshot({
+      path: "test-results/daily-owner-movement.png",
+      fullPage: true,
+    });
+    expect(errors).toEqual([]);
   });
   test("report period filters reload the authorized chart and expose keyboard-readable data", async ({
     page,

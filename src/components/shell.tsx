@@ -142,6 +142,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <button
             className="mobile-menu"
             aria-label="Abrir navegación"
+            aria-haspopup="dialog"
+            aria-expanded={menu}
             onClick={() => setMenu(true)}
           >
             <Menu size={20} aria-hidden="true" />
@@ -200,7 +202,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <span>{label}</span>
             </Link>
           ))}
-        <button onClick={() => setMenu(true)}>
+        <button
+          aria-haspopup="dialog"
+          aria-expanded={menu}
+          onClick={() => setMenu(true)}
+        >
           <Menu size={20} aria-hidden="true" />
           <span>Más</span>
         </button>
@@ -248,6 +254,7 @@ function GlobalSearch({ links: allowed }: { links: typeof links }) {
     const handler = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
+        if (document.querySelector("dialog:modal")) return;
         input.current?.focus();
       }
       if (e.key === "Escape") setText("");
