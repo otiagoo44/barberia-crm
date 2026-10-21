@@ -69,9 +69,20 @@ export async function isolatedDatabase() {
     create role service_role nologin bypassrls;
     create schema auth;
     create table auth.users(id uuid primary key,email text unique,raw_user_meta_data jsonb not null default '{}');
+    -- SQL authorization fixtures, deliberately separate from real Supabase Auth E2E.
+    create table auth.sessions(id uuid primary key,user_id uuid not null references auth.users(id),not_after timestamptz);
+    create table auth.mfa_factors(id uuid primary key,user_id uuid not null references auth.users(id),status text not null);
+    create function auth.fixture_session() returns trigger language plpgsql as $$ begin
+      insert into auth.sessions(id,user_id) values(new.id,new.id); return new; end $$;
+    create trigger fixture_session after insert on auth.users for each row execute function auth.fixture_session();
+    create function auth.jwt() returns jsonb language sql stable as $$
+      select coalesce(nullif(current_setting('request.jwt.claims',true),'')::jsonb,
+        jsonb_build_object('sub',current_setting('request.jwt.claim.sub',true),'aal','aal2',
+        'session_id',current_setting('request.jwt.claim.sub',true))) $$;
     create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$;
     grant usage on schema auth to anon,authenticated;
     grant execute on function auth.uid() to anon,authenticated;
+    grant execute on function auth.jwt() to anon,authenticated;
   `);
   const files = (await readdir("supabase/migrations"))
     .filter((f) => f.endsWith(".sql"))
@@ -123,6 +134,9 @@ export async function asUser<T>(
     await client.query(`set local role ${user ? "authenticated" : "anon"}`);
     await client.query("select set_config('request.jwt.claim.sub',$1,true)", [
       user ?? "",
+    ]);
+    await client.query("select set_config('request.jwt.claims',$1,true)", [
+      JSON.stringify({ sub: user, aal: "aal2", session_id: user }),
     ]);
     const result = await client.query(query, params);
     await client.query("commit");

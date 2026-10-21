@@ -1,0 +1,26 @@
+/* Canonical tokens: DESIGN.md. Light theme, no parallel dark interface. */
+:root {
+  --color-primary: #242724;
+  --color-on-primary: #ffffff;
+  --color-canvas: #fafaf9;
+  --color-surface: #ffffff;
+  --color-subtle: #f3f3f0;
+  --color-foreground: #242724;
+  --color-muted: #646963;
+  --color-border: #e2e4de;
+  --color-input: #92978f;
+  --color-link: #705719;
+  --color-success: #246b44;
+  --color-warning: #80591c;
+  --color-danger: #9b332e;
+  --color-chart-primary: #446d88;
+  --color-chart-secondary: #aa8034;
+  --color-chart-tertiary: #67846c;
+  --radius-control: 7px;
+  --radius-panel: 10px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}

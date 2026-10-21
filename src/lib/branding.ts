@@ -8,7 +8,7 @@ function luminance(color: string) {
   return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
 }
 export function brandStyle(input: string): CSSProperties {
-  const brand = /^#[0-9a-f]{6}$/i.test(input) ? input : "#6fe2ff";
+  const brand = /^#[0-9a-f]{6}$/i.test(input) ? input : "#242724";
   const lum = luminance(brand);
   const onBrand = (lum + 0.05) / 0.05 >= 4.5 ? "#000000" : "#ffffff";
   let accent = brand;
@@ -18,14 +18,14 @@ export function brandStyle(input: string): CSSProperties {
     .map((s) => parseInt(s, 16));
   for (
     let step = 1;
-    (luminance(accent) + 0.05) / (0.0044 + 0.05) < 4.5 && step <= 20;
+    1.05 / (luminance(accent) + 0.05) < 4.5 && step <= 20;
     step++
   )
     accent =
       "#" +
       rgb
         .map((v) =>
-          Math.round(v + ((255 - v) * step) / 20)
+          Math.round(v * (1 - step / 20))
             .toString(16)
             .padStart(2, "0"),
         )

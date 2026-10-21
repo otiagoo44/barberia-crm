@@ -120,14 +120,28 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
   );
 }
 export function SignOut() {
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
   return (
-    <button
-      onClick={async () => {
-        await api("/api/auth/signout", {});
-        window.location.assign("/login");
-      }}
-    >
-      Salir
-    </button>
+    <>
+      <button
+        disabled={busy}
+        onClick={async () => {
+          setBusy(true);
+          setError("");
+          try {
+            await api("/api/auth/signout", {});
+            window.location.assign("/login");
+          } catch (e) {
+            setError((e as Error).message);
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        Salir
+      </button>
+      {error && <Notice error>{error}</Notice>}
+    </>
   );
 }

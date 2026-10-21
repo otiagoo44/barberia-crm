@@ -82,6 +82,13 @@ export function fail(error: unknown, requestId: string) {
     JSON.stringify({ level: "error", request_id: requestId, code, status }),
   );
   const authMessages: Record<string, string> = {
+    mfa_required:
+      "Verificá tu segundo factor en Seguridad de la cuenta para continuar.",
+    session_revoked: "La sesión terminó. Volvé a entrar.",
+    mfa_failed:
+      "No se pudo verificar el código. Revisá tu autenticador e intentá nuevamente.",
+    mfa_last_factor:
+      "Agregá y verificá otro autenticador antes de retirar este dispositivo.",
     invalid_credentials:
       "Correo o contraseña incorrectos. Si recién creaste tu cuenta, confirmá tu correo.",
     profile_inactive:

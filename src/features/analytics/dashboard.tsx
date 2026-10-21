@@ -5,12 +5,15 @@ import { format, subDays, startOfMonth } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource, resourceUrl } from "@/lib/client";
-import { Notice, Loading, Empty } from "@/components/ui";
+import { Notice, Loading } from "@/components/ui";
 import type { Page, Staff, DataRow } from "@/lib/types";
 import { currencyScale } from "@/features/configuration/record-manager";
 import { GoalCard } from "@/features/goals/goals";
 import { FinancialDashboard } from "@/features/finance/dashboard";
 import { LaunchGuide } from "@/features/organizations/launch-guide";
+import { DayOverview } from "./day-overview";
+import { DataChart } from "@/components/chart";
+import { chartInteger, utilization } from "@/lib/chart-values";
 type DashboardData = {
   totals: Record<string, number | null>;
   by_staff: {
@@ -32,6 +35,10 @@ type DashboardData = {
     completed: number;
     booked_minutes: number;
     available_minutes: number | null;
+    appointments: number;
+    cancelled: number;
+    no_shows: number;
+    rebookings: number;
   }[];
   by_service: { service_id: string; name: string; completed: number }[];
   goals: DataRow[];
@@ -43,9 +50,11 @@ export function Dashboard({ report = false }: { report?: boolean }) {
     w.organization.timezone,
     "yyyy-MM-dd",
   );
-  const [preset, setPreset] = useState("7");
+  const [preset, setPreset] = useState(report ? "7" : "1");
   const [from, setFrom] = useState(
-    format(subDays(new Date(today + "T12:00:00"), 6), "yyyy-MM-dd"),
+    report
+      ? format(subDays(new Date(today + "T12:00:00"), 6), "yyyy-MM-dd")
+      : today,
   );
   const [to, setTo] = useState(today);
   const [branch, setBranch] = useState(w.role === "manager" ? w.branchId : "");
@@ -123,12 +132,17 @@ export function Dashboard({ report = false }: { report?: boolean }) {
                 ? "Cómo va tu local"
                 : "Cómo va tu barbería"}
           </h1>
-          <p>Actividad, capacidad y metas del período que querés entender.</p>
+          <p>
+            {report
+              ? "Actividad, capacidad y seguimiento con datos del período."
+              : "Agenda, atención y resultados para organizar el día."}
+          </p>
         </div>
         <Link className="primary" href={`/${w.organization.slug}/agenda`}>
           Ver agenda →
         </Link>
       </div>
+      {!report && <DayOverview />}
       {!report && w.role === "organization_owner" && <LaunchGuide />}
       <div className="toolbar">
         <select
@@ -234,16 +248,27 @@ export function Dashboard({ report = false }: { report?: boolean }) {
                 money(t.priced_completed ? t.production_value_minor : null),
                 "Servicios con precio conocido; no representa cobros",
               ],
-            ].map(([label, value, note], index) => (
-              <article
-                className={index === 0 ? "kpi highlight" : "kpi"}
-                key={String(label)}
-              >
-                <span>{label}</span>
-                <strong>{value ?? "—"}</strong>
-                {note && <small>{note}</small>}
-              </article>
-            ))}
+            ]
+              .filter(
+                ([label]) =>
+                  report ||
+                  [
+                    "Reservas",
+                    "Pendientes",
+                    "Visitas completadas",
+                    "Utilización",
+                  ].includes(String(label)),
+              )
+              .map(([label, value, note], index) => (
+                <article
+                  className={index === 0 ? "kpi highlight" : "kpi"}
+                  key={String(label)}
+                >
+                  <span>{label}</span>
+                  <strong>{value ?? "—"}</strong>
+                  {note && <small>{note}</small>}
+                </article>
+              ))}
           </div>
           <p className="muted" style={{ marginBottom: 22 }}>
             Ticket promedio de visitas con precio:{" "}
@@ -251,83 +276,105 @@ export function Dashboard({ report = false }: { report?: boolean }) {
             {t.completed} visitas con precio conocido.
           </p>
           <div className="dashboard-grid">
+            <DataChart
+              title="Reservas y atención"
+              description={`${from} a ${to} · cantidad por día`}
+              data={r.data!.by_day.map((d) => ({
+                label: d.local_date.slice(5),
+                reservas: chartInteger(d.appointments),
+                atendidas: chartInteger(d.completed),
+              }))}
+              series={[
+                { key: "reservas", label: "Reservas" },
+                { key: "atendidas", label: "Completadas" },
+              ]}
+            />
+            <DataChart
+              title="Ocupación por profesional"
+              description="Minutos reservados / capacidad conocida"
+              kind="bar"
+              percent
+              data={r.data!.by_staff.map((d) => ({
+                label: d.name,
+                value: utilization(d.booked_minutes, d.available_minutes),
+              }))}
+              series={[{ key: "value", label: "Ocupación" }]}
+            />
+            {report && (
+              <>
+                <DataChart
+                  title="Cancelaciones y ausencias"
+                  description="Cantidad por día"
+                  data={r.data!.by_day.map((d) => ({
+                    label: d.local_date.slice(5),
+                    cancelled: chartInteger(d.cancelled),
+                    no_shows: chartInteger(d.no_shows),
+                  }))}
+                  series={[
+                    { key: "cancelled", label: "Canceladas" },
+                    { key: "no_shows", label: "No se presentó" },
+                  ]}
+                />
+                <DataChart
+                  title="Próxima visita"
+                  description="Rebooking registrado por día"
+                  kind="bar"
+                  data={r.data!.by_day.map((d) => ({
+                    label: d.local_date.slice(5),
+                    value: chartInteger(d.rebookings),
+                  }))}
+                  series={[{ key: "value", label: "Rebooking" }]}
+                />
+                <DataChart
+                  title="Clientes del período"
+                  description="Altas y clientes que regresaron; métricas independientes"
+                  kind="bar"
+                  data={[
+                    { label: "Nuevos", value: chartInteger(t.new_customers) },
+                    {
+                      label: "Recurrentes",
+                      value: chartInteger(t.recurring_customers),
+                    },
+                  ]}
+                  series={[{ key: "value", label: "Clientes" }]}
+                />
+              </>
+            )}
             {!report &&
               r
                 .data!.goals.filter((g) => g.active)
                 .map((g) => <GoalCard key={g.id} goal={g} />)}
-            <div className="panel">
-              <h2>Producción por barbero</h2>
-              {r.data!.by_staff.map((s) => (
-                <div className="bar-row" key={s.staff_id}>
-                  <span>{s.name}</span>
-                  <div className="bar-track">
-                    <span
-                      style={{
-                        width: `${Math.max(...r.data!.by_staff.map((s) => s.completed), 1) ? (s.completed / Math.max(...r.data!.by_staff.map((s) => s.completed), 1)) * 100 : 0}%`,
-                      }}
-                    />
-                  </div>
-                  <strong>{s.completed}</strong>
-                </div>
-              ))}
-              {!r.data!.by_staff.length && (
-                <Empty title="Sin actividad registrada" />
-              )}
-            </div>
-            <div className="panel">
-              <h2>Capacidad por local</h2>
-              {r.data!.by_branch.map((b) => (
-                <div className="list-item" key={b.branch_id}>
-                  <div className="row between">
-                    <strong>{b.name}</strong>
-                    <span>
-                      {b.available_minutes
-                        ? Math.round(
-                            (b.booked_minutes / b.available_minutes) * 100,
-                          ) + "%"
-                        : "—"}
-                    </span>
-                  </div>
-                  <small>
-                    {b.booked_minutes} min reservados ·{" "}
-                    {b.available_minutes ?? "—"} min disponibles
-                  </small>
-                </div>
-              ))}
-            </div>
-            <div className="panel">
-              <h2>Servicios completados</h2>
-              {r.data!.by_service.map((s) => (
-                <div className="list-item row between" key={s.service_id}>
-                  <span>{s.name}</span>
-                  <strong>{s.completed}</strong>
-                </div>
-              ))}
-              {!r.data!.by_service.length && (
-                <p className="muted" style={{ marginTop: 16 }}>
-                  Sin servicios agregados para este período.
-                </p>
-              )}
-            </div>
-            <div className="panel">
-              <h2>Ocupación por día</h2>
-              {r.data!.by_day.map((d) => (
-                <div className="list-item row between" key={d.local_date}>
-                  <span>{d.local_date}</span>
-                  <span>
-                    {d.available_minutes
-                      ? Math.round(
-                          (d.booked_minutes / d.available_minutes) * 100,
-                        ) + "%"
-                      : "—"}
-                  </span>
-                </div>
-              ))}
-            </div>
+            {report && (
+              <>
+                <DataChart
+                  title="Ocupación por sucursal"
+                  description="Solo capacidad conocida · porcentaje"
+                  kind="bar"
+                  percent
+                  data={r.data!.by_branch.map((d) => ({
+                    label: d.name,
+                    value: utilization(d.booked_minutes, d.available_minutes),
+                  }))}
+                  series={[{ key: "value", label: "Ocupación" }]}
+                />
+                <DataChart
+                  title="Servicios más realizados"
+                  description="Servicios completados del período · cantidad"
+                  kind="bar"
+                  data={r
+                    .data!.by_service.slice(0, 20)
+                    .map((d) => ({
+                      label: d.name,
+                      value: chartInteger(d.completed),
+                    }))}
+                  series={[{ key: "value", label: "Servicios" }]}
+                />
+              </>
+            )}
           </div>
         </>
       )}
-      {w.role !== "barber" && w.role !== "receptionist" && (
+      {w.role !== "barber" && w.role !== "receptionist" && !staff && (
         <FinancialDashboard
           compact
           periodFrom={from}

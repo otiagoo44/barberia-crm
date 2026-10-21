@@ -4,6 +4,7 @@ import { randomBytes } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import { fixtures, type FixtureUsers } from "../integration/fixtures";
 import { asUser } from "../integration/database";
+import { totp } from "./mfa-helper";
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 if (
   process.env.E2E_REAL_SUPABASE !== "1" ||
@@ -53,10 +54,43 @@ try {
     "select public.manage_membership($1,'financeA@fixture.invalid','finance',false,$2,true)",
     [f.orgA, [f.branches.a1]],
   );
+  const mfa: Record<string, { factor: string; secret: string }> = {};
+  for (const role of [
+    "ownerA",
+    "ownerB",
+    "managerA1",
+    "financeA",
+    "platform",
+  ]) {
+    const client = createClient(
+      url,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    const signed = await client.auth.signInWithPassword({
+      email: `${role}@fixture.invalid`,
+      password,
+    });
+    if (signed.error) throw new Error("Real Auth MFA fixture sign-in failed");
+    const enrolled = await client.auth.mfa.enroll({
+      factorType: "totp",
+      friendlyName: "Isolated authenticator",
+    });
+    if (enrolled.error)
+      throw new Error("Real Auth MFA fixture enrollment failed");
+    const verified = await client.auth.mfa.challengeAndVerify({
+      factorId: enrolled.data.id,
+      code: totp(enrolled.data.totp.secret),
+    });
+    if (verified.error)
+      throw new Error("Real Auth MFA fixture verification failed");
+    mfa[role] = { factor: enrolled.data.id, secret: enrolled.data.totp.secret };
+    await client.auth.signOut();
+  }
   await mkdir(".test-data/e2e", { recursive: true });
   await writeFile(
     ".test-data/e2e/fixtures.json",
-    JSON.stringify({ ...f, password }),
+    JSON.stringify({ ...f, password, mfa }),
     { mode: 0o600 },
   );
   console.log(

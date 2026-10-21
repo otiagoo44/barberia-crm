@@ -128,6 +128,41 @@ export async function POST(
     let name: string;
     let args: Record<string, unknown>;
     switch (resource) {
+      case "daily_blocks": {
+        const p = z
+          .object({
+            org: uuid,
+            branch: uuid,
+            staff: uuid,
+            date,
+            blocks: z
+              .array(
+                z
+                  .object({
+                    starts_at: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/),
+                    ends_at: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/),
+                    available: z.boolean(),
+                    reason: z.string().max(300).optional(),
+                  })
+                  .strict(),
+              )
+              .min(1)
+              .max(16),
+            key: uuid,
+          })
+          .strict()
+          .parse(raw);
+        name = "save_daily_blocks";
+        args = {
+          p_org: p.org,
+          p_branch: p.branch,
+          p_staff: p.staff,
+          p_date: p.date,
+          p_blocks: p.blocks,
+          p_key: p.key,
+        };
+        break;
+      }
       case "record": {
         const p = writes.record.parse(raw);
         name = "manage_record";

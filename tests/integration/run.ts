@@ -3,6 +3,7 @@ import { contracts } from "../security/contracts";
 import { financeContracts } from "./finance";
 import { onboardingContracts } from "./onboarding";
 import { hardeningContracts } from "./hardening";
+import { productContracts } from "./product-release";
 const db = await isolatedDatabase();
 try {
   const result = await contracts(db.pool);
@@ -39,4 +40,15 @@ try {
   );
 } finally {
   await hardeningDb.stop();
+}
+const productDb = await isolatedDatabase();
+try {
+  console.log(
+    JSON.stringify({
+      suite: "product-release",
+      ...(await productContracts(productDb.pool)),
+    }),
+  );
+} finally {
+  await productDb.stop();
 }

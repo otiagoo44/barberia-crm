@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
 import type { fixtures } from "../integration/fixtures";
+import { verifyRequest, verifyClient } from "./mfa-helper";
 type Fixture = Awaited<ReturnType<typeof fixtures>> & { password: string };
 const real = process.env.E2E_REAL_SUPABASE === "1";
 let f: Fixture;
@@ -26,6 +27,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         })
       ).ok(),
     ).toBeTruthy();
+    await verifyRequest(request, "ownerA");
     const call = async (
       action: string,
       data: object,
@@ -85,6 +87,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       data: { email: "ownerA@fixture.invalid", password: f.password },
     });
     expect(login.ok()).toBeTruthy();
+    await verifyRequest(page.request, "ownerA");
     await page.goto("/fixture-a/caja");
     await page
       .getByRole("button", { name: "Venta sin cita", exact: true })
@@ -120,6 +123,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         data: credentials,
       });
       expect(login.status()).toBe(200);
+      await verifyRequest(request, role);
       const today = new Date().toISOString().slice(0, 10);
       const base = `org=${f.orgA}&branch=${f.branches.a1}&from=${today}&to=${today}`;
       const foreign = await request.get(
@@ -162,6 +166,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       );
       const auth = await db.auth.signInWithPassword(credentials);
       expect(auth.error).toBeNull();
+      await verifyClient(db, role);
       const settings = await db
         .from("finance_settings")
         .select("profit_share_staff_ids")

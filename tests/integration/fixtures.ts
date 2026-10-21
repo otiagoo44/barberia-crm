@@ -21,6 +21,14 @@ export async function fixtures(pool: Pool, registeredUsers?: FixtureUsers) {
       );
   const orgA = randomUUID(),
     orgB = randomUUID();
+  // Only isolated SQL fixtures use synthetic sessions. Browser/HTTP tests sign in
+  // through GoTrue and prove enforcement using genuine signed AAL1/AAL2 tokens.
+  if (registeredUsers)
+    for (const id of Object.values(users))
+      await pool.query(
+        "insert into auth.sessions(id,user_id) values($1,$1) on conflict do nothing",
+        [id],
+      );
   for (const [id, slug] of [
     [orgA, "fixture-a"],
     [orgB, "fixture-b"],

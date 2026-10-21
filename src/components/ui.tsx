@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useId, type ReactNode } from "react";
+import { Inbox, X } from "lucide-react";
 export function Modal({
   title,
   children,
@@ -10,6 +11,7 @@ export function Modal({
   onClose: () => void;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
   useEffect(() => {
     const dialog = ref.current;
     dialog?.showModal();
@@ -18,11 +20,16 @@ export function Modal({
     };
   }, []);
   return (
-    <dialog ref={ref} className="modal" onCancel={onClose}>
+    <dialog
+      ref={ref}
+      className="modal"
+      onCancel={onClose}
+      aria-labelledby={titleId}
+    >
       <header className="row between">
-        <h2>{title}</h2>
+        <h2 id={titleId}>{title}</h2>
         <button className="icon-button" aria-label="Cerrar" onClick={onClose}>
-          ×
+          <X size={20} aria-hidden="true" />
         </button>
       </header>
       {children}
@@ -54,7 +61,9 @@ export function Empty({
 }) {
   return (
     <div className="empty">
-      <span aria-hidden="true">◇</span>
+      <span aria-hidden="true">
+        <Inbox size={28} />
+      </span>
       <h3>{title}</h3>
       {children && <p>{children}</p>}
     </div>
@@ -63,7 +72,10 @@ export function Empty({
 export function Loading() {
   return (
     <div className="loading" role="status">
-      Cargando…
+      <span className="sr-only">Cargando…</span>
+      <div className="skeleton" />
+      <div className="skeleton" />
+      <div className="skeleton" />
     </div>
   );
 }

@@ -13,6 +13,8 @@ import {
 } from "./client";
 import { FinanceForm } from "./forms";
 import { FinanceImport } from "./import-ui";
+import { FinancialCharts } from "./financial-charts";
+import { PartnerDistributions } from "./partner-distributions";
 import {
   ProfitSharing,
   RemunerationSettings,
@@ -32,6 +34,7 @@ const tabs = [
   ["expenses", "Gastos"],
   ["settlements", "Barberos / Liquidaciones"],
   ["closures", "Cierres"],
+  ["partners", "Distribuciones a socios"],
   ["catalog", "Configuración financiera"],
 ] as const;
 export function FinancialDashboard({
@@ -67,7 +70,7 @@ export function FinancialDashboard({
   const [staff, setStaff] = useState("");
   const privileged = hasCapability(w.role, "finance.configure");
   const r = useResource<Summary & { items?: FinanceRow[] }>(
-    branch
+    branch && tab !== "partners"
       ? financeUrl(tab, org, branch, periodFrom ?? from, periodTo ?? to, {
           q: query,
           offset: String(offset),
@@ -110,7 +113,7 @@ export function FinancialDashboard({
     own.reload();
   }
   const metrics = [
-    ["gross_revenue_minor", "Ingresos por ventas"],
+    ["gross_revenue_minor", "Ventas registradas (netas)"],
     ["collected_minor", "Ingresos cobrados"],
     ["pending_minor", "Pendiente de cobrar (actual)"],
     ["payment_processing_fees_minor", "Comisiones POS"],
@@ -179,7 +182,9 @@ export function FinancialDashboard({
           {w.role !== "barber" && (
             <div className="tabs">
               {tabs
-                .filter(([v]) => v !== "catalog" || privileged)
+                .filter(
+                  ([v]) => !["catalog", "partners"].includes(v) || privileged,
+                )
                 .map(([value, label]) => (
                   <button
                     key={value}
@@ -201,6 +206,8 @@ export function FinancialDashboard({
         <Loading />
       ) : r.error ? (
         <Notice error>{r.error}</Notice>
+      ) : tab === "partners" ? (
+        <PartnerDistributions from={from} to={to} catalog={catalog.data} />
       ) : tab === "summary" ? (
         <>
           {totals && (
@@ -217,6 +224,15 @@ export function FinancialDashboard({
               </div>
               {r.data?.profit_sharing && (
                 <ProfitSharing summary={r.data.profit_sharing} />
+              )}
+              {!compact && (
+                <FinancialCharts
+                  org={org}
+                  branch={branch}
+                  from={from}
+                  to={to}
+                  currency={w.organization.currency}
+                />
               )}
               {!compact && (
                 <>
