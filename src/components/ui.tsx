@@ -42,6 +42,7 @@ export function Modal({
           (element) =>
             element.tabIndex >= 0 &&
             !element.matches(":disabled") &&
+            element.checkVisibility({ checkVisibilityCSS: true }) &&
             element.getClientRects().length > 0 &&
             getComputedStyle(element).visibility !== "hidden",
         );

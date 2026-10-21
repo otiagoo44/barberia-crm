@@ -39,6 +39,7 @@ type Policy = {
   approval_role: string;
   withdrawals_mode: string;
   evidence_reference: string;
+  losses_reference: string | null;
 };
 export function PartnerDistributions({
   from,
@@ -96,6 +97,7 @@ export function PartnerDistributions({
           approval_role: f.get("approval_role"),
           withdrawals_mode: f.get("withdrawals_mode"),
           evidence_reference: f.get("reference"),
+          losses_reference: f.get("losses_reference"),
         });
       if (form.action === "prepare")
         Object.assign(data, { from: f.get("from"), to: f.get("to") });
@@ -187,7 +189,7 @@ export function PartnerDistributions({
       {!r.data?.policy?.enabled && (
         <Notice>
           Registro de distribuciones bloqueado. El propietario debe confirmar
-          periodicidad, aprobación y tratamiento de retiros con evidencia. La
+          periodicidad, aprobación, retiros y pérdidas previas con evidencia. La
           estimación 50/50 continúa disponible en Resumen.
         </Notice>
       )}
@@ -407,6 +409,19 @@ export function PartnerDistributions({
                     </option>
                   </select>
                 </Field>
+                <Field label="Acuerdo sobre pérdidas previas">
+                  <input
+                    name="losses_reference"
+                    defaultValue={r.data?.policy?.losses_reference ?? ""}
+                    minLength={5}
+                    maxLength={250}
+                    required
+                  />
+                </Field>
+                <p className="muted">
+                  Referenciá el acuerdo y su conciliación antes de aprobar. El
+                  sistema no calcula arrastres de pérdidas automáticamente.
+                </p>
                 <label className="check-label">
                   <input
                     type="checkbox"

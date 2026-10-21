@@ -86,6 +86,41 @@ export async function productContracts(pool: Pool) {
     },
   );
   await check(
+    "Auth storage refuses last-factor retirement and serializes concurrent removals",
+    async () => {
+      const factors = [randomUUID(), randomUUID()];
+      for (const id of factors)
+        await pool.query(
+          "insert into auth.mfa_factors(id,user_id,status) values($1,$2,'verified')",
+          [id, f.users.ownerB],
+        );
+      const results = await Promise.allSettled(
+        factors.map((id) =>
+          pool.query("delete from auth.mfa_factors where id=$1", [id]),
+        ),
+      );
+      assert.equal(results.filter((r) => r.status === "fulfilled").length, 1);
+      assert.equal(
+        (results.find((r) => r.status === "rejected") as PromiseRejectedResult)
+          .reason.code,
+        "23514",
+      );
+      const remaining = (
+        await pool.query("select id from auth.mfa_factors where user_id=$1", [
+          f.users.ownerB,
+        ])
+      ).rows;
+      assert.equal(remaining.length, 1);
+      await assert.rejects(
+        pool.query(
+          "update auth.mfa_factors set status='unverified' where id=$1",
+          [remaining[0].id],
+        ),
+        { code: "23514" },
+      );
+    },
+  );
+  await check(
     "AAL1 reception operates while enrolled users require MFA, and forged session IDs fail closed",
     async () => {
       assert.ok(
@@ -138,6 +173,7 @@ export async function productContracts(pool: Pool) {
         [f.orgA, f.branches.a1, randomUUID()],
       );
       // Wait for the actual advisory lock waiter, never assume a fixed delay proves concurrency.
+      let waiting = false;
       for (let i = 0; i < 100; i++) {
         if (
           (
@@ -145,10 +181,17 @@ export async function productContracts(pool: Pool) {
               "select count(*)::int n from pg_locks where locktype='advisory' and not granted",
             )
           ).rows[0].n > 0
-        )
+        ) {
+          waiting = true;
           break;
+        }
         await new Promise((r) => setTimeout(r, 10));
       }
+      assert.equal(
+        waiting,
+        true,
+        "session revocation must race a proven lock waiter",
+      );
       await blocker.query("delete from auth.sessions where id=$1", [
         f.users.ownerA,
       ]);
@@ -287,6 +330,17 @@ export async function productContracts(pool: Pool) {
         code: "42501",
       });
       await assert.rejects(
+        command("configure", {
+          confirmed: true,
+          enabled: true,
+          periodicity: "manual",
+          approval_role: "owner",
+          withdrawals_mode: "explicit_advance",
+          evidence_reference: "isolated agreement without losses decision",
+        }),
+        { code: "23514" },
+      );
+      await assert.rejects(
         command(
           "configure",
           { confirmed: true },
@@ -320,6 +374,7 @@ export async function productContracts(pool: Pool) {
     approval_role: "owner",
     withdrawals_mode: "explicit_advance",
     evidence_reference: "isolated fixture agreement",
+    losses_reference: "isolated fixture: prior losses reconciled manually",
   });
   let period = "";
   let a = "";
@@ -693,6 +748,35 @@ export async function productContracts(pool: Pool) {
       const sql = "select public.save_daily_blocks($1,$2,$3,$4,$5,$6) r";
       const first = await asUser(pool, f.users.ownerA, sql, args);
       assert.deepEqual(await asUser(pool, f.users.ownerA, sql, args), first);
+      // A duplicate payload still needs write permission; it must not become
+      // an unauthorized successful operation just because no INSERT is needed.
+      await assert.rejects(
+        asUser(pool, f.users.receptionA, sql, [
+          ...args.slice(0, 5),
+          randomUUID(),
+        ]),
+        { code: "42501" },
+      );
+      await assert.rejects(
+        asUser(pool, f.users.ownerA, sql, [
+          f.orgA,
+          f.branches.a2,
+          f.staff.a3,
+          ...args.slice(3, 5),
+          randomUUID(),
+        ]),
+        { code: "42501" },
+      );
+      await assert.rejects(
+        asUser(pool, f.users.ownerA, sql, [
+          f.orgA,
+          f.branches.a1,
+          f.staff.b1,
+          ...args.slice(3, 5),
+          randomUUID(),
+        ]),
+        { code: "42501" },
+      );
       assert.equal(
         (
           await pool.query(

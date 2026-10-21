@@ -5,7 +5,7 @@ import { createServer } from "node:net";
 import { readFile, readdir, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 
-export async function isolatedDatabase() {
+export async function isolatedDatabase(migrationLimit = Infinity) {
   if (process.env.TEST_DATABASE_URL)
     throw new Error(
       "Embedded test runner does not accept external database URLs. Use the dedicated staging runner.",
@@ -87,8 +87,9 @@ export async function isolatedDatabase() {
   const files = (await readdir("supabase/migrations"))
     .filter((f) => f.endsWith(".sql"))
     .sort();
-  try {
-    for (const file of files) {
+  let applied = 0;
+  async function migrate(limit = Infinity) {
+    for (const file of files.slice(applied, limit)) {
       const sql = await readFile(
         path.join("supabase/migrations", file),
         "utf8",
@@ -98,7 +99,11 @@ export async function isolatedDatabase() {
       await pool.query(sql);
       await pool.query("commit");
       console.log(`Migration OK: ${file}`);
+      applied++;
     }
+  }
+  try {
+    await migrate(migrationLimit);
   } catch (error) {
     await pool.query("rollback");
     await closePool();
@@ -107,6 +112,7 @@ export async function isolatedDatabase() {
   }
   return {
     pool,
+    migrate,
     stop: async () => {
       await closePool();
       await pg.stop();

@@ -93,6 +93,17 @@ test.describe("Real MFA release boundary", () => {
     await expect(
       page.getByRole("button", { name: "Retirar dispositivo" }),
     ).toBeDisabled();
+    const onlyFactor = await page.request.post("/api/auth/mfa/unenroll", {
+      headers: { Origin: "http://localhost:3000" },
+      data: {
+        factor: (
+          await admin.auth.admin.mfa.listFactors({
+            userId: created.data.user!.id,
+          })
+        ).data!.factors[0].id,
+      },
+    });
+    expect(onlyFactor.status()).toBe(409);
     await page.getByLabel("Nombre del dispositivo").fill("Respaldo privado");
     await page
       .getByRole("button", { name: "Configurar dispositivo", exact: true })
@@ -137,6 +148,31 @@ test.describe("Real MFA release boundary", () => {
     await expect(
       page.getByText("Teléfono principal", { exact: true }),
     ).toHaveCount(0);
+    // Bypass our HTTP endpoint using an ordinary AAL2 Auth token. Provider
+    // unenrollment must obey the same last-factor invariant.
+    const direct = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    expect(
+      (await direct.auth.signInWithPassword({ email, password: f.password }))
+        .error,
+    ).toBeNull();
+    const remaining = await direct.auth.mfa.listFactors();
+    const backupId = remaining.data!.totp[0].id;
+    expect(
+      (
+        await direct.auth.mfa.challengeAndVerify({
+          factorId: backupId,
+          code: totp(backup),
+        })
+      ).error,
+    ).toBeNull();
+    const refused = await direct.auth.mfa.unenroll({ factorId: backupId });
+    expect(refused.error).not.toBeNull();
+    expect((await direct.auth.mfa.listFactors()).data!.totp).toHaveLength(1);
+    await direct.auth.signOut({ scope: "local" });
     // Exercise the real callback/OTP/password path locally without claiming an
     // SMTP delivery. A recovery email must still require the existing factor.
     const recovery = await admin.auth.admin.generateLink({

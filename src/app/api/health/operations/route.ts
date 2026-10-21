@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     )
   )
     return Response.json({ error: "forbidden" }, { status: 403, headers });
+  const started = performance.now();
   try {
     const { data, error } = await gatewayClient().rpc("operations_health", {
       p_secret: process.env.WORKER_SECRET,
@@ -20,10 +21,20 @@ export async function GET(request: Request) {
       data.heartbeat_age_seconds <= 180 &&
       data.dead === 0 &&
       data.expired_leases === 0 &&
+      data.anomalous_leases === 0 &&
+      data.oldest_lock_wait_seconds <= 60 &&
       data.oldest_due_seconds <= 300 &&
       data.booking_constraint;
     return Response.json(
-      { ...data, healthy, alerts_delivery: "not_configured" },
+      {
+        ...data,
+        healthy,
+        database_roundtrip_ms: Math.round(performance.now() - started),
+        http_error_rate: null,
+        http_p95_ms: null,
+        incident_channel: "not_configured",
+        alerts_delivery: "not_configured",
+      },
       { status: healthy ? 200 : 503, headers },
     );
   } catch {

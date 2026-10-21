@@ -174,6 +174,41 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       expect(settings.error).toBeNull();
       if (!["ownerA", "financeA"].includes(role))
         expect(settings.data).toEqual([]);
+      else expect(settings.data!.length).toBeGreaterThan(0);
+      const ownBranches = await db
+        .from("branches")
+        .select("id")
+        .eq("organization_id", f.orgA);
+      expect(ownBranches.error).toBeNull();
+      expect(ownBranches.data!.length).toBe(
+        role === "platform"
+          ? 0
+          : ["ownerA", "receptionA"].includes(role)
+            ? 2
+            : 1,
+      );
+      const directUpdate = await db
+        .from("customers")
+        .update({ name: "forged update" })
+        .eq("id", f.customers.a1);
+      expect(directUpdate.error?.code).toBe("42501");
+      const foreignEvents = await db
+        .from("domain_events")
+        .select("id")
+        .eq("organization_id", f.orgB);
+      expect(foreignEvents.error).toBeNull();
+      expect(foreignEvents.data).toEqual([]);
+      const audit = await db
+        .from("audit_logs")
+        .select("id,action")
+        .eq("organization_id", f.orgA);
+      expect(audit.error).toBeNull();
+      if (["receptionA", "barberA", "platform"].includes(role))
+        expect(audit.data).toEqual([]);
+      if (role === "financeA")
+        expect(
+          audit.data!.every((row) => row.action.startsWith("finance.")),
+        ).toBeTruthy();
       const rows = await db
         .from("customers")
         .select("id")
@@ -201,4 +236,45 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       await db.auth.signOut();
     });
   }
+  test("Anon cannot read business HTTP/Data API, mutate or execute privileged RPCs", async ({
+    request,
+  }) => {
+    expect(
+      (
+        await request.get(
+          `/api/workspace/customers?org=${f.orgA}&branch=${f.branches.a1}`,
+        )
+      ).status(),
+    ).toBe(401);
+    expect(
+      (
+        await request.get(
+          `/api/finance/export?org=${f.orgA}&branch=${f.branches.a1}&from=2026-10-01&to=2026-10-20&view=expenses`,
+        )
+      ).status(),
+    ).toBe(401);
+    const db = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    for (const table of [
+      "customers",
+      "payments",
+      "audit_logs",
+      "domain_events",
+      "partner_distribution_payments",
+    ]) {
+      const r = await db.from(table).select("id");
+      expect(r.error?.code).toBe("42501");
+    }
+    const rpc = await db.rpc("finance_command", {
+      p_org: f.orgA,
+      p_branch: f.branches.a1,
+      p_action: "open_cash_session",
+      p_data: { opening_amount_minor: 0, role: "organization_owner" },
+      p_key: crypto.randomUUID(),
+    });
+    expect(rpc.error?.code).toBe("42501");
+  });
 });

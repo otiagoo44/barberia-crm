@@ -4,7 +4,7 @@ import { correlationId, fail, HttpError, readJson, response } from "@/lib/http";
 
 export const dynamic = "force-dynamic";
 function providerFailure(
-  error: { code?: string } | null,
+  error: { code?: string; status?: number } | null,
   requestId: string,
 ): never {
   const code = error?.code;
@@ -17,7 +17,7 @@ function providerFailure(
         code && /^[a-z0-9_]{1,60}$/i.test(code) ? code : "unavailable",
     }),
   );
-  throw new HttpError(400, "mfa_failed");
+  throw new HttpError(error?.status === 429 ? 429 : 400, "mfa_failed");
 }
 export async function POST(
   request: Request,
