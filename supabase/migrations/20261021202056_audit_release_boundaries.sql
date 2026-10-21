@@ -49,6 +49,20 @@ begin
  execute source;
 end $distribution_guard$;
 
+-- Once a withdrawal has reduced a partner balance, its underlying expense
+-- cannot be reversed independently. Preserve both ledgers and require an
+-- explicit audited allocation adjustment, as with commission settlements.
+do $withdrawal_guard$
+declare source text;needle text;
+begin
+ source:=pg_get_functiondef('app_private.finance_command(uuid,uuid,text,jsonb,uuid)'::regprocedure);
+ needle:='before_data:=to_jsonb(e);update public.expenses set status=''reversed''';
+ if position(needle in source)=0 then raise exception 'withdrawal_reversal_guard_mismatch';end if;
+ source:=replace(source,needle,
+  'if exists(select 1 from public.staff_advances a join public.partner_withdrawal_allocations w on w.organization_id=a.organization_id and w.advance_id=a.id where a.organization_id=p_org and a.expense_id=v) then raise exception ''allocated_advance_requires_adjustment'' using errcode=''23514'';end if; '||needle);
+ execute source;
+end $withdrawal_guard$;
+
 -- Check the operation even if every submitted block already exists. Dedupe
 -- and idempotency must never bypass current role, assignment or branch checks.
 do $daily_guard$

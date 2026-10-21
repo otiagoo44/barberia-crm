@@ -26,7 +26,9 @@ function supabase(...args: string[]) {
 supabase("db", "reset", "--local", "--no-seed", "--version", "20261019223415");
 const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
 try {
-  await pool.query("update cron.job set active=false");
+  // pg_cron exposes supported management functions; its catalog is not writable
+  // by the ordinary local postgres connection on managed Supabase images.
+  await pool.query("select cron.unschedule('barberia-internal-worker')");
   const admin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.LOCAL_SERVICE_ROLE_KEY!,

@@ -604,6 +604,14 @@ export async function productContracts(pool: Pool) {
       };
       await command("apply_withdrawal", data);
       await assert.rejects(command("apply_withdrawal", data));
+      await assert.rejects(
+        finance("reverse_financial_transaction", {
+          entity_type: "expense",
+          id: expense,
+          reason: "Cannot reverse an already distributed withdrawal",
+        }),
+        { code: "23514" },
+      );
       assert.equal(
         (await pool.query("select count(*)::int n from public.expenses"))
           .rows[0].n,
@@ -643,6 +651,59 @@ export async function productContracts(pool: Pool) {
       );
       assert.equal(Number(rows[0].r.items[0].assigned_minor), 50);
       assert.equal(Number(rows[0].r.items[0].balance_minor), 0);
+    },
+  );
+  await check(
+    "New policy versions preserve closed-period snapshots, allocations and payments",
+    async () => {
+      const before = (
+        await pool.query(
+          "select to_jsonb(p) value from public.partner_distribution_periods p where id=$1",
+          [period],
+        )
+      ).rows;
+      const payments = (
+        await pool.query(
+          "select count(*)::int n from public.partner_distribution_payments",
+        )
+      ).rows[0].n;
+      await command("configure", {
+        confirmed: true,
+        enabled: false,
+        periodicity: "monthly",
+        approval_role: "owner_or_finance",
+        withdrawals_mode: "blocked",
+        evidence_reference: "isolated changed agreement",
+        losses_reference: "isolated manually reconciled prior losses",
+      });
+      assert.deepEqual(
+        (
+          await pool.query(
+            "select to_jsonb(p) value from public.partner_distribution_periods p where id=$1",
+            [period],
+          )
+        ).rows,
+        before,
+      );
+      assert.equal(
+        (
+          await pool.query(
+            "select count(*)::int n from public.partner_distribution_payments",
+          )
+        ).rows[0].n,
+        payments,
+      );
+      assert.equal(
+        (
+          await pool.query(
+            "select version from public.partner_distribution_policies order by version desc limit 1",
+          )
+        ).rows[0].version,
+        2,
+      );
+      await assert.rejects(command("prepare", { from: day, to: day }), {
+        code: "23514",
+      });
     },
   );
   await check(
@@ -786,6 +847,26 @@ export async function productContracts(pool: Pool) {
         ).rows[0].n,
         3,
       );
+      const slots = (
+        await asUser<{ r: { starts_at: string; ends_at: string }[] }>(
+          pool,
+          f.users.ownerA,
+          "select public.list_availability($1,$2,$3,$4,$5) r",
+          [f.orgA, f.branches.a1, [f.services.cut], target, f.staff.a1],
+        )
+      )[0].r;
+      assert.ok(slots.length > 0);
+      for (const slot of slots) {
+        const start =
+          new Date(slot.starts_at).getUTCHours() * 60 +
+          new Date(slot.starts_at).getUTCMinutes();
+        const end = start + 40;
+        assert.ok(
+          (start >= 9 * 60 && end <= 12 * 60) ||
+            (start >= 15 * 60 && end <= 18 * 60),
+          "the full service duration must fit a block without crossing a break",
+        );
+      }
       const invalid = [
         { starts_at: "18:00", ends_at: "19:00", available: true },
         { starts_at: "16:00", ends_at: "17:00", available: false },
