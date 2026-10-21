@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
+import { Pool } from "pg";
 import type { fixtures } from "../integration/fixtures";
 import { verifyRequest, verifyClient } from "./mfa-helper";
 type Fixture = Awaited<ReturnType<typeof fixtures>> & { password: string };
@@ -282,6 +283,86 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
           p_id: f.staff.a2,
         });
         expect(otherStaff.error?.code).toBe("42501");
+      }
+      // Repeat live profile/membership/session revocation for every signed role.
+      // These mutations are fixture administration on localhost, not mocks of
+      // the HTTP or PostgREST requests under test.
+      if (
+        !["localhost", "127.0.0.1"].includes(
+          new URL(process.env.LOCAL_DB_URL!).hostname,
+        )
+      )
+        throw new Error("Revocation fixtures require localhost");
+      const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
+      const user = auth.data.user!.id;
+      const memberships = (
+        await pool.query(
+          "select id from public.organization_memberships where organization_id=$1 and profile_id=$2 and active",
+          [f.orgA, user],
+        )
+      ).rows.map((row) => row.id);
+      try {
+        await pool.query(
+          "update public.profiles set active=false where id=$1",
+          [user],
+        );
+        expect(
+          (await request.get(`/api/workspace/branches?org=${f.orgA}`)).status(),
+        ).toBe(403);
+        expect(
+          (await db.from("branches").select("id").eq("organization_id", f.orgA))
+            .data,
+        ).toEqual([]);
+        expect((await db.rpc("security_context")).error?.code).toBe("42501");
+        await pool.query("update public.profiles set active=true where id=$1", [
+          user,
+        ]);
+        await pool.query(
+          "update public.organization_memberships set active=false where id=any($1::uuid[])",
+          [memberships],
+        );
+        const revoked = await request.get(
+          `/api/workspace/branches?org=${f.orgA}`,
+        );
+        expect(revoked.status()).toBe(200);
+        expect((await revoked.json()).items).toEqual([]);
+        expect(
+          (await db.from("branches").select("id").eq("organization_id", f.orgA))
+            .data,
+        ).toEqual([]);
+        expect(
+          (
+            await db.rpc("finance_command", {
+              p_org: f.orgA,
+              p_branch: f.branches.a1,
+              p_action: "open_cash_session",
+              p_data: { opening_amount_minor: 0 },
+              p_key: crypto.randomUUID(),
+            })
+          ).error?.code,
+        ).toBe("42501");
+        await pool.query(
+          "update public.organization_memberships set active=true where id=any($1::uuid[])",
+          [memberships],
+        );
+        await pool.query("delete from auth.sessions where user_id=$1", [user]);
+        expect(
+          (await request.get(`/api/workspace/branches?org=${f.orgA}`)).status(),
+        ).toBe(401);
+        expect(
+          (await db.from("branches").select("id").eq("organization_id", f.orgA))
+            .data,
+        ).toEqual([]);
+        expect((await db.rpc("security_context")).error?.code).toBe("42501");
+      } finally {
+        await pool.query("update public.profiles set active=true where id=$1", [
+          user,
+        ]);
+        await pool.query(
+          "update public.organization_memberships set active=true where id=any($1::uuid[])",
+          [memberships],
+        );
+        await pool.end();
       }
       await db.auth.signOut();
     });

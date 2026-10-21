@@ -1,5 +1,7 @@
 # Auditoría de producto — 20/10/2026
 
+Continuación del 21/10 en [PR3_RECOVERY_AUDIT_2026_10_21](PR3_RECOVERY_AUDIT_2026_10_21.md). La tabla siguiente conserva el reconocimiento inicial; el estado de cierre y los checks del candidato se registran en [pr3-final.json](verification/pr3-final.json). No interpretar «ausente/pendiente» en esta matriz inicial como inventario del código final.
+
 Base verificada por `git fetch origin`: `4fa4d63eaa26e31bdddb37aac68456e8c0e85ba3`, `main`, árbol limpio. Rama de trabajo: `audit/product-release-20261020`. No se modifican migraciones aplicadas ni datos cloud. Esta matriz inicial se actualiza con evidencia al cerrar la revisión.
 
 ## Reconocimiento y matriz inicial
