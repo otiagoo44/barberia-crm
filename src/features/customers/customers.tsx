@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { api, useResource, resourceUrl } from "@/lib/client";
 import {
@@ -11,6 +13,12 @@ import {
 import { Modal, Field, Notice, Empty, Loading, Badge } from "@/components/ui";
 import { BookingForm } from "@/features/appointments/booking-form";
 import type { DataRow, Page, Staff } from "@/lib/types";
+import {
+  RecordDrawer,
+  Tabs,
+  ActivityTimeline,
+  DataTable,
+} from "@/components/workspace-ui";
 export function Customers({ retention = false }: { retention?: boolean }) {
   const w = useWorkspace();
   const searchParams = useSearchParams();
@@ -142,91 +150,87 @@ export function Customers({ retention = false }: { retention?: boolean }) {
       {(r.error || error) && <Notice error>{r.error || error}</Notice>}
       {r.loading && !r.data && <Loading />}
       {r.data?.items.length ? (
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Teléfono</th>
-                <th>Regreso estimado</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {r.data.items.map((c) => (
-                <tr key={c.id}>
-                  <td>
-                    <button
-                      onClick={() => setSelected(String(c.customer_id ?? c.id))}
+        <DataTable label="Clientes y regreso estimado">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Teléfono</th>
+              <th>Regreso estimado</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {r.data.items.map((c) => (
+              <tr key={c.id}>
+                <td>
+                  <button
+                    onClick={() => setSelected(String(c.customer_id ?? c.id))}
+                  >
+                    {String(c.name)}
+                  </button>
+                  {!!c.service_name && <small>{String(c.service_name)}</small>}
+                </td>
+                <td>{String(c.normalized_phone)}</td>
+                <td>
+                  {c.expected_return_at
+                    ? new Date(String(c.expected_return_at)).toLocaleDateString(
+                        "es",
+                      )
+                    : "Sin frecuencia configurada"}
+                </td>
+                <td>
+                  <Badge
+                    status={String(c.retention_status)}
+                    label={
+                      retentionLabels[String(c.retention_status)] ?? "Activo"
+                    }
+                  />
+                </td>
+                <td>
+                  <div className="row">
+                    <a
+                      href={`https://wa.me/${String(c.normalized_phone).replace("+", "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      {String(c.name)}
-                    </button>
-                    {!!c.service_name && (
-                      <small>{String(c.service_name)}</small>
-                    )}
-                  </td>
-                  <td>{String(c.normalized_phone)}</td>
-                  <td>
-                    {c.expected_return_at
-                      ? new Date(
-                          String(c.expected_return_at),
-                        ).toLocaleDateString("es")
-                      : "Sin frecuencia configurada"}
-                  </td>
-                  <td>
-                    <Badge
-                      status={String(c.retention_status)}
-                      label={
-                        retentionLabels[String(c.retention_status)] ?? "Activo"
-                      }
-                    />
-                  </td>
-                  <td>
-                    <div className="row">
-                      <a
-                        href={`https://wa.me/${String(c.normalized_phone).replace("+", "")}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      WhatsApp ↗
+                    </a>
+                    {w.role !== "barber" && (
+                      <button
+                        onClick={() =>
+                          setBooking({
+                            id: String(c.customer_id ?? c.id),
+                            name: String(c.name),
+                          })
+                        }
                       >
-                        WhatsApp ↗
-                      </a>
-                      {w.role !== "barber" && (
+                        Agendar
+                      </button>
+                    )}
+                    {retention && (
+                      <>
                         <button
                           onClick={() =>
-                            setBooking({
+                            setPostpone({
+                              ...c,
                               id: String(c.customer_id ?? c.id),
-                              name: String(c.name),
                             })
                           }
                         >
-                          Agendar
+                          Posponer
                         </button>
-                      )}
-                      {retention && (
-                        <>
-                          <button
-                            onClick={() =>
-                              setPostpone({
-                                ...c,
-                                id: String(c.customer_id ?? c.id),
-                              })
-                            }
-                          >
-                            Posponer
-                          </button>
-                          <button onClick={() => noContact(c)}>
-                            No contactar
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                        <button onClick={() => noContact(c)}>
+                          No contactar
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </DataTable>
       ) : (
         r.data && (
           <Empty
@@ -308,6 +312,7 @@ function CustomerDetail({
     stats: Record<string, number | string | null>;
     tags: string[];
     preferences: { id: string; key: string; value: string }[];
+    upcoming: DataRow[];
   }>(resourceUrl("customer", { org: w.organization.id, id }));
   const [cursor, setCursor] = useState<{ date: string; id: string } | null>(
     null,
@@ -321,6 +326,8 @@ function CustomerDetail({
     }),
   );
   const [old, setOld] = useState<DataRow[]>([]);
+  const [section, setSection] = useState("summary");
+  const [rebooking, setRebooking] = useState(false);
   const [edit, setEdit] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -339,6 +346,7 @@ function CustomerDetail({
       });
       form.reset();
       timeline.reload();
+      setSection("activity");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error");
     } finally {
@@ -390,11 +398,23 @@ function CustomerDetail({
       />
     );
   return (
-    <Modal title={String(r.data?.customer.name ?? "Cliente")} onClose={onClose}>
+    <RecordDrawer
+      title={String(r.data?.customer.name ?? "Cliente")}
+      onClose={onClose}
+    >
       {r.error && <Notice error>{r.error}</Notice>}
       {r.loading && !r.data && <Loading />}
       {r.data && (
         <div className="stack">
+          <div className="record-context">
+            <span>Clientes / Ficha del cliente</span>
+            <Badge
+              status={String(
+                r.data.customer.archived_at ? "cancelled" : "active",
+              )}
+              label={r.data.customer.archived_at ? "Archivado" : "Activo"}
+            />
+          </div>
           <div className="row between wrap">
             <div>
               <p>{String(r.data.customer.normalized_phone)}</p>
@@ -404,137 +424,226 @@ function CustomerDetail({
               <button onClick={() => setEdit(true)}>Editar cliente</button>
             )}
           </div>
-          <div className="detail-grid">
-            <div className="panel">
-              <strong>{r.data.stats.visits ?? 0}</strong>
-              <p className="muted">visitas completadas</p>
-            </div>
-            <div className="panel">
-              <strong>{r.data.stats.no_shows ?? 0}</strong>
-              <p className="muted">
-                no-shows · {r.data.stats.cancellations ?? 0} cancelaciones
-              </p>
-            </div>
-          </div>
-          <p>
-            <strong>Próximo regreso:</strong>{" "}
-            {r.data.customer.expected_return_at
-              ? new Date(
-                  String(r.data.customer.expected_return_at),
-                ).toLocaleDateString("es")
-              : "Sin frecuencia configurada"}
-          </p>
-          <p>
-            <strong>Última visita:</strong>{" "}
-            {r.data.stats.last_visit_at
-              ? new Date(String(r.data.stats.last_visit_at)).toLocaleDateString(
-                  "es",
-                )
-              : "Sin visitas completadas"}
-          </p>
-          {r.data.stats.habitual_service && (
-            <p>
-              <strong>Servicio habitual:</strong>{" "}
-              {r.data.stats.habitual_service}
-            </p>
-          )}
-          {r.data.customer.do_not_contact && (
-            <Notice>Este cliente pidió no ser contactado.</Notice>
-          )}
-          {r.data.tags.length > 0 && (
+          {!r.data.customer.archived_at && (
             <div className="row wrap">
-              {r.data.tags.map((t) => (
-                <span className="badge" key={t}>
-                  {t}
-                </span>
-              ))}
+              <button className="primary" onClick={() => setRebooking(true)}>
+                Agendar próximo turno
+              </button>
+              {!r.data.customer.do_not_contact && (
+                <a
+                  className="contact-action"
+                  href={`https://wa.me/${String(r.data.customer.normalized_phone).replace("+", "")}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Contactar por WhatsApp
+                </a>
+              )}
             </div>
           )}
-          {r.data.preferences.map((p) => (
-            <p key={p.key}>
-              <strong>{p.key}:</strong> {p.value}
-            </p>
-          ))}
-          <h3>Historial</h3>
-          <div>
-            {[...old, ...(timeline.data?.items ?? [])].map((t) => {
-              const d = t.data as Record<
-                string,
-                string | Record<string, string>
-              >;
-              const type = String(t.type);
-              return (
-                <article className="timeline-item" key={t.id}>
-                  <small>
-                    {new Date(String(t.created_at)).toLocaleString("es")}
-                  </small>
+          <Tabs
+            value={section}
+            onChange={setSection}
+            options={[
+              ["summary", "Resumen"],
+              ["activity", "Actividad"],
+              ["notes", "Notas y preferencias"],
+            ]}
+          >
+            {section === "summary" && (
+              <div className="stack">
+                <div className="detail-grid">
+                  <div className="panel">
+                    <strong>{r.data.stats.visits ?? 0}</strong>
+                    <p className="muted">visitas completadas</p>
+                  </div>
+                  <div className="panel">
+                    <strong>{r.data.stats.no_shows ?? 0}</strong>
+                    <p className="muted">
+                      no-shows · {r.data.stats.cancellations ?? 0} cancelaciones
+                    </p>
+                  </div>
+                </div>
+                <p>
+                  <strong>Próximo regreso:</strong>{" "}
+                  {r.data.customer.expected_return_at
+                    ? new Date(
+                        String(r.data.customer.expected_return_at),
+                      ).toLocaleDateString("es")
+                    : "Sin frecuencia configurada"}
+                </p>
+                <p>
+                  <strong>Última visita:</strong>{" "}
+                  {r.data.stats.last_visit_at
+                    ? new Date(
+                        String(r.data.stats.last_visit_at),
+                      ).toLocaleDateString("es")
+                    : "Sin visitas completadas"}
+                </p>
+                {r.data.stats.habitual_service && (
                   <p>
-                    {type === "note"
-                      ? String(d.body)
-                      : type.startsWith("appointment.")
-                        ? (statusLabels[type.replace("appointment.", "")] ??
-                          type)
-                        : type === "customer.created"
-                          ? "Cliente registrado"
-                          : "Actividad del cliente"}
+                    <strong>Servicio habitual:</strong>{" "}
+                    {r.data.stats.habitual_service}
                   </p>
-                  {d.starts_at && (
-                    <small>
-                      Turno:{" "}
-                      {new Date(String(d.starts_at)).toLocaleString("es")}
-                    </small>
-                  )}
-                </article>
-              );
-            })}
-          </div>
-          {timeline.data?.has_more && (
-            <button
-              onClick={() => {
-                const items = timeline.data!.items;
-                const last = items.at(-1)!;
-                setOld((v) => [...v, ...items]);
-                setCursor({ date: String(last.created_at), id: last.id });
-              }}
-            >
-              Ver historial anterior
-            </button>
-          )}
-          {w.role !== "barber" && (
-            <form onSubmit={addNote} className="stack-sm">
-              <Field label="Agregar nota">
-                <textarea
-                  name="body"
-                  maxLength={2000}
-                  required
-                  placeholder="Preferencias o información útil para la próxima visita…"
-                />
-              </Field>
-              {error && <Notice error>{error}</Notice>}
-              <button disabled={busy}>Guardar nota</button>
-            </form>
-          )}
-          {w.role !== "barber" && (
-            <form onSubmit={addAttribute} className="stack-sm">
-              <h3>Etiquetas y preferencias</h3>
-              <Field label="Tipo">
-                <select name="kind">
-                  <option value="tag">Etiqueta</option>
-                  <option value="preference">Preferencia</option>
-                </select>
-              </Field>
-              <Field label="Etiqueta o nombre de preferencia">
-                <input name="key" required maxLength={60} />
-              </Field>
-              <Field label="Detalle de preferencia (opcional para etiqueta)">
-                <input name="value" maxLength={300} />
-              </Field>
-              <button disabled={busy}>Agregar información</button>
-            </form>
-          )}
+                )}
+                {r.data.customer.do_not_contact && (
+                  <Notice>Este cliente pidió no ser contactado.</Notice>
+                )}
+                {r.data.tags.length > 0 && (
+                  <div className="row wrap">
+                    {r.data.tags.map((t) => (
+                      <span className="badge" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {r.data.preferences.map((p) => (
+                  <p key={p.key}>
+                    <strong>{p.key}:</strong> {p.value}
+                  </p>
+                ))}
+                <h3>Próximas reservas</h3>
+                {r.data.upcoming?.length ? (
+                  r.data.upcoming.map((a) => (
+                    <article className="upcoming-visit" key={a.id}>
+                      <div>
+                        <strong>
+                          {new Date(String(a.starts_at)).toLocaleString(
+                            "es-PY",
+                            {
+                              timeZone:
+                                w.branches.find((b) => b.id === a.branch_id)
+                                  ?.timezone ?? w.organization.timezone,
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            },
+                          )}
+                        </strong>
+                        <small>
+                          {String(a.duration_minutes)} min ·{" "}
+                          {statusLabels[String(a.status)]}
+                        </small>
+                      </div>
+                      <Link
+                        onClick={() => w.setBranchId(String(a.branch_id))}
+                        href={`/${w.organization.slug}/agenda?date=${formatInTimeZone(String(a.starts_at), w.branches.find((b) => b.id === a.branch_id)?.timezone ?? w.organization.timezone, "yyyy-MM-dd")}&staff=${a.staff_id}`}
+                      >
+                        Ver en agenda
+                      </Link>
+                    </article>
+                  ))
+                ) : (
+                  <Empty title="Sin próximas reservas">
+                    Ofrecé una nueva visita según su frecuencia real.
+                  </Empty>
+                )}
+              </div>
+            )}
+            {section === "activity" && (
+              <div className="stack">
+                <h3>Historial</h3>
+                {timeline.error && <Notice error>{timeline.error}</Notice>}
+                {timeline.loading && <Loading />}
+                <ActivityTimeline>
+                  {[...old, ...(timeline.data?.items ?? [])].map((t) => {
+                    const d = t.data as Record<
+                      string,
+                      string | Record<string, string>
+                    >;
+                    const type = String(t.type);
+                    return (
+                      <article className="timeline-item" key={t.id}>
+                        <small>
+                          {new Date(String(t.created_at)).toLocaleString("es")}
+                        </small>
+                        <p>
+                          {type === "note"
+                            ? String(d.body)
+                            : type.startsWith("appointment.")
+                              ? (statusLabels[
+                                  type.replace("appointment.", "")
+                                ] ?? type)
+                              : type === "customer.created"
+                                ? "Cliente registrado"
+                                : "Actividad del cliente"}
+                        </p>
+                        {d.starts_at && (
+                          <small>
+                            Turno:{" "}
+                            {new Date(String(d.starts_at)).toLocaleString("es")}
+                          </small>
+                        )}
+                      </article>
+                    );
+                  })}
+                </ActivityTimeline>
+                {timeline.data?.has_more && (
+                  <button
+                    onClick={() => {
+                      const items = timeline.data!.items;
+                      const last = items.at(-1)!;
+                      setOld((v) => [...v, ...items]);
+                      setCursor({ date: String(last.created_at), id: last.id });
+                    }}
+                  >
+                    Ver historial anterior
+                  </button>
+                )}
+              </div>
+            )}
+            {section === "notes" && (
+              <div className="stack">
+                {w.role !== "barber" && (
+                  <form onSubmit={addNote} className="stack-sm">
+                    <Field label="Agregar nota">
+                      <textarea
+                        name="body"
+                        maxLength={2000}
+                        required
+                        placeholder="Preferencias o información útil para la próxima visita…"
+                      />
+                    </Field>
+                    {error && <Notice error>{error}</Notice>}
+                    <button disabled={busy}>Guardar nota</button>
+                  </form>
+                )}
+                {w.role !== "barber" && (
+                  <form onSubmit={addAttribute} className="stack-sm">
+                    <h3>Etiquetas y preferencias</h3>
+                    <Field label="Tipo">
+                      <select name="kind">
+                        <option value="tag">Etiqueta</option>
+                        <option value="preference">Preferencia</option>
+                      </select>
+                    </Field>
+                    <Field label="Etiqueta o nombre de preferencia">
+                      <input name="key" required maxLength={60} />
+                    </Field>
+                    <Field label="Detalle de preferencia (opcional para etiqueta)">
+                      <input name="value" maxLength={300} />
+                    </Field>
+                    <button disabled={busy}>Agregar información</button>
+                  </form>
+                )}
+              </div>
+            )}
+          </Tabs>
         </div>
       )}
-    </Modal>
+      {rebooking && r.data && (
+        <BookingForm
+          customer={{ id, name: String(r.data.customer.name) }}
+          onClose={() => setRebooking(false)}
+          onSaved={() => {
+            setRebooking(false);
+            r.reload();
+            timeline.reload();
+            onChanged();
+          }}
+        />
+      )}
+    </RecordDrawer>
   );
 }
 function CustomerForm({

@@ -1,4 +1,5 @@
 @import "./design-tokens.css";
+@import "@fontsource-variable/dm-sans";
 :root {
   color-scheme: light;
   --bg: var(--color-canvas);
@@ -11,7 +12,7 @@
   --warm: var(--color-warning);
   --lavender: var(--color-subtle);
   font-family:
-    "Segoe UI",
+    "DM Sans Variable", "Segoe UI",
     ui-sans-serif,
     system-ui,
     -apple-system,
@@ -1506,6 +1507,85 @@ td button {
   color: var(--muted);
   font-size: 13px;
   margin-top: 12px;
+}
+.time-calendar {
+  margin-top: 16px;
+  max-height: 660px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.time-calendar-grid {
+  display: grid;
+  min-width: max-content;
+}
+.time-calendar-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 14px;
+}
+.time-axis-head {
+  left: 0;
+  z-index: 4;
+  font-size: 12px;
+  padding: 16px 8px;
+}
+.time-axis {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+.time-axis > span {
+  position: absolute;
+  left: 8px;
+  font-size: 11px;
+  padding-top: 8px;
+  color: var(--muted);
+}
+.time-lane {
+  position: relative;
+  min-width: 220px;
+  border-right: 1px solid var(--border);
+}
+.time-line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid var(--border);
+}
+.calendar-event {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  width: calc(100% - 12px);
+  margin: 2px 0 0;
+  padding: 5px 9px;
+  gap: 2px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.calendar-event .appointment-name {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.calendar-event .appointment-time,
+.calendar-status {
+  font-size: 11px;
+  line-height: 1.3;
 }
 @media (max-width: 1100px) {
   .workspace-context > span {

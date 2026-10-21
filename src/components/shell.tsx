@@ -32,19 +32,19 @@ import { Modal, Empty } from "./ui";
 import type { Page, DataRow } from "@/lib/types";
 import { brandStyle } from "@/lib/branding";
 const links: [string, string, LucideIcon, string][] = [
-  ["inicio", "Inicio", LayoutDashboard, "Tu jornada"],
-  ["agenda", "Agenda", CalendarDays, "Tu jornada"],
-  ["walk-ins", "Sin cita", UserRoundPlus, "Tu jornada"],
-  ["caja", "Caja", Wallet, "Tu jornada"],
-  ["clientes", "Clientes", UsersRound, "Relaciones"],
-  ["retencion", "Seguimiento", RotateCcw, "Relaciones"],
-  ["equipo", "Equipo", Users, "Administración"],
-  ["servicios", "Servicios", Scissors, "Administración"],
-  ["sucursales", "Sucursales", Store, "Administración"],
+  ["inicio", "Inicio", LayoutDashboard, "Operación"],
+  ["agenda", "Agenda", CalendarDays, "Operación"],
+  ["walk-ins", "Sin cita", UserRoundPlus, "Operación"],
+  ["caja", "Caja", Wallet, "Operación"],
+  ["clientes", "Clientes", UsersRound, "Clientes"],
+  ["retencion", "Seguimiento", RotateCcw, "Clientes"],
+  ["equipo", "Equipo", Users, "Negocio"],
+  ["servicios", "Servicios", Scissors, "Negocio"],
+  ["sucursales", "Sucursales", Store, "Negocio"],
   ["finanzas", "Finanzas", Wallet, "Resultados"],
   ["reportes", "Reportes", ChartNoAxesCombined, "Resultados"],
   ["metas", "Metas", Target, "Resultados"],
-  ["configuracion", "Configuración", SlidersHorizontal, "Negocio"],
+  ["configuracion", "Configuración", SlidersHorizontal, "Configuración"],
 ];
 export function Shell({ children }: { children: React.ReactNode }) {
   const w = useWorkspace();
@@ -253,8 +253,16 @@ function GlobalSearch({ links: allowed }: { links: typeof links }) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
         if (document.querySelector("dialog:modal")) return;
+        if (
+          e.target instanceof HTMLElement &&
+          e.target.matches(
+            'input, textarea, select, [contenteditable="true"]',
+          ) &&
+          e.target !== input.current
+        )
+          return;
+        e.preventDefault();
         input.current?.focus();
       }
       if (e.key === "Escape") setText("");

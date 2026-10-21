@@ -57,6 +57,7 @@ jobs:
       - run: npm run test:e2e
       - name: Capture redesigned product with real Auth
         run: |
+          npx tsx scripts/prepare-ux-fixtures.ts
           npm start > .test-data/redesign-server.log 2>&1 &
           for attempt in $(seq 1 30); do curl --fail --silent http://localhost:3000/api/health && break || sleep 1; done
           node scripts/capture-product.mjs
@@ -79,7 +80,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: 4fa4d63eaa26e31bdddb37aac68456e8c0e85ba3
+          ref: da9eb8ccfab9526beee89d2a74fd9d82c6674ed4
           persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -92,6 +93,7 @@ jobs:
       - run: npm ci
       - run: |
           cp .test-data/audit-tools/scripts/capture-product.mjs scripts/capture-product.mjs
+          cp .test-data/audit-tools/scripts/prepare-ux-fixtures.ts scripts/prepare-ux-fixtures.ts
           rm -rf .test-data/audit-tools
       - run: npx supabase start --exclude studio,imgproxy,logflare,vector,edge-runtime
       - run: npx supabase db reset --local --no-seed
@@ -99,8 +101,9 @@ jobs:
       - run: npx tsx tests/e2e/setup.ts
       - run: npx playwright install --with-deps chromium
       - run: npm run build
-      - name: Capture original main UI with actual isolated Auth
+      - name: Capture recovered PR UI with actual isolated Auth
         run: |
+          npx tsx scripts/prepare-ux-fixtures.ts
           npm start > .test-data/baseline-server.log 2>&1 &
           for attempt in $(seq 1 30); do curl --fail --silent http://localhost:3000/api/health && break || sleep 1; done
           QA_PHASE=before node scripts/capture-product.mjs

@@ -5,10 +5,12 @@ export function Modal({
   title,
   children,
   onClose,
+  side = false,
 }: {
   title: string;
   children: ReactNode;
   onClose: () => void;
+  side?: boolean;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -24,7 +26,7 @@ export function Modal({
   return (
     <dialog
       ref={ref}
-      className="modal"
+      className={side ? "modal record-drawer" : "modal"}
       onCancel={(event) => {
         event.preventDefault();
         onClose();

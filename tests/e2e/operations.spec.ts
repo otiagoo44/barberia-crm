@@ -320,9 +320,13 @@ test.describe("Real Supabase Auth and domain flows", () => {
     await page
       .getByRole("button", { name: "Customer a1", exact: true })
       .click();
+    await page.getByRole("tab", { name: "Actividad", exact: true }).click();
     await expect(
       page.getByRole("heading", { name: "Historial", exact: true }),
     ).toBeVisible();
+    await page
+      .getByRole("tab", { name: "Notas y preferencias", exact: true })
+      .click();
     await page.locator('textarea[name="body"]').fill("Prefiere tijera");
     await page.getByRole("button", { name: "Guardar nota" }).click();
     await expect(

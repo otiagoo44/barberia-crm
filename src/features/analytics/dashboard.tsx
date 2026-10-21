@@ -14,6 +14,8 @@ import { LaunchGuide } from "@/features/organizations/launch-guide";
 import { DayOverview } from "./day-overview";
 import { DataChart } from "@/components/chart";
 import { chartInteger, utilization } from "@/lib/chart-values";
+import { ReceptionHome } from "./operation-home";
+import { ViewSwitcher } from "@/components/workspace-ui";
 type DashboardData = {
   totals: Record<string, number | null>;
   by_staff: {
@@ -45,6 +47,25 @@ type DashboardData = {
 };
 export function Dashboard({ report = false }: { report?: boolean }) {
   const w = useWorkspace();
+  if (!report && w.role === "receptionist") return <ReceptionHome />;
+  if (w.role === "finance")
+    return (
+      <section className="stack">
+        <div className="page-heading">
+          <div>
+            <span className="eyebrow">CONTROL FINANCIERO</span>
+            <h1>{report ? "Reportes financieros" : "Revisión financiera"}</h1>
+            <p>Cobros, cierres, gastos y operaciones pendientes de revisión.</p>
+          </div>
+        </div>
+        <FinancialDashboard />
+      </section>
+    );
+  return <OperationalDashboard report={report} />;
+}
+function OperationalDashboard({ report }: { report: boolean }) {
+  const w = useWorkspace();
+  const [view, setView] = useState("operation");
   const today = formatInTimeZone(
     new Date(),
     w.organization.timezone,
@@ -130,7 +151,9 @@ export function Dashboard({ report = false }: { report?: boolean }) {
               ? "Reportes"
               : w.role === "manager"
                 ? "Cómo va tu local"
-                : "Cómo va tu barbería"}
+                : w.role === "barber"
+                  ? "Tu jornada y rendimiento"
+                  : "Cómo va tu barbería"}
           </h1>
           <p>
             {report
@@ -208,6 +231,18 @@ export function Dashboard({ report = false }: { report?: boolean }) {
       </div>
       {r.error && <Notice error>{r.error}</Notice>}
       {r.loading && !r.data && <Loading />}
+      {report && (
+        <ViewSwitcher
+          value={view}
+          onChange={setView}
+          label="Área del reporte"
+          options={[
+            ["operation", "Operación"],
+            ["retention", "Clientes y retorno"],
+            ["team", "Equipo y servicios"],
+          ]}
+        />
+      )}
       {t && (
         <>
           <div className="kpi-grid">
@@ -300,7 +335,7 @@ export function Dashboard({ report = false }: { report?: boolean }) {
               }))}
               series={[{ key: "value", label: "Ocupación" }]}
             />
-            {report && (
+            {report && view === "retention" && (
               <>
                 <DataChart
                   title="Cancelaciones y ausencias"
@@ -344,7 +379,7 @@ export function Dashboard({ report = false }: { report?: boolean }) {
               r
                 .data!.goals.filter((g) => g.active)
                 .map((g) => <GoalCard key={g.id} goal={g} />)}
-            {report && (
+            {report && view === "team" && (
               <>
                 <DataChart
                   title="Ocupación por sucursal"
@@ -361,12 +396,10 @@ export function Dashboard({ report = false }: { report?: boolean }) {
                   title="Servicios más realizados"
                   description="Servicios completados del período · cantidad"
                   kind="bar"
-                  data={r
-                    .data!.by_service.slice(0, 20)
-                    .map((d) => ({
-                      label: d.name,
-                      value: chartInteger(d.completed),
-                    }))}
+                  data={r.data!.by_service.slice(0, 20).map((d) => ({
+                    label: d.name,
+                    value: chartInteger(d.completed),
+                  }))}
                   series={[{ key: "value", label: "Servicios" }]}
                 />
               </>

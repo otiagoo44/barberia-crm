@@ -399,10 +399,32 @@ export async function GET(
             .parse(q.get("retention") ?? "all"),
         };
         break;
-      case "customer":
-        name = "customer_detail";
-        args = { p_org: org, p_customer: uuid.parse(q.get("id")) };
-        break;
+      case "customer": {
+        const customer = uuid.parse(q.get("id"));
+        const detail = await db.rpc("customer_detail", {
+          p_org: org,
+          p_customer: customer,
+        });
+        if (detail.error) throw detail.error;
+        // Session-bound client: the same record/branch RLS applies here.
+        // Never expose prices, commissions, private notes or ledger fields.
+        const upcoming = await db
+          .from("appointments")
+          .select(
+            "id,branch_id,staff_id,starts_at,ends_at,status,duration_minutes",
+          )
+          .eq("organization_id", org)
+          .eq("customer_id", customer)
+          .in("status", ["scheduled", "confirmed", "checked_in", "in_service"])
+          .gte("ends_at", new Date().toISOString())
+          .order("starts_at")
+          .limit(10);
+        if (upcoming.error) throw upcoming.error;
+        return response(
+          { ...detail.data, upcoming: upcoming.data ?? [] },
+          requestId,
+        );
+      }
       case "timeline":
         name = "customer_timeline";
         args = {
