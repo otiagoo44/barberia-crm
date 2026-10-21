@@ -2,6 +2,9 @@
 -- authoritative in list_customers and can_read_appointment.
 create index appointments_customer_completed_lookup on public.appointments
  (organization_id,customer_id,completed_at desc,id desc) where status='completed';
+create index appointments_customer_upcoming_lookup on public.appointments
+ (organization_id,customer_id,ends_at,starts_at)
+ where status in ('scheduled','confirmed','checked_in','in_service');
 
 create function app_private.customer_list_view(p_org uuid,p_branch uuid,p_query text,p_cursor jsonb,p_limit integer,p_retention text)
 returns jsonb language plpgsql stable security definer set search_path='' as $$

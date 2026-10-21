@@ -1,8 +1,52 @@
 /* Product layouts share DESIGN.md tokens; brandStyle preserves tenant identity. */
-.date-range { display: flex; gap: 12px; flex-wrap: wrap; }
-.date-range .field { flex: 1; min-width: 130px; }
-.toast { position: fixed; bottom: 28px; right: 24px; z-index: 40; display: flex; gap: 16px; align-items: center; max-width: calc(100vw - 32px); padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-shadow: 0 8px 32px #292a3520; }
-@media (max-width: 767px) { .toast { bottom: 85px; right: 16px; } }
+.saved-views {
+  margin: -8px 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.saved-views > div {
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  max-width: 420px;
+}
+.block {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.date-range {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.date-range .field {
+  flex: 1;
+  min-width: 130px;
+}
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 40;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  max-width: calc(100vw - 32px);
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 8px 32px #292a3520;
+}
+@media (max-width: 767px) {
+  .toast {
+    bottom: 85px;
+    right: 16px;
+  }
+}
 .sidebar {
   background: #f7f7f9;
   padding-top: 20px;

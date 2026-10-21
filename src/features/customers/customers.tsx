@@ -12,6 +12,7 @@ import {
 } from "@/lib/validation";
 import { Modal, Field, Notice, Empty, Loading, Badge } from "@/components/ui";
 import { BookingForm } from "@/features/appointments/booking-form";
+import { SavedViews } from "@/components/saved-views";
 import type { DataRow, Page, Staff } from "@/lib/types";
 import {
   RecordDrawer,
@@ -150,6 +151,23 @@ export function Customers({ retention = false }: { retention?: boolean }) {
           </a>
         )}
       </FilterBar>
+      {w.role !== "barber" && (
+        <SavedViews
+          value={tab}
+          onChange={(value) => {
+            setTab(value);
+            setCursor(null);
+          }}
+          options={[
+            ["all", "Activos"],
+            ["archived", "Archivados"],
+            ["due_soon", "Por volver pronto"],
+            ["due", "Le toca volver"],
+            ["overdue", "Atrasados"],
+            ["lapsed", "Sin regresar"],
+          ]}
+        />
+      )}
       {(r.error || error) && <Notice error>{r.error || error}</Notice>}
       {r.loading && !r.data && <Loading />}
       {r.data?.items.length ? (

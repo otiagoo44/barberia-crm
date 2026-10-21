@@ -43,7 +43,8 @@ async function verify(request, role) {
   expect(result.ok()).toBeTruthy();
 }
 try {
-  const page = await browser.newPage();
+  const context = await browser.newContext();
+  const page = await context.newPage();
   const errors = [];
   const consoleErrors = [];
   const failedRequests = [];
@@ -84,7 +85,8 @@ try {
   });
   page.on("pageerror", (e) => errors.push(e.message));
   await page.emulateMedia({ reducedMotion: "reduce" });
-  const anonymous = await browser.newPage();
+  const anonymousContext = await browser.newContext();
+  const anonymous = await anonymousContext.newPage();
   for (const width of [360, 390, 768, 1024, 1440]) {
     await anonymous.setViewportSize({ width, height: 1000 });
     await anonymous.goto(base + "/login");
@@ -94,7 +96,7 @@ try {
     });
     await audit(anonymous, "login", width);
   }
-  await anonymous.close();
+  await anonymousContext.close();
   const login = await page.request.post(base + "/api/auth/signin", {
     headers: { Origin: base },
     data: { email: "ownerA@fixture.invalid", password: f.password },
@@ -197,7 +199,8 @@ try {
   }
   if (phase === "after") {
     for (const role of ["managerA1", "receptionA", "barberA", "financeA"]) {
-      const rolePage = await browser.newPage();
+      const roleContext = await browser.newContext();
+      const rolePage = await roleContext.newPage();
       rolePage.on("pageerror", (e) => errors.push(e.message));
       rolePage.on("console", (m) => {
         if (m.type() === "error") consoleErrors.push(m.text());
@@ -237,7 +240,7 @@ try {
         await audit(rolePage, "inicio-" + role, width);
         results.push({ module: "inicio-" + role, width, overflow: false });
       }
-      await rolePage.close();
+      await roleContext.close();
     }
   }
   expect(errors).toEqual([]);

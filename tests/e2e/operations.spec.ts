@@ -317,6 +317,21 @@ test.describe("Real Supabase Auth and domain flows", () => {
       await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
     }
     await page.goto("/fixture-a/clientes");
+    await page.getByText("Vistas guardadas", { exact: true }).click();
+    await page
+      .getByLabel("Nombre de la vista", { exact: true })
+      .fill("Clientes activos QA");
+    await page
+      .getByRole("button", { name: "Guardar vista actual", exact: true })
+      .click();
+    await page.reload();
+    await page.getByText("Vistas guardadas", { exact: true }).click();
+    await expect(
+      page
+        .getByLabel("Vista personal")
+        .getByRole("option", { name: "Clientes activos QA", exact: true }),
+    ).toHaveCount(1);
+    await page.getByLabel("Vista personal").selectOption("0");
     await page
       .getByRole("button", { name: "Customer a1", exact: true })
       .click();

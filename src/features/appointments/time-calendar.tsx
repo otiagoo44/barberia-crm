@@ -6,6 +6,7 @@ import { useWorkspace } from "@/features/organizations/context";
 import { useResource, resourceUrl } from "@/lib/client";
 import { useClock } from "@/hooks/use-clock";
 import { Notice } from "@/components/ui";
+import { calendarBounds, visibleInterval } from "@/lib/calendar";
 /** A clock scale represents booked intervals, never inferred availability. */
 export function TimeCalendar({
   day,
@@ -29,31 +30,32 @@ export function TimeCalendar({
       date: day,
     }),
   );
-  const origin = fromZonedTime(day + "T00:00:00", tz).getTime();
+  const { origin, end, minutes: dayMinutes } = calendarBounds(day, tz);
   const elapsed = (time: string) => (new Date(time).getTime() - origin) / 60000;
   const localMinute = (time: string) =>
     elapsed(fromZonedTime(day + "T" + time, tz).toISOString());
   const visibleBlocks =
     blocks.data?.items.filter((b) => staff.some((s) => s.id === b.staff_id)) ??
     [];
-  const rows = appointments.filter(
-    (a) => formatInTimeZone(a.starts_at, tz, "yyyy-MM-dd") === day,
+  const rows = appointments.filter((a) =>
+    visibleInterval(a.starts_at, a.ends_at, origin, end),
   );
-  const minute = elapsed;
+  const visibleStart = (a: Appointment) =>
+    visibleInterval(a.starts_at, a.ends_at, origin, end)!.start;
+  const visibleEnd = (a: Appointment) =>
+    visibleInterval(a.starts_at, a.ends_at, origin, end)!.end;
   const first = Math.min(
     Math.floor(localMinute("08:00:00") / 60),
-    ...rows.map((a) => Math.floor(minute(a.starts_at) / 60)),
+    ...rows.map((a) => Math.floor(visibleStart(a) / 60)),
     ...visibleBlocks.map((b) =>
       Math.floor(localMinute(String(b.starts_at)) / 60),
     ),
   );
   const last = Math.min(
-    26,
+    Math.ceil(dayMinutes / 60),
     Math.max(
       Math.ceil(localMinute("20:00:00") / 60),
-      ...rows.map((a) =>
-        Math.ceil((minute(a.starts_at) + a.duration_minutes) / 60),
-      ),
+      ...rows.map((a) => Math.ceil(visibleEnd(a) / 60)),
       ...visibleBlocks.map((b) =>
         Math.ceil(localMinute(String(b.ends_at)) / 60),
       ),
@@ -140,8 +142,8 @@ export function TimeCalendar({
                     key={a.id}
                     className={`appointment-card calendar-event ${a.status}`}
                     style={{
-                      top: (minute(a.starts_at) - first * 60) * 2,
-                      height: (minute(a.ends_at) - minute(a.starts_at)) * 2,
+                      top: (visibleStart(a) - first * 60) * 2,
+                      height: (visibleEnd(a) - visibleStart(a)) * 2,
                     }}
                     onClick={() => onChoose(a)}
                     aria-label={`${formatInTimeZone(a.starts_at, tz, "HH:mm")} a ${formatInTimeZone(a.ends_at, tz, "HH:mm")} · ${a.customer_name} · ${a.services.map((s) => s.name).join(", ")} · ${statusLabels[a.status]}`}

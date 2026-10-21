@@ -50,7 +50,7 @@ export function DataChart({
       <XAxis
         dataKey={horizontal ? undefined : "label"}
         type={horizontal ? "number" : "category"}
-        allowDecimals={!!currency || !!percent}
+        allowDecimals={!!percent}
         tick={{ fontSize: 11, fill: "var(--muted)" }}
         tickLine={false}
         axisLine={false}
@@ -66,7 +66,7 @@ export function DataChart({
       <YAxis
         type={horizontal ? "category" : "number"}
         dataKey={horizontal ? "label" : undefined}
-        allowDecimals={!!currency || !!percent}
+        allowDecimals={!!percent}
         tick={{ fontSize: 11, fill: "var(--muted)" }}
         tickLine={false}
         axisLine={false}
