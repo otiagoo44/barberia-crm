@@ -2,6 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { chartInteger, utilization } from "../../src/lib/chart-values";
 import { brandStyle } from "../../src/lib/branding";
+import { totp } from "../e2e/mfa-helper";
+test("TOTP fixture generator matches the RFC SHA1 vector without logging secrets", () => {
+  assert.equal(totp("GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ", 59000), "287082");
+});
 test("charts preserve unknowns and reject rounded, malformed or unsafe integer money", () => {
   for (const v of [
     null,

@@ -248,3 +248,22 @@ create function public.partner_distributions(p_org uuid,p_branch uuid,p_from dat
 language sql stable security invoker set search_path='' as $$ select app_private.partner_distributions($1,$2,$3,$4) $$;
 revoke all on function app_private.partner_distributions(uuid,uuid,date,date),public.partner_distributions(uuid,uuid,date,date) from public,anon,authenticated,service_role;
 grant execute on function app_private.partner_distributions(uuid,uuid,date,date),public.partner_distributions(uuid,uuid,date,date) to authenticated;
+
+-- A barber who is also a configured partner sees only their approved allocation,
+-- never company result, peer balances, policies, references or bank information.
+create function app_private.partner_own_distributions(p_org uuid,p_branch uuid,p_from date,p_to date) returns jsonb
+language plpgsql stable security definer set search_path='' as $$
+declare own uuid:=app_private.current_staff_id(p_org);
+begin
+ if own is null or not app_private.can_access_branch(p_org,p_branch) then raise exception 'forbidden' using errcode='42501';end if;
+ if p_from is null or p_to is null or p_to<p_from or p_to-p_from>365 then raise exception 'invalid_period' using errcode='22023';end if;
+ return jsonb_build_object('items',(select coalesce(jsonb_agg(to_jsonb(x)),'[]') from(
+ select p.period_start,p.period_end,p.currency,p.status,a.amount_minor::text assigned_minor,app_private.partner_balance(p_org,a.id)::text balance_minor
+ from public.partner_distribution_allocations a join public.partner_distribution_periods p on p.organization_id=a.organization_id and p.id=a.period_id
+ where a.organization_id=p_org and a.branch_id=p_branch and a.staff_id=own and p.status in ('approved','closed')
+ and p.period_end>=p_from and p.period_start<=p_to order by p.period_start desc limit 50)x));
+end $$;
+create function public.partner_own_distributions(p_org uuid,p_branch uuid,p_from date,p_to date) returns jsonb
+language sql stable security invoker set search_path='' as $$ select app_private.partner_own_distributions($1,$2,$3,$4) $$;
+revoke all on function app_private.partner_own_distributions(uuid,uuid,date,date),public.partner_own_distributions(uuid,uuid,date,date) from public,anon,authenticated,service_role;
+grant execute on function app_private.partner_own_distributions(uuid,uuid,date,date),public.partner_own_distributions(uuid,uuid,date,date) to authenticated;

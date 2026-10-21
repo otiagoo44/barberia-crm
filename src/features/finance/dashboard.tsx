@@ -577,6 +577,15 @@ export function FinancialDashboard({
           )}
         </>
       )}
+      {!compact && w.role === "barber" && (
+        <OwnPartnerBalances
+          org={org}
+          branch={branch}
+          from={from}
+          to={to}
+          currency={w.organization.currency}
+        />
+      )}
       {form && catalog.data && (
         <FinanceForm
           action={form.action}
@@ -597,6 +606,52 @@ export function FinancialDashboard({
           onImported={reload}
         />
       )}
+    </section>
+  );
+}
+function OwnPartnerBalances({
+  org,
+  branch,
+  from,
+  to,
+  currency,
+}: {
+  org: string;
+  branch: string;
+  from: string;
+  to: string;
+  currency: string;
+}) {
+  const r = useResource<{
+    items: {
+      period_start: string;
+      period_end: string;
+      currency: string;
+      status: string;
+      assigned_minor: string;
+      balance_minor: string;
+    }[];
+  }>(branch ? financeUrl("partner_own", org, branch, from, to) : null);
+  if (r.error) return <Notice error>{r.error}</Notice>;
+  if (!r.data?.items.length) return null;
+  return (
+    <section className="panel stack">
+      <h2>Mis asignaciones como socio</h2>
+      <p className="muted">
+        Períodos aprobados. El saldo descuenta pagos y retiros aplicados; una
+        asignación no equivale a un pago.
+      </p>
+      {r.data.items.map((p) => (
+        <div className="list-item" key={p.period_start}>
+          <strong>
+            {p.period_start} → {p.period_end}
+          </strong>
+          <p>
+            Asignado: {money(p.assigned_minor, currency)} · Pendiente:{" "}
+            {money(p.balance_minor, currency)}
+          </p>
+        </div>
+      ))}
     </section>
   );
 }

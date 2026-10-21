@@ -100,6 +100,32 @@ export function fail(error: unknown, requestId: string) {
   };
   const message =
     authMessages[code] ??
+    (
+      {
+        schedule_conflicts_with_bookings:
+          "Este horario afecta citas existentes. Reasignalas en Agenda antes de reducir los bloques.",
+        distribution_policy_not_confirmed:
+          "El propietario debe confirmar y habilitar las reglas de distribución antes de operar.",
+        partner_overpayment:
+          "El pago supera el saldo disponible de esta asignación.",
+        insufficient_cash:
+          "La caja no tiene efectivo suficiente para este pago.",
+        stale_distribution_snapshot:
+          "El resultado cambió desde la propuesta. Prepará un nuevo período y revisá sus importes.",
+        completed_period_required:
+          "Elegí un período finalizado, con fechas válidas y hasta un año.",
+        unreconciled_distribution_balance:
+          "Hay saldos pendientes. Conciliá las asignaciones antes de cerrar.",
+        open_cash_session_required:
+          "Abrí la caja de esta sucursal antes de registrar efectivo.",
+      } as Record<string, string>
+    )[
+      error instanceof Error
+        ? error.message
+        : typeof error === "object" && error !== null && "message" in error
+          ? String(error.message)
+          : ""
+    ] ??
     (status === 409
       ? "Ese horario dejó de estar disponible. Elegí otro."
       : status === 403

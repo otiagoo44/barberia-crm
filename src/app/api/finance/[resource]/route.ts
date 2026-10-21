@@ -47,9 +47,13 @@ export async function GET(
     const branch = uuid.parse(q.get("branch"));
     const from = date.parse(q.get("from"));
     const to = date.parse(q.get("to"));
-    if (resource === "series" || resource === "partners") {
+    if (["series", "partners", "partner_own"].includes(resource)) {
       const { data, error } = await db.rpc(
-        resource === "series" ? "financial_series" : "partner_distributions",
+        resource === "series"
+          ? "financial_series"
+          : resource === "partner_own"
+            ? "partner_own_distributions"
+            : "partner_distributions",
         { p_org: org, p_branch: branch, p_from: from, p_to: to },
       );
       if (error) throw error;

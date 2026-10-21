@@ -3,7 +3,7 @@ create function app_private.session_is_live() returns boolean
 language sql stable security definer set search_path='' as $$
  select exists(select 1 from auth.sessions s
  where s.user_id=(select auth.uid())
- and s.id::text=(select auth.jwt()->>'session_id')
+ and s.id=nullif((select auth.jwt()->>'session_id'),'')::uuid
  and (s.not_after is null or s.not_after>now()))
 $$;
 create function app_private.requires_mfa() returns boolean

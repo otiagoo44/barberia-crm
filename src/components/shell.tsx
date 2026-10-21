@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
+import { formatInTimeZone } from "date-fns-tz";
 import {
   LayoutDashboard,
   CalendarDays,
@@ -334,8 +335,15 @@ function GlobalSearch({ links: allowed }: { links: typeof links }) {
           {r.data?.appointments.map((a) => (
             <Link
               key={a.id}
-              onClick={() => setText("")}
-              href={`/${w.organization.slug}/agenda?date=${String(a.starts_at).slice(0, 10)}`}
+              onClick={() => {
+                if (
+                  typeof a.branch_id === "string" &&
+                  w.branches.some((b) => b.id === a.branch_id)
+                )
+                  w.setBranchId(a.branch_id);
+                setText("");
+              }}
+              href={`/${w.organization.slug}/agenda?date=${formatInTimeZone(String(a.starts_at), w.branches.find((b) => b.id === String(a.branch_id))?.timezone ?? w.organization.timezone, "yyyy-MM-dd")}`}
             >
               {String(a.name)}
               <small>

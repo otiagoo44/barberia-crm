@@ -85,7 +85,7 @@ try {
     if (verified.error)
       throw new Error("Real Auth MFA fixture verification failed");
     mfa[role] = { factor: enrolled.data.id, secret: enrolled.data.totp.secret };
-    await client.auth.signOut();
+    await client.auth.signOut({ scope: "local" });
   }
   await mkdir(".test-data/e2e", { recursive: true });
   await writeFile(

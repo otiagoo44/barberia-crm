@@ -566,6 +566,31 @@ export async function productContracts(pool: Pool) {
     },
   );
   await check(
+    "Partner barber projection contains only their approved assignment and no peer balances",
+    async () => {
+      const rows = await asUser<{ r: { items: Record<string, unknown>[] } }>(
+        pool,
+        f.users.barberA,
+        "select public.partner_own_distributions($1,$2,$3,$3) r",
+        [f.orgA, f.branches.a1, day],
+      );
+      assert.equal(rows[0].r.items.length, 1);
+      assert.deepEqual(
+        Object.keys(rows[0].r.items[0]).sort(),
+        [
+          "period_start",
+          "period_end",
+          "currency",
+          "status",
+          "assigned_minor",
+          "balance_minor",
+        ].sort(),
+      );
+      assert.equal(Number(rows[0].r.items[0].assigned_minor), 50);
+      assert.equal(Number(rows[0].r.items[0].balance_minor), 0);
+    },
+  );
+  await check(
     "Financial graphs separate 101 sales from 101 collected and preserve scope/bounds",
     async () => {
       const rows = await asUser<{
@@ -612,6 +637,105 @@ export async function productContracts(pool: Pool) {
       }>(pool, null, "select public.operations_health($1) r", [f.workerSecret]);
       assert.ok(r[0].r.heartbeat_at);
       assert.equal(r[0].r.booking_constraint, true);
+    },
+  );
+  await check(
+    "Daily blocks validate the complete transaction, retain existing bookings and retry without duplicates",
+    async () => {
+      const tomorrow = new Date();
+      tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+      const target = tomorrow.toISOString().slice(0, 10);
+      for (const hour of ["09:00", "16:00"])
+        await asUser(
+          pool,
+          f.users.ownerA,
+          "select public.create_booking($1,$2,$3,$4,$5,$6,null,$7,null)",
+          [
+            f.orgA,
+            f.branches.a1,
+            [f.services.cut],
+            f.staff.a1,
+            `${target}T${hour}:00Z`,
+            f.customers.a1,
+            randomUUID(),
+          ],
+        );
+      const blocks = [
+        { starts_at: "09:00", ends_at: "12:00", available: true },
+        { starts_at: "15:00", ends_at: "18:00", available: true },
+        { starts_at: "12:00", ends_at: "15:00", available: false },
+      ];
+      const args = [
+        f.orgA,
+        f.branches.a1,
+        f.staff.a1,
+        target,
+        JSON.stringify(blocks),
+        randomUUID(),
+      ];
+      const sql = "select public.save_daily_blocks($1,$2,$3,$4,$5,$6) r";
+      const first = await asUser(pool, f.users.ownerA, sql, args);
+      assert.deepEqual(await asUser(pool, f.users.ownerA, sql, args), first);
+      assert.equal(
+        (
+          await pool.query(
+            "select count(*)::int n from public.staff_availability_exceptions where organization_id=$1 and local_date=$2",
+            [f.orgA, target],
+          )
+        ).rows[0].n,
+        3,
+      );
+      const invalid = [
+        { starts_at: "18:00", ends_at: "19:00", available: true },
+        { starts_at: "16:00", ends_at: "17:00", available: false },
+      ];
+      await assert.rejects(
+        asUser(pool, f.users.ownerA, sql, [
+          ...args.slice(0, 4),
+          JSON.stringify(invalid),
+          randomUUID(),
+        ]),
+        { code: "23514" },
+      );
+      assert.equal(
+        (
+          await pool.query(
+            "select count(*)::int n from public.staff_availability_exceptions where organization_id=$1 and local_date=$2",
+            [f.orgA, target],
+          )
+        ).rows[0].n,
+        3,
+      );
+      assert.equal(
+        (
+          await pool.query(
+            "select count(*)::int n from public.appointments where organization_id=$1 and starts_at::date=$2",
+            [f.orgA, target],
+          )
+        ).rows[0].n,
+        2,
+      );
+      await assert.rejects(
+        asUser(pool, f.users.ownerB, sql, [...args.slice(0, 5), randomUUID()]),
+        { code: "42501" },
+      );
+      await assert.rejects(
+        asUser(pool, f.users.receptionA, sql, [
+          ...args.slice(0, 4),
+          JSON.stringify(invalid.slice(0, 1)),
+          randomUUID(),
+        ]),
+        { code: "42501" },
+      );
+      await assert.rejects(
+        asUser(
+          pool,
+          f.users.ownerA,
+          "select app_private.manage_record_core($1,'staff_availability_exceptions',null,$2,'{}',true)",
+          [f.orgA, f.branches.a1],
+        ),
+        { code: "42501" },
+      );
     },
   );
   return { passed };
