@@ -62,6 +62,24 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     ).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(page.locator(".search-results")).toHaveCount(0);
+    const more = page.getByRole("button", { name: "Más", exact: true });
+    await more.click();
+    await expect(dialog).toBeVisible();
+    await dialog.locator("summary").click();
+    for (let i = 0; i < 20; i++) {
+      await page.keyboard.press("Tab");
+      expect(
+        await page.evaluate(() => !!document.activeElement?.closest("dialog")),
+      ).toBeTruthy();
+    }
+    await dialog.getByRole("button", { name: "Cerrar", exact: true }).focus();
+    await page.screenshot({
+      path: "test-results/mobile-menu-focus.png",
+      fullPage: true,
+    });
+    await page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(0);
+    await expect(more).toBeFocused();
   });
   test("owner saves explicit daily blocks and a break, inspects actual slots and copies only after confirmation", async ({
     page,

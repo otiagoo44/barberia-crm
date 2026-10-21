@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { randomUUID, createHash } from "node:crypto";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, readFile } from "node:fs/promises";
 import { isolatedDatabase, asUser } from "./database";
 import { fixtures, type FixtureUsers } from "./fixtures";
 import type { Pool } from "pg";
@@ -10,6 +10,20 @@ export async function migrationUpgradeContracts(external?: {
   migrate: () => Promise<void>;
   users: FixtureUsers;
 }) {
+  const manifest = JSON.parse(
+    await readFile("docs/verification/applied-migrations-27.json", "utf8"),
+  ) as { files: { path: string; sha256: string }[] };
+  assert.equal(manifest.files.length, 27);
+  for (const entry of manifest.files) {
+    const source = await readFile(entry.path, "utf8");
+    assert.equal(
+      createHash("sha256")
+        .update(source.replaceAll("\r\n", "\n"))
+        .digest("hex"),
+      entry.sha256,
+      `Applied migration must remain intact: ${entry.path}`,
+    );
+  }
   const isolated = external ? undefined : await isolatedDatabase(27);
   const db = external ?? isolated!;
   try {

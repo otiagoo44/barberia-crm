@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { createClient } from "@supabase/supabase-js";
+import { Pool } from "pg";
 import { readFile } from "node:fs/promises";
 import { totp, verifyRequest } from "./mfa-helper";
 const real = process.env.E2E_REAL_SUPABASE === "1";
@@ -84,6 +85,18 @@ test.describe("Real MFA release boundary", () => {
       .getByText("Ingresar la clave manualmente", { exact: true })
       .click();
     const first = (await page.locator(".secret-key").textContent())!;
+    const invalidCode = ((Number(totp(first)) + 1) % 1000000)
+      .toString()
+      .padStart(6, "0");
+    const invalidFactor = await admin.auth.admin.mfa.listFactors({
+      userId: created.data.user!.id,
+    });
+    const invalid = await page.request.post("/api/auth/mfa/verify", {
+      headers: { Origin: "http://localhost:3000" },
+      data: { factor: invalidFactor.data!.factors[0].id, code: invalidCode },
+    });
+    expect(invalid.status()).toBe(400);
+    expect((await invalid.text()).includes(first)).toBe(false);
     await page.getByLabel("Código de 6 dígitos").fill(totp(first));
     await page
       .getByRole("button", { name: "Confirmar autenticador", exact: true })
@@ -173,6 +186,16 @@ test.describe("Real MFA release boundary", () => {
     expect(refused.error).not.toBeNull();
     expect((await direct.auth.mfa.listFactors()).data!.totp).toHaveLength(1);
     await direct.auth.signOut({ scope: "local" });
+    const auditPool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
+    try {
+      const leakage = await auditPool.query(
+        "select exists(select 1 from public.audit_logs where strpos(metadata::text,$1)>0 or strpos(metadata::text,$2)>0) or exists(select 1 from auth.audit_log_entries where strpos(payload::text,$1)>0 or strpos(payload::text,$2)>0) leaked",
+        [first, backup],
+      );
+      expect(leakage.rows[0].leaked).toBe(false);
+    } finally {
+      await auditPool.end();
+    }
     // Exercise the real callback/OTP/password path locally without claiming an
     // SMTP delivery. A recovery email must still require the existing factor.
     const recovery = await admin.auth.admin.generateLink({

@@ -14,11 +14,11 @@ import {
 type Allocation = {
   id: string;
   name: string;
-  amount_minor: number;
-  balance_minor: number;
+  amount_minor: string;
+  balance_minor: string;
   payments: {
     id: string;
-    amount_minor: number;
+    amount_minor: string;
     direction: number;
     reference: string;
     reverses_id: string | null;
@@ -29,7 +29,7 @@ type Period = {
   period_start: string;
   period_end: string;
   status: string;
-  result_minor: number;
+  result_minor: string;
   snapshot_hash: string;
   allocations: Allocation[];
 };

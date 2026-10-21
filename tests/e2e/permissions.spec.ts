@@ -146,6 +146,43 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         },
       });
       expect(write.status()).toBe(403);
+      const ownRead = await request.get(
+        `/api/workspace/branches?org=${f.orgA}`,
+      );
+      expect(ownRead.status()).toBe(200);
+      expect((await ownRead.json()).items.length).toBe(
+        role === "platform"
+          ? 0
+          : ["ownerA", "receptionA"].includes(role)
+            ? 2
+            : 1,
+      );
+      const operationalWrite = await request.post("/api/workspace/record", {
+        headers: {
+          Origin: "http://localhost:3000",
+          "x-role": "organization_owner",
+        },
+        data: {
+          org: f.orgA,
+          branch: f.branches.a1,
+          entity: "customers",
+          id: null,
+          data: {
+            name: `Auth matrix ${role}`,
+            normalized_phone:
+              "+1202" +
+              crypto
+                .randomUUID()
+                .replaceAll("-", "")
+                .replaceAll(/[a-f]/g, "1")
+                .slice(0, 7),
+            home_branch_id: f.branches.a1,
+          },
+        },
+      });
+      expect(operationalWrite.ok()).toBe(
+        ["ownerA", "managerA1", "receptionA"].includes(role),
+      );
       if (["managerA1", "financeA"].includes(role)) {
         const otherBranch = await request.get(
           `/api/finance/expenses?org=${f.orgA}&branch=${f.branches.a2}&from=${today}&to=${today}`,
@@ -167,6 +204,19 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       const auth = await db.auth.signInWithPassword(credentials);
       expect(auth.error).toBeNull();
       await verifyClient(db, role);
+      if (["barberA", "financeA", "platform"].includes(role)) {
+        expect(
+          (
+            await db.auth.updateUser({
+              data: {
+                role: "organization_owner",
+                organization_id: f.orgA,
+                all_branches: true,
+              },
+            })
+          ).error,
+        ).toBeNull();
+      }
       const settings = await db
         .from("finance_settings")
         .select("profit_share_staff_ids")

@@ -63,6 +63,15 @@ begin
  execute source;
 end $withdrawal_guard$;
 
+-- Serialize aggregate money before PostgREST/JavaScript can round bigint JSON.
+do $distribution_projection$
+declare source text;
+begin
+ source:=pg_get_functiondef('app_private.partner_distributions(uuid,uuid,date,date)'::regprocedure);
+ if position('return result;' in source)=0 then raise exception 'distribution_projection_mismatch';end if;
+ execute replace(source,'return result;','return app_private.exact_financial_json(result);');
+end $distribution_projection$;
+
 -- Check the operation even if every submitted block already exists. Dedupe
 -- and idempotency must never bypass current role, assignment or branch checks.
 do $daily_guard$

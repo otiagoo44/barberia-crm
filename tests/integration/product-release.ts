@@ -305,11 +305,12 @@ export async function productContracts(pool: Pool) {
         r: {
           periods: {
             id: string;
+            result_minor: string;
             allocations: {
               id: string;
               staff_id: string;
-              amount_minor: number;
-              balance_minor: number;
+              amount_minor: string;
+              balance_minor: string;
             }[];
           }[];
         };
@@ -384,7 +385,12 @@ export async function productContracts(pool: Pool) {
     async () => {
       period = await command("prepare", { from: day, to: day });
       const data = await read();
+      assert.equal(
+        data.periods.find((p) => p.id === period)!.result_minor,
+        "101",
+      );
       const rows = data.periods.find((p) => p.id === period)!.allocations;
+      assert.equal(typeof rows[0].amount_minor, "string");
       assert.deepEqual(
         rows.map((x) => Number(x.amount_minor)),
         [50, 50],
