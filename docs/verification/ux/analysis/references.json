@@ -1,0 +1,45 @@
+[
+  {
+    "repo": "twentyhq/twenty",
+    "sha": "d7499bf4ba11ed8c8a9392e02a42bb12b576e543",
+    "path": "packages/twenty-front/src/modules/navigation/components/MainNavigationDrawerNavigationContent.tsx"
+  },
+  {
+    "repo": "twentyhq/twenty",
+    "sha": "d7499bf4ba11ed8c8a9392e02a42bb12b576e543",
+    "path": "packages/twenty-front/src/modules/object-record/record-table/components/RecordTable.tsx"
+  },
+  {
+    "repo": "frappe/crm",
+    "sha": "2c4b488bb858c18935a4ca27fe5fd7922cb45be5",
+    "path": "frontend/src/components/Layouts/AppSidebar.vue"
+  },
+  {
+    "repo": "frappe/crm",
+    "sha": "2c4b488bb858c18935a4ca27fe5fd7922cb45be5",
+    "path": "frontend/src/components/ListViews/ContactsListView.vue"
+  },
+  {
+    "repo": "frappe/crm",
+    "sha": "2c4b488bb858c18935a4ca27fe5fd7922cb45be5",
+    "path": "frontend/src/pages/Contact.vue"
+  },
+  {
+    "repo": "frappe/crm",
+    "sha": "2c4b488bb858c18935a4ca27fe5fd7922cb45be5",
+    "path": "frontend/src/components/Activities/ActivityHeader.vue"
+  },
+  {
+    "repo": "otiagoo44/ferreteria-crm",
+    "sha": "e623009abe253838b4c495d7612e7bde3555b6c4",
+    "paths": [
+      "DESIGN.md",
+      "src/styles.css",
+      "src/tokens.css",
+      "src/components/AppShell.tsx",
+      "src/components/common.tsx",
+      "src/features/inquiries/Inquiries.tsx",
+      "src/features/inquiries/RecordPanel.tsx"
+    ]
+  }
+]

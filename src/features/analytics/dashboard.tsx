@@ -15,7 +15,7 @@ import { DayOverview } from "./day-overview";
 import { DataChart } from "@/components/chart";
 import { chartInteger, utilization } from "@/lib/chart-values";
 import { ReceptionHome } from "./operation-home";
-import { ViewSwitcher } from "@/components/workspace-ui";
+import { ViewSwitcher, DateRangePicker } from "@/components/workspace-ui";
 type DashboardData = {
   totals: Record<string, number | null>;
   by_staff: {
@@ -180,21 +180,13 @@ function OperationalDashboard({ report }: { report: boolean }) {
           <option value="custom">Personalizado</option>
         </select>
         {preset === "custom" && (
-          <>
-            <input
-              aria-label="Desde"
-              type="date"
-              value={from}
-              onChange={(e) => setFrom(e.target.value)}
-            />
-            <input
-              aria-label="Hasta"
-              type="date"
-              max={today}
-              value={to}
-              onChange={(e) => setTo(e.target.value)}
-            />
-          </>
+          <DateRangePicker
+            from={from}
+            to={to}
+            onFrom={setFrom}
+            onTo={setTo}
+            max={today}
+          />
         )}
         {w.branches.length > 1 && (
           <select
@@ -229,6 +221,14 @@ function OperationalDashboard({ report }: { report: boolean }) {
           {from} → {to}
         </small>
       </div>
+      {w.role !== "barber" && w.role !== "receptionist" && !staff && (
+        <FinancialDashboard
+          compact
+          periodFrom={from}
+          periodTo={to}
+          branchId={branch || w.branchId}
+        />
+      )}
       {r.error && <Notice error>{r.error}</Notice>}
       {r.loading && !r.data && <Loading />}
       {report && (
@@ -396,6 +396,7 @@ function OperationalDashboard({ report }: { report: boolean }) {
                   title="Servicios más realizados"
                   description="Servicios completados del período · cantidad"
                   kind="bar"
+                  horizontal
                   data={r.data!.by_service.slice(0, 20).map((d) => ({
                     label: d.name,
                     value: chartInteger(d.completed),
@@ -406,14 +407,6 @@ function OperationalDashboard({ report }: { report: boolean }) {
             )}
           </div>
         </>
-      )}
-      {w.role !== "barber" && w.role !== "receptionist" && !staff && (
-        <FinancialDashboard
-          compact
-          periodFrom={from}
-          periodTo={to}
-          branchId={branch || w.branchId}
-        />
       )}
     </section>
   );

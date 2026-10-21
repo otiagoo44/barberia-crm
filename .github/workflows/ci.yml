@@ -90,11 +90,13 @@ jobs:
         with:
           node-version: "24.15.0"
           cache: npm
-      - run: npm ci
       - run: |
+          cp .test-data/audit-tools/package.json package.json
+          cp .test-data/audit-tools/package-lock.json package-lock.json
           cp .test-data/audit-tools/scripts/capture-product.mjs scripts/capture-product.mjs
           cp .test-data/audit-tools/scripts/prepare-ux-fixtures.ts scripts/prepare-ux-fixtures.ts
           rm -rf .test-data/audit-tools
+      - run: npm ci
       - run: npx supabase start --exclude studio,imgproxy,logflare,vector,edge-runtime
       - run: npx supabase db reset --local --no-seed
       - run: node scripts/ci-environment.mjs

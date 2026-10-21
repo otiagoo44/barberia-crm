@@ -1,4 +1,8 @@
 /* Product layouts share DESIGN.md tokens; brandStyle preserves tenant identity. */
+.date-range { display: flex; gap: 12px; flex-wrap: wrap; }
+.date-range .field { flex: 1; min-width: 130px; }
+.toast { position: fixed; bottom: 28px; right: 24px; z-index: 40; display: flex; gap: 16px; align-items: center; max-width: calc(100vw - 32px); padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); box-shadow: 0 8px 32px #292a3520; }
+@media (max-width: 767px) { .toast { bottom: 85px; right: 16px; } }
 .sidebar {
   background: #f7f7f9;
   padding-top: 20px;
@@ -30,6 +34,7 @@
   background: #eaeaf2;
 }
 .topbar {
+  height: auto;
   min-height: 60px;
   background: var(--surface);
 }
@@ -395,7 +400,7 @@ td button:not(.danger) {
   color: var(--muted);
   margin-top: 6px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   input,
   select,
   textarea {

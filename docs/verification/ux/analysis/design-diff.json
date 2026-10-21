@@ -1,0 +1,75 @@
+{
+  "tokens": {
+    "colors": {
+      "added": [],
+      "removed": [],
+      "modified": [
+        "primary",
+        "subtle",
+        "foreground",
+        "muted",
+        "border",
+        "input",
+        "link",
+        "chart-primary",
+        "chart-secondary",
+        "chart-tertiary"
+      ]
+    },
+    "typography": {
+      "added": [],
+      "removed": [],
+      "modified": [
+        "heading",
+        "section",
+        "body",
+        "caption"
+      ]
+    },
+    "rounded": {
+      "added": [],
+      "removed": [],
+      "modified": [
+        "panel"
+      ]
+    },
+    "spacing": {
+      "added": [],
+      "removed": [],
+      "modified": []
+    },
+    "components": {
+      "added": [],
+      "removed": [],
+      "modified": [
+        "button",
+        "body",
+        "caption",
+        "link",
+        "subtle-panel",
+        "border",
+        "input-outline",
+        "chart-primary",
+        "chart-secondary",
+        "chart-tertiary"
+      ]
+    }
+  },
+  "findings": {
+    "before": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 1
+    },
+    "after": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 1
+    },
+    "delta": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "regression": false
+}

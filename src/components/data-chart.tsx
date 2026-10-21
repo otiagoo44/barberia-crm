@@ -28,6 +28,7 @@ export function DataChart({
   kind = "line",
   currency,
   percent,
+  horizontal = false,
 }: ChartProps) {
   const id = useId();
   const format = (value: unknown) =>
@@ -41,28 +42,46 @@ export function DataChart({
   );
   const axes = (
     <>
-      <CartesianGrid stroke="var(--border)" vertical={false} />
+      <CartesianGrid
+        stroke="var(--border)"
+        vertical={horizontal}
+        horizontal={!horizontal}
+      />
       <XAxis
-        dataKey="label"
+        dataKey={horizontal ? undefined : "label"}
+        type={horizontal ? "number" : "category"}
+        allowDecimals={!!currency || !!percent}
         tick={{ fontSize: 11, fill: "var(--muted)" }}
         tickLine={false}
         axisLine={false}
         minTickGap={20}
+        tickCount={horizontal ? 3 : undefined}
+        tickFormatter={
+          horizontal
+            ? (v) =>
+                currency ? money(v, currency) : percent ? `${v}%` : String(v)
+            : undefined
+        }
       />
       <YAxis
+        type={horizontal ? "category" : "number"}
+        dataKey={horizontal ? "label" : undefined}
+        allowDecimals={!!currency || !!percent}
         tick={{ fontSize: 11, fill: "var(--muted)" }}
         tickLine={false}
         axisLine={false}
-        width={currency ? 82 : 44}
+        width={horizontal ? 110 : currency ? 82 : 44}
         tickFormatter={(v) =>
-          currency
-            ? new Intl.NumberFormat("es-PY", {
-                notation: "compact",
-                maximumFractionDigits: 1,
-              }).format(Number(v) / (currency === "PYG" ? 1 : 100))
-            : percent
-              ? `${v}%`
-              : String(v)
+          horizontal
+            ? String(v)
+            : currency
+              ? new Intl.NumberFormat("es-PY", {
+                  notation: "compact",
+                  maximumFractionDigits: 1,
+                }).format(Number(v) / (currency === "PYG" ? 1 : 100))
+              : percent
+                ? `${v}%`
+                : String(v)
         }
       />
       <Tooltip
@@ -93,6 +112,7 @@ export function DataChart({
             <ResponsiveContainer width="100%" height="100%">
               {kind === "bar" ? (
                 <BarChart
+                  layout={horizontal ? "vertical" : "horizontal"}
                   data={data}
                   accessibilityLayer
                   margin={{ top: 8, right: 8, bottom: 0, left: 0 }}
@@ -104,7 +124,7 @@ export function DataChart({
                       dataKey={s.key}
                       name={s.label}
                       fill={colors[i % colors.length]}
-                      radius={[3, 3, 0, 0]}
+                      radius={horizontal ? [0, 3, 3, 0] : [3, 3, 0, 0]}
                       isAnimationActive={false}
                     />
                   ))}

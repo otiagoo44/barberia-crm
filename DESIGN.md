@@ -2,40 +2,40 @@
 version: alpha
 name: Barbería OS — Workspace
 colors:
-  primary: "#242724"
+  primary: "#3e4095"
   on-primary: "#ffffff"
   canvas: "#fafaf9"
   surface: "#ffffff"
-  subtle: "#f3f3f0"
-  foreground: "#242724"
-  muted: "#646963"
-  border: "#e2e4de"
-  input: "#92978f"
-  link: "#705719"
+  subtle: "#f5f5f8"
+  foreground: "#292a35"
+  muted: "#626573"
+  border: "#e6e6ec"
+  input: "#898b98"
+  link: "#3e4095"
   success: "#246b44"
   warning: "#80591c"
   danger: "#9b332e"
-  chart-primary: "#446d88"
-  chart-secondary: "#aa8034"
-  chart-tertiary: "#67846c"
+  chart-primary: "#5154a0"
+  chart-secondary: "#54847e"
+  chart-tertiary: "#a67c36"
 typography:
   heading:
-    fontFamily: Segoe UI
+    fontFamily: DM Sans Variable
     fontSize: 28px
     fontWeight: 600
     lineHeight: 1.2
   section:
-    fontFamily: Segoe UI
+    fontFamily: DM Sans Variable
     fontSize: 18px
     fontWeight: 600
     lineHeight: 1.4
   body:
-    fontFamily: Segoe UI
+    fontFamily: DM Sans Variable
     fontSize: 15px
     fontWeight: 400
     lineHeight: 1.5
   caption:
-    fontFamily: Segoe UI
+    fontFamily: DM Sans Variable
     fontSize: 12px
     fontWeight: 400
     lineHeight: 1.5
@@ -47,7 +47,7 @@ spacing:
   xl: 32px
 rounded:
   control: 7px
-  panel: 10px
+  panel: 8px
 components:
   button:
     backgroundColor: "{colors.primary}"
@@ -88,17 +88,17 @@ components:
 
 ## Overview
 
-CRM operativo para recepción, profesionales y propietarios. Claro por defecto, información antes que decoración. Diales Taste: variance 3, motion 1, density 7. La autoridad visual es este archivo; `src/app/design-tokens.css` implementa sus colores. El documento anterior se conserva en `docs/design/LEGACY_DARK_DESIGN.md` como historial, sin autoridad sobre la interfaz.
+CRM operativo para recepción, profesionales y propietarios. Claro por defecto, información antes que decoración. Diales Taste: variance 2, motion 1, density 7. La autoridad visual es este archivo; `src/app/design-tokens.css` implementa sus colores. El documento anterior se conserva en `docs/design/LEGACY_DARK_DESIGN.md` como historial, sin autoridad sobre la interfaz.
 
-Referencias consultadas: [Twenty](https://github.com/twentyhq/twenty), [Frappe CRM](https://frappe.io/crm) y análisis local de [Notion](.agents/skills/awesome-design-md/references/designs/notion/DESIGN.md). Se toman sidebar sobria, separación de superficies, tablas y rectángulos discretos. Se descartan tipografías propietarias, paletas de esas marcas, héroes de marketing, ilustraciones y efectos. No se dispuso de una referencia verificable de Ferretería Occidental; no se atribuye una inspección inexistente. UI UX Pro Max confirmó minimalismo funcional; se descartaron su hero comercial y colores genéricos por no corresponder al CRM.
+Referencias de código verificadas: Twenty `d7499bf4ba11ed8c8a9392e02a42bb12b576e543` (navegación contextual y tabla), Frappe CRM `2c4b488bb858c18935a4ca27fe5fd7922cb45be5` (ContactsListView, Contact, actividades y sidebar) y [Occidental CRM](https://github.com/otiagoo44/ferreteria-crm/tree/e623009abe253838b4c495d7612e7bde3555b6c4) (DESIGN.md, styles.css, tokens.css, AppShell, common, Inquiries y RecordPanel). Inventario preciso en docs/UX_REDESIGN_REPORT.md. Se adaptan superficies continuas, tabla compacta, vistas encima de filtros y panel lateral con pestañas; no se copia código, dominio, metadata, marca ni activos. Awesome Design MD aporta su análisis completo de Notion: sólo geometría y jerarquía. Se descartan sus héroes, paletas y fuentes propietarias. UI UX Pro Max: consulta local CRM internal workspace, diales 2/1/7, UX focus modal keyboard y stack React table filtering state. Se adopta minimalismo funcional; se descartan el hero comercial, Poppins, azul/verde sugeridos y scroll reveal.
 
 ## Colors
 
-Canvas `{colors.canvas}`, superficies `{colors.surface}` y `{colors.subtle}`. Texto `{colors.foreground}`; secundario `{colors.muted}`. El dorado `{colors.link}` es un acento de lectura y foco. Cada organización conserva su logo y brand_color: `brandStyle` calcula texto sobre marca y un acento oscuro legible sobre blanco. No imponer una identidad no confirmada a 17:17.
+Canvas `{colors.canvas}`, superficies `{colors.surface}` y `{colors.subtle}`. Texto `{colors.foreground}`; secundario `{colors.muted}`. El índigo `{colors.link}` identifica acciones de la aplicación. Cada organización conserva su logo y brand_color: `brandStyle` calcula texto sobre marca y un acento oscuro legible sobre blanco. No imponer una identidad no confirmada a 17:17.
 
 ## Typography
 
-Fuente de sistema, sin solicitudes externas. Títulos de 28px, secciones 18px, texto 15px; inputs móviles 16px para evitar zoom involuntario. Números tabulares en importes. Nunca abreviar moneda o período de forma ambigua.
+DM Sans Variable autoalojada desde @fontsource-variable/dm-sans 5.3.0, licencia SIL OFL incluida en el paquete. Inter (SIL OFL) fue evaluada por su legibilidad numérica; se elige DM Sans por su continuidad con Occidental y sus formas más abiertas. Sin fuentes privadas ni solicitudes a Google Fonts. Títulos de 28px, secciones 18px, texto 15px; inputs móviles 16px para evitar zoom involuntario. Números tabulares en importes. Nunca abreviar moneda o período de forma ambigua.
 
 ## Layout
 
@@ -110,7 +110,7 @@ Superficies planas y bordes discretos. Sombra únicamente en overlays. Sin gradi
 
 ## Shapes
 
-Controles `{rounded.control}`; paneles `{rounded.panel}`. Evitar botones en forma de píldora para toda acción. Touch targets de 44px y foco visible.
+Controles `{rounded.control}`; paneles `{rounded.panel}`. Evitar botones en forma de píldora para toda acción. Acciones principales de 44px y foco visible. Los bloques de agenda conservan altura proporcional, incluso los cortos; Lista ofrece una alternativa táctil con controles completos.
 
 ## Components
 

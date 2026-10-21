@@ -125,6 +125,9 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
   const days = Array.from({ length: mode === "week" ? 7 : 1 }, (_, i) =>
     format(addDays(new Date(begin + "T12:00:00"), i), "yyyy-MM-dd"),
   );
+  columns.sort(
+    (a, b) => a.name.localeCompare(b.name, "es") || a.id.localeCompare(b.id),
+  );
   if (!w.branchId)
     return (
       <Empty title="Tu organización todavía no tiene sucursales">

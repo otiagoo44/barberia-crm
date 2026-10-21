@@ -377,7 +377,7 @@ export async function GET(
         };
         break;
       case "customers":
-        name = "list_customers";
+        name = "customer_list_view";
         args = {
           p_org: org,
           p_branch: branch,

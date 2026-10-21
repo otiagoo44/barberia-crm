@@ -62,6 +62,7 @@ export function FinancialCharts({
           title="Gastos por categoría"
           description="Gastos operativos y salarios, netos de reversiones del período"
           kind="bar"
+          horizontal
           data={
             r.data?.expenses.map((d) => ({
               label: d.name,

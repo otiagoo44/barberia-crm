@@ -13,6 +13,7 @@ export type ChartProps = {
   kind?: "line" | "bar";
   currency?: string;
   percent?: boolean;
+  horizontal?: boolean;
 };
 export const DataChart = dynamic<ChartProps>(
   () => import("./data-chart").then((m) => m.DataChart),

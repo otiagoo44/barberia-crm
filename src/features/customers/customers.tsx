@@ -18,6 +18,8 @@ import {
   Tabs,
   ActivityTimeline,
   DataTable,
+  FilterBar,
+  Toast,
 } from "@/components/workspace-ui";
 export function Customers({ retention = false }: { retention?: boolean }) {
   const w = useWorkspace();
@@ -35,6 +37,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
   );
   const [error, setError] = useState("");
   const [postpone, setPostpone] = useState<DataRow | null>(null);
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const t = setTimeout(() => setQuery(text.trim()), 300);
     return () => clearTimeout(t);
@@ -126,7 +129,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
           </button>
         </div>
       )}
-      <div className="toolbar">
+      <FilterBar label="Buscar y exportar clientes">
         <input
           aria-label="Buscar clientes"
           placeholder="Nombre o teléfono…"
@@ -146,7 +149,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
             Exportar CSV
           </a>
         )}
-      </div>
+      </FilterBar>
       {(r.error || error) && <Notice error>{r.error || error}</Notice>}
       {r.loading && !r.data && <Loading />}
       {r.data?.items.length ? (
@@ -155,6 +158,8 @@ export function Customers({ retention = false }: { retention?: boolean }) {
             <tr>
               <th>Cliente</th>
               <th>Teléfono</th>
+              <th>Última visita</th>
+              <th>Último servicio / barbero</th>
               <th>Regreso estimado</th>
               <th>Estado</th>
               <th>Acciones</th>
@@ -172,6 +177,20 @@ export function Customers({ retention = false }: { retention?: boolean }) {
                   {!!c.service_name && <small>{String(c.service_name)}</small>}
                 </td>
                 <td>{String(c.normalized_phone)}</td>
+                <td>
+                  {c.last_visit_at
+                    ? new Date(String(c.last_visit_at)).toLocaleDateString(
+                        "es-PY",
+                        { timeZone: w.organization.timezone },
+                      )
+                    : "Sin visitas completadas"}
+                </td>
+                <td>
+                  {String(c.last_service_name ?? "Sin historial")}
+                  <small className="block">
+                    {String(c.last_staff_name ?? "")}
+                  </small>
+                </td>
                 <td>
                   {c.expected_return_at
                     ? new Date(String(c.expected_return_at)).toLocaleDateString(
@@ -270,6 +289,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
           onClose={() => setEditing(false)}
           onSaved={() => {
             setEditing(false);
+            setMessage("Cliente guardado.");
             r.reload();
           }}
         />
@@ -294,6 +314,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
           }}
         />
       )}
+      {message && <Toast onClose={() => setMessage("")}>{message}</Toast>}
     </section>
   );
 }

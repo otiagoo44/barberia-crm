@@ -14,6 +14,12 @@ const auth = JSON.parse(await readFile(".test-data/e2e/fixtures.json", "utf8"));
 const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
 try {
   const f = await fixtures(pool, auth.users, "ux");
+  await asUser(
+    pool,
+    f.users.ownerA,
+    "select public.manage_membership($1,'financeA@fixture.invalid','finance',false,$2,true)",
+    [f.orgA, [f.branches.a1]],
+  );
   await pool.query(
     "update public.organizations set name='Barbería de prueba · QA',currency='PYG',brand_color='#3e4095' where id=$1",
     [f.orgA],
@@ -27,14 +33,22 @@ try {
     [f.orgA],
   );
   await pool.query(
-    "update public.staff set name='Profesional de prueba' where id=$1",
-    [f.staff.a1],
+    "update public.staff set name=case when id=$2 then 'A · Profesional QA' else 'Profesional QA · '||slug end where organization_id=$1",
+    [f.orgA, f.staff.a1],
   );
   await pool.query(
     "update public.customers set name='Cliente de prueba · QA',return_interval_days=21 where id=$1",
     [f.customers.a1],
   );
   const today = new Date().toISOString().slice(0, 10);
+  await pool.query(
+    "update public.organization_settings set booking_enabled=false where organization_id=$1",
+    [f.orgA],
+  );
+  await pool.query(
+    "update public.customers set expected_return_at=$2::timestamptz+interval '20 days' where id=$1",
+    [f.customers.a1, today + "T10:40:00Z"],
+  );
   for (let offset = -6; offset <= 1; offset++) {
     const day = new Date(today + "T12:00:00Z");
     day.setUTCDate(day.getUTCDate() + offset);

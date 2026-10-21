@@ -37,6 +37,62 @@ export async function productContracts(pool: Pool) {
     }
   }
   await check(
+    "customer list enriches the authorized page without leaking another branch's history or money",
+    async () => {
+      const g = await fixtures(
+        pool,
+        f.users,
+        "projection-" + randomUUID().slice(0, 8),
+      );
+      for (const [branch, days, label] of [
+        [g.branches.a1, 2, "Corte Centro"],
+        [g.branches.a2, 1, "Servicio otro local"],
+      ] as const) {
+        const id = randomUUID();
+        await pool.query(
+          "insert into public.appointments(id,organization_id,branch_id,customer_id,staff_id,starts_at,ends_at,duration_minutes,status,currency,price_minor,completed_at) values($1,$2,$3,$4,$5,now()-make_interval(days=>$6),now()-make_interval(days=>$6)+interval '40 minutes',40,'completed','USD',2000,now()-make_interval(days=>$6)+interval '40 minutes')",
+          [id, g.orgA, branch, g.customers.a1, g.staff.a1, days],
+        );
+        await pool.query(
+          "insert into public.appointment_services(organization_id,appointment_id,service_id,name_snapshot,duration_minutes,price_minor,composition_mode) values($1,$2,$3,$4,40,2000,'standalone')",
+          [g.orgA, id, g.services.cut, label],
+        );
+      }
+      const sql = "select public.customer_list_view($1,$2,'',null,50,'all') r";
+      for (const [user, label] of [
+        [g.users.ownerA, "Servicio otro local"],
+        [g.users.managerA1, "Corte Centro"],
+        [g.users.barberA, "Corte Centro"],
+        [g.users.receptionA, "Servicio otro local"],
+      ]) {
+        const page = (
+          await asUser<{
+            r: { items: { id: string; [key: string]: unknown }[] };
+          }>(pool, user, sql, [g.orgA, null])
+        )[0].r;
+        const customer = page.items.find(
+          (c: { id: string }) => c.id === g.customers.a1,
+        );
+        assert(customer);
+        assert.equal(customer.last_service_name, label);
+        assert.equal(typeof customer.last_visit_at, "string");
+        for (const key of Object.keys(customer))
+          assert(!/commission|profit|revenue|payment|price_minor/.test(key));
+      }
+      await assert.rejects(asUser(pool, g.users.ownerB, sql, [g.orgA, null]), {
+        code: "42501",
+      });
+      await assert.rejects(
+        asUser(pool, g.users.managerA1, sql, [g.orgA, g.branches.a2]),
+        { code: "42501" },
+      );
+      await assert.rejects(
+        claims(g.users.ownerA, "aal1", sql, [g.orgA, null]),
+        { code: "42501" },
+      );
+    },
+  );
+  await check(
     "AAL1 owners, managers and platform have no commercial SELECT, RPC or platform grants",
     async () => {
       for (const user of [

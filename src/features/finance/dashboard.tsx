@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import { DateRangePicker } from "@/components/workspace-ui";
+import { DataChart } from "@/components/chart";
+import { chartInteger } from "@/lib/chart-values";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource } from "@/lib/client";
@@ -96,13 +99,31 @@ export function FinancialDashboard({
     setTo(today);
     if (value === "today") setFrom(today);
     else if (value === "month") setFrom(today.slice(0, 8) + "01");
-    else {
+    else if (value === "7" || value === "30") {
+      const d = new Date(today + "T12:00:00Z");
+      d.setUTCDate(d.getUTCDate() - Number(value) + 1);
+      setFrom(d.toISOString().slice(0, 10));
+    } else {
       const d = new Date(today + "T12:00:00Z");
       d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
       setFrom(d.toISOString().slice(0, 10));
     }
   }
   const totals = r.data?.totals;
+  const byMethod = new Map<string, { label: string; amount: bigint | null }>();
+  for (const row of r.data?.methods ?? []) {
+    const id = String(row.payment_method_id ?? row.name);
+    const previous = byMethod.get(id) ?? {
+      label: String(row.name),
+      amount: 0n,
+    };
+    previous.amount =
+      previous.amount === null ||
+      !/^-?\d+$/.test(String(row.gross_received_minor))
+        ? null
+        : previous.amount + BigInt(String(row.gross_received_minor));
+    byMethod.set(id, previous);
+  }
   const rows = r.data?.items ?? [];
   const session =
     cash.data?.session?.status === "open" ? cash.data.session.id : undefined;
@@ -153,31 +174,25 @@ export function FinancialDashboard({
                 defaultValue="today"
               >
                 <option value="today">Hoy</option>
+                <option value="7">7 días</option>
+                <option value="30">30 días</option>
                 <option value="week">Semana</option>
                 <option value="month">Mes</option>
                 <option value="custom">Rango personalizado</option>
               </select>
             </Field>
-            <Field label="Desde">
-              <input
-                type="date"
-                value={from}
-                onChange={(e) => {
-                  setFrom(e.target.value);
-                  setOffset(0);
-                }}
-              />
-            </Field>
-            <Field label="Hasta">
-              <input
-                type="date"
-                value={to}
-                onChange={(e) => {
-                  setTo(e.target.value);
-                  setOffset(0);
-                }}
-              />
-            </Field>
+            <DateRangePicker
+              from={from}
+              to={to}
+              onFrom={(value) => {
+                setFrom(value);
+                setOffset(0);
+              }}
+              onTo={(value) => {
+                setTo(value);
+                setOffset(0);
+              }}
+            />
           </div>
           {w.role !== "barber" && (
             <div className="tabs">
@@ -213,14 +228,25 @@ export function FinancialDashboard({
           {totals && (
             <>
               <div className="kpi-grid">
-                {metrics.map(([key, label]) => (
-                  <div className="kpi" key={key}>
-                    <span>{label}</span>
-                    <strong>
-                      {money(totals[key], w.organization.currency)}
-                    </strong>
-                  </div>
-                ))}
+                {metrics
+                  .filter(
+                    ([key]) =>
+                      !compact ||
+                      [
+                        "gross_revenue_minor",
+                        "collected_minor",
+                        "operating_result_minor",
+                        "pending_minor",
+                      ].includes(key),
+                  )
+                  .map(([key, label]) => (
+                    <div className="kpi" key={key}>
+                      <span>{label}</span>
+                      <strong>
+                        {money(totals[key], w.organization.currency)}
+                      </strong>
+                    </div>
+                  ))}
               </div>
               {r.data?.profit_sharing && (
                 <ProfitSharing summary={r.data.profit_sharing} />
@@ -279,6 +305,21 @@ export function FinancialDashboard({
           )}
           {!compact && r.data?.methods && (
             <>
+              <DataChart
+                title="Cobros por medio de pago"
+                description="Importes recibidos por los medios reales del catálogo; reversiones en la tabla inferior"
+                kind="bar"
+                horizontal
+                currency={w.organization.currency}
+                data={[...byMethod.values()].map((m) => ({
+                  label: m.label,
+                  amount:
+                    m.amount === null
+                      ? null
+                      : chartInteger(m.amount.toString()),
+                }))}
+                series={[{ key: "amount", label: "Cobrado bruto" }]}
+              />
               <h2>Medios de pago</h2>
               <FinanceTable
                 rows={r.data.methods}

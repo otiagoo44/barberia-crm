@@ -5,6 +5,7 @@ import { useWorkspace } from "@/features/organizations/context";
 import { useResource, resourceUrl, api } from "@/lib/client";
 import { definitions, type FieldDefinition } from "./definitions";
 import { Modal, Field, Notice, Empty, Loading } from "@/components/ui";
+import { DataTable } from "@/components/workspace-ui";
 import type { DataRow, Page, Json } from "@/lib/types";
 export function currencyScale(currency: string) {
   return (
@@ -115,73 +116,66 @@ export function RecordManager({
               {r.data.has_more ? " · hay más páginas" : ""}
             </small>
           </div>
-          <div
-            className="table-wrap"
-            role="region"
-            tabIndex={0}
-            aria-label={def.title}
-          >
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">{def.singular}</th>
-                  {columns.map((f) => (
-                    <th scope="col" key={f.key}>
-                      {f.label}
-                    </th>
-                  ))}
-                  {!readOnly && <th scope="col">Acciones</th>}
-                </tr>
-              </thead>
-              <tbody>
-                {visibleRows.map((row) => (
-                  <tr key={row.id}>
-                    <th scope="row">
-                      {String(
-                        row.name ??
-                          row.service_name ??
-                          row.staff_name ??
-                          def.singular,
-                      )}
-                      {entity === "services" && row.consultation_required && (
-                        <small style={{ display: "block" }}>
-                          Consulta previa · sin reserva pública
-                        </small>
-                      )}
-                    </th>
-                    {columns.map((f) => (
-                      <td key={f.key}>
-                        {f.type === "checkbox"
-                          ? row[f.key]
-                            ? "Sí"
-                            : "No"
-                          : f.type === "money"
-                            ? row[f.key] === null || row[f.key] === undefined
-                              ? "Sin precio"
-                              : new Intl.NumberFormat("es-PY", {
-                                  style: "currency",
-                                  currency: w.organization.currency,
-                                }).format(
-                                  Number(row[f.key]) /
-                                    currencyScale(w.organization.currency),
-                                )
-                            : f.options
-                              ? (f.options.find(
-                                  ([v]) => v === String(row[f.key]),
-                                )?.[1] ?? String(row[f.key] ?? "—"))
-                              : String(row[f.key] ?? "—")}
-                      </td>
-                    ))}
-                    {!readOnly && (
-                      <td>
-                        <button onClick={() => setEditor(row)}>Editar</button>
-                      </td>
-                    )}
-                  </tr>
+          <DataTable label={def.title}>
+            <thead>
+              <tr>
+                <th scope="col">{def.singular}</th>
+                {columns.map((f) => (
+                  <th scope="col" key={f.key}>
+                    {f.label}
+                  </th>
                 ))}
-              </tbody>
-            </table>
-          </div>
+                {!readOnly && <th scope="col">Acciones</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {visibleRows.map((row) => (
+                <tr key={row.id}>
+                  <th scope="row">
+                    {String(
+                      row.name ??
+                        row.service_name ??
+                        row.staff_name ??
+                        def.singular,
+                    )}
+                    {entity === "services" && row.consultation_required && (
+                      <small style={{ display: "block" }}>
+                        Consulta previa · sin reserva pública
+                      </small>
+                    )}
+                  </th>
+                  {columns.map((f) => (
+                    <td key={f.key}>
+                      {f.type === "checkbox"
+                        ? row[f.key]
+                          ? "Sí"
+                          : "No"
+                        : f.type === "money"
+                          ? row[f.key] === null || row[f.key] === undefined
+                            ? "Sin precio"
+                            : new Intl.NumberFormat("es-PY", {
+                                style: "currency",
+                                currency: w.organization.currency,
+                              }).format(
+                                Number(row[f.key]) /
+                                  currencyScale(w.organization.currency),
+                              )
+                          : f.options
+                            ? (f.options.find(
+                                ([v]) => v === String(row[f.key]),
+                              )?.[1] ?? String(row[f.key] ?? "—"))
+                            : String(row[f.key] ?? "—")}
+                    </td>
+                  ))}
+                  {!readOnly && (
+                    <td>
+                      <button onClick={() => setEditor(row)}>Editar</button>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </DataTable>
         </>
       ) : (
         <div className="record-grid">

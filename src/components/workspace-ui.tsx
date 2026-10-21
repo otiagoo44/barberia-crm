@@ -1,6 +1,58 @@
 "use client";
 import { useId, type ReactNode } from "react";
-import { Modal, Notice } from "./ui";
+import { Modal, Notice, Field } from "./ui";
+
+export function Toast({
+  children,
+  onClose,
+}: {
+  children: ReactNode;
+  onClose: () => void;
+}) {
+  return (
+    <div className="toast" role="status">
+      <span>{children}</span>
+      <button aria-label="Cerrar mensaje" onClick={onClose}>
+        Cerrar
+      </button>
+    </div>
+  );
+}
+export function DateRangePicker({
+  from,
+  to,
+  onFrom,
+  onTo,
+  max,
+}: {
+  from: string;
+  to: string;
+  onFrom: (value: string) => void;
+  onTo: (value: string) => void;
+  max?: string;
+}) {
+  return (
+    <div className="date-range">
+      <Field label="Desde">
+        <input
+          type="date"
+          value={from}
+          max={to || max}
+          onChange={(e) => onFrom(e.target.value)}
+        />
+      </Field>
+      <Field label="Hasta">
+        <input
+          type="date"
+          value={to}
+          min={from}
+          max={max}
+          onChange={(e) => onTo(e.target.value)}
+        />
+      </Field>
+    </div>
+  );
+}
 
 export function RecordDrawer(props: {
   title: string;
@@ -93,7 +145,8 @@ export function Tabs({
           if (next === null) return;
           e.preventDefault();
           onChange(options[next][0]);
-          const buttons = e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+          const buttons =
+            e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]');
           buttons[next]?.focus();
         }}
       >

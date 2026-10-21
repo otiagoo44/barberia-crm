@@ -1,8 +1,10 @@
 /* global document, innerWidth */
 import { chromium, expect } from "@playwright/test";
-import { readFile, mkdir, writeFile } from "node:fs/promises";
+import { readFile, mkdir, writeFile, rm } from "node:fs/promises";
+import { resolve, dirname } from "node:path";
 import { createHmac } from "node:crypto";
 import { execFileSync } from "node:child_process";
+import AxeBuilder from "@axe-core/playwright";
 const base = process.env.QA_BASE_URL ?? "http://localhost:3000";
 if (
   process.env.E2E_REAL_SUPABASE !== "1" ||
@@ -12,13 +14,64 @@ if (
 const phase = process.env.QA_PHASE === "before" ? "before" : "after";
 const f = JSON.parse(await readFile(".test-data/e2e/ux-fixtures.json", "utf8"));
 const out = `docs/verification/ux/${phase}`;
+const target = resolve(out);
+if (dirname(target) !== resolve("docs/verification/ux"))
+  throw Error("Unsafe screenshot path");
+await rm(target, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch();
+async function verify(request, role) {
+  const m = f.mfa?.[role];
+  if (!m) return;
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  const bits = [...m.secret.toUpperCase().replace(/=+$/, "")]
+    .map((c) => alphabet.indexOf(c).toString(2).padStart(5, "0"))
+    .join("");
+  const bytes = [];
+  for (let i = 0; i + 8 <= bits.length; i += 8)
+    bytes.push(parseInt(bits.slice(i, i + 8), 2));
+  const counter = Buffer.alloc(8);
+  counter.writeBigUInt64BE(BigInt(Math.floor(Date.now() / 30000)));
+  const h = createHmac("sha1", Buffer.from(bytes)).update(counter).digest();
+  const code = ((h.readUInt32BE(h.at(-1) & 15) & 0x7fffffff) % 1000000)
+    .toString()
+    .padStart(6, "0");
+  const result = await request.post(base + "/api/auth/mfa/verify", {
+    headers: { Origin: base },
+    data: { factor: m.factor, code },
+  });
+  expect(result.ok()).toBeTruthy();
+}
 try {
   const page = await browser.newPage();
   const errors = [];
   const consoleErrors = [];
   const failedRequests = [];
+  const accessibility = [];
+  const results = [];
+  async function audit(page, module, width) {
+    if (width !== 390 && width !== 1440) return;
+    const result = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+      .analyze();
+    accessibility.push({
+      module,
+      width,
+      violations: result.violations.map((v) => ({
+        id: v.id,
+        impact: v.impact,
+        description: v.description,
+        nodes: v.nodes.map((n) => ({
+          target: n.target,
+          summary: n.failureSummary,
+        })),
+      })),
+    });
+    await writeFile(
+      `${out}/accessibility.json`,
+      JSON.stringify(accessibility, null, 2),
+    );
+  }
   page.on("console", (m) => {
     if (m.type() === "error") consoleErrors.push(m.text());
   });
@@ -39,6 +92,7 @@ try {
       path: `${out}/login-${width}.png`,
       fullPage: true,
     });
+    await audit(anonymous, "login", width);
   }
   await anonymous.close();
   const login = await page.request.post(base + "/api/auth/signin", {
@@ -53,29 +107,9 @@ try {
       page.getByRole("heading", { name: "Verificá tu identidad" }),
     ).toBeVisible();
     await page.screenshot({ path: `${out}/mfa-${width}.png`, fullPage: true });
+    await audit(page, "mfa", width);
   }
-  if (f.mfa?.ownerA) {
-    const m = f.mfa.ownerA;
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-    const bits = [...m.secret.toUpperCase().replace(/=+$/, "")]
-      .map((c) => alphabet.indexOf(c).toString(2).padStart(5, "0"))
-      .join("");
-    const bytes = [];
-    for (let i = 0; i + 8 <= bits.length; i += 8)
-      bytes.push(parseInt(bits.slice(i, i + 8), 2));
-    const counter = Buffer.alloc(8);
-    counter.writeBigUInt64BE(BigInt(Math.floor(Date.now() / 30000)));
-    const h = createHmac("sha1", Buffer.from(bytes)).update(counter).digest();
-    const code = ((h.readUInt32BE(h.at(-1) & 15) & 0x7fffffff) % 1000000)
-      .toString()
-      .padStart(6, "0");
-    const verified = await page.request.post(base + "/api/auth/mfa/verify", {
-      headers: { Origin: base },
-      data: { factor: m.factor, code },
-    });
-    expect(verified.ok()).toBeTruthy();
-  }
-  const results = [];
+  await verify(page.request, "ownerA");
   async function capture(module, width) {
     await expect(page.locator(".loading:visible")).toHaveCount(0);
     const fits = await page.evaluate(
@@ -88,18 +122,17 @@ try {
       animations: "disabled",
     });
     const performance = await page.evaluate(() => ({
-      navigation: performance
-        .getEntriesByType("navigation")
-        .map((n) => ({
-          duration: n.duration,
-          domContentLoaded: n.domContentLoadedEventEnd,
-        })),
+      navigation: performance.getEntriesByType("navigation").map((n) => ({
+        duration: n.duration,
+        domContentLoaded: n.domContentLoadedEventEnd,
+      })),
       resources: performance.getEntriesByType("resource").length,
       transferBytes: performance
         .getEntriesByType("resource")
         .reduce((n, r) => n + r.transferSize, 0),
     }));
     results.push({ module, width, overflow: false, performance });
+    await audit(page, module, width);
   }
   for (const width of [360, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
@@ -131,7 +164,13 @@ try {
         await capture("cliente-ficha", width);
         await page.keyboard.press("Escape");
       }
-      if (module === "equipo") await capture("disponibilidad", width);
+      if (module === "equipo") {
+        await capture("disponibilidad", width);
+        await page
+          .getByRole("button", { name: "Barberos", exact: true })
+          .click();
+        await capture("equipo-tabla", width);
+      }
       if (module === "caja") {
         await page
           .getByRole("button", { name: "Cobrar", exact: true })
@@ -140,17 +179,65 @@ try {
         await expect(
           page.getByRole("dialog", { name: "Cobrar", exact: true }),
         ).toBeVisible();
+        await page
+          .getByRole("button", { name: "Dividir pago", exact: true })
+          .click();
         await capture("checkout", width);
         await page.keyboard.press("Escape");
       }
       if (module === "agenda") {
-        if (width <= 768)
+        if (width < 768)
           await page
             .getByRole("button", { name: "Abrir navegación", exact: true })
             .click();
         await capture("navegacion", width);
-        if (width <= 768) await page.keyboard.press("Escape");
+        if (width < 768) await page.keyboard.press("Escape");
       }
+    }
+  }
+  if (phase === "after") {
+    for (const role of ["managerA1", "receptionA", "barberA", "financeA"]) {
+      const rolePage = await browser.newPage();
+      rolePage.on("pageerror", (e) => errors.push(e.message));
+      rolePage.on("console", (m) => {
+        if (m.type() === "error") consoleErrors.push(m.text());
+      });
+      rolePage.on("response", (r) => {
+        if (r.url().includes("/api/") && r.status() >= 400)
+          failedRequests.push({
+            role,
+            path: new URL(r.url()).pathname,
+            status: r.status(),
+          });
+      });
+      const signIn = await rolePage.request.post(base + "/api/auth/signin", {
+        headers: { Origin: base },
+        data: { email: role + "@fixture.invalid", password: f.password },
+      });
+      expect(signIn.ok()).toBeTruthy();
+      await verify(rolePage.request, role);
+      for (const width of [360, 390, 768, 1024, 1440]) {
+        await rolePage.setViewportSize({ width, height: 1000 });
+        await rolePage.emulateMedia({ reducedMotion: "reduce" });
+        await rolePage.goto(base + "/ux-a/inicio");
+        await expect(rolePage.locator("main h1").first()).toBeVisible();
+        await expect(rolePage.locator("main .loading")).toHaveCount(0);
+        await expect(rolePage.locator("main").getByRole("alert")).toHaveCount(
+          0,
+        );
+        expect(
+          await rolePage.evaluate(
+            () => document.documentElement.scrollWidth <= innerWidth,
+          ),
+        ).toBeTruthy();
+        await rolePage.screenshot({
+          path: `${out}/inicio-${role}-${width}.png`,
+          fullPage: true,
+        });
+        await audit(rolePage, "inicio-" + role, width);
+        results.push({ module: "inicio-" + role, width, overflow: false });
+      }
+      await rolePage.close();
     }
   }
   expect(errors).toEqual([]);
@@ -164,6 +251,7 @@ try {
         browserErrors: errors,
         consoleErrors,
         failedRequests,
+        accessibility,
         source: execFileSync("git", ["rev-parse", "HEAD"], {
           encoding: "utf8",
         }).trim(),
@@ -174,6 +262,11 @@ try {
   );
   expect(consoleErrors).toEqual([]);
   expect(failedRequests).toEqual([]);
+  if (phase === "after")
+    expect(
+      accessibility.flatMap((a) => a.violations),
+      "WCAG automated checks",
+    ).toEqual([]);
   console.log(
     `Captured ${results.length} actual ${phase} screenshots with Supabase Auth.`,
   );
