@@ -108,6 +108,12 @@ test.describe("Real MFA release boundary", () => {
     await expect(
       page.getByRole("heading", { name: "Tu acceso está protegido" }),
     ).toBeVisible();
+    await expect(
+      page.getByText("Respaldo privado", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByAltText("Código QR para agregar tu autenticador"),
+    ).toHaveCount(0);
     await page.getByRole("button", { name: "Salir", exact: true }).click();
     await expect(page).toHaveURL(/\/login$/);
     await page.getByLabel("Correo electrónico").fill(email);
@@ -131,6 +137,29 @@ test.describe("Real MFA release boundary", () => {
     await expect(
       page.getByText("Teléfono principal", { exact: true }),
     ).toHaveCount(0);
+    // Exercise the real callback/OTP/password path locally without claiming an
+    // SMTP delivery. A recovery email must still require the existing factor.
+    const recovery = await admin.auth.admin.generateLink({
+      type: "recovery",
+      email,
+    });
+    expect(recovery.error).toBeNull();
+    await page.goto(
+      "/auth/callback?type=recovery&next=reset-password&token_hash=" +
+        recovery.data.properties!.hashed_token,
+    );
+    await expect(page).toHaveURL(/\/mfa\?next=reset-password$/);
+    await page.getByLabel("Código de 6 dígitos").fill(totp(backup));
+    await page
+      .getByRole("button", { name: "Verificar y continuar", exact: true })
+      .click();
+    await expect(page).toHaveURL(/\/reset-password$/);
+    await page
+      .getByLabel("Contraseña", { exact: true })
+      .fill(f.password + "recovered");
+    await page.getByRole("button", { name: "Guardar contraseña" }).click();
+    await expect(page).toHaveURL(/\/$/);
+    await page.goto("/mfa");
     await page
       .getByRole("button", { name: "Cerrar todas mis sesiones" })
       .click();

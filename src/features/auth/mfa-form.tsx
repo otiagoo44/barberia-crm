@@ -10,10 +10,12 @@ export function MfaForm({
   level,
   factors,
   failed,
+  next = "/",
 }: {
   level: string;
   factors: Factor[];
   failed: boolean;
+  next?: string;
 }) {
   const verified = factors.filter((f) => f.status === "verified");
   const [enrollment, setEnrollment] = useState<{
@@ -53,7 +55,7 @@ export function MfaForm({
         code,
       });
       setEnrollment(null);
-      window.location.assign(manage ? "/mfa" : "/");
+      window.location.assign(manage ? "/mfa" : next);
     } catch (e) {
       setError((e as Error).message);
     } finally {
@@ -77,8 +79,10 @@ export function MfaForm({
       </p>
       {error && <Notice error>{error}</Notice>}
       {level === "aal2" && !enrollment && (
-        <Link className="primary" href="/">
-          Continuar a mis barberías
+        <Link className="primary" href={next}>
+          {next === "/reset-password"
+            ? "Continuar a nueva contraseña"
+            : "Continuar a mis barberías"}
         </Link>
       )}
       {verified.length > 0 && !enrollment && level !== "aal2" && (
@@ -214,7 +218,7 @@ export function MfaForm({
           Verificar para administrar dispositivos
         </button>
       )}
-      <SignOut />
+      <SignOut disabled={busy} />
     </section>
   );
 }

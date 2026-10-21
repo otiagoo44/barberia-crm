@@ -3,6 +3,22 @@ import { requireIdentity } from "@/lib/auth";
 import { correlationId, fail, HttpError, readJson, response } from "@/lib/http";
 
 export const dynamic = "force-dynamic";
+function providerFailure(
+  error: { code?: string } | null,
+  requestId: string,
+): never {
+  const code = error?.code;
+  console.warn(
+    JSON.stringify({
+      level: "warn",
+      request_id: requestId,
+      event: "auth.mfa_failed",
+      provider_code:
+        code && /^[a-z0-9_]{1,60}$/i.test(code) ? code : "unavailable",
+    }),
+  );
+  throw new HttpError(400, "mfa_failed");
+}
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ action: string }> },
@@ -18,7 +34,7 @@ export async function POST(
         .strict()
         .parse(raw);
       const factors = await db.auth.mfa.listFactors();
-      if (factors.error) throw new HttpError(400, "mfa_failed");
+      if (factors.error) providerFailure(factors.error, id);
       if (
         factors.data.all.some((f) => f.status === "verified") &&
         security.level !== "aal2"
@@ -29,7 +45,7 @@ export async function POST(
         friendlyName: p.name,
         issuer: "Barbería OS",
       });
-      if (error) throw new HttpError(400, "mfa_failed");
+      if (error) providerFailure(error, id);
       return response(
         { id: data.id, qr: data.totp.qr_code, secret: data.totp.secret },
         id,
@@ -44,13 +60,13 @@ export async function POST(
         factorId: p.factor,
         code: p.code,
       });
-      if (error) throw new HttpError(400, "mfa_failed");
+      if (error) providerFailure(error, id);
       return response({ ok: true }, id);
     }
     if (action === "unenroll") {
       const p = z.object({ factor: z.uuid() }).strict().parse(raw);
       const { data, error } = await db.auth.mfa.listFactors();
-      if (error) throw new HttpError(400, "mfa_failed");
+      if (error) providerFailure(error, id);
       const target = data.all.find((f) => f.id === p.factor);
       if (!target) throw new HttpError(404, "not_found");
       if (target.status === "verified") {
@@ -62,7 +78,7 @@ export async function POST(
           throw new HttpError(409, "mfa_last_factor");
       }
       const result = await db.auth.mfa.unenroll({ factorId: p.factor });
-      if (result.error) throw new HttpError(400, "mfa_failed");
+      if (result.error) providerFailure(result.error, id);
       return response({ ok: true }, id);
     }
     throw new HttpError(404, "not_found");

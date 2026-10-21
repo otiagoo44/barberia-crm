@@ -39,6 +39,18 @@ export function financeCommand(
   });
 }
 export function money(value: unknown, currency: string) {
+  if (
+    currency === "PYG" &&
+    ((typeof value === "string" && /^-?\d+$/.test(value)) ||
+      typeof value === "bigint")
+  )
+    return new Intl.NumberFormat("es-PY", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0,
+    }).format(BigInt(value as string | bigint));
+  if (typeof value === "number" && !Number.isSafeInteger(value))
+    return "No disponible";
   return value === null || value === undefined
     ? "No disponible"
     : new Intl.NumberFormat("es-PY", {

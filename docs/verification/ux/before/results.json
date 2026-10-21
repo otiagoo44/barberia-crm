@@ -1,0 +1,232 @@
+{
+  "phase": "before",
+  "fixture": "isolated Supabase Auth tenants; no production data",
+  "results": [
+    {
+      "module": "inicio",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "agenda",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "clientes",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "equipo",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "servicios",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "caja",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "finanzas",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "reportes",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "configuracion",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "inicio",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "agenda",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "clientes",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "equipo",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "servicios",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "caja",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "finanzas",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "reportes",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "configuracion",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "inicio",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "agenda",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "clientes",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "equipo",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "servicios",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "caja",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "finanzas",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "reportes",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "configuracion",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "inicio",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "agenda",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "clientes",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "equipo",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "servicios",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "caja",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "finanzas",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "reportes",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "configuracion",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "inicio",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "agenda",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "clientes",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "equipo",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "servicios",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "caja",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "finanzas",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "reportes",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "configuracion",
+      "width": 1440,
+      "overflow": false
+    }
+  ],
+  "browserErrors": []
+}

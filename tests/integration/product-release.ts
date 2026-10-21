@@ -604,6 +604,23 @@ export async function productContracts(pool: Pool) {
       assert.equal(rows[0].r.days[0].sales, "101");
       assert.equal(rows[0].r.days[0].collected, "101");
       assert.equal(rows[0].r.days[0].result, "101");
+      const exact = (
+        await pool.query(
+          'select app_private.exact_financial_json(\'{"result_minor":9007199254740993,"nested":[{"amount_minor":-9007199254740993}],"count":1}\'::jsonb) r',
+        )
+      ).rows[0].r;
+      assert.equal(exact.result_minor, "9007199254740993");
+      assert.equal(exact.nested[0].amount_minor, "-9007199254740993");
+      assert.equal(exact.count, 1);
+      const summary = await asUser<{
+        r: { totals: { gross_revenue_minor: string } };
+      }>(
+        pool,
+        f.users.ownerA,
+        "select public.finance_read_exact($1,$2,'summary',$3,$3) r",
+        [f.orgA, f.branches.a1, day],
+      );
+      assert.equal(summary[0].r.totals.gross_revenue_minor, "101");
       await assert.rejects(
         asUser(
           pool,

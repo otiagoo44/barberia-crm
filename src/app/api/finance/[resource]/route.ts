@@ -63,7 +63,7 @@ export async function GET(
       const view = z
         .enum(["movements", "expenses", "settlements", "closures"])
         .parse(q.get("view"));
-      const { data, error } = await db.rpc("financial_export", {
+      const { data, error } = await db.rpc("financial_export_exact", {
         p_org: org,
         p_branch: branch,
         p_view: view,
@@ -94,7 +94,7 @@ export async function GET(
         },
       });
     }
-    const { data, error } = await db.rpc("finance_read", {
+    const { data, error } = await db.rpc("finance_read_exact", {
       p_org: org,
       p_branch: branch,
       p_view: views.parse(resource),

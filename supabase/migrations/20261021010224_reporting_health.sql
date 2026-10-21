@@ -24,6 +24,31 @@ language sql stable security invoker set search_path='' as $$ select app_private
 revoke all on function app_private.financial_series(uuid,uuid,date,date),public.financial_series(uuid,uuid,date,date) from public,anon,authenticated,service_role;
 grant execute on function app_private.financial_series(uuid,uuid,date,date),public.financial_series(uuid,uuid,date,date) to authenticated;
 
+-- Preserve exact aggregated bigint amounts across the JSON/JavaScript boundary.
+-- Existing DB RPC contracts remain compatible; HTTP uses these additive wrappers.
+create function app_private.exact_financial_json(value jsonb) returns jsonb language plpgsql immutable security invoker set search_path='' as $$
+declare result jsonb;
+begin
+ if jsonb_typeof(value)='object' then
+  select jsonb_object_agg(k,case when k ~ '_minor$' and jsonb_typeof(v)='number' then to_jsonb(v#>>'{}') else app_private.exact_financial_json(v) end) into result from jsonb_each(value) x(k,v);
+  return coalesce(result,'{}'::jsonb);
+ elsif jsonb_typeof(value)='array' then
+  select jsonb_agg(app_private.exact_financial_json(v) order by n) into result from jsonb_array_elements(value) with ordinality x(v,n);return coalesce(result,'[]'::jsonb);
+ end if;
+ return value;
+end $$;
+revoke all on function app_private.exact_financial_json(jsonb) from public,anon,authenticated,service_role;
+create function app_private.finance_read_exact(p_org uuid,p_branch uuid,p_view text,p_from date,p_to date,p_limit integer default 50,p_offset integer default 0,p_query text default '',p_id uuid default null) returns jsonb
+language sql stable security definer set search_path='' as $$ select app_private.exact_financial_json(app_private.finance_read($1,$2,$3,$4,$5,$6,$7,$8,$9)) $$;
+create function public.finance_read_exact(p_org uuid,p_branch uuid,p_view text,p_from date,p_to date,p_limit integer default 50,p_offset integer default 0,p_query text default '',p_id uuid default null) returns jsonb
+language sql stable security invoker set search_path='' as $$ select app_private.finance_read_exact($1,$2,$3,$4,$5,$6,$7,$8,$9) $$;
+create function app_private.financial_export_exact(p_org uuid,p_branch uuid,p_view text,p_from date,p_to date) returns jsonb
+language sql security definer set search_path='' as $$ select app_private.exact_financial_json(app_private.financial_export($1,$2,$3,$4,$5)) $$;
+create function public.financial_export_exact(p_org uuid,p_branch uuid,p_view text,p_from date,p_to date) returns jsonb
+language sql security invoker set search_path='' as $$ select app_private.financial_export_exact($1,$2,$3,$4,$5) $$;
+revoke all on function app_private.finance_read_exact(uuid,uuid,text,date,date,integer,integer,text,uuid),public.finance_read_exact(uuid,uuid,text,date,date,integer,integer,text,uuid),app_private.financial_export_exact(uuid,uuid,text,date,date),public.financial_export_exact(uuid,uuid,text,date,date) from public,anon,authenticated,service_role;
+grant execute on function app_private.finance_read_exact(uuid,uuid,text,date,date,integer,integer,text,uuid),public.finance_read_exact(uuid,uuid,text,date,date,integer,integer,text,uuid),app_private.financial_export_exact(uuid,uuid,text,date,date),public.financial_export_exact(uuid,uuid,text,date,date) to authenticated;
+
 -- Never silently add known capacity to unknown capacity and display a percentage.
 do $chart_projection$
 declare source text;original text;

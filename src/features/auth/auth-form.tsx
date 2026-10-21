@@ -119,13 +119,13 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
     </section>
   );
 }
-export function SignOut() {
+export function SignOut({ disabled = false }: { disabled?: boolean } = {}) {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   return (
     <>
       <button
-        disabled={busy}
+        disabled={busy || disabled}
         onClick={async () => {
           setBusy(true);
           setError("");

@@ -62,6 +62,28 @@ components:
   link:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.link}"
+  subtle-panel:
+    backgroundColor: "{colors.subtle}"
+    textColor: "{colors.foreground}"
+  border:
+    backgroundColor: "{colors.border}"
+  input-outline:
+    backgroundColor: "{colors.input}"
+  success:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.success}"
+  warning:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.warning}"
+  error:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.danger}"
+  chart-primary:
+    backgroundColor: "{colors.chart-primary}"
+  chart-secondary:
+    backgroundColor: "{colors.chart-secondary}"
+  chart-tertiary:
+    backgroundColor: "{colors.chart-tertiary}"
 ---
 
 ## Overview

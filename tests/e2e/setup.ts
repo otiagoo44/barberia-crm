@@ -87,6 +87,14 @@ try {
     mfa[role] = { factor: enrolled.data.id, secret: enrolled.data.totp.secret };
     await client.auth.signOut({ scope: "local" });
   }
+  // GoTrue can invalidate other AAL1 sessions during enrollment. Recreate only
+  // the explicitly synthetic SQL identities used by the separate restore drill;
+  // all HTTP/browser tests still obtain genuine signed sessions from GoTrue.
+  for (const id of Object.values(users))
+    await pool.query(
+      "insert into auth.sessions(id,user_id) values($1,$1) on conflict do nothing",
+      [id],
+    );
   await mkdir(".test-data/e2e", { recursive: true });
   await writeFile(
     ".test-data/e2e/fixtures.json",
