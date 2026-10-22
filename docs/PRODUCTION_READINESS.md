@@ -1,3 +1,11 @@
+# Estado actualizado, 22/10/2026
+
+El usuario autorizó merge/publicación y conexión al proyecto correcto. El rollout técnico aplicó las siete migraciones pendientes a tbcfhagteyqufjkmbxzz: historial 34, 27 originales intactas, sin fixtures ni movimientos comerciales. CI del producto 9d17387 aprobada: 25 E2E, 180 capturas inspeccionadas y 72 auditorías axe sin violaciones. Ver UX_TEST_RESULTS.md y verification/ux/final.
+
+**La habilitación comercial sigue pendiente** de cuentas personales, MFA, SMTP, horarios/catálogo/fees, acuerdos, backup/restore administrado, alertas y piloto. [Guía concreta](PILOTO_ESTEBAN_JONATAN.md). El texto siguiente es historial previo al rollout y no describe el estado actual del esquema.
+
+---
+
 # Readiness de Barbería OS — 20/10/2026
 
 Revisión del 21/10: [recuperación PR #3](PR3_RECOVERY_AUDIT_2026_10_21.md), [evidencia final](verification/pr3-final.json) y [rollout de staging actualizado](STAGING_ROLLOUT_PR3.md). Las cifras iniciales de abajo son antecedentes. El candidato agrega una quinta migración de auditoría (32), conserva intactas las 27 aplicadas y las cuatro originales del PR. El rollout debe aplicar las cinco nuevas en orden y preparar enrolamiento previo; no se aplicó ninguna a producción en esta tarea.

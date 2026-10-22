@@ -24,3 +24,9 @@ El [baseline completo](https://github.com/otiagoo44/barberia-crm/actions/runs/39
 En sus 90 capturas comparables por fase, la mediana de DOMContentLoaded fue 138,1 ms antes y 130,8 ms en la iteración anterior; transferencia mediana 14.156 y 13.780 bytes. Son navegaciones con caché de CI y no LCP/INP, ni un benchmark del candidato actual. No se afirma una mejora de rendimiento definitiva.
 
 La [captura local actual del Login](verification/ux/local-public-auth/login-390.png) y sus 14 variantes verifican los formularios públicos del build. El cierre privado, la comparación final y los enlaces del SHA final siguen pendientes por los bloqueos documentados en UX_TEST_RESULTS.md.
+
+## Comparación final cerrada
+
+CI 39817313839 aprobada. Baseline: 105 PNG; candidato: 180 PNG; se inspeccionaron todos. [Muestras y manifiestos](verification/ux/final/summary.json), [Agenda antes](verification/ux/final/before-agenda-390.png), [Agenda después](verification/ux/final/after-agenda-390.png), [ficha](verification/ux/final/after-cliente-ficha-390.png), [Checkout](verification/ux/final/after-checkout-390.png). Artefactos completos enlazados en el resumen. 72 auditorías axe sin violaciones; los árboles de producto coinciden con el HEAD validado. Los bloqueos anteriores de captura están resueltos.
+
+95 navegaciones comparables: DOMContentLoaded mediano 136,2 → 173,6 ms y transferencia mediana 14.510 → 14.132 bytes. El tiempo aumenta; no se presenta como mejora de rendimiento ni como Core Web Vitals. La comparación usa caché de CI y contenido operativo más completo.

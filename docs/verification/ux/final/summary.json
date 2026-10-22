@@ -1,0 +1,41 @@
+{
+  "productHead": "9d1738713ebdbdc9decf73273ddb7a0b826bec29",
+  "ciTestMerge": "0991a8840c7c9969c835c3fbd0c2bc1e5c7122d7",
+  "srcTree": "d3fc5cbbd2a65a8c63f675db2355649fe6198938",
+  "schemaTree": "66c15acce411bc990d6f5258327cbf2653e04c74",
+  "run": 39817313839,
+  "ci": "success",
+  "unit": 20,
+  "databaseContracts": 110,
+  "e2ePassed": 25,
+  "e2eSkipped": 0,
+  "beforeImages": 105,
+  "afterImages": 180,
+  "geometryChecks": 170,
+  "axeAudits": 72,
+  "violations": 0,
+  "browserErrors": 0,
+  "consoleErrors": 0,
+  "httpFailures": 0,
+  "overflow": 0,
+  "viewports": [
+    360,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "comparison": {
+    "matched": 95,
+    "beforeDclMedianMs": 136.20000000001164,
+    "afterDclMedianMs": 173.59999999997672,
+    "beforeTransferMedianBytes": 14510,
+    "afterTransferMedianBytes": 14132,
+    "limitation": "Cached CI navigation; not LCP/INP or a controlled causal benchmark"
+  },
+  "artifacts": {
+    "before": "https://github.com/otiagoo44/barberia-crm/actions/runs/39817313839/artifacts/12443465903",
+    "after": "https://github.com/otiagoo44/barberia-crm/actions/runs/39817313839/artifacts/12443592078"
+  },
+  "inspection": "180 candidate captures reviewed in contact sheets; agenda, finance, home, customer drawer, checkout inspected individually. Before/after agenda compared. Real isolated Supabase Auth and labeled fixtures; no production fixtures."
+}

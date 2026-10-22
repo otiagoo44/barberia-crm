@@ -67,3 +67,9 @@ La inspección móvil corrigió un importe que se partía entre dígitos y el re
 La guía concreta de instalación, datos requeridos y aceptación con Esteban/Jonatan está en [PILOTO_ESTEBAN_JONATAN.md](PILOTO_ESTEBAN_JONATAN.md). Publicar no habilita por sí solo reservas online, reparto, correo o datos no confirmados.
 
 Las tasas de cancelación/ausencia se derivan de cantidades autorizadas: denominador de citas resueltas del período (completadas + canceladas + no-shows), excluyendo activas y reprogramadas. Con cero/desconocido no se muestra 0%. La comparación por sucursal sólo se renderiza con más de una sucursal autorizada.
+
+## Cierre de esta continuación
+
+Se inspeccionó la recaptura completa del producto 9d17387: 180 imágenes, 72 auditorías axe sin violaciones, 170 verificaciones geométricas sin overflow y 25 E2E sin skips. Se verificaron los hashes de src/supabase contra el checkout real de CI; resumen y muestras en verification/ux/final. Los pendientes de recaptura de secciones anteriores están resueltos. Se repitieron los scripts de Google y UI UX Pro Max y se consultaron nuevamente los patrones de código de las tres referencias, incluido Occidental.
+
+La autorización actual del usuario incluye integración a main y publicación. Se conectó el proyecto Supabase confirmado y se aplicaron las siete migraciones pendientes; 27 originales intactas, total 34. La instantánea previa es privada y parcial (datos de aplicación/funciones/políticas, no Auth ni infraestructura administrada). No se crearon fixtures ni operaciones comerciales cloud. Se conserva la separación de previews y producción. La guía de instalación distingue publicación técnica de cuentas, correo, MFA, datos comerciales, backup, alertas y piloto que requieren responsables reales.

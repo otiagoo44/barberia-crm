@@ -29,6 +29,6 @@ Nombres de producto mapeados a implementaciones existentes. No se incorporó un 
 | TimeCalendar | `appointments/time-calendar.tsx`, `lib/calendar.ts` | Intervalos/timezone, bloques, descansos y hora actual. |
 | StaffFinancialCharts | `finance/staff-charts.tsx` | Producción, ticket y comisiones seleccionables; suma exacta con BigInt sobre el read-model financiero autorizado. |
 
-La iteración final amplía FinancialCharts con ventas/POS/gastos/comisiones/resultado y traza discontinua para deducciones. DataChart adapta la altura de barras horizontales a la cantidad de filas. Categorías, minutos atendidos y seguimiento actual se agregan al dashboard sin cambiar guards/RLS ni reglas financieras. La recaptura completa del candidato está en curso.
+La iteración final amplía FinancialCharts con ventas/POS/gastos/comisiones/resultado y traza discontinua para deducciones. DataChart adapta la altura de barras horizontales a la cantidad de filas. Categorías, minutos atendidos y seguimiento actual se agregan al dashboard sin cambiar guards/RLS ni reglas financieras. La recaptura final de 180 imágenes fue inspeccionada y los 25 E2E aprobaron en CI 39817313839; ver UX_TEST_RESULTS.md.
 
 La UI no otorga permisos. Campos financieros, notas, directorio y operaciones conservan autoridad del backend.
