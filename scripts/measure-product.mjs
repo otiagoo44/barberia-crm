@@ -1,3 +1,4 @@
+/* global window, PerformanceObserver */
 // Measures only a real, isolated Supabase fixture. No response bodies/secrets saved.
 import { chromium, expect } from "@playwright/test";
 import { readFile, writeFile, mkdir, readdir, stat } from "node:fs/promises";
@@ -111,7 +112,7 @@ try {
       page.on("requestfinished", onDone);
       page.on("requestfailed", onDone);
       const begin = performance.now();
-      await page.goto(`${base}/${fixture.slug}/${module}`);
+      await page.goto(`${base}/ux-a/${module}`);
       await expect(page.locator(".page-heading h1").first()).toBeVisible();
       await expect(page.locator(".loading:visible")).toHaveCount(0);
       await expect.poll(() => pending, { timeout: 20000 }).toBe(0);
