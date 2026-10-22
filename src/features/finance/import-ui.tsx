@@ -199,7 +199,12 @@ export function FinanceImport({
                   }{" "}
                   excluidas.
                 </Notice>
-                <div className="table-wrap">
+                <div
+                  className="table-wrap"
+                  role="region"
+                  aria-label="Revisión de importación. Tabla desplazable con teclado."
+                  tabIndex={0}
+                >
                   <table>
                     <thead>
                       <tr>

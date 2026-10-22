@@ -71,7 +71,7 @@ jobs:
             docs/verification/restore-local.json
             docs/verification/migration-upgrade.json
             docs/verification/ux/after/
-          retention-days: 7
+          retention-days: 90
       - if: always()
         run: npx supabase stop --no-backup
   visual-baseline:
@@ -114,6 +114,6 @@ jobs:
         with:
           name: visual-baseline
           path: docs/verification/ux/before/
-          retention-days: 7
+          retention-days: 90
       - if: always()
         run: npx supabase stop --no-backup

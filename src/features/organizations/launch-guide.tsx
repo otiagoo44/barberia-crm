@@ -22,10 +22,10 @@ export function LaunchGuide() {
     settings.data?.items[0]?.booking_enabled &&
     branch.data?.items[0]?.booking_enabled;
   return (
-    <details className="launch-guide" open={!settings.loading && !enabled}>
+    <details className="launch-guide">
       <summary>
         <span>
-          <strong>Prepará tu barbería para trabajar</strong>
+          <strong>Configuración operativa</strong>
           <small>Equipo, reservas y caja en un solo lugar</small>
         </span>
         <span className="badge">

@@ -328,6 +328,56 @@ export async function GET(
     const org = uuid.parse(q.get("org"));
     const branch = q.get("branch") ? uuid.parse(q.get("branch")) : null;
     const staff = q.get("staff") ? uuid.parse(q.get("staff")) : null;
+    if (resource === "calendar_blocks") {
+      if (!branch) throw new HttpError(400, "branch_required");
+      const startDay = date.parse(q.get("start_day")),
+        endDay = date.parse(q.get("end_day"));
+      const from = z.iso.datetime({ offset: true }).parse(q.get("from")),
+        to = z.iso.datetime({ offset: true }).parse(q.get("to"));
+      const duration = Date.parse(to) - Date.parse(from);
+      if (
+        duration <= 0 ||
+        duration > 8 * 86400000 ||
+        endDay <= startDay ||
+        Date.parse(endDay) - Date.parse(startDay) > 8 * 86400000
+      )
+        throw new HttpError(400, "calendar_range_exceeded");
+      let daily = db
+        .from("staff_availability_exceptions")
+        .select("id,staff_id,local_date,starts_at,ends_at,available,reason")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .gte("local_date", startDay)
+        .lt("local_date", endDay)
+        .order("starts_at")
+        .limit(1001);
+      let absence = db
+        .from("staff_time_off")
+        .select("id,staff_id,starts_at,ends_at")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .lt("starts_at", to)
+        .gt("ends_at", from)
+        .order("starts_at")
+        .limit(1001);
+      if (staff) {
+        daily = daily.eq("staff_id", staff);
+        absence = absence.eq("staff_id", staff);
+      }
+      const [blocks, timeOff] = await Promise.all([daily, absence]);
+      if (blocks.error) throw blocks.error;
+      if (timeOff.error) throw timeOff.error;
+      return response(
+        {
+          items: (blocks.data ?? []).slice(0, 1000),
+          absences: (timeOff.data ?? []).slice(0, 1000),
+          has_more:
+            (blocks.data?.length ?? 0) > 1000 ||
+            (timeOff.data?.length ?? 0) > 1000,
+        },
+        requestId,
+      );
+    }
     if (resource === "daily_availability") {
       if (!branch) throw new HttpError(400, "branch_required");
       const day = date.parse(q.get("date"));

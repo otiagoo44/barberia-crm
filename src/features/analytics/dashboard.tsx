@@ -95,6 +95,19 @@ function OperationalDashboard({ report }: { report: boolean }) {
     resourceUrl("staff", { org: w.organization.id }),
   );
   const t = r.data?.totals;
+  const resolvedCounts = t
+    ? [t.completed, t.cancelled, t.no_shows].map(chartInteger)
+    : [];
+  const resolved =
+    resolvedCounts.length === 3 && resolvedCounts.every((n) => n !== null)
+      ? resolvedCounts.reduce<number>((sum, n) => sum + n!, 0)
+      : null;
+  const rate = (count: number | null | undefined) => {
+    const value = utilization(count, resolved);
+    return value === null
+      ? "No disponible"
+      : `${new Intl.NumberFormat("es-PY", { maximumFractionDigits: 1 }).format(value)}%`;
+  };
   const money = (value: number | null | undefined) =>
     value === null || value === undefined
       ? "—"
@@ -337,6 +350,15 @@ function OperationalDashboard({ report }: { report: boolean }) {
             />
             {report && view === "retention" && (
               <>
+                <p className="result-note">
+                  No se presentó: {t.no_shows ?? "No disponible"} (
+                  {rate(t.no_shows)}). Canceladas:{" "}
+                  {t.cancelled ?? "No disponible"} ({rate(t.cancelled)}).{" "}
+                  Denominador: {resolved ?? "desconocido"} citas resueltas del
+                  período (completadas, canceladas y ausencias). Se excluyen
+                  citas activas y reprogramadas. Con denominador cero, la tasa
+                  no está disponible.
+                </p>
                 <DataChart
                   title="Cancelaciones y ausencias"
                   description="Cantidad por día"
@@ -381,17 +403,19 @@ function OperationalDashboard({ report }: { report: boolean }) {
                 .map((g) => <GoalCard key={g.id} goal={g} />)}
             {report && view === "team" && (
               <>
-                <DataChart
-                  title="Ocupación por sucursal"
-                  description="Solo capacidad conocida · porcentaje"
-                  kind="bar"
-                  percent
-                  data={r.data!.by_branch.map((d) => ({
-                    label: d.name,
-                    value: utilization(d.booked_minutes, d.available_minutes),
-                  }))}
-                  series={[{ key: "value", label: "Ocupación" }]}
-                />
+                {w.branches.length > 1 && (
+                  <DataChart
+                    title="Ocupación por sucursal"
+                    description="Solo capacidad conocida · porcentaje"
+                    kind="bar"
+                    percent
+                    data={r.data!.by_branch.map((d) => ({
+                      label: d.name,
+                      value: utilization(d.booked_minutes, d.available_minutes),
+                    }))}
+                    series={[{ key: "value", label: "Ocupación" }]}
+                  />
+                )}
                 <DataChart
                   title="Servicios más realizados"
                   description="Servicios completados del período · cantidad"

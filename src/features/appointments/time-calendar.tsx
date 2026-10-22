@@ -2,10 +2,7 @@
 import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { statusLabels } from "@/lib/validation";
 import type { Appointment, Staff, DataRow } from "@/lib/types";
-import { useWorkspace } from "@/features/organizations/context";
-import { useResource, resourceUrl } from "@/lib/client";
 import { useClock } from "@/hooks/use-clock";
-import { Notice } from "@/components/ui";
 import { calendarBounds, visibleInterval } from "@/lib/calendar";
 /** A clock scale represents booked intervals, never inferred availability. */
 export function TimeCalendar({
@@ -13,33 +10,42 @@ export function TimeCalendar({
   tz,
   staff,
   appointments,
+  blocks,
+  absences,
+  loadingBlocks,
   onChoose,
 }: {
   day: string;
   tz: string;
   staff: Staff[];
   appointments: Appointment[];
+  blocks: DataRow[];
+  absences: DataRow[];
+  loadingBlocks: boolean;
   onChoose: (a: Appointment) => void;
 }) {
-  const w = useWorkspace();
   const now = useClock();
-  const blocks = useResource<{ items: DataRow[] }>(
-    resourceUrl("daily_availability", {
-      org: w.organization.id,
-      branch: w.branchId,
-      date: day,
-    }),
-  );
   const { origin, end, minutes: dayMinutes } = calendarBounds(day, tz);
   const elapsed = (time: string) => (new Date(time).getTime() - origin) / 60000;
   const localMinute = (time: string) =>
     elapsed(fromZonedTime(day + "T" + time, tz).toISOString());
-  const visibleBlocks =
-    blocks.data?.items.filter((b) => staff.some((s) => s.id === b.staff_id)) ??
-    [];
+  const visibleBlocks = blocks.filter(
+    (b) => b.local_date === day && staff.some((s) => s.id === b.staff_id),
+  );
   const rows = appointments.filter((a) =>
     visibleInterval(a.starts_at, a.ends_at, origin, end),
   );
+  const visibleAbsences = absences
+    .filter((b) => staff.some((s) => s.id === b.staff_id))
+    .flatMap((b) => {
+      const interval = visibleInterval(
+        String(b.starts_at),
+        String(b.ends_at),
+        origin,
+        end,
+      );
+      return interval ? [{ id: b.id, staffId: b.staff_id, interval }] : [];
+    });
   const visibleStart = (a: Appointment) =>
     visibleInterval(a.starts_at, a.ends_at, origin, end)!.start;
   const visibleEnd = (a: Appointment) =>
@@ -47,6 +53,7 @@ export function TimeCalendar({
   const first = Math.min(
     Math.floor(localMinute("08:00:00") / 60),
     ...rows.map((a) => Math.floor(visibleStart(a) / 60)),
+    ...visibleAbsences.map((b) => Math.floor(b.interval.start / 60)),
     ...visibleBlocks.map((b) =>
       Math.floor(localMinute(String(b.starts_at)) / 60),
     ),
@@ -56,6 +63,7 @@ export function TimeCalendar({
     Math.max(
       Math.ceil(localMinute("20:00:00") / 60),
       ...rows.map((a) => Math.ceil(visibleEnd(a) / 60)),
+      ...visibleAbsences.map((b) => Math.ceil(b.interval.end / 60)),
       ...visibleBlocks.map((b) =>
         Math.ceil(localMinute(String(b.ends_at)) / 60),
       ),
@@ -64,7 +72,6 @@ export function TimeCalendar({
   const hours = Array.from({ length: last - first }, (_, i) => first + i);
   return (
     <>
-      {blocks.error && <Notice error>Horarios del día: {blocks.error}</Notice>}
       <div
         className="time-calendar"
         tabIndex={0}
@@ -85,7 +92,9 @@ export function TimeCalendar({
                 {rows.filter((a) => a.staff_id === s.id).length} citas ·{" "}
                 {visibleBlocks.some((b) => b.staff_id === s.id)
                   ? "Franjas confirmadas"
-                  : "Disponibilidad sin confirmar"}
+                  : loadingBlocks
+                    ? "Consultando horarios…"
+                    : "Sin bloques diarios"}
               </small>
             </header>
           ))}
@@ -121,6 +130,20 @@ export function TimeCalendar({
                         ? "Disponible"
                         : String(b.reason || "Descanso / ausencia")}
                     </span>
+                  </div>
+                ))}
+              {visibleAbsences
+                .filter((b) => b.staffId === s.id)
+                .map((b) => (
+                  <div
+                    key={b.id}
+                    className="calendar-availability unavailable"
+                    style={{
+                      top: (b.interval.start - first * 60) * 2,
+                      height: b.interval.duration * 2,
+                    }}
+                  >
+                    <span>Ausencia registrada</span>
                   </div>
                 ))}
               {hours.map((h) => (

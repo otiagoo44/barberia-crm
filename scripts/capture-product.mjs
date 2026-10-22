@@ -1,8 +1,8 @@
 /* global document, innerWidth */
 import { chromium, expect } from "@playwright/test";
-import { readFile, mkdir, writeFile, rm } from "node:fs/promises";
+import { readFile, mkdir, writeFile, rm, readdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
-import { createHmac } from "node:crypto";
+import { createHmac, createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import AxeBuilder from "@axe-core/playwright";
 const base = process.env.QA_BASE_URL ?? "http://localhost:3000";
@@ -164,6 +164,16 @@ try {
           .click();
         await expect(page.getByRole("dialog")).toBeVisible();
         await capture("cliente-ficha", width);
+        if (phase === "after") {
+          await page
+            .getByRole("tab", { name: "Actividad", exact: true })
+            .click();
+          await capture("cliente-actividad", width);
+          await page
+            .getByRole("tab", { name: "Notas y preferencias", exact: true })
+            .click();
+          await capture("cliente-notas", width);
+        }
         await page.keyboard.press("Escape");
       }
       if (module === "equipo") {
@@ -194,6 +204,38 @@ try {
             .click();
         await capture("navegacion", width);
         if (width < 768) await page.keyboard.press("Escape");
+        if (phase === "after") {
+          await page
+            .getByRole("button", { name: "Semana", exact: true })
+            .click();
+          await capture("agenda-semana", width);
+          await page.getByRole("button", { name: "Día", exact: true }).click();
+          const appointment = page.locator(".calendar-event").first();
+          await appointment.click();
+          await expect(page.getByRole("dialog")).toBeVisible();
+          await capture("reserva-detalle", width);
+          await page.keyboard.press("Escape");
+          await expect(appointment).toBeFocused();
+          await page
+            .getByRole("button", { name: "+ Nueva reserva", exact: true })
+            .click();
+          await capture("reserva-nueva", width);
+          await page.keyboard.press("Escape");
+        }
+      }
+      if (module === "finanzas") {
+        await page.getByLabel("Período", { exact: true }).selectOption("7");
+        await capture("finanzas-7dias", width);
+      }
+      if (module === "reportes" && phase === "after") {
+        await page
+          .getByRole("button", { name: "Clientes y retorno", exact: true })
+          .click();
+        await capture("reportes-retencion", width);
+        await page
+          .getByRole("button", { name: "Equipo y servicios", exact: true })
+          .click();
+        await capture("reportes-equipo", width);
       }
     }
   }
@@ -244,6 +286,17 @@ try {
     }
   }
   expect(errors).toEqual([]);
+  const screenshots = [];
+  for (const file of (await readdir(out))
+    .filter((file) => file.endsWith(".png"))
+    .sort()) {
+    const bytes = await readFile(`${out}/${file}`);
+    screenshots.push({
+      file,
+      bytes: bytes.length,
+      sha256: createHash("sha256").update(bytes).digest("hex"),
+    });
+  }
   await writeFile(
     `${out}/results.json`,
     JSON.stringify(
@@ -255,6 +308,13 @@ try {
         consoleErrors,
         failedRequests,
         accessibility,
+        screenshots,
+        srcTree: execFileSync("git", ["rev-parse", "HEAD:src"], {
+          encoding: "utf8",
+        }).trim(),
+        schemaTree: execFileSync("git", ["rev-parse", "HEAD:supabase"], {
+          encoding: "utf8",
+        }).trim(),
         source: execFileSync("git", ["rev-parse", "HEAD"], {
           encoding: "utf8",
         }).trim(),

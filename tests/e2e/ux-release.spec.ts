@@ -324,6 +324,72 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     });
     expect(errors).toEqual([]);
   });
+  test("week calendar batches schedules, validates ranges and preserves tenant isolation with real Auth", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    await page.request.post("/api/auth/signin", {
+      headers: { Origin: "http://localhost:3000" },
+      data: { email: "ownerA@fixture.invalid", password: f.password },
+    });
+    await verifyRequest(page.request, "ownerA");
+    const schedules: string[] = [];
+    page.on("request", (r) => {
+      if (r.url().includes("/api/workspace/calendar_blocks?"))
+        schedules.push(r.url());
+    });
+    await page.goto("/fixture-a/agenda");
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
+    const dailyCount = schedules.length;
+    expect(dailyCount).toBe(1);
+    const scheduleResponse = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/workspace/calendar_blocks?") &&
+        r.status() === 200,
+    );
+    await page.getByRole("button", { name: "Semana", exact: true }).click();
+    const weeklyResponse = await scheduleResponse;
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
+    await expect(
+      page.getByRole("region", { name: /^Calendario horario del/ }),
+    ).toHaveCount(7);
+    expect(schedules.length - dailyCount).toBe(1);
+    const url = new URL(weeklyResponse.url());
+    const payload = await weeklyResponse.json();
+    expect(Array.isArray(payload.items)).toBeTruthy();
+    expect(Array.isArray(payload.absences)).toBeTruthy();
+    url.searchParams.set("org", f.orgB);
+    url.searchParams.set("branch", f.branches.b1);
+    const otherTenant = await page.request.get(url.toString());
+    expect(otherTenant.ok()).toBeTruthy();
+    expect(await otherTenant.json()).toMatchObject({
+      items: [],
+      absences: [],
+      has_more: false,
+    });
+    url.searchParams.set("end_day", url.searchParams.get("start_day")!);
+    expect((await page.request.get(url.toString())).status()).toBe(400);
+    await page
+      .getByRole("button", { name: "+ Nueva reserva", exact: true })
+      .click();
+    const dialog = page.getByRole("dialog", {
+      name: "Nueva reserva",
+      exact: true,
+    });
+    await expect(dialog).toBeVisible();
+    for (let i = 0; i < 12; i++) {
+      await page.keyboard.press("Tab");
+      expect(
+        await page.evaluate(() => !!document.activeElement?.closest("dialog")),
+      ).toBeTruthy();
+    }
+    await page.keyboard.press("Escape");
+    await expect(
+      page.getByRole("button", { name: "+ Nueva reserva", exact: true }),
+    ).toBeFocused();
+  });
   test("report period filters reload the authorized chart and expose keyboard-readable data", async ({
     page,
   }) => {

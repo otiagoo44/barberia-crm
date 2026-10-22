@@ -41,6 +41,19 @@ try {
     [f.customers.a1],
   );
   const today = new Date().toISOString().slice(0, 10);
+  await asUser(
+    pool,
+    f.users.ownerA,
+    "select public.manage_record($1,'customer_notes',null,$2,$3)",
+    [
+      f.orgA,
+      f.branches.a1,
+      JSON.stringify({
+        customer_id: f.customers.a1,
+        body: "Nota de prueba QA: prefiere tijera. Fixture aislado, no es un cliente real.",
+      }),
+    ],
+  );
   await pool.query(
     "update public.organization_settings set booking_enabled=false where organization_id=$1",
     [f.orgA],

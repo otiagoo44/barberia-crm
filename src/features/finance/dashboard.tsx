@@ -750,7 +750,12 @@ export function FinanceTable({
   action?: (row: FinanceRow) => React.ReactNode;
 }) {
   return (
-    <div className="table-wrap">
+    <div
+      className="table-wrap"
+      role="region"
+      aria-label="Detalle financiero. Tabla desplazable con teclado."
+      tabIndex={0}
+    >
       <table>
         <thead>
           <tr>

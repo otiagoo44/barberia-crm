@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-22T12:08:30.481Z",
+  "scope": "Working tree candidate; private browser recapture pending",
+  "commands": {
+    "lint": "pass",
+    "typecheck": "pass",
+    "unit": {
+      "pass": 20,
+      "skip": 0
+    },
+    "dbSuites": [],
+    "hardening": {
+      "pass": 23
+    },
+    "build": "pass",
+    "load": {
+      "operations": 1800,
+      "errors": 0,
+      "maxP95ms": 7287.15,
+      "report": "docs/verification/load-results.json",
+      "scope": "SQL and PostgreSQL RLS only; not HTTP, managed network, or production capacity"
+    },
+    "publicAuth": {
+      "viewports": [
+        360,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "forms": 3,
+      "axeViolations": 0,
+      "consoleErrors": 0
+    }
+  },
+  "blockers": [
+    "GitHub connector write: 403 Resource not accessible by integration",
+    "git HTTPS: connection timeout",
+    "No Docker runtime for isolated Supabase Auth on this machine; real-Auth verification runs in CI"
+  ],
+  "supabaseMcp": {
+    "configured": true,
+    "project": "tbcfhagteyqufjkmbxzz",
+    "existingOAuthVerified": true,
+    "verification": [
+      "initialize",
+      "tools/list"
+    ],
+    "cloudWrites": false,
+    "newLogin": "callback timed out; existing credential verified separately"
+  }
+}

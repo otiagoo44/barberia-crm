@@ -58,6 +58,23 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
         })
       : null,
   );
+  const schedule = useResource<{
+    items: DataRow[];
+    absences: DataRow[];
+    has_more: boolean;
+  }>(
+    w.branchId
+      ? resourceUrl("calendar_blocks", {
+          org: w.organization.id,
+          branch: w.branchId,
+          staff: staff || null,
+          start_day: begin,
+          end_day: end,
+          from,
+          to,
+        })
+      : null,
+  );
   const people = useResource<Page<Staff>>(
     resourceUrl("staff", { org: w.organization.id }),
   );
@@ -75,6 +92,16 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
   const live = useLive(w.organization.id, w.branchId, (change) => {
     if (change.type === "reconnected" || change.type === "visible") {
       r.reload();
+      schedule.reload();
+      return;
+    }
+    if (
+      ["staff_availability_exceptions", "staff_time_off"].includes(
+        change.table ?? "",
+      ) ||
+      change.type === "staff.availability_changed"
+    ) {
+      schedule.reload();
       return;
     }
     if (change.table !== "appointments" || !change.id) return;
@@ -243,7 +270,14 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
             </option>
           ))}
         </select>
-        <button onClick={r.reload}>Actualizar</button>
+        <button
+          onClick={() => {
+            r.reload();
+            schedule.reload();
+          }}
+        >
+          Actualizar
+        </button>
         <div className="segmented" aria-label="Presentación de agenda">
           <button
             aria-pressed={layout === "time"}
@@ -263,7 +297,15 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
         <span className="realtime-state">{live}</span>
       </div>
       {(r.error || error) && <Notice error>{r.error || error}</Notice>}
+      {schedule.error && <Notice error>Horarios: {schedule.error}</Notice>}
+      {schedule.data?.has_more && (
+        <Notice>
+          Hay más de 1.000 bloques. Filtrá por profesional para consultar el
+          rango completo.
+        </Notice>
+      )}
       {r.loading && !r.data && <Loading />}
+      {schedule.loading && !schedule.data && <Loading />}
       {r.data?.has_more && (
         <Notice>
           Este rango contiene más de 2.000 reservas. Reducí el rango o filtrá
@@ -296,6 +338,9 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
               tz={tz}
               staff={columns}
               appointments={r.data.items}
+              blocks={schedule.data?.items ?? []}
+              absences={schedule.data?.absences ?? []}
+              loadingBlocks={schedule.loading}
               onChoose={setChosen}
             />
           ) : (

@@ -116,6 +116,8 @@ Controles `{rounded.control}`; paneles `{rounded.panel}`. Evitar botones en form
 
 Lucide SVG coherente, iconos decorativos ocultos a lectores. Dialog nativo con nombre, Escape, foco contenido y restitución del foco. Una acción primaria por tarea; secundarias con borde y peligrosas con texto rojo. Tablas con encabezados, filas legibles y región desplazable con teclado. Charts Recharts accesibles más tabla alternativa: no depender de color ni hover. Skeleton, vacío, error y desconocido son estados distintos.
 
+Inicio prioriza la jornada y los indicadores; la guía de configuración queda plegada, accesible desde su resumen. Deshabilitar reservas online no significa que el negocio necesite onboarding. Agenda carga franjas y ausencias una vez por rango, con límites explícitos y RLS de la sesión; cada día conserva su escala real. Las tablas financieras y de auditoría permiten foco y desplazamiento con teclado también cuando no contienen acciones.
+
 ## Do's and Don'ts
 
 Usar datos autorizados y unidades exactas. Mostrar producción estimada, ventas reconocidas, cobros y resultado por separado. No inventar tendencias sin comparación. No llenar gráficos vacíos con fixtures. Respetar reduced-motion. Mantener personalización de marca y los permisos efectivos en DB. No agregar modo oscuro hasta poder probar todos sus estados.
