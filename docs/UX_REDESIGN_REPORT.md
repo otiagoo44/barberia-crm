@@ -56,10 +56,14 @@ Las 27 originales, las cuatro del PR y hardening 32 se conservan. La 33 requiere
 
 Las iteraciones, comparación de rendimiento y limitaciones se registran en [UX_TEST_RESULTS.md](UX_TEST_RESULTS.md) y [UX_BEFORE_AFTER.md](UX_BEFORE_AFTER.md). Un candidato no queda validado por TypeScript ni por screenshots de otra revisión.
 
-## Pendientes reales
+## Iteración final y pendientes de verificación
 
-La sesión del 22/10 corrigió el acceso por teclado a tablas, plegó la guía operativa y consolidó horarios/ausencias por rango. No pudo publicar por 403 del conector y timeout de Git; las capturas privadas y CI actuales siguen pendientes. Login/alta/recuperación sí se recapturaron en el build local y pasaron axe a cinco anchos.
+La primera sesión del 22/10 corrigió tablas, guía operativa y consultas por rango. En la continuación se recuperó Git HTTPS y acceso a Vercel mediante su CLI; el conector conserva 403. La captura 70ebe7b completó las pantallas privadas y detectó ARIA sin rol en el indicador de hora actual: se corrigió su semántica gráfica. No se deshabilitaron reglas axe. El baseline no tenía preset de siete días: ahora el mismo rango se configura usando sus controles personalizados originales.
 
-También quedan diferencias de alcance que no deben confundirse con trabajo terminado: la serie de resultado muestra el neto y explica sus deducciones, pero todavía no ofrece series separadas de POS y comisiones; el gráfico de servicios está por servicio, no por categoría; clientes vencidos están en seguimiento, no en una serie histórica de retención. No se fabricaron esas series ni se ampliaron permisos para rellenarlas. Deben completarse y validarse antes de aceptar el rediseño integral.
+La migración 34 agrega las series POS/comisiones sobre los mismos snapshots financieros, categorías sobre servicios autorizados y minutos de atención por profesional. Un selector financiero compara producción, ticket y comisiones sin agregar consultas ni mezclar unidades. El retorno vencido se presenta como snapshot actual, no como historia inexistente. Contratos verifican importes exactos, desconocidos, aislamiento y exclusión de no contactar. La suite local de producto tiene 17 contratos aprobados y la calidad de 70ebe7b aprobó en CI. La recaptura del cierre sigue pendiente.
+
+La inspección móvil corrigió un importe que se partía entre dígitos y el resumen de jornada demasiado estrecho. Seguridad agrega confirmación antes de retirar un autenticador o cerrar todas las sesiones; se conserva la prohibición de retirar el último factor y se amplía el E2E con cancelar/Escape/foco. Se usan todas las skills de diseño instaladas (las cinco enumeradas) y las dos de Supabase/Postgres. Se repitieron lint/diff/export de Google con cero advertencias; las recomendaciones de landing de UI UX Pro Max se descartaron explícitamente por no corresponder al producto.
+
+La guía concreta de instalación, datos requeridos y aceptación con Esteban/Jonatan está en [PILOTO_ESTEBAN_JONATAN.md](PILOTO_ESTEBAN_JONATAN.md). Publicar no habilita por sí solo reservas online, reparto, correo o datos no confirmados.
 
 Las tasas de cancelación/ausencia se derivan de cantidades autorizadas: denominador de citas resueltas del período (completadas + canceladas + no-shows), excluyendo activas y reprogramadas. Con cero/desconocido no se muestra 0%. La comparación por sucursal sólo se renderiza con más de una sucursal autorizada.

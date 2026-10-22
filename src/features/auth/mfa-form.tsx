@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { ShieldCheck, KeyRound } from "lucide-react";
 import { api } from "@/lib/client";
 import { Field, Notice } from "@/components/ui";
+import { ConfirmDialog } from "@/components/workspace-ui";
 import { SignOut } from "./auth-form";
 type Factor = { id: string; name: string; status: string };
 export function MfaForm({
@@ -31,6 +32,27 @@ export function MfaForm({
   );
   const [busy, setBusy] = useState(false);
   const [manage, setManage] = useState(level === "aal2");
+  const [confirmation, setConfirmation] = useState<
+    { kind: "factor"; factor: Factor } | { kind: "sessions" } | null
+  >(null);
+  async function confirmSecurityAction() {
+    if (!confirmation || busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      if (confirmation.kind === "factor") {
+        await api("/api/auth/mfa/unenroll", { factor: confirmation.factor.id });
+        window.location.reload();
+      } else {
+        await api("/api/auth/revoke_sessions", {});
+        window.location.assign("/login");
+      }
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
   async function enroll(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setBusy(true);
@@ -77,7 +99,7 @@ export function MfaForm({
         Usá el código de tu aplicación de autenticación. Los accesos de
         administración y finanzas requieren esta verificación.
       </p>
-      {error && <Notice error>{error}</Notice>}
+      {error && !confirmation && <Notice error>{error}</Notice>}
       {level === "aal2" && !enrollment && (
         <Link className="primary" href={next}>
           {next === "/reset-password"
@@ -169,17 +191,9 @@ export function MfaForm({
             <span>{f.name}</span>
             <button
               disabled={busy || verified.length < 2}
-              onClick={async () => {
-                setBusy(true);
+              onClick={() => {
                 setError("");
-                try {
-                  await api("/api/auth/mfa/unenroll", { factor: f.id });
-                  window.location.reload();
-                } catch (e) {
-                  setError((e as Error).message);
-                } finally {
-                  setBusy(false);
-                }
+                setConfirmation({ kind: "factor", factor: f });
               }}
             >
               Retirar dispositivo
@@ -201,13 +215,10 @@ export function MfaForm({
       </details>
       {level === "aal2" && (
         <button
-          onClick={async () => {
-            try {
-              await api("/api/auth/revoke_sessions", {});
-              window.location.assign("/login");
-            } catch (e) {
-              setError((e as Error).message);
-            }
+          disabled={busy}
+          onClick={() => {
+            setError("");
+            setConfirmation({ kind: "sessions" });
           }}
         >
           Cerrar todas mis sesiones
@@ -219,6 +230,32 @@ export function MfaForm({
         </button>
       )}
       <SignOut disabled={busy} />
+      {confirmation && (
+        <ConfirmDialog
+          title={
+            confirmation.kind === "factor"
+              ? "Retirar dispositivo"
+              : "Cerrar todas mis sesiones"
+          }
+          pending={busy}
+          error={error}
+          onClose={() => {
+            if (!busy) {
+              setConfirmation(null);
+              setError("");
+            }
+          }}
+          onConfirm={() => {
+            void confirmSecurityAction();
+          }}
+        >
+          <p>
+            {confirmation.kind === "factor"
+              ? `Vas a retirar ${confirmation.factor.name}. Asegurate de poder entrar con otro autenticador verificado. Esta clave dejará de servir para iniciar sesión.`
+              : "Se cerrará tu acceso en todos los dispositivos, incluido este. Vas a necesitar tu contraseña y autenticador para volver a entrar."}
+          </p>
+        </ConfirmDialog>
+      )}
     </section>
   );
 }

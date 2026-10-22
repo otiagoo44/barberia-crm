@@ -158,6 +158,26 @@ test.describe("Real MFA release boundary", () => {
       .filter({ hasText: "Teléfono principal" })
       .getByRole("button", { name: "Retirar dispositivo" })
       .click();
+    const retirement = page.getByRole("dialog", {
+      name: "Retirar dispositivo",
+      exact: true,
+    });
+    await expect(retirement).toBeVisible();
+    await retirement
+      .getByRole("button", { name: "Cancelar", exact: true })
+      .click();
+    await expect(
+      page.getByText("Teléfono principal", { exact: true }),
+    ).toBeVisible();
+    const retireButton = page
+      .locator(".row")
+      .filter({ hasText: "Teléfono principal" })
+      .getByRole("button", { name: "Retirar dispositivo" });
+    await expect(retireButton).toBeFocused();
+    await retireButton.click();
+    await retirement
+      .getByRole("button", { name: "Confirmar", exact: true })
+      .click();
     await expect(
       page.getByText("Teléfono principal", { exact: true }),
     ).toHaveCount(0);
@@ -221,6 +241,24 @@ test.describe("Real MFA release boundary", () => {
     await page.goto("/mfa");
     await page
       .getByRole("button", { name: "Cerrar todas mis sesiones" })
+      .click();
+    const revocation = page.getByRole("dialog", {
+      name: "Cerrar todas mis sesiones",
+      exact: true,
+    });
+    await expect(revocation).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(
+      page.getByRole("button", {
+        name: "Cerrar todas mis sesiones",
+        exact: true,
+      }),
+    ).toBeFocused();
+    await page
+      .getByRole("button", { name: "Cerrar todas mis sesiones", exact: true })
+      .click();
+    await revocation
+      .getByRole("button", { name: "Confirmar", exact: true })
       .click();
     await expect(page).toHaveURL(/\/login$/);
     expect(

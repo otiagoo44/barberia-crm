@@ -136,6 +136,21 @@ try {
     results.push({ module, width, overflow: false, performance });
     await audit(page, module, width);
   }
+  if (phase === "after") {
+    for (const width of [360, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      await page.goto(base + "/mfa");
+      await capture("mfa-dispositivos", width);
+      const revoke = page.getByRole("button", {
+        name: "Cerrar todas mis sesiones",
+        exact: true,
+      });
+      await revoke.click();
+      await capture("mfa-confirmacion", width);
+      await page.keyboard.press("Escape");
+      await expect(revoke).toBeFocused();
+    }
+  }
   for (const width of [360, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     for (const module of [
@@ -224,9 +239,25 @@ try {
         }
       }
       if (module === "finanzas") {
-        await page
-          .getByRole("combobox", { name: "Período", exact: true })
-          .selectOption("7");
+        const period = page.getByRole("combobox", {
+          name: "Período",
+          exact: true,
+        });
+        if (phase === "before") {
+          // The recovered PR has Today/Week/Month/Custom, not a 7-day preset.
+          // Compare the same real range using its existing date controls.
+          await period.selectOption("custom");
+          const end = await page
+            .getByLabel("Hasta", { exact: true })
+            .inputValue();
+          const start = new Date(end + "T12:00:00Z");
+          start.setUTCDate(start.getUTCDate() - 6);
+          await page
+            .getByLabel("Desde", { exact: true })
+            .fill(start.toISOString().slice(0, 10));
+        } else {
+          await period.selectOption("7");
+        }
         await capture("finanzas-7dias", width);
         if (phase === "after") {
           await page

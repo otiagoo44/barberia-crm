@@ -188,6 +188,7 @@ export function TimeCalendar({
                 (now - origin) / 60000 < last * 60 && (
                   <div
                     className="calendar-now"
+                    role="img"
                     style={{ top: ((now - origin) / 60000 - first * 60) * 2 }}
                     aria-label={`Hora actual ${formatInTimeZone(now, tz, "HH:mm")}`}
                   />
