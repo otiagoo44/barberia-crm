@@ -64,7 +64,13 @@ jobs:
         run: npx tsx tests/e2e/setup.ts
       - name: Restore drill with real local Supabase
         run: npx tsx tests/recovery/local-supabase.ts
-      - run: npx playwright install --with-deps chromium
+      - name: Install Chromium and verify host libraries
+        timeout-minutes: 10
+        run: |
+          npx playwright install chromium
+          if ! node -e "require('@playwright/test').chromium.launch().then(browser => browser.close())"; then
+            npx playwright install-deps chromium
+          fi
       - run: npm run build
         id: product-build
       - run: npm run test:e2e
@@ -135,7 +141,13 @@ jobs:
       - run: npx supabase db reset --local --no-seed
       - run: node scripts/ci-environment.mjs
       - run: npx tsx tests/e2e/setup.ts
-      - run: npx playwright install --with-deps chromium
+      - name: Install Chromium and verify host libraries
+        timeout-minutes: 10
+        run: |
+          npx playwright install chromium
+          if ! node -e "require('@playwright/test').chromium.launch().then(browser => browser.close())"; then
+            npx playwright install-deps chromium
+          fi
       - run: npm run build
       - name: Capture recovered PR UI with actual isolated Auth
         run: |

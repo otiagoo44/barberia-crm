@@ -184,7 +184,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     expect(bounds!.y).toBeGreaterThanOrEqual(0);
     await page.screenshot({
       path: "test-results/clients-css-zoom-200.png",
-      fullPage: true,
+      fullPage: false,
     });
     await page.keyboard.press("Escape");
     await page.evaluate(() => {

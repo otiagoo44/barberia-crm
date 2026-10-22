@@ -122,8 +122,8 @@ button:disabled {
 }
 button.primary,
 .primary {
-  background: var(--accent);
-  color: var(--text);
+  background: var(--brand, var(--color-primary));
+  color: var(--on-brand, var(--color-on-primary));
   border-color: transparent;
   font-weight: 650;
   display: inline-flex;
@@ -340,7 +340,7 @@ small {
 }
 .modal {
   width: min(680px, calc(100vw - 32px));
-  max-height: 90dvh;
+  max-height: min(90dvh, calc(100% - 32px));
   background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
@@ -379,7 +379,7 @@ small {
   z-index: 100;
   padding: 12px;
   background: var(--accent);
-  color: #000;
+  color: #fff;
 }
 .skip-link:focus {
   top: 12px;
@@ -421,8 +421,8 @@ small {
 .brand-mark {
   width: 34px;
   height: 38px;
-  background: var(--accent);
-  color: var(--text);
+  background: var(--brand, var(--color-primary));
+  color: var(--on-brand, var(--color-on-primary));
   border-radius: var(--radius-control);
   display: grid;
   place-items: center;
@@ -876,9 +876,9 @@ td button {
   padding: 9px;
   border-radius: var(--radius-control);
 }
-.slot-grid button.selected {
-  background: var(--accent);
-  color: #111;
+.slot-grid button.selected:not(:disabled) {
+  background: var(--brand, var(--color-primary));
+  color: var(--on-brand, var(--color-on-primary));
   border-color: transparent;
 }
 .slot-grid small {
@@ -1045,8 +1045,8 @@ td button {
   border-radius: var(--radius-control);
 }
 .booking-steps span.current {
-  background: var(--accent);
-  color: #111;
+  background: var(--brand, var(--color-primary));
+  color: var(--on-brand, var(--color-on-primary));
 }
 .honeypot {
   position: absolute;
@@ -1233,13 +1233,6 @@ td button {
     animation: none !important;
     transition: none !important;
   }
-}
-
-.primary,
-button.primary,
-.brand-mark {
-  background: var(--brand, var(--color-primary));
-  color: var(--on-brand, var(--color-on-primary));
 }
 
 .nav-group {

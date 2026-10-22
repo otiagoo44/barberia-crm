@@ -171,11 +171,7 @@
 }
 .primary,
 button.primary {
-  background: var(--brand, var(--color-primary));
-  color: var(--on-brand, var(--color-on-primary));
-  border-color: transparent;
   font-size: 15px;
-  font-weight: 650;
 }
 .primary:hover,
 button.primary:hover {
@@ -184,6 +180,7 @@ button.primary:hover {
 }
 .primary:disabled,
 button.primary:disabled,
+.table-wrap button:disabled,
 button:disabled {
   background: var(--color-disabled);
   color: var(--color-muted);
@@ -344,10 +341,10 @@ td button:not(.danger) {
   position: fixed;
   inset: 0 0 0 auto;
   margin: 0;
-  height: 100dvh;
-  max-height: 100dvh;
-  width: min(660px, 100vw);
-  max-width: 100vw;
+  height: min(100dvh, 100%);
+  max-height: min(100dvh, 100%);
+  width: min(660px, 100%);
+  max-width: 100%;
   border-radius: 0;
   padding: 28px;
   box-shadow: -12px 0 48px #17171518;
