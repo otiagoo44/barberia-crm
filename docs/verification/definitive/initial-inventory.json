@@ -1,0 +1,5063 @@
+{
+  "base": "b7d5cfd42611d83347b4307e0c53db173d7b967f",
+  "records": [
+    {
+      "path": ".env.example",
+      "kind": "configuración",
+      "sha256": "11ba31a185776705c5c5146943a717479073acaa6148912a71edf818fe58becb",
+      "lines": 13,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": ".github/rulesets/main.json",
+      "kind": "automatización / protección",
+      "sha256": "27ed10c30d397a0499b6a5b0480023ef233bb6dd3b4e04d98a05c32166360dcc",
+      "lines": 34,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "kind": "automatización / protección",
+      "sha256": "dda8855b90eb1b2a9e594df4ec5ea3d3bded3e5799620c6570c716f68de211e4",
+      "lines": 120,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": ".github/workflows/load.yml",
+      "kind": "automatización / protección",
+      "sha256": "043dd1eac86ed5527b1c0dbd701ec421941f2a435dc206aec414755914698630",
+      "lines": 22,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": ".gitignore",
+      "kind": "configuración",
+      "sha256": "0a1f4ea415c5d7847d5c45e11d71e1e9ae2d84e5a4b8e394c72452e09eea129d",
+      "lines": 17,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": ".vercelignore",
+      "kind": "configuración",
+      "sha256": "8fb76204d0f3b5aecfea8828bf183eb5266d2b775fa883ebb5b1f89a7a2ffa7a",
+      "lines": 20,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "DESIGN.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "b597475f2ccdd617ee2da623e6ee53068d8205355eae80e12ea4a84d2d7cc83e",
+      "lines": 130,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "README.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "6193e9b182cd73c345c5ed9e60e63f152ee424229098d8813ccd3df70db9905b",
+      "lines": 80,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "config/onboarding/1717.json",
+      "kind": "configuración",
+      "sha256": "f4d201022a8dbf37a4ace9c86cc7f88be703e6bac663b3224ea68a0b0734e5ba",
+      "lines": 201,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/1717_INTEGRATION_HANDOFF.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "4022da2fefdb7aeeaaad8821544f6b080479c87aa430f642241f40a07b263466",
+      "lines": 27,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "63a94e47b7658769ee68719bed40d023b0b8a4429428adc4a270eddc2e14fe83",
+      "lines": 43,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/AUDIT.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "23051d452e5a3fecfa1eaf7ffb195ee444dd19f36c81bc39f352b1115e88af5b",
+      "lines": 54,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/AVAILABILITY_ENGINE.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "593058dc12f66ca6f48d9074288084274ac8abc6cfe3b367d09494c9780bcc4d",
+      "lines": 16,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/BACKUP_AND_RECOVERY.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "dc508515f2e6e5c655878d0fd9ec344df309ff2c541f7a7d941979afba95b01c",
+      "lines": 38,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/BOOKING_ENGINE.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "892fe8bac548b89e7141fe718ef6334ae7e9f08f82ca8d69834a855e94269f3e",
+      "lines": 33,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/CAPACITY_AND_SCALING.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "5ce5fb3c74f241b0efc96e2bb10c7bfcb9f394a53d643bdceb96ba8a45efbced",
+      "lines": 37,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/CONTINUATION_AUDIT.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "689f9d466cd3544c877a61d580e8ac683e7f5529ba24d1955f7abb6f2d0a967c",
+      "lines": 39,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/FINAL_AUDIT_INVENTORY.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "d0c8d1b58998f3d7d1ec95d447054f243daa2ddad8105d5b2521c21c2bd08030",
+      "lines": 138,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/FINAL_HARDENING_AUDIT.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "271604a2edb2126724b4e68586c4e0c173212476b418578d6ad54395ddae0dcc",
+      "lines": 87,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/FINAL_PERMISSION_MATRIX.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "21c465f58ee79f8a98ba7c318ea37f3488523dd6a486f0010b235b90465e6666",
+      "lines": 57,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/FINAL_PRODUCT_AUDIT_2026_10_20.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "a02e056f01a5961dff8c27be8d46d6c81c525ea4533cc191681c3acad6f04867",
+      "lines": 33,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/FINANCE.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "119e75bb9d6d43497def789c8d57598912d74686a65b371f379ec5525497a9e7",
+      "lines": 47,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/FINANCE_IMPORT_1717.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "ff3c87b1285e9e31e6a0e916d10d6f54a6661756ec989b73c23adb76abc03d01",
+      "lines": 38,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/MULTITENANCY.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "8ad5adda4de464957753ff1a2de778456ea6e6770f8af47a1b563bc4d7c17241",
+      "lines": 16,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/NEW_ORGANIZATION_ONBOARDING.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "216ed6f93005642487f8a14069516f1818e6210e2a65d7a5a8a200669130aeb0",
+      "lines": 64,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/OPERACION_1717.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "cbe5cbdf2a33c284ae37abfef85c5b08b9dc0b8c9c3a652ef5229f26da90c864",
+      "lines": 34,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/OPERATIONAL_INCIDENTS.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "ce3b1f3f35e1503388969862597bd7ed6f3ac25ad0ed58f95db43667621d9a29",
+      "lines": 33,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/PARTNER_DISTRIBUTIONS_DESIGN.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "522c9372a5317ca8c0a10c3085e88224611a45cdec4568aad7deafe57aef8adc",
+      "lines": 29,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/PILOTO_ESTEBAN_JONATAN.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "ee919a16ca512982601a55f20baa03c6f57d72857660e86ba678e1d640fcf00a",
+      "lines": 49,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/PR3_RECOVERY_AUDIT_2026_10_21.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "9cbab6ca34778919cb34cd183d7c153a95b91efbdbe840ba8352f0eff1ac0483",
+      "lines": 74,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/PRODUCTION_READINESS.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "2d6699d69cf417353b757f8eee42d3cb9844643ccd6f943850a444d5409edfee",
+      "lines": 43,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/PRODUCTION_RELEASE_CHECKLIST.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "e373f4ddb50b11bba212f0493bb30099289b5490b2b33b272295b47e7f1d8b84",
+      "lines": 52,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/RELEASE_2026_10_19.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "634a851f29754d1f4fae3d4af3057e56c670fe78fa3604d0512be67dd943f9f3",
+      "lines": 38,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/RELEASE_REPORT.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "e2fa3b4d91890efe85f641b2a58975ee98e1eb35195fc306fe20bcd1c1735ddc",
+      "lines": 91,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/REQUIREMENTS.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "13594797d0509649106af6ab1eb02d8cc5ccb3a38f44739dcb241fee7d8866dd",
+      "lines": 107,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/RLS_MATRIX.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "4b12ce394724edf0ec0dc924bfa899259217448074b8a3aafa16a78f9c0db1e6",
+      "lines": 93,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/ROLLBACK_PLAN.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "12e95fcab9a5642318261a34cad82ad9fc2f4e35025522c471c983bb28ab4015",
+      "lines": 16,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/SCHEMA.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "c3a5d3d7c75ab151951c253f4b7961e4abb3b681215e2e22876a0d9600f56150",
+      "lines": 59,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/SECURITY.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "6dc8f3eb5589ba8b6bdef8a377f0b5967b0e98b9a6f465592f91d4abbef2f24b",
+      "lines": 45,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/SECURITY_RELEASE_MATRIX.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "70aa9f3c1ca9162a59206b4389d928714fd5e74c61009a5352f7462540c5dc11",
+      "lines": 30,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/SESSION_HANDOFF_2026_10_19.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "6e7decb04faefc838ae5a29a0f1da942b827a3ea51fb21a3a948c9c1be8d2b1b",
+      "lines": 45,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/STAGING_ROLLOUT_PR3.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "6134131443496fe197b48babeed8c04028dabbb91017f48aaaaaeee6863f51d1",
+      "lines": 29,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/UX_BEFORE_AFTER.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "4beec757a2c147df81e9843efba3cdb6dfa98d0ced6a341750e1e760ff7b9ab8",
+      "lines": 33,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/UX_COMPONENT_INVENTORY.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "d218a8d49447be286b57b015ba35e39806669da487338144d0d5078100ca13b5",
+      "lines": 35,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/UX_REDESIGN_REPORT.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "3e1072ec5266438b31b3e2a5c62947b290a399a1203bb9cd7541b4b5334a9590",
+      "lines": 76,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/UX_TEST_RESULTS.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "58cc09f07458ff835c22ec52d9ddadbcab5b2532fee1bcd5a2e8fb6322f0aa21",
+      "lines": 85,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/VERCEL_DEPLOYMENT.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "fd552b24535c624ce70da63c6413f03ddd2eb3ba8956ba12a401ec9484a8fec3",
+      "lines": 51,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "e2beea91bde3dab5df6299eeefd9b0fbf36bd1d1d736d7d381b9db1fd050e2b9",
+      "lines": 65,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/WEBSITE_INTEGRATION.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "24a6044a4689cc044077e1278518841cb13a1f108da5649a30e4678e9c0827f6",
+      "lines": 43,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/design/LEGACY_DARK_DESIGN.md",
+      "kind": "documentación (vigencia requiere revisión)",
+      "sha256": "a80338b38b859974604ba4f06722a691ff75974eb4ac7ff51d41264f1f8189ce",
+      "lines": 453,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/applied-migrations-27.json",
+      "kind": "evidencia QA",
+      "sha256": "f22e2d0e37ac1685d84f3b66779e962ac99a6c85e07e09da165af1b286463692",
+      "lines": 114,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/deployment-observed-20261020.json",
+      "kind": "evidencia QA",
+      "sha256": "aa4b0dfdfaa1a86140c22bd1c093680c139c89154944cd61758d2eac70897155",
+      "lines": 6,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/final-file-inventory.json",
+      "kind": "evidencia QA",
+      "sha256": "747c1b362b32f768b35eb50d5034409ce161acbcea25b0da03c702ab11b8c871",
+      "lines": 1259,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/load-results.json",
+      "kind": "evidencia QA",
+      "sha256": "1617d7fdde9ec2766fb14f7384988bd815aeb8b5ef08009b41537f1746ddf2c9",
+      "lines": 579,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/migration-upgrade.json",
+      "kind": "evidencia QA",
+      "sha256": "8ec301003ae7645a8c7bbd0304f5eac2069705980a409f3f486d56144c3feaa5",
+      "lines": 11,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/pr3-failure-analysis.json",
+      "kind": "evidencia QA",
+      "sha256": "474a0377d0b40f4ab119110c6c28a6b30a09ece9acc55236240671585682775e",
+      "lines": 241,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/pr3-final.json",
+      "kind": "evidencia QA",
+      "sha256": "bfa521c3cf2bbd4212bfdc7c4db8e37486bbd5c47c73c51fa166e4a62d485fc5",
+      "lines": 193,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/pr3/daily-cash-closed.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "ccfe809528fe7cbb16b4622576aa411a2aadc4c8899466e6e9723aef2fffa9a8",
+      "lines": 239,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/pr3/daily-owner-movement.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "aade16a024b7e1af76edc05a7cfc9916d66fb7d7106860ed5ab643c9574f3217",
+      "lines": 263,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/pr3/daily-split-paid.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "43fe40c4f9f68c46dafcdca80023d56dbdc52c24f0d93cc5b25b48efd812e62f",
+      "lines": 170,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/pr3/mobile-menu-focus.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "bf536e750d474c2ae864ea87e1b7dfa1a7ca3b661b66586decfc908051cc0360",
+      "lines": 110,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/restore-final-local.json",
+      "kind": "evidencia QA",
+      "sha256": "6e18cae517a97c22a43fa7ed31c94ee6e1520123c3bef152c59f3cf77b144db7",
+      "lines": 48,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/after/login-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "101647596ca30015aa95d75f7d154959e513834192068f22e7f47709f4f34023",
+      "lines": 46,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/after/login-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "a5ef66e6cb94027518fc5f06d8c5b65fd374ea3a95bb756768c2792cd2c9b507",
+      "lines": 46,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/after/login-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "3f3696a4ffb07960d843635f7e87e8087aaf6175909b1e883f0208ea276027d0",
+      "lines": 43,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/after/login-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "487c23f5386f1a8f28427b84345b707862f244db5e34b431a49d34f3f5a5f8ed",
+      "lines": 28,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/design-diff.json",
+      "kind": "evidencia QA",
+      "sha256": "0a690a9984379f6bd80b19cbb85e17700f1f36b7b962498c446721e9094655d6",
+      "lines": 82,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/design-export.css",
+      "kind": "evidencia QA",
+      "sha256": "482a8f84d8fadd5bdf3265e055415dd7ce48cbc3eff97476c21bc039c599faf2",
+      "lines": 40,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "docs/verification/ux/analysis/design-lint.json",
+      "kind": "evidencia QA",
+      "sha256": "95ef8111e430a32ddd084fb44a5d83ba92edb525ba8fc30e98feb61b835036e9",
+      "lines": 15,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/local-checks.json",
+      "kind": "evidencia QA",
+      "sha256": "44257c169203c7782376089699f5f127dfd60846345f217599167b0c36c34231",
+      "lines": 53,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/references.json",
+      "kind": "evidencia QA",
+      "sha256": "32f17cb17b652ade0e7f8031508d7853f86846ad5c01a24017ef1224f01481f9",
+      "lines": 45,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/rollout-bundle-local.json",
+      "kind": "evidencia QA",
+      "sha256": "47fb862912831425a3456b299f68ee55508e2069ff63495f7da10eac2e0ffca3",
+      "lines": 9,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/ui-ux-accessibility.md",
+      "kind": "evidencia QA",
+      "sha256": "6dbfd60b2105935edce8313c56cd048e0856f961111b51a80662d057208560bf",
+      "lines": 38,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/ui-ux-design-system.md",
+      "kind": "evidencia QA",
+      "sha256": "9eb464747931316bb7a847c547d3302ded4386667102199d3f189c8689b14cc3",
+      "lines": 81,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/ui-ux-enterprise.md",
+      "kind": "evidencia QA",
+      "sha256": "52aff8b227cdceae9233363a990df2a9d5240d0caac66c1f2002313b8d2e97ea",
+      "lines": 75,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/analysis/ui-ux-react.md",
+      "kind": "evidencia QA",
+      "sha256": "9001f34efa81a71c9500919ebdea60506dfb6141a75dd736903f0349119ac247",
+      "lines": 47,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/agenda-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e9afe01826d5d370c882a655dd8a3c0df4e4deae1b58fc43c2f3a1260a66aa37",
+      "lines": 207,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/agenda-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "b9362ecea94fa6f24ba361d8974d5fbf9cde18a0359fe4e4236aa8cec95d6792",
+      "lines": 197,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/agenda-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "804af8699b494294f96aeb972ab0383994280060820850ff980a62b1c84783c4",
+      "lines": 140,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/agenda-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "78719104e429db80eba98d21df6763326baac3196fe9c833a91e91a9c83a0a03",
+      "lines": 116,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/agenda-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "f27c2c8317331d8cc3f352c3faac7bc84f4c156c3a9d7d96a0068075d95a2302",
+      "lines": 230,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/caja-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "06b6d2d8a9c95559a46d9b7101f5c114790f10f1e87c48fcd0ee8c4422876345",
+      "lines": 208,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/caja-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "1a4db2b8ad414ed749d1131a9b70225544cba8f632ec7a3805c2d27af1fcb044",
+      "lines": 277,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/caja-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "759fde510091369e065c4fa86e6906cedcccb318a9a5f4b1b93d0d0f5b97bf16",
+      "lines": 184,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/caja-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "04f1b1ba7f925a2cf2c450382d8a4c51abdea698cd99c0be8022d78413b8a54d",
+      "lines": 143,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/caja-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "d2cfaaef2239138558259a8f3d9936b16414fcb9dd8349d21ab884ed7de30c8c",
+      "lines": 248,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/clientes-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "4938b20cf83a4011f7167b9c85bde42f6255630572c41cc9aa59184e4bef05f5",
+      "lines": 238,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/clientes-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "834a2a21a8f7b9465a3af5117dd88ce13a536ebe4e6875ee188bbd7a54a37c8d",
+      "lines": 267,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/clientes-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "fc1a4d66975de807d0f1e667fc877edc659e3f028c6be4922f0847128eec16b1",
+      "lines": 167,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/clientes-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "c0f8ec525007631b7e6de556eb112bc0d42781f404b7d53a6aaba4a76a08416d",
+      "lines": 143,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/clientes-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "30a36eff70c9a1309852dc6afcc9ef76d06ba8a4fa164630d71a66688ec673d1",
+      "lines": 294,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/configuracion-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "53cd6ccae2db1ced88b8b42635071034cca7daf69ebb349d70d048877ff3297c",
+      "lines": 282,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/configuracion-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "5a640528a859abde29d9b07bd07c7baa3b157de86f07a10d1a0dc593644f1d2d",
+      "lines": 329,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/configuracion-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "35b06c97e4b4c9bd3d38cdd83c58bf694e6714d0039e7c31d187d81d20d22df0",
+      "lines": 187,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/configuracion-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "42cc4802466999773bc5cca8e4d1aa49c2bf82b5f6b703728dfe2246b0793ea0",
+      "lines": 219,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/configuracion-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "8cb72003f50e8f551e1cbf74ce0db602dd6e358c1d706938dbd2c01d1112fc6b",
+      "lines": 280,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/equipo-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "9694657e6ee2f509281d9e8e787eae388a23b9feb9625cdcdac2a723999fb3eb",
+      "lines": 497,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/equipo-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "d722762ae33cec4b1b410fc4a2cb93497fc0178dc3257473354d7f03c417a4bc",
+      "lines": 366,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/equipo-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "a01ff6e7412ea56e29137fb3ea6e4b677b25e048b79f9c506beaa9fa1f874fed",
+      "lines": 353,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/equipo-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "5ff2ffe2403d750b54a1944e430e050004bb202c24c96dcaf92411da0248b4ef",
+      "lines": 389,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/equipo-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "a0d3a318eedea668a2e5719ae797cd34a64bf12d19ab446d3d727ff13b3dcf44",
+      "lines": 500,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/finanzas-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "51a8ab6db7b16e3133a03a1bee64cb3c96d79302f0ac576b6ae4859767c04c8c",
+      "lines": 494,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/finanzas-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e2cf4c47f633a969a113dcb2726657c39a6129551cef84ce4b8b6a064c69aaff",
+      "lines": 411,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/finanzas-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "6474f0dd244b55c6ed15e47415d3c2f360fe07dce51d27c2c18ecc81c1e7d235",
+      "lines": 369,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/finanzas-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "511cdbb2baa1eedb4ad27a1b310ec57cb2aa2cea30b60046c5d14239459f88a0",
+      "lines": 279,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/finanzas-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "b9f595f24f3cadb577eb829bb4d113b3974be2553899e08a2fe8442cbb8283b6",
+      "lines": 540,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/inicio-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "b7f51f349aba888db5873e0e825c2a20cb6c19bdd0cde7e5ccdec35d40dc9d5a",
+      "lines": 555,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/inicio-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "31bab9241dab0b97c1fb67b2bcec539199eb448435a93928717c888c4ac288ab",
+      "lines": 499,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/inicio-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "d3d944f4f47fe589bdb1cc46aabfe225ad2a79715f04e0d6b4e05b12df3fd7b7",
+      "lines": 497,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/inicio-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "9e2f44a52fb1041ae5c4a5af5d677dc86bda3b9ce4fac196f479cfe44ac1ae0a",
+      "lines": 530,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/inicio-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "a7b37b3457d9d1c2f14a3fe5a29c9e7fc58ff247ec21416a4257e414078db1f5",
+      "lines": 639,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/login-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "b1d8b13ab522a0d6ef6b8a84aedfb02314c6fa627274581ff67628366d3a4f1b",
+      "lines": 525,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/login-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "2ef3f885e705558b17cefa75a060669ef50ee46a9b5d49615290954d6202de05",
+      "lines": 155,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/reportes-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "7580d346dbf60d6864e9778835bb5528bfdb390e30357ff96e0aef3aeac227bd",
+      "lines": 544,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/reportes-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "3ba3f4a2d20ec9497ebef78b9437ff51c02d50f27e96777f5f8bcc389c7b15ce",
+      "lines": 491,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/reportes-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "29c68410fef96240870d55260b0d8cd5855512c13fcb66407939bf5a5513ba52",
+      "lines": 494,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/reportes-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "6aceb7ae2b00fb26d5f0a72af990cf61625b36b7f8d044e79d5934dd7fba253b",
+      "lines": 531,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/reportes-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e12229c6f31249a469152271b7dc2a356f4a2523739a9c543ae008e2f69d5fc5",
+      "lines": 561,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/results.json",
+      "kind": "evidencia QA",
+      "sha256": "c1f8a7194520df6979982284863e5092d7098d17fcfb8e0e70928f6069fc0628",
+      "lines": 232,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/servicios-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e542d5d37606197aa44f4af8e1aeb28edfd9e9cd01ab735ba13f6c7163ca234c",
+      "lines": 379,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/servicios-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "347821b9ec5427eeacd93fe4cbbddc641778a5ced9c61e20805deec04956ff50",
+      "lines": 398,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/servicios-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "89861b60bdcad15e1e37371d8b5fbeb2125589d25f6894e337e8c60e5b0eda05",
+      "lines": 466,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/servicios-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "9133a298be5ef9a9505bfbbf8cc5c9f9f3fd84d57c9dd9a7ba8e7a1f1ce3b482",
+      "lines": 411,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/before/servicios-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "5309df7720d259c4160bee52c503148f5b18cd9663d03ce4eeaeddfd2de54eb1",
+      "lines": 471,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/accessibility.json",
+      "kind": "evidencia QA",
+      "sha256": "273f454bf9d39122ff6000636fbf11f897c3f074ec8e011da8387644240812ff",
+      "lines": 363,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/after-agenda-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "560ba54bf51c981e28be6d75e7e8674ab31c3c2b0f084fa117695df22e8554c5",
+      "lines": 141,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/after-checkout-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "85328929be7ca1d6f0d1cdde684beeac0e31e8656373fde425128c40c7b27011",
+      "lines": 161,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/after-cliente-ficha-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "2d8ee88da61ce784dc9154c74af74847a07933ff1e0f6a3e595990972c8d4635",
+      "lines": 143,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/after-inicio-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e9f52623de948851b46c22515eea290170c726e361ace69c528f2375cd010c11",
+      "lines": 359,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/after.json",
+      "kind": "evidencia QA",
+      "sha256": "f28c7bb9f1ae5dca6b4738fcb199c37be9371dd80b66eab183e5d27d8bc1d2d5",
+      "lines": 3627,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/before-agenda-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "0cc6b11d9507c2ed9fcef2f81f39f6d2f28f28f98709b2019a7bcd5182e58fef",
+      "lines": 116,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/before-checkout-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e08ee425882444ca2559f1a60859f8fb57f536ffee2faac3b2019a6f063c7522",
+      "lines": 183,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/before-cliente-ficha-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "3492f7d3bce2e5d6ab6ba656f2c22011eeaeecf919928f9ab2fa0a8529badb9f",
+      "lines": 214,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/before-inicio-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "0453fa31fad2c34edd7554313d159dde5050936d24545deed51d0cc4986f5ff7",
+      "lines": 658,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/before.json",
+      "kind": "evidencia QA",
+      "sha256": "8b8a5453a4e5b76b2417012e72d0aacfebdbbbbe94b13b32872222289448ed0f",
+      "lines": 2205,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/cloud-rollout.json",
+      "kind": "evidencia QA",
+      "sha256": "6805b3658b48167752f136798ee7c2d855dfd5e4f67ffa478618636ecb6d2ba1",
+      "lines": 182,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/final/summary.json",
+      "kind": "evidencia QA",
+      "sha256": "e2e36e802c04df32c4f29ab3841cab77a206f716c062cc40991868174b7f9f5d",
+      "lines": 42,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/login-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "6e02d4f8f21da9e8df8ba4b531205bbce02c1ad0dc2103433f297a8fff61f735",
+      "lines": 40,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/login-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "c932b563951c3c61542e68fc96a70990c26d80b1e94d5d2b3040fc5ba1265144",
+      "lines": 56,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/login-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "fef1096d80ba5cc1be175da6bdbf202ae5e6997e6f215c020e35b0a6fdb1d17c",
+      "lines": 43,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/login-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "f13f22acafb37428383b5358607b99c14f94a602f360cff9088e5a1a096542b9",
+      "lines": 35,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/login-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "d1411b2066376738b51316059350f9545c07c3fdefc9080f24515e04a0711c50",
+      "lines": 57,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/recover-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "e944740664eece1aa0d611a6d847d31d6bcdf72a76ba9e2c2a31cd8f24eb4ad0",
+      "lines": 45,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/recover-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "0e462b8cafc5c6657475273199277a2519c81d2917a2d1c999be66a6f1221f75",
+      "lines": 49,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/recover-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "a6036ea9c4bfefb68e2589b00df833728e3f23393b3e4047ea3d35d848b58d63",
+      "lines": 70,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/recover-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "5f75758bd26e69b6f6e92210cca98185c9e66ff604d0be82eb61f806c510109f",
+      "lines": 54,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/recover-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "afcb07db249638a86377882af5cd25135c9c85f94327801dfcf4c52885d98c72",
+      "lines": 71,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/results.json",
+      "kind": "evidencia QA",
+      "sha256": "910bae1394132599409227aaa37b366d1b4cde10fa0064bd3861f13a6802e3ee",
+      "lines": 159,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/signup-1024.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "860b872b0328db030ae7ea601296e7b4de3bed29b2e140f99c86d16a5eed8624",
+      "lines": 38,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/signup-1440.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "caa6f350bd728d9e854837fa6508487e42b813933dbdaee39448fce16f6a62ad",
+      "lines": 54,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/signup-360.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "9e55aa9a91cd7d5b5570d6c22e2a9b0719210edeb08e8b8738d91c49bff528c0",
+      "lines": 63,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/signup-390.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "1d780b76b7b4eaf1410deb9595dccaa36ea82a573b99e8e1be9f4d18bb1e00e9",
+      "lines": 42,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "docs/verification/ux/local-public-auth/signup-768.png",
+      "kind": "evidencia QA / asset binario",
+      "sha256": "67f19ece7970bdc6d759f9b4bb778ddb53a716ef46b68315abf7741c417e0928",
+      "lines": 50,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "eslint.config.mjs",
+      "kind": "configuración",
+      "sha256": "3ab11acc49f75d2fd04c6a579d743738bd103344ca55f1341db503abe9ea54e1",
+      "lines": 38,
+      "dependencies": [
+        "@eslint/js",
+        "typescript-eslint",
+        "eslint-plugin-react-hooks"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "next-env.d.ts",
+      "kind": "configuración",
+      "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b",
+      "lines": 8,
+      "dependencies": [
+        "./.next/types/routes.d.ts",
+        "./.next/types/root-params.d.ts"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "next.config.ts",
+      "kind": "configuración",
+      "sha256": "8884c878be64938f78780ee16bfffde97040156c9e8bc8f0dab107f439fff4c4",
+      "lines": 26,
+      "dependencies": [
+        "next"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "package-lock.json",
+      "kind": "configuración",
+      "sha256": "1ee4391708a1253b77f9dc25a88c054a40b04af50ad24e82f558ec26f69b4f23",
+      "lines": 4810,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "package.json",
+      "kind": "configuración",
+      "sha256": "415f6b1c240a8ccc09a3a98f0e8861cc7de41f33fedb9db85b4efb446aa1881b",
+      "lines": 60,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "playwright.config.ts",
+      "kind": "configuración",
+      "sha256": "4910b947766141b5b689e8d3cf4679e792ab5fa06f34b5b78227787b280e9c0e",
+      "lines": 23,
+      "dependencies": [
+        "@playwright/test"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/capture-product.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "31eb1c99e39af40af86b5d1caf9d495712f734d1bb328a87c6db23ca794b024e",
+      "lines": 382,
+      "dependencies": [
+        "@playwright/test",
+        "node:fs/promises",
+        "node:path",
+        "node:crypto",
+        "node:child_process",
+        "@axe-core/playwright"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/ci-environment.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "d8ffa328df3b181e00368ebe1e01a858ff8d5594d52be37c4d4d0a2a9217a93f",
+      "lines": 51,
+      "dependencies": [
+        "node:child_process",
+        "node:fs",
+        "node:path"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/configure-1717-operations.sql",
+      "kind": "herramienta operativa / QA",
+      "sha256": "5a0ac7bd9b2e658b2876c6029948af84cd43d5192a42e86dbc2ff7cf1fd3095a",
+      "lines": 27,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/enable-scheduler.sql",
+      "kind": "herramienta operativa / QA",
+      "sha256": "d3ac11034e21fa1704ac99a3ab6f65caf8e0ce17262f6943acd56caf9f5ca97f",
+      "lines": 11,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/finance-dry-run.ts",
+      "kind": "herramienta operativa / QA",
+      "sha256": "d57a85057de9f25b1e99f41bb5aa1ae7bb35ae77d3a2482a64f0651ceb65929a",
+      "lines": 71,
+      "dependencies": [
+        "node:fs/promises",
+        "../src/features/finance/import-parser"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "scripts/onboard-1717.d.mts",
+      "kind": "herramienta operativa / QA",
+      "sha256": "fa1f80eb12277e478b9d14e2e7a679bf7356efdd16fcfb0d7aa437f91d7b8f98",
+      "lines": 2,
+      "dependencies": [],
+      "exports": [
+        "onboardingSql"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/onboarding.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/onboard-1717.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "5f157afdea76dfebb1de611167608b3f6823c174166eb5eebca7d5856da9fab0",
+      "lines": 99,
+      "dependencies": [
+        "node:fs/promises",
+        "node:path",
+        "node:url"
+      ],
+      "exports": [
+        "onboardingSql"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/onboarding.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/prepare-pr3-release.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "91529cf0a2eec9f2e6370711517a4beb6843e1060fd40a20a2b4982e534fc171",
+      "lines": 63,
+      "dependencies": [
+        "node:fs/promises",
+        "node:crypto"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/prepare-release.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "5fc3ae1d4f6f1dc2ee80da53deee9b1b8f8e18a551dab71abb169c0897451173",
+      "lines": 36,
+      "dependencies": [
+        "node:fs/promises",
+        "node:path"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/prepare-ux-fixtures.ts",
+      "kind": "herramienta operativa / QA",
+      "sha256": "e0976ae52f4177e770b9a28dc2e288f78e05e7908371101eb49f6b344371b3e6",
+      "lines": 176,
+      "dependencies": [
+        "node:fs/promises",
+        "node:crypto",
+        "pg",
+        "../tests/integration/fixtures",
+        "../tests/integration/database"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/qa-website-booking.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "1131c196f9a0a23f433979ccd765feb203c81f60fee627fad640176453a3c5e5",
+      "lines": 176,
+      "dependencies": [
+        "@playwright/test",
+        "node:fs/promises",
+        "node:assert/strict"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/seed-demo.ts",
+      "kind": "herramienta operativa / QA",
+      "sha256": "41c59e419b7ba9f0a2c15c66fe1c925042527953fa731cb210b561a4dcde0f65",
+      "lines": 103,
+      "dependencies": [
+        "@supabase/supabase-js",
+        "pg",
+        "node:crypto",
+        "../tests/integration/fixtures"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/smoke-production.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "cf08c81c2433fbd7fbe2f8f9da716bc1f46bd1ac311f7224305e109cf4c6ec9a",
+      "lines": 40,
+      "dependencies": [
+        "node:assert/strict"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "scripts/validate-deployment.mjs",
+      "kind": "herramienta operativa / QA",
+      "sha256": "a14d88c8590e8b45a81e62b7bed5be109abc2a8086ae86606ab03b29cfa6614e",
+      "lines": 14,
+      "dependencies": [
+        "../src/lib/environment-boundary.ts"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "skills-lock.json",
+      "kind": "configuración",
+      "sha256": "a39357c106ce9e177c349dd95a69fb48eef3ee368cdb19fbf621bcf1c5d0b381",
+      "lines": 18,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/app/(workspace)/[organization]/[module]/page.tsx",
+      "kind": "producto",
+      "sha256": "ca3768c3adbf111962ee7ec5fd4b1eabd499178c7ded5a3170c25e20cbf1b29e",
+      "lines": 111,
+      "dependencies": [
+        "next/navigation",
+        "@/features/appointments/agenda",
+        "@/features/analytics/dashboard",
+        "@/features/customers/customers",
+        "@/features/walk-ins/queue",
+        "@/features/goals/goals",
+        "@/features/configuration/configuration",
+        "@/lib/auth",
+        "@/lib/http",
+        "@/features/finance/cash",
+        "@/features/finance/dashboard",
+        "@/lib/capabilities"
+      ],
+      "exports": [
+        "dynamic",
+        "Module"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/(workspace)/[organization]/layout.tsx",
+      "kind": "producto",
+      "sha256": "9f359541c273385c3634cf6b768f224c86f8690a46fa5b847ad09c855e6c08ef",
+      "lines": 73,
+      "dependencies": [
+        "next/navigation",
+        "@/lib/auth",
+        "@/lib/http",
+        "@/features/organizations/context",
+        "@/components/shell",
+        "@/lib/types"
+      ],
+      "exports": [
+        "dynamic",
+        "WorkspaceLayout"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/api/auth/[action]/route.ts",
+      "kind": "producto",
+      "sha256": "8c669e61c857bf497fcc88e31c9035353e31b5f61ea55fe8917aab9c5feb0058",
+      "lines": 109,
+      "dependencies": [
+        "zod",
+        "@/lib/supabase/server",
+        "@/lib/http",
+        "@/lib/auth"
+      ],
+      "exports": [
+        "POST"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/auth/mfa/[action]/route.ts",
+      "kind": "producto",
+      "sha256": "6cf17915bc1275cb3cd3c2361a9273562065cb34a30ec69f6574677b8d61ef04",
+      "lines": 89,
+      "dependencies": [
+        "zod",
+        "@/lib/auth",
+        "@/lib/http"
+      ],
+      "exports": [
+        "dynamic",
+        "POST"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/export/customers/route.ts",
+      "kind": "producto",
+      "sha256": "7990a739412aad9ebcdd9fdb5bc675df650af1a1179d1f22ae3195f4c37e326b",
+      "lines": 68,
+      "dependencies": [
+        "zod",
+        "@/lib/auth",
+        "@/lib/http",
+        "@/lib/validation",
+        "@/lib/types"
+      ],
+      "exports": [
+        "dynamic",
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/finance/[resource]/route.ts",
+      "kind": "producto",
+      "sha256": "6f103da51a676fe972493427c341d86026d0fd5f6fc4d0987b3f91c987eea0e9",
+      "lines": 177,
+      "dependencies": [
+        "zod",
+        "@/lib/auth",
+        "@/lib/validation",
+        "@/lib/http"
+      ],
+      "exports": [
+        "dynamic",
+        "GET",
+        "POST"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/finance/import/route.ts",
+      "kind": "producto",
+      "sha256": "be870c5392612227b496c1759c321dd785dd58ad97ca7abde3b39bb227c971a0",
+      "lines": 131,
+      "dependencies": [
+        "zod",
+        "@/lib/auth",
+        "@/lib/http",
+        "@/lib/validation",
+        "@/lib/capabilities",
+        "@/features/finance/import-limits",
+        "@/features/finance/import-parser"
+      ],
+      "exports": [
+        "dynamic",
+        "POST"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/health/operations/route.ts",
+      "kind": "producto",
+      "sha256": "91599a60880b2b255f170707dddb49aa775ec97418e9b72ac343ebbbb8f96659",
+      "lines": 47,
+      "dependencies": [
+        "@/lib/supabase/server",
+        "@/lib/secret-auth"
+      ],
+      "exports": [
+        "dynamic",
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/health/ready/route.ts",
+      "kind": "producto",
+      "sha256": "9f9e305a806745c50a831a5462be65989b5e4be797f246d726ca708dc2429d98",
+      "lines": 22,
+      "dependencies": [
+        "@/lib/supabase/server"
+      ],
+      "exports": [
+        "dynamic",
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/health/route.ts",
+      "kind": "producto",
+      "sha256": "797205d2211fdfe9ca0846eaf9e807986165a766302ae6dcb56be2bb72ac2fcf",
+      "lines": 7,
+      "dependencies": [],
+      "exports": [
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/jobs/route.ts",
+      "kind": "producto",
+      "sha256": "a24bcc72e3b1ff965488c93cb5c81b9d183482efc031c6b5855b7bab42637e73",
+      "lines": 62,
+      "dependencies": [
+        "@/lib/secret-auth",
+        "@/lib/supabase/server",
+        "@/lib/http"
+      ],
+      "exports": [
+        "dynamic",
+        "maxDuration",
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/live/route.ts",
+      "kind": "producto",
+      "sha256": "b18fd93369d2ce8e0b34185db6bfb8103d2eb01ac2dffcb02390e58499217c7e",
+      "lines": 106,
+      "dependencies": [
+        "@/lib/http",
+        "zod",
+        "@/lib/auth"
+      ],
+      "exports": [
+        "dynamic",
+        "maxDuration",
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/public/[resource]/route.ts",
+      "kind": "producto",
+      "sha256": "9a1f96658a0cd525f88191881bb578934234843ac8a95680a8fc7177c07fd361",
+      "lines": 110,
+      "dependencies": [
+        "node:crypto",
+        "zod",
+        "@/lib/supabase/server",
+        "@/lib/http",
+        "@/lib/validation"
+      ],
+      "exports": [
+        "dynamic",
+        "GET",
+        "POST"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/api/workspace/[resource]/route.ts",
+      "kind": "producto",
+      "sha256": "c9aa2c479dbaf28a0b9ddbf6a2dedde1e4ca091febc94c5ac87b003ccf39abc5",
+      "lines": 632,
+      "dependencies": [
+        "zod",
+        "@/lib/auth",
+        "@/lib/http",
+        "@/lib/validation"
+      ],
+      "exports": [
+        "dynamic",
+        "POST",
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "src/app/auth/callback/route.ts",
+      "kind": "producto",
+      "sha256": "3ca184e18f818502e54218a3f0f5c8a149e47cc6209d7a6392b933e94dc25a82",
+      "lines": 32,
+      "dependencies": [
+        "next/server",
+        "@/lib/supabase/server"
+      ],
+      "exports": [
+        "GET"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/app/book/[organization]/[[...branch]]/page.tsx",
+      "kind": "producto",
+      "sha256": "bee1579d97fa70fe9e5606f9c925ddfe23c8cbdcbaf2e7126efc24d8fb2a0f66",
+      "lines": 27,
+      "dependencies": [
+        "next/navigation",
+        "@/features/booking/public-booking",
+        "@/lib/validation",
+        "@/lib/public-booking"
+      ],
+      "exports": [
+        "dynamic",
+        "BookingPage"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/design-tokens.css",
+      "kind": "producto",
+      "sha256": "567ea7f6489339f23e726a3d35b2f6560f6f1e3c8795d1c8cd4f963e36ce67e4",
+      "lines": 29,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/error.tsx",
+      "kind": "producto",
+      "sha256": "7d6a4b23b8d651ae4637b996288e770d5ab4d6f3c6f5d710a764e20ad856cecd",
+      "lines": 13,
+      "dependencies": [],
+      "exports": [
+        "ErrorPage"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/globals.css",
+      "kind": "producto",
+      "sha256": "0c26639641cf09585ad0fd20b599b07f2d8b608eeaad2794d584b4e8e1fd2260",
+      "lines": 1718,
+      "dependencies": [
+        "./design-tokens.css",
+        "@fontsource-variable/dm-sans"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/icon.svg",
+      "kind": "producto",
+      "sha256": "29eb9d4f6c28cd77cb1887c5b92462c2c52505574f2e26774e804ce0d6da32e9",
+      "lines": 2,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "kind": "producto",
+      "sha256": "849cf83491c3d44f8b2feb7cf00be9e2cb37614cd84e8cb23a1ba3066d68f6ca",
+      "lines": 25,
+      "dependencies": [
+        "next",
+        "./globals.css",
+        "./workspace.css"
+      ],
+      "exports": [
+        "metadata",
+        "RootLayout"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/e2e/security-release.spec.ts",
+        "tests/integration/hardening.ts",
+        "tests/security/contracts.ts"
+      ],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/login/page.tsx",
+      "kind": "producto",
+      "sha256": "69dd848d89c89652404aab45dcfade10650abb947e2bd2b734aec2691c4cef39",
+      "lines": 24,
+      "dependencies": [
+        "@/features/auth/auth-form",
+        "@/components/ui"
+      ],
+      "exports": [
+        "dynamic",
+        "Login"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/mfa/page.tsx",
+      "kind": "producto",
+      "sha256": "6024870e1fcbd8b5e1822169aba15ecbb8d6b0fcfa022a7501e7124d6c6c8a6e",
+      "lines": 37,
+      "dependencies": [
+        "next/navigation",
+        "@/lib/auth",
+        "@/features/auth/mfa-form"
+      ],
+      "exports": [
+        "dynamic",
+        "MfaPage"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/not-found.tsx",
+      "kind": "producto",
+      "sha256": "4c78f019fef217d91b1854b03cf6e2e6a9045ecd25cab2697bf8e1456b1bfde2",
+      "lines": 10,
+      "dependencies": [
+        "next/link"
+      ],
+      "exports": [
+        "NotFound"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/page.tsx",
+      "kind": "producto",
+      "sha256": "548921a0a7e2728acd25ad31d1ee989f642dfc21e5505a87c7b0f25e3746b1bb",
+      "lines": 63,
+      "dependencies": [
+        "next/link",
+        "next/navigation",
+        "@/lib/auth",
+        "@/lib/http",
+        "@/features/organizations/create-organization",
+        "@/features/auth/auth-form"
+      ],
+      "exports": [
+        "dynamic",
+        "Organizations"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/reset-password/page.tsx",
+      "kind": "producto",
+      "sha256": "4979e8c8b73b9965cac0ab55911f9e52cf8c5b7daaa16e64f3627e0a3d529e0b",
+      "lines": 19,
+      "dependencies": [
+        "@/features/auth/auth-form",
+        "@/lib/auth",
+        "next/navigation"
+      ],
+      "exports": [
+        "dynamic",
+        "Reset"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/app/workspace.css",
+      "kind": "producto",
+      "sha256": "37d09737132b2f39f0ee04b2ef6b28b90ae538659fbc5b1fbd6edc7f2abe4a7e",
+      "lines": 487,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/components/chart.tsx",
+      "kind": "producto",
+      "sha256": "a13c540156ff79c0dbe384266d312fd1e2da4a65d23b64e4063855d68e1411e2",
+      "lines": 22,
+      "dependencies": [
+        "next/dynamic",
+        "./ui"
+      ],
+      "exports": [
+        "ChartPoint",
+        "ChartProps",
+        "DataChart"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/components/data-chart.tsx",
+      "kind": "producto",
+      "sha256": "391096b597eff6c9db6447143f5d0705b48712b1863f9e306ba1a4742bb6f7ad",
+      "lines": 210,
+      "dependencies": [
+        "react",
+        "recharts",
+        "./ui",
+        "./chart",
+        "@/features/finance/client"
+      ],
+      "exports": [
+        "DataChart"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/chart-values.test.ts"
+      ],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/components/saved-views.tsx",
+      "kind": "producto",
+      "sha256": "b6fbb216f899e2955ae2528afd7c3235772d0faf1e28162aa2cb0257a57a4d3d",
+      "lines": 119,
+      "dependencies": [
+        "react",
+        "./ui",
+        "@/features/organizations/context"
+      ],
+      "exports": [
+        "SavedViews"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/components/shell.tsx",
+      "kind": "producto",
+      "sha256": "3f87fe2a2b006ae133864fa91b230bd6c907ca844e543c0509680425b3b8d679",
+      "lines": 379,
+      "dependencies": [
+        "next/link",
+        "next/navigation",
+        "react",
+        "date-fns-tz",
+        "lucide-react",
+        "@/features/organizations/context",
+        "@/features/auth/auth-form",
+        "@/lib/validation",
+        "@/lib/client",
+        "./ui",
+        "@/lib/types",
+        "@/lib/branding"
+      ],
+      "exports": [
+        "Shell"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/components/ui.tsx",
+      "kind": "producto",
+      "sha256": "1c8d6baebc71d8113b1899499ca37f89f03569fe722dba16f865aa9720f164e1",
+      "lines": 134,
+      "dependencies": [
+        "react",
+        "lucide-react"
+      ],
+      "exports": [
+        "Modal",
+        "Notice",
+        "Empty",
+        "Loading",
+        "Badge",
+        "Field"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/components/workspace-ui.tsx",
+      "kind": "producto",
+      "sha256": "c0bbe4322a1f7f8d3858317f51cbd8bd6c76e551610745c8101040cc273d7d81",
+      "lines": 252,
+      "dependencies": [
+        "react",
+        "./ui"
+      ],
+      "exports": [
+        "Toast",
+        "DateRangePicker",
+        "RecordDrawer",
+        "FilterBar",
+        "DataTable",
+        "ViewSwitcher",
+        "Tabs",
+        "MetricCard",
+        "ActivityTimeline",
+        "ErrorState",
+        "ConfirmDialog"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/analytics/dashboard.tsx",
+      "kind": "producto",
+      "sha256": "f63cf2fbc31ee6c136d47005145db6e0fb89e3fef5c886f52caf99aa7fbba558",
+      "lines": 500,
+      "dependencies": [
+        "next/link",
+        "react",
+        "date-fns",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/components/ui",
+        "@/lib/types",
+        "@/features/configuration/record-manager",
+        "@/features/goals/goals",
+        "@/features/finance/dashboard",
+        "@/features/organizations/launch-guide",
+        "./day-overview",
+        "@/components/chart",
+        "@/lib/chart-values",
+        "./operation-home",
+        "@/components/workspace-ui"
+      ],
+      "exports": [
+        "Dashboard"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/security/contracts.ts"
+      ],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/analytics/day-overview.tsx",
+      "kind": "producto",
+      "sha256": "7d274ba4576fbe41151168b32f950b47c74ffd49b23918c305b601f16588580e",
+      "lines": 74,
+      "dependencies": [
+        "next/link",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/lib/types",
+        "@/components/ui",
+        "@/hooks/use-clock"
+      ],
+      "exports": [
+        "DayOverview"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/analytics/operation-home.tsx",
+      "kind": "producto",
+      "sha256": "e355cd20f7e730ab047cc2f1e84841261be039e1e208e13f2df62b776c006b8a",
+      "lines": 99,
+      "dependencies": [
+        "next/link",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/features/finance/client",
+        "./day-overview",
+        "@/components/ui",
+        "@/components/workspace-ui",
+        "@/lib/types"
+      ],
+      "exports": [
+        "ReceptionHome"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/appointments/agenda.tsx",
+      "kind": "producto",
+      "sha256": "1078ef1d96ce9973eb0e3a7044abb928b47c6844060d02972a35a0f96c31d07d",
+      "lines": 428,
+      "dependencies": [
+        "react",
+        "next/navigation",
+        "date-fns",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/lib/validation",
+        "@/hooks/use-live",
+        "@/components/ui",
+        "@/lib/types",
+        "./booking-form",
+        "./appointment-dialog",
+        "./time-calendar"
+      ],
+      "exports": [
+        "Agenda"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/e2e/permissions.spec.ts",
+        "tests/e2e/ux-release.spec.ts"
+      ],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/appointments/appointment-dialog.tsx",
+      "kind": "producto",
+      "sha256": "e2acad09049a2441175dc930548680614040d513b2253ea098b541276b9da300",
+      "lines": 199,
+      "dependencies": [
+        "@/hooks/use-clock",
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/lib/validation",
+        "@/components/ui",
+        "@/lib/types",
+        "./booking-form",
+        "@/features/finance/checkout"
+      ],
+      "exports": [
+        "AppointmentDialog"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/appointments/booking-form.tsx",
+      "kind": "producto",
+      "sha256": "498f82ef92b6be5585b0309c526dae8a6d45413e91d348a402baf33812bf26e1",
+      "lines": 375,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/lib/validation",
+        "@/components/ui",
+        "@/features/services/service-picker",
+        "@/lib/types"
+      ],
+      "exports": [
+        "BookingForm"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/appointments/time-calendar.tsx",
+      "kind": "producto",
+      "sha256": "ccf31d35953325143db9b430a814ede4bc46c5529826633068c76a03d40b845c",
+      "lines": 216,
+      "dependencies": [
+        "date-fns-tz",
+        "@/lib/validation",
+        "@/lib/types",
+        "@/hooks/use-clock",
+        "@/lib/calendar"
+      ],
+      "exports": [
+        "TimeCalendar"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/auth/auth-form.tsx",
+      "kind": "producto",
+      "sha256": "fe0b337ef2424e97eb14a76dcb468839f2694f742f479fa4a8a39a77432314e1",
+      "lines": 148,
+      "dependencies": [
+        "react",
+        "@/lib/client",
+        "@/components/ui"
+      ],
+      "exports": [
+        "AuthForm",
+        "SignOut"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/auth/mfa-form.tsx",
+      "kind": "producto",
+      "sha256": "6ad51db9e7359b32ce1ff14e46bc71115cd11d94003fd283f4f048bbae35d8f3",
+      "lines": 307,
+      "dependencies": [
+        "next/link",
+        "react",
+        "lucide-react",
+        "@/lib/client",
+        "@/components/ui",
+        "@/components/workspace-ui",
+        "./auth-form"
+      ],
+      "exports": [
+        "MfaForm"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/booking/public-booking.tsx",
+      "kind": "producto",
+      "sha256": "7154b096d84e5a47106d6df9a7b5cd3e0a66b2e3b371849cda43c911cbc050ad",
+      "lines": 336,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/lib/client",
+        "@/lib/validation",
+        "@/components/ui",
+        "@/features/services/service-picker",
+        "@/lib/branding",
+        "@/lib/public-booking"
+      ],
+      "exports": [
+        "PublicBooking"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/configuration/configuration.tsx",
+      "kind": "producto",
+      "sha256": "0c7fa1b885bd5fcc89a037bf3092e7822efa916c871260c348a1b2c9e6679a60",
+      "lines": 378,
+      "dependencies": [
+        "react",
+        "@/features/organizations/context",
+        "./record-manager",
+        "./definitions",
+        "./daily-availability",
+        "@/lib/client",
+        "@/components/ui",
+        "@/lib/validation",
+        "@/lib/types"
+      ],
+      "exports": [
+        "Configuration"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/configuration/daily-availability.tsx",
+      "kind": "producto",
+      "sha256": "2bc624a950df5611adddc5f918d9aa278924e2e5d974b76be7e70c168e072bc4",
+      "lines": 487,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/components/ui",
+        "@/lib/types"
+      ],
+      "exports": [
+        "DailyAvailability"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/configuration/definitions.ts",
+      "kind": "producto",
+      "sha256": "4f2b79d2e3b2720ce54bfad5e03ebffd8cb04bfbed9e1e5c991e901a2af76ffa",
+      "lines": 378,
+      "dependencies": [],
+      "exports": [
+        "FieldDefinition",
+        "Definition",
+        "definitions"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/features/configuration/record-manager.tsx",
+      "kind": "producto",
+      "sha256": "cf975ecba141e75251998263e0c2d90ec5de10feea92976408d39d88a0ccb948",
+      "lines": 557,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "./definitions",
+        "@/components/ui",
+        "@/components/workspace-ui",
+        "@/lib/types"
+      ],
+      "exports": [
+        "currencyScale",
+        "RecordManager"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/customers/customers.tsx",
+      "kind": "producto",
+      "sha256": "7d57c0d6795c3bf40e404ba6eb5612e7f507a64431d727c77a39a6bf3e1f1580",
+      "lines": 894,
+      "dependencies": [
+        "react",
+        "next/navigation",
+        "next/link",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/lib/validation",
+        "@/components/ui",
+        "@/features/appointments/booking-form",
+        "@/components/saved-views",
+        "@/lib/types",
+        "@/components/workspace-ui"
+      ],
+      "exports": [
+        "Customers"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/finance/cash.tsx",
+      "kind": "producto",
+      "sha256": "d882d567d0e109685fdc6d49512e2760b7b12c4038f4c1ad1b8287c5fa30a94f",
+      "lines": 290,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/components/ui",
+        "./client",
+        "./checkout",
+        "./forms"
+      ],
+      "exports": [
+        "Cash"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/checkout.tsx",
+      "kind": "producto",
+      "sha256": "78527a6f0dafc71313c144ad866f3f9e046efb01975833926d04d9d5917d08c8",
+      "lines": 313,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/components/ui",
+        "./payment-method-selector",
+        "./client"
+      ],
+      "exports": [
+        "CheckoutDialog"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/client.ts",
+      "kind": "producto",
+      "sha256": "373441714ec2e280c29e3223de638fdc9498c38a45773fcbb81dc71706a070eb",
+      "lines": 75,
+      "dependencies": [
+        "@/lib/client"
+      ],
+      "exports": [
+        "FinanceRow",
+        "FinanceCatalog",
+        "financeUrl",
+        "financeCommand",
+        "money",
+        "integerInput",
+        "amountLabel"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/dashboard.tsx",
+      "kind": "producto",
+      "sha256": "ea033d6dbed91348bcf492f98902469c0ef4b6265c4edbcd1cfc5d5e11a4b617",
+      "lines": 832,
+      "dependencies": [
+        "react",
+        "@/components/workspace-ui",
+        "@/components/chart",
+        "@/lib/chart-values",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/lib/capabilities",
+        "@/components/ui",
+        "./client",
+        "./forms",
+        "./import-ui",
+        "./financial-charts",
+        "./staff-charts",
+        "./partner-distributions",
+        "./profit-sharing"
+      ],
+      "exports": [
+        "FinancialDashboard",
+        "FinanceTable"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/financial-charts.tsx",
+      "kind": "producto",
+      "sha256": "f57b631694b15860e656ec2e2d1e02f0c20098d44a93c8f7fd97eb83ee64f0bf",
+      "lines": 96,
+      "dependencies": [
+        "@/components/chart",
+        "@/components/ui",
+        "@/lib/client",
+        "@/lib/chart-values",
+        "./client"
+      ],
+      "exports": [
+        "FinancialCharts"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/forms.tsx",
+      "kind": "producto",
+      "sha256": "cf191c3943a4d12468c392fef1a9ec875cf01a1751919880cdb8e31df900b24d",
+      "lines": 389,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/components/ui",
+        "./client"
+      ],
+      "exports": [
+        "FinanceForm"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/import-limits.ts",
+      "kind": "producto",
+      "sha256": "23141b8eff051316af20ae16f40a7c79a14d274f1c30b1add500ff655c2d5786",
+      "lines": 6,
+      "dependencies": [],
+      "exports": [
+        "MAX_IMPORT_UPLOAD_BYTES",
+        "MAX_IMPORT_JSON_BYTES",
+        "MAX_IMPORT_BASE64_LENGTH"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/import-parser.ts",
+      "kind": "producto",
+      "sha256": "d9f9ea3e25cd3e5291ffdfbf91e61282f6d0d6d84bfa99c2e60ae481913517a5",
+      "lines": 322,
+      "dependencies": [
+        "fflate",
+        "fast-xml-parser",
+        "node:crypto"
+      ],
+      "exports": [
+        "ImportEntity",
+        "ImportCatalog",
+        "ImportMapping",
+        "SourceCell",
+        "SourceRow",
+        "PreviewRow",
+        "canonical",
+        "excelDate",
+        "normalizeRows",
+        "parseXlsx",
+        "parseCsv",
+        "sourceHash"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/finance-import.test.ts",
+        "tests/unit/public-booking.test.ts"
+      ],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/import-ui.tsx",
+      "kind": "producto",
+      "sha256": "dfa191cfca2807ae61788c20877e0e59ae130cb8f67ad849ed9f0edf0da5803c",
+      "lines": 274,
+      "dependencies": [
+        "react",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/components/ui",
+        "./client",
+        "./import-parser",
+        "./import-limits"
+      ],
+      "exports": [
+        "FinanceImport"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/partner-distributions.tsx",
+      "kind": "producto",
+      "sha256": "ff655684b47e97a6531cf8a51c78102d95b10186b627f16e62e9ea0a4b251138",
+      "lines": 575,
+      "dependencies": [
+        "react",
+        "date-fns-tz",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/components/ui",
+        "./client"
+      ],
+      "exports": [
+        "PartnerDistributions"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/payment-method-selector.tsx",
+      "kind": "producto",
+      "sha256": "c55ac4be8a37b790e2a3d6aac9900491ff9b14aeaea0081151bf8abc276735bc",
+      "lines": 32,
+      "dependencies": [
+        "@/components/ui",
+        "./client"
+      ],
+      "exports": [
+        "PaymentMethodSelector"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/profit-sharing.tsx",
+      "kind": "producto",
+      "sha256": "a60db1329ac337e811c63cece86821964281f39da10dd6f1cd53609b37f3d588",
+      "lines": 155,
+      "dependencies": [
+        "react",
+        "@/features/organizations/context",
+        "@/components/ui",
+        "./client"
+      ],
+      "exports": [
+        "ProfitSharingSummary",
+        "ProfitSharing",
+        "RemunerationSettings"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/finance/staff-charts.tsx",
+      "kind": "producto",
+      "sha256": "740212276f5d5c1ee39e47c02cefbafca475b09b6b96a0f840dcccd356ac7af8",
+      "lines": 87,
+      "dependencies": [
+        "react",
+        "@/components/chart",
+        "@/components/workspace-ui",
+        "@/lib/chart-values",
+        "./client"
+      ],
+      "exports": [
+        "StaffFinancialCharts"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/features/goals/goals.tsx",
+      "kind": "producto",
+      "sha256": "70a45680a74f2c9794e218741be8cf992a7441eea8af4e3c31c58cfaf91f155d",
+      "lines": 81,
+      "dependencies": [
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/features/configuration/record-manager",
+        "@/lib/types"
+      ],
+      "exports": [
+        "Goals",
+        "GoalCard"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/organizations/context.tsx",
+      "kind": "producto",
+      "sha256": "a30ca9d0ef4525c4e917176253dcc70da78ae8039b31f586e375cf0c932cf534",
+      "lines": 28,
+      "dependencies": [
+        "react",
+        "@/lib/types"
+      ],
+      "exports": [
+        "WorkspaceProvider",
+        "useWorkspace"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/organizations/create-organization.tsx",
+      "kind": "producto",
+      "sha256": "c7f64f83c38db23f691fbf1155bf1d55996f6999daac62ac74496a7d0e86dd53",
+      "lines": 71,
+      "dependencies": [
+        "react",
+        "@/lib/client",
+        "@/components/ui"
+      ],
+      "exports": [
+        "CreateOrganization"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/organizations/launch-guide.tsx",
+      "kind": "producto",
+      "sha256": "7559c25271c1cff058c15521b7a39e86a75e99cd7322a40a5c346f9698e4ca29",
+      "lines": 107,
+      "dependencies": [
+        "next/link",
+        "./context",
+        "@/lib/client",
+        "@/components/ui",
+        "@/lib/types"
+      ],
+      "exports": [
+        "LaunchGuide"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/services/service-picker.tsx",
+      "kind": "producto",
+      "sha256": "d892c0e8fb7ae8539f179fe962e024cd51f31370c983e339ce3bc2b08b4505fa",
+      "lines": 83,
+      "dependencies": [],
+      "exports": [
+        "PickableService",
+        "nextServiceSelection",
+        "ServicePicker"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/domain.test.ts"
+      ],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/features/walk-ins/queue.tsx",
+      "kind": "producto",
+      "sha256": "3790031fb3ec9f49af78a48c4bcb4fc9697dd47de7b533cfdd392ec9302ca87b",
+      "lines": 207,
+      "dependencies": [
+        "react",
+        "@/features/organizations/context",
+        "@/lib/client",
+        "@/hooks/use-live",
+        "@/features/appointments/booking-form",
+        "@/features/appointments/appointment-dialog",
+        "@/components/ui",
+        "@/lib/types"
+      ],
+      "exports": [
+        "WalkIns"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Legibilidad, estados, teclado, responsive y coste de render/requests."
+    },
+    {
+      "path": "src/hooks/use-clock.ts",
+      "kind": "producto",
+      "sha256": "180529d0e12802d2e6e726f55cc15bbfcadd57ac7e88db91005102ef81131787",
+      "lines": 11,
+      "dependencies": [
+        "react"
+      ],
+      "exports": [
+        "useClock"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/hooks/use-live.ts",
+      "kind": "producto",
+      "sha256": "30f4cb6cfa2d67d8d4b4ccf0d11ca45f0f502b3fb793efd4e226cbfbff2c7aa8",
+      "lines": 41,
+      "dependencies": [
+        "react"
+      ],
+      "exports": [
+        "LiveChange",
+        "useLive"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/auth.ts",
+      "kind": "producto",
+      "sha256": "396f8da55643b30f92b208c46bd0f5f63e45cf37c3939f938900519ba965733d",
+      "lines": 33,
+      "dependencies": [
+        "server-only",
+        "./supabase/server",
+        "./http",
+        "react"
+      ],
+      "exports": [
+        "requireIdentity",
+        "requireUser"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/lib/branding.ts",
+      "kind": "producto",
+      "sha256": "2df2bb6ba763b6b411ed4f9cf688fa7eb885264eea02d2029962d43fdcc5d221",
+      "lines": 39,
+      "dependencies": [
+        "react"
+      ],
+      "exports": [
+        "brandStyle"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/chart-values.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/calendar.ts",
+      "kind": "producto",
+      "sha256": "fab875e21a42515c8009964deb5ffcc23b50a61441b5dc1b5f5d3b347d27bc63",
+      "lines": 29,
+      "dependencies": [
+        "date-fns-tz"
+      ],
+      "exports": [
+        "calendarBounds",
+        "visibleInterval"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/calendar.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/capabilities.ts",
+      "kind": "producto",
+      "sha256": "ead0390a64f9347d7b6324c118850d92d132c382268c7a2209b45e60873e4e53",
+      "lines": 20,
+      "dependencies": [
+        "./types"
+      ],
+      "exports": [
+        "capabilities",
+        "hasCapability"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/chart-values.ts",
+      "kind": "producto",
+      "sha256": "bd2a637bd61b99de838f164ad5f125f5bbaac23e81f37250c30732af6665c0f2",
+      "lines": 19,
+      "dependencies": [],
+      "exports": [
+        "chartInteger",
+        "utilization"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/chart-values.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/client.ts",
+      "kind": "producto",
+      "sha256": "e30040d5b8b7444c4679468584f5320ff5799aa36c8ebe04f095b6ca1840ad5e",
+      "lines": 76,
+      "dependencies": [
+        "react"
+      ],
+      "exports": [
+        "api",
+        "resourceUrl",
+        "useResource"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/cookie-security.ts",
+      "kind": "producto",
+      "sha256": "2ef9f372a900502ff37d20d9b42b1cf49b9441718a99a71acf7e125a8d690cb2",
+      "lines": 8,
+      "dependencies": [],
+      "exports": [
+        "secureCookies"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/environment-boundary.ts",
+      "kind": "producto",
+      "sha256": "9ee13c2b3a894be43f6141a9a7f03c69f44bcb0b798d88152d35e5709a04965e",
+      "lines": 65,
+      "dependencies": [],
+      "exports": [
+        "assertEnvironmentBoundary",
+        "assertDeploymentEnvironment"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/environment.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/http.ts",
+      "kind": "producto",
+      "sha256": "422ae710085a1ecaebb772574af47aa2e0b990d90056646bde920d32ccc8e094",
+      "lines": 142,
+      "dependencies": [
+        "server-only",
+        "node:crypto",
+        "zod"
+      ],
+      "exports": [
+        "HttpError",
+        "correlationId",
+        "readJson",
+        "response",
+        "fail"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/e2e/ux-release.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/public-booking.ts",
+      "kind": "producto",
+      "sha256": "11e99f94d1079520c628d713145ceb474c548ed864b9b6c781bf00b9f490ad2a",
+      "lines": 23,
+      "dependencies": [
+        "./validation",
+        "../features/services/service-picker"
+      ],
+      "exports": [
+        "PublicPickableService",
+        "parsePublicBookingQuery",
+        "directlyBookable",
+        "preselectedServices"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/public-booking.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/secret-auth.ts",
+      "kind": "producto",
+      "sha256": "5e4ece97f7b909d07aabd60e5eef0a8b3ef79c7ab02d172abec6caf7e19e2cea",
+      "lines": 12,
+      "dependencies": [
+        "node:crypto"
+      ],
+      "exports": [
+        "matchesSecret"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/secret-auth.test.ts"
+      ],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "src/lib/supabase/server.ts",
+      "kind": "producto",
+      "sha256": "81a3265f2978e6bb63e170c351e7aec6a7931506f0953dc92948f532062a972f",
+      "lines": 57,
+      "dependencies": [
+        "server-only",
+        "@supabase/ssr",
+        "@supabase/supabase-js",
+        "next/headers",
+        "@/lib/cookie-security",
+        "@/lib/environment-boundary"
+      ],
+      "exports": [
+        "publicEnvironment",
+        "supabaseServer",
+        "gatewayClient"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/types.ts",
+      "kind": "producto",
+      "sha256": "25924eec18377696e12b68b5719a6941be7a1964ad6812cafea953547c8cf2b7",
+      "lines": 79,
+      "dependencies": [],
+      "exports": [
+        "Json",
+        "DataRow",
+        "Role",
+        "Organization",
+        "Branch",
+        "Staff",
+        "Service",
+        "Appointment",
+        "Page",
+        "Workspace"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/finance.ts",
+        "tests/unit/domain.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/lib/validation.ts",
+      "kind": "producto",
+      "sha256": "d061e3055fa588ce68c8f377c3452fa3d18957071aad16d746b13df415e42734",
+      "lines": 62,
+      "dependencies": [
+        "zod"
+      ],
+      "exports": [
+        "uuid",
+        "slug",
+        "phone",
+        "date",
+        "normalizePhone",
+        "customerInput",
+        "statuses",
+        "statusLabels",
+        "retentionLabels",
+        "roleLabels",
+        "csvCell"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/unit/domain.test.ts",
+        "tests/unit/finance-import.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/proxy.ts",
+      "kind": "producto",
+      "sha256": "1b12ad84828bb1883ae7e7b5b0de2f669d71a65f1fee2978c684143a27590601",
+      "lines": 54,
+      "dependencies": [
+        "@supabase/ssr",
+        "next/server",
+        "@/lib/cookie-security",
+        "@/lib/environment-boundary"
+      ],
+      "exports": [
+        "proxy",
+        "config"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/onboarding.ts",
+        "tests/unit/environment.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "src/services/automation/provider.ts",
+      "kind": "producto",
+      "sha256": "bd19bfa1303e2e3f0228066553c56dd7c1a92123ad4dfee1cc6cbadae18791de",
+      "lines": 17,
+      "dependencies": [],
+      "exports": [
+        "DeliveryResult",
+        "AutomationProvider"
+      ],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "supabase/.gitignore",
+      "kind": "configuración",
+      "sha256": "507699eb91144818edf61d3a079212cacf31d8db520eae428e3b48fcf0d6919c",
+      "lines": 9,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "supabase/config.toml",
+      "kind": "configuración",
+      "sha256": "4b26dbdb7503c68b033d8f0bce89e7d3373b01ba0014ce1311c349baba6b9722",
+      "lines": 416,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "supabase/migrations/20261012171437_tenant_core.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "2768c8fd190bc4ec9dcee59672012b43ee257f4db634c94752cfc8d52e76cb11",
+      "lines": 117,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "public.profiles",
+        "public.organizations",
+        "public.organization_settings",
+        "public.branches",
+        "public.branch_settings",
+        "public.branch_business_hours",
+        "public.branch_closures",
+        "public.organization_memberships",
+        "public.membership_branch_access",
+        "public.staff",
+        "public.staff_branch_assignments",
+        "public.services",
+        "public.branch_services",
+        "public.staff_service_capabilities",
+        "public.staff_availability_rules",
+        "public.staff_availability_exceptions",
+        "public.staff_time_off",
+        "public.customers",
+        "public.customer_notes",
+        "public.customer_preferences",
+        "public.customer_tags",
+        "public.appointments",
+        "public.appointment_services",
+        "public.appointment_status_history",
+        "public.walk_in_entries",
+        "public.goals",
+        "public.domain_events",
+        "public.automation_jobs",
+        "public.notifications",
+        "public.audit_logs",
+        "public.daily_metrics",
+        "public.daily_service_metrics",
+        "app_private.platform_admins",
+        "app_private.gateway_credentials",
+        "app_private.idempotency_keys",
+        "app_private.rate_limits",
+        "customers_return_idx",
+        "customers_name_search_idx",
+        "appointments_branch_range_idx",
+        "appointments_staff_range_idx",
+        "appointments_customer_range_idx",
+        "appointments_status_range_idx",
+        "memberships_profile_idx",
+        "staff_profile_idx",
+        "customer_notes_timeline_idx",
+        "walkins_queue_idx",
+        "jobs_claim_idx",
+        "audit_timeline_idx",
+        "events_timeline_idx",
+        "app_private.touch_and_protect_tenant",
+        "app_private.deny_history_mutation",
+        "app_private.create_profile"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012171442_authorization.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "6b891e7a37f13a6f3bc0978c8f2f9e67f683d5d240707a2eb62d6280aa4ba293",
+      "lines": 71,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.current_profile",
+        "app_private.is_platform_admin",
+        "app_private.is_org_member",
+        "app_private.has_org_role",
+        "app_private.current_staff_id",
+        "app_private.can_access_branch",
+        "app_private.current_organization_id",
+        "app_private.can_operate_branch",
+        "app_private.can_read_staff",
+        "app_private.can_read_customer",
+        "app_private.can_read_appointment",
+        "app_private.can_read_profile",
+        "profiles_read",
+        "organizations_read",
+        "organization_settings_read",
+        "memberships_read",
+        "membership_access_read",
+        "branches_read",
+        "staff_read",
+        "customers_read",
+        "services_read",
+        "appointments_read",
+        "appointment_services_read",
+        "appointment_history_read",
+        "capabilities_read",
+        "timeoff_read",
+        "goals_read",
+        "notifications_read",
+        "scoped_read",
+        "scoped_read",
+        "customer_read",
+        "management_read",
+        "walkins_read",
+        "public.visits"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012171446_configuration.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "4a40c4d5c5706dec8abd82e9a8231f6563786adaa09f23b3b83162b7f6d70b87",
+      "lines": 139,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.record_audit",
+        "app_private.emit_event",
+        "app_private.idempotency_begin",
+        "app_private.idempotency_finish",
+        "app_private.lock_organization",
+        "app_private.create_organization",
+        "app_private.update_organization",
+        "app_private.manage_membership",
+        "app_private.manage_record",
+        "public.create_organization",
+        "public.update_organization",
+        "public.manage_membership",
+        "public.manage_record"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012171451_scheduling.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "3442d235343e71c9db16dcc904fe246f361c4f48874dde200fe149e48268857b",
+      "lines": 237,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.service_plan",
+        "app_private.effective_availability",
+        "app_private.compatible_staff",
+        "app_private.availability_slots",
+        "app_private.list_availability",
+        "app_private.create_booking_internal",
+        "app_private.create_booking",
+        "app_private.reschedule_booking",
+        "app_private.transition_booking",
+        "app_private.cancel_booking",
+        "app_private.check_gateway",
+        "app_private.rate_limit",
+        "app_private.public_rate_check",
+        "app_private.public_catalog",
+        "app_private.resolve_public_request",
+        "app_private.public_availability",
+        "app_private.public_booking",
+        "public.list_availability",
+        "public.create_booking",
+        "public.reschedule_booking",
+        "public.transition_booking",
+        "public.cancel_booking",
+        "public.public_rate_check",
+        "public.public_catalog",
+        "public.public_availability",
+        "public.public_booking"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012171456_operations.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "87cba8b43ad89f021a131df9b421a50dd9fe1d92d8d642ec517174d9a310a793",
+      "lines": 122,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.list_customers",
+        "app_private.customer_detail",
+        "app_private.customer_timeline",
+        "app_private.create_walkin",
+        "app_private.assign_walkin",
+        "app_private.close_walkin",
+        "app_private.day_status",
+        "app_private.search_workspace",
+        "customers_phone_prefix_idx",
+        "staff_name_search_idx",
+        "app_private.remove_schedule_record",
+        "public.list_customers",
+        "public.customer_detail",
+        "public.customer_timeline",
+        "public.create_walkin",
+        "public.assign_walkin",
+        "public.close_walkin",
+        "public.day_status",
+        "public.search_workspace",
+        "public.remove_schedule_record"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012171501_analytics_automation.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "183a554442731504e666330f5bf848f79dd16a97732b134c1dabed76e8957d50",
+      "lines": 139,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "public.capacity_snapshots",
+        "capacity_source_idx",
+        "capacity_read",
+        "app_private.compute_metric_day",
+        "app_private.rebuild_metric_day",
+        "public.daily_branch_metrics",
+        "public.daily_organization_metrics",
+        "public.daily_staff_metrics",
+        "app_private.dashboard",
+        "app_private.record_export",
+        "app_private.claim_jobs",
+        "app_private.process_job",
+        "app_private.fail_job",
+        "app_private.worker_tick",
+        "public.dashboard",
+        "public.record_export",
+        "public.claim_jobs",
+        "public.process_job",
+        "public.fail_job",
+        "public.worker_tick"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012173606_read_models.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "3d1998a657f6208cd47fc3e6a77dd8dbb6945724eb62d0c366b5c5c832d32f30",
+      "lines": 39,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.session_context",
+        "app_private.create_organization_for_email",
+        "app_private.list_agenda",
+        "app_private.appointment_detail",
+        "app_private.goal_progress",
+        "public.session_context",
+        "public.create_organization_for_email",
+        "public.list_agenda",
+        "public.appointment_detail",
+        "public.goal_progress"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012180348_product_hardening.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "60107f8637e3467c53e89c7f352e3322ff49cf4b3bc72ddb34436b97c7495da7",
+      "lines": 312,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.request_id",
+        "public.customer_service_returns",
+        "service_returns_due_idx",
+        "service_returns_service_idx",
+        "service_returns_branch_idx",
+        "service_returns_read",
+        "public.daily_customer_activity",
+        "customer_activity_period_idx",
+        "customer_activity_customer_idx",
+        "customer_activity_branch_idx",
+        "customer_activity_staff_idx",
+        "customers_created_idx",
+        "customer_activity_read",
+        "app_private.estimate_return_days",
+        "app_private.refresh_service_returns",
+        "app_private.membership_directory",
+        "app_private.maintenance_due",
+        "app_private.gateway_health",
+        "app_private.manage_record",
+        "app_private.transition_booking",
+        "app_private.create_booking",
+        "app_private.update_organization",
+        "app_private.reschedule_booking",
+        "app_private.create_booking_internal",
+        "app_private.rebuild_metric_day",
+        "app_private.process_job",
+        "app_private.claim_jobs",
+        "app_private.worker_tick",
+        "app_private.dashboard",
+        "public.membership_directory",
+        "public.maintenance_due",
+        "public.gateway_health"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012181534_final_read_models.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "b73b36ca782b5f6ab74e224cda3ffbb35f06011d7695b7ca61b3f11c3d4347ca",
+      "lines": 46,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.dashboard",
+        "app_private.customer_timeline",
+        "app_private.list_memberships",
+        "public.list_memberships"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012182755_advisor_foreign_key_indexes.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "fc2b6e0177a565514e6847f7e0736d9554e9eccb800fb92f198de38537ef976c",
+      "lines": 8,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "capacity_snapshots_staff_fk_idx",
+        "capacity_snapshots_actor_fk_idx",
+        "customer_service_returns_actor_fk_idx",
+        "daily_customer_activity_actor_fk_idx"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012183007_reporting_access.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "78d6b23a6e8272a813495b51593141b28fb861cdf7176ca3024c6b316d44c9fb",
+      "lines": 12,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "reporting_read"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012183207_bounded_read_permissions.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "75fe589c6d0af36f3e69bab11797bbafddd125d300bc2ba61748d596914a6e4c",
+      "lines": 34,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.list_agenda",
+        "app_private.list_customers"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012183541_archived_branch_history.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "e0148240a22cf295f064a8d762b582871944658e7ebcd00c899583bdf58f0b0c",
+      "lines": 40,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.request_id",
+        "app_private.can_access_branch",
+        "app_private.can_operate_branch",
+        "app_private.list_customers"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012183917_platform_admin_audit.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "d8bdcbdac831a541ed183216381e2c0df4694937fd8c661ebdf7060a93eb0c79",
+      "lines": 13,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.audit_platform_admins"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012184839_customer_detail_branding.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "325d7ad14025383cf7459e4b32ae4c15acf18101e6539e80b2d745383db9c311",
+      "lines": 29,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.list_customers",
+        "app_private.customer_detail"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012210000_website_booking.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "8c32e0f74f95810de4d3357c5c0cb8667594d108adb3dfba4cfb6aa2acabd7c1",
+      "lines": 116,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.booking_attributions",
+        "app_private.public_catalog",
+        "app_private.resolve_public_request",
+        "app_private.manage_record",
+        "app_private.public_booking",
+        "app_private.public_booking",
+        "public.public_booking"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012223818_finance_schema.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "0bd9cad905077083775d2592dae7b0260f45f9ab908f12c7e2836ff9d525a6fa",
+      "lines": 137,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "public.",
+        "public.settlement_adjustments",
+        "finance_checkout_period",
+        "finance_checkout_pending",
+        "finance_payment_period",
+        "finance_expense_period",
+        "finance_commission_period",
+        "app_private.finance_access",
+        "app_private.finance_staff_access",
+        "app_private.finance_checkout_access",
+        "finance_catalog_read",
+        "fee_rules_read",
+        "commission_rules_read",
+        "finance_operational_read",
+        "checkout_lines_read",
+        "expense_read",
+        "own_finance_read",
+        "finance_report_read",
+        "financial_import_read",
+        "own_finance_read",
+        "app_private.finance_guard"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012223852_finance_transactions.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "0ec5426c18793df80a40b4bd642414bbdf9a963483dbb0659e5040889cbe9c67",
+      "lines": 305,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.finance_amount",
+        "app_private.finance_round",
+        "app_private.finance_session",
+        "app_private.finance_expected",
+        "app_private.finance_rebuild_day",
+        "app_private.finance_create_checkout",
+        "app_private.finance_record_payment",
+        "app_private.finance_post_checkout",
+        "app_private.finance_create_expense",
+        "app_private.finance_reverse_payment",
+        "app_private.finance_command",
+        "public.finance_command",
+        "public."
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012224111_finance_read_import.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "a3f58c64e9107c82a55f92904bb043cc6f56e7cf1d59e2cc71d5652a1aa26500",
+      "lines": 139,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.finance_read",
+        "public.finance_read",
+        "app_private.financial_export",
+        "public.financial_export",
+        "app_private.finance_import",
+        "public.finance_import"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261012224355_booking_finance_hardening.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "8f40aed5d8e6f642167a062c3c5d6d3dc64428ca0e2d6b15ed689cf84acb0e0b",
+      "lines": 62,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.manage_membership",
+        "app_private.finance_configuration_guard",
+        "financial_audit_read",
+        "app_private.finance_child_guard",
+        "app_private.finance_posted_consistency"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261015190206_booking_attribution_rls.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "5bbea8b1fc724c77899b6d672cac682b29fd597cac2192b56408efebc1116079",
+      "lines": 4,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261015190657_consolidate_financial_audit_policy.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "7231dad890478bf92104773912e1761959236f167980b9010d859efce51bdf47",
+      "lines": 21,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261015191802_worker_tick_record_scope.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "887f1b8d6464a60608e1181692be82dde6158de41ed1b5ffce920501eb793983",
+      "lines": 44,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.worker_tick"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261019154027_database_scheduler.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "39912ac9f65699012ba226e68015457f2b83a1502f65e0ecbb2b7beaf2b5a6d3",
+      "lines": 126,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.worker_tick_core",
+        "app_private.worker_tick",
+        "app_private.claim_jobs_core",
+        "app_private.claim_jobs",
+        "app_private.process_job_core",
+        "app_private.process_job",
+        "app_private.fail_job_core",
+        "app_private.fail_job",
+        "app_private.run_scheduled_jobs"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261019213732_profit_sharing.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "f6e75884aa9ffd20277918cfd3efb6988c91aa238e42347f4da50f9f1b9e02e6",
+      "lines": 81,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.configure_profit_settings",
+        "app_private.profit_share_summary"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261019220146_enable_database_cron.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "642243b5064b8aa0ee95418ec98c7f18e5936f716db6ec683192a89a2ceefa63",
+      "lines": 12,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261019223415_final_authorization_hardening.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "128d697018f1c8f7aad9521532c6d0481ab015475e81988edada0ee473ce75db",
+      "lines": 206,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "automation_jobs_tenant_event_idx",
+        "notifications_tenant_event_idx",
+        "app_private.is_org_member",
+        "app_private.has_org_role",
+        "app_private.can_access_branch",
+        "app_private.can_read_profile",
+        "app_private.finance_access",
+        "finance_settings_read",
+        "app_private.platform_support_snapshot",
+        "public.platform_support_snapshot"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261021005325_privileged_mfa_sessions.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "39b95e35c375e64bf3075d8e47a0ca32ceffac770397fe2b0b4282e2f26c97af",
+      "lines": 69,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.session_is_live",
+        "app_private.requires_mfa",
+        "app_private.assurance_allowed",
+        "app_private.security_context",
+        "public.security_context",
+        "session_assurance"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261021005630_partner_distributions.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "b996a7759d9074aae2a5d1387b837a254a6eb81d48fbcd9b7fb5c8300dc1ebc1",
+      "lines": 270,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "public.partner_distribution_policies",
+        "public.partner_distribution_periods",
+        "public.partner_distribution_allocations",
+        "public.partner_distribution_payments",
+        "public.partner_distribution_adjustments",
+        "public.partner_withdrawal_allocations",
+        "distribution_read",
+        "on",
+        "partner_payments_allocation",
+        "partner_adjustments_allocation",
+        "partner_withdrawals_allocation",
+        "partner_allocations_staff",
+        "app_private.distribution_period_guard",
+        "app_private.partner_balance",
+        "app_private.partner_distribution_command",
+        "public.partner_distribution_command",
+        "app_private.partner_distributions",
+        "public.partner_distributions",
+        "app_private.partner_own_distributions",
+        "public.partner_own_distributions"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261021010224_reporting_health.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "b5b613a2a5a2b06c65a4e52570982a6a18b17d36462756dc29be39ce5710f87e",
+      "lines": 100,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.financial_series",
+        "public.financial_series",
+        "app_private.exact_financial_json",
+        "app_private.finance_read_exact",
+        "public.finance_read_exact",
+        "app_private.financial_export_exact",
+        "public.financial_export_exact",
+        "app_private.scheduler_heartbeat",
+        "app_private.operations_health",
+        "public.operations_health"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261021011210_daily_blocks.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "032f715b20e142cdacb4da011743be56da4bd8548db88895e1c39c7c7fcba231",
+      "lines": 47,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.assert_schedule_appointments",
+        "app_private.manage_record",
+        "app_private.save_daily_blocks",
+        "public.save_daily_blocks"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261021202056_audit_release_boundaries.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "dd75c06c55e9c744226b8fceff2a2eb839cb5bcdb0e6de833ed1c77cf5ca1746",
+      "lines": 105,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "app_private.mfa_factor_mutation_locks",
+        "app_private.retain_verified_mfa_factor"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261021214500_customer_list_projection.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "43d208e8bc045bdec70a9eb4ad68dd7f93aad0c2c2f1198892dd6c9e2310ce72",
+      "lines": 36,
+      "dependencies": [],
+      "exports": [],
+      "sql": [
+        "appointments_customer_completed_lookup",
+        "appointments_customer_upcoming_lookup",
+        "app_private.customer_list_view",
+        "public.customer_list_view"
+      ],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "supabase/migrations/20261022162330_ux_reporting_breakdown.sql",
+      "kind": "migración histórica aplicada",
+      "sha256": "3b4a32a72224563d7c4e838c58d7aedbe16834741a3dd2cd3d7eced380ecad68",
+      "lines": 59,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Autorización, scope y contratos DB/API; conservar guards, grants, locks e historia."
+    },
+    {
+      "path": "tests/e2e/mfa-helper.ts",
+      "kind": "prueba aislada",
+      "sha256": "866f2b2c07d944cdc6b19633faa8229e8accd48b23a7fe5cbb0769e71439245c",
+      "lines": 47,
+      "dependencies": [
+        "node:crypto",
+        "node:fs/promises",
+        "@playwright/test",
+        "@supabase/supabase-js"
+      ],
+      "exports": [
+        "totp",
+        "mfaFixture",
+        "verifyRequest",
+        "verifyClient"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/operations.spec.ts",
+        "tests/e2e/permissions.spec.ts",
+        "tests/e2e/security-release.spec.ts",
+        "tests/e2e/ux-release.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/e2e/operations.spec.ts",
+      "kind": "prueba aislada",
+      "sha256": "28764258a3bd7e6c8abdf79a7ef70388d93dd5ad20beda6a5421dc96be6576ac",
+      "lines": 368,
+      "dependencies": [
+        "@playwright/test",
+        "node:fs/promises",
+        "@supabase/supabase-js",
+        "../integration/fixtures",
+        "./mfa-helper"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/operations.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/e2e/permissions.spec.ts",
+      "kind": "prueba aislada",
+      "sha256": "933df31f50e3470aa6d11f2e34d4cf7e8b207c0481586de14f1ae398d034c9ea",
+      "lines": 412,
+      "dependencies": [
+        "@playwright/test",
+        "node:fs/promises",
+        "@supabase/supabase-js",
+        "pg",
+        "../integration/fixtures",
+        "./mfa-helper"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/permissions.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/e2e/revocation.spec.ts",
+      "kind": "prueba aislada",
+      "sha256": "16b1310b6e31c4060f9954b28c157674eb73810a237a27aa8584170ae0877d41",
+      "lines": 195,
+      "dependencies": [
+        "@playwright/test",
+        "@supabase/supabase-js",
+        "pg",
+        "node:fs/promises",
+        "./mfa-helper"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/revocation.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/e2e/security-release.spec.ts",
+      "kind": "prueba aislada",
+      "sha256": "1e14cf0e7b0c29cc8e109f362fdfe4f7e5ff8d586967de25b52c5d515be3971a",
+      "lines": 318,
+      "dependencies": [
+        "@playwright/test",
+        "@supabase/supabase-js",
+        "pg",
+        "node:fs/promises",
+        "./mfa-helper",
+        "@axe-core/playwright"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/security-release.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/e2e/setup.ts",
+      "kind": "prueba aislada",
+      "sha256": "2c266e09ab20edaf4a60ff67ca28b4d14399b3d4d9b1bb821540b3612d29c770",
+      "lines": 110,
+      "dependencies": [
+        "@supabase/supabase-js",
+        "pg",
+        "node:crypto",
+        "node:fs/promises",
+        "../integration/fixtures",
+        "../integration/database",
+        "./mfa-helper"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/setup.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/e2e/ux-release.spec.ts",
+      "kind": "prueba aislada",
+      "sha256": "31ab5c0a61c2c2695eff79bd1995f433c0c7d092e1971ce76084d94282f56edd",
+      "lines": 427,
+      "dependencies": [
+        "@playwright/test",
+        "node:fs/promises",
+        "./mfa-helper",
+        "pg",
+        "../integration/fixtures"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/ux-release.spec.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/database.ts",
+      "kind": "prueba aislada",
+      "sha256": "22fbc990e459537fa98a5be0a1b386952f6f5d038badd068b88425830cf8bba1",
+      "lines": 157,
+      "dependencies": [
+        "embedded-postgres",
+        "pg",
+        "node:crypto",
+        "node:net",
+        "node:fs/promises",
+        "node:path"
+      ],
+      "exports": [
+        "isolatedDatabase",
+        "asUser"
+      ],
+      "sql": [
+        "auth.users",
+        "auth.sessions",
+        "auth.mfa_factors",
+        "auth.fixture_session",
+        "auth.jwt",
+        "auth.uid"
+      ],
+      "tests": [
+        "tests/e2e/setup.ts",
+        "tests/integration/database.ts",
+        "tests/integration/finance.ts",
+        "tests/integration/hardening.ts",
+        "tests/integration/migration-upgrade.ts",
+        "tests/integration/onboarding.ts",
+        "tests/integration/product-release.ts",
+        "tests/integration/run-hardening.ts",
+        "tests/integration/run-product.ts",
+        "tests/integration/run.ts",
+        "tests/load/run.ts",
+        "tests/recovery/local-supabase.ts",
+        "tests/security/contracts.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/finance.ts",
+      "kind": "prueba aislada",
+      "sha256": "7e797ae574b992c6ba970186da4bbb93a2a268a6c7e5526ba00df70d88ff5bd7",
+      "lines": 776,
+      "dependencies": [
+        "node:assert/strict",
+        "node:crypto",
+        "pg",
+        "./database",
+        "./fixtures"
+      ],
+      "exports": [
+        "financeContracts"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/finance.ts",
+        "tests/integration/fixtures.ts",
+        "tests/integration/run.ts"
+      ],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "tests/integration/fixtures.ts",
+      "kind": "prueba aislada",
+      "sha256": "e2f00a336702430fe5c1660154f066930f0feb2712a43526c8518a7d991a4ebd",
+      "lines": 196,
+      "dependencies": [
+        "node:crypto",
+        "pg"
+      ],
+      "exports": [
+        "FixtureUsers",
+        "fixtures"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/e2e/mfa-helper.ts",
+        "tests/e2e/operations.spec.ts",
+        "tests/e2e/permissions.spec.ts",
+        "tests/e2e/revocation.spec.ts",
+        "tests/e2e/security-release.spec.ts",
+        "tests/e2e/setup.ts",
+        "tests/e2e/ux-release.spec.ts",
+        "tests/integration/database.ts",
+        "tests/integration/finance.ts",
+        "tests/integration/fixtures.ts",
+        "tests/integration/hardening.ts",
+        "tests/integration/migration-upgrade.ts",
+        "tests/integration/product-release.ts",
+        "tests/recovery/local-supabase.ts",
+        "tests/recovery/upgrade-local.ts",
+        "tests/security/contracts.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/hardening.ts",
+      "kind": "prueba aislada",
+      "sha256": "622aba2c7f5b148ed6b2559329100fc5be816c3614145ca9aadbaab91f45f7e9",
+      "lines": 892,
+      "dependencies": [
+        "node:assert/strict",
+        "node:crypto",
+        "pg",
+        "./database",
+        "./fixtures"
+      ],
+      "exports": [
+        "hardeningContracts"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/fixtures.ts",
+        "tests/integration/hardening.ts",
+        "tests/integration/run-hardening.ts",
+        "tests/integration/run.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/migration-upgrade.ts",
+      "kind": "prueba aislada",
+      "sha256": "54b71a102a1d29118d6c035b730c16d95779c47fef1c84a7513972c27d0b0e4a",
+      "lines": 199,
+      "dependencies": [
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "./database",
+        "./fixtures",
+        "pg"
+      ],
+      "exports": [
+        "migrationUpgradeContracts"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/fixtures.ts",
+        "tests/integration/migration-upgrade.ts",
+        "tests/integration/run.ts",
+        "tests/recovery/upgrade-local.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/onboarding.ts",
+      "kind": "prueba aislada",
+      "sha256": "c40b3d74ab05b8155e9c0fdeeefd4e97264d38e3ce6478e10d307b7f2f1bd30e",
+      "lines": 249,
+      "dependencies": [
+        "node:assert/strict",
+        "node:crypto",
+        "pg",
+        "node:fs/promises",
+        "./database"
+      ],
+      "exports": [
+        "onboardingContracts"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/onboarding.ts",
+        "tests/integration/run.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/product-release.ts",
+      "kind": "prueba aislada",
+      "sha256": "2bd4bf2175a04de8155fdfdd38402d5ef84daf026d513e150fb4026814b48a07",
+      "lines": 1140,
+      "dependencies": [
+        "node:assert/strict",
+        "node:crypto",
+        "pg",
+        "./database",
+        "./fixtures"
+      ],
+      "exports": [
+        "productContracts"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/fixtures.ts",
+        "tests/integration/product-release.ts",
+        "tests/integration/run-product.ts",
+        "tests/integration/run.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/run-hardening.ts",
+      "kind": "prueba aislada",
+      "sha256": "c9c5fa94999c8792efea4e8f9fe568cb14fca3e04a659c6b75f19afea2be0c63",
+      "lines": 14,
+      "dependencies": [
+        "./database",
+        "./hardening"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/hardening.ts",
+        "tests/integration/run-hardening.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/run-product.ts",
+      "kind": "prueba aislada",
+      "sha256": "b8ef6ad00deabe3197366a42fd2be9ab9af7f7c3acfd3db230e89c65b8773530",
+      "lines": 14,
+      "dependencies": [
+        "./database",
+        "./product-release"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/product-release.ts",
+        "tests/integration/run-product.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/integration/run.ts",
+      "kind": "prueba aislada",
+      "sha256": "36918e65811ca6c4be39e96b329c551c3487a05300f79b889ec5adda42dd033b",
+      "lines": 57,
+      "dependencies": [
+        "./database",
+        "../security/contracts",
+        "./finance",
+        "./onboarding",
+        "./hardening",
+        "./product-release",
+        "./migration-upgrade"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/integration/database.ts",
+        "tests/integration/finance.ts",
+        "tests/integration/hardening.ts",
+        "tests/integration/migration-upgrade.ts",
+        "tests/integration/onboarding.ts",
+        "tests/integration/product-release.ts",
+        "tests/integration/run-hardening.ts",
+        "tests/integration/run.ts",
+        "tests/unit/finance-import.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/load/run.ts",
+      "kind": "prueba aislada",
+      "sha256": "b0f77690a18a3bd1cf7591494b25749887decadd2e19ea4db01a45cf3343ddbb",
+      "lines": 315,
+      "dependencies": [
+        "../integration/database",
+        "node:crypto",
+        "node:fs/promises",
+        "node:os"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/load/run.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/recovery/local-supabase.ts",
+      "kind": "prueba aislada",
+      "sha256": "4f62ed1933a8fa210eead1797bd0dba8a4f7f559db204fc2a5025ae027518711",
+      "lines": 318,
+      "dependencies": [
+        "node:child_process",
+        "pg",
+        "node:crypto",
+        "node:fs/promises",
+        "node:assert/strict",
+        "../integration/database",
+        "../integration/fixtures"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/recovery/local-supabase.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/recovery/upgrade-local.ts",
+      "kind": "prueba aislada",
+      "sha256": "7dcd1301818f7961ebafc57cb894085cd285c82f29b29773b255fa938bd25de9",
+      "lines": 67,
+      "dependencies": [
+        "node:child_process",
+        "node:crypto",
+        "node:path",
+        "pg",
+        "@supabase/supabase-js",
+        "../integration/migration-upgrade",
+        "../integration/fixtures"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/recovery/upgrade-local.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/security/contracts.ts",
+      "kind": "prueba aislada",
+      "sha256": "7df84ead3f3dc0925c9d8e1ee62b7f428ec8f4f5da27c6d7894ab2e2dc68f83d",
+      "lines": 1462,
+      "dependencies": [
+        "node:assert/strict",
+        "node:crypto",
+        "pg",
+        "../integration/database",
+        "../integration/fixtures"
+      ],
+      "exports": [
+        "contracts"
+      ],
+      "sql": [],
+      "tests": [
+        "tests/integration/run.ts",
+        "tests/security/contracts.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/unit/calendar.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "3ff8651fe389253e507485ed06a37a8546da3b17ab175b36d27cd858f08ce6c6",
+      "lines": 42,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "../../src/lib/calendar"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/calendar.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/unit/chart-values.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "f94c6ed3672644951736acbc73abae15094f2dd217304e580f1202bcf6905453",
+      "lines": 46,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "../../src/lib/chart-values",
+        "../../src/lib/branding",
+        "../e2e/mfa-helper"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/chart-values.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/unit/domain.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "81ce593aa401d4994bff4062a79e2d43a2524ea2d95a4fad5c98afd7b172daab",
+      "lines": 104,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "../../src/lib/validation",
+        "../../src/features/services/service-picker",
+        "date-fns-tz"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/domain.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/unit/environment.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "c9f511f12c158754f1a1697cc00a515e8e9811526ad02b16a27a958b42d3c229",
+      "lines": 64,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "../../src/lib/environment-boundary"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/environment.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/unit/finance-import.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "4ef6b80c41dd75060a0c5482d733efbc7657ed14f58e10cae8a5cc9e83f416c7",
+      "lines": 211,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "fflate",
+        "../../src/features/finance/import-parser",
+        "../../src/lib/validation"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/finance-import.test.ts"
+      ],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "tests/unit/public-booking.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "8ff2080d5efc1783225181b578592b3a4768cf2446988ab1a6ee90d8138a341d",
+      "lines": 23,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "../../src/lib/public-booking"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/public-booking.test.ts"
+      ],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "tests/unit/secret-auth.test.ts",
+      "kind": "prueba aislada",
+      "sha256": "ebf966dd70aaf7cc9c8bea9245c6c797da67f362cd7f9d38faedd7dcaaef05d0",
+      "lines": 13,
+      "dependencies": [
+        "node:test",
+        "node:assert/strict",
+        "../../src/lib/secret-auth"
+      ],
+      "exports": [],
+      "sql": [],
+      "tests": [
+        "tests/unit/secret-auth.test.ts"
+      ],
+      "risk": "Dinero exacto, idempotencia o identidad; confirmar con contratos aislados."
+    },
+    {
+      "path": "tsconfig.json",
+      "kind": "configuración",
+      "sha256": "b2ad1540ef68464d575f4eb697181d3943f71b6638ec14d7fa569bb3572bbb2b",
+      "lines": 28,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    },
+    {
+      "path": "vercel.json",
+      "kind": "configuración",
+      "sha256": "1bde306be076c87e649f061ffdd813fba7675910e98e240f6413df2e6bdf1531",
+      "lines": 5,
+      "dependencies": [],
+      "exports": [],
+      "sql": [],
+      "tests": [],
+      "risk": "Compatibilidad y efectos del entorno; verificar antes de ejecución."
+    }
+  ]
+}
