@@ -1,5 +1,7 @@
 # Cierre verificado del rediseño, 22/10/2026
 
+Revisión posterior al despliegue inicial: los logs mostraron un error esperado de MFA al abrir un enlace directo del workspace. Next renderiza página y layout en paralelo; se agrega a la página la misma redirección de sesión/MFA del layout, antes de cualquier lectura comercial. El E2E comprueba enlaces directos a Inicio, Agenda, Clientes y Caja en AAL1 para cada rol privilegiado, más un enlace anónimo hacia Login. No se cambian RPC, permisos, sesiones ni enforcement. El PR de corrección vuelve a ejecutar la suite completa y capturas.
+
 Producto: **9d1738713ebdbdc9decf73273ddb7a0b826bec29**. [CI completa aprobada](https://github.com/otiagoo44/barberia-crm/actions/runs/39817313839): quality, supabase-e2e y visual-baseline. [Resumen verificable](verification/ux/final/summary.json).
 
 ## Parche de seguridad previo a publicación

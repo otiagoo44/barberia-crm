@@ -7,8 +7,13 @@ const real = process.env.E2E_REAL_SUPABASE === "1";
 test.describe("Real MFA release boundary", () => {
   test.skip(!real, "Requires isolated Supabase Auth; no mock proof");
   test("AAL1 privileged sessions fail HTTP and direct Data API until TOTP; spoofed headers cannot elevate", async ({
-    request,
+    page,
   }) => {
+    const request = page.request;
+    const pageErrors: string[] = [];
+    page.on("pageerror", (error) => pageErrors.push(error.message));
+    await page.goto("/fixture-a/agenda");
+    await expect(page).toHaveURL(/\/login$/);
     const f = JSON.parse(
       await readFile(".test-data/e2e/fixtures.json", "utf8"),
     );
@@ -18,6 +23,13 @@ test.describe("Real MFA release boundary", () => {
         data: { email: `${role}@fixture.invalid`, password: f.password },
       });
       expect(login.status()).toBe(200);
+      for (const module of ["inicio", "agenda", "clientes", "caja"]) {
+        await page.goto(`/fixture-a/${module}`);
+        await expect(page).toHaveURL(/\/mfa$/);
+        await expect(
+          page.getByRole("heading", { name: "Verificá tu identidad" }),
+        ).toBeVisible();
+      }
       const forbidden = await request.get(
         `/api/finance/summary?org=${f.orgA}&branch=${f.branches.a1}&from=2026-10-01&to=2026-10-20`,
         { headers: { "x-aal": "aal2" } },
@@ -50,6 +62,7 @@ test.describe("Real MFA release boundary", () => {
       expect(verified.status()).toBe(role === "platform" ? 400 : 200);
       await client.auth.signOut();
     }
+    expect(pageErrors).toEqual([]);
   });
   test("TOTP enrollment, backup authenticator recovery, retirement and global revocation use actual Auth", async ({
     page,
