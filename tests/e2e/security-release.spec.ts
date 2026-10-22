@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { Pool } from "pg";
 import { readFile } from "node:fs/promises";
 import { totp, verifyRequest } from "./mfa-helper";
+import AxeBuilder from "@axe-core/playwright";
 const real = process.env.E2E_REAL_SUPABASE === "1";
 test.describe("Real MFA release boundary", () => {
   test.skip(!real, "Requires isolated Supabase Auth; no mock proof");
@@ -87,6 +88,33 @@ test.describe("Real MFA release boundary", () => {
       data: { email, password: f.password },
     });
     await page.goto("/mfa");
+    for (const width of [360, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      await page
+        .getByText("No tengo una app autenticadora", { exact: true })
+        .click();
+      await expect(
+        page.getByRole("link", { name: "Android", exact: true }),
+      ).toBeVisible();
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBeTruthy();
+      await page.screenshot({
+        path: `test-results/mfa-first-setup-${width}.png`,
+        fullPage: true,
+      });
+      if (width === 390 || width === 1440) {
+        const audit = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+          .analyze();
+        expect(audit.violations).toEqual([]);
+      }
+      await page
+        .getByText("No tengo una app autenticadora", { exact: true })
+        .click();
+    }
     await page.getByLabel("Nombre del dispositivo").fill("Teléfono principal");
     await page
       .getByRole("button", { name: "Configurar dispositivo", exact: true })
