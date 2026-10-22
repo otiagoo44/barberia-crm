@@ -2,6 +2,10 @@
 
 Producto: **9d1738713ebdbdc9decf73273ddb7a0b826bec29**. [CI completa aprobada](https://github.com/otiagoo44/barberia-crm/actions/runs/39817313839): quality, supabase-e2e y visual-baseline. [Resumen verificable](verification/ux/final/summary.json).
 
+## Parche de seguridad previo a publicación
+
+La reejecución del commit de cierre detectó avisos de seguridad en Next.js 16.4.0 y bloqueó quality. Se actualiza únicamente Next.js a **16.4.2**, con versión exacta y lockfile, para corregir [RCE de optimización de imágenes](https://github.com/advisories/GHSA-2464-fhr4-w9xw) y [DoS de Server Actions](https://github.com/advisories/GHSA-p3m5-59mp-jv5r). La instalación corregida informa cero vulnerabilidades. Los árboles src/supabase permanecen intactos; CI vuelve a ejecutar build, contratos, E2E y capturas con ese runtime antes del merge. El resumen siguiente identifica la evidencia visual inicial, no sustituye los checks del HEAD definitivo.
+
 ## Evidencia final
 
 - 20 unitarias, 110 contratos DB (51 seguridad/operación, 19 financieros, 23 hardening, 17 producto), 25 E2E aprobados sin skips con Auth/Data API/RPC/HTTP reales y aislados. Incluye recepción → atención → checkout dividido → cierre → revisión owner, revocación viva, MFA, semana, teclado/Escape/foco. No se eliminaron asserts.
