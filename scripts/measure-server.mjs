@@ -1,7 +1,7 @@
 /* global AbortSignal, setTimeout */
 import { spawn } from "node:child_process";
 import { createWriteStream } from "node:fs";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 const root = resolve(".");
 const dir = resolve(process.env.QA_SERVER_DIR ?? ".");
@@ -22,20 +22,15 @@ await mkdir(".test-data", { recursive: true });
 const log = createWriteStream(`.test-data/measure-${port}.log`, {
   mode: 0o600,
 });
-const server = spawn(
-  process.execPath,
-  [
-    resolve(dir, "node_modules/next/dist/bin/next.js"),
-    "start",
-    "-p",
-    String(port),
-  ],
-  {
-    cwd: dir,
-    env: { ...process.env, APP_URL: base },
-    stdio: ["ignore", "pipe", "pipe"],
-  },
+const nextPackage = JSON.parse(
+  await readFile(resolve(dir, "node_modules/next/package.json"), "utf8"),
 );
+const nextCli = resolve(dir, "node_modules/next", nextPackage.bin.next);
+const server = spawn(process.execPath, [nextCli, "start", "-p", String(port)], {
+  cwd: dir,
+  env: { ...process.env, APP_URL: base },
+  stdio: ["ignore", "pipe", "pipe"],
+});
 server.stdout.pipe(log);
 server.stderr.pipe(log);
 let startupOutput = "";
