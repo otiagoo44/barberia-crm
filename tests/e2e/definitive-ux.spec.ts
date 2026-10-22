@@ -81,7 +81,9 @@ test.describe("Definitive workspace with real scoped Auth", () => {
       await gate;
       await route.continue();
     });
-    await page.getByLabel("Período", { exact: true }).selectOption("month");
+    await page
+      .getByRole("combobox", { name: "Período", exact: true })
+      .selectOption("month");
     await expect.poll(() => requested).toBeTruthy();
     await expect(page.locator(".loading:visible")).toHaveCount(1);
     await expect(page.locator(".kpi-grid")).toHaveCount(0);
@@ -92,11 +94,15 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await page.route("**/api/finance/summary?**", (route) =>
       route.abort("failed"),
     );
-    await page.getByLabel("Período", { exact: true }).selectOption("7");
+    await page
+      .getByRole("combobox", { name: "Período", exact: true })
+      .selectOption("7");
     await expect(page.getByRole("alert")).toBeVisible();
     await expect(page.locator(".kpi-grid")).toHaveCount(0);
     await page.unroute("**/api/finance/summary?**");
-    await page.getByLabel("Período", { exact: true }).selectOption("today");
+    await page
+      .getByRole("combobox", { name: "Período", exact: true })
+      .selectOption("today");
     await expect(page.locator(".kpi-grid").first()).toBeVisible();
     await expect(page.getByRole("alert")).toHaveCount(0);
   });

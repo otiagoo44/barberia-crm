@@ -95,7 +95,7 @@ try {
       fullPage: true,
     });
     await audit(anonymous, "login", width);
-    await anonymous.goto(base + "/book/ux-a/a1");
+    await anonymous.goto(base + "/book/ux-b/b1");
     await expect(anonymous.locator(".loading:visible")).toHaveCount(0);
     await expect(anonymous.locator("h1").first()).toBeVisible();
     expect(

@@ -183,6 +183,7 @@ button.primary:hover {
   box-shadow: 0 3px 10px #1717151c;
 }
 .primary:disabled,
+button.primary:disabled,
 button:disabled {
   background: var(--color-disabled);
   color: var(--color-muted);
