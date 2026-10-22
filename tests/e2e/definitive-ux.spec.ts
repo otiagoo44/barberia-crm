@@ -47,6 +47,23 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     expect(
       (await page.request.get(`/api/workspace/setup?${query}`)).status(),
     ).toBe(403);
+    let releaseCash: () => void = () => {};
+    const cashGate = new Promise<void>((resolve) => {
+      releaseCash = resolve;
+    });
+    await page.route("**/api/finance/cash?**", async (route) => {
+      await cashGate;
+      await route.continue();
+    });
+    await page.goto("/fixture-a/inicio");
+    await expect(
+      page.getByText("Consultando caja…", { exact: true }),
+    ).toBeVisible();
+    await expect(page.getByText("Sin apertura", { exact: true })).toHaveCount(
+      0,
+    );
+    releaseCash();
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
     await page.goto("/fixture-a/configuracion");
     await expect(
       page.getByText("Comprobado", { exact: true }).first(),
