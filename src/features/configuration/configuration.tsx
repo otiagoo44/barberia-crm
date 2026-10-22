@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, type FormEvent } from "react";
 import { useWorkspace } from "@/features/organizations/context";
 import { RecordManager } from "./record-manager";

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource, resourceUrl, api } from "@/lib/client";
@@ -148,7 +148,7 @@ export function WalkIns() {
               {row.status === "waiting" && w.role !== "barber" ? (
                 <>
                   <button
-                    aria-busy={!!busy}
+                    aria-busy={busy === row.id}
                     className="primary"
                     disabled={busy === row.id}
                     onClick={() => action(row, "assign")}
@@ -156,14 +156,14 @@ export function WalkIns() {
                     Asignar disponible
                   </button>
                   <button
-                    aria-busy={!!busy}
+                    aria-busy={busy === row.id}
                     disabled={busy === row.id}
                     onClick={() => action(row, "left")}
                   >
                     Se retiró
                   </button>
                   <button
-                    aria-busy={!!busy}
+                    aria-busy={busy === row.id}
                     disabled={busy === row.id}
                     onClick={() => action(row, "cancelled")}
                   >
@@ -172,7 +172,7 @@ export function WalkIns() {
                 </>
               ) : (
                 <button
-                  aria-busy={!!busy}
+                  aria-busy={busy === row.id}
                   disabled={busy === row.id}
                   onClick={() => action(row, "open")}
                 >

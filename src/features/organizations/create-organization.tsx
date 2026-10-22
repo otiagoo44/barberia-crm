@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, type FormEvent } from "react";
 import { api } from "@/lib/client";
 import { Field, Notice } from "@/components/ui";

@@ -117,8 +117,8 @@ button:hover {
   background: var(--surface-2);
 }
 button:disabled {
-  opacity: 0.55;
-  cursor: wait;
+  opacity: 1;
+  cursor: not-allowed;
 }
 button.primary,
 .primary {

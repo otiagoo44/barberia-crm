@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { ShieldCheck, KeyRound } from "lucide-react";

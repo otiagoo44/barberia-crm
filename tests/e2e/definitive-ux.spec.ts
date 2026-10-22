@@ -97,14 +97,16 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await page
       .getByRole("combobox", { name: "Período", exact: true })
       .selectOption("7");
-    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(page.locator("main").getByRole("alert")).toContainText(
+      "No pudimos conectar",
+    );
     await expect(page.locator(".kpi-grid")).toHaveCount(0);
     await page.unroute("**/api/finance/summary?**");
     await page
       .getByRole("combobox", { name: "Período", exact: true })
       .selectOption("today");
     await expect(page.locator(".kpi-grid").first()).toBeVisible();
-    await expect(page.getByRole("alert")).toHaveCount(0);
+    await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
   });
 
   test("motion, 200 percent layout, keyboard, contrast and readable controls across target widths", async ({
@@ -134,6 +136,18 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await page.mouse.up();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
+    const save = dialog.getByRole("button", {
+      name: "Guardar cliente",
+      exact: true,
+    });
+    // Exercise the native disabled state without starting a customer write.
+    await save.evaluate((el) => {
+      (el as HTMLButtonElement).disabled = true;
+    });
+    await expect(save).toHaveCSS("background-color", "rgb(236, 232, 223)");
+    await save.hover();
+    await expect(save).toHaveCSS("background-color", "rgb(236, 232, 223)");
+    expect(await save.evaluate((el) => getComputedStyle(el).opacity)).toBe("1");
     await page.keyboard.press("Escape");
     await expect(primary).toBeFocused();
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -161,6 +175,13 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     ).toBeTruthy();
     await primary.click();
     await expect(dialog).toBeVisible();
+    const heading = dialog.getByRole("heading", {
+      name: "Nuevo cliente",
+      exact: true,
+    });
+    const bounds = await heading.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.y).toBeGreaterThanOrEqual(0);
     await page.screenshot({
       path: "test-results/clients-css-zoom-200.png",
       fullPage: true,
@@ -169,6 +190,15 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await page.evaluate(() => {
       document.documentElement.style.zoom = "";
     });
+    // Reflow at the CSS viewport equivalent of 1440x1000 at 200% browser zoom.
+    await page.setViewportSize({ width: 720, height: 500 });
+    await primary.click();
+    await expect(
+      dialog.getByRole("button", { name: "Cerrar", exact: true }),
+    ).toBeVisible();
+    expect((await heading.boundingBox())!.y).toBeGreaterThanOrEqual(0);
+    await page.keyboard.press("Escape");
+    await page.setViewportSize({ width: 1440, height: 1000 });
     const axe = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
       .analyze();

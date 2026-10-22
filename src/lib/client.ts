@@ -16,13 +16,22 @@ const revoked = "barberia:session-revoked";
 function broadcast(event: string) {
   if (typeof window !== "undefined") window.dispatchEvent(new Event(event));
 }
+async function request(url: string, options: RequestInit) {
+  try {
+    return await fetch(url, options);
+  } catch {
+    throw new Error(
+      "No pudimos conectar. Revisá tu conexión y volvé a intentar.",
+    );
+  }
+}
 export async function api<T>(url: string, body?: unknown): Promise<T> {
   if (
     body !== undefined &&
     /\/api\/auth\/(signout|signin)|\/api\/auth\/mfa\/revoke/.test(url)
   )
     broadcast(revoked);
-  const result = await fetch(
+  const result = await request(
     url,
     body === undefined
       ? { cache: "no-store" }
@@ -86,7 +95,7 @@ export function useResource<T>(url: string | null) {
     window.addEventListener(revoked, invalidateSession);
     async function load() {
       try {
-        const result = await fetch(url!, {
+        const result = await request(url!, {
           cache: "no-store",
           signal: controller.signal,
         });
@@ -118,14 +127,17 @@ export function useResource<T>(url: string | null) {
   }, [url, key, reload]);
   const setData = useCallback(
     (value: SetStateAction<T | null>) =>
-      setState((current) => ({
-        ...current,
-        data:
-          typeof value === "function"
-            ? (value as (previous: T | null) => T | null)(current.data)
-            : value,
-      })),
-    [],
+      setState((current) => {
+        if (current.key !== key) return current;
+        return {
+          ...current,
+          data:
+            typeof value === "function"
+              ? (value as (previous: T | null) => T | null)(current.data)
+              : value,
+        };
+      }),
+    [key],
   );
   return {
     data: url && state.key === key ? state.data : null,

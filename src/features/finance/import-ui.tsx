@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import { useWorkspace } from "@/features/organizations/context";
 import { api } from "@/lib/client";

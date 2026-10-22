@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";

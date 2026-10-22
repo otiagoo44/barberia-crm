@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useClock } from "@/hooks/use-clock";
 import { useState } from "react";
 import { formatInTimeZone } from "date-fns-tz";
