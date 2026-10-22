@@ -9,7 +9,7 @@ export type ChartProps = {
   title: string;
   description: string;
   data: ChartPoint[];
-  series: { key: string; label: string }[];
+  series: { key: string; label: string; dashed?: boolean }[];
   kind?: "line" | "bar";
   currency?: string;
   percent?: boolean;

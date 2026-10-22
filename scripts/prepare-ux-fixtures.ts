@@ -33,6 +33,10 @@ try {
     [f.orgA],
   );
   await pool.query(
+    "update public.services set category='Cortes · QA' where organization_id=$1 and id=$2",
+    [f.orgA, f.services.cut],
+  );
+  await pool.query(
     "update public.staff set name=case when id=$2 then 'A · Profesional QA' else 'Profesional QA · '||slug end where organization_id=$1",
     [f.orgA, f.staff.a1],
   );

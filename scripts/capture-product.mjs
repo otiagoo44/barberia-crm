@@ -224,8 +224,20 @@ try {
         }
       }
       if (module === "finanzas") {
-        await page.getByLabel("Período", { exact: true }).selectOption("7");
+        await page
+          .getByRole("combobox", { name: "Período", exact: true })
+          .selectOption("7");
         await capture("finanzas-7dias", width);
+        if (phase === "after") {
+          await page
+            .getByRole("button", { name: "Ticket promedio", exact: true })
+            .click();
+          await capture("equipo-ticket", width);
+          await page
+            .getByRole("button", { name: "Comisiones", exact: true })
+            .click();
+          await capture("equipo-comisiones", width);
+        }
       }
       if (module === "reportes" && phase === "after") {
         await page

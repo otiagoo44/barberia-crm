@@ -2,7 +2,7 @@
   "findings": [
     {
       "severity": "info",
-      "message": "Design system defines 16 colors, 4 typography scales, 2 rounding levels, 5 spacing tokens, 13 components.",
+      "message": "Design system defines 18 colors, 4 typography scales, 2 rounding levels, 5 spacing tokens, 15 components.",
       "rule": "token-summary"
     }
   ],

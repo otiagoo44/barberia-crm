@@ -22,6 +22,7 @@ type DashboardData = {
     staff_id: string;
     name: string;
     completed: number;
+    completed_minutes: number;
     booked_minutes: number;
     available_minutes: number | null;
   }[];
@@ -43,6 +44,13 @@ type DashboardData = {
     rebookings: number;
   }[];
   by_service: { service_id: string; name: string; completed: number }[];
+  by_category: { name: string; completed: number }[];
+  retention_now: {
+    as_of: string;
+    due: number;
+    overdue: number;
+    lapsed: number;
+  };
   goals: DataRow[];
 };
 export function Dashboard({ report = false }: { report?: boolean }) {
@@ -395,6 +403,27 @@ function OperationalDashboard({ report }: { report: boolean }) {
                   ]}
                   series={[{ key: "value", label: "Clientes" }]}
                 />
+                <DataChart
+                  title="Seguimiento pendiente hoy"
+                  description="Estado actual, independiente del período. Excluye archivados, no contactar y seguimientos pospuestos; definiciones del listado de seguimiento."
+                  kind="bar"
+                  horizontal
+                  data={[
+                    {
+                      label: "Recién vencidos",
+                      value: chartInteger(r.data!.retention_now.due),
+                    },
+                    {
+                      label: "Atrasados",
+                      value: chartInteger(r.data!.retention_now.overdue),
+                    },
+                    {
+                      label: "Inactivos",
+                      value: chartInteger(r.data!.retention_now.lapsed),
+                    },
+                  ]}
+                  series={[{ key: "value", label: "Clientes" }]}
+                />
               </>
             )}
             {!report &&
@@ -403,6 +432,39 @@ function OperationalDashboard({ report }: { report: boolean }) {
                 .map((g) => <GoalCard key={g.id} goal={g} />)}
             {report && view === "team" && (
               <>
+                <DataChart
+                  title="Atenciones por profesional"
+                  description="Visitas completadas en el período"
+                  kind="bar"
+                  horizontal
+                  data={r.data!.by_staff.map((d) => ({
+                    label: d.name,
+                    value: chartInteger(d.completed),
+                  }))}
+                  series={[{ key: "value", label: "Atenciones" }]}
+                />
+                <DataChart
+                  title="Tiempo de atención"
+                  description="Minutos de servicios completados por profesional; no incluye esperas"
+                  kind="bar"
+                  horizontal
+                  data={r.data!.by_staff.map((d) => ({
+                    label: d.name,
+                    value: chartInteger(d.completed_minutes),
+                  }))}
+                  series={[{ key: "value", label: "Minutos atendidos" }]}
+                />
+                <DataChart
+                  title="Servicios por categoría"
+                  description="Categoría actual del catálogo · servicios completados, no ventas"
+                  kind="bar"
+                  horizontal
+                  data={r.data!.by_category.map((d) => ({
+                    label: d.name,
+                    value: chartInteger(d.completed),
+                  }))}
+                  series={[{ key: "value", label: "Servicios" }]}
+                />
                 {w.branches.length > 1 && (
                   <DataChart
                     title="Ocupación por sucursal"

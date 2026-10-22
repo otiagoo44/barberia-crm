@@ -1,7 +1,10 @@
 {
   "tokens": {
     "colors": {
-      "added": [],
+      "added": [
+        "chart-quaternary",
+        "chart-result"
+      ],
       "removed": [],
       "modified": [
         "primary",
@@ -39,7 +42,10 @@
       "modified": []
     },
     "components": {
-      "added": [],
+      "added": [
+        "chart-quaternary",
+        "chart-result"
+      ],
       "removed": [],
       "modified": [
         "button",

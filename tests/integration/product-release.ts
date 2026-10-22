@@ -93,6 +93,110 @@ export async function productContracts(pool: Pool) {
     },
   );
   await check(
+    "report categories and current retention preserve branch, staff and tenant scopes",
+    async () => {
+      const g = await fixtures(
+        pool,
+        f.users,
+        "analytics-" + randomUUID().slice(0, 8),
+      );
+      await pool.query(
+        "update public.customers set expected_return_at=now()-interval '5 days' where organization_id=$1",
+        [g.orgA],
+      );
+      const readDashboard = async (
+        user: string,
+        branch: string | null = null,
+        staff: string | null = null,
+      ) =>
+        (
+          await asUser<{
+            r: {
+              by_category: { name: string; completed: number }[];
+              by_staff: { staff_id: string; completed_minutes: number }[];
+              retention_now: { overdue: number; lapsed: number };
+            };
+          }>(
+            pool,
+            user,
+            "select public.dashboard($1,$2,$3,current_date,current_date) r",
+            [g.orgA, branch, staff],
+          )
+        )[0].r;
+      const all = await readDashboard(g.users.ownerA);
+      assert.equal(all.retention_now.overdue, 2);
+      assert.equal(all.retention_now.lapsed, 0);
+      const manager = await readDashboard(g.users.managerA1, g.branches.a1);
+      assert.equal(manager.retention_now.overdue, 1);
+      const barber = await readDashboard(
+        g.users.barberA,
+        g.branches.a1,
+        g.staff.a1,
+      );
+      assert.equal(barber.retention_now.overdue, 0);
+      assert(barber.by_staff.every((s) => s.staff_id === g.staff.a1));
+      assert(all.by_staff.every((s) => s.completed_minutes !== undefined));
+      const visit = randomUUID();
+      await pool.query(
+        "update public.services set category='Cortes QA' where id=$1",
+        [g.services.cut],
+      );
+      await pool.query(
+        "insert into public.appointments(id,organization_id,branch_id,customer_id,staff_id,starts_at,ends_at,duration_minutes,status,currency,completed_at) values($1,$2,$3,$4,$5,current_date+interval '10 hours',current_date+interval '10 hours 40 minutes',40,'completed','USD',current_date+interval '10 hours 40 minutes')",
+        [visit, g.orgA, g.branches.a1, g.customers.a1, g.staff.a1],
+      );
+      await pool.query(
+        "insert into public.appointment_services(organization_id,appointment_id,service_id,name_snapshot,duration_minutes,composition_mode) values($1,$2,$3,'Corte QA',40,'standalone')",
+        [g.orgA, visit, g.services.cut],
+      );
+      const completed = await readDashboard(g.users.ownerA, g.branches.a1);
+      assert.deepEqual(completed.by_category, [
+        { name: "Cortes QA", completed: 1 },
+      ]);
+      assert.equal(
+        completed.by_staff.find((s) => s.staff_id === g.staff.a1)!
+          .completed_minutes,
+        40,
+      );
+      await pool.query(
+        "update public.customers set do_not_contact=true where id=$1",
+        [g.customers.a1],
+      );
+      assert.equal(
+        (await readDashboard(g.users.ownerA)).retention_now.overdue,
+        1,
+      );
+      for (const user of [g.users.ownerB, g.users.receptionA])
+        await assert.rejects(readDashboard(user), { code: "42501" });
+      await pool.query(
+        "update public.organization_memberships set role='finance' where organization_id=$1 and profile_id=$2",
+        [g.orgA, g.users.receptionA],
+      );
+      await assert.rejects(readDashboard(g.users.receptionA), {
+        code: "42501",
+      });
+      // Restore the shared profile's role; finance correctly requires MFA
+      // across all memberships belonging to that session.
+      await pool.query(
+        "update public.organization_memberships set role='receptionist' where organization_id=$1 and profile_id=$2",
+        [g.orgA, g.users.receptionA],
+      );
+      await assert.rejects(readDashboard(g.users.managerA1, g.branches.a2), {
+        code: "42501",
+      });
+      await assert.rejects(
+        claims(
+          g.users.ownerA,
+          "aal1",
+          "select public.dashboard($1,null,null,current_date,current_date)",
+          [g.orgA],
+        ),
+        { code: "42501" },
+      );
+      assert(Array.isArray(all.by_category));
+    },
+  );
+  await check(
     "AAL1 owners, managers and platform have no commercial SELECT, RPC or platform grants",
     async () => {
       for (const user of [
@@ -772,7 +876,16 @@ export async function productContracts(pool: Pool) {
     "Financial graphs separate 101 sales from 101 collected and preserve scope/bounds",
     async () => {
       const rows = await asUser<{
-        r: { days: { sales: string; collected: string; result: string }[] };
+        r: {
+          days: {
+            sales: string;
+            collected: string;
+            result: string;
+            fees: string | null;
+            commissions: string | null;
+            expenses: string;
+          }[];
+        };
       }>(
         pool,
         f.users.ownerA,
@@ -782,6 +895,46 @@ export async function productContracts(pool: Pool) {
       assert.equal(rows[0].r.days[0].sales, "101");
       assert.equal(rows[0].r.days[0].collected, "101");
       assert.equal(rows[0].r.days[0].result, "101");
+      const first = rows[0].r.days[0];
+      assert.equal(
+        BigInt(first.sales) -
+          BigInt(first.fees!) -
+          BigInt(first.expenses) -
+          BigInt(first.commissions!),
+        BigInt(first.result),
+      );
+      assert.equal(typeof first.fees, "string");
+      assert.equal(typeof first.commissions, "string");
+      await pool.query(
+        "update public.daily_financial_metrics set unknown_fees=1,unknown_commissions=1 where organization_id=$1 and branch_id=$2 and local_date=$3",
+        [f.orgA, f.branches.a1, day],
+      );
+      const unknown = (
+        await asUser<{
+          r: { days: { fees: null; commissions: null; result: null }[] };
+        }>(
+          pool,
+          f.users.ownerA,
+          "select public.financial_series($1,$2,$3,$3) r",
+          [f.orgA, f.branches.a1, day],
+        )
+      )[0].r.days[0];
+      assert.equal(unknown.fees, null);
+      assert.equal(unknown.commissions, null);
+      assert.equal(unknown.result, null);
+      await pool.query(
+        "update public.daily_financial_metrics set unknown_fees=0,unknown_commissions=0 where organization_id=$1 and branch_id=$2 and local_date=$3",
+        [f.orgA, f.branches.a1, day],
+      );
+      for (const user of [f.users.receptionA, f.users.barberA, f.users.ownerB])
+        await assert.rejects(
+          asUser(pool, user, "select public.financial_series($1,$2,$3,$3)", [
+            f.orgA,
+            f.branches.a1,
+            day,
+          ]),
+          { code: "42501" },
+        );
       const exact = (
         await pool.query(
           'select app_private.exact_financial_json(\'{"result_minor":9007199254740993,"nested":[{"amount_minor":-9007199254740993}],"count":1}\'::jsonb) r',

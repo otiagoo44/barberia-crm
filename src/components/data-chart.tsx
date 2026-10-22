@@ -19,6 +19,8 @@ const colors = [
   "var(--color-chart-primary)",
   "var(--color-chart-secondary)",
   "var(--color-chart-tertiary)",
+  "var(--color-chart-quaternary)",
+  "var(--color-chart-result)",
 ];
 export function DataChart({
   title,
@@ -108,7 +110,16 @@ export function DataChart({
       </div>
       {available ? (
         <>
-          <div className="chart-frame">
+          <div
+            className="chart-frame"
+            style={
+              horizontal
+                ? {
+                    height: Math.max(230, Math.min(data.length * 36 + 64, 800)),
+                  }
+                : undefined
+            }
+          >
             <ResponsiveContainer width="100%" height="100%">
               {kind === "bar" ? (
                 <BarChart
@@ -144,6 +155,7 @@ export function DataChart({
                       name={s.label}
                       stroke={colors[i % colors.length]}
                       strokeWidth={2}
+                      strokeDasharray={s.dashed ? "5 3" : undefined}
                       dot={data.length < 15}
                       connectNulls={false}
                       isAnimationActive={false}

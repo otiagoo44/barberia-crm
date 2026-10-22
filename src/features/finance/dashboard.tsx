@@ -17,6 +17,7 @@ import {
 import { FinanceForm } from "./forms";
 import { FinanceImport } from "./import-ui";
 import { FinancialCharts } from "./financial-charts";
+import { StaffFinancialCharts } from "./staff-charts";
 import { PartnerDistributions } from "./partner-distributions";
 import {
   ProfitSharing,
@@ -344,6 +345,9 @@ export function FinancialDashboard({
                 currency={w.organization.currency}
               />
             </>
+          )}
+          {!compact && totals && r.data?.staff && (
+            <StaffFinancialCharts rows={r.data.staff} currency={w.organization.currency} />
           )}
         </>
       ) : tab === "catalog" && catalog.data ? (

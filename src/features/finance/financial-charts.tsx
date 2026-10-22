@@ -10,6 +10,8 @@ type Series = {
     sales: string;
     collected: string;
     expenses: string;
+    fees: string | null;
+    commissions: string | null;
     result: string | null;
     incomplete: boolean;
   }[];
@@ -37,6 +39,9 @@ export function FinancialCharts({
       sales: chartInteger(d.sales),
       collected: chartInteger(d.collected),
       result: chartInteger(d.result),
+      expenses: chartInteger(d.expenses),
+      fees: chartInteger(d.fees),
+      commissions: chartInteger(d.commissions),
     })) ?? [];
   return (
     <>
@@ -56,7 +61,13 @@ export function FinancialCharts({
           description="Ventas netas menos POS, gastos y comisiones; no indica efectivo"
           data={days}
           currency={currency}
-          series={[{ key: "result", label: "Resultado" }]}
+          series={[
+            { key: "sales", label: "Ventas netas" },
+            { key: "fees", label: "Tarifas POS", dashed: true },
+            { key: "expenses", label: "Gastos", dashed: true },
+            { key: "commissions", label: "Comisiones", dashed: true },
+            { key: "result", label: "Resultado" },
+          ]}
         />
         <DataChart
           title="Gastos por categoría"

@@ -18,6 +18,8 @@ colors:
   chart-primary: "#5154a0"
   chart-secondary: "#54847e"
   chart-tertiary: "#a67c36"
+  chart-quaternary: "#85758b"
+  chart-result: "#292a35"
 typography:
   heading:
     fontFamily: DM Sans Variable
@@ -84,6 +86,10 @@ components:
     backgroundColor: "{colors.chart-secondary}"
   chart-tertiary:
     backgroundColor: "{colors.chart-tertiary}"
+  chart-quaternary:
+    backgroundColor: "{colors.chart-quaternary}"
+  chart-result:
+    backgroundColor: "{colors.chart-result}"
 ---
 
 ## Overview
