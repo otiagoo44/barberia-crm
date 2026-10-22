@@ -298,6 +298,17 @@ td button:not(.danger) {
 .toolbar select {
   max-width: 100%;
 }
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tabs button[aria-pressed="true"] {
+  background: var(--brand, var(--color-primary));
+  color: var(--on-brand, var(--color-on-primary));
+  border-color: transparent;
+  font-weight: 650;
+}
 .config-tabs {
   border-bottom: 1px solid var(--border);
   gap: 12px;

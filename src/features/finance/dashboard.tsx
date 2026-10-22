@@ -196,7 +196,11 @@ export function FinancialDashboard({
             />
           </div>
           {w.role !== "barber" && (
-            <div className="tabs">
+            <div
+              className="tabs"
+              role="group"
+              aria-label="Secciones de finanzas"
+            >
               {tabs
                 .filter(
                   ([v]) => !["catalog", "partners"].includes(v) || privileged,
@@ -205,6 +209,7 @@ export function FinancialDashboard({
                   <button
                     key={value}
                     className={tab === value ? "active" : ""}
+                    aria-pressed={tab === value}
                     onClick={() => {
                       setTab(value);
                       setOffset(0);

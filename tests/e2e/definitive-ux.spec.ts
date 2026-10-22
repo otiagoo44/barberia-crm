@@ -71,6 +71,13 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await page.goto("/fixture-a/finanzas");
     await expect(page.locator(".loading:visible")).toHaveCount(0);
     await expect(page.locator(".kpi-grid").first()).toBeVisible();
+    const sections = page.getByRole("group", {
+      name: "Secciones de finanzas",
+      exact: true,
+    });
+    await expect(
+      sections.getByRole("button", { name: "Resumen", exact: true }),
+    ).toHaveAttribute("aria-pressed", "true");
     let release: () => void = () => {};
     const gate = new Promise<void>((resolve) => {
       release = resolve;
@@ -107,6 +114,14 @@ test.describe("Definitive workspace with real scoped Auth", () => {
       .selectOption("today");
     await expect(page.locator(".kpi-grid").first()).toBeVisible();
     await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
+    await sections.getByRole("button", { name: "Gastos", exact: true }).click();
+    await expect(
+      sections.getByRole("button", { name: "Gastos", exact: true }),
+    ).toHaveAttribute("aria-pressed", "true");
+    await expect(
+      sections.getByRole("button", { name: "Resumen", exact: true }),
+    ).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
   });
 
   test("motion, 200 percent layout, keyboard, contrast and readable controls across target widths", async ({
