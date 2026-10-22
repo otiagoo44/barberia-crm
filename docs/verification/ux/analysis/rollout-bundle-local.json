@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "from": 27,
+  "to": 34,
+  "retryRefusesUnexpectedLedger": true,
+  "customerRowsPreserved": true,
+  "originalManifestVerified": true,
+  "environment": "Embedded PostgreSQL, no cloud writes"
+}

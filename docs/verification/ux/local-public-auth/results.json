@@ -1,0 +1,159 @@
+{
+  "scope": "Anonymous public Auth rendering only; no account submissions",
+  "origin": "http://localhost:3000",
+  "errors": [],
+  "audits": [
+    {
+      "mode": "login",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "mode": "signup",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "mode": "recover",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "mode": "login",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "mode": "signup",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "mode": "recover",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "mode": "login",
+      "width": 768,
+      "violations": []
+    },
+    {
+      "mode": "signup",
+      "width": 768,
+      "violations": []
+    },
+    {
+      "mode": "recover",
+      "width": 768,
+      "violations": []
+    },
+    {
+      "mode": "login",
+      "width": 1024,
+      "violations": []
+    },
+    {
+      "mode": "signup",
+      "width": 1024,
+      "violations": []
+    },
+    {
+      "mode": "recover",
+      "width": 1024,
+      "violations": []
+    },
+    {
+      "mode": "login",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "mode": "signup",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "mode": "recover",
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "login-360.png",
+      "bytes": 23453,
+      "sha256": "fef1096d80ba5cc1be175da6bdbf202ae5e6997e6f215c020e35b0a6fdb1d17c"
+    },
+    {
+      "file": "signup-360.png",
+      "bytes": 23495,
+      "sha256": "9e55aa9a91cd7d5b5570d6c22e2a9b0719210edeb08e8b8738d91c49bff528c0"
+    },
+    {
+      "file": "recover-360.png",
+      "bytes": 21345,
+      "sha256": "a6036ea9c4bfefb68e2589b00df833728e3f23393b3e4047ea3d35d848b58d63"
+    },
+    {
+      "file": "login-390.png",
+      "bytes": 23545,
+      "sha256": "f13f22acafb37428383b5358607b99c14f94a602f360cff9088e5a1a096542b9"
+    },
+    {
+      "file": "signup-390.png",
+      "bytes": 23686,
+      "sha256": "1d780b76b7b4eaf1410deb9595dccaa36ea82a573b99e8e1be9f4d18bb1e00e9"
+    },
+    {
+      "file": "recover-390.png",
+      "bytes": 21511,
+      "sha256": "5f75758bd26e69b6f6e92210cca98185c9e66ff604d0be82eb61f806c510109f"
+    },
+    {
+      "file": "login-768.png",
+      "bytes": 26281,
+      "sha256": "d1411b2066376738b51316059350f9545c07c3fdefc9080f24515e04a0711c50"
+    },
+    {
+      "file": "signup-768.png",
+      "bytes": 26102,
+      "sha256": "67f19ece7970bdc6d759f9b4bb778ddb53a716ef46b68315abf7741c417e0928"
+    },
+    {
+      "file": "recover-768.png",
+      "bytes": 24253,
+      "sha256": "afcb07db249638a86377882af5cd25135c9c85f94327801dfcf4c52885d98c72"
+    },
+    {
+      "file": "login-1024.png",
+      "bytes": 27397,
+      "sha256": "6e02d4f8f21da9e8df8ba4b531205bbce02c1ad0dc2103433f297a8fff61f735"
+    },
+    {
+      "file": "signup-1024.png",
+      "bytes": 27261,
+      "sha256": "860b872b0328db030ae7ea601296e7b4de3bed29b2e140f99c86d16a5eed8624"
+    },
+    {
+      "file": "recover-1024.png",
+      "bytes": 25252,
+      "sha256": "e944740664eece1aa0d611a6d847d31d6bcdf72a76ba9e2c2a31cd8f24eb4ad0"
+    },
+    {
+      "file": "login-1440.png",
+      "bytes": 29296,
+      "sha256": "c932b563951c3c61542e68fc96a70990c26d80b1e94d5d2b3040fc5ba1265144"
+    },
+    {
+      "file": "signup-1440.png",
+      "bytes": 29131,
+      "sha256": "caa6f350bd728d9e854837fa6508487e42b813933dbdaee39448fce16f6a62ad"
+    },
+    {
+      "file": "recover-1440.png",
+      "bytes": 26886,
+      "sha256": "0e462b8cafc5c6657475273199277a2519c81d2917a2d1c999be66a6f1221f75"
+    }
+  ]
+}

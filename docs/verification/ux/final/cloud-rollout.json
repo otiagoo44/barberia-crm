@@ -1,0 +1,181 @@
+{
+  "projectRef": "tbcfhagteyqufjkmbxzz",
+  "from": 27,
+  "to": 34,
+  "historicalPayloadsUnchanged": true,
+  "newPayloadsMatchRepository": true,
+  "transport": "Supabase apply_migration; seven generated transport timestamps normalized to original repository versions after exact SHA256 verification",
+  "backup": "Private application data/functions/policies snapshot, excludes Auth secrets and managed infrastructure. Full managed restore remains manual.",
+  "versions": [
+    {
+      "version": "20261012171437",
+      "name": "tenant_core",
+      "sha256": "5a1331f4f9eb14e6c65a64bbd5621974f5f4c9b3121fd707fd64df2106bf9add"
+    },
+    {
+      "version": "20261012171442",
+      "name": "authorization",
+      "sha256": "171750bf9e9313fd6562498165e28bcfab34361029f0bba8c25f1244abaa73cc"
+    },
+    {
+      "version": "20261012171446",
+      "name": "configuration",
+      "sha256": "8601cd522a934cccd549bc42ef1d947b9f62f22a3b0a0b70bb426ba1c5555308"
+    },
+    {
+      "version": "20261012171451",
+      "name": "scheduling",
+      "sha256": "8db07bf5b76ddfdc68e2971cae22298c5158e7e3195c705c983ba853777ceee5"
+    },
+    {
+      "version": "20261012171456",
+      "name": "operations",
+      "sha256": "9e3de6972211ec8ca437bfdd4155145dbc9280f36895b53425700a7c4ad8664d"
+    },
+    {
+      "version": "20261012171501",
+      "name": "analytics_automation",
+      "sha256": "1308e544ef4f1c32f460590a0269296a107ce9e2ce5f89f95c90b18284cabdd0"
+    },
+    {
+      "version": "20261012173606",
+      "name": "read_models",
+      "sha256": "740381bba96f18cc0f8958f8345ec599fa797bd27cd527c9648c3bb6631c3f08"
+    },
+    {
+      "version": "20261012180348",
+      "name": "product_hardening",
+      "sha256": "35a9aa33c3b632388c95c0888f3f422308747b4b56dbd3506e225eed27f07954"
+    },
+    {
+      "version": "20261012181534",
+      "name": "final_read_models",
+      "sha256": "c7f8a854aa1cb85a9158a0255a16a6c4da163ae370fb035d1c6146ecc26b60c6"
+    },
+    {
+      "version": "20261012182755",
+      "name": "advisor_foreign_key_indexes",
+      "sha256": "1051b9a77f5b493243268ff83cc9590a9f2012ac14da12c6586f8b0cce24f7d6"
+    },
+    {
+      "version": "20261012183007",
+      "name": "reporting_access",
+      "sha256": "d1579e0ce2417dab04318c28bfb521b852b31dc22a15e6af3bbc39187401e4e6"
+    },
+    {
+      "version": "20261012183207",
+      "name": "bounded_read_permissions",
+      "sha256": "2a2c1529218b68ecde8dffccd587acbf77be28e22fda8ac62c60e7efcdcaf67f"
+    },
+    {
+      "version": "20261012183541",
+      "name": "archived_branch_history",
+      "sha256": "4227535edd5bfb03f80db3404424f942f1dd42e728601b5f593b20c8e2327f2e"
+    },
+    {
+      "version": "20261012183917",
+      "name": "platform_admin_audit",
+      "sha256": "38c7a949ae8604bd1794df2d30fe679d916a9ed9c582a6056986293e4bd059b1"
+    },
+    {
+      "version": "20261012184839",
+      "name": "customer_detail_branding",
+      "sha256": "325d7ad14025383cf7459e4b32ae4c15acf18101e6539e80b2d745383db9c311"
+    },
+    {
+      "version": "20261012210000",
+      "name": "website_booking",
+      "sha256": "8c32e0f74f95810de4d3357c5c0cb8667594d108adb3dfba4cfb6aa2acabd7c1"
+    },
+    {
+      "version": "20261012223818",
+      "name": "finance_schema",
+      "sha256": "0bd9cad905077083775d2592dae7b0260f45f9ab908f12c7e2836ff9d525a6fa"
+    },
+    {
+      "version": "20261012223852",
+      "name": "finance_transactions",
+      "sha256": "0ec5426c18793df80a40b4bd642414bbdf9a963483dbb0659e5040889cbe9c67"
+    },
+    {
+      "version": "20261012224111",
+      "name": "finance_read_import",
+      "sha256": "a3f58c64e9107c82a55f92904bb043cc6f56e7cf1d59e2cc71d5652a1aa26500"
+    },
+    {
+      "version": "20261012224355",
+      "name": "booking_finance_hardening",
+      "sha256": "8f40aed5d8e6f642167a062c3c5d6d3dc64428ca0e2d6b15ed689cf84acb0e0b"
+    },
+    {
+      "version": "20261015190206",
+      "name": "booking_attribution_rls",
+      "sha256": "5bbea8b1fc724c77899b6d672cac682b29fd597cac2192b56408efebc1116079"
+    },
+    {
+      "version": "20261015190657",
+      "name": "consolidate_financial_audit_policy",
+      "sha256": "7231dad890478bf92104773912e1761959236f167980b9010d859efce51bdf47"
+    },
+    {
+      "version": "20261015191802",
+      "name": "worker_tick_record_scope",
+      "sha256": "887f1b8d6464a60608e1181692be82dde6158de41ed1b5ffce920501eb793983"
+    },
+    {
+      "version": "20261019154027",
+      "name": "database_scheduler",
+      "sha256": "f479722b46f1117b50eeaf53af14b2e47170c676f8dd717093be5c1a3ed12125"
+    },
+    {
+      "version": "20261019213732",
+      "name": "profit_sharing",
+      "sha256": "7ea337c9ce21c31d9463f60789a9f542e2a98d584f4ac567c548edebf5d4f1ee"
+    },
+    {
+      "version": "20261019220146",
+      "name": "enable_database_cron",
+      "sha256": "3c73885249542a62750b334432ca6e5516a40b74d7f53c52306a5cf3c863dc05"
+    },
+    {
+      "version": "20261019223415",
+      "name": "final_authorization_hardening",
+      "sha256": "3b79b5f650916e212fe152aedb0f4bd2a85f4906cb299f93463823959af20824"
+    },
+    {
+      "version": "20261021005325",
+      "name": "privileged_mfa_sessions",
+      "sha256": "5a72d150c6616cc43e813776a3ca8e1df678eb9b571af9f32c27cedc9bb6d1ad"
+    },
+    {
+      "version": "20261021005630",
+      "name": "partner_distributions",
+      "sha256": "9320845d1ff1d27217d9cdd3b39a2529f07f36a61d8f127a00252a3b88dd4e3e"
+    },
+    {
+      "version": "20261021010224",
+      "name": "reporting_health",
+      "sha256": "6d5d14898325a1f4c7886cf15758427db0684939f59612d579f10c9eb499d5cf"
+    },
+    {
+      "version": "20261021011210",
+      "name": "daily_blocks",
+      "sha256": "f6c3427551eb065d57ef0c9621fc6348808707384f143311d3eb012ed3a887f0"
+    },
+    {
+      "version": "20261021202056",
+      "name": "audit_release_boundaries",
+      "sha256": "3efc42852588c7279b6229659a611e89dec0bd6a14be4af77a62424914356ea4"
+    },
+    {
+      "version": "20261021214500",
+      "name": "customer_list_projection",
+      "sha256": "f0943b898f3825b282c4153b48ec372ba28ef092d37ed6383a3440d042e02819"
+    },
+    {
+      "version": "20261022162330",
+      "name": "ux_reporting_breakdown",
+      "sha256": "d4e94e33fdef12e685ff07a74ff7f3561100cdf0906d08e4977fe72545b6c483"
+    }
+  ]
+}

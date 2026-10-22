@@ -4,6 +4,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource } from "@/lib/client";
 import { Modal, Notice, Loading, Field } from "@/components/ui";
+import { PaymentMethodSelector } from "./payment-method-selector";
 import {
   financeUrl,
   financeCommand,
@@ -190,28 +191,18 @@ export function CheckoutDialog({
             </p>
             {payments.map((p, index) => (
               <div key={index} className="row wrap">
-                <Field label="Medio de pago">
-                  <select
-                    value={
-                      p.method || catalog.data?.payment_methods[0]?.id || ""
-                    }
-                    onChange={(e) =>
-                      setPayments((rows) =>
-                        rows.map((row, i) =>
-                          i === index
-                            ? { ...row, method: e.target.value }
-                            : row,
-                        ),
-                      )
-                    }
-                  >
-                    {catalog.data?.payment_methods.map((m) => (
-                      <option value={m.id} key={m.id}>
-                        {String(m.name)}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
+                <PaymentMethodSelector
+                  methods={catalog.data?.payment_methods ?? []}
+                  disabled={busy}
+                  value={p.method || catalog.data?.payment_methods[0]?.id || ""}
+                  onChange={(value) =>
+                    setPayments((rows) =>
+                      rows.map((row, i) =>
+                        i === index ? { ...row, method: value } : row,
+                      ),
+                    )
+                  }
+                />
                 <Field label={amountLabel(w.organization.currency)}>
                   <input
                     inputMode="numeric"

@@ -201,7 +201,12 @@ function Memberships() {
           </button>
         </form>
       </div>
-      <div className="table-wrap">
+      <div
+        className="table-wrap"
+        role="region"
+        aria-label="Usuarios y permisos. Tabla desplazable con teclado."
+        tabIndex={0}
+      >
         <table>
           <thead>
             <tr>
@@ -337,7 +342,12 @@ function Audit() {
       <h2>Acciones registradas</h2>
       {r.loading && !r.data && <Loading />}
       {r.error && <Notice error>{r.error}</Notice>}
-      <div className="table-wrap">
+      <div
+        className="table-wrap"
+        role="region"
+        aria-label="Acciones registradas. Tabla desplazable con teclado."
+        tabIndex={0}
+      >
         <table>
           <thead>
             <tr>

@@ -47,11 +47,23 @@ export async function GET(
     const branch = uuid.parse(q.get("branch"));
     const from = date.parse(q.get("from"));
     const to = date.parse(q.get("to"));
+    if (["series", "partners", "partner_own"].includes(resource)) {
+      const { data, error } = await db.rpc(
+        resource === "series"
+          ? "financial_series"
+          : resource === "partner_own"
+            ? "partner_own_distributions"
+            : "partner_distributions",
+        { p_org: org, p_branch: branch, p_from: from, p_to: to },
+      );
+      if (error) throw error;
+      return response(data, id);
+    }
     if (resource === "export") {
       const view = z
         .enum(["movements", "expenses", "settlements", "closures"])
         .parse(q.get("view"));
-      const { data, error } = await db.rpc("financial_export", {
+      const { data, error } = await db.rpc("financial_export_exact", {
         p_org: org,
         p_branch: branch,
         p_view: view,
@@ -82,7 +94,7 @@ export async function GET(
         },
       });
     }
-    const { data, error } = await db.rpc("finance_read", {
+    const { data, error } = await db.rpc("finance_read_exact", {
       p_org: org,
       p_branch: branch,
       p_view: views.parse(resource),
@@ -118,26 +130,44 @@ export async function POST(
 ) {
   const id = correlationId(request);
   try {
-    if ((await params).resource !== "command")
+    const resource = (await params).resource;
+    if (resource !== "command" && resource !== "partners")
       throw new HttpError(404, "not_found");
     const { db } = await requireUser();
     const p = z
       .object({
         org: uuid,
         branch: uuid.nullable(),
-        action: actions,
+        action:
+          resource === "partners"
+            ? z.enum([
+                "configure",
+                "prepare",
+                "approve",
+                "pay",
+                "reverse_payment",
+                "adjust",
+                "apply_withdrawal",
+                "close",
+              ])
+            : actions,
         data: z.record(z.string(), z.unknown()),
         key: uuid,
       })
       .strict()
       .parse(await readJson(request, 65536));
-    const { data, error } = await db.rpc("finance_command", {
-      p_org: p.org,
-      p_branch: p.branch,
-      p_action: p.action,
-      p_data: p.data,
-      p_key: p.key,
-    });
+    const { data, error } = await db.rpc(
+      resource === "partners"
+        ? "partner_distribution_command"
+        : "finance_command",
+      {
+        p_org: p.org,
+        p_branch: p.branch,
+        p_action: p.action,
+        p_data: p.data,
+        p_key: p.key,
+      },
+    );
     if (error) throw error;
     return response(data, id, 201);
   } catch (e) {

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { supabaseServer } from "@/lib/supabase/server";
 import { fail, response, readJson, HttpError, correlationId } from "@/lib/http";
+import { requireIdentity, requireUser } from "@/lib/auth";
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ action: string }> },
@@ -11,7 +12,14 @@ export async function POST(
     const raw = await readJson(request, 4096);
     const db = await supabaseServer();
     if (action === "signout") {
-      await db.auth.signOut();
+      const { error } = await db.auth.signOut({ scope: "local" });
+      if (error) throw new HttpError(400, "signout_failed");
+      return response({ ok: true }, id);
+    }
+    if (action === "revoke_sessions") {
+      await requireUser();
+      const { error } = await db.auth.signOut({ scope: "global" });
+      if (error) throw new HttpError(400, "signout_failed");
       return response({ ok: true }, id);
     }
     if (action === "signin") {
@@ -80,8 +88,15 @@ export async function POST(
         .object({ password: z.string().min(12).max(128) })
         .strict()
         .parse(raw);
-      const { data } = await db.auth.getUser();
-      if (!data.user) throw new HttpError(401, "unauthenticated");
+      const identity = await requireIdentity();
+      const factors = await db.auth.mfa.listFactors();
+      if (factors.error) throw new HttpError(400, "password_update_failed");
+      // Recovery email never removes or bypasses an existing second factor.
+      if (
+        factors.data.all.some((f) => f.status === "verified") &&
+        identity.security.level !== "aal2"
+      )
+        throw new HttpError(403, "mfa_required");
       const { error } = await db.auth.updateUser({ password: p.password });
       if (error) throw new HttpError(400, "password_update_failed");
       return response({ ok: true }, id);

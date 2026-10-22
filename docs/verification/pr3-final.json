@@ -1,0 +1,192 @@
+{
+  "recordedAt": "2026-10-21T20:53:33.551Z",
+  "repository": "otiagoo44/barberia-crm",
+  "pr": 3,
+  "branch": "audit/product-release-20261020",
+  "base": "4fa4d63eaa26e31bdddb37aac68456e8c0e85ba3",
+  "recoveredHead": "2a2cb927604a0cd05ffc682c325e045752112e8c",
+  "verifiedImplementation": {
+    "head": "a9bd1fc2a455f5f13fe56e9bc568f6f950677fab",
+    "srcTree": "32d825d6f3fb9e09ef6084100ed2d9c8aa33e71b",
+    "supabaseTree": "12544c32a8ec244ad1449aa67b82e5238164f720",
+    "run": 39672949571,
+    "url": "https://github.com/otiagoo44/barberia-crm/actions/runs/39672949571",
+    "jobs": {
+      "quality": "success",
+      "supabase-e2e": "success",
+      "visual-baseline": "success"
+    }
+  },
+  "finalDelivery": {
+    "checks": "https://github.com/otiagoo44/barberia-crm/pull/3/checks",
+    "note": "This record identifies the successful implementation run and source trees. The subsequent delivery commit adds documentation/evidence and expands the same six role tests for profile/membership/session revocation. Its exact SHA and successful final workflow are recorded in the delivery message; all required HEAD checks must pass before merge."
+  },
+  "commands": {
+    "npm ci": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm audit --audit-level=high": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run lint": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run typecheck": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm test": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run test:db": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run test:hardening": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run test:load": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run build": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "GitHub Actions Ubuntu, isolated PostgreSQL where applicable"
+    },
+    "npm run test:e2e": {
+      "status": "PASS",
+      "sourceRun": 39672949571,
+      "environment": "isolated real Supabase Auth/PostgREST and Chromium"
+    }
+  },
+  "results": {
+    "auditHighVulnerabilities": 0,
+    "unit": {
+      "passed": 19,
+      "skipped": 0
+    },
+    "database": {
+      "security": 51,
+      "finance": 19,
+      "hardening": 23,
+      "product": 15,
+      "total": 108,
+      "upgrade27To32": true,
+      "onboarding": true,
+      "scheduler": true
+    },
+    "hardeningStandalone": 23,
+    "e2e": {
+      "passed": 24,
+      "skipped": 0,
+      "flaky": 0,
+      "includes": [
+        "menu Tab/Shift+Tab, collapsed/expanded account, Escape and both triggers",
+        "daily reception UI through split, closure and Owner review",
+        "six signed roles plus Anon",
+        "AAL1/AAL2 and enrollment, backup, recovery, last factor HTTP/GoTrue, invalid code, audit secrecy",
+        "real lock wait followed by membership/branch/profile/session revocation and stale JWT SELECT/RPC"
+      ]
+    },
+    "load": {
+      "organizations": [
+        10,
+        50,
+        100
+      ],
+      "concentratedTenant": true,
+      "errors": 0,
+      "cloudCapacityCertified": false
+    }
+  },
+  "migrations": {
+    "appliedHistorical": 27,
+    "candidateTotal": 32,
+    "historicalFilesIntact": true,
+    "originalFourPrFilesIntact": true,
+    "additional": "20261021202056_audit_release_boundaries.sql",
+    "cleanInstall": "PASS real local Supabase and embedded PostgreSQL",
+    "upgradeExistingTablesCompared": {
+      "embedded": 70,
+      "realLocalSupabase": 94
+    },
+    "existingRowsPreserved": true,
+    "financialRetryPreserved": true,
+    "unprotectedBusinessTables": 0,
+    "unvalidatedConstraints": 0,
+    "cloudAppliedDuringTask": false
+  },
+  "evidence": {
+    "failedRun": 39528698984,
+    "originalTraceSummary": "docs/verification/pr3-failure-analysis.json",
+    "migrationManifest": "docs/verification/applied-migrations-27.json",
+    "localSupabaseUpgrade": "docs/verification/migration-upgrade.json",
+    "artifact": {
+      "id": 12380398565,
+      "url": "https://github.com/otiagoo44/barberia-crm/actions/runs/39672949571/artifacts/12380398565",
+      "sha256": "3cd83d4fc35d1ce790ad36a6e79be2178e03734872e5e9fa1362685f3a74aa6d"
+    },
+    "screenshots": {
+      "docs/verification/pr3/mobile-menu-focus.png": {
+        "sha256": "bf536e750d474c2ae864ea87e1b7dfa1a7ca3b661b66586decfc908051cc0360",
+        "sourceRun": 39672949571,
+        "sourceHead": "a9bd1fc2a455f5f13fe56e9bc568f6f950677fab"
+      },
+      "docs/verification/pr3/daily-split-paid.png": {
+        "sha256": "43fe40c4f9f68c46dafcdca80023d56dbdc52c24f0d93cc5b25b48efd812e62f",
+        "sourceRun": 39672949571,
+        "sourceHead": "a9bd1fc2a455f5f13fe56e9bc568f6f950677fab"
+      },
+      "docs/verification/pr3/daily-cash-closed.png": {
+        "sha256": "ccfe809528fe7cbb16b4622576aa411a2aadc4c8899466e6e9723aef2fffa9a8",
+        "sourceRun": 39672949571,
+        "sourceHead": "a9bd1fc2a455f5f13fe56e9bc568f6f950677fab"
+      },
+      "docs/verification/pr3/daily-owner-movement.png": {
+        "sha256": "aade16a024b7e1af76edc05a7cfc9916d66fb7d7106860ed5ab643c9574f3217",
+        "sourceRun": 39672949571,
+        "sourceHead": "a9bd1fc2a455f5f13fe56e9bc568f6f950677fab"
+      }
+    }
+  },
+  "mcp": {
+    "name": "supabase",
+    "projectRef": "tbcfhagteyqufjkmbxzz",
+    "configuration": "enabled",
+    "auth": "OAuth login completed",
+    "toolsHotLoadedIntoCurrentSession": false,
+    "cloudInventoryRequeried": false
+  },
+  "release": {
+    "productionWritesDuringTask": false,
+    "publicBookingEnabledDuringTask": false,
+    "realDistributionsEnabledDuringTask": false,
+    "mergeExecuted": false,
+    "commercialReadiness": "NOT READY",
+    "externalGatesOpen": [
+      "SMTP and delivered recovery email/redirects",
+      "independent cloud staging",
+      "cloud privileged enrollment with independent backup authenticator",
+      "supervised lost-all-factors recovery and provider MFA",
+      "cloud backup/restore and accepted RPO/RTO",
+      "HTTP error rate/p95, incidents and actually received alerts",
+      "confirmed partner periodicity/approver/withdrawals/prior losses",
+      "real tariffs/durations/daily availability, four XLSX anomalies and role pilot",
+      "separate deployment and commercial activation authorization"
+    ]
+  }
+}

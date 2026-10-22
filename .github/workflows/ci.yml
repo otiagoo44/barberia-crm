@@ -1,12 +1,12 @@
 name: Product verification
 on:
   push:
-    branches: [main, "audit/**"]
+    branches: [main]
   pull_request:
 permissions:
   contents: read
 concurrency:
-  group: verification-${{ github.ref }}
+  group: verification-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
   quality:
@@ -26,6 +26,8 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run test:db
+      - run: npm run test:hardening
+      - run: npm run test:load
       - run: npm run build
   supabase-e2e:
     runs-on: ubuntu-latest
@@ -44,6 +46,8 @@ jobs:
       - name: Migration smoke against real Supabase
         run: npx supabase db reset --local --no-seed
       - run: node scripts/ci-environment.mjs
+      - name: Upgrade existing 27-migration ledger without rewriting history
+        run: npx tsx tests/recovery/upgrade-local.ts
       - name: Prepare real Auth fixtures
         run: npx tsx tests/e2e/setup.ts
       - name: Restore drill with real local Supabase
@@ -51,6 +55,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run test:e2e
+      - name: Capture redesigned product with real Auth
+        run: |
+          npx tsx scripts/prepare-ux-fixtures.ts
+          npm start > .test-data/redesign-server.log 2>&1 &
+          for attempt in $(seq 1 30); do curl --fail --silent http://localhost:3000/api/health && break || sleep 1; done
+          node scripts/capture-product.mjs
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
@@ -59,6 +69,51 @@ jobs:
             test-results/
             playwright-report/
             docs/verification/restore-local.json
-          retention-days: 7
+            docs/verification/migration-upgrade.json
+            docs/verification/ux/after/
+          retention-days: 90
+      - if: always()
+        run: npx supabase stop --no-backup
+  visual-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: da9eb8ccfab9526beee89d2a74fd9d82c6674ed4
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          path: .test-data/audit-tools
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: "24.15.0"
+          cache: npm
+      - run: |
+          cp .test-data/audit-tools/package.json package.json
+          cp .test-data/audit-tools/package-lock.json package-lock.json
+          cp .test-data/audit-tools/scripts/capture-product.mjs scripts/capture-product.mjs
+          cp .test-data/audit-tools/scripts/prepare-ux-fixtures.ts scripts/prepare-ux-fixtures.ts
+          rm -rf .test-data/audit-tools
+      - run: npm ci
+      - run: npx supabase start --exclude studio,imgproxy,logflare,vector,edge-runtime
+      - run: npx supabase db reset --local --no-seed
+      - run: node scripts/ci-environment.mjs
+      - run: npx tsx tests/e2e/setup.ts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Capture recovered PR UI with actual isolated Auth
+        run: |
+          npx tsx scripts/prepare-ux-fixtures.ts
+          npm start > .test-data/baseline-server.log 2>&1 &
+          for attempt in $(seq 1 30); do curl --fail --silent http://localhost:3000/api/health && break || sleep 1; done
+          QA_PHASE=before node scripts/capture-product.mjs
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: visual-baseline
+          path: docs/verification/ux/before/
+          retention-days: 90
       - if: always()
         run: npx supabase stop --no-backup

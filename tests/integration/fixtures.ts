@@ -4,7 +4,11 @@ export type FixtureUsers = Record<
   "ownerA" | "managerA1" | "receptionA" | "barberA" | "ownerB" | "platform",
   string
 >;
-export async function fixtures(pool: Pool, registeredUsers?: FixtureUsers) {
+export async function fixtures(
+  pool: Pool,
+  registeredUsers?: FixtureUsers,
+  namespace = "fixture",
+) {
   const users = registeredUsers ?? {
     ownerA: randomUUID(),
     managerA1: randomUUID(),
@@ -21,9 +25,17 @@ export async function fixtures(pool: Pool, registeredUsers?: FixtureUsers) {
       );
   const orgA = randomUUID(),
     orgB = randomUUID();
+  // Only isolated SQL fixtures use synthetic sessions. Browser/HTTP tests sign in
+  // through GoTrue and prove enforcement using genuine signed AAL1/AAL2 tokens.
+  if (registeredUsers)
+    for (const id of Object.values(users))
+      await pool.query(
+        "insert into auth.sessions(id,user_id) values($1,$1) on conflict do nothing",
+        [id],
+      );
   for (const [id, slug] of [
-    [orgA, "fixture-a"],
-    [orgB, "fixture-b"],
+    [orgA, `${namespace}-a`],
+    [orgB, `${namespace}-b`],
   ]) {
     await pool.query(
       "insert into public.organizations(id,name,slug,timezone,currency) values($1,$2,$2,'Etc/UTC','USD')",
@@ -76,7 +88,7 @@ export async function fixtures(pool: Pool, registeredUsers?: FixtureUsers) {
       );
   }
   await pool.query(
-    "insert into app_private.platform_admins(profile_id) values($1)",
+    "insert into app_private.platform_admins(profile_id) values($1) on conflict do nothing",
     [users.platform],
   );
   const staff = {
@@ -165,7 +177,7 @@ export async function fixtures(pool: Pool, registeredUsers?: FixtureUsers) {
     ["worker", workerSecret],
   ])
     await pool.query(
-      "insert into app_private.gateway_credentials(name,secret_hash) values($1,$2)",
+      "insert into app_private.gateway_credentials(name,secret_hash) values($1,$2) on conflict do nothing",
       [name, createHash("sha256").update(value).digest("hex")],
     );
   return {

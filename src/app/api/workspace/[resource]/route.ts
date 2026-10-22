@@ -128,6 +128,41 @@ export async function POST(
     let name: string;
     let args: Record<string, unknown>;
     switch (resource) {
+      case "daily_blocks": {
+        const p = z
+          .object({
+            org: uuid,
+            branch: uuid,
+            staff: uuid,
+            date,
+            blocks: z
+              .array(
+                z
+                  .object({
+                    starts_at: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/),
+                    ends_at: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/),
+                    available: z.boolean(),
+                    reason: z.string().max(300).optional(),
+                  })
+                  .strict(),
+              )
+              .min(1)
+              .max(16),
+            key: uuid,
+          })
+          .strict()
+          .parse(raw);
+        name = "save_daily_blocks";
+        args = {
+          p_org: p.org,
+          p_branch: p.branch,
+          p_staff: p.staff,
+          p_date: p.date,
+          p_blocks: p.blocks,
+          p_key: p.key,
+        };
+        break;
+      }
       case "record": {
         const p = writes.record.parse(raw);
         name = "manage_record";
@@ -293,6 +328,56 @@ export async function GET(
     const org = uuid.parse(q.get("org"));
     const branch = q.get("branch") ? uuid.parse(q.get("branch")) : null;
     const staff = q.get("staff") ? uuid.parse(q.get("staff")) : null;
+    if (resource === "calendar_blocks") {
+      if (!branch) throw new HttpError(400, "branch_required");
+      const startDay = date.parse(q.get("start_day")),
+        endDay = date.parse(q.get("end_day"));
+      const from = z.iso.datetime({ offset: true }).parse(q.get("from")),
+        to = z.iso.datetime({ offset: true }).parse(q.get("to"));
+      const duration = Date.parse(to) - Date.parse(from);
+      if (
+        duration <= 0 ||
+        duration > 8 * 86400000 ||
+        endDay <= startDay ||
+        Date.parse(endDay) - Date.parse(startDay) > 8 * 86400000
+      )
+        throw new HttpError(400, "calendar_range_exceeded");
+      let daily = db
+        .from("staff_availability_exceptions")
+        .select("id,staff_id,local_date,starts_at,ends_at,available,reason")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .gte("local_date", startDay)
+        .lt("local_date", endDay)
+        .order("starts_at")
+        .limit(1001);
+      let absence = db
+        .from("staff_time_off")
+        .select("id,staff_id,starts_at,ends_at")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .lt("starts_at", to)
+        .gt("ends_at", from)
+        .order("starts_at")
+        .limit(1001);
+      if (staff) {
+        daily = daily.eq("staff_id", staff);
+        absence = absence.eq("staff_id", staff);
+      }
+      const [blocks, timeOff] = await Promise.all([daily, absence]);
+      if (blocks.error) throw blocks.error;
+      if (timeOff.error) throw timeOff.error;
+      return response(
+        {
+          items: (blocks.data ?? []).slice(0, 1000),
+          absences: (timeOff.data ?? []).slice(0, 1000),
+          has_more:
+            (blocks.data?.length ?? 0) > 1000 ||
+            (timeOff.data?.length ?? 0) > 1000,
+        },
+        requestId,
+      );
+    }
     if (resource === "daily_availability") {
       if (!branch) throw new HttpError(400, "branch_required");
       const day = date.parse(q.get("date"));
@@ -342,7 +427,7 @@ export async function GET(
         };
         break;
       case "customers":
-        name = "list_customers";
+        name = "customer_list_view";
         args = {
           p_org: org,
           p_branch: branch,
@@ -364,10 +449,32 @@ export async function GET(
             .parse(q.get("retention") ?? "all"),
         };
         break;
-      case "customer":
-        name = "customer_detail";
-        args = { p_org: org, p_customer: uuid.parse(q.get("id")) };
-        break;
+      case "customer": {
+        const customer = uuid.parse(q.get("id"));
+        const detail = await db.rpc("customer_detail", {
+          p_org: org,
+          p_customer: customer,
+        });
+        if (detail.error) throw detail.error;
+        // Session-bound client: the same record/branch RLS applies here.
+        // Never expose prices, commissions, private notes or ledger fields.
+        const upcoming = await db
+          .from("appointments")
+          .select(
+            "id,branch_id,staff_id,starts_at,ends_at,status,duration_minutes",
+          )
+          .eq("organization_id", org)
+          .eq("customer_id", customer)
+          .in("status", ["scheduled", "confirmed", "checked_in", "in_service"])
+          .gte("ends_at", new Date().toISOString())
+          .order("starts_at")
+          .limit(10);
+        if (upcoming.error) throw upcoming.error;
+        return response(
+          { ...detail.data, upcoming: upcoming.data ?? [] },
+          requestId,
+        );
+      }
       case "timeline":
         name = "customer_timeline";
         args = {

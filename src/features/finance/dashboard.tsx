@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import { DateRangePicker } from "@/components/workspace-ui";
+import { DataChart } from "@/components/chart";
+import { chartInteger } from "@/lib/chart-values";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource } from "@/lib/client";
@@ -13,6 +16,9 @@ import {
 } from "./client";
 import { FinanceForm } from "./forms";
 import { FinanceImport } from "./import-ui";
+import { FinancialCharts } from "./financial-charts";
+import { StaffFinancialCharts } from "./staff-charts";
+import { PartnerDistributions } from "./partner-distributions";
 import {
   ProfitSharing,
   RemunerationSettings,
@@ -32,6 +38,7 @@ const tabs = [
   ["expenses", "Gastos"],
   ["settlements", "Barberos / Liquidaciones"],
   ["closures", "Cierres"],
+  ["partners", "Distribuciones a socios"],
   ["catalog", "Configuración financiera"],
 ] as const;
 export function FinancialDashboard({
@@ -67,7 +74,7 @@ export function FinancialDashboard({
   const [staff, setStaff] = useState("");
   const privileged = hasCapability(w.role, "finance.configure");
   const r = useResource<Summary & { items?: FinanceRow[] }>(
-    branch
+    branch && tab !== "partners"
       ? financeUrl(tab, org, branch, periodFrom ?? from, periodTo ?? to, {
           q: query,
           offset: String(offset),
@@ -93,13 +100,31 @@ export function FinancialDashboard({
     setTo(today);
     if (value === "today") setFrom(today);
     else if (value === "month") setFrom(today.slice(0, 8) + "01");
-    else {
+    else if (value === "7" || value === "30") {
+      const d = new Date(today + "T12:00:00Z");
+      d.setUTCDate(d.getUTCDate() - Number(value) + 1);
+      setFrom(d.toISOString().slice(0, 10));
+    } else {
       const d = new Date(today + "T12:00:00Z");
       d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
       setFrom(d.toISOString().slice(0, 10));
     }
   }
   const totals = r.data?.totals;
+  const byMethod = new Map<string, { label: string; amount: bigint | null }>();
+  for (const row of r.data?.methods ?? []) {
+    const id = String(row.payment_method_id ?? row.name);
+    const previous = byMethod.get(id) ?? {
+      label: String(row.name),
+      amount: 0n,
+    };
+    previous.amount =
+      previous.amount === null ||
+      !/^-?\d+$/.test(String(row.gross_received_minor))
+        ? null
+        : previous.amount + BigInt(String(row.gross_received_minor));
+    byMethod.set(id, previous);
+  }
   const rows = r.data?.items ?? [];
   const session =
     cash.data?.session?.status === "open" ? cash.data.session.id : undefined;
@@ -110,7 +135,7 @@ export function FinancialDashboard({
     own.reload();
   }
   const metrics = [
-    ["gross_revenue_minor", "Ingresos por ventas"],
+    ["gross_revenue_minor", "Ventas registradas (netas)"],
     ["collected_minor", "Ingresos cobrados"],
     ["pending_minor", "Pendiente de cobrar (actual)"],
     ["payment_processing_fees_minor", "Comisiones POS"],
@@ -150,36 +175,32 @@ export function FinancialDashboard({
                 defaultValue="today"
               >
                 <option value="today">Hoy</option>
+                <option value="7">7 días</option>
+                <option value="30">30 días</option>
                 <option value="week">Semana</option>
                 <option value="month">Mes</option>
                 <option value="custom">Rango personalizado</option>
               </select>
             </Field>
-            <Field label="Desde">
-              <input
-                type="date"
-                value={from}
-                onChange={(e) => {
-                  setFrom(e.target.value);
-                  setOffset(0);
-                }}
-              />
-            </Field>
-            <Field label="Hasta">
-              <input
-                type="date"
-                value={to}
-                onChange={(e) => {
-                  setTo(e.target.value);
-                  setOffset(0);
-                }}
-              />
-            </Field>
+            <DateRangePicker
+              from={from}
+              to={to}
+              onFrom={(value) => {
+                setFrom(value);
+                setOffset(0);
+              }}
+              onTo={(value) => {
+                setTo(value);
+                setOffset(0);
+              }}
+            />
           </div>
           {w.role !== "barber" && (
             <div className="tabs">
               {tabs
-                .filter(([v]) => v !== "catalog" || privileged)
+                .filter(
+                  ([v]) => !["catalog", "partners"].includes(v) || privileged,
+                )
                 .map(([value, label]) => (
                   <button
                     key={value}
@@ -201,22 +222,44 @@ export function FinancialDashboard({
         <Loading />
       ) : r.error ? (
         <Notice error>{r.error}</Notice>
+      ) : tab === "partners" ? (
+        <PartnerDistributions from={from} to={to} catalog={catalog.data} />
       ) : tab === "summary" ? (
         <>
           {totals && (
             <>
               <div className="kpi-grid">
-                {metrics.map(([key, label]) => (
-                  <div className="kpi" key={key}>
-                    <span>{label}</span>
-                    <strong>
-                      {money(totals[key], w.organization.currency)}
-                    </strong>
-                  </div>
-                ))}
+                {metrics
+                  .filter(
+                    ([key]) =>
+                      !compact ||
+                      [
+                        "gross_revenue_minor",
+                        "collected_minor",
+                        "operating_result_minor",
+                        "pending_minor",
+                      ].includes(key),
+                  )
+                  .map(([key, label]) => (
+                    <div className="kpi" key={key}>
+                      <span>{label}</span>
+                      <strong>
+                        {money(totals[key], w.organization.currency)}
+                      </strong>
+                    </div>
+                  ))}
               </div>
               {r.data?.profit_sharing && (
                 <ProfitSharing summary={r.data.profit_sharing} />
+              )}
+              {!compact && (
+                <FinancialCharts
+                  org={org}
+                  branch={branch}
+                  from={from}
+                  to={to}
+                  currency={w.organization.currency}
+                />
               )}
               {!compact && (
                 <>
@@ -263,6 +306,21 @@ export function FinancialDashboard({
           )}
           {!compact && r.data?.methods && (
             <>
+              <DataChart
+                title="Cobros por medio de pago"
+                description="Importes recibidos por los medios reales del catálogo; reversiones en la tabla inferior"
+                kind="bar"
+                horizontal
+                currency={w.organization.currency}
+                data={[...byMethod.values()].map((m) => ({
+                  label: m.label,
+                  amount:
+                    m.amount === null
+                      ? null
+                      : chartInteger(m.amount.toString()),
+                }))}
+                series={[{ key: "amount", label: "Cobrado bruto" }]}
+              />
               <h2>Medios de pago</h2>
               <FinanceTable
                 rows={r.data.methods}
@@ -287,6 +345,9 @@ export function FinancialDashboard({
                 currency={w.organization.currency}
               />
             </>
+          )}
+          {!compact && totals && r.data?.staff && (
+            <StaffFinancialCharts rows={r.data.staff} currency={w.organization.currency} />
           )}
         </>
       ) : tab === "catalog" && catalog.data ? (
@@ -561,6 +622,15 @@ export function FinancialDashboard({
           )}
         </>
       )}
+      {!compact && w.role === "barber" && (
+        <OwnPartnerBalances
+          org={org}
+          branch={branch}
+          from={from}
+          to={to}
+          currency={w.organization.currency}
+        />
+      )}
       {form && catalog.data && (
         <FinanceForm
           action={form.action}
@@ -581,6 +651,52 @@ export function FinancialDashboard({
           onImported={reload}
         />
       )}
+    </section>
+  );
+}
+function OwnPartnerBalances({
+  org,
+  branch,
+  from,
+  to,
+  currency,
+}: {
+  org: string;
+  branch: string;
+  from: string;
+  to: string;
+  currency: string;
+}) {
+  const r = useResource<{
+    items: {
+      period_start: string;
+      period_end: string;
+      currency: string;
+      status: string;
+      assigned_minor: string;
+      balance_minor: string;
+    }[];
+  }>(branch ? financeUrl("partner_own", org, branch, from, to) : null);
+  if (r.error) return <Notice error>{r.error}</Notice>;
+  if (!r.data?.items.length) return null;
+  return (
+    <section className="panel stack">
+      <h2>Mis asignaciones como socio</h2>
+      <p className="muted">
+        Períodos aprobados. El saldo descuenta pagos y retiros aplicados; una
+        asignación no equivale a un pago.
+      </p>
+      {r.data.items.map((p) => (
+        <div className="list-item" key={p.period_start}>
+          <strong>
+            {p.period_start} → {p.period_end}
+          </strong>
+          <p>
+            Asignado: {money(p.assigned_minor, currency)} · Pendiente:{" "}
+            {money(p.balance_minor, currency)}
+          </p>
+        </div>
+      ))}
     </section>
   );
 }
@@ -638,7 +754,12 @@ export function FinanceTable({
   action?: (row: FinanceRow) => React.ReactNode;
 }) {
   return (
-    <div className="table-wrap">
+    <div
+      className="table-wrap"
+      role="region"
+      aria-label="Detalle financiero. Tabla desplazable con teclado."
+      tabIndex={0}
+    >
       <table>
         <thead>
           <tr>

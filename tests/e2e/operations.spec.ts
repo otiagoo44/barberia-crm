@@ -2,6 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
 import type { fixtures } from "../integration/fixtures";
+import { mfaFixture, totp, verifyClient } from "./mfa-helper";
 type Fixture = Awaited<ReturnType<typeof fixtures>> & { password: string };
 const real = process.env.E2E_REAL_SUPABASE === "1";
 let f: Fixture;
@@ -14,6 +15,14 @@ async function login(page: Page, role: keyof Fixture["users"] = "ownerA") {
   await page.getByLabel("Correo electrónico").fill(`${role}@fixture.invalid`);
   await page.getByLabel("Contraseña", { exact: true }).fill(f.password);
   await page.getByRole("button", { name: "Entrar", exact: true }).click();
+  const mfa = await mfaFixture(role);
+  if (mfa) {
+    await expect(page).toHaveURL(/\/mfa$/);
+    await page.getByLabel("Código de 6 dígitos").fill(totp(mfa.secret));
+    await page
+      .getByRole("button", { name: "Verificar y continuar", exact: true })
+      .click();
+  }
   await expect(page).toHaveURL(/\/$/);
 }
 test("Login is responsive, has security headers, keyboard access and no browser errors", async ({
@@ -222,6 +231,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
         password: f.password,
       });
       expect(signed.error).toBeNull();
+      await verifyClient(client, role);
       const result = await client.rpc("list_customers", {
         p_org: org,
         p_branch: branch,
@@ -307,12 +317,31 @@ test.describe("Real Supabase Auth and domain flows", () => {
       await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
     }
     await page.goto("/fixture-a/clientes");
+    await page.getByText("Vistas guardadas", { exact: true }).click();
+    await page
+      .getByLabel("Nombre de la vista", { exact: true })
+      .fill("Clientes activos QA");
+    await page
+      .getByRole("button", { name: "Guardar vista actual", exact: true })
+      .click();
+    await page.reload();
+    await page.getByText("Vistas guardadas", { exact: true }).click();
+    await expect(
+      page
+        .getByLabel("Vista personal")
+        .getByRole("option", { name: "Clientes activos QA", exact: true }),
+    ).toHaveCount(1);
+    await page.getByLabel("Vista personal").selectOption("0");
     await page
       .getByRole("button", { name: "Customer a1", exact: true })
       .click();
+    await page.getByRole("tab", { name: "Actividad", exact: true }).click();
     await expect(
       page.getByRole("heading", { name: "Historial", exact: true }),
     ).toBeVisible();
+    await page
+      .getByRole("tab", { name: "Notas y preferencias", exact: true })
+      .click();
     await page.locator('textarea[name="body"]').fill("Prefiere tijera");
     await page.getByRole("button", { name: "Guardar nota" }).click();
     await expect(

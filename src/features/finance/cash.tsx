@@ -143,7 +143,12 @@ export function Cash() {
               </>
             )}
           </div>
-          <div className="table-wrap">
+          <div
+            className="table-wrap"
+            role="region"
+            aria-label="Cobros por medio de pago. Tabla desplazable con teclado."
+            tabIndex={0}
+          >
             <table>
               <caption>Cobros de hoy por medio de pago</caption>
               <thead>

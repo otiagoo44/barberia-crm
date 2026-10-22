@@ -5,6 +5,7 @@ import { useWorkspace } from "@/features/organizations/context";
 import { useResource, resourceUrl, api } from "@/lib/client";
 import { definitions, type FieldDefinition } from "./definitions";
 import { Modal, Field, Notice, Empty, Loading } from "@/components/ui";
+import { DataTable } from "@/components/workspace-ui";
 import type { DataRow, Page, Json } from "@/lib/types";
 export function currencyScale(currency: string) {
   return (
@@ -27,6 +28,8 @@ export function RecordManager({
   const [cursor, setCursor] = useState<string | null>(null);
   const [editor, setEditor] = useState<DataRow | "new" | null>(null);
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("");
   const r = useResource<Page<DataRow>>(
     resourceUrl(entity, {
       org: w.organization.id,
@@ -35,6 +38,29 @@ export function RecordManager({
       cursor,
     }),
   );
+  const tableMode = [
+    "services",
+    "staff",
+    "branches",
+    "branch_services",
+  ].includes(entity);
+  const visibleRows =
+    r.data?.items.filter(
+      (row) =>
+        (!query ||
+          String(row.name ?? row.service_name ?? row.staff_name ?? "")
+            .toLocaleLowerCase("es")
+            .includes(query.toLocaleLowerCase("es"))) &&
+        (!category || row.category === category),
+    ) ?? [];
+  const columns = def.fields
+    .filter(
+      (f) =>
+        !["name", "slug", "color", "description", "profile_id"].includes(
+          f.key,
+        ) && f.type !== "reference",
+    )
+    .slice(0, 6);
   if (def.branch && !w.branchId)
     return <Empty title="Primero creá una sucursal" />;
   return (
@@ -56,90 +82,190 @@ export function RecordManager({
           Agregá la información real del negocio para habilitar su operación.
         </Empty>
       )}
-      <div className="record-grid">
-        {r.data?.items.map((row) => (
-          <article className="record-card" key={row.id}>
-            <h3>
-              {String(
-                row.name ?? row.staff_name ?? row.service_name ?? def.singular,
-              )}
-            </h3>
-            <dl>
-              {def.fields
-                .filter(
-                  (f) =>
-                    f.type !== "reference" &&
-                    f.key !== "name" &&
-                    f.key !== "slug" &&
-                    f.key !== "color" &&
-                    row[f.key] !== null &&
-                    row[f.key] !== undefined,
-                )
-                .map((f) => (
-                  <div style={{ display: "contents" }} key={f.key}>
-                    <dt>{f.label}</dt>
-                    <dd>
+      {tableMode && r.data?.items.length ? (
+        <>
+          <div className="toolbar">
+            <input
+              aria-label={`Buscar en ${def.title}`}
+              placeholder="Filtrar esta página…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            {entity === "services" && (
+              <select
+                aria-label="Filtrar categoría de servicio"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="">Todas las categorías</option>
+                {[
+                  ...new Set(
+                    r.data.items
+                      .map((row) => String(row.category ?? ""))
+                      .filter(Boolean),
+                  ),
+                ]
+                  .sort()
+                  .map((c) => (
+                    <option key={c}>{c}</option>
+                  ))}
+              </select>
+            )}
+            <small>
+              {visibleRows.length} registros visibles
+              {r.data.has_more ? " · hay más páginas" : ""}
+            </small>
+          </div>
+          <DataTable label={def.title}>
+            <thead>
+              <tr>
+                <th scope="col">{def.singular}</th>
+                {columns.map((f) => (
+                  <th scope="col" key={f.key}>
+                    {f.label}
+                  </th>
+                ))}
+                {!readOnly && <th scope="col">Acciones</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {visibleRows.map((row) => (
+                <tr key={row.id}>
+                  <th scope="row">
+                    {String(
+                      row.name ??
+                        row.service_name ??
+                        row.staff_name ??
+                        def.singular,
+                    )}
+                    {entity === "services" && row.consultation_required && (
+                      <small style={{ display: "block" }}>
+                        Consulta previa · sin reserva pública
+                      </small>
+                    )}
+                  </th>
+                  {columns.map((f) => (
+                    <td key={f.key}>
                       {f.type === "checkbox"
                         ? row[f.key]
                           ? "Sí"
                           : "No"
                         : f.type === "money"
-                          ? new Intl.NumberFormat("es", {
-                              style: "currency",
-                              currency: w.organization.currency,
-                            }).format(
-                              Number(row[f.key]) /
-                                currencyScale(w.organization.currency),
-                            )
+                          ? row[f.key] === null || row[f.key] === undefined
+                            ? "Sin precio"
+                            : new Intl.NumberFormat("es-PY", {
+                                style: "currency",
+                                currency: w.organization.currency,
+                              }).format(
+                                Number(row[f.key]) /
+                                  currencyScale(w.organization.currency),
+                              )
                           : f.options
                             ? (f.options.find(
                                 ([v]) => v === String(row[f.key]),
-                              )?.[1] ?? String(row[f.key]))
-                            : f.type === "datetime"
-                              ? formatInTimeZone(
-                                  String(row[f.key]),
-                                  w.branches.find((b) => b.id === w.branchId)
-                                    ?.timezone ?? w.organization.timezone,
-                                  "dd/MM/yyyy HH:mm",
-                                )
-                              : String(row[f.key])}
-                    </dd>
-                  </div>
-                ))}
-            </dl>
-            {!readOnly && (
-              <div className="row wrap">
-                <button onClick={() => setEditor(row)}>Editar</button>
-                {[
-                  "branch_business_hours",
-                  "staff_availability_rules",
-                  "staff_availability_exceptions",
-                  "staff_service_capabilities",
-                ].includes(entity) && (
-                  <button
-                    className="danger"
-                    onClick={async () => {
-                      setError("");
-                      try {
-                        await api("/api/workspace/remove_schedule", {
-                          org: w.organization.id,
-                          entity,
-                          id: row.id,
-                        });
-                        r.reload();
-                      } catch (e) {
-                        setError(e instanceof Error ? e.message : "Error");
-                      }
-                    }}
-                  >
-                    Quitar
-                  </button>
+                              )?.[1] ?? String(row[f.key] ?? "—"))
+                            : String(row[f.key] ?? "—")}
+                    </td>
+                  ))}
+                  {!readOnly && (
+                    <td>
+                      <button onClick={() => setEditor(row)}>Editar</button>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </DataTable>
+        </>
+      ) : (
+        <div className="record-grid">
+          {r.data?.items.map((row) => (
+            <article className="record-card" key={row.id}>
+              <h3>
+                {String(
+                  row.name ??
+                    row.staff_name ??
+                    row.service_name ??
+                    def.singular,
                 )}
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
+              </h3>
+              <dl>
+                {def.fields
+                  .filter(
+                    (f) =>
+                      f.type !== "reference" &&
+                      f.key !== "name" &&
+                      f.key !== "slug" &&
+                      f.key !== "color" &&
+                      row[f.key] !== null &&
+                      row[f.key] !== undefined,
+                  )
+                  .map((f) => (
+                    <div style={{ display: "contents" }} key={f.key}>
+                      <dt>{f.label}</dt>
+                      <dd>
+                        {f.type === "checkbox"
+                          ? row[f.key]
+                            ? "Sí"
+                            : "No"
+                          : f.type === "money"
+                            ? new Intl.NumberFormat("es", {
+                                style: "currency",
+                                currency: w.organization.currency,
+                              }).format(
+                                Number(row[f.key]) /
+                                  currencyScale(w.organization.currency),
+                              )
+                            : f.options
+                              ? (f.options.find(
+                                  ([v]) => v === String(row[f.key]),
+                                )?.[1] ?? String(row[f.key]))
+                              : f.type === "datetime"
+                                ? formatInTimeZone(
+                                    String(row[f.key]),
+                                    w.branches.find((b) => b.id === w.branchId)
+                                      ?.timezone ?? w.organization.timezone,
+                                    "dd/MM/yyyy HH:mm",
+                                  )
+                                : String(row[f.key])}
+                      </dd>
+                    </div>
+                  ))}
+              </dl>
+              {!readOnly && (
+                <div className="row wrap">
+                  <button onClick={() => setEditor(row)}>Editar</button>
+                  {[
+                    "branch_business_hours",
+                    "staff_availability_rules",
+                    "staff_availability_exceptions",
+                    "staff_service_capabilities",
+                  ].includes(entity) && (
+                    <button
+                      className="danger"
+                      onClick={async () => {
+                        setError("");
+                        try {
+                          await api("/api/workspace/remove_schedule", {
+                            org: w.organization.id,
+                            entity,
+                            id: row.id,
+                          });
+                          r.reload();
+                        } catch (e) {
+                          setError(e instanceof Error ? e.message : "Error");
+                        }
+                      }}
+                    >
+                      Quitar
+                    </button>
+                  )}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
       {r.data?.has_more && (
         <div className="pagination">
           <button

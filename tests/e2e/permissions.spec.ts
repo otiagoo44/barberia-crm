@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
+import { Pool } from "pg";
 import type { fixtures } from "../integration/fixtures";
+import { verifyRequest, verifyClient } from "./mfa-helper";
 type Fixture = Awaited<ReturnType<typeof fixtures>> & { password: string };
 const real = process.env.E2E_REAL_SUPABASE === "1";
 let f: Fixture;
@@ -26,6 +28,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         })
       ).ok(),
     ).toBeTruthy();
+    await verifyRequest(request, "ownerA");
     const call = async (
       action: string,
       data: object,
@@ -85,6 +88,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       data: { email: "ownerA@fixture.invalid", password: f.password },
     });
     expect(login.ok()).toBeTruthy();
+    await verifyRequest(page.request, "ownerA");
     await page.goto("/fixture-a/caja");
     await page
       .getByRole("button", { name: "Venta sin cita", exact: true })
@@ -120,6 +124,7 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         data: credentials,
       });
       expect(login.status()).toBe(200);
+      await verifyRequest(request, role);
       const today = new Date().toISOString().slice(0, 10);
       const base = `org=${f.orgA}&branch=${f.branches.a1}&from=${today}&to=${today}`;
       const foreign = await request.get(
@@ -142,6 +147,43 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         },
       });
       expect(write.status()).toBe(403);
+      const ownRead = await request.get(
+        `/api/workspace/branches?org=${f.orgA}`,
+      );
+      expect(ownRead.status()).toBe(200);
+      expect((await ownRead.json()).items.length).toBe(
+        role === "platform"
+          ? 0
+          : ["ownerA", "receptionA"].includes(role)
+            ? 2
+            : 1,
+      );
+      const operationalWrite = await request.post("/api/workspace/record", {
+        headers: {
+          Origin: "http://localhost:3000",
+          "x-role": "organization_owner",
+        },
+        data: {
+          org: f.orgA,
+          branch: f.branches.a1,
+          entity: "customers",
+          id: null,
+          data: {
+            name: `Auth matrix ${role}`,
+            normalized_phone:
+              "+1202" +
+              crypto
+                .randomUUID()
+                .replaceAll("-", "")
+                .replaceAll(/[a-f]/g, "1")
+                .slice(0, 7),
+            home_branch_id: f.branches.a1,
+          },
+        },
+      });
+      expect(operationalWrite.ok()).toBe(
+        ["ownerA", "managerA1", "receptionA"].includes(role),
+      );
       if (["managerA1", "financeA"].includes(role)) {
         const otherBranch = await request.get(
           `/api/finance/expenses?org=${f.orgA}&branch=${f.branches.a2}&from=${today}&to=${today}`,
@@ -162,6 +204,20 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       );
       const auth = await db.auth.signInWithPassword(credentials);
       expect(auth.error).toBeNull();
+      await verifyClient(db, role);
+      if (["barberA", "financeA", "platform"].includes(role)) {
+        expect(
+          (
+            await db.auth.updateUser({
+              data: {
+                role: "organization_owner",
+                organization_id: f.orgA,
+                all_branches: true,
+              },
+            })
+          ).error,
+        ).toBeNull();
+      }
       const settings = await db
         .from("finance_settings")
         .select("profit_share_staff_ids")
@@ -169,6 +225,41 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
       expect(settings.error).toBeNull();
       if (!["ownerA", "financeA"].includes(role))
         expect(settings.data).toEqual([]);
+      else expect(settings.data!.length).toBeGreaterThan(0);
+      const ownBranches = await db
+        .from("branches")
+        .select("id")
+        .eq("organization_id", f.orgA);
+      expect(ownBranches.error).toBeNull();
+      expect(ownBranches.data!.length).toBe(
+        role === "platform"
+          ? 0
+          : ["ownerA", "receptionA"].includes(role)
+            ? 2
+            : 1,
+      );
+      const directUpdate = await db
+        .from("customers")
+        .update({ name: "forged update" })
+        .eq("id", f.customers.a1);
+      expect(directUpdate.error?.code).toBe("42501");
+      const foreignEvents = await db
+        .from("domain_events")
+        .select("id")
+        .eq("organization_id", f.orgB);
+      expect(foreignEvents.error).toBeNull();
+      expect(foreignEvents.data).toEqual([]);
+      const audit = await db
+        .from("audit_logs")
+        .select("id,action")
+        .eq("organization_id", f.orgA);
+      expect(audit.error).toBeNull();
+      if (["receptionA", "barberA", "platform"].includes(role))
+        expect(audit.data).toEqual([]);
+      if (role === "financeA")
+        expect(
+          audit.data!.every((row) => row.action.startsWith("finance.")),
+        ).toBeTruthy();
       const rows = await db
         .from("customers")
         .select("id")
@@ -193,7 +284,128 @@ test.describe("HTTP and Data API permission matrix with real Auth", () => {
         });
         expect(otherStaff.error?.code).toBe("42501");
       }
+      // Repeat live profile/membership/session revocation for every signed role.
+      // These mutations are fixture administration on localhost, not mocks of
+      // the HTTP or PostgREST requests under test.
+      if (
+        !["localhost", "127.0.0.1"].includes(
+          new URL(process.env.LOCAL_DB_URL!).hostname,
+        )
+      )
+        throw new Error("Revocation fixtures require localhost");
+      const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
+      const user = auth.data.user!.id;
+      const memberships = (
+        await pool.query(
+          "select id from public.organization_memberships where organization_id=$1 and profile_id=$2 and active",
+          [f.orgA, user],
+        )
+      ).rows.map((row) => row.id);
+      try {
+        await pool.query(
+          "update public.profiles set active=false where id=$1",
+          [user],
+        );
+        expect(
+          (await request.get(`/api/workspace/branches?org=${f.orgA}`)).status(),
+        ).toBe(403);
+        expect(
+          (await db.from("branches").select("id").eq("organization_id", f.orgA))
+            .data,
+        ).toEqual([]);
+        expect((await db.rpc("security_context")).error?.code).toBe("42501");
+        await pool.query("update public.profiles set active=true where id=$1", [
+          user,
+        ]);
+        await pool.query(
+          "update public.organization_memberships set active=false where id=any($1::uuid[])",
+          [memberships],
+        );
+        const revoked = await request.get(
+          `/api/workspace/branches?org=${f.orgA}`,
+        );
+        expect(revoked.status()).toBe(200);
+        expect((await revoked.json()).items).toEqual([]);
+        expect(
+          (await db.from("branches").select("id").eq("organization_id", f.orgA))
+            .data,
+        ).toEqual([]);
+        expect(
+          (
+            await db.rpc("finance_command", {
+              p_org: f.orgA,
+              p_branch: f.branches.a1,
+              p_action: "open_cash_session",
+              p_data: { opening_amount_minor: 0 },
+              p_key: crypto.randomUUID(),
+            })
+          ).error?.code,
+        ).toBe("42501");
+        await pool.query(
+          "update public.organization_memberships set active=true where id=any($1::uuid[])",
+          [memberships],
+        );
+        await pool.query("delete from auth.sessions where user_id=$1", [user]);
+        expect(
+          (await request.get(`/api/workspace/branches?org=${f.orgA}`)).status(),
+        ).toBe(401);
+        expect(
+          (await db.from("branches").select("id").eq("organization_id", f.orgA))
+            .data,
+        ).toEqual([]);
+        expect((await db.rpc("security_context")).error?.code).toBe("42501");
+      } finally {
+        await pool.query("update public.profiles set active=true where id=$1", [
+          user,
+        ]);
+        await pool.query(
+          "update public.organization_memberships set active=true where id=any($1::uuid[])",
+          [memberships],
+        );
+        await pool.end();
+      }
       await db.auth.signOut();
     });
   }
+  test("Anon cannot read business HTTP/Data API, mutate or execute privileged RPCs", async ({
+    request,
+  }) => {
+    expect(
+      (
+        await request.get(
+          `/api/workspace/customers?org=${f.orgA}&branch=${f.branches.a1}`,
+        )
+      ).status(),
+    ).toBe(401);
+    expect(
+      (
+        await request.get(
+          `/api/finance/export?org=${f.orgA}&branch=${f.branches.a1}&from=2026-10-01&to=2026-10-20&view=expenses`,
+        )
+      ).status(),
+    ).toBe(401);
+    const db = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+      { auth: { persistSession: false, autoRefreshToken: false } },
+    );
+    for (const table of [
+      "customers",
+      "payments",
+      "audit_logs",
+      "domain_events",
+      "partner_distribution_payments",
+    ]) {
+      const r = await db.from(table).select("id");
+      expect(r.error?.code).toBe("42501");
+    }
+    const rpc = await db.rpc("finance_command", {
+      p_org: f.orgA,
+      p_branch: f.branches.a1,
+      p_action: "open_cash_session",
+      p_data: { opening_amount_minor: 0, role: "organization_owner" },
+      p_key: crypto.randomUUID(),
+    });
+    expect(rpc.error?.code).toBe("42501");
+  });
 });

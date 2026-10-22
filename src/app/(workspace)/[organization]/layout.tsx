@@ -16,6 +16,8 @@ export default async function WorkspaceLayout({
   try {
     context = await requireUser();
   } catch (error) {
+    if (error instanceof HttpError && error.code === "mfa_required")
+      redirect("/mfa");
     if (error instanceof HttpError && error.status === 401) redirect("/login");
     redirect("/");
   }

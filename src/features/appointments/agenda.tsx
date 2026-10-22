@@ -11,6 +11,7 @@ import { Badge, Empty, Loading, Notice } from "@/components/ui";
 import type { Appointment, Page, Staff, Service, DataRow } from "@/lib/types";
 import { BookingForm } from "./booking-form";
 import { AppointmentDialog } from "./appointment-dialog";
+import { TimeCalendar } from "./time-calendar";
 export function Agenda({ compact = false }: { compact?: boolean }) {
   const w = useWorkspace();
   const q = useSearchParams();
@@ -24,6 +25,7 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
     ? requestedDate
     : formatInTimeZone(new Date(), tz, "yyyy-MM-dd");
   const [mode, setMode] = useState("day");
+  const [layout, setLayout] = useState("time");
   const [staff, setStaff] = useState(
     w.role === "barber" ? (w.staffId ?? "") : (q.get("staff") ?? ""),
   );
@@ -56,6 +58,23 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
         })
       : null,
   );
+  const schedule = useResource<{
+    items: DataRow[];
+    absences: DataRow[];
+    has_more: boolean;
+  }>(
+    w.branchId
+      ? resourceUrl("calendar_blocks", {
+          org: w.organization.id,
+          branch: w.branchId,
+          staff: staff || null,
+          start_day: begin,
+          end_day: end,
+          from,
+          to,
+        })
+      : null,
+  );
   const people = useResource<Page<Staff>>(
     resourceUrl("staff", { org: w.organization.id }),
   );
@@ -73,6 +92,16 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
   const live = useLive(w.organization.id, w.branchId, (change) => {
     if (change.type === "reconnected" || change.type === "visible") {
       r.reload();
+      schedule.reload();
+      return;
+    }
+    if (
+      ["staff_availability_exceptions", "staff_time_off"].includes(
+        change.table ?? "",
+      ) ||
+      change.type === "staff.availability_changed"
+    ) {
+      schedule.reload();
       return;
     }
     if (change.table !== "appointments" || !change.id) return;
@@ -122,6 +151,9 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
   );
   const days = Array.from({ length: mode === "week" ? 7 : 1 }, (_, i) =>
     format(addDays(new Date(begin + "T12:00:00"), i), "yyyy-MM-dd"),
+  );
+  columns.sort(
+    (a, b) => a.name.localeCompare(b.name, "es") || a.id.localeCompare(b.id),
   );
   if (!w.branchId)
     return (
@@ -238,11 +270,42 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
             </option>
           ))}
         </select>
-        <button onClick={r.reload}>Actualizar</button>
+        <button
+          onClick={() => {
+            r.reload();
+            schedule.reload();
+          }}
+        >
+          Actualizar
+        </button>
+        <div className="segmented" aria-label="Presentación de agenda">
+          <button
+            aria-pressed={layout === "time"}
+            className={layout === "time" ? "selected" : ""}
+            onClick={() => setLayout("time")}
+          >
+            Calendario
+          </button>
+          <button
+            aria-pressed={layout === "list"}
+            className={layout === "list" ? "selected" : ""}
+            onClick={() => setLayout("list")}
+          >
+            Lista
+          </button>
+        </div>
         <span className="realtime-state">{live}</span>
       </div>
       {(r.error || error) && <Notice error>{r.error || error}</Notice>}
+      {schedule.error && <Notice error>Horarios: {schedule.error}</Notice>}
+      {schedule.data?.has_more && (
+        <Notice>
+          Hay más de 1.000 bloques. Filtrá por profesional para consultar el
+          rango completo.
+        </Notice>
+      )}
       {r.loading && !r.data && <Loading />}
+      {schedule.loading && !schedule.data && <Loading />}
       {r.data?.has_more && (
         <Notice>
           Este rango contiene más de 2.000 reservas. Reducí el rango o filtrá
@@ -254,6 +317,10 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
           Asigná el equipo y sus horarios para habilitar la agenda.
         </Empty>
       )}
+      <p className="result-note">
+        La escala muestra citas registradas. Los espacios vacíos no indican
+        disponibilidad; consultá los horarios reales al reservar.
+      </p>
       {days.map((day) => (
         <section key={day} className="day-section">
           {mode === "week" && (
@@ -265,53 +332,69 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
               })}
             </h2>
           )}
-          <div className="calendar-grid">
-            {columns.map((s) => {
-              const rows =
-                r.data?.items.filter(
-                  (a) =>
-                    a.staff_id === s.id &&
-                    formatInTimeZone(a.starts_at, tz, "yyyy-MM-dd") === day,
-                ) ?? [];
-              return (
-                <section className="staff-column" key={s.id}>
-                  <header>
-                    <strong>
-                      <span
-                        className="staff-dot"
-                        style={{ background: s.color }}
-                      />
-                      {s.name}
-                    </strong>
-                    <small>{rows.length} citas</small>
-                  </header>
-                  {rows.map((a) => (
-                    <button
-                      className={`appointment-card ${a.status}`}
-                      key={a.id}
-                      onClick={() => setChosen(a)}
-                    >
-                      <span className="appointment-time">
-                        {formatInTimeZone(a.starts_at, tz, "HH:mm")}–
-                        {formatInTimeZone(a.ends_at, tz, "HH:mm")} ·{" "}
-                        {a.duration_minutes} min
-                      </span>
-                      <span className="appointment-name">
-                        {a.customer_name}
-                      </span>
-                      <span className="appointment-services">
-                        {a.services.map((s) => s.name).join(" + ")}
-                      </span>
-                      <Badge status={a.status} label={statusLabels[a.status]} />
-                    </button>
-                  ))}
-                  {!rows.length && (
-                    <p className="muted">Sin reservas en este rango.</p>
-                  )}
-                </section>
-              );
-            })}
-          </div>
+          {layout === "time" && r.data ? (
+            <TimeCalendar
+              day={day}
+              tz={tz}
+              staff={columns}
+              appointments={r.data.items}
+              blocks={schedule.data?.items ?? []}
+              absences={schedule.data?.absences ?? []}
+              loadingBlocks={schedule.loading}
+              onChoose={setChosen}
+            />
+          ) : (
+            <div className="calendar-grid">
+              {columns.map((s) => {
+                const rows =
+                  r.data?.items.filter(
+                    (a) =>
+                      a.staff_id === s.id &&
+                      formatInTimeZone(a.starts_at, tz, "yyyy-MM-dd") === day,
+                  ) ?? [];
+                return (
+                  <section className="staff-column" key={s.id}>
+                    <header>
+                      <strong>
+                        <span
+                          className="staff-dot"
+                          style={{ background: s.color }}
+                        />
+                        {s.name}
+                      </strong>
+                      <small>{rows.length} citas</small>
+                    </header>
+                    {rows.map((a) => (
+                      <button
+                        className={`appointment-card ${a.status}`}
+                        key={a.id}
+                        onClick={() => setChosen(a)}
+                      >
+                        <span className="appointment-time">
+                          {formatInTimeZone(a.starts_at, tz, "HH:mm")}–
+                          {formatInTimeZone(a.ends_at, tz, "HH:mm")} ·{" "}
+                          {a.duration_minutes} min
+                        </span>
+                        <span className="appointment-name">
+                          {a.customer_name}
+                        </span>
+                        <span className="appointment-services">
+                          {a.services.map((s) => s.name).join(" + ")}
+                        </span>
+                        <Badge
+                          status={a.status}
+                          label={statusLabels[a.status]}
+                        />
+                      </button>
+                    ))}
+                    {!rows.length && (
+                      <p className="muted">Sin reservas en este rango.</p>
+                    )}
+                  </section>
+                );
+              })}
+            </div>
+          )}
         </section>
       ))}
       {booking && (

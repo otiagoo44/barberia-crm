@@ -1,0 +1,241 @@
+{
+  "run": 39528698984,
+  "head": "2a2cb927604a0cd05ffc682c325e045752112e8c",
+  "note": "Original Playwright traces; URLs omit queries, headers, request/response bodies, cookies and credentials.",
+  "tests": [
+    {
+      "test": "ux-release-Daily-work-and--b84c2-ortcut-opens-actual-results-chromium",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/workspace/staff_branch_assignments",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/agenda",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/services",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/staff",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/live",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signin",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/mfa/verify",
+          "status": 200
+        }
+      ],
+      "consoleEventTypes": []
+    },
+    {
+      "test": "ux-release-Daily-work-and--b84c2-ortcut-opens-actual-results-chromium-retry1",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/workspace/services",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/staff",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/agenda",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/staff_branch_assignments",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/live",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signin",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/mfa/verify",
+          "status": 200
+        }
+      ],
+      "consoleEventTypes": []
+    },
+    {
+      "test": "ux-release-Daily-work-and--fba89-ner-reviews-the-actual-sale-chromium",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/finance/catalog",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/finance/cash",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "GET",
+          "path": "/api/finance/cash",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/day",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/services",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/staff",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/branch_services",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/workspace/staff_branch_assignments",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/live",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signin",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/mfa/verify",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signout",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signin",
+          "status": 200
+        }
+      ],
+      "consoleEventTypes": []
+    },
+    {
+      "test": "ux-release-Daily-work-and--fba89-ner-reviews-the-actual-sale-chromium-retry1",
+      "requests": [
+        {
+          "method": "GET",
+          "path": "/api/finance/catalog",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "path": "/api/finance/cash",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signin",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/mfa/verify",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/finance/command",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signout",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signin",
+          "status": 200
+        }
+      ],
+      "consoleEventTypes": []
+    }
+  ]
+}

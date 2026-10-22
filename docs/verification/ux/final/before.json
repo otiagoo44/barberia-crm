@@ -1,0 +1,2204 @@
+{
+  "phase": "before",
+  "fixture": "isolated Supabase Auth tenants; no production data",
+  "results": [
+    {
+      "module": "inicio",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 253.60000000003492,
+            "domContentLoaded": 225.60000000003492
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 218836
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164,
+            "domContentLoaded": 164
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 9124
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164,
+            "domContentLoaded": 164
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 9124
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.90000000002328,
+            "domContentLoaded": 161.90000000002328
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4870
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.90000000002328,
+            "domContentLoaded": 161.90000000002328
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 6590
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 141.10000000003492,
+            "domContentLoaded": 137.10000000003492
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 10156
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 141.10000000003492,
+            "domContentLoaded": 137.10000000003492
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 10156
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 141.10000000003492,
+            "domContentLoaded": 137.10000000003492
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 11551
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.79999999998836,
+            "domContentLoaded": 136.79999999998836
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 6485
+      }
+    },
+    {
+      "module": "caja",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.09999999997672,
+            "domContentLoaded": 134.09999999997672
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 8708
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.09999999997672,
+            "domContentLoaded": 134.09999999997672
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 16713
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164.59999999997672,
+            "domContentLoaded": 161.79999999998836
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 15106
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164.59999999997672,
+            "domContentLoaded": 161.79999999998836
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 20370
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 135.59999999997672,
+            "domContentLoaded": 135.5
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 12231
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 142,
+            "domContentLoaded": 139.59999999997672
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4302
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 135.29999999998836,
+            "domContentLoaded": 133.40000000002328
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4095
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.20000000001164,
+            "domContentLoaded": 132.39999999996508
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4506
+      }
+    },
+    {
+      "module": "metas",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 131.70000000001164,
+            "domContentLoaded": 129.80000000004657
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 4132
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.80000000004657,
+            "domContentLoaded": 132
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 3780
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 140.30000000004657,
+            "domContentLoaded": 138
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 19431
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 135.09999999997672,
+            "domContentLoaded": 132.59999999997672
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 9122
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 135.09999999997672,
+            "domContentLoaded": 132.59999999997672
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 9122
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.59999999997672,
+            "domContentLoaded": 131.59999999997672
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4875
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.59999999997672,
+            "domContentLoaded": 131.59999999997672
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 6595
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.30000000004657,
+            "domContentLoaded": 148.90000000002328
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 10157
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.30000000004657,
+            "domContentLoaded": 148.90000000002328
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 10157
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.30000000004657,
+            "domContentLoaded": 148.90000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 11552
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 140.09999999997672,
+            "domContentLoaded": 138
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 6486
+      }
+    },
+    {
+      "module": "caja",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.90000000002328,
+            "domContentLoaded": 132.10000000003492
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 8708
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.90000000002328,
+            "domContentLoaded": 132.10000000003492
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 16713
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164.10000000003492,
+            "domContentLoaded": 161.60000000003492
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 15106
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164.10000000003492,
+            "domContentLoaded": 161.60000000003492
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 20370
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 138.40000000002328,
+            "domContentLoaded": 136.30000000004657
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 12229
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 135.79999999998836,
+            "domContentLoaded": 134
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4307
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 130.5,
+            "domContentLoaded": 128.89999999996508
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4095
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 140,
+            "domContentLoaded": 138.09999999997672
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 4506
+      }
+    },
+    {
+      "module": "metas",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.39999999996508,
+            "domContentLoaded": 134.39999999996508
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 4137
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.69999999995343,
+            "domContentLoaded": 131.79999999998836
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 3781
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 281.70000000001164,
+            "domContentLoaded": 277.6000000000349
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 25524
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.29999999998836,
+            "domContentLoaded": 133.40000000002328
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 8441
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.29999999998836,
+            "domContentLoaded": 133.40000000002328
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 13028
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 247.59999999997672,
+            "domContentLoaded": 247.5
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 14510
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 247.59999999997672,
+            "domContentLoaded": 247.5
+          }
+        ],
+        "resources": 30,
+        "transferBytes": 18422
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.5,
+            "domContentLoaded": 132.80000000004657
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 15218
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.5,
+            "domContentLoaded": 132.80000000004657
+          }
+        ],
+        "resources": 30,
+        "transferBytes": 20961
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.5,
+            "domContentLoaded": 132.80000000004657
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 23398
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 138.59999999997672,
+            "domContentLoaded": 136.20000000001164
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 16121
+      }
+    },
+    {
+      "module": "caja",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.40000000002328,
+            "domContentLoaded": 131.20000000001164
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 17206
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.40000000002328,
+            "domContentLoaded": 131.20000000001164
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 29695
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 169.29999999998836,
+            "domContentLoaded": 166.20000000001164
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 26937
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 169.29999999998836,
+            "domContentLoaded": 166.20000000001164
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 32201
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 146.10000000003492,
+            "domContentLoaded": 143.40000000002328
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 24066
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.39999999996508,
+            "domContentLoaded": 134.09999999997672
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 13954
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.60000000003492,
+            "domContentLoaded": 132.40000000002328
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 10299
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 169.60000000003492,
+            "domContentLoaded": 167.10000000003492
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 9562
+      }
+    },
+    {
+      "module": "metas",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 220.10000000003492,
+            "domContentLoaded": 217.90000000002328
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 9190
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 185.20000000001164,
+            "domContentLoaded": 183.09999999997672
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 13425
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.39999999996508,
+            "domContentLoaded": 171.59999999997672
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 25525
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 145,
+            "domContentLoaded": 142.19999999995343
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 13025
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 145,
+            "domContentLoaded": 142.19999999995343
+          }
+        ],
+        "resources": 24,
+        "transferBytes": 14171
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 199.09999999997672,
+            "domContentLoaded": 196.79999999998836
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 14518
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 199.09999999997672,
+            "domContentLoaded": 196.79999999998836
+          }
+        ],
+        "resources": 30,
+        "transferBytes": 18432
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.69999999995343,
+            "domContentLoaded": 133.29999999998836
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 18658
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.69999999995343,
+            "domContentLoaded": 133.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 21997
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.69999999995343,
+            "domContentLoaded": 133.29999999998836
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 23392
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.89999999996508,
+            "domContentLoaded": 150.39999999996508
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 18317
+      }
+    },
+    {
+      "module": "caja",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 125.69999999995343,
+            "domContentLoaded": 123.39999999996508
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 19498
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 125.69999999995343,
+            "domContentLoaded": 123.39999999996508
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 29696
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.90000000002328,
+            "domContentLoaded": 150
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 26944
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.90000000002328,
+            "domContentLoaded": 150
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 32208
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.79999999998836,
+            "domContentLoaded": 132.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 24068
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.5,
+            "domContentLoaded": 132.20000000001164
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 16135
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 132.60000000003492,
+            "domContentLoaded": 130.30000000004657
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 13741
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 139.40000000002328,
+            "domContentLoaded": 137.20000000001164
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 15303
+      }
+    },
+    {
+      "module": "metas",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 127.70000000001164,
+            "domContentLoaded": 125.59999999997672
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 13773
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 145.39999999996508,
+            "domContentLoaded": 143.19999999995343
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 14577
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 136.70000000001164,
+            "domContentLoaded": 133.89999999996508
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 25528
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134,
+            "domContentLoaded": 131.09999999997672
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 10738
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134,
+            "domContentLoaded": 131.09999999997672
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 22110
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 148.70000000001164,
+            "domContentLoaded": 146.40000000002328
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 16707
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 148.70000000001164,
+            "domContentLoaded": 146.40000000002328
+          }
+        ],
+        "resources": 30,
+        "transferBytes": 18427
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.5,
+            "domContentLoaded": 131
+          }
+        ],
+        "resources": 29,
+        "transferBytes": 19794
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.5,
+            "domContentLoaded": 131
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 21988
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 134.5,
+            "domContentLoaded": 131
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 23383
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 131.90000000002328,
+            "domContentLoaded": 129.59999999997672
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 11537
+      }
+    },
+    {
+      "module": "caja",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 130.70000000001164,
+            "domContentLoaded": 128.5
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 19497
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 130.70000000001164,
+            "domContentLoaded": 128.5
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 29695
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 149.5,
+            "domContentLoaded": 149.39999999996508
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 26943
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 149.5,
+            "domContentLoaded": 149.39999999996508
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 32207
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 139.29999999998836,
+            "domContentLoaded": 136.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 24064
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 144,
+            "domContentLoaded": 141.40000000002328
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 16135
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 135.30000000004657,
+            "domContentLoaded": 132.70000000001164
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 13735
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 133.09999999997672,
+            "domContentLoaded": 130.59999999997672
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 9557
+      }
+    },
+    {
+      "module": "metas",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 152.5,
+            "domContentLoaded": 149.90000000002328
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 13775
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 129.40000000002328,
+            "domContentLoaded": 126.90000000002328
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 8841
+      }
+    }
+  ],
+  "browserErrors": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "accessibility": [
+    {
+      "module": "login",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "login",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "mfa",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "mfa",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "inicio",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "agenda",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "navegacion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "clientes",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "equipo",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "disponibilidad",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "servicios",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "caja",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "checkout",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "finanzas",
+      "width": 390,
+      "violations": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
+          "nodes": [
+            {
+              "target": [
+                ".table-wrap:nth-child(9)"
+              ],
+              "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 390,
+      "violations": [
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
+          "nodes": [
+            {
+              "target": [
+                ".table-wrap:nth-child(9)"
+              ],
+              "summary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module": "reportes",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "configuracion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "walk-ins",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "sucursales",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "metas",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "retencion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "inicio",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "agenda",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "navegacion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "clientes",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "equipo",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "disponibilidad",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "servicios",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "caja",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "checkout",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "finanzas",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reportes",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "configuracion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "walk-ins",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "sucursales",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "metas",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "retencion",
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "agenda-1024.png",
+      "bytes": 94886,
+      "sha256": "989e89192887b3b89c386c8e0b872d75bcdad149fcd44096f7cbf51402d2eaa9"
+    },
+    {
+      "file": "agenda-1440.png",
+      "bytes": 103947,
+      "sha256": "452568bfa9fad1ae882367d78a86dd4fc9285d39967ad6639e3de5fd39b24d58"
+    },
+    {
+      "file": "agenda-360.png",
+      "bytes": 44399,
+      "sha256": "d854ab31aa849eecc14b22611e26ffbb06c749e507c1e18ddba4e09d1badb950"
+    },
+    {
+      "file": "agenda-390.png",
+      "bytes": 45109,
+      "sha256": "0cc6b11d9507c2ed9fcef2f81f39f6d2f28f28f98709b2019a7bcd5182e58fef"
+    },
+    {
+      "file": "agenda-768.png",
+      "bytes": 88410,
+      "sha256": "7b052b46e308463497c482cc7d4d077e078c2955ec28c458e6b8c26eeea3cfaf"
+    },
+    {
+      "file": "caja-1024.png",
+      "bytes": 107731,
+      "sha256": "ff68108ca2d08bb86f170e6987f3a364d5fdfd3c1a301a46b9b8fc453e89c0a5"
+    },
+    {
+      "file": "caja-1440.png",
+      "bytes": 111513,
+      "sha256": "8917a154b39df37754e9f9e100daccd9f6c260bf74119d65e2943529e5ae97b6"
+    },
+    {
+      "file": "caja-360.png",
+      "bytes": 62667,
+      "sha256": "7490d3eb246b28e54d75569a25726493cf39fb560500c19841be4249211bd301"
+    },
+    {
+      "file": "caja-390.png",
+      "bytes": 66153,
+      "sha256": "3b0862fdd2729c354f05b0ed5c608cb2ae5d6811a53ace27083d02184b8747c4"
+    },
+    {
+      "file": "caja-768.png",
+      "bytes": 105890,
+      "sha256": "1c0382b442e3296f6fd9560cd732f2f955cd37f8100bea8a3ab042d34c26a5b8"
+    },
+    {
+      "file": "checkout-1024.png",
+      "bytes": 103415,
+      "sha256": "64f0126fe101b14160450e9f013eaf0c9fb12279b7ff1ed313800c84172fd77c"
+    },
+    {
+      "file": "checkout-1440.png",
+      "bytes": 125060,
+      "sha256": "b35a634add002674432f81d47831137acacd850981690c1ef6ceecf664bb8072"
+    },
+    {
+      "file": "checkout-360.png",
+      "bytes": 48795,
+      "sha256": "231c892093a0b6dbf7dec9a0e323f55970f9a3c17d109b3a9e799ef7ef619289"
+    },
+    {
+      "file": "checkout-390.png",
+      "bytes": 50784,
+      "sha256": "e08ee425882444ca2559f1a60859f8fb57f536ffee2faac3b2019a6f063c7522"
+    },
+    {
+      "file": "checkout-768.png",
+      "bytes": 85775,
+      "sha256": "be022c398cab44e92e3fcf043ec641a935f57a42a78cde93216345b6edebb800"
+    },
+    {
+      "file": "cliente-ficha-1024.png",
+      "bytes": 114834,
+      "sha256": "86610f1e3eb7f53a52e20335f405e55f14d4d157956657d26792aee1ac6fc32a"
+    },
+    {
+      "file": "cliente-ficha-1440.png",
+      "bytes": 135248,
+      "sha256": "481bfb3dbde49136dec5c099878eb9e06a8dfb44aa996015d9db3edc50bbe6d1"
+    },
+    {
+      "file": "cliente-ficha-360.png",
+      "bytes": 60254,
+      "sha256": "fe7aba4f0af242b1b73b5ce3320436170a6db1ea48746685c5c21922738296ca"
+    },
+    {
+      "file": "cliente-ficha-390.png",
+      "bytes": 63355,
+      "sha256": "3492f7d3bce2e5d6ab6ba656f2c22011eeaeecf919928f9ab2fa0a8529badb9f"
+    },
+    {
+      "file": "cliente-ficha-768.png",
+      "bytes": 83954,
+      "sha256": "498123d6f4a9748bb83f939a3207aada7097eccdd492de636dc62beebee3b9d2"
+    },
+    {
+      "file": "clientes-1024.png",
+      "bytes": 92260,
+      "sha256": "15add58b546c41ad9d94f3d173956051892c8df4dcfdca929d5f93811472d50e"
+    },
+    {
+      "file": "clientes-1440.png",
+      "bytes": 99184,
+      "sha256": "462d4056443830bd54f3a1fb52b372156d5e20bc962ce16e67da8a03af6eaddf"
+    },
+    {
+      "file": "clientes-360.png",
+      "bytes": 42853,
+      "sha256": "04e5a801954b0b7fa2aac9b61dea6f8498182745e7ed12c9ef9ef982e1bcc08f"
+    },
+    {
+      "file": "clientes-390.png",
+      "bytes": 42689,
+      "sha256": "b6488e209b662772ce5479d60e43b79561e0cf87dc3bfb91b2723093dbdeab3f"
+    },
+    {
+      "file": "clientes-768.png",
+      "bytes": 85103,
+      "sha256": "3305f1c9b5061a7a89941b9da896268de5d4938d025c7c9f3556e026798e8045"
+    },
+    {
+      "file": "configuracion-1024.png",
+      "bytes": 103640,
+      "sha256": "c9c04a8afd13b9fe3c149afa5c5a00c31d62e24614efbacc9d3be989a4b28bc1"
+    },
+    {
+      "file": "configuracion-1440.png",
+      "bytes": 110343,
+      "sha256": "9fae0027e578ffd30e0611eb92477cd5fc9a73e3d94d559428b3f1e48512fc17"
+    },
+    {
+      "file": "configuracion-360.png",
+      "bytes": 60107,
+      "sha256": "10c785828deff5eb3ebc9d205b586a31365dc275512088d7dc367dcf3748a3e3"
+    },
+    {
+      "file": "configuracion-390.png",
+      "bytes": 59549,
+      "sha256": "dbb363263c60e4460c97ada9c7e3b05a29907bdd5f94b9da27b57b67c9c0696f"
+    },
+    {
+      "file": "configuracion-768.png",
+      "bytes": 98909,
+      "sha256": "8c259154b0cc5a1714dbeb69f78618f0bcd0a767182c92b9d575d8b8d3bb730f"
+    },
+    {
+      "file": "disponibilidad-1024.png",
+      "bytes": 213245,
+      "sha256": "a67959d9d3be5e47cb33bfb1abd086a38c0944d21e9fd34dc63b3e65e7805b4f"
+    },
+    {
+      "file": "disponibilidad-1440.png",
+      "bytes": 214460,
+      "sha256": "357e8724ab7df33341f2f99e51ddb3ee6953c829d68412e42950f260c98a0227"
+    },
+    {
+      "file": "disponibilidad-360.png",
+      "bytes": 173163,
+      "sha256": "389eb837cb15c18bafc5379a4a39eef51e311d8dc97a265c0e8c610509f08343"
+    },
+    {
+      "file": "disponibilidad-390.png",
+      "bytes": 174295,
+      "sha256": "db7fcd546e7aca381d3b12f849e1eaa8dfcc15ffa6a270b397ec844d0e52d74c"
+    },
+    {
+      "file": "disponibilidad-768.png",
+      "bytes": 217982,
+      "sha256": "28b68201b3055e958965522f4559ec7de52f72b0670a0d7fd7c2a05d9ee1f73b"
+    },
+    {
+      "file": "equipo-1024.png",
+      "bytes": 213245,
+      "sha256": "a67959d9d3be5e47cb33bfb1abd086a38c0944d21e9fd34dc63b3e65e7805b4f"
+    },
+    {
+      "file": "equipo-1440.png",
+      "bytes": 214460,
+      "sha256": "357e8724ab7df33341f2f99e51ddb3ee6953c829d68412e42950f260c98a0227"
+    },
+    {
+      "file": "equipo-360.png",
+      "bytes": 173163,
+      "sha256": "389eb837cb15c18bafc5379a4a39eef51e311d8dc97a265c0e8c610509f08343"
+    },
+    {
+      "file": "equipo-390.png",
+      "bytes": 174295,
+      "sha256": "db7fcd546e7aca381d3b12f849e1eaa8dfcc15ffa6a270b397ec844d0e52d74c"
+    },
+    {
+      "file": "equipo-768.png",
+      "bytes": 217982,
+      "sha256": "28b68201b3055e958965522f4559ec7de52f72b0670a0d7fd7c2a05d9ee1f73b"
+    },
+    {
+      "file": "equipo-tabla-1024.png",
+      "bytes": 93152,
+      "sha256": "f1473705c48e0bfac4fcd376bb12175feb3519179fdf8c7a2b8b803f4511279a"
+    },
+    {
+      "file": "equipo-tabla-1440.png",
+      "bytes": 96972,
+      "sha256": "efbd6faacd9de2ed0ed6696733821565de8163610e0c88069a0c429ca8493383"
+    },
+    {
+      "file": "equipo-tabla-360.png",
+      "bytes": 57598,
+      "sha256": "391876a08f146367c8dea46378775dbb9f1a3baec5d3942d638fb870f1dc0acb"
+    },
+    {
+      "file": "equipo-tabla-390.png",
+      "bytes": 57349,
+      "sha256": "4b6d0002eef0d7d1e92dadd1a40210296cb2ad07aa2aadaf328679d6ecb94f79"
+    },
+    {
+      "file": "equipo-tabla-768.png",
+      "bytes": 91542,
+      "sha256": "2444f591236501463370a33a6ee067a6d3f576692889c03e88b6460cce2b0586"
+    },
+    {
+      "file": "finanzas-1024.png",
+      "bytes": 235387,
+      "sha256": "71a2b2550df2d6447b8fa6e2278b9aee9a81b1af86458d334adc46ab9372b9dd"
+    },
+    {
+      "file": "finanzas-1440.png",
+      "bytes": 227496,
+      "sha256": "0bb17eb82d8ff4f39d5ccd1405b155ab218abbc0155f003b8a752b0aeac322fe"
+    },
+    {
+      "file": "finanzas-360.png",
+      "bytes": 186557,
+      "sha256": "bcaf5281c8fc1fc34f082836359f10f787795d8711b07a9db4e100be1824b0fb"
+    },
+    {
+      "file": "finanzas-390.png",
+      "bytes": 187236,
+      "sha256": "c62127dc4c4a934bd8e8a15b5820fbf036b8ac029087cbd8fd1ab18e7e4e39c6"
+    },
+    {
+      "file": "finanzas-768.png",
+      "bytes": 235181,
+      "sha256": "eb702a6768d4da99669a76eb09399c786fbed0d088efcab5c0746633fccb1f13"
+    },
+    {
+      "file": "finanzas-7dias-1024.png",
+      "bytes": 239779,
+      "sha256": "598804108518df13c314645467e00e7b99486f92a588a029374281799bb287b9"
+    },
+    {
+      "file": "finanzas-7dias-1440.png",
+      "bytes": 232075,
+      "sha256": "f3ec0424984779dd1891037fea0b33e453f150e75e492a39e394c7d50c31db67"
+    },
+    {
+      "file": "finanzas-7dias-360.png",
+      "bytes": 189653,
+      "sha256": "1193a6aa7eb14d5f72fd16bf5bed9b344a324f6f24905362c61064cd7fbc798b"
+    },
+    {
+      "file": "finanzas-7dias-390.png",
+      "bytes": 190007,
+      "sha256": "709994a828019d8bf7dfe3ee593343bda7c95ebb3ad853c5199a6d0fa06dc8c1"
+    },
+    {
+      "file": "finanzas-7dias-768.png",
+      "bytes": 239241,
+      "sha256": "fdec65dc7d1ac4e0c2ce604375a8983416193f9c803eefd6b080866b9d5000fd"
+    },
+    {
+      "file": "inicio-1024.png",
+      "bytes": 249994,
+      "sha256": "5e8153837b8aa69c6e1712309b185ba7b378acd7395b845723742088b317ffd4"
+    },
+    {
+      "file": "inicio-1440.png",
+      "bytes": 238472,
+      "sha256": "0453fa31fad2c34edd7554313d159dde5050936d24545deed51d0cc4986f5ff7"
+    },
+    {
+      "file": "inicio-360.png",
+      "bytes": 205056,
+      "sha256": "ef29d57b200fa4a013990aba0d4152b465a0d6f43d62530714a48ac856b2c68e"
+    },
+    {
+      "file": "inicio-390.png",
+      "bytes": 205058,
+      "sha256": "9cc1197a96ab6aabf438c57cfe7c81f6bac7fb11f211f6350c8a6102e322169c"
+    },
+    {
+      "file": "inicio-768.png",
+      "bytes": 255646,
+      "sha256": "101bfbe43ea48445b730daa6613c85e18d98f35781a08eb2a748a4096d0fae61"
+    },
+    {
+      "file": "login-1024.png",
+      "bytes": 30223,
+      "sha256": "c63395363a69c078ff5a5be9d9cbcdd5a44484f14c97e3c94901423cbf5d8bf9"
+    },
+    {
+      "file": "login-1440.png",
+      "bytes": 32632,
+      "sha256": "9335c7d71f9f3e314f74dcbb63837a46a647d55c262509ca80a9c9ed2949aa4b"
+    },
+    {
+      "file": "login-360.png",
+      "bytes": 25244,
+      "sha256": "c560f354b1545cf984658ad677c110b675a7677d681d97c3eab457a31ce335e2"
+    },
+    {
+      "file": "login-390.png",
+      "bytes": 25343,
+      "sha256": "c91472f5192495a457c646cbd7e1f7aefad8a544586f15b2b1983b8187e3178b"
+    },
+    {
+      "file": "login-768.png",
+      "bytes": 28968,
+      "sha256": "af91909469f7a0fcde805d09adc0534fc21c8ba537ae1e2c0060b0a372da05d3"
+    },
+    {
+      "file": "metas-1024.png",
+      "bytes": 75993,
+      "sha256": "fa038265c7f62e0f4311e67fcc23a476b81691cb5b7256f3a399acef53c6c01c"
+    },
+    {
+      "file": "metas-1440.png",
+      "bytes": 80631,
+      "sha256": "23413cd3eed228b8e523f7e516b0c9ffc5fb567c49c636f4d0fa0d898b9660ee"
+    },
+    {
+      "file": "metas-360.png",
+      "bytes": 36490,
+      "sha256": "daec781168ec437ad0c9065841675d47137268d35d2ec213422615762e187d22"
+    },
+    {
+      "file": "metas-390.png",
+      "bytes": 36034,
+      "sha256": "994e736dec815387a8936eb6aa1add716fbf27cf9adc9c099eb8160d7c4dcb00"
+    },
+    {
+      "file": "metas-768.png",
+      "bytes": 74103,
+      "sha256": "30fd0664fe085c5e4e18a4b643be7f1f333065bda6a5715df286b5d68c51dfc2"
+    },
+    {
+      "file": "mfa-1024.png",
+      "bytes": 47134,
+      "sha256": "c3e157b8d2b9bafea7513e45e1969be761d3b22aab46331676d03ed0c934a7ee"
+    },
+    {
+      "file": "mfa-1440.png",
+      "bytes": 49297,
+      "sha256": "5b6b71b93667ff2b8de9142bbef03c754b05ce53d0688e48d75913cd2fcacdc2"
+    },
+    {
+      "file": "mfa-360.png",
+      "bytes": 42351,
+      "sha256": "589376207d245bf14a1cace7f2319cc57ae64bbfebd3c14cb5a2958ccb16a430"
+    },
+    {
+      "file": "mfa-390.png",
+      "bytes": 41810,
+      "sha256": "1d476bdc4028c2c6c3228be6819f03cdad96a01a49909df9e3eac4c236d093f7"
+    },
+    {
+      "file": "mfa-768.png",
+      "bytes": 45608,
+      "sha256": "cc16cb87caa36ed2cbefd5f9685923f531436f25605a7d6d26e31131b21c8c57"
+    },
+    {
+      "file": "navegacion-1024.png",
+      "bytes": 94399,
+      "sha256": "bb083a2649eb0be91cff93b7a41f0e13eff268d226b9378847931fc2a8e80f84"
+    },
+    {
+      "file": "navegacion-1440.png",
+      "bytes": 103465,
+      "sha256": "7b76e05687f36fd41ccb70991be3b9bf9b74d081055ccab4bf81da1bbaaa9b4a"
+    },
+    {
+      "file": "navegacion-360.png",
+      "bytes": 44520,
+      "sha256": "9846e7bcbea1e1a6df032688b500b92230840f867cb46f71e722f112765e2f20"
+    },
+    {
+      "file": "navegacion-390.png",
+      "bytes": 44681,
+      "sha256": "262fbaad47a1d0b475ee73d4e3db85832725f216783abe8bd05156abcdd135f1"
+    },
+    {
+      "file": "navegacion-768.png",
+      "bytes": 85103,
+      "sha256": "5fb61f4d4ea74eba7ba2befc4e5fddc30f732e1ef83f5c8d151ec7c6b9fec499"
+    },
+    {
+      "file": "reportes-1024.png",
+      "bytes": 290882,
+      "sha256": "8d44eddffba56ea724e597004ed599f23147dff593afe25b94f4f9e7c25e64c8"
+    },
+    {
+      "file": "reportes-1440.png",
+      "bytes": 280357,
+      "sha256": "05541b39830b9d0333a7355e55f3fa4139b4394f219f1a1419abc7af5346e2cd"
+    },
+    {
+      "file": "reportes-360.png",
+      "bytes": 236942,
+      "sha256": "215dfb9d70dcc3607a5bc3ad6f41022a8322fb441a312e6e40808713b2bea5a7"
+    },
+    {
+      "file": "reportes-390.png",
+      "bytes": 236716,
+      "sha256": "784e90ab2a05e03e86b783c69b82f6f42bdd348ceeb4d91440e2c8771b789553"
+    },
+    {
+      "file": "reportes-768.png",
+      "bytes": 289008,
+      "sha256": "80f30ea3db830fbb5c98c1d6f93eaae37535a9fb50d5b753053e100c873c94b5"
+    },
+    {
+      "file": "retencion-1024.png",
+      "bytes": 88243,
+      "sha256": "76d3d0ed1c53b1753fd3c371bd8e8e878aec11cea3946948c4fc9c548486ca77"
+    },
+    {
+      "file": "retencion-1440.png",
+      "bytes": 92620,
+      "sha256": "56375ee4d22c0b4733b9300b4a7af37c64ae3d1b8ec6e5ccbad831b012cdd5e3"
+    },
+    {
+      "file": "retencion-360.png",
+      "bytes": 50355,
+      "sha256": "590d5cf06eefa06852ac1eb37cdf0d9eff0ddcdd3503e9ca244493e7f3b2d7e8"
+    },
+    {
+      "file": "retencion-390.png",
+      "bytes": 50638,
+      "sha256": "e5dda6f9741cbaf1f70ce659cd2d686b5b6503735da1482e875967ce5a683678"
+    },
+    {
+      "file": "retencion-768.png",
+      "bytes": 88554,
+      "sha256": "c8fb33e8c1c0a08e7b31f625a70ee9a10c42466702eee7e8425a1f4ce0b0e3b9"
+    },
+    {
+      "file": "servicios-1024.png",
+      "bytes": 91845,
+      "sha256": "a1ea63bc58668f624da6e39a697d55d0de3b0b4bfb03d460075112d60fbc4f41"
+    },
+    {
+      "file": "servicios-1440.png",
+      "bytes": 109922,
+      "sha256": "4a60554e6b11ee96b34b17b4a018616688cead8bdca7894d99ab0f42db899603"
+    },
+    {
+      "file": "servicios-360.png",
+      "bytes": 43757,
+      "sha256": "9d5758d9d1b7f2520dc8771843d8d0ca07de6ab7994e3004e31d58aac1d76e0b"
+    },
+    {
+      "file": "servicios-390.png",
+      "bytes": 43782,
+      "sha256": "2ab49763a0d6bd3d297c9eb7a7e07af0c663517175fbb128a025c3ca53205bca"
+    },
+    {
+      "file": "servicios-768.png",
+      "bytes": 85037,
+      "sha256": "37bf570edda2b86d19ea44f8eefd42026e9f5e3e009dad4bed287e3aa8e6eb63"
+    },
+    {
+      "file": "sucursales-1024.png",
+      "bytes": 89536,
+      "sha256": "8cca05f6a3e029188fa12cad61e415635802102b179d87453ef7ea1b02e6068d"
+    },
+    {
+      "file": "sucursales-1440.png",
+      "bytes": 94873,
+      "sha256": "d62e5a6568b6803f585279122716c1f637d6c8b2749a877a8a99daabec84c360"
+    },
+    {
+      "file": "sucursales-360.png",
+      "bytes": 45232,
+      "sha256": "3cc698c3f0034dcc84398c1137a8eb66d89591278a9d3a0a56aecc82a3aface5"
+    },
+    {
+      "file": "sucursales-390.png",
+      "bytes": 44886,
+      "sha256": "70954a44b8e87513ae8e7b218acc5335c17ba9412ab89a8fd2bf91049473730c"
+    },
+    {
+      "file": "sucursales-768.png",
+      "bytes": 85313,
+      "sha256": "785bc22049e429d57969c1207478f4476487692c1ad47e1c038cca7848c3a1d6"
+    },
+    {
+      "file": "walk-ins-1024.png",
+      "bytes": 87811,
+      "sha256": "cfd4e3846fc12ae38b08d6de0824a03d7ebdd2eb075ece4be89e2c5eefb63363"
+    },
+    {
+      "file": "walk-ins-1440.png",
+      "bytes": 91304,
+      "sha256": "7a6e93d16436494420e8998274037490d3fbf6011c9e52241e7327dd179d5a62"
+    },
+    {
+      "file": "walk-ins-360.png",
+      "bytes": 49068,
+      "sha256": "7966a5a85836d212f49ada2baf6515efa99f21bf64d79b5d0b624c6f8412c1c6"
+    },
+    {
+      "file": "walk-ins-390.png",
+      "bytes": 48474,
+      "sha256": "f9898493f6968441d7f7e825ff41ad758441d9fda861aa72290448a9b2f96100"
+    },
+    {
+      "file": "walk-ins-768.png",
+      "bytes": 85932,
+      "sha256": "6daa3edaeefb50440ef45b25250a603d8794d4d39101f10150a5223a0073cd19"
+    }
+  ],
+  "srcTree": "32d825d6f3fb9e09ef6084100ed2d9c8aa33e71b",
+  "schemaTree": "12544c32a8ec244ad1449aa67b82e5238164f720",
+  "source": "da9eb8ccfab9526beee89d2a74fd9d82c6674ed4"
+}

@@ -1,7 +1,29 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { formatInTimeZone } from "date-fns-tz";
+import {
+  LayoutDashboard,
+  CalendarDays,
+  UsersRound,
+  UserRoundPlus,
+  RotateCcw,
+  Scissors,
+  Users,
+  Store,
+  Target,
+  Wallet,
+  ChartNoAxesCombined,
+  SlidersHorizontal,
+  Search,
+  Bell,
+  Menu,
+  ChevronRight,
+  ChevronsUpDown,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 import { useWorkspace } from "@/features/organizations/context";
 import { SignOut } from "@/features/auth/auth-form";
 import { roleLabels } from "@/lib/validation";
@@ -9,20 +31,20 @@ import { resourceUrl, useResource } from "@/lib/client";
 import { Modal, Empty } from "./ui";
 import type { Page, DataRow } from "@/lib/types";
 import { brandStyle } from "@/lib/branding";
-const links = [
-  ["inicio", "Inicio", "◈"],
-  ["agenda", "Agenda", "▦"],
-  ["clientes", "Clientes", "◎"],
-  ["walk-ins", "Walk-ins", "⇥"],
-  ["retencion", "Retención", "↻"],
-  ["equipo", "Equipo", "♧"],
-  ["servicios", "Servicios", "✂"],
-  ["sucursales", "Sucursales", "⌂"],
-  ["metas", "Metas", "⚑"],
-  ["caja", "Caja", "$"],
-  ["finanzas", "Finanzas", "%"],
-  ["reportes", "Reportes", "▥"],
-  ["configuracion", "Configuración", "⚙"],
+const links: [string, string, LucideIcon, string][] = [
+  ["inicio", "Inicio", LayoutDashboard, "Operación"],
+  ["agenda", "Agenda", CalendarDays, "Operación"],
+  ["walk-ins", "Sin cita", UserRoundPlus, "Operación"],
+  ["caja", "Caja", Wallet, "Operación"],
+  ["clientes", "Clientes", UsersRound, "Clientes"],
+  ["retencion", "Seguimiento", RotateCcw, "Clientes"],
+  ["equipo", "Equipo", Users, "Negocio"],
+  ["servicios", "Servicios", Scissors, "Negocio"],
+  ["sucursales", "Sucursales", Store, "Negocio"],
+  ["finanzas", "Finanzas", Wallet, "Resultados"],
+  ["reportes", "Reportes", ChartNoAxesCombined, "Resultados"],
+  ["metas", "Metas", Target, "Resultados"],
+  ["configuracion", "Configuración", SlidersHorizontal, "Configuración"],
 ];
 export function Shell({ children }: { children: React.ReactNode }) {
   const w = useWorkspace();
@@ -70,23 +92,45 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </span>
       </Link>
       <nav aria-label="Navegación principal">
-        {allowed.map(([key, label, icon]) => (
-          <Link
-            onClick={() => setMenu(false)}
-            className={path.endsWith("/" + key) ? "active" : ""}
-            href={`/${w.organization.slug}/${key}`}
-            key={key}
-          >
-            <span aria-hidden="true">{icon}</span>
-            {label}
-          </Link>
+        {Array.from(new Set(allowed.map((l) => l[3]))).map((group) => (
+          <div className="nav-group" key={group}>
+            <span className="nav-group-label">{group}</span>
+            {allowed
+              .filter((l) => l[3] === group)
+              .map(([key, label, Icon]) => (
+                <Link
+                  onClick={() => setMenu(false)}
+                  className={path.endsWith("/" + key) ? "active" : ""}
+                  href={`/${w.organization.slug}/${key}`}
+                  aria-current={path.endsWith("/" + key) ? "page" : undefined}
+                  key={key}
+                >
+                  <Icon size={18} strokeWidth={1.7} aria-hidden="true" />
+                  {label}
+                </Link>
+              ))}
+          </div>
         ))}
       </nav>
       <div className="sidebar-footer">
-        <Link href="/">Cambiar organización</Link>
-        <span>{w.fullName}</span>
-        <small>{roleLabels[w.role]}</small>
-        <SignOut />
+        <Link href="/">
+          <ChevronsUpDown size={16} aria-hidden="true" /> Cambiar organización
+        </Link>
+        <details className="user-menu">
+          <summary>
+            <span className="avatar" aria-hidden="true">
+              {w.fullName.slice(0, 1).toUpperCase()}
+            </span>
+            <span>
+              {w.fullName}
+              <small>{roleLabels[w.role]}</small>
+            </span>
+          </summary>
+          <Link href="/mfa">
+            <ShieldCheck size={16} aria-hidden="true" /> Seguridad de la cuenta
+          </Link>
+          <SignOut />
+        </details>
       </div>
     </>
   );
@@ -98,11 +142,21 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <button
             className="mobile-menu"
             aria-label="Abrir navegación"
+            aria-haspopup="dialog"
+            aria-expanded={menu}
             onClick={() => setMenu(true)}
           >
-            ☰
+            <Menu size={20} aria-hidden="true" />
           </button>
-          <GlobalSearch />
+          <div className="workspace-context">
+            <span>{w.organization.name}</span>
+            <ChevronRight size={14} aria-hidden="true" />
+            <strong>
+              {links.find(([key]) => path.endsWith("/" + key))?.[1] ??
+                "Espacio de trabajo"}
+            </strong>
+          </div>
+          <GlobalSearch links={allowed} />
           {w.branches.length > 1 ? (
             <label className="branch-switch">
               <span className="sr-only">Sucursal activa</span>
@@ -128,13 +182,35 @@ export function Shell({ children }: { children: React.ReactNode }) {
             aria-label="Ver actividad"
             onClick={() => setActivity(true)}
           >
-            ◉
+            <Bell size={18} aria-hidden="true" />
           </button>
         </header>
         <main id="content" className="workspace" key={w.branchId}>
           {children}
         </main>
       </div>
+      <nav className="mobile-bottom-nav" aria-label="Accesos rápidos">
+        {allowed
+          .filter(([key]) => ["inicio", "agenda", "caja"].includes(key))
+          .map(([key, label, Icon]) => (
+            <Link
+              key={key}
+              href={`/${w.organization.slug}/${key}`}
+              aria-current={path.endsWith("/" + key) ? "page" : undefined}
+            >
+              <Icon size={20} aria-hidden="true" />
+              <span>{label}</span>
+            </Link>
+          ))}
+        <button
+          aria-haspopup="dialog"
+          aria-expanded={menu}
+          onClick={() => setMenu(true)}
+        >
+          <Menu size={20} aria-hidden="true" />
+          <span>Más</span>
+        </button>
+      </nav>
       {menu && (
         <Modal title="Navegación" onClose={() => setMenu(false)}>
           <div className="mobile-nav">{nav}</div>
@@ -169,10 +245,31 @@ function Activity() {
     </div>
   );
 }
-function GlobalSearch() {
+function GlobalSearch({ links: allowed }: { links: typeof links }) {
   const w = useWorkspace();
   const [text, setText] = useState("");
   const [query, setQuery] = useState("");
+  const input = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        if (document.querySelector("dialog:modal")) return;
+        if (
+          e.target instanceof HTMLElement &&
+          e.target.matches(
+            'input, textarea, select, [contenteditable="true"]',
+          ) &&
+          e.target !== input.current
+        )
+          return;
+        e.preventDefault();
+        input.current?.focus();
+      }
+      if (e.key === "Escape") setText("");
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
   useEffect(() => {
     const t = setTimeout(() => setQuery(text.trim()), 300);
     return () => clearTimeout(t);
@@ -182,7 +279,7 @@ function GlobalSearch() {
     staff: DataRow[];
     appointments: DataRow[];
   }>(
-    query.length >= 2
+    query.length >= 2 && w.role !== "finance"
       ? resourceUrl("search", { org: w.organization.id, q: query })
       : null,
   );
@@ -192,9 +289,14 @@ function GlobalSearch() {
         <span className="sr-only">
           Buscar clientes, teléfono, barberos o citas
         </span>
-        <span aria-hidden="true">⌕</span>
+        <Search size={18} aria-hidden="true" />
         <input
-          placeholder="Buscar clientes, teléfono…"
+          ref={input}
+          placeholder={
+            w.role === "finance"
+              ? "Buscar pantallas…"
+              : "Buscar cliente o pantalla…"
+          }
           value={text}
           onChange={(e) => setText(e.target.value)}
           maxLength={80}
@@ -205,6 +307,26 @@ function GlobalSearch() {
           <button className="close-search" onClick={() => setText("")}>
             Cerrar
           </button>
+          {allowed
+            .filter(([, label]) =>
+              label
+                .toLocaleLowerCase("es")
+                .includes(query.toLocaleLowerCase("es")),
+            )
+            .map(([key, label, Icon]) => (
+              <Link
+                key={key}
+                onClick={() => setText("")}
+                href={`/${w.organization.slug}/${key}`}
+              >
+                <span className="row">
+                  <Icon size={16} aria-hidden="true" />
+                  {label}
+                </span>
+                <small>Ir a la pantalla</small>
+              </Link>
+            ))}
+          {r.loading && <p role="status">Buscando…</p>}
           {r.data?.customers.map((c) => (
             <Link
               key={c.id}
@@ -228,8 +350,15 @@ function GlobalSearch() {
           {r.data?.appointments.map((a) => (
             <Link
               key={a.id}
-              onClick={() => setText("")}
-              href={`/${w.organization.slug}/agenda?date=${String(a.starts_at).slice(0, 10)}`}
+              onClick={() => {
+                if (
+                  typeof a.branch_id === "string" &&
+                  w.branches.some((b) => b.id === a.branch_id)
+                )
+                  w.setBranchId(a.branch_id);
+                setText("");
+              }}
+              href={`/${w.organization.slug}/agenda?date=${formatInTimeZone(String(a.starts_at), w.branches.find((b) => b.id === String(a.branch_id))?.timezone ?? w.organization.timezone, "yyyy-MM-dd")}`}
             >
               {String(a.name)}
               <small>
