@@ -11,6 +11,15 @@ if (
   !["localhost", "127.0.0.1"].includes(new URL(base).hostname)
 )
   throw Error("Visual fixtures require isolated localhost Auth");
+if (
+  !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  !["localhost", "127.0.0.1"].includes(
+    new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname,
+  )
+)
+  throw Error(
+    "Visual fixtures require isolated Supabase, never a cloud project",
+  );
 const phase = process.env.QA_PHASE === "before" ? "before" : "after";
 const f = JSON.parse(await readFile(".test-data/e2e/ux-fixtures.json", "utf8"));
 const out = `docs/verification/ux/${phase}`;

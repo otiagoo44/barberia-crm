@@ -11,6 +11,15 @@ if (
   !["localhost", "127.0.0.1"].includes(new URL(base).hostname)
 )
   throw Error("HTTP benchmark requires isolated localhost Auth");
+if (
+  !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  !["localhost", "127.0.0.1"].includes(
+    new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname,
+  )
+)
+  throw Error(
+    "HTTP benchmark requires isolated Supabase, never a cloud project",
+  );
 const phase = ["before", "profiling"].includes(process.env.QA_PHASE)
   ? process.env.QA_PHASE
   : "after";

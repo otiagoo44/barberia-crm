@@ -245,10 +245,11 @@ textarea {
   line-height: 1.5;
 }
 .kpi strong {
+  display: block;
   font-size: clamp(28px, 2.4vw, 36px);
   font-weight: 650;
   letter-spacing: -0.035em;
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
   word-break: normal;
 }
 .kpi strong,
@@ -638,7 +639,7 @@ td button:not(.danger) {
     padding-top: 16px;
   }
   .kpi strong {
-    font-size: clamp(25px, 6.5vw, 32px);
+    font-size: clamp(28px, 6.5vw, 32px);
     letter-spacing: -0.025em;
   }
   .day-control {
@@ -665,5 +666,10 @@ td button:not(.danger) {
   }
   .config-tabs {
     gap: 8px;
+  }
+}
+@media (max-width: 600px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
   }
 }

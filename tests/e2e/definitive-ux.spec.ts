@@ -124,6 +124,59 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await expect(page.locator(".loading:visible")).toHaveCount(0);
   });
 
+  test("large financial figures remain complete and readable across target widths", async ({
+    page,
+  }) => {
+    await page.goto("/fixture-a/finanzas");
+    await expect(page.locator(".kpi-grid").first()).toBeVisible();
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
+    // Visual stress values only in this isolated browser DOM, never a business write.
+    const values = [128450000, 9000000000000].map((value) =>
+      new Intl.NumberFormat("es-PY", {
+        style: "currency",
+        currency: "PYG",
+        maximumFractionDigits: 0,
+      }).format(value),
+    );
+    await page.locator(".kpi strong").evaluateAll((elements, values) => {
+      elements.forEach((element, index) => {
+        element.textContent = values[index % values.length];
+      });
+    }, values);
+    await page.evaluate(() => {
+      const note = document.createElement("p");
+      note.textContent =
+        "Prueba visual QA: importes sintéticos, sin operaciones del negocio.";
+      document.querySelector("main")?.prepend(note);
+    });
+    for (const width of [360, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBeTruthy();
+      const amounts = await page
+        .locator(".kpi strong")
+        .evaluateAll((elements) =>
+          elements.map((el) => ({
+            text: el.textContent,
+            fits: el.scrollWidth <= el.clientWidth,
+            fontSize: parseFloat(getComputedStyle(el).fontSize),
+          })),
+        );
+      for (const [index, amount] of amounts.entries()) {
+        expect(amount.text).toBe(values[index % values.length]);
+        expect(amount.fits).toBeTruthy();
+        expect(amount.fontSize).toBeGreaterThanOrEqual(28);
+      }
+      await page.screenshot({
+        path: `test-results/large-figures-${width}.png`,
+        fullPage: false,
+      });
+    }
+  });
+
   test("motion, 200 percent layout, keyboard, contrast and readable controls across target widths", async ({
     page,
   }) => {
