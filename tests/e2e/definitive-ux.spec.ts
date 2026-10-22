@@ -47,6 +47,22 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     expect(
       (await page.request.get(`/api/workspace/setup?${query}`)).status(),
     ).toBe(403);
+    await page.goto("/fixture-a/configuracion");
+    await expect(
+      page.getByText("Comprobado", { exact: true }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/Este diagnóstico no habilita reservas/),
+    ).toBeVisible();
+    await page.request.post("/api/auth/signin", {
+      headers: { Origin: "http://localhost:3000" },
+      data: { email: "receptionA@fixture.invalid", password: f.password },
+    });
+    query.set("org", f.orgA);
+    query.set("branch", f.branches.a1);
+    expect(
+      (await page.request.get(`/api/workspace/setup?${query}`)).status(),
+    ).toBe(403);
     let releaseCash: () => void = () => {};
     const cashGate = new Promise<void>((resolve) => {
       releaseCash = resolve;
@@ -64,22 +80,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     );
     releaseCash();
     await expect(page.locator(".loading:visible")).toHaveCount(0);
-    await page.goto("/fixture-a/configuracion");
-    await expect(
-      page.getByText("Comprobado", { exact: true }).first(),
-    ).toBeVisible();
-    await expect(
-      page.getByText(/Este diagnóstico no habilita reservas/),
-    ).toBeVisible();
-    await page.request.post("/api/auth/signin", {
-      headers: { Origin: "http://localhost:3000" },
-      data: { email: "receptionA@fixture.invalid", password: f.password },
-    });
-    query.set("org", f.orgA);
-    query.set("branch", f.branches.a1);
-    expect(
-      (await page.request.get(`/api/workspace/setup?${query}`)).status(),
-    ).toBe(403);
+    await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
   });
 
   test("financial filters hide obsolete totals while loading, transport errors expose no previous totals", async ({
