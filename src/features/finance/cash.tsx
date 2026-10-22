@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
@@ -32,11 +32,13 @@ export function Cash() {
   const r = useResource<CashData>(
     branch ? financeUrl("cash", org, branch, today) : null,
   );
-  const catalog = useResource<FinanceCatalog>(
-    branch ? financeUrl("catalog", org, branch, today) : null,
-  );
   const [action, setAction] = useState<"open" | "close" | "expense" | null>(
     null,
+  );
+  const catalog = useResource<FinanceCatalog>(
+    branch && action === "expense"
+      ? financeUrl("catalog", org, branch, today)
+      : null,
   );
   const [checkout, setCheckout] = useState<string | null>(null);
   const [manual, setManual] = useState(false);
@@ -226,6 +228,18 @@ export function Cash() {
           }}
         />
       )}
+      {action === "expense" && !catalog.data && (
+        <Modal title="Registrar gasto" onClose={() => setAction(null)}>
+          {catalog.error ? (
+            <Notice error>
+              {catalog.error}{" "}
+              <button onClick={catalog.reload}>Reintentar</button>
+            </Notice>
+          ) : (
+            <Loading />
+          )}
+        </Modal>
+      )}
       {(action === "open" || action === "close") && (
         <Modal
           title={action === "open" ? "Abrir caja" : "Cerrar caja"}
@@ -270,6 +284,7 @@ export function Cash() {
             )}
             <button
               className="primary"
+              aria-busy={!!busy}
               disabled={
                 busy ||
                 !amount ||

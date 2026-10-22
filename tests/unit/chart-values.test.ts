@@ -38,6 +38,11 @@ test("brand accents retain contrast against light surfaces without altering the 
     const style = brandStyle(color) as Record<string, string>;
     assert.equal(style["--brand"], color);
     assert.ok(1.05 / (luminance(style["--accent"]) + 0.05) >= 4.5);
+    assert.ok(
+      (luminance(style["--sidebar-accent"]) + 0.05) /
+        (luminance("#30291C") + 0.05) >=
+        4.5,
+    );
     const a = luminance(style["--brand"]),
       b = luminance(style["--on-brand"]);
     assert.ok((Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05) >= 4.5);

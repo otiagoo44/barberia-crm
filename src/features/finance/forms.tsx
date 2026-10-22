@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { fromZonedTime } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
@@ -379,7 +379,12 @@ export function FinanceForm({
             admite correcciones mediante ajustes auditados.
           </Notice>
         )}
-        <button className="primary" disabled={busy} type="submit">
+        <button
+          aria-busy={!!busy}
+          className="primary"
+          disabled={busy}
+          type="submit"
+        >
           {busy ? "Registrando…" : "Confirmar"}
         </button>
       </form>

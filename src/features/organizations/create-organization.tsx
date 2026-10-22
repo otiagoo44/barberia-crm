@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { api } from "@/lib/client";
 import { Field, Notice } from "@/components/ui";
@@ -62,7 +62,7 @@ export function CreateOrganization() {
         </Field>
       </div>
       {error && <Notice error>{error}</Notice>}
-      <button className="primary" disabled={busy}>
+      <button aria-busy={!!busy} className="primary" disabled={busy}>
         {busy ? "Creando…" : "Crear organización"}
       </button>
     </form>

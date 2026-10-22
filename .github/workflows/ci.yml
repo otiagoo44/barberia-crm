@@ -28,7 +28,19 @@ jobs:
       - run: npm run test:db
       - run: npm run test:hardening
       - run: npm run test:load
+      - name: Explain and measure unchanged critical SQL on the initial schema
+        run: SQL_BASELINE=1 npx tsx tests/load/critical.ts
+      - name: Explain and measure critical SQL on the candidate schema
+        run: npx tsx tests/load/critical.ts
       - run: npm run build
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: sql-and-load-verification
+          path: |
+            docs/verification/definitive/sql-*.json
+            docs/verification/load-results.json
+          retention-days: 90
   supabase-e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -61,8 +73,25 @@ jobs:
           npm start > .test-data/redesign-server.log 2>&1 &
           for attempt in $(seq 1 30); do curl --fail --silent http://localhost:3000/api/health && break || sleep 1; done
           node scripts/capture-product.mjs
-      - name: Measure isolated HTTP and browser baseline
-        run: QA_PHASE=before node scripts/measure-product.mjs
+      - name: Measure isolated HTTP and browser candidate
+        run: QA_PHASE=after node scripts/measure-product.mjs
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: b7d5cfd42611d83347b4307e0c53db173d7b967f
+          path: .test-data/performance-before
+          persist-credentials: false
+      - name: Build exact initial product for comparison on the same isolated runner
+        run: |
+          cp .env.local .test-data/performance-before/.env.local
+          cd .test-data/performance-before
+          npm ci
+          npm run build
+      - name: Measure exact initial product against the same isolated data
+        run: QA_SERVER_DIR=.test-data/performance-before QA_PHASE=before node scripts/measure-server.mjs
+      - name: Build dedicated React profiling variant
+        run: NEXT_PUBLIC_QA_PROFILE=1 npm run build -- --profile
+      - name: Record React commits separately from ordinary production timings
+        run: QA_SERVER_PORT=3002 QA_PHASE=profiling node scripts/measure-server.mjs
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
@@ -83,7 +112,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: da9eb8ccfab9526beee89d2a74fd9d82c6674ed4
+          ref: b7d5cfd42611d83347b4307e0c53db173d7b967f
           persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:

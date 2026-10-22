@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
@@ -363,9 +363,13 @@ export function DailyAvailability({
             />
           </Field>
           {error && <Notice error>{error}</Notice>}
-          {message && <Notice>{message}</Notice>}
+          {message && <Notice success>{message}</Notice>}
           <div className="row wrap">
-            <button className="primary" disabled={busy || !people.length}>
+            <button
+              aria-busy={!!busy}
+              className="primary"
+              disabled={busy || !people.length}
+            >
               {busy ? "Guardando…" : "Guardar disponibilidad"}
             </button>
             {editing && (
@@ -438,7 +442,7 @@ export function DailyAvailability({
               atenderá en estos bloques de la fecha elegida.
             </label>
             {error && <Notice error>{error}</Notice>}
-            <button className="primary" disabled={busy}>
+            <button aria-busy={!!busy} className="primary" disabled={busy}>
               Confirmar copia
             </button>
           </form>

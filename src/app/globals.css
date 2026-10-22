@@ -12,17 +12,18 @@
   --warm: var(--color-warning);
   --lavender: var(--color-subtle);
   font-family:
-    "DM Sans Variable", "Segoe UI",
+    "DM Sans Variable",
+    "Segoe UI",
     ui-sans-serif,
     system-ui,
     -apple-system,
     sans-serif;
-  font-size: 15px;
+  font-size: 16px;
 }
 .launch-guide {
   margin: 0 0 28px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--surface);
 }
 .launch-guide summary {
@@ -109,7 +110,7 @@ button {
   background: var(--surface);
   color: var(--text);
   padding: 10px 18px;
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   min-height: 44px;
 }
 button:hover {
@@ -129,7 +130,7 @@ button.primary,
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   padding: 11px 22px;
   min-height: 44px;
 }
@@ -144,7 +145,7 @@ textarea {
   border: 1px solid var(--color-input);
   background: var(--surface);
   color: var(--text);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   padding: 11px 12px;
   min-height: 44px;
 }
@@ -175,7 +176,7 @@ p {
   margin: 0;
 }
 h1 {
-  font-size: clamp(24px, 2.2vw, 28px);
+  font-size: clamp(28px, 2.4vw, 32px);
   line-height: 1.18;
   letter-spacing: -0.025em;
   font-weight: 650;
@@ -191,14 +192,14 @@ p {
   line-height: 1.6;
 }
 small {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
 }
 .muted {
   color: var(--muted);
 }
 .eyebrow {
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.18em;
   color: var(--muted);
   font-weight: 650;
@@ -227,7 +228,7 @@ small {
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   padding: 24px;
 }
 .page-heading {
@@ -256,7 +257,7 @@ small {
 .segmented {
   display: flex;
   border: 1px solid var(--border);
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   padding: 4px;
   gap: 2px;
 }
@@ -280,7 +281,7 @@ small {
   padding: 12px 16px;
   border: 1px solid #c9d9e8;
   background: #f0f6fc;
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   line-height: 1.5;
 }
 .notice.error {
@@ -290,7 +291,7 @@ small {
 }
 .empty {
   border: 1px dashed var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   text-align: center;
   padding: 48px 24px;
   color: var(--muted);
@@ -317,7 +318,7 @@ small {
   min-width: 0;
 }
 .field > span {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text);
 }
 .form-grid {
@@ -343,7 +344,7 @@ small {
   background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   padding: 24px;
   overflow: auto;
 }
@@ -388,7 +389,7 @@ small {
   min-height: 100dvh;
 }
 .sidebar {
-  width: 232px;
+  width: 264px;
   flex-shrink: 0;
   position: fixed;
   inset: 0 auto 0 0;
@@ -413,7 +414,7 @@ small {
 }
 .brand small {
   display: block;
-  font-size: 9px;
+  font-size: 14px;
   letter-spacing: 0.16em;
   margin-top: 6px;
 }
@@ -422,7 +423,7 @@ small {
   height: 38px;
   background: var(--accent);
   color: var(--text);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   display: grid;
   place-items: center;
   font-size: 23px;
@@ -439,7 +440,7 @@ small {
   padding: 9px 12px;
   min-height: 40px;
   font-size: 14px;
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   color: var(--muted);
   display: flex;
   gap: 10px;
@@ -467,7 +468,7 @@ small {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .sidebar-footer > a {
   color: var(--muted);
@@ -482,8 +483,8 @@ small {
   color: var(--muted);
 }
 .main-shell {
-  margin-left: 232px;
-  width: calc(100% - 232px);
+  margin-left: 264px;
+  width: calc(100% - 264px);
   min-width: 0;
 }
 .topbar {
@@ -535,7 +536,7 @@ small {
   overflow: auto;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   padding: 12px;
   z-index: 40;
 }
@@ -544,7 +545,7 @@ small {
   flex-direction: column;
   gap: 4px;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
 }
 .search-results a:hover {
   background: var(--surface-2);
@@ -559,10 +560,10 @@ small {
   max-width: 190px;
 }
 .branch-switch select {
-  font-size: 13px;
+  font-size: 14px;
 }
 .branch-name {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
 }
 .mobile-menu {
@@ -578,7 +579,7 @@ small {
 .auth-card {
   width: min(440px, 100%);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   padding: 36px;
   background: var(--surface);
 }
@@ -601,7 +602,7 @@ small {
   min-height: 32px;
   background: transparent;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .org-page {
   max-width: 980px;
@@ -625,7 +626,7 @@ small {
   padding: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -636,7 +637,7 @@ small {
 }
 .organization-card > span:last-child {
   color: var(--accent);
-  font-size: 13px;
+  font-size: 14px;
 }
 .kpi-grid {
   display: grid;
@@ -646,18 +647,18 @@ small {
 }
 .kpi {
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   padding: 22px;
   background: var(--surface);
 }
 .kpi span {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   margin-bottom: 14px;
 }
 .kpi strong {
-  font-size: clamp(22px, 2vw, 30px);
+  font-size: clamp(28px, 2.2vw, 34px);
   font-variant-numeric: tabular-nums;
   overflow-wrap: anywhere;
   font-weight: 600;
@@ -686,13 +687,13 @@ small {
   grid-template-columns: 130px 1fr 48px;
   gap: 14px;
   align-items: center;
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 20px;
 }
 .bar-track {
   height: 7px;
   background: var(--surface-2);
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   overflow: hidden;
 }
 .bar-track > span {
@@ -700,19 +701,19 @@ small {
   max-width: 100%;
   height: 100%;
   background: var(--accent);
-  border-radius: 7px;
+  border-radius: var(--radius-control);
 }
 .table-wrap {
   overflow: auto;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
 }
 table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: 14px;
 }
 th {
   color: var(--muted);
@@ -731,7 +732,7 @@ tbody tr:hover {
   background: #f7f7f5;
 }
 td button {
-  font-size: 12px;
+  font-size: 14px;
   padding: 6px 12px;
   min-height: 32px;
 }
@@ -739,9 +740,9 @@ td button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   padding: 5px 10px;
-  font-size: 11px;
+  font-size: 14px;
   white-space: nowrap;
   background: #efefed;
   color: #525654;
@@ -790,7 +791,7 @@ td button {
 .staff-column {
   background: #fafaf8;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   padding: 16px;
   min-height: 440px;
 }
@@ -844,7 +845,7 @@ td button {
   border-color: #d4c9e3;
 }
 .appointment-time {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
 }
 .appointment-name {
@@ -852,7 +853,7 @@ td button {
   font-size: 15px;
 }
 .appointment-services {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   white-space: normal;
 }
@@ -871,9 +872,9 @@ td button {
   overflow: auto;
 }
 .slot-grid button {
-  font-size: 13px;
+  font-size: 14px;
   padding: 9px;
-  border-radius: 10px;
+  border-radius: var(--radius-control);
 }
 .slot-grid button.selected {
   background: var(--accent);
@@ -883,7 +884,7 @@ td button {
 .slot-grid small {
   display: block;
   color: inherit;
-  font-size: 10px;
+  font-size: 14px;
   margin-top: 3px;
 }
 .service-options {
@@ -897,7 +898,7 @@ td button {
   border-radius: 12px;
 }
 .service-option span {
-  font-size: 13px;
+  font-size: 14px;
 }
 .service-option small {
   display: block;
@@ -925,7 +926,7 @@ td button {
 .queue-card {
   padding: 20px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -951,8 +952,8 @@ td button {
 .team-state span {
   padding: 8px 12px;
   background: var(--surface-2);
-  border-radius: 7px;
-  font-size: 12px;
+  border-radius: var(--radius-control);
+  font-size: 14px;
 }
 .team-state span.available {
   background: #eaf5ee;
@@ -976,7 +977,7 @@ td button {
 .record-card {
   padding: 20px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--surface);
   display: flex;
   flex-direction: column;
@@ -987,7 +988,7 @@ td button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .record-card dt {
   color: var(--muted);
@@ -1037,11 +1038,11 @@ td button {
   flex-wrap: wrap;
 }
 .booking-steps span {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   padding: 8px 12px;
   background: var(--surface-2);
-  border-radius: 7px;
+  border-radius: var(--radius-control);
 }
 .booking-steps span.current {
   background: var(--accent);
@@ -1063,7 +1064,7 @@ td button {
 .setup-steps a {
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   padding: 20px;
 }
 .setup-steps strong {
@@ -1071,7 +1072,7 @@ td button {
   margin: 12px 0;
 }
 .realtime-state {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--muted);
 }
 @media (max-width: 1100px) {
@@ -1127,7 +1128,7 @@ td button {
   }
   .page-heading > .primary {
     padding: 10px 14px;
-    font-size: 12px;
+    font-size: 14px;
   }
   .toolbar {
     gap: 8px;
@@ -1140,7 +1141,7 @@ td button {
     min-width: 120px;
   }
   .global-search input {
-    font-size: 12px;
+    font-size: 14px;
     width: 100%;
     padding-right: 0;
   }
@@ -1153,7 +1154,7 @@ td button {
   .branch-switch select {
     max-width: 150px;
     padding: 10px 7px;
-    font-size: 11px;
+    font-size: 14px;
   }
   .topbar > .icon-button {
     width: 36px;
@@ -1247,7 +1248,7 @@ button.primary,
 .nav-group-label {
   display: block;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   padding: 8px 12px;
 }
 .sidebar nav a.active,
@@ -1285,7 +1286,7 @@ button.primary,
   width: 32px;
   height: 32px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--surface);
   font-weight: 600;
 }
@@ -1293,7 +1294,7 @@ button.primary,
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 14px;
   white-space: nowrap;
 }
 .workspace-context > span {
@@ -1309,7 +1310,7 @@ button.primary,
 .global-search label {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 7px;
+  border-radius: var(--radius-control);
   padding-left: 10px;
 }
 .branch-name {
@@ -1379,7 +1380,7 @@ summary {
   outline: 2px solid var(--accent);
 }
 th {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   background: var(--bg);
 }
@@ -1417,7 +1418,7 @@ td button {
 }
 .chart-heading p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 5px;
 }
 .chart-frame {
@@ -1435,7 +1436,7 @@ td button {
 }
 .chart-data summary {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .day-control {
   display: flex;
@@ -1454,12 +1455,12 @@ td button {
   align-items: center;
   gap: 6px;
   min-height: 44px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--accent);
 }
 .availability-day {
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   background: var(--surface);
   padding: 20px;
 }
@@ -1500,12 +1501,12 @@ td button {
 .availability-hours {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
 }
 .result-note {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 12px;
 }
 .time-calendar {
@@ -1513,7 +1514,7 @@ td button {
   max-height: 660px;
   overflow: auto;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   background: var(--surface);
 }
 .time-calendar-grid {
@@ -1536,7 +1537,7 @@ td button {
 .time-axis-head {
   left: 0;
   z-index: 4;
-  font-size: 12px;
+  font-size: 14px;
   padding: 16px 8px;
 }
 .time-axis {
@@ -1549,7 +1550,7 @@ td button {
 .time-axis > span {
   position: absolute;
   left: 8px;
-  font-size: 11px;
+  font-size: 14px;
   padding-top: 8px;
   color: var(--muted);
 }
@@ -1576,7 +1577,7 @@ td button {
   overflow: hidden;
 }
 .calendar-event .appointment-name {
-  font-size: 13px;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1584,7 +1585,7 @@ td button {
 }
 .calendar-event .appointment-time,
 .calendar-status {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.3;
 }
 @media (max-width: 1100px) {
@@ -1648,7 +1649,7 @@ td button {
   }
   .branch-name {
     display: block;
-    font-size: 12px;
+    font-size: 14px;
   }
   .topbar > .icon-button {
     display: none;
@@ -1672,7 +1673,7 @@ td button {
     gap: 4px;
     min-height: 56px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 14px;
     border: 0;
     padding: 5px;
     background: transparent;

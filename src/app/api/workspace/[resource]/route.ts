@@ -2,6 +2,7 @@ import { z } from "zod";
 import { requireUser } from "@/lib/auth";
 import { fail, response, readJson, HttpError, correlationId } from "@/lib/http";
 import { uuid, date, slug, customerInput, statuses } from "@/lib/validation";
+import { setupStatus } from "@/services/setup-status";
 export const dynamic = "force-dynamic";
 const nullableId = uuid.nullable();
 const common = { org: uuid, branch: nullableId };
@@ -328,6 +329,9 @@ export async function GET(
     const org = uuid.parse(q.get("org"));
     const branch = q.get("branch") ? uuid.parse(q.get("branch")) : null;
     const staff = q.get("staff") ? uuid.parse(q.get("staff")) : null;
+    if (resource === "setup") {
+      return response(await setupStatus(org, branch, date.parse(q.get("date"))), requestId);
+    }
     if (resource === "calendar_blocks") {
       if (!branch) throw new HttpError(400, "branch_required");
       const startDay = date.parse(q.get("start_day")),

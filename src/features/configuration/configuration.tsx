@@ -1,9 +1,10 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { useWorkspace } from "@/features/organizations/context";
 import { RecordManager } from "./record-manager";
 import { definitions } from "./definitions";
 import { DailyAvailability } from "./daily-availability";
+import { LaunchGuide } from "@/features/organizations/launch-guide";
 import { useResource, resourceUrl, api } from "@/lib/client";
 import { Field, Notice, Loading } from "@/components/ui";
 import { roleLabels } from "@/lib/validation";
@@ -49,6 +50,7 @@ export function Configuration({
               "staff_time_off",
             ],
     configuracion: [
+      "setup",
       "organization_settings",
       "memberships",
       "branding",
@@ -63,6 +65,7 @@ export function Configuration({
       : null,
   );
   const labels: Record<string, string> = {
+    setup: "Puesta en marcha",
     daily_availability: "Turnos del día",
     memberships: "Usuarios y permisos",
     branding: "Identidad del negocio",
@@ -97,7 +100,9 @@ export function Configuration({
           </button>
         ))}
       </div>
-      {tab === "daily_availability" ? (
+      {tab === "setup" ? (
+        <LaunchGuide expanded />
+      ) : tab === "daily_availability" ? (
         <DailyAvailability
           key={w.branchId}
           readOnly={
@@ -195,8 +200,8 @@ function Memberships() {
             Acceso activo
           </label>
           {error && <Notice error>{error}</Notice>}
-          {message && <Notice>{message}</Notice>}
-          <button className="primary" disabled={busy}>
+          {message && <Notice success>{message}</Notice>}
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             {busy ? "Guardando…" : "Guardar acceso"}
           </button>
         </form>
@@ -325,7 +330,7 @@ function Branding() {
         </a>
       </p>
       {error && <Notice error>{error}</Notice>}
-      <button className="primary" disabled={busy}>
+      <button aria-busy={!!busy} className="primary" disabled={busy}>
         Guardar configuración
       </button>
     </form>

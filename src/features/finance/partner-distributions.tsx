@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
@@ -184,7 +184,7 @@ export function PartnerDistributions({
           <button onClick={() => open("configure")}>Confirmar reglas</button>
         )}
       </div>
-      {message && <Notice>{message}</Notice>}
+      {message && <Notice success>{message}</Notice>}
       {r.error && <Notice error>{r.error}</Notice>}
       {!r.data?.policy?.enabled && (
         <Notice>
@@ -556,13 +556,14 @@ export function PartnerDistributions({
             {error && <Notice error>{error}</Notice>}
             <div className="form-actions">
               <button
+                aria-busy={!!busy}
                 type="button"
                 disabled={busy}
                 onClick={() => setForm(null)}
               >
                 Cancelar
               </button>
-              <button className="primary" disabled={busy}>
+              <button aria-busy={!!busy} className="primary" disabled={busy}>
                 {busy ? "Guardando…" : titles[form.action]}
               </button>
             </div>

@@ -1,16 +1,19 @@
-/* global window, PerformanceObserver */
+/* global window, PerformanceObserver, performance */
 // Measures only a real, isolated Supabase fixture. No response bodies/secrets saved.
 import { chromium, expect } from "@playwright/test";
 import { readFile, writeFile, mkdir, readdir, stat } from "node:fs/promises";
 import { createHmac } from "node:crypto";
 import { execFileSync } from "node:child_process";
+import os from "node:os";
 const base = process.env.QA_BASE_URL ?? "http://localhost:3000";
 if (
   process.env.E2E_REAL_SUPABASE !== "1" ||
   !["localhost", "127.0.0.1"].includes(new URL(base).hostname)
 )
   throw Error("HTTP benchmark requires isolated localhost Auth");
-const phase = process.env.QA_PHASE === "before" ? "before" : "after";
+const phase = ["before", "profiling"].includes(process.env.QA_PHASE)
+  ? process.env.QA_PHASE
+  : "after";
 const fixture = JSON.parse(
   await readFile(".test-data/e2e/ux-fixtures.json", "utf8"),
 );
@@ -38,16 +41,16 @@ function totp(secret) {
     .toString()
     .padStart(6, "0");
 }
-const percentile = (items, p) =>
-  items.length
+const percentile = (items, p) => {
+  const sorted = [...items].sort((a, b) => a - b);
+  return sorted.length
     ? Number(
-        [...items]
-          .sort((a, b) => a - b)
-          [Math.min(items.length - 1, Math.ceil(items.length * p) - 1)].toFixed(
-            2,
-          ),
+        sorted[
+          Math.min(sorted.length - 1, Math.ceil(sorted.length * p) - 1)
+        ].toFixed(2),
       )
     : null;
+};
 try {
   const signIn = await context.request.post(base + "/api/auth/signin", {
     headers: { Origin: base },
@@ -168,7 +171,12 @@ try {
           (s, n) => s + Math.max(0, n - 1),
           0,
         ),
-        requests: timings.map(({ key, ...r }) => r),
+        requests: timings.map((r) => ({
+          endpoint: r.endpoint,
+          status: r.status,
+          ttfb_ms: r.ttfb_ms,
+          duration_ms: r.duration_ms,
+        })),
         browser: browserMetrics,
       });
       page.off("request", onRequest);
@@ -227,10 +235,18 @@ try {
     phase,
     sha: execFileSync("git", ["rev-parse", "HEAD"], {
       encoding: "utf8",
+      cwd: process.env.QA_SOURCE_DIR,
     }).trim(),
     fixture: "real Supabase Auth localhost, synthetic QA tenant",
-    environment: { platform: process.platform, node: process.version },
-    js_build_bytes: await size(".next/static/chunks"),
+    environment: {
+      platform: process.platform,
+      node: process.version,
+      cpu: os.cpus()[0].model,
+      logical_cpus: os.cpus().length,
+    },
+    chunk_build_bytes: await size(
+      `${process.env.QA_BUILD_DIR ?? ".next"}/static/chunks`,
+    ),
     modules,
     samples,
     limits:

@@ -1,28 +1,39 @@
-/* Canonical tokens: DESIGN.md. Light theme, no parallel dark interface. */
+/* Canonical tokens: DESIGN.md. */
 :root {
-  --color-primary: #3e4095;
-  --color-on-primary: #ffffff;
-  --color-canvas: #fafaf9;
+  --color-primary: #d7b56d;
+  --color-on-primary: #171715;
+  --color-canvas: #f8f6f0;
   --color-surface: #ffffff;
-  --color-subtle: #f5f5f8;
-  --color-foreground: #292a35;
-  --color-muted: #626573;
-  --color-border: #e6e6ec;
-  --color-input: #898b98;
-  --color-link: #3e4095;
+  --color-subtle: #f1eee6;
+  --color-foreground: #171715;
+  --color-muted: #67645e;
+  --color-border: #e8e3d9;
+  --color-input: #827a6c;
+  --color-link: #865d16;
+  --color-sidebar: #121313;
+  --color-on-sidebar: #f8f6f0;
+  --color-sidebar-muted: #bdb9ae;
+  --color-selected: #30291c;
   --color-success: #246b44;
   --color-warning: #80591c;
   --color-danger: #9b332e;
-  --color-chart-primary: #5154a0;
-  --color-chart-secondary: #54847e;
-  --color-chart-tertiary: #a67c36;
-  --color-chart-quaternary: #85758b;
-  --color-chart-result: #292a35;
-  --radius-control: 7px;
-  --radius-panel: 8px;
+  --color-info: #285c7e;
+  --color-disabled: #ece8df;
+  --color-chart-primary: #865d16;
+  --color-chart-secondary: #32746a;
+  --color-chart-tertiary: #9b6248;
+  --color-chart-quaternary: #706084;
+  --color-chart-result: #171715;
+  --radius-control: 10px;
+  --radius-panel: 14px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
+  --motion-press: 110ms;
+  --motion-hover: 160ms;
+  --motion-state: 180ms;
+  --motion-overlay: 220ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }

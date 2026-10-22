@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./workspace.css";
+import "./motion.css";
 export const metadata: Metadata = {
   title: "Barbería OS",
   description: "Agenda, clientes y operación de tu barbería.",

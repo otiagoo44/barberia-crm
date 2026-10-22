@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
@@ -495,7 +495,7 @@ function RecordEditor({
           <button type="button" onClick={onClose}>
             Cancelar
           </button>
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             {busy ? "Guardando…" : "Guardar"}
           </button>
         </div>

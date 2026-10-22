@@ -10,6 +10,7 @@ import { HttpError } from "@/lib/http";
 import { Cash } from "@/features/finance/cash";
 import { FinancialDashboard } from "@/features/finance/dashboard";
 import { hasCapability } from "@/lib/capabilities";
+import { ReceptionHome } from "@/features/analytics/operation-home";
 export const dynamic = "force-dynamic";
 export default async function Module({
   params,
@@ -53,14 +54,7 @@ export default async function Module({
   switch (p.module) {
     case "inicio":
       if (role === "finance") return <FinancialDashboard />;
-      return role === "receptionist" ? (
-        <>
-          <Agenda compact />
-          <div style={{ marginTop: 32 }}>
-            <WalkIns />
-          </div>
-        </>
-      ) : role === "barber" ? (
+      return role === "receptionist" ? <ReceptionHome /> : role === "barber" ? (
         <>
           <Agenda compact />
           <div style={{ marginTop: 32 }}>

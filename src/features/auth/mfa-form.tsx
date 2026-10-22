@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { ShieldCheck, KeyRound } from "lucide-react";
@@ -122,7 +122,7 @@ export function MfaForm({
             </select>
           </Field>
           <CodeField />
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             Verificar y continuar
           </button>
         </form>
@@ -159,7 +159,7 @@ export function MfaForm({
               placeholder="Mi teléfono"
             />
           </Field>
-          <button disabled={busy || failed}>
+          <button aria-busy={!!busy} disabled={busy || failed}>
             <KeyRound size={16} aria-hidden="true" /> Configurar dispositivo
           </button>
         </form>
@@ -192,10 +192,11 @@ export function MfaForm({
             Guardá esta clave en un lugar privado. No la compartas por chat.
           </p>
           <CodeField />
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             Confirmar autenticador
           </button>
           <button
+            aria-busy={!!busy}
             type="button"
             disabled={busy}
             onClick={async () => {
@@ -220,6 +221,7 @@ export function MfaForm({
           <div key={f.id} className="row between wrap">
             <span>{f.name}</span>
             <button
+              aria-busy={!!busy}
               disabled={busy || verified.length < 2}
               onClick={() => {
                 setError("");
@@ -245,6 +247,7 @@ export function MfaForm({
       </details>
       {level === "aal2" && (
         <button
+          aria-busy={!!busy}
           disabled={busy}
           onClick={() => {
             setError("");

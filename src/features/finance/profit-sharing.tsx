@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, type FormEvent } from "react";
 import { useWorkspace } from "@/features/organizations/context";
 import { Field, Notice } from "@/components/ui";
@@ -146,7 +146,7 @@ export function RemunerationSettings({
         comisión por cada servicio.
       </p>
       {error && <Notice error>{error}</Notice>}
-      <button className="primary" disabled={busy}>
+      <button aria-busy={!!busy} className="primary" disabled={busy}>
         {busy ? "Guardando…" : "Guardar modalidad"}
       </button>
     </form>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useEffect, type FormEvent } from "react";
 import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
@@ -358,6 +358,7 @@ export function BookingForm({
             Cancelar
           </button>
           <button
+            aria-busy={!!busy}
             className="primary"
             disabled={busy || (!customer && !newCustomer)}
           >

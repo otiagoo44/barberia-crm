@@ -1,0 +1,171 @@
+import { test, expect } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+import AxeBuilder from "@axe-core/playwright";
+import { verifyRequest } from "./mfa-helper";
+
+test.describe("Definitive workspace with real scoped Auth", () => {
+  test.skip(
+    process.env.E2E_REAL_SUPABASE !== "1",
+    "Requires real isolated Supabase Auth; no cloud fixtures",
+  );
+  test.beforeEach(async ({ page }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const signIn = await page.request.post("/api/auth/signin", {
+      headers: { Origin: "http://localhost:3000" },
+      data: { email: "ownerA@fixture.invalid", password: f.password },
+    });
+    expect(signIn.ok()).toBeTruthy();
+    await verifyRequest(page.request, "ownerA");
+  });
+
+  test("setup is live, owner scoped, branch scoped and never activates booking", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const query = new URLSearchParams({
+      org: f.orgA,
+      branch: f.branches.a1,
+      date: new Date().toISOString().slice(0, 10),
+    });
+    const result = await page.request.get(`/api/workspace/setup?${query}`);
+    expect(result.ok()).toBeTruthy();
+    const status = await result.json();
+    expect(status.checks).toHaveLength(9);
+    expect(
+      status.checks.find((c: { key: string }) => c.key === "security").detail,
+    ).toContain("backups y alertas");
+    expect(JSON.stringify(status)).not.toContain(f.users.ownerA);
+    query.set("branch", f.branches.b1);
+    expect(
+      (await page.request.get(`/api/workspace/setup?${query}`)).status(),
+    ).toBe(404);
+    query.set("org", f.orgB);
+    expect(
+      (await page.request.get(`/api/workspace/setup?${query}`)).status(),
+    ).toBe(403);
+    await page.goto("/fixture-a/configuracion");
+    await expect(
+      page.getByText("Comprobado", { exact: true }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/Este diagnóstico no habilita reservas/),
+    ).toBeVisible();
+    await page.request.post("/api/auth/signin", {
+      headers: { Origin: "http://localhost:3000" },
+      data: { email: "receptionA@fixture.invalid", password: f.password },
+    });
+    query.set("org", f.orgA);
+    query.set("branch", f.branches.a1);
+    expect(
+      (await page.request.get(`/api/workspace/setup?${query}`)).status(),
+    ).toBe(403);
+  });
+
+  test("financial filters hide obsolete totals while loading, transport errors expose no previous totals", async ({
+    page,
+  }) => {
+    await page.goto("/fixture-a/finanzas");
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
+    await expect(page.locator(".kpi-grid").first()).toBeVisible();
+    let release: () => void = () => {};
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let requested = false;
+    await page.route("**/api/finance/summary?**", async (route) => {
+      requested = true;
+      await gate;
+      await route.continue();
+    });
+    await page.getByLabel("Período", { exact: true }).selectOption("month");
+    await expect.poll(() => requested).toBeTruthy();
+    await expect(page.locator(".loading:visible")).toHaveCount(1);
+    await expect(page.locator(".kpi-grid")).toHaveCount(0);
+    release();
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
+    await expect(page.locator(".kpi-grid").first()).toBeVisible();
+    await page.unroute("**/api/finance/summary?**");
+    await page.route("**/api/finance/summary?**", (route) =>
+      route.abort("failed"),
+    );
+    await page.getByLabel("Período", { exact: true }).selectOption("7");
+    await expect(page.getByRole("alert")).toBeVisible();
+    await expect(page.locator(".kpi-grid")).toHaveCount(0);
+    await page.unroute("**/api/finance/summary?**");
+    await page.getByLabel("Período", { exact: true }).selectOption("today");
+    await expect(page.locator(".kpi-grid").first()).toBeVisible();
+    await expect(page.getByRole("alert")).toHaveCount(0);
+  });
+
+  test("motion, 200 percent layout, keyboard, contrast and readable controls across target widths", async ({
+    page,
+  }) => {
+    await page.goto("/fixture-a/clientes");
+    await expect(page.locator(".loading:visible")).toHaveCount(0);
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    const primary = page.getByRole("button", {
+      name: "+ Nuevo cliente",
+      exact: true,
+    });
+    await expect(primary).toBeVisible();
+    expect(
+      await primary.evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
+    ).toBeGreaterThanOrEqual(15);
+    await primary.focus();
+    await expect(primary).toBeFocused();
+    expect(
+      await primary.evaluate((el) => getComputedStyle(el).outlineStyle),
+    ).not.toBe("none");
+    await primary.hover();
+    await page.mouse.down();
+    await expect
+      .poll(() => primary.evaluate((el) => getComputedStyle(el).transform))
+      .not.toBe("none");
+    await page.mouse.up();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(primary).toBeFocused();
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    for (const width of [360, 390, 768, 1024, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBeTruthy();
+      await primary.click();
+      expect(
+        await dialog.evaluate((el) => getComputedStyle(el).animationName),
+      ).toBe("none");
+      await page.keyboard.press("Escape");
+    }
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.evaluate(() => {
+      document.documentElement.style.zoom = "2";
+    });
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBeTruthy();
+    await primary.click();
+    await expect(dialog).toBeVisible();
+    await page.screenshot({
+      path: "test-results/clients-css-zoom-200.png",
+      fullPage: true,
+    });
+    await page.keyboard.press("Escape");
+    await page.evaluate(() => {
+      document.documentElement.style.zoom = "";
+    });
+    const axe = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"])
+      .analyze();
+    expect(axe.violations).toEqual([]);
+  });
+});
