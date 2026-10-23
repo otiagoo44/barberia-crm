@@ -59,3 +59,11 @@ Smoke público: health 200, ready 200 `ready:true`, worker sin secreto 403. Cata
 8. Completar piloto real de ambos y registrar evidencia. Habilitar booking solo al cerrar todos sus controles. No hacer la prueba destructiva con datos reales.
 
 GitHub fue reconsultado: ruleset `main-quality-and-pr` **25439970 activo**, sin bypass, PR requerido y checks estrictos `quality`/`supabase-e2e`; sin aprobaciones mínimas, hilos resueltos requeridos. Git permite push de la rama (dry-run aprobado). Se publicará el candidato y se verificará la CI de su SHA; no usar force push ni alterar el ruleset. Ningún bloqueo externo se considera resuelto por la existencia de este documento.
+
+## PR y control de publicación
+
+[PR #6](https://github.com/otiagoo44/barberia-crm/pull/6), abierto contra main. Commit de implementación `35fff7c937da4a336eaedd1559698f0eff891d81`; los commits posteriores cierran documentación/evidencia. SHA final: consultar HEAD de esta rama y los [checks del PR](https://github.com/otiagoo44/barberia-crm/pull/6/checks).
+
+El conector GitHub pudo leer, pero rechazó crear PR con 403 `Resource not accessible by integration`. El canal de Computer Use no estaba disponible. La API estándar creó el PR con la autenticación del proveedor normal de Git que ya había autorizado el push al mismo repositorio; ninguna credencial se imprimió, guardó en un archivo o extrajo de bases de otra aplicación. No se modificaron permisos ni protecciones.
+
+El PR abierto no equivale a merge. Exigir CI del HEAD final, sin errores ni omisiones de Auth, y compatibilidad del runtime actual. Las migraciones/configuración privada cloud y la activación comercial siguen los controles independientes anteriores. El estado remoto definitivo debe consultarse en el PR; no inferirlo de un commit de documentación previo a la finalización de CI.
