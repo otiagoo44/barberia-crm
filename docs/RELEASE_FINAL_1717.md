@@ -47,6 +47,8 @@ Vercel: proyecto `prj_5T3VMAuA8qXr3G6zzDSc94pHMpCQ`, equipo `team_fHImRjkE8m0Nyo
 
 Smoke público: health 200, ready 200 `ready:true`, worker sin secreto 403. Catalog 200 JSON con `branches:[]`; availability Luque 404; book 200 HTML. No POST productivo. No se afirma que el nuevo release esté desplegado. El helper autenticado Vercel devuelve 403 sobre aliases; no se cambian protecciones.
 
+Estos GET no registran operaciones comerciales ni configuración; el gateway puede actualizar sus contadores internos de rate limit. El cero de mantenimiento cloud significa que no se ejecutó DDL/SQL de configuración ni mutaciones comerciales, no que una solicitud HTTP omita toda telemetría interna.
+
 ## Instalador: controles restantes
 
 1. Recuperar acceso efectivo al proyecto Supabase exacto (MCP reiniciado y credenciales autorizadas); ejecutar `scripts/inspect-1717.sql` read-only. Registrar UUID de org/Luque/Esteban/Jonatan, 37 versiones esperadas al finalizar y estado real de servicios/reglas/excepciones/flags/cuentas. No copiar datos privados a artifacts públicos.
