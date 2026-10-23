@@ -138,7 +138,7 @@ Logo y color configurables permanecen. brandStyle calcula contraste de botón, e
 
 DM Sans Variable autoalojada, cuerpo 16px, controles 15–16px, tablas 15px y etiquetas 14px. Títulos 28–32px, secciones 22px, cifras 28–36px sin cortar dígitos. Números tabulares para dinero, horarios y métricas. Sin fuentes remotas en producción.
 
-Comparación real con Inter Variable en QA: mismas cadenas españolas, PYG, botones y tablas a 16px en cinco anchos. Registrar capturas y razones en FINAL_UX_AUDIT.md. DM Sans es la elección inicial pendiente de esa comparación; no se elige por continuidad con otra marca. Ambas fuentes OFL; Inter solo para desarrollo/QA.
+Se elige DM Sans después de comparar el listado real de Clientes con Inter Variable en cinco anchos. Ambas resultaron legibles y sin desborde de página. A 16px, la cadena monetaria ocupó 119px con DM Sans y 127px con Inter; el texto español, 347px y 366px. En escritorio DM Sans dejó visible la acción de la última columna en el mismo ancho; Inter requirió más scroll interno. La revisión a escala real en 390/1440 conservó buena lectura de teléfonos, cifras y etiquetas con DM Sans. Es una decisión de QA visual y densidad, no una prueba humana de velocidad de lectura. Evidencia y límites en FINAL_UX_AUDIT.md. Ambas fuentes OFL; Inter solo para desarrollo/QA.
 
 ## Layout
 

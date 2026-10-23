@@ -1,0 +1,3258 @@
+{
+  "phase": "after",
+  "sha": "aec2ea7c8181d748a09136a4370fa1d8454de99e",
+  "fixture": "real Supabase Auth localhost, synthetic QA tenant",
+  "environment": {
+    "platform": "linux",
+    "node": "v24.15.0",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logical_cpus": 4
+  },
+  "chunk_build_bytes": 1419485,
+  "modules": [
+    {
+      "module": "inicio",
+      "samples": 5,
+      "ready_p50_ms": 999.84,
+      "ready_p95_ms": 1123.22,
+      "ready_p99_ms": 1123.22,
+      "requests": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 324.47,
+      "api_p95_ms": 384.42,
+      "api_p99_ms": 396.15
+    },
+    {
+      "module": "agenda",
+      "samples": 5,
+      "ready_p50_ms": 993.49,
+      "ready_p95_ms": 1012.33,
+      "ready_p99_ms": 1012.33,
+      "requests": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 320.06,
+      "api_p95_ms": 370.6,
+      "api_p99_ms": 373.08
+    },
+    {
+      "module": "clientes",
+      "samples": 5,
+      "ready_p50_ms": 476.69,
+      "ready_p95_ms": 480.52,
+      "ready_p99_ms": 480.52,
+      "requests": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 154.34,
+      "api_p95_ms": 276.26,
+      "api_p99_ms": 276.26
+    },
+    {
+      "module": "caja",
+      "samples": 5,
+      "ready_p50_ms": 537.05,
+      "ready_p95_ms": 979.02,
+      "ready_p99_ms": 979.02,
+      "requests": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 276.15,
+      "api_p95_ms": 323.5,
+      "api_p99_ms": 323.5
+    },
+    {
+      "module": "finanzas",
+      "samples": 5,
+      "ready_p50_ms": 994.36,
+      "ready_p95_ms": 1054.21,
+      "ready_p99_ms": 1054.21,
+      "requests": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 310.45,
+      "api_p95_ms": 363.42,
+      "api_p99_ms": 363.42
+    },
+    {
+      "module": "equipo",
+      "samples": 5,
+      "ready_p50_ms": 709.84,
+      "ready_p95_ms": 1149.99,
+      "ready_p99_ms": 1149.99,
+      "requests": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 319.43,
+      "api_p95_ms": 360.31,
+      "api_p99_ms": 409.19
+    },
+    {
+      "module": "reportes",
+      "samples": 5,
+      "ready_p50_ms": 979.34,
+      "ready_p95_ms": 982.84,
+      "ready_p99_ms": 982.84,
+      "requests": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 317.62,
+      "api_p95_ms": 448.16,
+      "api_p99_ms": 449.82
+    }
+  ],
+  "samples": [
+    {
+      "module": "inicio",
+      "repeat": 0,
+      "ready_ms": 1123.217775,
+      "refresh_ms": 413.30702900000006,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 323.02,
+          "duration_ms": 324.119
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 354.469,
+          "duration_ms": 356.545
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 383.022,
+          "duration_ms": 384.423
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 329.556,
+          "duration_ms": 331.514
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 140.491,
+          "duration_ms": 141.727
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 117.89999999990687,
+        "domContentLoaded_ms": 230.59999999997672,
+        "transfer_bytes": 419052,
+        "js_transfer_bytes": 348646,
+        "longTasks": [
+          {
+            "duration": 84,
+            "start": 1013.5999999999767
+          }
+        ],
+        "events": [
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 16,
+            "start": 226
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162
+          },
+          {
+            "duration": 24,
+            "start": 1162.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1162.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1162.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1162.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1162.5999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 212
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 1,
+      "ready_ms": 1040.8520319999998,
+      "refresh_ms": 407.065067,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 280.628,
+          "duration_ms": 282.317
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 330.937,
+          "duration_ms": 331.893
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 371.677,
+          "duration_ms": 372.888
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 313.926,
+          "duration_ms": 316.616
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 128.132,
+          "duration_ms": 129.17
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 108.39999999990687,
+        "domContentLoaded_ms": 193.59999999997672,
+        "transfer_bytes": 24710,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 51,
+            "start": 926.5
+          }
+        ],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.5
+          },
+          {
+            "duration": 24,
+            "start": 1079.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1079.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1079.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1079.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1079.6999999999534
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 216
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 2,
+      "ready_ms": 994.4188439999994,
+      "refresh_ms": 401.12929499999973,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 292.257,
+          "duration_ms": 294.197
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 301.029,
+          "duration_ms": 303.996
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 350.706,
+          "duration_ms": 353.606
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 324.8,
+          "duration_ms": 329.63
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 113.3,
+          "duration_ms": 114.3
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 98.40000000002328,
+        "domContentLoaded_ms": 136.59999999997672,
+        "transfer_bytes": 24717,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 60,
+            "start": 849.2000000000698
+          }
+        ],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1031.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1031.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1032.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1032.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1032.0999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 3,
+      "ready_ms": 986.403166,
+      "refresh_ms": 401.59987099999944,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 257.328,
+          "duration_ms": 258.375
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 335.345,
+          "duration_ms": 337.59
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 394.879,
+          "duration_ms": 396.151
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 321.792,
+          "duration_ms": 324.468
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 118.794,
+          "duration_ms": 119.795
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 101.5,
+        "domContentLoaded_ms": 141.70000000006985,
+        "transfer_bytes": 24719,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 54,
+            "start": 883.2000000000698
+          }
+        ],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1026.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1027
+          },
+          {
+            "duration": 16,
+            "start": 1027
+          },
+          {
+            "duration": 16,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1027.0999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 132
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 4,
+      "ready_ms": 999.8411749999996,
+      "refresh_ms": 392.4387740000002,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 296.376,
+          "duration_ms": 299.353
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 341.788,
+          "duration_ms": 343.779
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 356.741,
+          "duration_ms": 358.657
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 337.513,
+          "duration_ms": 340.405
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 128.541,
+          "duration_ms": 129.535
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 101.19999999995343,
+        "domContentLoaded_ms": 143.79999999993015,
+        "transfer_bytes": 24711,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 51,
+            "start": 847.3999999999069
+          }
+        ],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1028.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1028.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1028.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1028.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1028.6999999999534
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 136
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 0,
+      "ready_ms": 987.0829400000002,
+      "refresh_ms": 400.8171570000013,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 330.155,
+          "duration_ms": 331.635
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 320.753,
+          "duration_ms": 322.861
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 331.409,
+          "duration_ms": 337.099
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 371.162,
+          "duration_ms": 373.078
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 343.331,
+          "duration_ms": 344.938
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 122.598,
+          "duration_ms": 123.662
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 124.203,
+          "duration_ms": 125.026
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 99.89999999990687,
+        "domContentLoaded_ms": 137.69999999995343,
+        "transfer_bytes": 23325,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1027.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1027.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1027.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1027.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1027.2999999999302
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 1,
+      "ready_ms": 993.4898450000001,
+      "refresh_ms": 398.03006599999935,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 344.531,
+          "duration_ms": 347.82
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 334.954,
+          "duration_ms": 336.979
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 336.005,
+          "duration_ms": 338.488
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 341.228,
+          "duration_ms": 343.837
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 328.96,
+          "duration_ms": 331.386
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 137.473,
+          "duration_ms": 138.603
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 140.74,
+          "duration_ms": 141.947
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 102.70000000006985,
+        "domContentLoaded_ms": 148.30000000004657,
+        "transfer_bytes": 23329,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1030.5
+          },
+          {
+            "duration": 24,
+            "start": 1030.5
+          },
+          {
+            "duration": 24,
+            "start": 1030.5
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 140
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 2,
+      "ready_ms": 1012.3318039999995,
+      "refresh_ms": 392.4938540000003,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 311.109,
+          "duration_ms": 312.568
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 335.644,
+          "duration_ms": 336.938
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 319.001,
+          "duration_ms": 320.06
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 324.482,
+          "duration_ms": 325.551
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 369,
+          "duration_ms": 370.6
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 123.891,
+          "duration_ms": 124.85
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 120.055,
+          "duration_ms": 123.506
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 104.29999999993015,
+        "domContentLoaded_ms": 143.09999999997672,
+        "transfer_bytes": 23332,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1043.8999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1044.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1044.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1044.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1044.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1044.0999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 136
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 3,
+      "ready_ms": 1002.0229060000001,
+      "refresh_ms": 387.86372200000005,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 295.759,
+          "duration_ms": 297.446
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 270.609,
+          "duration_ms": 272.195
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 358.224,
+          "duration_ms": 361.551
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 366.84,
+          "duration_ms": 369.406
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 332.935,
+          "duration_ms": 334.921
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 134.916,
+          "duration_ms": 136.425
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 136.474,
+          "duration_ms": 137.609
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 112.10000000009313,
+        "domContentLoaded_ms": 160.70000000006985,
+        "transfer_bytes": 23335,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1029.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1029.6000000000931
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 156
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 4,
+      "ready_ms": 982.5268840000008,
+      "refresh_ms": 392.62749799999983,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 315.568,
+          "duration_ms": 316.747
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 280.195,
+          "duration_ms": 281.075
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 312.513,
+          "duration_ms": 313.476
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 308.678,
+          "duration_ms": 310.649
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 319.243,
+          "duration_ms": 320.437
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 143.965,
+          "duration_ms": 145.157
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 143.87,
+          "duration_ms": 144.742
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 103.19999999995343,
+        "domContentLoaded_ms": 144.30000000004657,
+        "transfer_bytes": 23334,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 1012.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1012.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1012.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1012.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1012.8000000000466
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 136
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 0,
+      "ready_ms": 476.68624199999977,
+      "refresh_ms": 407.2965629999999,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 275.175,
+          "duration_ms": 276.263
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 134.139,
+          "duration_ms": 136.33
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 100.5,
+        "domContentLoaded_ms": 137.70000000006985,
+        "transfer_bytes": 17377,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 512.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 512.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 512.9000000000233
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 156
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 1,
+      "ready_ms": 474.0574830000005,
+      "refresh_ms": 405.6648860000023,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 233.492,
+          "duration_ms": 234.656
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 144.32,
+          "duration_ms": 145.987
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 104.20000000006985,
+        "domContentLoaded_ms": 140.30000000004657,
+        "transfer_bytes": 17371,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 512.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 513.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 513.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 513.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 513.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 513.5999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 2,
+      "ready_ms": 480.519733000001,
+      "refresh_ms": 399.8905259999992,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 262.595,
+          "duration_ms": 264.141
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 151.671,
+          "duration_ms": 152.983
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 108.19999999995343,
+        "domContentLoaded_ms": 142.40000000002328,
+        "transfer_bytes": 17365,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519
+          },
+          {
+            "duration": 16,
+            "start": 519.4000000000233
+          },
+          {
+            "duration": 16,
+            "start": 519.4000000000233
+          },
+          {
+            "duration": 16,
+            "start": 519.5
+          },
+          {
+            "duration": 16,
+            "start": 519.5
+          },
+          {
+            "duration": 16,
+            "start": 519.5
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 3,
+      "ready_ms": 465.93016299999726,
+      "refresh_ms": 409.3638380000011,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 256.723,
+          "duration_ms": 257.89
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 150.083,
+          "duration_ms": 154.341
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 101.30000000004657,
+        "domContentLoaded_ms": 137.80000000004657,
+        "transfer_bytes": 17373,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 508.69999999995343
+          },
+          {
+            "duration": 24,
+            "start": 509.30000000004657
+          },
+          {
+            "duration": 24,
+            "start": 509.30000000004657
+          },
+          {
+            "duration": 24,
+            "start": 509.30000000004657
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 128
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 4,
+      "ready_ms": 479.79972199999975,
+      "refresh_ms": 411.5894870000011,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 244.99,
+          "duration_ms": 246.262
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 122.076,
+          "duration_ms": 125.299
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 110.90000000002328,
+        "domContentLoaded_ms": 145.20000000006985,
+        "transfer_bytes": 17370,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.5
+          },
+          {
+            "duration": 24,
+            "start": 536.5
+          },
+          {
+            "duration": 24,
+            "start": 536.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 536.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 536.9000000000233
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 0,
+      "ready_ms": 979.0225659999996,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 321.107,
+          "duration_ms": 323.501
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 100.5,
+        "domContentLoaded_ms": 135.5,
+        "transfer_bytes": 15742,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 152
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 1,
+      "ready_ms": 480.0035160000007,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 255.624,
+          "duration_ms": 257.43
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 97.90000000002328,
+        "domContentLoaded_ms": 143.80000000004657,
+        "transfer_bytes": 10120,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 2,
+      "ready_ms": 537.0519910000003,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 274.861,
+          "duration_ms": 276.152
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 162.5,
+        "domContentLoaded_ms": 196.20000000006985,
+        "transfer_bytes": 10123,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 212
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 3,
+      "ready_ms": 530.7903269999988,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 252.333,
+          "duration_ms": 253.298
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 151.40000000002328,
+        "domContentLoaded_ms": 185.20000000006985,
+        "transfer_bytes": 10123,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 200
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 4,
+      "ready_ms": 572.9110260000016,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 304.309,
+          "duration_ms": 306.052
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 162.40000000002328,
+        "domContentLoaded_ms": 210.5,
+        "transfer_bytes": 10116,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 232
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 0,
+      "ready_ms": 1054.2099979999984,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 328.301,
+          "duration_ms": 329.735
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 360.885,
+          "duration_ms": 363.422
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 222.54,
+          "duration_ms": 223.953
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 169.90000000002328,
+        "domContentLoaded_ms": 205.90000000002328,
+        "transfer_bytes": 24188,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 94,
+            "start": 635.5999999999767
+          },
+          {
+            "duration": 55,
+            "start": 843.9000000000233
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 224
+          },
+          {
+            "duration": 0,
+            "start": 620
+          },
+          {
+            "duration": 0,
+            "start": 852
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 1,
+      "ready_ms": 977.2106720000011,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 325.627,
+          "duration_ms": 326.712
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 316.255,
+          "duration_ms": 318.326
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 164.199,
+          "duration_ms": 165.621
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 110.29999999993015,
+        "domContentLoaded_ms": 152,
+        "transfer_bytes": 24189,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 76,
+            "start": 707.5
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 144
+          },
+          {
+            "duration": 0,
+            "start": 548
+          },
+          {
+            "duration": 0,
+            "start": 716
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 2,
+      "ready_ms": 994.3553079999983,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 329.083,
+          "duration_ms": 331.558
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 299.249,
+          "duration_ms": 300.716
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 162.46,
+          "duration_ms": 165.403
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 101.59999999997672,
+        "domContentLoaded_ms": 142.5,
+        "transfer_bytes": 24186,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 59,
+            "start": 708.7000000000698
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          },
+          {
+            "duration": 0,
+            "start": 556
+          },
+          {
+            "duration": 0,
+            "start": 716
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 3,
+      "ready_ms": 992.2566989999978,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 308.919,
+          "duration_ms": 310.451
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 319.478,
+          "duration_ms": 320.422
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 216.334,
+          "duration_ms": 217.994
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 97.19999999995343,
+        "domContentLoaded_ms": 139.79999999993015,
+        "transfer_bytes": 24195,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 115,
+            "start": 541.2999999999302
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          },
+          {
+            "duration": 0,
+            "start": 524
+          },
+          {
+            "duration": 0,
+            "start": 752
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 4,
+      "ready_ms": 1031.896722999998,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 296.742,
+          "duration_ms": 298.604
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 342.48,
+          "duration_ms": 343.507
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 243.884,
+          "duration_ms": 248.501
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 103.69999999995343,
+        "domContentLoaded_ms": 147.19999999995343,
+        "transfer_bytes": 24184,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 117,
+            "start": 555.5999999999767
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 176
+          },
+          {
+            "duration": 0,
+            "start": 540
+          },
+          {
+            "duration": 0,
+            "start": 780
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 0,
+      "ready_ms": 588.3921819999996,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 285.707,
+          "duration_ms": 287.598
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 330.29,
+          "duration_ms": 332.047
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 317.679,
+          "duration_ms": 319.428
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 278.659,
+          "duration_ms": 280.669
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 104.70000000006985,
+        "domContentLoaded_ms": 146.5,
+        "transfer_bytes": 11771,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 172
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 1,
+      "ready_ms": 709.8398640000014,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 327.444,
+          "duration_ms": 329.122
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 296.379,
+          "duration_ms": 297.757
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 343.665,
+          "duration_ms": 345.132
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 288.122,
+          "duration_ms": 289.687
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 216.60000000009313,
+        "domContentLoaded_ms": 256.60000000009313,
+        "transfer_bytes": 15216,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 248
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 2,
+      "ready_ms": 685.825082000003,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 311.532,
+          "duration_ms": 312.979
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 300.426,
+          "duration_ms": 301.268
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 322.276,
+          "duration_ms": 323.352
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 295.509,
+          "duration_ms": 297.052
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 180.70000000006985,
+        "domContentLoaded_ms": 220.40000000002328,
+        "transfer_bytes": 11772,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 244
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 3,
+      "ready_ms": 1149.9896770000014,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 340.484,
+          "duration_ms": 341.923
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 359.25,
+          "duration_ms": 360.313
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 353.663,
+          "duration_ms": 356.124
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 406.667,
+          "duration_ms": 409.195
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 199.29999999993015,
+        "domContentLoaded_ms": 237.19999999995343,
+        "transfer_bytes": 20838,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 264
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 4,
+      "ready_ms": 983.8955320000023,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 291.971,
+          "duration_ms": 293.632
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 356.949,
+          "duration_ms": 358.17
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 335.54,
+          "duration_ms": 338.237
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 308.011,
+          "duration_ms": 310.42
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 98.39999999990687,
+        "domContentLoaded_ms": 133.19999999995343,
+        "transfer_bytes": 20839,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 0,
+      "ready_ms": 981.4711440000028,
+      "refresh_ms": 391.60301900000195,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 378.652,
+          "duration_ms": 380.625
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 447.964,
+          "duration_ms": 449.823
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 415.61,
+          "duration_ms": 417.643
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 126.842,
+          "duration_ms": 127.894
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 102,
+        "domContentLoaded_ms": 138.70000000006985,
+        "transfer_bytes": 25915,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1014.4000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.4000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.4000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.4000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.4000000000233
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 1,
+      "ready_ms": 979.3385760000019,
+      "refresh_ms": 396.8626480000021,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 426.352,
+          "duration_ms": 428.018
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 440.277,
+          "duration_ms": 441.383
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 353.633,
+          "duration_ms": 356.685
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 125.259,
+          "duration_ms": 126.341
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 98.29999999993015,
+        "domContentLoaded_ms": 134,
+        "transfer_bytes": 25900,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1015.2999999999302
+          },
+          {
+            "duration": 16,
+            "start": 1015.2999999999302
+          },
+          {
+            "duration": 16,
+            "start": 1015.2999999999302
+          },
+          {
+            "duration": 16,
+            "start": 1015.2999999999302
+          },
+          {
+            "duration": 16,
+            "start": 1015.2999999999302
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 152
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 2,
+      "ready_ms": 978.022278000004,
+      "refresh_ms": 395.6456040000048,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 350.057,
+          "duration_ms": 352.255
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 446.578,
+          "duration_ms": 448.156
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 315.573,
+          "duration_ms": 317.616
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 122.474,
+          "duration_ms": 123.425
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 98.09999999997672,
+        "domContentLoaded_ms": 134.90000000002328,
+        "transfer_bytes": 25909,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013
+          },
+          {
+            "duration": 24,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1013.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1013.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1013.2000000000698
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 152
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 3,
+      "ready_ms": 982.8396980000034,
+      "refresh_ms": 389.67615300000034,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 314.286,
+          "duration_ms": 316.012
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 359.208,
+          "duration_ms": 361.525
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 281.171,
+          "duration_ms": 283.063
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 122.782,
+          "duration_ms": 123.836
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 96.69999999995343,
+        "domContentLoaded_ms": 134.89999999990687,
+        "transfer_bytes": 25913,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1013.0999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 156
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 4,
+      "ready_ms": 967.9142719999945,
+      "refresh_ms": 401.8795539999992,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 307.543,
+          "duration_ms": 308.966
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 383.391,
+          "duration_ms": 385.174
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 298.494,
+          "duration_ms": 299.807
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 132.395,
+          "duration_ms": 133.428
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 100.09999999997672,
+        "domContentLoaded_ms": 136.20000000006985,
+        "transfer_bytes": 25914,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1014.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1015
+          },
+          {
+            "duration": 16,
+            "start": 1015
+          },
+          {
+            "duration": 16,
+            "start": 1015
+          },
+          {
+            "duration": 16,
+            "start": 1015
+          },
+          {
+            "duration": 16,
+            "start": 1015
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 128
+          }
+        ],
+        "profiles": []
+      }
+    }
+  ],
+  "limits": "Five samples per module: p95/p99 are maxima, exploratory not capacity/SLA. Browser event timings are synthetic, not field INP. No customer response bodies stored. Ordinary production builds do not provide React profile durations."
+}

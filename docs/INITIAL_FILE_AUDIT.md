@@ -925,7 +925,7 @@ Base `b7d5cfd42611d83347b4307e0c53db173d7b967f`. Se recorrieron todos los archiv
 - Responsabilidad: GET/POST y ciclo de carga del frontend.
 - Dependencias: react
 - Riesgos: Compatibilidad y efectos del entorno; verificar antes de ejecución.
-- Defectos comprobados: F03: lecturas independientes sin deduplicación y datos previos visibles durante reload; medir requests antes de elegir caché.
+- Defectos comprobados: F03: datos previos visibles durante reload. Las lecturas independientes sin deduplicación son un riesgo a medir, no un fallo demostrado; el muestreo inicial posterior encontró cero duplicadas y no justificó un caché.
 - Pruebas relacionadas: tests/e2e/ux-release.spec.ts; permissions.spec.ts; capture-product.mjs.
 - Mejora necesaria / conservación: Corregir el hallazgo indicado y volver a verificar.
 

@@ -1,5 +1,7 @@
 # Estado actualizado, 22/10/2026
 
+Revisión de diseño y rendimiento en curso en PR #5: [aceptación del candidato](RELEASE_ACCEPTANCE.md), [auditoría de dos pasadas](FINAL_UX_AUDIT.md). La evidencia y el rollout narrados debajo pertenecen al producto anterior; no certifican el nuevo rediseño ni autorizan su despliegue. Las nuevas migraciones 35/36 permanecen pendientes de rollout controlado.
+
 El usuario autorizó merge/publicación y conexión al proyecto correcto. El rollout técnico aplicó las siete migraciones pendientes a tbcfhagteyqufjkmbxzz: historial 34, 27 originales intactas, sin fixtures ni movimientos comerciales. CI del producto 9d17387 aprobada: 25 E2E, 180 capturas inspeccionadas y 72 auditorías axe sin violaciones. Ver UX_TEST_RESULTS.md y verification/ux/final.
 
 **La habilitación comercial sigue pendiente** de cuentas personales, MFA, SMTP, horarios/catálogo/fees, acuerdos, backup/restore administrado, alertas y piloto. [Guía concreta](PILOTO_ESTEBAN_JONATAN.md). El texto siguiente es historial previo al rollout y no describe el estado actual del esquema.

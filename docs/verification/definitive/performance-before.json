@@ -1,19 +1,21 @@
 {
   "phase": "before",
-  "sha": "99c6a6afd2b270e17fe25dde207e114a925f734d",
+  "sha": "b7d5cfd42611d83347b4307e0c53db173d7b967f",
   "fixture": "real Supabase Auth localhost, synthetic QA tenant",
   "environment": {
     "platform": "linux",
-    "node": "v24.15.0"
+    "node": "v24.15.0",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logical_cpus": 4
   },
-  "js_build_bytes": 1401051,
+  "chunk_build_bytes": 1401051,
   "modules": [
     {
       "module": "inicio",
       "samples": 5,
-      "ready_p50_ms": 1050.09,
-      "ready_p95_ms": 1130.16,
-      "ready_p99_ms": 1130.16,
+      "ready_p50_ms": 1097.95,
+      "ready_p95_ms": 1465.56,
+      "ready_p99_ms": 1465.56,
       "requests": [
         6,
         6,
@@ -28,16 +30,16 @@
         0,
         0
       ],
-      "api_p50_ms": 291.68,
-      "api_p95_ms": 354.46,
-      "api_p99_ms": 374.5
+      "api_p50_ms": 334.07,
+      "api_p95_ms": 454.23,
+      "api_p99_ms": 465.6
     },
     {
       "module": "agenda",
       "samples": 5,
-      "ready_p50_ms": 1024.91,
-      "ready_p95_ms": 1044.99,
-      "ready_p99_ms": 1044.99,
+      "ready_p50_ms": 1066.52,
+      "ready_p95_ms": 1118.55,
+      "ready_p99_ms": 1118.55,
       "requests": [
         5,
         5,
@@ -52,16 +54,16 @@
         0,
         0
       ],
-      "api_p50_ms": 297.03,
-      "api_p95_ms": 352.27,
-      "api_p99_ms": 371.6
+      "api_p50_ms": 313.58,
+      "api_p95_ms": 443.05,
+      "api_p99_ms": 461.55
     },
     {
       "module": "clientes",
       "samples": 5,
-      "ready_p50_ms": 510.76,
-      "ready_p95_ms": 535.02,
-      "ready_p99_ms": 535.02,
+      "ready_p50_ms": 544.05,
+      "ready_p95_ms": 594.03,
+      "ready_p99_ms": 594.03,
       "requests": [
         1,
         1,
@@ -76,16 +78,16 @@
         0,
         0
       ],
-      "api_p50_ms": 147.11,
-      "api_p95_ms": 259.18,
-      "api_p99_ms": 259.18
+      "api_p50_ms": 200.66,
+      "api_p95_ms": 323.3,
+      "api_p99_ms": 323.3
     },
     {
       "module": "caja",
       "samples": 5,
-      "ready_p50_ms": 1005.13,
-      "ready_p95_ms": 1015.48,
-      "ready_p99_ms": 1015.48,
+      "ready_p50_ms": 1036.59,
+      "ready_p95_ms": 1063.31,
+      "ready_p99_ms": 1063.31,
       "requests": [
         2,
         2,
@@ -100,16 +102,16 @@
         0,
         0
       ],
-      "api_p50_ms": 328.83,
-      "api_p95_ms": 412.67,
-      "api_p99_ms": 412.67
+      "api_p50_ms": 322.26,
+      "api_p95_ms": 354.84,
+      "api_p99_ms": 354.84
     },
     {
       "module": "finanzas",
       "samples": 5,
-      "ready_p50_ms": 1026.9,
-      "ready_p95_ms": 1034.19,
-      "ready_p99_ms": 1034.19,
+      "ready_p50_ms": 1053.06,
+      "ready_p95_ms": 1060.99,
+      "ready_p99_ms": 1060.99,
       "requests": [
         4,
         4,
@@ -124,16 +126,16 @@
         0,
         0
       ],
-      "api_p50_ms": 319.23,
-      "api_p95_ms": 361.72,
-      "api_p99_ms": 364.26
+      "api_p50_ms": 348.3,
+      "api_p95_ms": 389.87,
+      "api_p99_ms": 392.1
     },
     {
       "module": "equipo",
       "samples": 5,
-      "ready_p50_ms": 629.21,
-      "ready_p95_ms": 1170.09,
-      "ready_p99_ms": 1170.09,
+      "ready_p50_ms": 1064.65,
+      "ready_p95_ms": 1084.22,
+      "ready_p99_ms": 1084.22,
       "requests": [
         4,
         4,
@@ -148,16 +150,16 @@
         0,
         0
       ],
-      "api_p50_ms": 304.32,
-      "api_p95_ms": 357.5,
-      "api_p99_ms": 371.09
+      "api_p50_ms": 348.45,
+      "api_p95_ms": 455.48,
+      "api_p99_ms": 485.1
     },
     {
       "module": "reportes",
       "samples": 5,
-      "ready_p50_ms": 1027.32,
-      "ready_p95_ms": 1099.05,
-      "ready_p99_ms": 1099.05,
+      "ready_p50_ms": 1037,
+      "ready_p95_ms": 1047.13,
+      "ready_p99_ms": 1047.13,
       "requests": [
         3,
         3,
@@ -172,172 +174,172 @@
         0,
         0
       ],
-      "api_p50_ms": 305.16,
-      "api_p95_ms": 385.83,
-      "api_p99_ms": 404.5
+      "api_p50_ms": 341.77,
+      "api_p95_ms": 439.82,
+      "api_p99_ms": 447.44
     }
   ],
   "samples": [
     {
       "module": "inicio",
       "repeat": 0,
-      "ready_ms": 1130.159034,
-      "refresh_ms": 420.4666950000001,
+      "ready_ms": 1465.5569859999998,
+      "refresh_ms": 427.71092099999987,
       "initial_requests": 6,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 304.671,
-          "duration_ms": 306.587
+          "ttfb_ms": 330.361,
+          "duration_ms": 331.549
         },
         {
           "endpoint": "/api/workspace/organization_settings",
           "status": 200,
-          "ttfb_ms": 276.707,
-          "duration_ms": 278.059
+          "ttfb_ms": 367.682,
+          "duration_ms": 369.635
         },
         {
           "endpoint": "/api/workspace/branch_settings",
           "status": 200,
-          "ttfb_ms": 319.319,
-          "duration_ms": 322.551
+          "ttfb_ms": 375.41,
+          "duration_ms": 376.954
         },
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 309.091,
-          "duration_ms": 310.316
+          "ttfb_ms": 436.136,
+          "duration_ms": 438.624
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 351.335,
-          "duration_ms": 354.464
+          "ttfb_ms": 463.409,
+          "duration_ms": 465.597
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 314.012,
-          "duration_ms": 315.741
+          "ttfb_ms": 387.582,
+          "duration_ms": 389.164
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 126.672,
-          "duration_ms": 127.65
+          "ttfb_ms": 168.485,
+          "duration_ms": 170.671
         }
       ],
       "browser": {
-        "ttfb_ms": 113.59999999997672,
-        "domContentLoaded_ms": 234.70000000001164,
-        "transfer_bytes": 419202,
+        "ttfb_ms": 337.5999999999767,
+        "domContentLoaded_ms": 467,
+        "transfer_bytes": 419224,
         "js_transfer_bytes": 347125,
         "longTasks": [
           {
-            "duration": 127,
-            "start": 993.7999999999884
+            "duration": 117,
+            "start": 1337.2000000000698
           }
         ],
         "events": [
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
             "duration": 32,
-            "start": 188.29999999998836
+            "start": 422.0999999999767
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1173.9000000000233
+            "duration": 40,
+            "start": 1505.4000000000233
           },
           {
-            "duration": 24,
-            "start": 1174.2000000000116
+            "duration": 40,
+            "start": 1505.7000000000698
           },
           {
-            "duration": 24,
-            "start": 1174.2000000000116
+            "duration": 40,
+            "start": 1505.7000000000698
           },
           {
-            "duration": 24,
-            "start": 1174.2999999999884
+            "duration": 40,
+            "start": 1505.7000000000698
           },
           {
-            "duration": 24,
-            "start": 1174.2999999999884
+            "duration": 40,
+            "start": 1505.7000000000698
           },
           {
-            "duration": 24,
-            "start": 1174.2999999999884
+            "duration": 40,
+            "start": 1505.7000000000698
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 208
+            "start": 440
           },
           {
             "duration": 0,
-            "start": 704
+            "start": 1036
           }
         ],
         "profiles": []
@@ -346,139 +348,139 @@
     {
       "module": "inicio",
       "repeat": 1,
-      "ready_ms": 1051.717803,
-      "refresh_ms": 399.704526,
+      "ready_ms": 1097.9548570000002,
+      "refresh_ms": 429.1377779999998,
       "initial_requests": 6,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 279.136,
-          "duration_ms": 281.63
+          "ttfb_ms": 377.562,
+          "duration_ms": 379.637
         },
         {
           "endpoint": "/api/workspace/organization_settings",
           "status": 200,
-          "ttfb_ms": 269.66,
-          "duration_ms": 271.066
+          "ttfb_ms": 301.07,
+          "duration_ms": 303.739
         },
         {
           "endpoint": "/api/workspace/branch_settings",
           "status": 200,
-          "ttfb_ms": 281.015,
-          "duration_ms": 283.199
+          "ttfb_ms": 318.703,
+          "duration_ms": 321.282
         },
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 307.389,
-          "duration_ms": 308.467
+          "ttfb_ms": 368.569,
+          "duration_ms": 370.12
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 319.709,
-          "duration_ms": 321.353
+          "ttfb_ms": 426.966,
+          "duration_ms": 428.339
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 286.943,
-          "duration_ms": 289.196
+          "ttfb_ms": 376.545,
+          "duration_ms": 378.016
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 118.558,
-          "duration_ms": 119.555
+          "ttfb_ms": 188.971,
+          "duration_ms": 190.187
         }
       ],
       "browser": {
-        "ttfb_ms": 109.70000000001164,
-        "domContentLoaded_ms": 185.10000000003492,
-        "transfer_bytes": 27466,
+        "ttfb_ms": 120.80000000004657,
+        "domContentLoaded_ms": 201.30000000004657,
+        "transfer_bytes": 27480,
         "js_transfer_bytes": 0,
         "longTasks": [
           {
-            "duration": 79,
-            "start": 876.2000000000116
+            "duration": 86,
+            "start": 1004.6000000000931
           }
         ],
         "events": [
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144.2000000000698
           },
           {
             "duration": 24,
-            "start": 1076.4000000000233
+            "start": 1144.2000000000698
           },
           {
             "duration": 24,
-            "start": 1076.5
+            "start": 1144.5
           },
           {
             "duration": 24,
-            "start": 1076.5
+            "start": 1144.5
           },
           {
             "duration": 24,
-            "start": 1076.5
+            "start": 1144.5
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 140
+            "start": 160
           },
           {
             "duration": 0,
-            "start": 608
+            "start": 740
           }
         ],
         "profiles": []
@@ -487,139 +489,139 @@
     {
       "module": "inicio",
       "repeat": 2,
-      "ready_ms": 1023.114012,
-      "refresh_ms": 412.4302950000001,
+      "ready_ms": 1107.3573260000003,
+      "refresh_ms": 405.3921700000001,
       "initial_requests": 6,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 267.263,
-          "duration_ms": 268.89
+          "ttfb_ms": 345.032,
+          "duration_ms": 346.92
         },
         {
           "endpoint": "/api/workspace/organization_settings",
           "status": 200,
-          "ttfb_ms": 283.222,
-          "duration_ms": 285.886
+          "ttfb_ms": 328.796,
+          "duration_ms": 332.198
         },
         {
           "endpoint": "/api/workspace/branch_settings",
           "status": 200,
-          "ttfb_ms": 306.949,
-          "duration_ms": 308.547
+          "ttfb_ms": 325.286,
+          "duration_ms": 327.733
         },
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 288.786,
-          "duration_ms": 291.684
+          "ttfb_ms": 383.726,
+          "duration_ms": 385.188
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 372.538,
-          "duration_ms": 374.498
+          "ttfb_ms": 451.979,
+          "duration_ms": 454.225
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 318.294,
-          "duration_ms": 320.333
+          "ttfb_ms": 372.993,
+          "duration_ms": 374.425
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 111.561,
-          "duration_ms": 112.535
+          "ttfb_ms": 146.572,
+          "duration_ms": 147.737
         }
       ],
       "browser": {
-        "ttfb_ms": 97.10000000003492,
-        "domContentLoaded_ms": 153,
-        "transfer_bytes": 27457,
+        "ttfb_ms": 121.40000000002328,
+        "domContentLoaded_ms": 180.90000000002328,
+        "transfer_bytes": 27478,
         "js_transfer_bytes": 0,
         "longTasks": [
           {
-            "duration": 52,
-            "start": 903
+            "duration": 73,
+            "start": 1027.0999999999767
           }
         ],
         "events": [
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.5999999999767
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.6999999999534
           },
           {
             "duration": 24,
-            "start": 1064.4000000000233
+            "start": 1137.6999999999534
           },
           {
             "duration": 24,
-            "start": 1064.5
+            "start": 1137.6999999999534
           },
           {
             "duration": 24,
-            "start": 1064.5
+            "start": 1137.6999999999534
           },
           {
             "duration": 24,
-            "start": 1064.5
+            "start": 1137.6999999999534
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 172
+            "start": 200
           },
           {
             "duration": 0,
-            "start": 632
+            "start": 752
           }
         ],
         "profiles": []
@@ -628,139 +630,139 @@
     {
       "module": "inicio",
       "repeat": 3,
-      "ready_ms": 1018.9580210000004,
-      "refresh_ms": 403.58729100000073,
+      "ready_ms": 1055.6481159999994,
+      "refresh_ms": 411.5160429999996,
       "initial_requests": 6,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 304.233,
-          "duration_ms": 305.854
+          "ttfb_ms": 286.668,
+          "duration_ms": 287.907
         },
         {
           "endpoint": "/api/workspace/organization_settings",
           "status": 200,
-          "ttfb_ms": 286.405,
-          "duration_ms": 287.525
+          "ttfb_ms": 307.486,
+          "duration_ms": 308.585
         },
         {
           "endpoint": "/api/workspace/branch_settings",
           "status": 200,
-          "ttfb_ms": 270.713,
-          "duration_ms": 272.369
+          "ttfb_ms": 322.44,
+          "duration_ms": 323.529
         },
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 313.045,
-          "duration_ms": 314.78
+          "ttfb_ms": 355.199,
+          "duration_ms": 356.982
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 336.719,
-          "duration_ms": 338.278
+          "ttfb_ms": 377.086,
+          "duration_ms": 378.646
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 293.826,
-          "duration_ms": 294.983
+          "ttfb_ms": 332.185,
+          "duration_ms": 334.075
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 111.921,
-          "duration_ms": 112.923
+          "ttfb_ms": 127.797,
+          "duration_ms": 128.923
         }
       ],
       "browser": {
-        "ttfb_ms": 96.59999999997672,
-        "domContentLoaded_ms": 153.59999999997672,
-        "transfer_bytes": 27464,
+        "ttfb_ms": 117.60000000009313,
+        "domContentLoaded_ms": 177.80000000004657,
+        "transfer_bytes": 27480,
         "js_transfer_bytes": 0,
         "longTasks": [
           {
-            "duration": 61,
-            "start": 867.3999999999651
+            "duration": 76,
+            "start": 934.3000000000466
           }
         ],
         "events": [
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052.1999999999534
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052.1999999999534
+            "start": 1096.7000000000698
           },
           {
             "duration": 24,
-            "start": 1052.1999999999534
+            "start": 1100
           },
           {
             "duration": 24,
-            "start": 1052.1999999999534
+            "start": 1100
           },
           {
             "duration": 24,
-            "start": 1052.1999999999534
+            "start": 1100
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 128
+            "start": 152
           },
           {
             "duration": 0,
-            "start": 584
+            "start": 652
           }
         ],
         "profiles": []
@@ -769,139 +771,139 @@
     {
       "module": "inicio",
       "repeat": 4,
-      "ready_ms": 1050.0925550000002,
-      "refresh_ms": 406.90229999999974,
+      "ready_ms": 1058.0176069999998,
+      "refresh_ms": 413.1730320000006,
       "initial_requests": 6,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 265.848,
-          "duration_ms": 267.043
+          "ttfb_ms": 316.543,
+          "duration_ms": 321.123
         },
         {
           "endpoint": "/api/workspace/organization_settings",
           "status": 200,
-          "ttfb_ms": 279.781,
-          "duration_ms": 281.983
+          "ttfb_ms": 322.868,
+          "duration_ms": 323.794
         },
         {
           "endpoint": "/api/workspace/branch_settings",
           "status": 200,
-          "ttfb_ms": 285.053,
-          "duration_ms": 286.996
+          "ttfb_ms": 301.337,
+          "duration_ms": 302.687
         },
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 310.9,
-          "duration_ms": 314.011
+          "ttfb_ms": 365.609,
+          "duration_ms": 367.406
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 347.788,
-          "duration_ms": 349.89
+          "ttfb_ms": 393.664,
+          "duration_ms": 396.363
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 321.135,
-          "duration_ms": 322.501
+          "ttfb_ms": 319.888,
+          "duration_ms": 321.547
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 108.384,
-          "duration_ms": 109.492
+          "ttfb_ms": 121.511,
+          "duration_ms": 122.51
         }
       ],
       "browser": {
-        "ttfb_ms": 104.29999999998836,
-        "domContentLoaded_ms": 161.20000000001164,
-        "transfer_bytes": 27464,
+        "ttfb_ms": 117,
+        "domContentLoaded_ms": 180,
+        "transfer_bytes": 27478,
         "js_transfer_bytes": 0,
         "longTasks": [
           {
-            "duration": 53,
-            "start": 888.2999999999884
+            "duration": 101,
+            "start": 948.6000000000931
           }
         ],
         "events": [
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.0999999999767
+            "start": 1099.4000000000233
           },
           {
             "duration": 24,
-            "start": 1086.2000000000116
+            "start": 1099.5
           },
           {
             "duration": 24,
-            "start": 1086.2000000000116
+            "start": 1099.5
           },
           {
             "duration": 24,
-            "start": 1086.2999999999884
+            "start": 1099.6000000000931
           },
           {
             "duration": 24,
-            "start": 1086.2999999999884
+            "start": 1099.6000000000931
           },
           {
             "duration": 24,
-            "start": 1086.2999999999884
+            "start": 1099.6000000000931
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 180
+            "start": 152
           },
           {
             "duration": 0,
-            "start": 608
+            "start": 672
           }
         ],
         "profiles": []
@@ -910,124 +912,388 @@
     {
       "module": "agenda",
       "repeat": 0,
-      "ready_ms": 636.9858760000006,
-      "refresh_ms": 406.97893099999965,
+      "ready_ms": 1069.47955,
+      "refresh_ms": 395.1369849999992,
       "initial_requests": 5,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 283.055,
-          "duration_ms": 285.344
+          "ttfb_ms": 300.437,
+          "duration_ms": 302.272
         },
         {
           "endpoint": "/api/workspace/calendar_blocks",
           "status": 200,
-          "ttfb_ms": 273.885,
-          "duration_ms": 276.839
+          "ttfb_ms": 342.117,
+          "duration_ms": 344.421
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 300.789,
-          "duration_ms": 302.662
+          "ttfb_ms": 344.001,
+          "duration_ms": 344.895
         },
         {
           "endpoint": "/api/workspace/staff_branch_assignments",
           "status": 200,
-          "ttfb_ms": 287.954,
-          "duration_ms": 289.65
+          "ttfb_ms": 401.511,
+          "duration_ms": 402.744
         },
         {
           "endpoint": "/api/workspace/services",
           "status": 200,
-          "ttfb_ms": 309.59,
-          "duration_ms": 310.554
+          "ttfb_ms": 369.91,
+          "duration_ms": 371.27
         },
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 232.504,
-          "duration_ms": 233.97
+          "ttfb_ms": 168.053,
+          "duration_ms": 169.352
         },
         {
           "endpoint": "/api/workspace/calendar_blocks",
           "status": 200,
-          "ttfb_ms": 328.483,
-          "duration_ms": 331.643
+          "ttfb_ms": 171.878,
+          "duration_ms": 172.98
         }
       ],
       "browser": {
-        "ttfb_ms": 96.70000000001164,
-        "domContentLoaded_ms": 153.20000000001164,
-        "transfer_bytes": 24484,
+        "ttfb_ms": 120.69999999995343,
+        "domContentLoaded_ms": 181.19999999995343,
+        "transfer_bytes": 24506,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
-          },
-          {
-            "duration": 24,
-            "start": 673.9000000000233
+            "duration": 16,
+            "start": 1099
           },
           {
             "duration": 16,
-            "start": 674.6000000000349
+            "start": 1099
           },
           {
             "duration": 16,
-            "start": 674.6000000000349
+            "start": 1099
           },
           {
             "duration": 16,
-            "start": 675.1000000000349
+            "start": 1099
           },
           {
             "duration": 16,
-            "start": 675.1000000000349
+            "start": 1099
           },
           {
             "duration": 16,
-            "start": 675.1000000000349
+            "start": 1099
+          },
+          {
+            "duration": 16,
+            "start": 1099
+          },
+          {
+            "duration": 16,
+            "start": 1099
+          },
+          {
+            "duration": 16,
+            "start": 1099
+          },
+          {
+            "duration": 16,
+            "start": 1099
+          },
+          {
+            "duration": 16,
+            "start": 1099
+          },
+          {
+            "duration": 16,
+            "start": 1099.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1099.0999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1099.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1099.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1099.1999999999534
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 216
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 1,
+      "ready_ms": 1118.5523900000007,
+      "refresh_ms": 400.0744329999998,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 359.565,
+          "duration_ms": 361.915
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 419.356,
+          "duration_ms": 424.962
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 403.508,
+          "duration_ms": 410.883
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 438.102,
+          "duration_ms": 443.048
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 448.288,
+          "duration_ms": 461.549
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 126.921,
+          "duration_ms": 128.173
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 129.884,
+          "duration_ms": 130.76
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 135.09999999997672,
+        "domContentLoaded_ms": 203.59999999997672,
+        "transfer_bytes": 24499,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1155.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1156
+          },
+          {
+            "duration": 16,
+            "start": 1156
+          },
+          {
+            "duration": 16,
+            "start": 1156
+          },
+          {
+            "duration": 16,
+            "start": 1156
+          },
+          {
+            "duration": 16,
+            "start": 1156
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 176
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 2,
+      "ready_ms": 1048.5704929999993,
+      "refresh_ms": 394.8183910000007,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 311.928,
+          "duration_ms": 313.585
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 362.164,
+          "duration_ms": 365.851
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 291.186,
+          "duration_ms": 292.233
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 393.033,
+          "duration_ms": 395.165
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 298.134,
+          "duration_ms": 300.533
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 132.309,
+          "duration_ms": 133.449
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 133.368,
+          "duration_ms": 134.669
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 109,
+        "domContentLoaded_ms": 168.20000000006985,
+        "transfer_bytes": 24501,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.7000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1076.8000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1076.8000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1076.8000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1076.8000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1076.8000000000466
           }
         ],
         "lcp": [
@@ -1041,125 +1307,461 @@
     },
     {
       "module": "agenda",
-      "repeat": 1,
-      "ready_ms": 1028.6852990000007,
-      "refresh_ms": 396.94717800000035,
+      "repeat": 3,
+      "ready_ms": 1040.5548660000004,
+      "refresh_ms": 395.4825839999994,
       "initial_requests": 5,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 300.489,
-          "duration_ms": 301.358
+          "ttfb_ms": 283.713,
+          "duration_ms": 285.251
         },
         {
           "endpoint": "/api/workspace/calendar_blocks",
           "status": 200,
-          "ttfb_ms": 304.776,
-          "duration_ms": 306.425
+          "ttfb_ms": 300.983,
+          "duration_ms": 301.899
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 297.609,
-          "duration_ms": 299.639
+          "ttfb_ms": 343.78,
+          "duration_ms": 346.102
         },
         {
           "endpoint": "/api/workspace/staff_branch_assignments",
           "status": 200,
-          "ttfb_ms": 343.809,
-          "duration_ms": 345.091
+          "ttfb_ms": 372.777,
+          "duration_ms": 374.355
         },
         {
           "endpoint": "/api/workspace/services",
           "status": 200,
-          "ttfb_ms": 369.629,
-          "duration_ms": 371.603
+          "ttfb_ms": 370.201,
+          "duration_ms": 371.666
         },
         {
           "endpoint": "/api/workspace/agenda",
           "status": 200,
-          "ttfb_ms": 123.281,
-          "duration_ms": 124.865
+          "ttfb_ms": 134.575,
+          "duration_ms": 135.613
         },
         {
           "endpoint": "/api/workspace/calendar_blocks",
           "status": 200,
-          "ttfb_ms": 129.421,
-          "duration_ms": 130.254
+          "ttfb_ms": 134.697,
+          "duration_ms": 135.809
         }
       ],
       "browser": {
-        "ttfb_ms": 95.20000000001164,
-        "domContentLoaded_ms": 155.5,
-        "transfer_bytes": 24484,
+        "ttfb_ms": 110,
+        "domContentLoaded_ms": 168,
+        "transfer_bytes": 24494,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.6999999999534
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.9000000000233
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.9000000000233
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.9000000000233
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.9000000000233
           },
           {
             "duration": 16,
-            "start": 1064.5999999999767
+            "start": 1073.9000000000233
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 188
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 4,
+      "ready_ms": 1066.5207050000008,
+      "refresh_ms": 388.8560180000004,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 305.494,
+          "duration_ms": 307.03
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 329.769,
+          "duration_ms": 332.495
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 298.412,
+          "duration_ms": 299.847
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 342.137,
+          "duration_ms": 345.259
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 346.687,
+          "duration_ms": 348.327
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 144.283,
+          "duration_ms": 145.224
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 143.011,
+          "duration_ms": 143.988
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 110.59999999997672,
+        "domContentLoaded_ms": 171.29999999993015,
+        "transfer_bytes": 24499,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1094.8999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1095
+          },
+          {
+            "duration": 16,
+            "start": 1095
+          },
+          {
+            "duration": 16,
+            "start": 1095
+          },
+          {
+            "duration": 16,
+            "start": 1095
+          },
+          {
+            "duration": 16,
+            "start": 1095
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 192
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 0,
+      "ready_ms": 544.0523860000012,
+      "refresh_ms": 429.4112219999988,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 283.8,
+          "duration_ms": 286.335
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 184.588,
+          "duration_ms": 185.916
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 114.80000000004657,
+        "domContentLoaded_ms": 172.30000000004657,
+        "transfer_bytes": 18539,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.1000000000931
+          },
+          {
+            "duration": 24,
+            "start": 597.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 597.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 597.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 597.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 597.3000000000466
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 192
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 1,
+      "ready_ms": 524.6035039999988,
+      "refresh_ms": 404.8362699999998,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 262.156,
+          "duration_ms": 264.499
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 167.459,
+          "duration_ms": 169.241
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 107.19999999995343,
+        "domContentLoaded_ms": 161.29999999993015,
+        "transfer_bytes": 18539,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 577.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 577.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 577.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 577.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 577.6999999999534
           }
         ],
         "lcp": [
@@ -1172,637 +1774,102 @@
       }
     },
     {
-      "module": "agenda",
-      "repeat": 2,
-      "ready_ms": 1044.9924429999992,
-      "refresh_ms": 396.18346500000007,
-      "initial_requests": 5,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/workspace/agenda",
-          "status": 200,
-          "ttfb_ms": 270.008,
-          "duration_ms": 271.893
-        },
-        {
-          "endpoint": "/api/workspace/calendar_blocks",
-          "status": 200,
-          "ttfb_ms": 333.184,
-          "duration_ms": 334.162
-        },
-        {
-          "endpoint": "/api/workspace/staff",
-          "status": 200,
-          "ttfb_ms": 292.347,
-          "duration_ms": 293.901
-        },
-        {
-          "endpoint": "/api/workspace/staff_branch_assignments",
-          "status": 200,
-          "ttfb_ms": 322.265,
-          "duration_ms": 323.632
-        },
-        {
-          "endpoint": "/api/workspace/services",
-          "status": 200,
-          "ttfb_ms": 336.644,
-          "duration_ms": 337.781
-        },
-        {
-          "endpoint": "/api/workspace/agenda",
-          "status": 200,
-          "ttfb_ms": 122.149,
-          "duration_ms": 123.107
-        },
-        {
-          "endpoint": "/api/workspace/calendar_blocks",
-          "status": 200,
-          "ttfb_ms": 122.23,
-          "duration_ms": 123.225
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 116.09999999997672,
-        "domContentLoaded_ms": 182.09999999997672,
-        "transfer_bytes": 24479,
-        "js_transfer_bytes": 0,
-        "longTasks": [],
-        "events": [
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 1079.4000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1079.4000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1079.5
-          },
-          {
-            "duration": 16,
-            "start": 1079.5
-          },
-          {
-            "duration": 16,
-            "start": 1079.5
-          }
-        ],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 220
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "agenda",
-      "repeat": 3,
-      "ready_ms": 1024.905487,
-      "refresh_ms": 398.0228509999997,
-      "initial_requests": 5,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/workspace/agenda",
-          "status": 200,
-          "ttfb_ms": 319.89,
-          "duration_ms": 321.958
-        },
-        {
-          "endpoint": "/api/workspace/calendar_blocks",
-          "status": 200,
-          "ttfb_ms": 304.558,
-          "duration_ms": 306.905
-        },
-        {
-          "endpoint": "/api/workspace/staff",
-          "status": 200,
-          "ttfb_ms": 295.717,
-          "duration_ms": 297.032
-        },
-        {
-          "endpoint": "/api/workspace/staff_branch_assignments",
-          "status": 200,
-          "ttfb_ms": 324.872,
-          "duration_ms": 326.495
-        },
-        {
-          "endpoint": "/api/workspace/services",
-          "status": 200,
-          "ttfb_ms": 275.09,
-          "duration_ms": 276.605
-        },
-        {
-          "endpoint": "/api/workspace/agenda",
-          "status": 200,
-          "ttfb_ms": 113.868,
-          "duration_ms": 114.846
-        },
-        {
-          "endpoint": "/api/workspace/calendar_blocks",
-          "status": 200,
-          "ttfb_ms": 120.076,
-          "duration_ms": 121.702
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 97.20000000001164,
-        "domContentLoaded_ms": 152.20000000001164,
-        "transfer_bytes": 24480,
-        "js_transfer_bytes": 0,
-        "longTasks": [],
-        "events": [
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.600000000035
-          },
-          {
-            "duration": 16,
-            "start": 1061.8000000000466
-          },
-          {
-            "duration": 16,
-            "start": 1061.8000000000466
-          },
-          {
-            "duration": 16,
-            "start": 1061.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1061.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1061.9000000000233
-          }
-        ],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 172
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "agenda",
-      "repeat": 4,
-      "ready_ms": 1017.6629209999992,
-      "refresh_ms": 390.4642279999989,
-      "initial_requests": 5,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/workspace/agenda",
-          "status": 200,
-          "ttfb_ms": 252.422,
-          "duration_ms": 254.159
-        },
-        {
-          "endpoint": "/api/workspace/calendar_blocks",
-          "status": 200,
-          "ttfb_ms": 309.826,
-          "duration_ms": 311.868
-        },
-        {
-          "endpoint": "/api/workspace/staff",
-          "status": 200,
-          "ttfb_ms": 280.218,
-          "duration_ms": 281.75
-        },
-        {
-          "endpoint": "/api/workspace/staff_branch_assignments",
-          "status": 200,
-          "ttfb_ms": 349.65,
-          "duration_ms": 352.271
-        },
-        {
-          "endpoint": "/api/workspace/services",
-          "status": 200,
-          "ttfb_ms": 304.72,
-          "duration_ms": 306.475
-        },
-        {
-          "endpoint": "/api/workspace/agenda",
-          "status": 200,
-          "ttfb_ms": 124.71,
-          "duration_ms": 125.872
-        },
-        {
-          "endpoint": "/api/workspace/calendar_blocks",
-          "status": 200,
-          "ttfb_ms": 127.476,
-          "duration_ms": 128.445
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 97.20000000001164,
-        "domContentLoaded_ms": 151.29999999998836,
-        "transfer_bytes": 24475,
-        "js_transfer_bytes": 0,
-        "longTasks": [],
-        "events": [
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1046.9000000000233
-          },
-          {
-            "duration": 16,
-            "start": 1047
-          },
-          {
-            "duration": 16,
-            "start": 1047
-          },
-          {
-            "duration": 16,
-            "start": 1047
-          },
-          {
-            "duration": 16,
-            "start": 1047
-          },
-          {
-            "duration": 16,
-            "start": 1047
-          }
-        ],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 168
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "clientes",
-      "repeat": 0,
-      "ready_ms": 504.4318579999999,
-      "refresh_ms": 398.46095799999966,
-      "initial_requests": 1,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/workspace/customers",
-          "status": 200,
-          "ttfb_ms": 223.834,
-          "duration_ms": 224.866
-        },
-        {
-          "endpoint": "/api/workspace/customers",
-          "status": 200,
-          "ttfb_ms": 135.305,
-          "duration_ms": 137.196
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 95.40000000002328,
-        "domContentLoaded_ms": 150.40000000002328,
-        "transfer_bytes": 18516,
-        "js_transfer_bytes": 0,
-        "longTasks": [],
-        "events": [
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2000000000116
-          },
-          {
-            "duration": 16,
-            "start": 546.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 546.2999999999884
-          },
-          {
-            "duration": 16,
-            "start": 546.4000000000233
-          },
-          {
-            "duration": 16,
-            "start": 546.4000000000233
-          },
-          {
-            "duration": 16,
-            "start": 546.4000000000233
-          }
-        ],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 168
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "clientes",
-      "repeat": 1,
-      "ready_ms": 510.7589149999985,
-      "refresh_ms": 417.5662919999995,
-      "initial_requests": 1,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/workspace/customers",
-          "status": 200,
-          "ttfb_ms": 255.515,
-          "duration_ms": 256.977
-        },
-        {
-          "endpoint": "/api/workspace/customers",
-          "status": 200,
-          "ttfb_ms": 128.626,
-          "duration_ms": 130.018
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 99.5,
-        "domContentLoaded_ms": 152.10000000003492,
-        "transfer_bytes": 18509,
-        "js_transfer_bytes": 0,
-        "longTasks": [],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 172
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
       "module": "clientes",
       "repeat": 2,
-      "ready_ms": 535.0194280000032,
-      "refresh_ms": 411.26109500000166,
+      "ready_ms": 594.0255639999996,
+      "refresh_ms": 414.76131499999974,
       "initial_requests": 1,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/customers",
           "status": 200,
-          "ttfb_ms": 247.733,
-          "duration_ms": 248.71
+          "ttfb_ms": 320.557,
+          "duration_ms": 323.3
         },
         {
           "endpoint": "/api/workspace/customers",
           "status": 200,
-          "ttfb_ms": 129.91,
-          "duration_ms": 132.338
+          "ttfb_ms": 199.251,
+          "duration_ms": 200.658
         }
       ],
       "browser": {
-        "ttfb_ms": 96,
-        "domContentLoaded_ms": 153.30000000004657,
-        "transfer_bytes": 18519,
+        "ttfb_ms": 112.5,
+        "domContentLoaded_ms": 168.09999999997672,
+        "transfer_bytes": 18540,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.3000000000466
+            "start": 644.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.6000000000349
+            "start": 645.8000000000466
           },
           {
             "duration": 16,
-            "start": 584.6000000000349
+            "start": 645.8000000000466
           },
           {
             "duration": 16,
-            "start": 584.6000000000349
+            "start": 646.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.6000000000349
+            "start": 646.3000000000466
           },
           {
             "duration": 16,
-            "start": 584.6000000000349
+            "start": 646.3000000000466
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 124
+            "start": 188
           }
         ],
         "profiles": []
@@ -1811,100 +1878,100 @@
     {
       "module": "clientes",
       "repeat": 3,
-      "ready_ms": 528.094175000002,
-      "refresh_ms": 411.1648230000028,
+      "ready_ms": 564.1954760000008,
+      "refresh_ms": 409.31124199999977,
       "initial_requests": 1,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/customers",
           "status": 200,
-          "ttfb_ms": 257.94,
-          "duration_ms": 259.176
+          "ttfb_ms": 243.533,
+          "duration_ms": 245.531
         },
         {
           "endpoint": "/api/workspace/customers",
           "status": 200,
-          "ttfb_ms": 129.617,
-          "duration_ms": 131.251
+          "ttfb_ms": 197.576,
+          "duration_ms": 198.874
         }
       ],
       "browser": {
-        "ttfb_ms": 97.5,
-        "domContentLoaded_ms": 151.29999999998836,
-        "transfer_bytes": 18511,
+        "ttfb_ms": 109.30000000004657,
+        "domContentLoaded_ms": 164.69999999995343,
+        "transfer_bytes": 18537,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
-            "duration": 16,
-            "start": 575.3999999999651
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 605.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 606.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 606.0999999999767
           },
           {
             "duration": 16,
-            "start": 575.3999999999651
+            "start": 606.1999999999534
           },
           {
             "duration": 16,
-            "start": 575.3999999999651
+            "start": 606.1999999999534
           },
           {
             "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.3999999999651
-          },
-          {
-            "duration": 16,
-            "start": 575.6999999999534
-          },
-          {
-            "duration": 16,
-            "start": 575.6999999999534
-          },
-          {
-            "duration": 16,
-            "start": 575.6999999999534
-          },
-          {
-            "duration": 16,
-            "start": 575.6999999999534
-          },
-          {
-            "duration": 16,
-            "start": 575.6999999999534
+            "start": 606.1999999999534
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 172
+            "start": 180
           }
         ],
         "profiles": []
@@ -1913,100 +1980,100 @@
     {
       "module": "clientes",
       "repeat": 4,
-      "ready_ms": 504.18248999999923,
-      "refresh_ms": 403.0108050000017,
+      "ready_ms": 531.5628649999999,
+      "refresh_ms": 400.61282500000016,
       "initial_requests": 1,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/workspace/customers",
           "status": 200,
-          "ttfb_ms": 231.717,
-          "duration_ms": 233.107
+          "ttfb_ms": 266.7,
+          "duration_ms": 268.765
         },
         {
           "endpoint": "/api/workspace/customers",
           "status": 200,
-          "ttfb_ms": 145.719,
-          "duration_ms": 147.107
+          "ttfb_ms": 186.604,
+          "duration_ms": 188.174
         }
       ],
       "browser": {
-        "ttfb_ms": 100.70000000001164,
-        "domContentLoaded_ms": 151.39999999996508,
-        "transfer_bytes": 18510,
+        "ttfb_ms": 113.69999999995343,
+        "domContentLoaded_ms": 167.89999999990687,
+        "transfer_bytes": 18534,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.2999999999884
+            "start": 586.6999999999534
           },
           {
             "duration": 16,
-            "start": 542.5999999999767
+            "start": 587
           },
           {
             "duration": 16,
-            "start": 542.5999999999767
+            "start": 587
           },
           {
             "duration": 16,
-            "start": 542.7000000000116
+            "start": 587.2999999999302
           },
           {
             "duration": 16,
-            "start": 542.7000000000116
+            "start": 587.2999999999302
           },
           {
             "duration": 16,
-            "start": 542.7000000000116
+            "start": 587.2999999999302
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 168
+            "start": 200
           }
         ],
         "profiles": []
@@ -2015,7 +2082,7 @@
     {
       "module": "caja",
       "repeat": 0,
-      "ready_ms": 1005.1321339999995,
+      "ready_ms": 1051.310510000003,
       "refresh_ms": null,
       "initial_requests": 2,
       "duplicate_requests": 0,
@@ -2023,27 +2090,27 @@
         {
           "endpoint": "/api/finance/cash",
           "status": 200,
-          "ttfb_ms": 294.829,
-          "duration_ms": 296.379
+          "ttfb_ms": 309.96,
+          "duration_ms": 311.664
         },
         {
           "endpoint": "/api/finance/catalog",
           "status": 200,
-          "ttfb_ms": 332.449,
-          "duration_ms": 334.174
+          "ttfb_ms": 337.487,
+          "duration_ms": 338.654
         }
       ],
       "browser": {
-        "ttfb_ms": 95.90000000002328,
-        "domContentLoaded_ms": 146.09999999997672,
-        "transfer_bytes": 21683,
+        "ttfb_ms": 123.30000000004657,
+        "domContentLoaded_ms": 179.20000000006985,
+        "transfer_bytes": 21694,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 160
+            "start": 196
           }
         ],
         "profiles": []
@@ -2052,7 +2119,7 @@
     {
       "module": "caja",
       "repeat": 1,
-      "ready_ms": 1008.430424000002,
+      "ready_ms": 1036.5866200000019,
       "refresh_ms": null,
       "initial_requests": 2,
       "duplicate_requests": 0,
@@ -2060,27 +2127,27 @@
         {
           "endpoint": "/api/finance/cash",
           "status": 200,
-          "ttfb_ms": 331.618,
-          "duration_ms": 332.871
+          "ttfb_ms": 323.405,
+          "duration_ms": 324.581
         },
         {
           "endpoint": "/api/finance/catalog",
           "status": 200,
-          "ttfb_ms": 325.395,
-          "duration_ms": 327.054
+          "ttfb_ms": 321.327,
+          "duration_ms": 322.261
         }
       ],
       "browser": {
-        "ttfb_ms": 93.80000000004657,
-        "domContentLoaded_ms": 145.90000000002328,
-        "transfer_bytes": 21676,
+        "ttfb_ms": 107.69999999995343,
+        "domContentLoaded_ms": 164.69999999995343,
+        "transfer_bytes": 21694,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 120
+            "start": 136
           }
         ],
         "profiles": []
@@ -2089,7 +2156,7 @@
     {
       "module": "caja",
       "repeat": 2,
-      "ready_ms": 1004.8928899999992,
+      "ready_ms": 1027.811517000002,
       "refresh_ms": null,
       "initial_requests": 2,
       "duplicate_requests": 0,
@@ -2097,27 +2164,27 @@
         {
           "endpoint": "/api/finance/cash",
           "status": 200,
-          "ttfb_ms": 361.724,
-          "duration_ms": 363.761
+          "ttfb_ms": 302.563,
+          "duration_ms": 304.266
         },
         {
           "endpoint": "/api/finance/catalog",
           "status": 200,
-          "ttfb_ms": 411.446,
-          "duration_ms": 412.666
+          "ttfb_ms": 332.158,
+          "duration_ms": 334.093
         }
       ],
       "browser": {
-        "ttfb_ms": 94,
-        "domContentLoaded_ms": 146,
-        "transfer_bytes": 21678,
+        "ttfb_ms": 111.40000000002328,
+        "domContentLoaded_ms": 167.30000000004657,
+        "transfer_bytes": 21693,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 160
+            "start": 140
           }
         ],
         "profiles": []
@@ -2126,7 +2193,7 @@
     {
       "module": "caja",
       "repeat": 3,
-      "ready_ms": 1015.4762970000011,
+      "ready_ms": 1063.3112599999986,
       "refresh_ms": null,
       "initial_requests": 2,
       "duplicate_requests": 0,
@@ -2134,396 +2201,57 @@
         {
           "endpoint": "/api/finance/cash",
           "status": 200,
-          "ttfb_ms": 327.815,
-          "duration_ms": 328.827
+          "ttfb_ms": 316.429,
+          "duration_ms": 318.17
         },
         {
           "endpoint": "/api/finance/catalog",
           "status": 200,
-          "ttfb_ms": 334.403,
-          "duration_ms": 337.231
+          "ttfb_ms": 353.509,
+          "duration_ms": 354.841
         }
       ],
       "browser": {
-        "ttfb_ms": 99.90000000002328,
-        "domContentLoaded_ms": 151.29999999998836,
-        "transfer_bytes": 21678,
+        "ttfb_ms": 139.30000000004657,
+        "domContentLoaded_ms": 209.70000000006985,
+        "transfer_bytes": 21701,
         "js_transfer_bytes": 0,
         "longTasks": [],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 164
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "caja",
-      "repeat": 4,
-      "ready_ms": 1005.0806869999979,
-      "refresh_ms": null,
-      "initial_requests": 2,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/finance/cash",
-          "status": 200,
-          "ttfb_ms": 309.327,
-          "duration_ms": 311.326
-        },
-        {
-          "endpoint": "/api/finance/catalog",
-          "status": 200,
-          "ttfb_ms": 322.758,
-          "duration_ms": 324.798
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 99.40000000002328,
-        "domContentLoaded_ms": 150.20000000001164,
-        "transfer_bytes": 21671,
-        "js_transfer_bytes": 0,
-        "longTasks": [],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 164
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "finanzas",
-      "repeat": 0,
-      "ready_ms": 1010.1265590000003,
-      "refresh_ms": null,
-      "initial_requests": 4,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/finance/summary",
-          "status": 200,
-          "ttfb_ms": 305.903,
-          "duration_ms": 307.451
-        },
-        {
-          "endpoint": "/api/finance/catalog",
-          "status": 200,
-          "ttfb_ms": 359.035,
-          "duration_ms": 361.717
-        },
-        {
-          "endpoint": "/api/finance/cash",
-          "status": 200,
-          "ttfb_ms": 343.316,
-          "duration_ms": 345.098
-        },
-        {
-          "endpoint": "/api/finance/series",
-          "status": 200,
-          "ttfb_ms": 282.071,
-          "duration_ms": 283.383
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 101.5,
-        "domContentLoaded_ms": 153.40000000002328,
-        "transfer_bytes": 26962,
-        "js_transfer_bytes": 0,
-        "longTasks": [
-          {
-            "duration": 121,
-            "start": 571
-          }
-        ],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 168
-          },
-          {
-            "duration": 0,
-            "start": 560
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "finanzas",
-      "repeat": 1,
-      "ready_ms": 1034.186407000001,
-      "refresh_ms": null,
-      "initial_requests": 4,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/finance/summary",
-          "status": 200,
-          "ttfb_ms": 349.942,
-          "duration_ms": 352.373
-        },
-        {
-          "endpoint": "/api/finance/catalog",
-          "status": 200,
-          "ttfb_ms": 317.523,
-          "duration_ms": 319.231
-        },
-        {
-          "endpoint": "/api/finance/cash",
-          "status": 200,
-          "ttfb_ms": 345.878,
-          "duration_ms": 348.666
-        },
-        {
-          "endpoint": "/api/finance/series",
-          "status": 200,
-          "ttfb_ms": 208.118,
-          "duration_ms": 209.487
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 93.60000000003492,
-        "domContentLoaded_ms": 152.10000000003492,
-        "transfer_bytes": 26972,
-        "js_transfer_bytes": 0,
-        "longTasks": [
-          {
-            "duration": 54,
-            "start": 797.4000000000233
-          }
-        ],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 168
-          },
-          {
-            "duration": 0,
-            "start": 608
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "finanzas",
-      "repeat": 2,
-      "ready_ms": 1026.89948,
-      "refresh_ms": null,
-      "initial_requests": 4,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/finance/summary",
-          "status": 200,
-          "ttfb_ms": 316.393,
-          "duration_ms": 318.514
-        },
-        {
-          "endpoint": "/api/finance/catalog",
-          "status": 200,
-          "ttfb_ms": 361.56,
-          "duration_ms": 364.264
-        },
-        {
-          "endpoint": "/api/finance/cash",
-          "status": 200,
-          "ttfb_ms": 347.526,
-          "duration_ms": 348.621
-        },
-        {
-          "endpoint": "/api/finance/series",
-          "status": 200,
-          "ttfb_ms": 271.49,
-          "duration_ms": 273.511
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 95.59999999997672,
-        "domContentLoaded_ms": 155.09999999997672,
-        "transfer_bytes": 26968,
-        "js_transfer_bytes": 0,
-        "longTasks": [
-          {
-            "duration": 105,
-            "start": 573.2000000000116
-          }
-        ],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 172
-          },
-          {
-            "duration": 0,
-            "start": 576
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "finanzas",
-      "repeat": 3,
-      "ready_ms": 1024.5548739999977,
-      "refresh_ms": null,
-      "initial_requests": 4,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/finance/summary",
-          "status": 200,
-          "ttfb_ms": 319.343,
-          "duration_ms": 320.43
-        },
-        {
-          "endpoint": "/api/finance/catalog",
-          "status": 200,
-          "ttfb_ms": 358.35,
-          "duration_ms": 359.343
-        },
-        {
-          "endpoint": "/api/finance/cash",
-          "status": 200,
-          "ttfb_ms": 311.443,
-          "duration_ms": 312.534
-        },
-        {
-          "endpoint": "/api/finance/series",
-          "status": 200,
-          "ttfb_ms": 269.813,
-          "duration_ms": 273.811
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 101.5,
-        "domContentLoaded_ms": 158.5,
-        "transfer_bytes": 26978,
-        "js_transfer_bytes": 0,
-        "longTasks": [
-          {
-            "duration": 104,
-            "start": 592.6000000000349
-          }
-        ],
         "events": [],
         "lcp": [
           {
             "duration": 0,
             "start": 176
-          },
-          {
-            "duration": 0,
-            "start": 576
           }
         ],
         "profiles": []
       }
     },
     {
-      "module": "finanzas",
+      "module": "caja",
       "repeat": 4,
-      "ready_ms": 1033.776595000003,
+      "ready_ms": 1027.7222669999974,
       "refresh_ms": null,
-      "initial_requests": 4,
+      "initial_requests": 2,
       "duplicate_requests": 0,
       "requests": [
         {
-          "endpoint": "/api/finance/summary",
+          "endpoint": "/api/finance/cash",
           "status": 200,
-          "ttfb_ms": 348.917,
-          "duration_ms": 351.389
+          "ttfb_ms": 317.023,
+          "duration_ms": 318.997
         },
         {
           "endpoint": "/api/finance/catalog",
           "status": 200,
-          "ttfb_ms": 287.723,
-          "duration_ms": 288.939
-        },
-        {
-          "endpoint": "/api/finance/cash",
-          "status": 200,
-          "ttfb_ms": 318.774,
-          "duration_ms": 321.874
-        },
-        {
-          "endpoint": "/api/finance/series",
-          "status": 200,
-          "ttfb_ms": 233.881,
-          "duration_ms": 236.945
+          "ttfb_ms": 345.389,
+          "duration_ms": 347.187
         }
       ],
       "browser": {
-        "ttfb_ms": 97.59999999997672,
-        "domContentLoaded_ms": 155.59999999997672,
-        "transfer_bytes": 26975,
-        "js_transfer_bytes": 0,
-        "longTasks": [
-          {
-            "duration": 57,
-            "start": 849
-          }
-        ],
-        "events": [],
-        "lcp": [
-          {
-            "duration": 0,
-            "start": 172
-          },
-          {
-            "duration": 0,
-            "start": 632
-          }
-        ],
-        "profiles": []
-      }
-    },
-    {
-      "module": "equipo",
-      "repeat": 0,
-      "ready_ms": 629.2067940000015,
-      "refresh_ms": null,
-      "initial_requests": 4,
-      "duplicate_requests": 0,
-      "requests": [
-        {
-          "endpoint": "/api/workspace/services",
-          "status": 200,
-          "ttfb_ms": 291.054,
-          "duration_ms": 292.96
-        },
-        {
-          "endpoint": "/api/workspace/staff",
-          "status": 200,
-          "ttfb_ms": 278.104,
-          "duration_ms": 279.49
-        },
-        {
-          "endpoint": "/api/workspace/staff_branch_assignments",
-          "status": 200,
-          "ttfb_ms": 329.784,
-          "duration_ms": 331.94
-        },
-        {
-          "endpoint": "/api/workspace/daily_availability",
-          "status": 200,
-          "ttfb_ms": 291.613,
-          "duration_ms": 292.822
-        }
-      ],
-      "browser": {
-        "ttfb_ms": 99.40000000002328,
-        "domContentLoaded_ms": 157.30000000004657,
-        "transfer_bytes": 15214,
+        "ttfb_ms": 110,
+        "domContentLoaded_ms": 165.5,
+        "transfer_bytes": 21687,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
@@ -2537,9 +2265,311 @@
       }
     },
     {
-      "module": "equipo",
+      "module": "finanzas",
+      "repeat": 0,
+      "ready_ms": 1051.428172,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 347.25,
+          "duration_ms": 348.3
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 348.454,
+          "duration_ms": 350.144
+        },
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 344.625,
+          "duration_ms": 345.773
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 297.876,
+          "duration_ms": 299.665
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 117.69999999995343,
+        "domContentLoaded_ms": 174.90000000002328,
+        "transfer_bytes": 26985,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 139,
+            "start": 638.2999999999302
+          },
+          {
+            "duration": 51,
+            "start": 929.2999999999302
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 204
+          },
+          {
+            "duration": 0,
+            "start": 624
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
       "repeat": 1,
-      "ready_ms": 1107.427840999997,
+      "ready_ms": 1036.9618210000008,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 371.39,
+          "duration_ms": 372.748
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 345.231,
+          "duration_ms": 346.387
+        },
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 384.168,
+          "duration_ms": 386.178
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 220.713,
+          "duration_ms": 223.917
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 109.70000000006985,
+        "domContentLoaded_ms": 172.90000000002328,
+        "transfer_bytes": 26983,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 148,
+            "start": 691.3000000000466
+          },
+          {
+            "duration": 91,
+            "start": 871.8000000000466
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 192
+          },
+          {
+            "duration": 0,
+            "start": 680
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 2,
+      "ready_ms": 1058.0517519999994,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 351.825,
+          "duration_ms": 352.951
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 326.767,
+          "duration_ms": 330.342
+        },
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 340.275,
+          "duration_ms": 342.202
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 255.513,
+          "duration_ms": 258.839
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 124.90000000002328,
+        "domContentLoaded_ms": 187.19999999995343,
+        "transfer_bytes": 26982,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 72,
+            "start": 897.7999999999302
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 208
+          },
+          {
+            "duration": 0,
+            "start": 656
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 3,
+      "ready_ms": 1053.0638199999994,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 388.562,
+          "duration_ms": 389.866
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 358.718,
+          "duration_ms": 360.427
+        },
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 367.015,
+          "duration_ms": 368.109
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 239.664,
+          "duration_ms": 241.422
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 111.89999999990687,
+        "domContentLoaded_ms": 172.69999999995343,
+        "transfer_bytes": 26989,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 68,
+            "start": 895.8999999999069
+          },
+          {
+            "duration": 50,
+            "start": 972.5999999999767
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 204
+          },
+          {
+            "duration": 0,
+            "start": 680
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 4,
+      "ready_ms": 1060.9907519999979,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 389.803,
+          "duration_ms": 392.101
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 376.45,
+          "duration_ms": 377.71
+        },
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 358.274,
+          "duration_ms": 360.09
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 230.382,
+          "duration_ms": 232.151
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 119.90000000002328,
+        "domContentLoaded_ms": 189.19999999995343,
+        "transfer_bytes": 26985,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 62,
+            "start": 901.0999999999767
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 208
+          },
+          {
+            "duration": 0,
+            "start": 716
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 0,
+      "ready_ms": 1053.5072160000018,
       "refresh_ms": null,
       "initial_requests": 4,
       "duplicate_requests": 0,
@@ -2547,39 +2577,88 @@
         {
           "endpoint": "/api/workspace/services",
           "status": 200,
-          "ttfb_ms": 356.413,
-          "duration_ms": 357.504
+          "ttfb_ms": 313.124,
+          "duration_ms": 314.481
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 335.239,
-          "duration_ms": 337.938
+          "ttfb_ms": 317.1,
+          "duration_ms": 318.398
         },
         {
           "endpoint": "/api/workspace/staff_branch_assignments",
           "status": 200,
-          "ttfb_ms": 369.383,
-          "duration_ms": 371.086
+          "ttfb_ms": 373.956,
+          "duration_ms": 376.43
         },
         {
           "endpoint": "/api/workspace/daily_availability",
           "status": 200,
-          "ttfb_ms": 349.021,
-          "duration_ms": 350.723
+          "ttfb_ms": 337.108,
+          "duration_ms": 339.979
         }
       ],
       "browser": {
-        "ttfb_ms": 186.70000000001164,
-        "domContentLoaded_ms": 243.20000000001164,
-        "transfer_bytes": 21981,
+        "ttfb_ms": 115.5,
+        "domContentLoaded_ms": 178.09999999997672,
+        "transfer_bytes": 22007,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 220
+            "start": 204
+          }
+        ],
+        "profiles": []
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 1,
+      "ready_ms": 1084.2183030000015,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 368.238,
+          "duration_ms": 370.559
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 386.099,
+          "duration_ms": 389.192
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 404.067,
+          "duration_ms": 406.695
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 425.466,
+          "duration_ms": 427.8
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 126.09999999997672,
+        "domContentLoaded_ms": 192.30000000004657,
+        "transfer_bytes": 22005,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
           }
         ],
         "profiles": []
@@ -2588,7 +2667,7 @@
     {
       "module": "equipo",
       "repeat": 2,
-      "ready_ms": 610.8844189999982,
+      "ready_ms": 1076.2446320000017,
       "refresh_ms": null,
       "initial_requests": 4,
       "duplicate_requests": 0,
@@ -2596,39 +2675,39 @@
         {
           "endpoint": "/api/workspace/services",
           "status": 200,
-          "ttfb_ms": 268.503,
-          "duration_ms": 270.9
+          "ttfb_ms": 388.815,
+          "duration_ms": 390.466
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 272.931,
-          "duration_ms": 274.421
+          "ttfb_ms": 449.881,
+          "duration_ms": 455.484
         },
         {
           "endpoint": "/api/workspace/staff_branch_assignments",
           "status": 200,
-          "ttfb_ms": 330.407,
-          "duration_ms": 333.014
+          "ttfb_ms": 481.666,
+          "duration_ms": 485.095
         },
         {
           "endpoint": "/api/workspace/daily_availability",
           "status": 200,
-          "ttfb_ms": 281.494,
-          "duration_ms": 282.437
+          "ttfb_ms": 394.497,
+          "duration_ms": 397.944
         }
       ],
       "browser": {
-        "ttfb_ms": 98.5,
-        "domContentLoaded_ms": 155.10000000003492,
-        "transfer_bytes": 11768,
+        "ttfb_ms": 116.80000000004657,
+        "domContentLoaded_ms": 177.19999999995343,
+        "transfer_bytes": 22005,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 132
+            "start": 212
           }
         ],
         "profiles": []
@@ -2637,7 +2716,7 @@
     {
       "module": "equipo",
       "repeat": 3,
-      "ready_ms": 1170.0883869999998,
+      "ready_ms": 1048.2717269999994,
       "refresh_ms": null,
       "initial_requests": 4,
       "duplicate_requests": 0,
@@ -2645,39 +2724,39 @@
         {
           "endpoint": "/api/workspace/services",
           "status": 200,
-          "ttfb_ms": 318.812,
-          "duration_ms": 322.603
+          "ttfb_ms": 320.658,
+          "duration_ms": 322.312
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 268.06,
-          "duration_ms": 269.017
+          "ttfb_ms": 299.866,
+          "duration_ms": 300.782
         },
         {
           "endpoint": "/api/workspace/staff_branch_assignments",
           "status": 200,
-          "ttfb_ms": 332.404,
-          "duration_ms": 334.686
+          "ttfb_ms": 346.093,
+          "duration_ms": 348.447
         },
         {
           "endpoint": "/api/workspace/daily_availability",
           "status": 200,
-          "ttfb_ms": 305.423,
-          "duration_ms": 306.75
+          "ttfb_ms": 322.214,
+          "duration_ms": 323.906
         }
       ],
       "browser": {
-        "ttfb_ms": 244.69999999995343,
-        "domContentLoaded_ms": 300.3999999999651,
-        "transfer_bytes": 21983,
+        "ttfb_ms": 111.30000000004657,
+        "domContentLoaded_ms": 171.59999999997672,
+        "transfer_bytes": 22005,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 320
+            "start": 144
           }
         ],
         "profiles": []
@@ -2686,7 +2765,7 @@
     {
       "module": "equipo",
       "repeat": 4,
-      "ready_ms": 623.9496919999947,
+      "ready_ms": 1064.6529779999983,
       "refresh_ms": null,
       "initial_requests": 4,
       "duplicate_requests": 0,
@@ -2694,39 +2773,39 @@
         {
           "endpoint": "/api/workspace/services",
           "status": 200,
-          "ttfb_ms": 303.182,
-          "duration_ms": 304.317
+          "ttfb_ms": 302.604,
+          "duration_ms": 303.832
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 278.163,
-          "duration_ms": 280.223
+          "ttfb_ms": 348.802,
+          "duration_ms": 350.103
         },
         {
           "endpoint": "/api/workspace/staff_branch_assignments",
           "status": 200,
-          "ttfb_ms": 333.674,
-          "duration_ms": 335.243
+          "ttfb_ms": 325.119,
+          "duration_ms": 327.405
         },
         {
           "endpoint": "/api/workspace/daily_availability",
           "status": 200,
-          "ttfb_ms": 286.613,
-          "duration_ms": 288.356
+          "ttfb_ms": 336.128,
+          "duration_ms": 337.785
         }
       ],
       "browser": {
-        "ttfb_ms": 98.10000000003492,
-        "domContentLoaded_ms": 150.60000000003492,
-        "transfer_bytes": 15212,
+        "ttfb_ms": 122.69999999995343,
+        "domContentLoaded_ms": 181.29999999993015,
+        "transfer_bytes": 21999,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [],
         "lcp": [
           {
             "duration": 0,
-            "start": 172
+            "start": 216
           }
         ],
         "profiles": []
@@ -2735,116 +2814,116 @@
     {
       "module": "reportes",
       "repeat": 0,
-      "ready_ms": 1099.0520839999954,
-      "refresh_ms": 407.86424100000295,
+      "ready_ms": 1037.0045979999995,
+      "refresh_ms": 407.4171070000011,
       "initial_requests": 3,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 298.99,
-          "duration_ms": 300.198
+          "ttfb_ms": 318.732,
+          "duration_ms": 320.52
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 382.928,
-          "duration_ms": 385.353
+          "ttfb_ms": 402.648,
+          "duration_ms": 404.584
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 283.014,
-          "duration_ms": 284.253
+          "ttfb_ms": 299.335,
+          "duration_ms": 300.287
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 124.393,
-          "duration_ms": 125.368
+          "ttfb_ms": 137.926,
+          "duration_ms": 139.017
         }
       ],
       "browser": {
-        "ttfb_ms": 175.10000000003492,
-        "domContentLoaded_ms": 228.5,
-        "transfer_bytes": 27072,
+        "ttfb_ms": 112,
+        "domContentLoaded_ms": 175.09999999997672,
+        "transfer_bytes": 27077,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.4000000000233
+            "start": 1074.0999999999767
           },
           {
             "duration": 16,
-            "start": 1127.5
+            "start": 1074.2999999999302
           },
           {
             "duration": 16,
-            "start": 1127.5
+            "start": 1074.2999999999302
           },
           {
             "duration": 16,
-            "start": 1127.600000000035
+            "start": 1074.2999999999302
           },
           {
             "duration": 16,
-            "start": 1127.600000000035
+            "start": 1074.2999999999302
           },
           {
             "duration": 16,
-            "start": 1127.600000000035
+            "start": 1074.2999999999302
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 244
+            "start": 144
           },
           {
             "duration": 0,
-            "start": 748
+            "start": 676
           }
         ],
         "profiles": []
@@ -2853,116 +2932,116 @@
     {
       "module": "reportes",
       "repeat": 1,
-      "ready_ms": 1010.5815939999957,
-      "refresh_ms": 403.7693339999969,
+      "ready_ms": 1047.012251,
+      "refresh_ms": 409.74490300000616,
       "initial_requests": 3,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 330.92,
-          "duration_ms": 332.694
+          "ttfb_ms": 368.023,
+          "duration_ms": 369.621
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 383.567,
-          "duration_ms": 385.833
+          "ttfb_ms": 426.795,
+          "duration_ms": 428.343
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 302.244,
-          "duration_ms": 303.877
+          "ttfb_ms": 332.167,
+          "duration_ms": 335.869
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 122.937,
-          "duration_ms": 123.888
+          "ttfb_ms": 150.112,
+          "duration_ms": 151.249
         }
       ],
       "browser": {
-        "ttfb_ms": 93.09999999997672,
-        "domContentLoaded_ms": 147.89999999996508,
-        "transfer_bytes": 27068,
+        "ttfb_ms": 121.19999999995343,
+        "domContentLoaded_ms": 179,
+        "transfer_bytes": 27074,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.7999999999884
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.899999999965
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.899999999965
+            "duration": 24,
+            "start": 1086.5
           },
           {
-            "duration": 16,
-            "start": 1047.899999999965
+            "duration": 24,
+            "start": 1086.6999999999534
           },
           {
-            "duration": 16,
-            "start": 1047.899999999965
+            "duration": 24,
+            "start": 1086.6999999999534
           },
           {
-            "duration": 16,
-            "start": 1047.899999999965
+            "duration": 24,
+            "start": 1086.6999999999534
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 164
+            "start": 196
           },
           {
             "duration": 0,
-            "start": 628
+            "start": 712
           }
         ],
         "profiles": []
@@ -2971,116 +3050,116 @@
     {
       "module": "reportes",
       "repeat": 2,
-      "ready_ms": 1027.3160480000006,
-      "refresh_ms": 396.8000880000036,
+      "ready_ms": 1047.1255319999982,
+      "refresh_ms": 405.8698549999972,
       "initial_requests": 3,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 334.476,
-          "duration_ms": 335.989
+          "ttfb_ms": 372.69,
+          "duration_ms": 374.578
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 403.262,
-          "duration_ms": 404.501
+          "ttfb_ms": 445.8,
+          "duration_ms": 447.435
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 317.969,
-          "duration_ms": 320.988
+          "ttfb_ms": 368.502,
+          "duration_ms": 369.67
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 145.581,
-          "duration_ms": 146.614
+          "ttfb_ms": 140.424,
+          "duration_ms": 141.44
         }
       ],
       "browser": {
-        "ttfb_ms": 95,
-        "domContentLoaded_ms": 151.60000000003492,
-        "transfer_bytes": 27070,
+        "ttfb_ms": 115.30000000004657,
+        "domContentLoaded_ms": 174.5,
+        "transfer_bytes": 27075,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.4000000000233
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.5
           },
           {
             "duration": 16,
-            "start": 1058.4000000000233
+            "start": 1085.5
           },
           {
             "duration": 16,
-            "start": 1058.5
+            "start": 1085.5999999999767
           },
           {
             "duration": 16,
-            "start": 1058.5
+            "start": 1085.5999999999767
           },
           {
             "duration": 16,
-            "start": 1058.5
+            "start": 1085.5999999999767
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 168
+            "start": 196
           },
           {
             "duration": 0,
-            "start": 652
+            "start": 728
           }
         ],
         "profiles": []
@@ -3089,116 +3168,116 @@
     {
       "module": "reportes",
       "repeat": 3,
-      "ready_ms": 1011.0971659999996,
-      "refresh_ms": 411.25728000000527,
+      "ready_ms": 1032.2032400000026,
+      "refresh_ms": 410.931488000002,
       "initial_requests": 3,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 352.149,
-          "duration_ms": 353.513
+          "ttfb_ms": 343.542,
+          "duration_ms": 346.168
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 372.122,
-          "duration_ms": 373.372
+          "ttfb_ms": 402.945,
+          "duration_ms": 404.218
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 251.979,
-          "duration_ms": 253.238
+          "ttfb_ms": 338.414,
+          "duration_ms": 341.768
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 125.204,
-          "duration_ms": 126.205
+          "ttfb_ms": 130.909,
+          "duration_ms": 131.918
         }
       ],
       "browser": {
-        "ttfb_ms": 94.39999999996508,
-        "domContentLoaded_ms": 149.69999999995343,
-        "transfer_bytes": 27058,
+        "ttfb_ms": 105,
+        "domContentLoaded_ms": 162.89999999990687,
+        "transfer_bytes": 27082,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.6999999999534
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.7999999999302
           },
           {
-            "duration": 24,
-            "start": 1042.899999999965
+            "duration": 16,
+            "start": 1072.7999999999302
           },
           {
-            "duration": 24,
-            "start": 1043.0999999999767
+            "duration": 16,
+            "start": 1072.7999999999302
           },
           {
-            "duration": 24,
-            "start": 1043.0999999999767
+            "duration": 16,
+            "start": 1072.7999999999302
           },
           {
-            "duration": 24,
-            "start": 1043.0999999999767
+            "duration": 16,
+            "start": 1072.7999999999302
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 168
+            "start": 136
           },
           {
             "duration": 0,
-            "start": 616
+            "start": 660
           }
         ],
         "profiles": []
@@ -3207,116 +3286,116 @@
     {
       "module": "reportes",
       "repeat": 4,
-      "ready_ms": 1034.9095309999975,
-      "refresh_ms": 408.975188000004,
+      "ready_ms": 1036.0841579999978,
+      "refresh_ms": 402.7269079999969,
       "initial_requests": 3,
       "duplicate_requests": 0,
       "requests": [
         {
           "endpoint": "/api/finance/summary",
           "status": 200,
-          "ttfb_ms": 309.872,
-          "duration_ms": 311.411
+          "ttfb_ms": 422.584,
+          "duration_ms": 424.739
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 365.768,
-          "duration_ms": 366.747
+          "ttfb_ms": 438.215,
+          "duration_ms": 439.824
         },
         {
           "endpoint": "/api/workspace/staff",
           "status": 200,
-          "ttfb_ms": 300.21,
-          "duration_ms": 305.157
+          "ttfb_ms": 327.837,
+          "duration_ms": 331.006
         },
         {
           "endpoint": "/api/workspace/dashboard",
           "status": 200,
-          "ttfb_ms": 131.979,
-          "duration_ms": 133.074
+          "ttfb_ms": 134.263,
+          "duration_ms": 135.303
         }
       ],
       "browser": {
-        "ttfb_ms": 95,
-        "domContentLoaded_ms": 150.90000000002328,
-        "transfer_bytes": 27060,
+        "ttfb_ms": 107.5,
+        "domContentLoaded_ms": 164.80000000004657,
+        "transfer_bytes": 27075,
         "js_transfer_bytes": 0,
         "longTasks": [],
         "events": [
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.3000000000466
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.4000000000233
           },
           {
             "duration": 16,
-            "start": 1075.0999999999767
+            "start": 1070.4000000000233
           },
           {
             "duration": 16,
-            "start": 1075.2000000000116
+            "start": 1070.5
           },
           {
             "duration": 16,
-            "start": 1075.2000000000116
+            "start": 1070.5
           },
           {
             "duration": 16,
-            "start": 1075.2000000000116
+            "start": 1070.5
           }
         ],
         "lcp": [
           {
             "duration": 0,
-            "start": 168
+            "start": 184
           },
           {
             "duration": 0,
-            "start": 616
+            "start": 708
           }
         ],
         "profiles": []

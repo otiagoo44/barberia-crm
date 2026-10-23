@@ -1,0 +1,72 @@
+[
+  {
+    "font": "DM Sans Variable",
+    "numberWidth": 119,
+    "textWidth": 347,
+    "overflow": false,
+    "width": 360
+  },
+  {
+    "font": "DM Sans Variable",
+    "numberWidth": 119,
+    "textWidth": 347,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "font": "DM Sans Variable",
+    "numberWidth": 119,
+    "textWidth": 347,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "font": "DM Sans Variable",
+    "numberWidth": 119,
+    "textWidth": 347,
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "font": "DM Sans Variable",
+    "numberWidth": 119,
+    "textWidth": 347,
+    "overflow": false,
+    "width": 1440
+  },
+  {
+    "font": "Inter QA",
+    "numberWidth": 127,
+    "textWidth": 366,
+    "overflow": false,
+    "width": 360
+  },
+  {
+    "font": "Inter QA",
+    "numberWidth": 127,
+    "textWidth": 366,
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "font": "Inter QA",
+    "numberWidth": 127,
+    "textWidth": 366,
+    "overflow": false,
+    "width": 768
+  },
+  {
+    "font": "Inter QA",
+    "numberWidth": 127,
+    "textWidth": 366,
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "font": "Inter QA",
+    "numberWidth": 127,
+    "textWidth": 366,
+    "overflow": false,
+    "width": 1440
+  }
+]

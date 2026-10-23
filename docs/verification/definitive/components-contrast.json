@@ -1,0 +1,182 @@
+[
+  {
+    "brand": "#D7B56D",
+    "styles": [
+      {
+        "selector": "current",
+        "background": "rgb(215, 181, 109)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "selected",
+        "background": "rgb(215, 181, 109)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(215, 181, 109)",
+        "color": "rgb(0, 0, 0)",
+        "font": "15px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(236, 232, 223)",
+        "color": "rgb(103, 100, 94)",
+        "font": "15px"
+      }
+    ],
+    "violations": 0
+  },
+  {
+    "brand": "#336699",
+    "styles": [
+      {
+        "selector": "current",
+        "background": "rgb(51, 102, 153)",
+        "color": "rgb(255, 255, 255)",
+        "font": "14px"
+      },
+      {
+        "selector": "selected",
+        "background": "rgb(51, 102, 153)",
+        "color": "rgb(255, 255, 255)",
+        "font": "14px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(51, 102, 153)",
+        "color": "rgb(255, 255, 255)",
+        "font": "15px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(236, 232, 223)",
+        "color": "rgb(103, 100, 94)",
+        "font": "15px"
+      }
+    ],
+    "violations": 0
+  },
+  {
+    "brand": "#ffffff",
+    "styles": [
+      {
+        "selector": "current",
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "selected",
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "font": "15px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(236, 232, 223)",
+        "color": "rgb(103, 100, 94)",
+        "font": "15px"
+      }
+    ],
+    "violations": 0
+  },
+  {
+    "brand": "#000000",
+    "styles": [
+      {
+        "selector": "current",
+        "background": "rgb(0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "font": "14px"
+      },
+      {
+        "selector": "selected",
+        "background": "rgb(0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "font": "14px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "font": "15px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(236, 232, 223)",
+        "color": "rgb(103, 100, 94)",
+        "font": "15px"
+      }
+    ],
+    "violations": 0
+  },
+  {
+    "brand": "#efef00",
+    "styles": [
+      {
+        "selector": "current",
+        "background": "rgb(239, 239, 0)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "selected",
+        "background": "rgb(239, 239, 0)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(239, 239, 0)",
+        "color": "rgb(0, 0, 0)",
+        "font": "15px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(236, 232, 223)",
+        "color": "rgb(103, 100, 94)",
+        "font": "15px"
+      }
+    ],
+    "violations": 0
+  },
+  {
+    "brand": "#ff0000",
+    "styles": [
+      {
+        "selector": "current",
+        "background": "rgb(255, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "selected",
+        "background": "rgb(255, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(255, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "font": "15px"
+      },
+      {
+        "selector": "primary",
+        "background": "rgb(236, 232, 223)",
+        "color": "rgb(103, 100, 94)",
+        "font": "15px"
+      }
+    ],
+    "violations": 0
+  }
+]

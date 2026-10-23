@@ -108,7 +108,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     });
     await page
       .getByRole("combobox", { name: "Período", exact: true })
-      .selectOption("month");
+      .selectOption("7");
     await expect.poll(() => requested).toBeTruthy();
     await expect(page.locator(".loading:visible")).toHaveCount(1);
     await expect(page.locator(".kpi-grid")).toHaveCount(0);
@@ -121,7 +121,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     );
     await page
       .getByRole("combobox", { name: "Período", exact: true })
-      .selectOption("7");
+      .selectOption("30");
     await expect(page.locator("main").getByRole("alert")).toContainText(
       "No pudimos conectar",
     );

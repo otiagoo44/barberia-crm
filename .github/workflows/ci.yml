@@ -60,6 +60,8 @@ jobs:
       - run: node scripts/ci-environment.mjs
       - name: Upgrade existing 27-migration ledger without rewriting history
         run: npx tsx tests/recovery/upgrade-local.ts
+      - name: Inspect candidate security and performance advisors on isolated Supabase
+        run: npx supabase db advisors --local --type all --fail-on error --output json > docs/verification/definitive/advisors-local.json
       - name: Prepare real Auth fixtures
         run: npx tsx tests/e2e/setup.ts
       - name: Restore drill with real local Supabase
