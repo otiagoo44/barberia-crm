@@ -379,7 +379,12 @@ export function FinanceForm({
             admite correcciones mediante ajustes auditados.
           </Notice>
         )}
-        <button className="primary" disabled={busy} type="submit">
+        <button
+          aria-busy={!!busy}
+          className="primary"
+          disabled={busy}
+          type="submit"
+        >
           {busy ? "Registrando…" : "Confirmar"}
         </button>
       </form>

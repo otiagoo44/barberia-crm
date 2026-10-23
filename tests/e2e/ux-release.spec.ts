@@ -154,9 +154,19 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     const pool = new Pool({ connectionString: process.env.LOCAL_DB_URL });
     const f = await (async () => {
       try {
+        const scoped = await fixtures(pool, baseFixture.users, namespace);
+        // The walk-in starts at the real current time. Keep this isolated
+        // branch near local noon so its 40-minute service never crosses the
+        // test day's boundary. Production availability guards stay unchanged.
+        const offset = new Date().getUTCHours() - 12;
+        const timezone = `Etc/GMT${offset >= 0 ? "+" : ""}${offset}`;
+        await pool.query("update public.branches set timezone=$1 where id=$2", [
+          timezone,
+          scoped.branches.a1,
+        ]);
         return {
           ...baseFixture,
-          ...(await fixtures(pool, baseFixture.users, namespace)),
+          ...scoped,
         };
       } finally {
         await pool.end();
@@ -244,7 +254,13 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
       .click();
     const card = page.locator(".queue-card").filter({ hasText: name });
     await expect(card).toBeVisible();
+    const assigned = page.waitForResponse(
+      (response) =>
+        response.url().includes("/api/workspace/assign_walkin") &&
+        response.request().method() === "POST",
+    );
     await card.getByRole("button", { name: "Asignar disponible" }).click();
+    expect((await assigned).ok()).toBeTruthy();
     await card.getByRole("button", { name: "Abrir servicio" }).click();
     await page.getByRole("button", { name: "Check-in", exact: true }).click();
     await page

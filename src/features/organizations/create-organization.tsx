@@ -62,7 +62,7 @@ export function CreateOrganization() {
         </Field>
       </div>
       {error && <Notice error>{error}</Notice>}
-      <button className="primary" disabled={busy}>
+      <button aria-busy={!!busy} className="primary" disabled={busy}>
         {busy ? "Creando…" : "Crear organización"}
       </button>
     </form>

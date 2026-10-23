@@ -1,0 +1,16 @@
+{
+  "run": "39874912332",
+  "branch": "redesign/black-gold-audit-20261022",
+  "product_commit": "8a59362db9c701e94cb17ae0240a1a9ab5e33190",
+  "src_tree": "051ddcb8b6d7f26abc26a0bcde34913ac64f633e",
+  "schema_tree": "c49634f7f33584d0953e407f3a50489e8bffe457",
+  "artifact_source": "aec2ea7c8181d748a09136a4370fa1d8454de99e",
+  "baseline_source": "b7d5cfd42611d83347b4307e0c53db173d7b967f",
+  "visual": {
+    "before_screenshots": 110,
+    "after_screenshots": 195,
+    "after_audits": 74,
+    "after_violations": 0
+  },
+  "limits": "Isolated fixtures; not production acceptance. CI synthetic merge SHA is linked by matching product trees."
+}

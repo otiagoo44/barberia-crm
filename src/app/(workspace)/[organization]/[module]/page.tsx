@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Agenda } from "@/features/appointments/agenda";
 import { Dashboard } from "@/features/analytics/dashboard";
 import { Customers } from "@/features/customers/customers";
@@ -6,9 +6,11 @@ import { WalkIns } from "@/features/walk-ins/queue";
 import { Goals } from "@/features/goals/goals";
 import { Configuration } from "@/features/configuration/configuration";
 import { requireUser } from "@/lib/auth";
+import { HttpError } from "@/lib/http";
 import { Cash } from "@/features/finance/cash";
 import { FinancialDashboard } from "@/features/finance/dashboard";
 import { hasCapability } from "@/lib/capabilities";
+import { ReceptionHome } from "@/features/analytics/operation-home";
 export const dynamic = "force-dynamic";
 export default async function Module({
   params,
@@ -16,7 +18,18 @@ export default async function Module({
   params: Promise<{ organization: string; module: string }>;
 }) {
   const p = await params;
-  const { db, user } = await requireUser();
+  // Pages render in parallel with layouts: resolve their auth redirects here
+  // too, before any workspace read, instead of leaking an expected gate error.
+  let context;
+  try {
+    context = await requireUser();
+  } catch (error) {
+    if (error instanceof HttpError && error.code === "mfa_required")
+      redirect("/mfa");
+    if (error instanceof HttpError && error.status === 401) redirect("/login");
+    redirect("/");
+  }
+  const { db, user } = context;
   const { data: org } = await db
     .from("organizations")
     .select("id")
@@ -41,14 +54,7 @@ export default async function Module({
   switch (p.module) {
     case "inicio":
       if (role === "finance") return <FinancialDashboard />;
-      return role === "receptionist" ? (
-        <>
-          <Agenda compact />
-          <div style={{ marginTop: 32 }}>
-            <WalkIns />
-          </div>
-        </>
-      ) : role === "barber" ? (
+      return role === "receptionist" ? <ReceptionHome /> : role === "barber" ? (
         <>
           <Agenda compact />
           <div style={{ marginTop: 32 }}>

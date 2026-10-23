@@ -1,0 +1,47 @@
+{
+  "executed_at": "2026-10-22T23:59:20.344Z",
+  "source": "Isolated Docker Supabase with real Auth fixtures; not managed production backup",
+  "status": "PASSED",
+  "dump_bytes": 1156305,
+  "restore_and_validation_ms": 1892,
+  "source_counts": {
+    "organizations": 2,
+    "customers": 3,
+    "staff": 4,
+    "auth_users": 7,
+    "audit_logs": 16,
+    "checkouts": 1,
+    "payments": 1,
+    "cash_movements": 4,
+    "expenses": 3,
+    "advances": 1,
+    "salaries": 1,
+    "closures": 1,
+    "financial_dedupe_keys": 14
+  },
+  "checks": [
+    "row counts incl Auth/audit",
+    "all public tables RLS",
+    "tenant isolation",
+    "manager branch isolation",
+    "idempotent booking",
+    "GiST overlap constraint",
+    "financial row counts, cash balance and tenant isolation",
+    "expenses, advances, salaries, sealed cash closure and durable financial retry",
+    "restored platform and reception permission denials"
+  ],
+  "production_restore": "NOT_TESTED",
+  "schemas": [
+    "public",
+    "app_private",
+    "auth",
+    "extensions"
+  ],
+  "extensions": [
+    "btree_gist",
+    "pg_trgm",
+    "pgcrypto"
+  ],
+  "managed_platform_restore": "NOT_TESTED: Realtime/Storage infrastructure and publications are provisioned separately, not restored by this application drill.",
+  "ownership": "Original local owners, ACLs and RLS restored using the isolated container's existing supabase_admin role. No production privileges changed; cloud recovery not exercised."
+}

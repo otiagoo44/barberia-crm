@@ -72,12 +72,16 @@ export function ReceptionHome() {
         <MetricCard
           label="Efectivo esperado"
           value={
-            cash.data?.session
-              ? money(
-                  cash.data.session.expected_cash_minor,
-                  w.organization.currency,
-                )
-              : "Sin apertura"
+            cash.loading
+              ? "Consultando caja…"
+              : !cash.data || cash.error
+                ? "Sin datos"
+                : cash.data.session
+                  ? money(
+                      cash.data.session.expected_cash_minor,
+                      w.organization.currency,
+                    )
+                  : "Sin apertura"
           }
         />
       </div>

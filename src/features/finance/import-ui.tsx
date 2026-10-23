@@ -175,6 +175,7 @@ export function FinanceImport({
               </Field>
             ))}
             <button
+              aria-busy={!!busy}
               className="primary"
               disabled={busy || !file}
               onClick={validate}
@@ -254,6 +255,7 @@ export function FinanceImport({
                 </Notice>
                 {!dryRun && preview.id && (
                   <button
+                    aria-busy={!!busy}
                     className="primary"
                     disabled={
                       busy || dirty || preview.dry_run || unresolved.length > 0

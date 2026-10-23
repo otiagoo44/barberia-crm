@@ -28,7 +28,7 @@ import { useWorkspace } from "@/features/organizations/context";
 import { SignOut } from "@/features/auth/auth-form";
 import { roleLabels } from "@/lib/validation";
 import { resourceUrl, useResource } from "@/lib/client";
-import { Modal, Empty } from "./ui";
+import { Modal, Empty, Loading, Notice } from "./ui";
 import type { Page, DataRow } from "@/lib/types";
 import { brandStyle } from "@/lib/branding";
 const links: [string, string, LucideIcon, string][] = [
@@ -231,7 +231,13 @@ function Activity() {
   );
   return (
     <div className="stack">
-      {r.data?.items.length ? (
+      {r.loading ? (
+        <Loading />
+      ) : r.error ? (
+        <Notice error>
+          {r.error} <button onClick={r.reload}>Reintentar</button>
+        </Notice>
+      ) : r.data?.items.length ? (
         r.data.items.map((n) => (
           <article className="list-item" key={n.id}>
             <strong>{String(n.title)}</strong>

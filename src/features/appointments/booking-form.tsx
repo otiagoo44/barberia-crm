@@ -358,6 +358,7 @@ export function BookingForm({
             Cancelar
           </button>
           <button
+            aria-busy={!!busy}
             className="primary"
             disabled={busy || (!customer && !newCustomer)}
           >

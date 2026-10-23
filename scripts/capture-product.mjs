@@ -1,4 +1,4 @@
-/* global document, innerWidth */
+/* global document, innerWidth, FontFace */
 import { chromium, expect } from "@playwright/test";
 import { readFile, mkdir, writeFile, rm, readdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
@@ -11,6 +11,15 @@ if (
   !["localhost", "127.0.0.1"].includes(new URL(base).hostname)
 )
   throw Error("Visual fixtures require isolated localhost Auth");
+if (
+  !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  !["localhost", "127.0.0.1"].includes(
+    new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname,
+  )
+)
+  throw Error(
+    "Visual fixtures require isolated Supabase, never a cloud project",
+  );
 const phase = process.env.QA_PHASE === "before" ? "before" : "after";
 const f = JSON.parse(await readFile(".test-data/e2e/ux-fixtures.json", "utf8"));
 const out = `docs/verification/ux/${phase}`;
@@ -95,6 +104,19 @@ try {
       fullPage: true,
     });
     await audit(anonymous, "login", width);
+    await anonymous.goto(base + "/book/ux-b/b1");
+    await expect(anonymous.locator(".loading:visible")).toHaveCount(0);
+    await expect(anonymous.locator("h1").first()).toBeVisible();
+    expect(
+      await anonymous.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBeTruthy();
+    await anonymous.screenshot({
+      path: `${out}/reserva-publica-${width}.png`,
+      fullPage: true,
+    });
+    await audit(anonymous, "reserva-publica", width);
   }
   await anonymousContext.close();
   const login = await page.request.post(base + "/api/auth/signin", {
@@ -112,6 +134,60 @@ try {
     await audit(page, "mfa", width);
   }
   await verify(page.request, "ownerA");
+  if (phase === "after") {
+    const fontResults = [];
+    const interBytes = [
+      ...(await readFile(
+        "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+      )),
+    ];
+    for (const font of ["DM Sans Variable", "Inter QA"]) {
+      for (const width of [360, 390, 768, 1024, 1440]) {
+        await page.setViewportSize({ width, height: 1000 });
+        await page.goto(base + "/ux-a/clientes");
+        await expect(page.locator("main .loading")).toHaveCount(0);
+        const metrics = await page.evaluate(
+          async ({ font, interBytes }) => {
+            if (font === "Inter QA") {
+              const face = new FontFace(
+                font,
+                new Uint8Array(interBytes).buffer,
+                { weight: "100 900" },
+              );
+              await face.load();
+              document.fonts.add(face);
+            }
+            document.documentElement.style.fontFamily = `"${font}",sans-serif`;
+            await document.fonts.ready;
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            ctx.font = `16px "${font}"`;
+            return {
+              font,
+              numberWidth: ctx.measureText("Gs. 128.450.000").width,
+              textWidth: ctx.measureText(
+                "Próxima atención · Teléfono · Jonatan y Esteban",
+              ).width,
+              overflow: document.documentElement.scrollWidth > innerWidth,
+            };
+          },
+          { font, interBytes },
+        );
+        expect(metrics.overflow).toBeFalsy();
+        fontResults.push({ ...metrics, width });
+        await page.screenshot({
+          path: `${out}/tipografia-${font === "Inter QA" ? "inter" : "dm-sans"}-${width}.png`,
+          fullPage: true,
+        });
+      }
+    }
+    await mkdir("docs/verification/definitive", { recursive: true });
+    await writeFile(
+      "docs/verification/definitive/typeface-comparison.json",
+      JSON.stringify(fontResults, null, 2),
+    );
+    await page.goto(base + "/mfa");
+  }
   async function capture(module, width) {
     await expect(page.locator(".loading:visible")).toHaveCount(0);
     const fits = await page.evaluate(

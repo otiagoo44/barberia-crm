@@ -105,12 +105,17 @@ export function AppointmentDialog({
         {error && <Notice error>{error}</Notice>}
         <div className="row wrap">
           {operator && a.status === "scheduled" && (
-            <button disabled={busy} onClick={() => change("confirmed")}>
+            <button
+              aria-busy={!!busy}
+              disabled={busy}
+              onClick={() => change("confirmed")}
+            >
               Confirmar
             </button>
           )}
           {["scheduled", "confirmed"].includes(a.status) && (
             <button
+              aria-busy={!!busy}
               className="primary"
               disabled={busy || !due}
               onClick={() => change("checked_in")}
@@ -120,6 +125,7 @@ export function AppointmentDialog({
           )}
           {a.status === "checked_in" && (
             <button
+              aria-busy={!!busy}
               className="primary"
               disabled={busy || !due}
               onClick={() => change("in_service")}
@@ -129,6 +135,7 @@ export function AppointmentDialog({
           )}
           {a.status === "in_service" && (
             <button
+              aria-busy={!!busy}
               className="primary"
               disabled={busy}
               onClick={() => change("completed")}
@@ -137,14 +144,22 @@ export function AppointmentDialog({
             </button>
           )}
           {operator && ["scheduled", "confirmed"].includes(a.status) && (
-            <button disabled={busy} onClick={() => setBooking("reschedule")}>
+            <button
+              aria-busy={!!busy}
+              disabled={busy}
+              onClick={() => setBooking("reschedule")}
+            >
               Reprogramar
             </button>
           )}
           {operator &&
             ["scheduled", "confirmed"].includes(a.status) &&
             new Date(a.starts_at).valueOf() <= now && (
-              <button disabled={busy} onClick={() => change("no_show")}>
+              <button
+                aria-busy={!!busy}
+                disabled={busy}
+                onClick={() => change("no_show")}
+              >
                 No asistió
               </button>
             )}
@@ -183,6 +198,7 @@ export function AppointmentDialog({
                   />
                 </label>
                 <button
+                  aria-busy={!!busy}
                   className="danger"
                   disabled={busy}
                   onClick={() => change("cancelled")}

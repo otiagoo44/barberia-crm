@@ -85,8 +85,8 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
           </Field>
         )}
         {error && <Notice error>{error}</Notice>}
-        {message && <Notice>{message}</Notice>}
-        <button className="primary" disabled={busy}>
+        {message && <Notice success>{message}</Notice>}
+        <button aria-busy={!!busy} className="primary" disabled={busy}>
           {busy
             ? "Un momento…"
             : mode === "signin"
@@ -125,6 +125,7 @@ export function SignOut({ disabled = false }: { disabled?: boolean } = {}) {
   return (
     <>
       <button
+        aria-busy={!!busy}
         disabled={busy || disabled}
         onClick={async () => {
           setBusy(true);

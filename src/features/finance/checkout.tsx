@@ -161,7 +161,7 @@ export function CheckoutDialog({
           <Loading />
         ) : done || checkout?.status === "posted" ? (
           <>
-            <Notice>Venta cobrada y registrada.</Notice>
+            <Notice success>Venta cobrada y registrada.</Notice>
             <button className="primary" onClick={onClose}>
               Volver y ofrecer próximo turno
             </button>
@@ -232,6 +232,7 @@ export function CheckoutDialog({
               </div>
             ))}
             <button
+              aria-busy={!!busy}
               onClick={() =>
                 setPayments((rows) => [...rows, { method: "", amount: "" }])
               }
@@ -240,6 +241,7 @@ export function CheckoutDialog({
               Dividir pago
             </button>
             <button
+              aria-busy={!!busy}
               className="primary"
               onClick={post}
               disabled={busy || !catalog.data?.payment_methods.length}
@@ -301,7 +303,12 @@ export function CheckoutDialog({
                 </Field>
               </>
             )}
-            <button className="primary" disabled={busy} onClick={create}>
+            <button
+              aria-busy={!!busy}
+              className="primary"
+              disabled={busy}
+              onClick={create}
+            >
               Preparar cobro
             </button>
           </>

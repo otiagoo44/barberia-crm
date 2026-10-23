@@ -1,0 +1,3711 @@
+{
+  "phase": "after",
+  "fixture": "isolated Supabase Auth tenants; no production data",
+  "results": [
+    {
+      "module": "mfa-dispositivos",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 177.5,
+            "domContentLoaded": 177.5
+          }
+        ],
+        "resources": 11,
+        "transferBytes": 0
+      }
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 177.5,
+            "domContentLoaded": 177.5
+          }
+        ],
+        "resources": 13,
+        "transferBytes": 1505
+      }
+    },
+    {
+      "module": "mfa-dispositivos",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 138,
+            "domContentLoaded": 136.80000000004657
+          }
+        ],
+        "resources": 11,
+        "transferBytes": 0
+      }
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 138,
+            "domContentLoaded": 136.80000000004657
+          }
+        ],
+        "resources": 13,
+        "transferBytes": 1503
+      }
+    },
+    {
+      "module": "mfa-dispositivos",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 139.89999999996508,
+            "domContentLoaded": 139.89999999996508
+          }
+        ],
+        "resources": 12,
+        "transferBytes": 463
+      }
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 139.89999999996508,
+            "domContentLoaded": 139.89999999996508
+          }
+        ],
+        "resources": 13,
+        "transferBytes": 1501
+      }
+    },
+    {
+      "module": "mfa-dispositivos",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 150.5,
+            "domContentLoaded": 150.39999999996508
+          }
+        ],
+        "resources": 12,
+        "transferBytes": 463
+      }
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 150.5,
+            "domContentLoaded": 150.39999999996508
+          }
+        ],
+        "resources": 13,
+        "transferBytes": 1502
+      }
+    },
+    {
+      "module": "mfa-dispositivos",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 142.59999999997672,
+            "domContentLoaded": 142.5
+          }
+        ],
+        "resources": 12,
+        "transferBytes": 463
+      }
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 142.59999999997672,
+            "domContentLoaded": 142.5
+          }
+        ],
+        "resources": 13,
+        "transferBytes": 1500
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 172.5,
+            "domContentLoaded": 166.79999999998836
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 122830
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.70000000001164,
+            "domContentLoaded": 169.80000000004657
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 9891
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.70000000001164,
+            "domContentLoaded": 169.80000000004657
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 9891
+      }
+    },
+    {
+      "module": "agenda-semana",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.70000000001164,
+            "domContentLoaded": 169.80000000004657
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 20821
+      }
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.70000000001164,
+            "domContentLoaded": 169.80000000004657
+          }
+        ],
+        "resources": 29,
+        "transferBytes": 22437
+      }
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.70000000001164,
+            "domContentLoaded": 169.80000000004657
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 30862
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.5,
+            "domContentLoaded": 161.40000000002328
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 5064
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.5,
+            "domContentLoaded": 161.40000000002328
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 7335
+      }
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.5,
+            "domContentLoaded": 161.40000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 8529
+      }
+    },
+    {
+      "module": "cliente-notas",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.5,
+            "domContentLoaded": 161.40000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 8529
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160.70000000001164,
+            "domContentLoaded": 154.29999999998836
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 10158
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160.70000000001164,
+            "domContentLoaded": 154.29999999998836
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 10158
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160.70000000001164,
+            "domContentLoaded": 154.29999999998836
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 11553
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 176.70000000001164,
+            "domContentLoaded": 176.60000000003492
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 6488
+      }
+    },
+    {
+      "module": "caja",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 157,
+            "domContentLoaded": 154.10000000003492
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 3920
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 157,
+            "domContentLoaded": 154.10000000003492
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 11926
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 200.20000000001164,
+            "domContentLoaded": 196.20000000001164
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 13510
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 200.20000000001164,
+            "domContentLoaded": 196.20000000001164
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 18813
+      }
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 200.20000000001164,
+            "domContentLoaded": 196.20000000001164
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 18813
+      }
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 200.20000000001164,
+            "domContentLoaded": 196.20000000001164
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 18813
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.60000000003492,
+            "domContentLoaded": 158
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 12446
+      }
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.60000000003492,
+            "domContentLoaded": 158
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 12446
+      }
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.60000000003492,
+            "domContentLoaded": 158
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 12446
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160,
+            "domContentLoaded": 156.5
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 8908
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 156.90000000002328,
+            "domContentLoaded": 154.29999999998836
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 4098
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 158.29999999998836,
+            "domContentLoaded": 158.29999999998836
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 4508
+      }
+    },
+    {
+      "module": "metas",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 153.40000000002328,
+            "domContentLoaded": 150.70000000001164
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 4129
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 360,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 153.90000000002328,
+            "domContentLoaded": 153.90000000002328
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 3782
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166.20000000001164,
+            "domContentLoaded": 162.30000000004657
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 12269
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166,
+            "domContentLoaded": 162.40000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 9891
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166,
+            "domContentLoaded": 162.40000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 9891
+      }
+    },
+    {
+      "module": "agenda-semana",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166,
+            "domContentLoaded": 162.40000000002328
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 27713
+      }
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166,
+            "domContentLoaded": 162.40000000002328
+          }
+        ],
+        "resources": 35,
+        "transferBytes": 29329
+      }
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166,
+            "domContentLoaded": 162.40000000002328
+          }
+        ],
+        "resources": 39,
+        "transferBytes": 37754
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 171.39999999996508,
+            "domContentLoaded": 168.19999999995343
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 5066
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 171.39999999996508,
+            "domContentLoaded": 168.19999999995343
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 7337
+      }
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 171.39999999996508,
+            "domContentLoaded": 168.19999999995343
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 9728
+      }
+    },
+    {
+      "module": "cliente-notas",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 171.39999999996508,
+            "domContentLoaded": 168.19999999995343
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 9728
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.90000000002328,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 10158
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.90000000002328,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 10158
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.90000000002328,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 22,
+        "transferBytes": 11553
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 166.40000000002328,
+            "domContentLoaded": 163.30000000004657
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 6486
+      }
+    },
+    {
+      "module": "caja",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160.5,
+            "domContentLoaded": 160.5
+          }
+        ],
+        "resources": 17,
+        "transferBytes": 3922
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160.5,
+            "domContentLoaded": 160.5
+          }
+        ],
+        "resources": 20,
+        "transferBytes": 11928
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 194.5,
+            "domContentLoaded": 190.59999999997672
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 13514
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 194.5,
+            "domContentLoaded": 190.59999999997672
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 18817
+      }
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 194.5,
+            "domContentLoaded": 190.59999999997672
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 18817
+      }
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 194.5,
+            "domContentLoaded": 190.59999999997672
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 18817
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 172.29999999998836,
+            "domContentLoaded": 168.79999999998836
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 12444
+      }
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 172.29999999998836,
+            "domContentLoaded": 168.79999999998836
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 12444
+      }
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 172.29999999998836,
+            "domContentLoaded": 168.79999999998836
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 12444
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 178.79999999998836,
+            "domContentLoaded": 174.89999999996508
+          }
+        ],
+        "resources": 21,
+        "transferBytes": 8910
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 273.20000000001164,
+            "domContentLoaded": 273.20000000001164
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 4099
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 175.70000000001164,
+            "domContentLoaded": 172.89999999996508
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 4506
+      }
+    },
+    {
+      "module": "metas",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 158.90000000002328,
+            "domContentLoaded": 156.09999999997672
+          }
+        ],
+        "resources": 19,
+        "transferBytes": 4131
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 390,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 183.39999999996508,
+            "domContentLoaded": 180.69999999995343
+          }
+        ],
+        "resources": 18,
+        "transferBytes": 3783
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 345,
+            "domContentLoaded": 339.69999999995343
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 22946
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.59999999997672,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 21718
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.59999999997672,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 21718
+      }
+    },
+    {
+      "module": "agenda-semana",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.59999999997672,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 28064
+      }
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.59999999997672,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 36,
+        "transferBytes": 29680
+      }
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163.59999999997672,
+            "domContentLoaded": 158.90000000002328
+          }
+        ],
+        "resources": 40,
+        "transferBytes": 38105
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 168.90000000002328,
+            "domContentLoaded": 164.80000000004657
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 14703
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 168.90000000002328,
+            "domContentLoaded": 164.80000000004657
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20402
+      }
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 168.90000000002328,
+            "domContentLoaded": 164.80000000004657
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20402
+      }
+    },
+    {
+      "module": "cliente-notas",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 168.90000000002328,
+            "domContentLoaded": 164.80000000004657
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20402
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 156.40000000002328,
+            "domContentLoaded": 150.70000000001164
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 20837
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 156.40000000002328,
+            "domContentLoaded": 150.70000000001164
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 20837
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 156.40000000002328,
+            "domContentLoaded": 150.70000000001164
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 22232
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 193.90000000002328,
+            "domContentLoaded": 189.90000000002328
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 16125
+      }
+    },
+    {
+      "module": "caja",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 173,
+            "domContentLoaded": 173
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 10121
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 173,
+            "domContentLoaded": 173
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23751
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 228.5,
+            "domContentLoaded": 228.39999999996508
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 24181
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 228.5,
+            "domContentLoaded": 228.39999999996508
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29484
+      }
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 228.5,
+            "domContentLoaded": 228.39999999996508
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29484
+      }
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 228.5,
+            "domContentLoaded": 228.39999999996508
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29484
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174,
+            "domContentLoaded": 169.39999999996508
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23124
+      }
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174,
+            "domContentLoaded": 169.39999999996508
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23124
+      }
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174,
+            "domContentLoaded": 169.39999999996508
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23124
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 163,
+            "domContentLoaded": 157.40000000002328
+          }
+        ],
+        "resources": 29,
+        "transferBytes": 17289
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 158.70000000001164,
+            "domContentLoaded": 155
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 14781
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 159.79999999998836,
+            "domContentLoaded": 156
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 11851
+      }
+    },
+    {
+      "module": "metas",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 172.89999999996508,
+            "domContentLoaded": 169.19999999995343
+          }
+        ],
+        "resources": 29,
+        "transferBytes": 14811
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 768,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 160.90000000002328,
+            "domContentLoaded": 157
+          }
+        ],
+        "resources": 23,
+        "transferBytes": 8832
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 193.70000000001164,
+            "domContentLoaded": 188.60000000003492
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 22948
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.80000000004657,
+            "domContentLoaded": 161.20000000001164
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 21713
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.80000000004657,
+            "domContentLoaded": 161.20000000001164
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 21713
+      }
+    },
+    {
+      "module": "agenda-semana",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.80000000004657,
+            "domContentLoaded": 161.20000000001164
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 28059
+      }
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.80000000004657,
+            "domContentLoaded": 161.20000000001164
+          }
+        ],
+        "resources": 36,
+        "transferBytes": 29675
+      }
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.80000000004657,
+            "domContentLoaded": 161.20000000001164
+          }
+        ],
+        "resources": 40,
+        "transferBytes": 38100
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.70000000001164,
+            "domContentLoaded": 161.59999999997672
+          }
+        ],
+        "resources": 24,
+        "transferBytes": 11263
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.70000000001164,
+            "domContentLoaded": 161.59999999997672
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20400
+      }
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.70000000001164,
+            "domContentLoaded": 161.59999999997672
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20400
+      }
+    },
+    {
+      "module": "cliente-notas",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.70000000001164,
+            "domContentLoaded": 161.59999999997672
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20400
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.09999999997672,
+            "domContentLoaded": 165.09999999997672
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 20831
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.09999999997672,
+            "domContentLoaded": 165.09999999997672
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 20831
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.09999999997672,
+            "domContentLoaded": 165.09999999997672
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 22226
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 164,
+            "domContentLoaded": 159.70000000001164
+          }
+        ],
+        "resources": 24,
+        "transferBytes": 12686
+      }
+    },
+    {
+      "module": "caja",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 194.10000000003492,
+            "domContentLoaded": 190.40000000002328
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 12412
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 194.10000000003492,
+            "domContentLoaded": 190.40000000002328
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23748
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 187.80000000004657,
+            "domContentLoaded": 183.40000000002328
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 24188
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 187.80000000004657,
+            "domContentLoaded": 183.40000000002328
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29491
+      }
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 187.80000000004657,
+            "domContentLoaded": 183.40000000002328
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29491
+      }
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 187.80000000004657,
+            "domContentLoaded": 183.40000000002328
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29491
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.20000000001164,
+            "domContentLoaded": 169.40000000002328
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23130
+      }
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.20000000001164,
+            "domContentLoaded": 169.40000000002328
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23130
+      }
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.20000000001164,
+            "domContentLoaded": 169.40000000002328
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23130
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 191,
+            "domContentLoaded": 186.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 18816
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 156.39999999996508,
+            "domContentLoaded": 152.69999999995343
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 14770
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 174.39999999996508,
+            "domContentLoaded": 170.59999999997672
+          }
+        ],
+        "resources": 26,
+        "transferBytes": 12999
+      }
+    },
+    {
+      "module": "metas",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 212.29999999998836,
+            "domContentLoaded": 208.59999999997672
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 10326
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 1024,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 190.5,
+            "domContentLoaded": 186.5
+          }
+        ],
+        "resources": 24,
+        "transferBytes": 9976
+      }
+    },
+    {
+      "module": "inicio",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 180.20000000001164,
+            "domContentLoaded": 175.5
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 22944
+      }
+    },
+    {
+      "module": "agenda",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 170.69999999995343,
+            "domContentLoaded": 166.19999999995343
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 21715
+      }
+    },
+    {
+      "module": "navegacion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 170.69999999995343,
+            "domContentLoaded": 166.19999999995343
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 21715
+      }
+    },
+    {
+      "module": "agenda-semana",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 170.69999999995343,
+            "domContentLoaded": 166.19999999995343
+          }
+        ],
+        "resources": 34,
+        "transferBytes": 28061
+      }
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 170.69999999995343,
+            "domContentLoaded": 166.19999999995343
+          }
+        ],
+        "resources": 36,
+        "transferBytes": 29677
+      }
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 170.69999999995343,
+            "domContentLoaded": 166.19999999995343
+          }
+        ],
+        "resources": 40,
+        "transferBytes": 38102
+      }
+    },
+    {
+      "module": "clientes",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 189.40000000002328,
+            "domContentLoaded": 184.90000000002328
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 12409
+      }
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 189.40000000002328,
+            "domContentLoaded": 184.90000000002328
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20397
+      }
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 189.40000000002328,
+            "domContentLoaded": 184.90000000002328
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20397
+      }
+    },
+    {
+      "module": "cliente-notas",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 189.40000000002328,
+            "domContentLoaded": 184.90000000002328
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 20397
+      }
+    },
+    {
+      "module": "equipo",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.79999999998836,
+            "domContentLoaded": 160
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 17505
+      }
+    },
+    {
+      "module": "disponibilidad",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.79999999998836,
+            "domContentLoaded": 160
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 20836
+      }
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.79999999998836,
+            "domContentLoaded": 160
+          }
+        ],
+        "resources": 32,
+        "transferBytes": 22231
+      }
+    },
+    {
+      "module": "servicios",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 176.09999999997672,
+            "domContentLoaded": 172.09999999997672
+          }
+        ],
+        "resources": 24,
+        "transferBytes": 12688
+      }
+    },
+    {
+      "module": "caja",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.89999999996508,
+            "domContentLoaded": 158.20000000001164
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 14707
+      }
+    },
+    {
+      "module": "checkout",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 161.89999999996508,
+            "domContentLoaded": 158.20000000001164
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23751
+      }
+    },
+    {
+      "module": "finanzas",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 230.40000000002328,
+            "domContentLoaded": 225
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 24196
+      }
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 230.40000000002328,
+            "domContentLoaded": 225
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29499
+      }
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 230.40000000002328,
+            "domContentLoaded": 225
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29499
+      }
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 230.40000000002328,
+            "domContentLoaded": 225
+          }
+        ],
+        "resources": 33,
+        "transferBytes": 29499
+      }
+    },
+    {
+      "module": "reportes",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 176.10000000003492,
+            "domContentLoaded": 171.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23124
+      }
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 176.10000000003492,
+            "domContentLoaded": 171.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23124
+      }
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 176.10000000003492,
+            "domContentLoaded": 171.29999999998836
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 23124
+      }
+    },
+    {
+      "module": "configuracion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 195,
+            "domContentLoaded": 189.89999999990687
+          }
+        ],
+        "resources": 31,
+        "transferBytes": 18819
+      }
+    },
+    {
+      "module": "walk-ins",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 237.5,
+            "domContentLoaded": 233.09999999997672
+          }
+        ],
+        "resources": 28,
+        "transferBytes": 14773
+      }
+    },
+    {
+      "module": "sucursales",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 165.29999999993015,
+            "domContentLoaded": 160.89999999990687
+          }
+        ],
+        "resources": 27,
+        "transferBytes": 14146
+      }
+    },
+    {
+      "module": "metas",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 162.90000000002328,
+            "domContentLoaded": 158.69999999995343
+          }
+        ],
+        "resources": 25,
+        "transferBytes": 10328
+      }
+    },
+    {
+      "module": "retencion",
+      "width": 1440,
+      "overflow": false,
+      "performance": {
+        "navigation": [
+          {
+            "duration": 167.5,
+            "domContentLoaded": 163.10000000009313
+          }
+        ],
+        "resources": 24,
+        "transferBytes": 9979
+      }
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 360,
+      "overflow": false
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 1440,
+      "overflow": false
+    }
+  ],
+  "browserErrors": [],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "accessibility": [
+    {
+      "module": "login",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "reserva-publica",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "login",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reserva-publica",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "mfa",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "mfa",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "mfa-dispositivos",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "mfa-dispositivos",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "mfa-confirmacion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "inicio",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "agenda",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "navegacion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "agenda-semana",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "clientes",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "cliente-notas",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "equipo",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "disponibilidad",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "servicios",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "caja",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "checkout",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "finanzas",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "reportes",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "configuracion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "walk-ins",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "sucursales",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "metas",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "retencion",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "inicio",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "agenda",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "navegacion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "agenda-semana",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reserva-detalle",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reserva-nueva",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "clientes",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "cliente-ficha",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "cliente-actividad",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "cliente-notas",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "equipo",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "disponibilidad",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "equipo-tabla",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "servicios",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "caja",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "checkout",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "finanzas",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "finanzas-7dias",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "equipo-ticket",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "equipo-comisiones",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reportes",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reportes-retencion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "reportes-equipo",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "configuracion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "walk-ins",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "sucursales",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "metas",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "retencion",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "inicio-managerA1",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "inicio-receptionA",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "inicio-barberA",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "module": "inicio-financeA",
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "agenda-1024.png",
+      "bytes": 102590,
+      "sha256": "441b432428289bed795d5fe4d4b45f6221a25936e75cba10cedd44571c9fef38"
+    },
+    {
+      "file": "agenda-1440.png",
+      "bytes": 106323,
+      "sha256": "630431f395a75654eaf262ffd23a8b28768dc2c885c2780d7715ca071d2ad040"
+    },
+    {
+      "file": "agenda-360.png",
+      "bytes": 59064,
+      "sha256": "9f44f638fe0f80914ca49425e9ff8e3c2b6ef9a31820ade00b1f305e23b5662a"
+    },
+    {
+      "file": "agenda-390.png",
+      "bytes": 60236,
+      "sha256": "fa8826230da6fef4bf23bcf15126e19a5e08e1004eef0b14e04f9a5622a91391"
+    },
+    {
+      "file": "agenda-768.png",
+      "bytes": 103716,
+      "sha256": "37b9740532e6f48b7a77de4e22d6ed880ae6a5c2e5f45dc21a59c0e201789c53"
+    },
+    {
+      "file": "agenda-semana-1024.png",
+      "bytes": 254501,
+      "sha256": "746746365a83638564ba48889a3deee9e5210a35e6ff67c9da665674cd80fea3"
+    },
+    {
+      "file": "agenda-semana-1440.png",
+      "bytes": 267865,
+      "sha256": "01071912ae1b8b4b31fde02b6da375710cc59e301ecc3d94a00a50f8dab305f7"
+    },
+    {
+      "file": "agenda-semana-360.png",
+      "bytes": 186439,
+      "sha256": "b007e1e33fddf0c37c6a91e06a0b121c26be7af89087fa33bb423afd120ec567"
+    },
+    {
+      "file": "agenda-semana-390.png",
+      "bytes": 189623,
+      "sha256": "7f5a6c3614355ca06d840d53849cda26354a634413f6fc326db4876a7678111c"
+    },
+    {
+      "file": "agenda-semana-768.png",
+      "bytes": 248053,
+      "sha256": "b391f6682b90cdf0a8bac885f092ff2c2c09220ec195e1873a2d44715a6f306d"
+    },
+    {
+      "file": "caja-1024.png",
+      "bytes": 99558,
+      "sha256": "6733f34242059017a2904549a738a7d2ca621f77a2b5d09c35ef99f6929b4319"
+    },
+    {
+      "file": "caja-1440.png",
+      "bytes": 104385,
+      "sha256": "498e5f2df0508c72776b224d0f9f02b228a62ed52f6d00d2221ff558e88dda70"
+    },
+    {
+      "file": "caja-360.png",
+      "bytes": 56693,
+      "sha256": "afd4b7eb839ea24cec9ab19e32781f036cd20132367fbccaed79f8d6b7f087e7"
+    },
+    {
+      "file": "caja-390.png",
+      "bytes": 57614,
+      "sha256": "10f7aec7fe9c1949e7be54c10891cb909426a9cbe0d35558f8bff5e15faeca2a"
+    },
+    {
+      "file": "caja-768.png",
+      "bytes": 97237,
+      "sha256": "d2aa3c4df8dbb1b8bcd388509a8e1b050f9673ee815825d3c9051c73062ad9e8"
+    },
+    {
+      "file": "checkout-1024.png",
+      "bytes": 103770,
+      "sha256": "6a905e2ead04f90bea365bb34e9a7e05d95ee54f3a35bb1d1f268f0fe599e0a8"
+    },
+    {
+      "file": "checkout-1440.png",
+      "bytes": 121777,
+      "sha256": "fd0d2ffd20c737fdaa3c51ede709422ee379c77c76cb720176165b21cea5709a"
+    },
+    {
+      "file": "checkout-360.png",
+      "bytes": 47476,
+      "sha256": "0b9b1142d4a531d800eb0b93a81bba8de721154863241d05c95e5933c462cf05"
+    },
+    {
+      "file": "checkout-390.png",
+      "bytes": 53762,
+      "sha256": "fe1e688afb50ca8e4d9ef3fd7ccda271a3b4db2524ea6ef3400c21cd0343ee30"
+    },
+    {
+      "file": "checkout-768.png",
+      "bytes": 87921,
+      "sha256": "04fbbfa642dad3edeb2e3da3217d721735009aecdd4e7e3735c3132eac24e85f"
+    },
+    {
+      "file": "cliente-actividad-1024.png",
+      "bytes": 94597,
+      "sha256": "0c96a7d809ebf821de4cb028cd3fe3583ee6afafba26de43013668d502f44610"
+    },
+    {
+      "file": "cliente-actividad-1440.png",
+      "bytes": 110992,
+      "sha256": "ba2a4bb50d84649ee74be9f513fd993a3fbaf36ea4ed43e4170035ad6ed3ffce"
+    },
+    {
+      "file": "cliente-actividad-360.png",
+      "bytes": 34235,
+      "sha256": "706737f78b756398a30da83ac179218c9c9abe620d067bec6cdbe5425bf46a8d"
+    },
+    {
+      "file": "cliente-actividad-390.png",
+      "bytes": 33936,
+      "sha256": "40c4b7ffb98da898259ff410a9945aeda864fd3a8c12133d1291b0da9d0ac774"
+    },
+    {
+      "file": "cliente-actividad-768.png",
+      "bytes": 67424,
+      "sha256": "b1239d57f404c007856d0a6b40599b9021a0ad107ce85909cd00761293bff565"
+    },
+    {
+      "file": "cliente-ficha-1024.png",
+      "bytes": 113147,
+      "sha256": "1b01d4261f48a008e2b3b87977162f285b4fa705f269c70eb61022cc0fe3e1b7"
+    },
+    {
+      "file": "cliente-ficha-1440.png",
+      "bytes": 129860,
+      "sha256": "cb25b046ef634c706e7eee4a9fdb241a05d8609c5f2d29638c9913c1dd64dfc9"
+    },
+    {
+      "file": "cliente-ficha-360.png",
+      "bytes": 47790,
+      "sha256": "183824484934a2c02c1ad7933c95d489ee9af2393b286fdbef937343a8642bbb"
+    },
+    {
+      "file": "cliente-ficha-390.png",
+      "bytes": 53605,
+      "sha256": "9f6492b9aff2d6128a6bf500927cbe195d5659dc28c972ba518cc7562b3f2caf"
+    },
+    {
+      "file": "cliente-ficha-768.png",
+      "bytes": 85839,
+      "sha256": "007bf14064fc77a7a27809a1a4741e03fbc9e1c2618787029fbc62130c48ae32"
+    },
+    {
+      "file": "cliente-notas-1024.png",
+      "bytes": 104261,
+      "sha256": "031bb98bb353f40c9c73df6d75ff3c53a4d3ac3bbe4e5b40ec035e8c5d59b5bd"
+    },
+    {
+      "file": "cliente-notas-1440.png",
+      "bytes": 121050,
+      "sha256": "2cb1d5162014edae3a41a465990672a827b19c611782308355ffd10fa73c2713"
+    },
+    {
+      "file": "cliente-notas-360.png",
+      "bytes": 42723,
+      "sha256": "ed0a555243cb7eca11958c03ab9da58e928f252d7d1c126b800060c28f699df4"
+    },
+    {
+      "file": "cliente-notas-390.png",
+      "bytes": 42981,
+      "sha256": "4979b036cfaeb897e5dccdf81c1ca3d4fd8722251a036362ca04ba9643570b26"
+    },
+    {
+      "file": "cliente-notas-768.png",
+      "bytes": 77418,
+      "sha256": "78f69fc23fa203ef7fa4afb4d1082121cec65a9c5b390d3f367b6afd82bb594b"
+    },
+    {
+      "file": "clientes-1024.png",
+      "bytes": 89453,
+      "sha256": "ef464de1defcc5d7c203a9a1023f267a5fa7f3c7a05a0d2d3053c9533e5d72d8"
+    },
+    {
+      "file": "clientes-1440.png",
+      "bytes": 99928,
+      "sha256": "e78e169644da883855fbe20d9763123e27a9381455f0d011ddefe38b49942b1f"
+    },
+    {
+      "file": "clientes-360.png",
+      "bytes": 39731,
+      "sha256": "2bb4b02e8f814ba2bc61d44d6f166052785f86aad744a680e948feb6978e4f3d"
+    },
+    {
+      "file": "clientes-390.png",
+      "bytes": 40724,
+      "sha256": "fb428c11daad8d9f03e3d3c8d1789016f8993a133c2ceb2b6356620f3739a8cb"
+    },
+    {
+      "file": "clientes-768.png",
+      "bytes": 81974,
+      "sha256": "b79b9f18184fcb10e00c7075f54db32653cea7e49f2913dd2b3e5c732fab7c68"
+    },
+    {
+      "file": "configuracion-1024.png",
+      "bytes": 175163,
+      "sha256": "69e1e24b2a476cafd02d4f1fd7344c3bb7ccc5460422b01345624634a2b35ba4"
+    },
+    {
+      "file": "configuracion-1440.png",
+      "bytes": 171873,
+      "sha256": "0c3c758a34e64d096a402156d3492f7cf2afee1834a68856c5081de7c86d66b3"
+    },
+    {
+      "file": "configuracion-360.png",
+      "bytes": 137827,
+      "sha256": "8a72366a4124274383193ba0ff7c9673d34a989b411e377eabed9ab075e7a453"
+    },
+    {
+      "file": "configuracion-390.png",
+      "bytes": 139882,
+      "sha256": "ac798d1c4df6fafd17aaba5017f7ae2778f024748fc89d4f26b726b4f77156ad"
+    },
+    {
+      "file": "configuracion-768.png",
+      "bytes": 192645,
+      "sha256": "40638cfb485e88d5f283e155ac4abdef40e9800fc891992e360c86fc34318318"
+    },
+    {
+      "file": "disponibilidad-1024.png",
+      "bytes": 179083,
+      "sha256": "c14bb9d0264ee677d7c7f29c8a7f72fbb4caaf6c746cfed372eba2bb2b668ffe"
+    },
+    {
+      "file": "disponibilidad-1440.png",
+      "bytes": 180611,
+      "sha256": "6bc25b716cded9d9bd51ef7dd02516b4338a9ac76e8dfb8cbc65e39d123dcf41"
+    },
+    {
+      "file": "disponibilidad-360.png",
+      "bytes": 137422,
+      "sha256": "16336add2994dfdee34e0842d1e8fbe5c21fdc3c8f89d493c099a74c91f9432f"
+    },
+    {
+      "file": "disponibilidad-390.png",
+      "bytes": 139573,
+      "sha256": "35ec1be0bb4ae915ae6672440d5ea1d96cf934efa29567d6bad6c12efba3c433"
+    },
+    {
+      "file": "disponibilidad-768.png",
+      "bytes": 182612,
+      "sha256": "2a92e61aaaf105fab88527991e083ce19318a9df81b2cc907430c92f1cb40138"
+    },
+    {
+      "file": "equipo-1024.png",
+      "bytes": 179083,
+      "sha256": "c14bb9d0264ee677d7c7f29c8a7f72fbb4caaf6c746cfed372eba2bb2b668ffe"
+    },
+    {
+      "file": "equipo-1440.png",
+      "bytes": 180611,
+      "sha256": "6bc25b716cded9d9bd51ef7dd02516b4338a9ac76e8dfb8cbc65e39d123dcf41"
+    },
+    {
+      "file": "equipo-360.png",
+      "bytes": 137422,
+      "sha256": "16336add2994dfdee34e0842d1e8fbe5c21fdc3c8f89d493c099a74c91f9432f"
+    },
+    {
+      "file": "equipo-390.png",
+      "bytes": 139567,
+      "sha256": "91c05713779a4332ab3c05b5a3e67fea3187b9be0e5be4ada7a58bc4587fda52"
+    },
+    {
+      "file": "equipo-768.png",
+      "bytes": 182612,
+      "sha256": "2a92e61aaaf105fab88527991e083ce19318a9df81b2cc907430c92f1cb40138"
+    },
+    {
+      "file": "equipo-comisiones-1024.png",
+      "bytes": 271446,
+      "sha256": "1b687e9ec4ac96a87e088b23fac2a5c46894d9d3462b1e18f188adabe978ebc8"
+    },
+    {
+      "file": "equipo-comisiones-1440.png",
+      "bytes": 263518,
+      "sha256": "f9ee4d81a9bcb6f774a27843f27e2aff9ff89c1f89785e72287e8e76ea1c52cb"
+    },
+    {
+      "file": "equipo-comisiones-360.png",
+      "bytes": 236338,
+      "sha256": "e65f5897f5c8bdb89b301a3e206fd87b051869a78d2ef85c466bdec7e0f963ba"
+    },
+    {
+      "file": "equipo-comisiones-390.png",
+      "bytes": 235411,
+      "sha256": "7469b1ecf8a6ca6d43f231dc445c3ac0b6870c4cec60445fbf2987c5de4ac1b4"
+    },
+    {
+      "file": "equipo-comisiones-768.png",
+      "bytes": 276199,
+      "sha256": "a63376f90cda8a656eb938438ef780a2409f9af4dec4d2292c9033de28489965"
+    },
+    {
+      "file": "equipo-tabla-1024.png",
+      "bytes": 86750,
+      "sha256": "cf8c83302c7216481d44bf5db3dccd3a8b09118e3529d789e3712678d48b8e90"
+    },
+    {
+      "file": "equipo-tabla-1440.png",
+      "bytes": 89584,
+      "sha256": "8ca9b873749ec7758af1513eace232c37e0c1cbb97612a1b8a7ae3318672cb2c"
+    },
+    {
+      "file": "equipo-tabla-360.png",
+      "bytes": 49690,
+      "sha256": "94a9b1faedc3815bcf2c7a9d077faed1d6d8d7cb9ce3579ff5e036882e7d46a4"
+    },
+    {
+      "file": "equipo-tabla-390.png",
+      "bytes": 49001,
+      "sha256": "6d5d9e6418ce57ec6f0cc5689b7ae96fbec33db1672e2b90510678e6ff14e5a3"
+    },
+    {
+      "file": "equipo-tabla-768.png",
+      "bytes": 85426,
+      "sha256": "778285adfdfd7aade76256dbf6d2129b6aea7ab4678cc107b5e7c3ef890bcca0"
+    },
+    {
+      "file": "equipo-ticket-1024.png",
+      "bytes": 272821,
+      "sha256": "f6d31540d8dc5ba10b4067da22bb2698d2be7ce82e9dbe3f82b19c770f9080e4"
+    },
+    {
+      "file": "equipo-ticket-1440.png",
+      "bytes": 264706,
+      "sha256": "cef1ded2396f321182c900f194469389d02294370684d14b13f9d40b04ad9794"
+    },
+    {
+      "file": "equipo-ticket-360.png",
+      "bytes": 238353,
+      "sha256": "4f5418eb43fcda342b330af2cb01dcf3450da7c9053fbb14db0b1b4085abbb8e"
+    },
+    {
+      "file": "equipo-ticket-390.png",
+      "bytes": 239895,
+      "sha256": "62445956d7ad7ce79d4935de31d2c3f88c51acea39b5f68615fede14621768b0"
+    },
+    {
+      "file": "equipo-ticket-768.png",
+      "bytes": 277862,
+      "sha256": "f7d778c17eb911b2eebd347e15da463ad03160d52098e56fe4cb9bbc89078dc3"
+    },
+    {
+      "file": "finanzas-1024.png",
+      "bytes": 272176,
+      "sha256": "28a53b41e27f1f3714996ec7e74b0c121598dd9f45c4c98d8c2a2f05b8171d15"
+    },
+    {
+      "file": "finanzas-1440.png",
+      "bytes": 263309,
+      "sha256": "fd36149aa15163dab0925b97e02d2652898e4ea86bd29577351af68a6e8fc46a"
+    },
+    {
+      "file": "finanzas-360.png",
+      "bytes": 236358,
+      "sha256": "0af2c5a3b214942f35541620eb2aefc2b4d25d588963d896ced4395f8739f0b2"
+    },
+    {
+      "file": "finanzas-390.png",
+      "bytes": 237644,
+      "sha256": "5694e364617e1898a79d9bbc3e3b1409f6854aedbf1edce9e75355fdca99d923"
+    },
+    {
+      "file": "finanzas-768.png",
+      "bytes": 276010,
+      "sha256": "748e33bf24b631438c348badb6eb62eb4a28c9ca5726d477b20f55ba7bae293a"
+    },
+    {
+      "file": "finanzas-7dias-1024.png",
+      "bytes": 273599,
+      "sha256": "ad3070bef6a12f7f23f660c3a8f6ede4cd021636a3d1c251f46b5107c7a86110"
+    },
+    {
+      "file": "finanzas-7dias-1440.png",
+      "bytes": 264726,
+      "sha256": "c2de84479e932840ebe5f72d681aeadfe43cb119392e1e378b03e678ea89be5f"
+    },
+    {
+      "file": "finanzas-7dias-360.png",
+      "bytes": 237812,
+      "sha256": "0d1ed3a3598268b2cd172aa3fbd6009062533633f51f2e6a0a86d3375fd91275"
+    },
+    {
+      "file": "finanzas-7dias-390.png",
+      "bytes": 239122,
+      "sha256": "d1211302321b8dd5c3d92b819681989fffa113cfc200fd622e44adc85b8bcefd"
+    },
+    {
+      "file": "finanzas-7dias-768.png",
+      "bytes": 277678,
+      "sha256": "267a1acbfb30ea0d1aec68ca9144438f46ac3896d5330fe629747633425697c8"
+    },
+    {
+      "file": "inicio-1024.png",
+      "bytes": 164486,
+      "sha256": "ab4e7d716afcf892477285244081c101a7ced3e40c40104e8d18e65bd6cf5c04"
+    },
+    {
+      "file": "inicio-1440.png",
+      "bytes": 155561,
+      "sha256": "e699c8927d20e87b6aed8601f6d4da38eb917197e37bbaf08012e56be5189c01"
+    },
+    {
+      "file": "inicio-360.png",
+      "bytes": 129011,
+      "sha256": "16efad7a9f5dee96f208bc676614384de75085721b161a86c9d4928e15ea2665"
+    },
+    {
+      "file": "inicio-390.png",
+      "bytes": 129705,
+      "sha256": "9453fcbe664ba004257b3a08fc93a9c2d0404c1c18ea4f1f6d400618330b5dfa"
+    },
+    {
+      "file": "inicio-768.png",
+      "bytes": 166600,
+      "sha256": "d9b818031064726952a053e886294554edb0f549abdbdead6af1942a124a5475"
+    },
+    {
+      "file": "inicio-barberA-1024.png",
+      "bytes": 167578,
+      "sha256": "1c0c193720956cafcd7f572d3a94100680fa9d9640435b4d173a895e30c179d0"
+    },
+    {
+      "file": "inicio-barberA-1440.png",
+      "bytes": 163357,
+      "sha256": "ab5761aa03f0aa61a814e5e38fef5f2c06ebccc9134fda90c73f41d7fe2e846b"
+    },
+    {
+      "file": "inicio-barberA-360.png",
+      "bytes": 133256,
+      "sha256": "efc1f75af5648ef2d6bba9b37ea520f6682afb578383ac1850818c93ee1005b0"
+    },
+    {
+      "file": "inicio-barberA-390.png",
+      "bytes": 134452,
+      "sha256": "32328ac1511a48aa91e3238cc94a3693e6177fe1ce28a2ffdbec6583312086c4"
+    },
+    {
+      "file": "inicio-barberA-768.png",
+      "bytes": 165937,
+      "sha256": "83f7c75c5b60dde112b1f4442b41f4c45becc550b1b806808319495243f5d97d"
+    },
+    {
+      "file": "inicio-financeA-1024.png",
+      "bytes": 251884,
+      "sha256": "204c7f2e1dac421ab0080add36682a7d905601d17b0ad67471fe1a74b68c011c"
+    },
+    {
+      "file": "inicio-financeA-1440.png",
+      "bytes": 242577,
+      "sha256": "c30fd1d4f045556ce37f9090b2bd993342c906834ff9751f80f62ac2289b961a"
+    },
+    {
+      "file": "inicio-financeA-360.png",
+      "bytes": 234116,
+      "sha256": "4ca4075bfc84f37f91d20459713a6450782b9a777439feda6fba1de99d2d1876"
+    },
+    {
+      "file": "inicio-financeA-390.png",
+      "bytes": 235937,
+      "sha256": "d54538b70b790235c2db7759495c13a6af1ea392eeddd740833b0ced55f7c9ee"
+    },
+    {
+      "file": "inicio-financeA-768.png",
+      "bytes": 256705,
+      "sha256": "d8f291c350461f850af5d51c06e26ce785cdf1c54246df3e4bddb549f7c2e0f6"
+    },
+    {
+      "file": "inicio-managerA1-1024.png",
+      "bytes": 152451,
+      "sha256": "fc5a9256c4cffe71c5b5f722becb3c90197b9d3201ad9ab1ff17aba3d8008008"
+    },
+    {
+      "file": "inicio-managerA1-1440.png",
+      "bytes": 142694,
+      "sha256": "a7f311e2e641692a2d47e4ed2741a4b9053c54cb63d3e112a69143269e464ad8"
+    },
+    {
+      "file": "inicio-managerA1-360.png",
+      "bytes": 119458,
+      "sha256": "51e51f70bdc49886eb8cb3eacb102ed6efa58dfa981ab3843fb2b9bf700791ce"
+    },
+    {
+      "file": "inicio-managerA1-390.png",
+      "bytes": 119917,
+      "sha256": "061135a379fef7bb2da1e2f00a5cb2aa812cec932be6ab33b8e455f78f4d2996"
+    },
+    {
+      "file": "inicio-managerA1-768.png",
+      "bytes": 152416,
+      "sha256": "48177a128f565cf128cd7f93893c63e2acac66dde3b1a1973e427b83ed8c353f"
+    },
+    {
+      "file": "inicio-receptionA-1024.png",
+      "bytes": 85032,
+      "sha256": "b45baa2c3a010766499c3f0131f554c591724c0e6eea7026015ac7250507851e"
+    },
+    {
+      "file": "inicio-receptionA-1440.png",
+      "bytes": 86484,
+      "sha256": "fcd39b9045251b3563792aff15385901804fc9cdc9da241a6e19a21b45d59402"
+    },
+    {
+      "file": "inicio-receptionA-360.png",
+      "bytes": 65235,
+      "sha256": "74e24e561ed99cbbc4409cff6fe70c379eadbf695f5d437468929aeda0662f9a"
+    },
+    {
+      "file": "inicio-receptionA-390.png",
+      "bytes": 65633,
+      "sha256": "2c13aa3e3ddb646e089501a914f2f1f00093735c50e3c15fa5f398b5a1a470c5"
+    },
+    {
+      "file": "inicio-receptionA-768.png",
+      "bytes": 88426,
+      "sha256": "5da8a1c3a12b9d07fdf93dad4bf7ee1a7de233fdafc0857d99781b5ec125783c"
+    },
+    {
+      "file": "login-1024.png",
+      "bytes": 27879,
+      "sha256": "ccb163ecec581c1dd2fcc6cdea9a85337b2e0637d13b668c1749827e87b1c39e"
+    },
+    {
+      "file": "login-1440.png",
+      "bytes": 29650,
+      "sha256": "89014ca88c8e23539be5cd2c1177dd55f8bb91d2391f9eca0481472409f71761"
+    },
+    {
+      "file": "login-360.png",
+      "bytes": 24379,
+      "sha256": "2e1c0a6cce7083da9890e30f994ec3f4354d8f8604387d6a550cc4053711ebfc"
+    },
+    {
+      "file": "login-390.png",
+      "bytes": 23472,
+      "sha256": "a42261a9345195b733b7c858f9a8c0c8b9334578426f7c9a513ef8d12cf99fad"
+    },
+    {
+      "file": "login-768.png",
+      "bytes": 26722,
+      "sha256": "b5e6c8233c9b29e4e76c1ac844f1b37f85dd2e01a8d794420803bb25c7c02303"
+    },
+    {
+      "file": "metas-1024.png",
+      "bytes": 71028,
+      "sha256": "414a62029569bfd0659c6455c8997da1aed88734ef4b0bed39904c3838053bed"
+    },
+    {
+      "file": "metas-1440.png",
+      "bytes": 75134,
+      "sha256": "2c2571f4d72ed2d35bd37d9bfbace888f669fa0fe9be3da7b62b7270d3f89bc7"
+    },
+    {
+      "file": "metas-360.png",
+      "bytes": 30863,
+      "sha256": "e22e869b999fcc87125075cb4da3f0251b874485039a34bdfc80f66a505e704e"
+    },
+    {
+      "file": "metas-390.png",
+      "bytes": 31225,
+      "sha256": "c5cd50586841316284c39a8d8c88391af72c9f27bb207805f9d6274c9139616c"
+    },
+    {
+      "file": "metas-768.png",
+      "bytes": 69971,
+      "sha256": "91ed93bc0e373efbf1fbf66e05a96277a7175915c3fcbb653bb7aacf12bb7cce"
+    },
+    {
+      "file": "mfa-1024.png",
+      "bytes": 41236,
+      "sha256": "1c6496288818810a50f504c58dc9faddb6d17fdadbca6eef7b1d79f9c4e36271"
+    },
+    {
+      "file": "mfa-1440.png",
+      "bytes": 43718,
+      "sha256": "abde0b2b0c30b3794059d6c95152b0517f069cd90fe330adaf45dbc39b549bf0"
+    },
+    {
+      "file": "mfa-360.png",
+      "bytes": 36656,
+      "sha256": "8b2b023856734520154f2dfff475a691afd297e0abdf9c10f7daacdee6ed77d6"
+    },
+    {
+      "file": "mfa-390.png",
+      "bytes": 35954,
+      "sha256": "ea927f4aef4e6d84aea504c4e5e38baea74bbcedbd90a2470a72183b313c7942"
+    },
+    {
+      "file": "mfa-768.png",
+      "bytes": 40096,
+      "sha256": "d54f815c312566fcd7ec6d48f446f26ae40b1f22f0dd14910cf5572c21e95355"
+    },
+    {
+      "file": "mfa-confirmacion-1024.png",
+      "bytes": 48436,
+      "sha256": "695950de37704212207e82f2b7ba06006a43c96b12ff6d2e6718882f7d81cb8a"
+    },
+    {
+      "file": "mfa-confirmacion-1440.png",
+      "bytes": 51196,
+      "sha256": "b8264a691ff847fe4615bad77b8aa1c3db44fb3a2e6e44662c4f26152f6249b7"
+    },
+    {
+      "file": "mfa-confirmacion-360.png",
+      "bytes": 44379,
+      "sha256": "c745af7bcb4c919ed7cd07cacd28ce9bebb38eaa16e863c41d0ac6feb337968f"
+    },
+    {
+      "file": "mfa-confirmacion-390.png",
+      "bytes": 43509,
+      "sha256": "b0b4d76e51b74ea9a80c4c73f99d8ae5317545a40d7e086e6461cb12a72a8865"
+    },
+    {
+      "file": "mfa-confirmacion-768.png",
+      "bytes": 47153,
+      "sha256": "d5f7feb1b0e6cdab31f0b7a88f0a57eb1373ed7e2a52593f0675b91832a28c2d"
+    },
+    {
+      "file": "mfa-dispositivos-1024.png",
+      "bytes": 47608,
+      "sha256": "e4b4e6fac85b2bdd52ef0c50939ada2b2f1400a7c54ec6006ff1b03e30aff0f1"
+    },
+    {
+      "file": "mfa-dispositivos-1440.png",
+      "bytes": 50279,
+      "sha256": "9bbefc3db6a0dbd906b79b644f32660446b501ac8b440f335916c913a6896cad"
+    },
+    {
+      "file": "mfa-dispositivos-360.png",
+      "bytes": 43895,
+      "sha256": "cfd3dfce7ca58a378539716bf4724407218d85b859a9c5a5b80d975badf94d87"
+    },
+    {
+      "file": "mfa-dispositivos-390.png",
+      "bytes": 43962,
+      "sha256": "b48fe5ce58a0abd59f82032a23ebc226d401298ac4312ec8e04529bd3bdd648b"
+    },
+    {
+      "file": "mfa-dispositivos-768.png",
+      "bytes": 46226,
+      "sha256": "fd8212e039f0f630615f07f77afffaa9c27bc6174532e14c289d5ba020ea6f9c"
+    },
+    {
+      "file": "navegacion-1024.png",
+      "bytes": 102590,
+      "sha256": "441b432428289bed795d5fe4d4b45f6221a25936e75cba10cedd44571c9fef38"
+    },
+    {
+      "file": "navegacion-1440.png",
+      "bytes": 106323,
+      "sha256": "630431f395a75654eaf262ffd23a8b28768dc2c885c2780d7715ca071d2ad040"
+    },
+    {
+      "file": "navegacion-360.png",
+      "bytes": 55879,
+      "sha256": "b4c5d06ade416375f3691a9408df8a82d7e6322b9d02bf18a9a3fe4dda55bf67"
+    },
+    {
+      "file": "navegacion-390.png",
+      "bytes": 56040,
+      "sha256": "2fbe2b92e92a50f623f609ecb3baf8f91b00a845cf38fb6e8f0d20d60f98a606"
+    },
+    {
+      "file": "navegacion-768.png",
+      "bytes": 103716,
+      "sha256": "37b9740532e6f48b7a77de4e22d6ed880ae6a5c2e5f45dc21a59c0e201789c53"
+    },
+    {
+      "file": "reportes-1024.png",
+      "bytes": 180524,
+      "sha256": "c89c60eebe91cd9aee3920cb014eda86223f4c031e5c91bb7f3cec7701dff627"
+    },
+    {
+      "file": "reportes-1440.png",
+      "bytes": 171930,
+      "sha256": "5e09601a8ce566099d59bb0c7d40d09977b68bf926a3083adbde753cc8dbc211"
+    },
+    {
+      "file": "reportes-360.png",
+      "bytes": 151160,
+      "sha256": "9b84ada508f9f3efa12f06155d931625a5c99d2522224483b397a9459acaa8ec"
+    },
+    {
+      "file": "reportes-390.png",
+      "bytes": 151801,
+      "sha256": "16644dab539fa7ec826198d506748747c0b990087e68849551778d64822d7093"
+    },
+    {
+      "file": "reportes-768.png",
+      "bytes": 181959,
+      "sha256": "b83f243bd2cba091ee68f55b45f5c26b301b63799cda31c20c580361ee2445e2"
+    },
+    {
+      "file": "reportes-equipo-1024.png",
+      "bytes": 274848,
+      "sha256": "8df4883c307db4a7061fc599e9239a788afbc90bf7d622fb7e379eff5302641f"
+    },
+    {
+      "file": "reportes-equipo-1440.png",
+      "bytes": 258541,
+      "sha256": "01aced8386acce481b85eae8418f505f16dc068235eb0d23e44e790650711c3f"
+    },
+    {
+      "file": "reportes-equipo-360.png",
+      "bytes": 237648,
+      "sha256": "0e756413c6e516c1f3113f52428230dbd06d671b88d87282a7a312e263ea2193"
+    },
+    {
+      "file": "reportes-equipo-390.png",
+      "bytes": 237431,
+      "sha256": "66f510c8548ee3d62ca003724f6c7e97fbf376a85bd5f07c827611c9788bb63c"
+    },
+    {
+      "file": "reportes-equipo-768.png",
+      "bytes": 274593,
+      "sha256": "1f26fd2257c7cda7b1a449cf091ecc6147d98d0bb3553f8d101fa0648771ad51"
+    },
+    {
+      "file": "reportes-retencion-1024.png",
+      "bytes": 263841,
+      "sha256": "a6b9b399bff7bdda788486c04b6ce4a92f1b49a765b2ae238f386decc5685677"
+    },
+    {
+      "file": "reportes-retencion-1440.png",
+      "bytes": 249796,
+      "sha256": "e98e0fd3f7a266a6e8f0ae8e33079f87efed6517e3870472e691e40cff45d206"
+    },
+    {
+      "file": "reportes-retencion-360.png",
+      "bytes": 225635,
+      "sha256": "26caecdbab77b2786bd10dba56f3f2298709b7e7317f9bae234dec06c0f927b4"
+    },
+    {
+      "file": "reportes-retencion-390.png",
+      "bytes": 226478,
+      "sha256": "bbc8e13f15b8e636f9efb106b91016b85167343c5c0778dafb2e46c99c374640"
+    },
+    {
+      "file": "reportes-retencion-768.png",
+      "bytes": 265057,
+      "sha256": "89f773d1a4cbe192bf178468272931dd022e13a3083e8db8a3355d67f27fd863"
+    },
+    {
+      "file": "reserva-detalle-1024.png",
+      "bytes": 107625,
+      "sha256": "a3147d44794972b5a409285d6d9ada0c00136d47f4786759c025a151aa331f83"
+    },
+    {
+      "file": "reserva-detalle-1440.png",
+      "bytes": 117989,
+      "sha256": "258478631068ed41133ccc633b02e5a26e12fefb78466614bf53e79486c8ad38"
+    },
+    {
+      "file": "reserva-detalle-360.png",
+      "bytes": 71451,
+      "sha256": "fa3f99e47b9c32ef1cdd174c1f45c0f8874e79b72a31e5e2a39db60fb8e691ef"
+    },
+    {
+      "file": "reserva-detalle-390.png",
+      "bytes": 72211,
+      "sha256": "fd2f8d8bcb963dd4c107b0f8fb7e6359de022a7f9d710cae932436ed1f3fbd79"
+    },
+    {
+      "file": "reserva-detalle-768.png",
+      "bytes": 93202,
+      "sha256": "2a20fa16a18f6ee82bdbcfb1ab19c177d8d8e508be1cd432ad6e4f4b3ef38ed7"
+    },
+    {
+      "file": "reserva-nueva-1024.png",
+      "bytes": 102858,
+      "sha256": "7655cdd16a94b409bf650f149d019a323133d6c8018171101f6f1e03969237ba"
+    },
+    {
+      "file": "reserva-nueva-1440.png",
+      "bytes": 115147,
+      "sha256": "6e0369712813822c7c7212262174cf3ca0d1acee34cf0f7207424cfb1adb8641"
+    },
+    {
+      "file": "reserva-nueva-360.png",
+      "bytes": 53731,
+      "sha256": "e2c755ba8e90f4fbc185cf0be4f9cff3b0cb9a35534763c73014dadc25e058a4"
+    },
+    {
+      "file": "reserva-nueva-390.png",
+      "bytes": 54927,
+      "sha256": "d2a43b22f6963e79878bc83f4bc0d78b2a70323aa041bf60d3aa536b8653bcb9"
+    },
+    {
+      "file": "reserva-nueva-768.png",
+      "bytes": 87012,
+      "sha256": "0bfb0b5e5fed49c025ba7e4c6b57449ec61fbc977a1e22f98a68919b29278a62"
+    },
+    {
+      "file": "reserva-publica-1024.png",
+      "bytes": 43617,
+      "sha256": "915a090d871c33f5bfbe0c4e22e6b790cb4896460e583e2410ab005aadb338e5"
+    },
+    {
+      "file": "reserva-publica-1440.png",
+      "bytes": 45697,
+      "sha256": "9ff884545f5251e4f341938fe7859423917df2807dc5983647a8f74a615ed5c0"
+    },
+    {
+      "file": "reserva-publica-360.png",
+      "bytes": 43143,
+      "sha256": "566bc1c56cfd90f55f28c814a6c07578ca750f14495a5e28d889ac5569b1a2a6"
+    },
+    {
+      "file": "reserva-publica-390.png",
+      "bytes": 43388,
+      "sha256": "53a64c97bbab2686244fae579adb0c920bcc131a410f3eb6a16034d4482ddc04"
+    },
+    {
+      "file": "reserva-publica-768.png",
+      "bytes": 42666,
+      "sha256": "a73c5edf0275843324c6e7b853aa06b40a37d594d5a919657acf423b7a896f92"
+    },
+    {
+      "file": "retencion-1024.png",
+      "bytes": 80590,
+      "sha256": "d7a73ef1b39c8c0e4966aeaa5b581a0c17a7cef6c55d55ae090496c1c6fe1735"
+    },
+    {
+      "file": "retencion-1440.png",
+      "bytes": 84548,
+      "sha256": "9b11b8f4809837856a97d534f3bcdbcffef99cec14d970dce191a61a136eb129"
+    },
+    {
+      "file": "retencion-360.png",
+      "bytes": 41839,
+      "sha256": "4f43cfb0fb21f510344d38e4b4376ba61ad135b4e588d8aa81b9eef243fdbd48"
+    },
+    {
+      "file": "retencion-390.png",
+      "bytes": 41361,
+      "sha256": "cd8da012b72527d050ba1c04d0a159e249a672b5450170a371b91e3c564b8b52"
+    },
+    {
+      "file": "retencion-768.png",
+      "bytes": 80845,
+      "sha256": "d648b8edbfa28c67b82e7646cfc9b03117c103dc96246e6434a21f0e9c8256ea"
+    },
+    {
+      "file": "servicios-1024.png",
+      "bytes": 88237,
+      "sha256": "033c1da52ada791f082adccc5e09bb6628461c59060ffb8b1ad22b688078842c"
+    },
+    {
+      "file": "servicios-1440.png",
+      "bytes": 101996,
+      "sha256": "02dbe65191701faaae4e3d3e21f041d81fd7f0619d2657e12a070452a2ded5c8"
+    },
+    {
+      "file": "servicios-360.png",
+      "bytes": 41594,
+      "sha256": "33e5e989a49e1566a91ed084e600141c72876ad33f456f5ef35d9db8b8800409"
+    },
+    {
+      "file": "servicios-390.png",
+      "bytes": 42056,
+      "sha256": "814bb2dc358d30c653403c69cdff1ade6d82e1ca9b3853b2c974b79bb6cddacd"
+    },
+    {
+      "file": "servicios-768.png",
+      "bytes": 82435,
+      "sha256": "b7404b1634b119d55b067110d095c6659239ab87aa0a03f8a73854555de5830f"
+    },
+    {
+      "file": "sucursales-1024.png",
+      "bytes": 84716,
+      "sha256": "d2d72d02983ef52393029b9f383a8748bad9dc4bd3765bb32511094bc8d4e4a9"
+    },
+    {
+      "file": "sucursales-1440.png",
+      "bytes": 89220,
+      "sha256": "3fe6b3855ea7c0a487dc4d7ef96a9d3dd8c780bfceba78b89265471524ee0f1f"
+    },
+    {
+      "file": "sucursales-360.png",
+      "bytes": 41261,
+      "sha256": "24dcc9b149dd9abae29d4aecbe14f0ccbacafb092b02d27c720c38469e9b5058"
+    },
+    {
+      "file": "sucursales-390.png",
+      "bytes": 41580,
+      "sha256": "019ba8aeef75e2f59ac991df236ea42639420524b649a7427150308f25cb7001"
+    },
+    {
+      "file": "sucursales-768.png",
+      "bytes": 80924,
+      "sha256": "0c5a614a3f5f1cfd3c0fc56f2eb20d7e51bf30799fce1c1f235909f155f4db86"
+    },
+    {
+      "file": "tipografia-dm-sans-1024.png",
+      "bytes": 89441,
+      "sha256": "824548aca74e91d4e875bc066455bf223545685ce8d8f02fc2d9dcd0968b8615"
+    },
+    {
+      "file": "tipografia-dm-sans-1440.png",
+      "bytes": 99916,
+      "sha256": "8716b5b265be27c15211aa2d52f888394abfab39372f32634f046a7238fe6fa5"
+    },
+    {
+      "file": "tipografia-dm-sans-360.png",
+      "bytes": 39738,
+      "sha256": "8f6ac45556320f51376466d6588bf0d092d7b93cdc3b8a95e2d49f20776fba85"
+    },
+    {
+      "file": "tipografia-dm-sans-390.png",
+      "bytes": 40735,
+      "sha256": "d885eb50cf61a15e117e06974389cccc4ab155a689a155fbef6664e369d71f52"
+    },
+    {
+      "file": "tipografia-dm-sans-768.png",
+      "bytes": 81981,
+      "sha256": "b9eeee965da971dac5dfd0d52672dae94c03f8d3b18249ade0644479b1539f64"
+    },
+    {
+      "file": "tipografia-inter-1024.png",
+      "bytes": 90516,
+      "sha256": "a9b19145c87df92a9c0d6c3718e2bf227a6e914c576845a716190aebeb94d1a6"
+    },
+    {
+      "file": "tipografia-inter-1440.png",
+      "bytes": 101493,
+      "sha256": "2b7c140e5b6f5a699244b0758b0e112efbf45f10fc0f110dff8f52189f81b94b"
+    },
+    {
+      "file": "tipografia-inter-360.png",
+      "bytes": 40804,
+      "sha256": "281c147f06c75a1078ea3da0d817f22d0e127867da52d1ccdd065fd770a43d1d"
+    },
+    {
+      "file": "tipografia-inter-390.png",
+      "bytes": 41212,
+      "sha256": "3161a5f2b012d8d7caa5b0da73d5b7935eca97903de0761a3597c7a2b485bef7"
+    },
+    {
+      "file": "tipografia-inter-768.png",
+      "bytes": 83482,
+      "sha256": "d3ccb958023c28a026cede22369a3364851833627c0a8c4658d7609ac85de94d"
+    },
+    {
+      "file": "walk-ins-1024.png",
+      "bytes": 82457,
+      "sha256": "d07df90b4d7bd5747ca4e75c781baf26124f56e880de26a83ae2abd359a417ea"
+    },
+    {
+      "file": "walk-ins-1440.png",
+      "bytes": 85153,
+      "sha256": "4af92a7325ed9e8d2404fc1efab1a3f60e559cdc5297eda3f71328f2c685f0a1"
+    },
+    {
+      "file": "walk-ins-360.png",
+      "bytes": 44284,
+      "sha256": "fcde66783b15e6e2bbabfe16b4ba5b0ab3a9e3cbae2b5979ede4f4ab8b356117"
+    },
+    {
+      "file": "walk-ins-390.png",
+      "bytes": 44626,
+      "sha256": "c9723b94054acc92885638708479024fa41e66d377e55a53934b1aaf75f1a822"
+    },
+    {
+      "file": "walk-ins-768.png",
+      "bytes": 83057,
+      "sha256": "a24524ee91746dff6968895d50ca1a953da0d916cb3c26f2f208d947cdb7cc88"
+    }
+  ],
+  "srcTree": "051ddcb8b6d7f26abc26a0bcde34913ac64f633e",
+  "schemaTree": "c49634f7f33584d0953e407f3a50489e8bffe457",
+  "source": "aec2ea7c8181d748a09136a4370fa1d8454de99e"
+}

@@ -5,7 +5,9 @@ import { onboardingContracts } from "./onboarding";
 import { hardeningContracts } from "./hardening";
 import { productContracts } from "./product-release";
 import { migrationUpgradeContracts } from "./migration-upgrade";
+import { dashboardUpgradeContracts } from "./dashboard-upgrade";
 await migrationUpgradeContracts();
+await dashboardUpgradeContracts();
 const db = await isolatedDatabase();
 try {
   const result = await contracts(db.pool);

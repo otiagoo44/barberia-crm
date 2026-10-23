@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useId, type ReactNode } from "react";
-import { Inbox, X } from "lucide-react";
+import { Inbox, X, CircleCheck, CircleAlert, Info } from "lucide-react";
 export function Modal({
   title,
   children,
@@ -74,16 +74,25 @@ export function Modal({
 export function Notice({
   children,
   error = false,
+  success = false,
 }: {
   children: ReactNode;
   error?: boolean;
+  success?: boolean;
 }) {
   return (
     <div
-      className={error ? "notice error" : "notice"}
+      className={error ? "notice error" : success ? "notice success" : "notice"}
       role={error ? "alert" : "status"}
     >
-      {children}
+      {error ? (
+        <CircleAlert size={20} aria-hidden="true" />
+      ) : success ? (
+        <CircleCheck size={20} aria-hidden="true" />
+      ) : (
+        <Info size={20} aria-hidden="true" />
+      )}
+      <div>{children}</div>
     </div>
   );
 }

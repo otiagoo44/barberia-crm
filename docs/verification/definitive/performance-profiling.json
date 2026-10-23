@@ -1,0 +1,6481 @@
+{
+  "phase": "profiling",
+  "sha": "aec2ea7c8181d748a09136a4370fa1d8454de99e",
+  "fixture": "real Supabase Auth localhost, synthetic QA tenant",
+  "environment": {
+    "platform": "linux",
+    "node": "v24.15.0",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logical_cpus": 4
+  },
+  "chunk_build_bytes": 1440461,
+  "modules": [
+    {
+      "module": "inicio",
+      "samples": 5,
+      "ready_p50_ms": 1011.27,
+      "ready_p95_ms": 1291.89,
+      "ready_p99_ms": 1291.89,
+      "requests": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 329.36,
+      "api_p95_ms": 416.13,
+      "api_p99_ms": 419.9
+    },
+    {
+      "module": "agenda",
+      "samples": 5,
+      "ready_p50_ms": 1011.67,
+      "ready_p95_ms": 1052.12,
+      "ready_p99_ms": 1052.12,
+      "requests": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 314.56,
+      "api_p95_ms": 419.05,
+      "api_p99_ms": 468.83
+    },
+    {
+      "module": "clientes",
+      "samples": 5,
+      "ready_p50_ms": 490.24,
+      "ready_p95_ms": 976.2,
+      "ready_p99_ms": 976.2,
+      "requests": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 193.81,
+      "api_p95_ms": 295.5,
+      "api_p99_ms": 295.5
+    },
+    {
+      "module": "caja",
+      "samples": 5,
+      "ready_p50_ms": 559.25,
+      "ready_p95_ms": 1058.74,
+      "ready_p99_ms": 1058.74,
+      "requests": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 256.44,
+      "api_p95_ms": 335.74,
+      "api_p99_ms": 335.74
+    },
+    {
+      "module": "finanzas",
+      "samples": 5,
+      "ready_p50_ms": 1010.89,
+      "ready_p95_ms": 1068.54,
+      "ready_p99_ms": 1068.54,
+      "requests": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 309.14,
+      "api_p95_ms": 363.13,
+      "api_p99_ms": 363.13
+    },
+    {
+      "module": "equipo",
+      "samples": 5,
+      "ready_p50_ms": 1015.35,
+      "ready_p95_ms": 1099.56,
+      "ready_p99_ms": 1099.56,
+      "requests": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 314.37,
+      "api_p95_ms": 340.58,
+      "api_p99_ms": 345.71
+    },
+    {
+      "module": "reportes",
+      "samples": 5,
+      "ready_p50_ms": 1005.42,
+      "ready_p95_ms": 1522.87,
+      "ready_p99_ms": 1522.87,
+      "requests": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "duplicates": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "api_p50_ms": 320.24,
+      "api_p95_ms": 457.16,
+      "api_p99_ms": 513.74
+    }
+  ],
+  "samples": [
+    {
+      "module": "inicio",
+      "repeat": 0,
+      "ready_ms": 1291.8924829999999,
+      "refresh_ms": 408.69192799999973,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 335.29,
+          "duration_ms": 337.426
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 412.584,
+          "duration_ms": 414.343
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 356.287,
+          "duration_ms": 358.728
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 328.169,
+          "duration_ms": 329.363
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 118.113,
+          "duration_ms": 119.279
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 272.60000000009313,
+        "domContentLoaded_ms": 296.4000000000233,
+        "transfer_bytes": 425123,
+        "js_transfer_bytes": 354707,
+        "longTasks": [
+          {
+            "duration": 94,
+            "start": 1158.8000000000466
+          }
+        ],
+        "events": [
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 96,
+            "start": 279.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1327.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1328.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1328.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1328.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1328.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1328.4000000000233
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 380
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 47.29999999993015,
+            "baseDuration": 45.89999999990687,
+            "startTime": 414.10000000009313,
+            "commitTime": 476.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 45.89999999990687,
+            "startTime": 503.10000000009313,
+            "commitTime": 503.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.2000000000698492,
+            "baseDuration": 46,
+            "startTime": 504.4000000000233,
+            "commitTime": 504.70000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.400000000023283,
+            "baseDuration": 44.09999999997672,
+            "startTime": 816.1000000000931,
+            "commitTime": 818.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 44.39999999990687,
+            "startTime": 824.4000000000233,
+            "commitTime": 825.3000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.200000000069849,
+            "baseDuration": 43.999999999883585,
+            "startTime": 847.4000000000233,
+            "commitTime": 853.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.699999999953434,
+            "baseDuration": 46.89999999990687,
+            "startTime": 939.2000000000698,
+            "commitTime": 943
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6.599999999860302,
+            "baseDuration": 51.5999999998603,
+            "startTime": 943.6000000000931,
+            "commitTime": 1154.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6,
+            "baseDuration": 55.19999999983702,
+            "startTime": 1158.9000000000233,
+            "commitTime": 1165.1000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 12.599999999976717,
+            "baseDuration": 63.499999999650754,
+            "startTime": 1169.6000000000931,
+            "commitTime": 1182.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 20.400000000023283,
+            "baseDuration": 72.5,
+            "startTime": 1197.3000000000466,
+            "commitTime": 1218
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 9.000000000116415,
+            "baseDuration": 62.999999999883585,
+            "startTime": 1226.9000000000233,
+            "commitTime": 1236.6000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.299999999930151,
+            "baseDuration": 60.79999999969732,
+            "startTime": 1243.2000000000698,
+            "commitTime": 1249.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.7000000000698492,
+            "baseDuration": 61.099999999743886,
+            "startTime": 1251.9000000000233,
+            "commitTime": 1253.2000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.1000000000931323,
+            "baseDuration": 42.90000000002328,
+            "startTime": 1331,
+            "commitTime": 1332.2000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 43.199999999953434,
+            "startTime": 1460.3000000000466,
+            "commitTime": 1462.2000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.3000000000465661,
+            "baseDuration": 44.39999999990687,
+            "startTime": 1465.2000000000698,
+            "commitTime": 1466.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3,
+            "baseDuration": 45.89999999955762,
+            "startTime": 1467.9000000000233,
+            "commitTime": 1470.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.100000000093132,
+            "baseDuration": 48.69999999960419,
+            "startTime": 1477.3000000000466,
+            "commitTime": 1483.6000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.5,
+            "baseDuration": 48.29999999969732,
+            "startTime": 1487.8000000000466,
+            "commitTime": 1492.6000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.5,
+            "baseDuration": 49.099999999743886,
+            "startTime": 1495.7000000000698,
+            "commitTime": 1500.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.40000000002328306,
+            "baseDuration": 49.099999999743886,
+            "startTime": 1502.7000000000698,
+            "commitTime": 1503.7000000000698
+          }
+        ]
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 1,
+      "ready_ms": 1082.7871290000003,
+      "refresh_ms": 394.3621170000001,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 296.831,
+          "duration_ms": 298.811
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 373.094,
+          "duration_ms": 378.149
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 402.852,
+          "duration_ms": 407.711
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 306.34,
+          "duration_ms": 308.721
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 139.934,
+          "duration_ms": 141.069
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 138.19999999995343,
+        "domContentLoaded_ms": 226.90000000002328,
+        "transfer_bytes": 24726,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 65,
+            "start": 992.9000000000233
+          }
+        ],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1110.9000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1111
+          },
+          {
+            "duration": 24,
+            "start": 1111
+          },
+          {
+            "duration": 24,
+            "start": 1111
+          },
+          {
+            "duration": 24,
+            "start": 1111
+          },
+          {
+            "duration": 24,
+            "start": 1111
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 248
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.999999999883585,
+            "baseDuration": 18.79999999993015,
+            "startTime": 237,
+            "commitTime": 266.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.79999999993015,
+            "startTime": 285.9000000000233,
+            "commitTime": 286.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 18.79999999993015,
+            "startTime": 288,
+            "commitTime": 288.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 20.499999999883585,
+            "startTime": 576.3000000000466,
+            "commitTime": 578.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7000000000698492,
+            "baseDuration": 19.300000000046566,
+            "startTime": 586.0999999999767,
+            "commitTime": 588
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.099999999976717,
+            "baseDuration": 19.999999999883585,
+            "startTime": 653.3000000000466,
+            "commitTime": 655.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.299999999930151,
+            "baseDuration": 19.599999999743886,
+            "startTime": 684.3000000000466,
+            "commitTime": 689.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 20.799999999813735,
+            "startTime": 712.5,
+            "commitTime": 989.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.700000000069849,
+            "baseDuration": 22.99999999976717,
+            "startTime": 993,
+            "commitTime": 995.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.5,
+            "baseDuration": 27.99999999976717,
+            "startTime": 998.5999999999767,
+            "commitTime": 1006.3000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 11.400000000023283,
+            "baseDuration": 32.099999999743886,
+            "startTime": 1017.8000000000466,
+            "commitTime": 1029.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.400000000023283,
+            "baseDuration": 28.09999999962747,
+            "startTime": 1035,
+            "commitTime": 1040.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.800000000046566,
+            "baseDuration": 30.599999999511056,
+            "startTime": 1044.9000000000233,
+            "commitTime": 1052.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.6999999999534339,
+            "baseDuration": 30.79999999946449,
+            "startTime": 1055.8000000000466,
+            "commitTime": 1057.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.1999999999534339,
+            "baseDuration": 18.699999999953434,
+            "startTime": 1112.9000000000233,
+            "commitTime": 1114.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2,
+            "baseDuration": 19.299999999813735,
+            "startTime": 1261.9000000000233,
+            "commitTime": 1264
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 20.999999999883585,
+            "startTime": 1267.0999999999767,
+            "commitTime": 1269
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.599999999976717,
+            "baseDuration": 23.0999999998603,
+            "startTime": 1270.4000000000233,
+            "commitTime": 1274.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.100000000093132,
+            "baseDuration": 26.499999999883585,
+            "startTime": 1280,
+            "commitTime": 1287.6999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.8999999999068677,
+            "baseDuration": 24.699999999604188,
+            "startTime": 1292.5,
+            "commitTime": 1296.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.9999999998835847,
+            "baseDuration": 24.899999999557622,
+            "startTime": 1300.3000000000466,
+            "commitTime": 1304.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.39999999990686774,
+            "baseDuration": 24.799999999580905,
+            "startTime": 1307.3000000000466,
+            "commitTime": 1308.1999999999534
+          }
+        ]
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 2,
+      "ready_ms": 1010.1858280000006,
+      "refresh_ms": 391.3471649999992,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 351.261,
+          "duration_ms": 353.639
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 326.147,
+          "duration_ms": 327.489
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 365.592,
+          "duration_ms": 368.033
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 292.03,
+          "duration_ms": 294.452
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 118.668,
+          "duration_ms": 119.745
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 110.69999999995343,
+        "domContentLoaded_ms": 150,
+        "transfer_bytes": 24725,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 58,
+            "start": 880.1999999999534
+          }
+        ],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1037.5
+          },
+          {
+            "duration": 24,
+            "start": 1037.5
+          },
+          {
+            "duration": 24,
+            "start": 1037.5
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 176
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 23.699999999953434,
+            "baseDuration": 22.899999999557622,
+            "startTime": 159.90000000002328,
+            "commitTime": 193.79999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 22.899999999557622,
+            "startTime": 208.19999999995343,
+            "commitTime": 208.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 22.99999999953434,
+            "startTime": 215.09999999997672,
+            "commitTime": 215.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.400000000023283,
+            "baseDuration": 23.899999999790452,
+            "startTime": 498.79999999993015,
+            "commitTime": 501.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.6000000000931323,
+            "baseDuration": 24.799999999813735,
+            "startTime": 529.6999999999534,
+            "commitTime": 532.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 24.69999999983702,
+            "startTime": 556.4000000000233,
+            "commitTime": 558.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.800000000046566,
+            "baseDuration": 23.399999999674037,
+            "startTime": 572.9000000000233,
+            "commitTime": 577.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3,
+            "baseDuration": 24.79999999969732,
+            "startTime": 591.2999999999302,
+            "commitTime": 877.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.5,
+            "baseDuration": 26.49999999953434,
+            "startTime": 880.2999999999302,
+            "commitTime": 882.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.400000000139698,
+            "baseDuration": 30.199999999604188,
+            "startTime": 885.1999999999534,
+            "commitTime": 890.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 10.900000000023283,
+            "baseDuration": 35.79999999946449,
+            "startTime": 901.0999999999767,
+            "commitTime": 912.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.899999999906868,
+            "baseDuration": 31.899999999441206,
+            "startTime": 918.2999999999302,
+            "commitTime": 924.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.700000000069849,
+            "baseDuration": 30.99999999953434,
+            "startTime": 929.5999999999767,
+            "commitTime": 934.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 31.099999999511056,
+            "startTime": 937.4000000000233,
+            "commitTime": 938.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 22.79999999969732,
+            "startTime": 1039.5,
+            "commitTime": 1040.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 23.0999999998603,
+            "startTime": 1167,
+            "commitTime": 1169
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.400000000023283,
+            "baseDuration": 24.199999999604188,
+            "startTime": 1171.5,
+            "commitTime": 1173
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.900000000023283,
+            "baseDuration": 25.699999999720603,
+            "startTime": 1174.1999999999534,
+            "commitTime": 1177.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.5,
+            "baseDuration": 28.299999999580905,
+            "startTime": 1182.7999999999302,
+            "commitTime": 1188.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.299999999930151,
+            "baseDuration": 27.199999999371357,
+            "startTime": 1192.7999999999302,
+            "commitTime": 1196.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.200000000069849,
+            "baseDuration": 27.59999999962747,
+            "startTime": 1199.4000000000233,
+            "commitTime": 1203
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.40000000002328306,
+            "baseDuration": 27.699999999604188,
+            "startTime": 1205.6999999999534,
+            "commitTime": 1207
+          }
+        ]
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 3,
+      "ready_ms": 1011.267441,
+      "refresh_ms": 393.15059699999983,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 295.016,
+          "duration_ms": 297.199
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 331.657,
+          "duration_ms": 334.25
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 380.903,
+          "duration_ms": 382.916
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 318.637,
+          "duration_ms": 320.168
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 115.122,
+          "duration_ms": 116.247
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 115.59999999997672,
+        "domContentLoaded_ms": 155.19999999995343,
+        "transfer_bytes": 24721,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 56,
+            "start": 894.4000000000233
+          }
+        ],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1041.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1041.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1041.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1041.3000000000466
+          },
+          {
+            "duration": 16,
+            "start": 1041.3000000000466
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 180
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 20.5999999998603,
+            "baseDuration": 19.399999999790452,
+            "startTime": 164.09999999997672,
+            "commitTime": 194.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 19.399999999790452,
+            "startTime": 208.90000000002328,
+            "commitTime": 209.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.2000000000698492,
+            "baseDuration": 19.49999999976717,
+            "startTime": 211,
+            "commitTime": 211.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 20.099999999743886,
+            "startTime": 499.9000000000233,
+            "commitTime": 501.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.700000000069849,
+            "baseDuration": 22.999999999883585,
+            "startTime": 524.9000000000233,
+            "commitTime": 529.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8999999999068677,
+            "baseDuration": 23.299999999813735,
+            "startTime": 537.3000000000466,
+            "commitTime": 538.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.2999999998137355,
+            "baseDuration": 19.799999999580905,
+            "startTime": 587.3000000000466,
+            "commitTime": 591.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.1999999999534339,
+            "baseDuration": 20.299999999580905,
+            "startTime": 602.6999999999534,
+            "commitTime": 891.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.599999999976717,
+            "baseDuration": 22.399999999674037,
+            "startTime": 894.5,
+            "commitTime": 897.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.300000000046566,
+            "baseDuration": 26.599999999511056,
+            "startTime": 898.9000000000233,
+            "commitTime": 905.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 11.900000000023283,
+            "baseDuration": 32.59999999939464,
+            "startTime": 912.9000000000233,
+            "commitTime": 925.3000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.200000000069849,
+            "baseDuration": 27.599999999511056,
+            "startTime": 930.5,
+            "commitTime": 935.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.100000000093132,
+            "baseDuration": 27.199999999487773,
+            "startTime": 941.5999999999767,
+            "commitTime": 946.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.7000000000698492,
+            "baseDuration": 27.299999999580905,
+            "startTime": 949.5,
+            "commitTime": 950.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.1999999999534339,
+            "baseDuration": 19.299999999813735,
+            "startTime": 1043.5,
+            "commitTime": 1044.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 19.799999999813735,
+            "startTime": 1167.9000000000233,
+            "commitTime": 1169.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.400000000023283,
+            "baseDuration": 20.899999999906868,
+            "startTime": 1172.0999999999767,
+            "commitTime": 1173.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.200000000069849,
+            "baseDuration": 22.699999999953434,
+            "startTime": 1175.1999999999534,
+            "commitTime": 1178.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.900000000023283,
+            "baseDuration": 24.69999999983702,
+            "startTime": 1183.9000000000233,
+            "commitTime": 1189.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.5,
+            "baseDuration": 24.5,
+            "startTime": 1193.5999999999767,
+            "commitTime": 1197.1999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.800000000046566,
+            "baseDuration": 26.399999999906868,
+            "startTime": 1200.9000000000233,
+            "commitTime": 1206.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.40000000002328306,
+            "baseDuration": 26.0999999998603,
+            "startTime": 1209,
+            "commitTime": 1209.8000000000466
+          }
+        ]
+      }
+    },
+    {
+      "module": "inicio",
+      "repeat": 4,
+      "ready_ms": 1008.7484550000008,
+      "refresh_ms": 397.14951999999994,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 273.875,
+          "duration_ms": 275.836
+        },
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 418.486,
+          "duration_ms": 419.899
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 413.935,
+          "duration_ms": 416.133
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 344.324,
+          "duration_ms": 345.729
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 146.518,
+          "duration_ms": 147.664
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 113.30000000004657,
+        "domContentLoaded_ms": 155.40000000002328,
+        "transfer_bytes": 24723,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 59,
+            "start": 932.6000000000931
+          }
+        ],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039
+          },
+          {
+            "duration": 16,
+            "start": 1039.1000000000931
+          },
+          {
+            "duration": 16,
+            "start": 1039.1000000000931
+          },
+          {
+            "duration": 16,
+            "start": 1039.2000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1039.2000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1039.2000000000698
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 176
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 21.400000000023283,
+            "baseDuration": 20.499999999883585,
+            "startTime": 165.20000000006985,
+            "commitTime": 197.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 20.499999999883585,
+            "startTime": 214.5,
+            "commitTime": 214.70000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 20.399999999906868,
+            "startTime": 216.20000000006985,
+            "commitTime": 216.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.3999999999068677,
+            "baseDuration": 21.399999999790452,
+            "startTime": 481.60000000009313,
+            "commitTime": 483.60000000009313
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 20.999999999883585,
+            "startTime": 552.7000000000698,
+            "commitTime": 555.1000000000931
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.999999999883585,
+            "baseDuration": 21.69999999983702,
+            "startTime": 622.5,
+            "commitTime": 628
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 23.0999999998603,
+            "startTime": 649.2000000000698,
+            "commitTime": 652.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.199999999953434,
+            "baseDuration": 24.499999999883585,
+            "startTime": 659.7000000000698,
+            "commitTime": 928.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.700000000069849,
+            "baseDuration": 26.399999999906868,
+            "startTime": 932.8000000000466,
+            "commitTime": 935.6000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.000000000116415,
+            "baseDuration": 30.50000000023283,
+            "startTime": 937.9000000000233,
+            "commitTime": 944.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 11.399999999790452,
+            "baseDuration": 35.99999999976717,
+            "startTime": 952.9000000000233,
+            "commitTime": 964.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.300000000046566,
+            "baseDuration": 32.4000000001397,
+            "startTime": 971,
+            "commitTime": 977.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.499999999883585,
+            "baseDuration": 30.900000000256114,
+            "startTime": 983.2000000000698,
+            "commitTime": 988.1000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 31.100000000325963,
+            "startTime": 990.7000000000698,
+            "commitTime": 992
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.099999999976717,
+            "baseDuration": 19.899999999906868,
+            "startTime": 1041.6000000000931,
+            "commitTime": 1042.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.9999999998835847,
+            "baseDuration": 20.49999999976717,
+            "startTime": 1197.8000000000466,
+            "commitTime": 1199.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 21.99999999976717,
+            "startTime": 1202.8000000000466,
+            "commitTime": 1204.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.900000000023283,
+            "baseDuration": 24.499999999650754,
+            "startTime": 1206.2000000000698,
+            "commitTime": 1210.2000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.699999999953434,
+            "baseDuration": 28.29999999946449,
+            "startTime": 1216.1000000000931,
+            "commitTime": 1224
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.800000000046566,
+            "baseDuration": 25.899999999674037,
+            "startTime": 1229.8000000000466,
+            "commitTime": 1233.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.5,
+            "baseDuration": 26.59999999962747,
+            "startTime": 1237.4000000000233,
+            "commitTime": 1242.2000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.2999999999301508,
+            "baseDuration": 26.399999999557622,
+            "startTime": 1244.8000000000466,
+            "commitTime": 1245.5
+          }
+        ]
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 0,
+      "ready_ms": 1028.4858299999996,
+      "refresh_ms": 390.02673700000014,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 305.322,
+          "duration_ms": 306.613
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 308.24,
+          "duration_ms": 309.741
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 338.339,
+          "duration_ms": 339.559
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 416.564,
+          "duration_ms": 419.046
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 323.306,
+          "duration_ms": 324.923
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 140.546,
+          "duration_ms": 141.606
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 138.757,
+          "duration_ms": 139.97
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 118.09999999997672,
+        "domContentLoaded_ms": 167.5,
+        "transfer_bytes": 23339,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.3999999999069
+          },
+          {
+            "duration": 24,
+            "start": 1056.5
+          },
+          {
+            "duration": 24,
+            "start": 1056.5
+          },
+          {
+            "duration": 24,
+            "start": 1056.5
+          },
+          {
+            "duration": 24,
+            "start": 1056.5
+          },
+          {
+            "duration": 24,
+            "start": 1056.5
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 192
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 20.79999999993015,
+            "baseDuration": 19.499999999883585,
+            "startTime": 178.59999999997672,
+            "commitTime": 209.89999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 19.499999999883585,
+            "startTime": 238.89999999990687,
+            "commitTime": 239.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 19.499999999883585,
+            "startTime": 241.09999999997672,
+            "commitTime": 243.79999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.400000000023283,
+            "baseDuration": 19.800000000046566,
+            "startTime": 524.7999999999302,
+            "commitTime": 530.3999999999069
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.400000000023283,
+            "baseDuration": 19.699999999953434,
+            "startTime": 539,
+            "commitTime": 542.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.900000000023283,
+            "baseDuration": 19.999999999883585,
+            "startTime": 552.0999999999767,
+            "commitTime": 556.1999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.800000000046566,
+            "baseDuration": 20.399999999906868,
+            "startTime": 562.3999999999069,
+            "commitTime": 567.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.299999999930151,
+            "baseDuration": 19.499999999883585,
+            "startTime": 628,
+            "commitTime": 631.3999999999069
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.9999999998835847,
+            "baseDuration": 19.79999999993015,
+            "startTime": 639.5999999999767,
+            "commitTime": 644
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 16.999999999883585,
+            "startTime": 1059,
+            "commitTime": 1060
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 17.099999999976717,
+            "startTime": 1203.8999999999069,
+            "commitTime": 1204.7999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2,
+            "baseDuration": 17.5999999998603,
+            "startTime": 1206.8999999999069,
+            "commitTime": 1209
+          }
+        ]
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 1,
+      "ready_ms": 1008.3425090000001,
+      "refresh_ms": 396.92987300000095,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 356.32,
+          "duration_ms": 358.036
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 333.181,
+          "duration_ms": 335.497
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 379.166,
+          "duration_ms": 380.652
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 413.942,
+          "duration_ms": 415.669
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 347.699,
+          "duration_ms": 350.036
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 153.304,
+          "duration_ms": 154.46
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 155.117,
+          "duration_ms": 156.181
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 115.70000000006985,
+        "domContentLoaded_ms": 159,
+        "transfer_bytes": 23341,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.0999999999767
+          },
+          {
+            "duration": 32,
+            "start": 1042.2000000000698
+          },
+          {
+            "duration": 32,
+            "start": 1042.2000000000698
+          },
+          {
+            "duration": 32,
+            "start": 1042.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 1042.3000000000466
+          },
+          {
+            "duration": 32,
+            "start": 1042.3000000000466
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 152
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 17.9000000001397,
+            "baseDuration": 17.00000000023283,
+            "startTime": 161.09999999997672,
+            "commitTime": 188.90000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.10000000009313226,
+            "baseDuration": 17.00000000023283,
+            "startTime": 211.09999999997672,
+            "commitTime": 211.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 17.00000000023283,
+            "startTime": 212.70000000006985,
+            "commitTime": 212.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3,
+            "baseDuration": 17.100000000209548,
+            "startTime": 534.7000000000698,
+            "commitTime": 537.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7000000000698492,
+            "baseDuration": 15.70000000030268,
+            "startTime": 552,
+            "commitTime": 553.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.299999999930151,
+            "baseDuration": 16.00000000023283,
+            "startTime": 556.3000000000466,
+            "commitTime": 558.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 15.500000000349246,
+            "startTime": 579.5999999999767,
+            "commitTime": 581.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.400000000023283,
+            "baseDuration": 17.80000000016298,
+            "startTime": 614.9000000000233,
+            "commitTime": 619.3000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.799999999930151,
+            "baseDuration": 16.80000000016298,
+            "startTime": 710.8000000000466,
+            "commitTime": 713.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.7999999999301508,
+            "baseDuration": 14.700000000186265,
+            "startTime": 1044.8000000000466,
+            "commitTime": 1045.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.1000000000931323,
+            "baseDuration": 15.800000000279397,
+            "startTime": 1203.5999999999767,
+            "commitTime": 1205.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.1000000000931323,
+            "baseDuration": 16.100000000325963,
+            "startTime": 1208.5999999999767,
+            "commitTime": 1210.7000000000698
+          }
+        ]
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 2,
+      "ready_ms": 997.3157250000004,
+      "refresh_ms": 392.1833740000002,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 302.45,
+          "duration_ms": 304.441
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 305.809,
+          "duration_ms": 307.051
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 337.785,
+          "duration_ms": 338.976
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 350.909,
+          "duration_ms": 352.094
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 309.963,
+          "duration_ms": 311.119
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 132.794,
+          "duration_ms": 134.223
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 134.417,
+          "duration_ms": 135.895
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 105.40000000002328,
+        "domContentLoaded_ms": 146.20000000006985,
+        "transfer_bytes": 23338,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.2000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1026.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1026.3000000000466
+          },
+          {
+            "duration": 24,
+            "start": 1026.3000000000466
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 168
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.70000000006985,
+            "baseDuration": 18.4000000001397,
+            "startTime": 155.59999999997672,
+            "commitTime": 185.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.4000000001397,
+            "startTime": 203.59999999997672,
+            "commitTime": 203.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.500000000116415,
+            "startTime": 204.5,
+            "commitTime": 204.59999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6.299999999930151,
+            "baseDuration": 21.4000000001397,
+            "startTime": 501.0999999999767,
+            "commitTime": 507.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.399999999906868,
+            "baseDuration": 19.600000000093132,
+            "startTime": 517.7000000000698,
+            "commitTime": 522.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.400000000023283,
+            "baseDuration": 17.50000000023283,
+            "startTime": 533.9000000000233,
+            "commitTime": 536.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.300000000046566,
+            "baseDuration": 18.400000000256114,
+            "startTime": 548.4000000000233,
+            "commitTime": 552
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7999999999301508,
+            "baseDuration": 17.200000000186265,
+            "startTime": 552.9000000000233,
+            "commitTime": 554.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.7999999999301508,
+            "baseDuration": 16.200000000186265,
+            "startTime": 1028.8000000000466,
+            "commitTime": 1029.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 17.100000000209548,
+            "startTime": 1166.8000000000466,
+            "commitTime": 1169.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 17.100000000209548,
+            "startTime": 1172.0999999999767,
+            "commitTime": 1173.9000000000233
+          }
+        ]
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 3,
+      "ready_ms": 1011.6742129999984,
+      "refresh_ms": 396.5947950000009,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 312.779,
+          "duration_ms": 314.563
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 377.433,
+          "duration_ms": 380.126
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 333.195,
+          "duration_ms": 336.011
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 397.957,
+          "duration_ms": 402.025
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 463.587,
+          "duration_ms": 468.828
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 128.753,
+          "duration_ms": 129.932
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 130.821,
+          "duration_ms": 133.338
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 107.90000000002328,
+        "domContentLoaded_ms": 148.90000000002328,
+        "transfer_bytes": 23340,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.6000000000931
+          },
+          {
+            "duration": 24,
+            "start": 1043.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1043.7000000000698
+          },
+          {
+            "duration": 24,
+            "start": 1043.7000000000698
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 180
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 24.900000000023283,
+            "baseDuration": 23.800000000046566,
+            "startTime": 157.90000000002328,
+            "commitTime": 195.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 23.800000000046566,
+            "startTime": 222.80000000004657,
+            "commitTime": 223.10000000009313
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 23.800000000046566,
+            "startTime": 224.40000000002328,
+            "commitTime": 224.60000000009313
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.599999999976717,
+            "baseDuration": 24.50000000023283,
+            "startTime": 521.7000000000698,
+            "commitTime": 526.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.699999999953434,
+            "baseDuration": 25.900000000023283,
+            "startTime": 543.7000000000698,
+            "commitTime": 549.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.599999999976717,
+            "baseDuration": 23.200000000186265,
+            "startTime": 587.1000000000931,
+            "commitTime": 589.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.700000000069849,
+            "baseDuration": 23.80000000016298,
+            "startTime": 611.7000000000698,
+            "commitTime": 615.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7000000000698492,
+            "baseDuration": 22.400000000256114,
+            "startTime": 621.5,
+            "commitTime": 623.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6.5,
+            "baseDuration": 26.500000000116415,
+            "startTime": 679.8000000000466,
+            "commitTime": 686.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.7000000000698492,
+            "baseDuration": 21.200000000186265,
+            "startTime": 1046,
+            "commitTime": 1046.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.400000000023283,
+            "baseDuration": 21.600000000209548,
+            "startTime": 1180.7000000000698,
+            "commitTime": 1182.2000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 22.80000000016298,
+            "startTime": 1185.8000000000466,
+            "commitTime": 1188
+          }
+        ]
+      }
+    },
+    {
+      "module": "agenda",
+      "repeat": 4,
+      "ready_ms": 1052.1235719999986,
+      "refresh_ms": 403.47963999999956,
+      "initial_requests": 5,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 286.129,
+          "duration_ms": 288.243
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 337.253,
+          "duration_ms": 338.826
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 312.725,
+          "duration_ms": 314.162
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 370.955,
+          "duration_ms": 372.089
+        },
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 336.608,
+          "duration_ms": 337.988
+        },
+        {
+          "endpoint": "/api/workspace/agenda",
+          "status": 200,
+          "ttfb_ms": 131.056,
+          "duration_ms": 132.38
+        },
+        {
+          "endpoint": "/api/workspace/calendar_blocks",
+          "status": 200,
+          "ttfb_ms": 131.155,
+          "duration_ms": 132.314
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 123.40000000002328,
+        "domContentLoaded_ms": 183.79999999993015,
+        "transfer_bytes": 23347,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1091.7999999999302
+          },
+          {
+            "duration": 24,
+            "start": 1092
+          },
+          {
+            "duration": 24,
+            "start": 1092
+          },
+          {
+            "duration": 24,
+            "start": 1092
+          },
+          {
+            "duration": 24,
+            "start": 1092
+          },
+          {
+            "duration": 24,
+            "start": 1092
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 168
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 22.000000000116415,
+            "baseDuration": 20.699999999953434,
+            "startTime": 188.59999999997672,
+            "commitTime": 224.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 20.699999999953434,
+            "startTime": 246.19999999995343,
+            "commitTime": 248.90000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 20.79999999993015,
+            "startTime": 263.4000000000233,
+            "commitTime": 265.69999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 7.399999999906868,
+            "baseDuration": 22.699999999720603,
+            "startTime": 524.7999999999302,
+            "commitTime": 532.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6.199999999953434,
+            "baseDuration": 23.199999999953434,
+            "startTime": 557,
+            "commitTime": 563.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 18.999999999883585,
+            "startTime": 577,
+            "commitTime": 578.7999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 13.100000000093132,
+            "baseDuration": 28.499999999883585,
+            "startTime": 608.7999999999302,
+            "commitTime": 622.1999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 7.899999999906868,
+            "baseDuration": 25.299999999813735,
+            "startTime": 635.9000000000233,
+            "commitTime": 644.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 18.199999999953434,
+            "startTime": 1094.5,
+            "commitTime": 1095.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 18.69999999983702,
+            "startTime": 1231.9000000000233,
+            "commitTime": 1233.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 18.999999999883585,
+            "startTime": 1236.4000000000233,
+            "commitTime": 1238.1999999999534
+          }
+        ]
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 0,
+      "ready_ms": 467.02942599999915,
+      "refresh_ms": 407.9323110000023,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 234.707,
+          "duration_ms": 236.717
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 176.545,
+          "duration_ms": 178.594
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 101.5,
+        "domContentLoaded_ms": 143.5,
+        "transfer_bytes": 17379,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.30000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.80000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.80000000004657
+          },
+          {
+            "duration": 16,
+            "start": 510.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 510.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 510.9000000000233
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 132
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.700000000186265,
+            "baseDuration": 15.800000000162981,
+            "startTime": 146.09999999997672,
+            "commitTime": 172.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.800000000162981,
+            "startTime": 181.30000000004657,
+            "commitTime": 181.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.800000000162981,
+            "startTime": 182.19999999995343,
+            "commitTime": 182.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.5,
+            "baseDuration": 16.80000000016298,
+            "startTime": 416.5,
+            "commitTime": 420.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.40000000002328306,
+            "baseDuration": 16.80000000016298,
+            "startTime": 479.5999999999767,
+            "commitTime": 480.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5,
+            "baseDuration": 14.200000000186265,
+            "startTime": 515.9000000000233,
+            "commitTime": 516.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 14.400000000139698,
+            "startTime": 700.0999999999767,
+            "commitTime": 701
+          }
+        ]
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 1,
+      "ready_ms": 490.23563000000286,
+      "refresh_ms": 406.4286859999993,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 233.291,
+          "duration_ms": 235.47
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 126.851,
+          "duration_ms": 128.72
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 103.90000000002328,
+        "domContentLoaded_ms": 141.90000000002328,
+        "transfer_bytes": 17386,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 538.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 538.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 538.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 538.6999999999534
+          },
+          {
+            "duration": 24,
+            "start": 538.6999999999534
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.900000000023283,
+            "baseDuration": 19.100000000093132,
+            "startTime": 150.19999999995343,
+            "commitTime": 180.09999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.10000000009313226,
+            "baseDuration": 19.100000000093132,
+            "startTime": 190,
+            "commitTime": 190.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 19.100000000093132,
+            "startTime": 195.29999999993015,
+            "commitTime": 195.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.0000000001164153,
+            "baseDuration": 18.100000000209548,
+            "startTime": 423.19999999995343,
+            "commitTime": 425.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.100000000209548,
+            "startTime": 485.9000000000233,
+            "commitTime": 486.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.40000000002328306,
+            "baseDuration": 17.300000000046566,
+            "startTime": 544.9000000000233,
+            "commitTime": 545.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 17.5,
+            "startTime": 679,
+            "commitTime": 680
+          }
+        ]
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 2,
+      "ready_ms": 493.2431579999975,
+      "refresh_ms": 403.78076599999986,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 245.267,
+          "duration_ms": 247.333
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 189.662,
+          "duration_ms": 193.811
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 111,
+        "domContentLoaded_ms": 148.5,
+        "transfer_bytes": 17377,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 536.8000000000466
+          },
+          {
+            "duration": 24,
+            "start": 537.5
+          },
+          {
+            "duration": 24,
+            "start": 537.5
+          },
+          {
+            "duration": 24,
+            "start": 537.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 537.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 537.5999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 168
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.70000000006985,
+            "baseDuration": 18.5999999998603,
+            "startTime": 159.40000000002328,
+            "commitTime": 188.90000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.5999999998603,
+            "startTime": 200.90000000002328,
+            "commitTime": 201.30000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.49999999976717,
+            "startTime": 203.59999999997672,
+            "commitTime": 203.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.299999999930151,
+            "baseDuration": 17.5999999998603,
+            "startTime": 446.20000000006985,
+            "commitTime": 448.70000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 17.5999999998603,
+            "startTime": 494.5999999999767,
+            "commitTime": 495.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5,
+            "baseDuration": 16.49999999976717,
+            "startTime": 542.3000000000466,
+            "commitTime": 543.2000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 16.899999999790452,
+            "startTime": 741.4000000000233,
+            "commitTime": 742.4000000000233
+          }
+        ]
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 3,
+      "ready_ms": 483.1839970000001,
+      "refresh_ms": 403.90678599999956,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 236.615,
+          "duration_ms": 239.122
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 180.478,
+          "duration_ms": 182.392
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 103.19999999995343,
+        "domContentLoaded_ms": 140.79999999993015,
+        "transfer_bytes": 17387,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.0999999999767
+          },
+          {
+            "duration": 24,
+            "start": 524.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 524.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 524.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 524.2999999999302
+          },
+          {
+            "duration": 24,
+            "start": 524.2999999999302
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 132
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.999999999650754,
+            "baseDuration": 15.899999999906868,
+            "startTime": 143.29999999993015,
+            "commitTime": 170.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.899999999906868,
+            "startTime": 178.79999999993015,
+            "commitTime": 179
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 15.899999999906868,
+            "startTime": 179.59999999997672,
+            "commitTime": 179.89999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.8999999999068677,
+            "baseDuration": 16.199999999953434,
+            "startTime": 416.5,
+            "commitTime": 419.69999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.2999999999301508,
+            "baseDuration": 16.199999999953434,
+            "startTime": 475.19999999995343,
+            "commitTime": 476.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5,
+            "baseDuration": 14.599999999976717,
+            "startTime": 532.7999999999302,
+            "commitTime": 533.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 14.699999999953434,
+            "startTime": 719.6999999999534,
+            "commitTime": 720.6999999999534
+          }
+        ]
+      }
+    },
+    {
+      "module": "clientes",
+      "repeat": 4,
+      "ready_ms": 976.2003519999998,
+      "refresh_ms": 398.009062000001,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 293.044,
+          "duration_ms": 295.498
+        },
+        {
+          "endpoint": "/api/workspace/customers",
+          "status": 200,
+          "ttfb_ms": 111.645,
+          "duration_ms": 112.967
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 105.40000000002328,
+        "domContentLoaded_ms": 142.10000000009313,
+        "transfer_bytes": 17381,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 24,
+            "start": 1016
+          },
+          {
+            "duration": 16,
+            "start": 1016.2000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1016.2000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1016.2000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1016.2000000000698
+          },
+          {
+            "duration": 16,
+            "start": 1016.2000000000698
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 132
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.4000000001397,
+            "baseDuration": 15.000000000116415,
+            "startTime": 144.5,
+            "commitTime": 170.10000000009313
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.000000000116415,
+            "startTime": 178.60000000009313,
+            "commitTime": 178.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 15.100000000093132,
+            "startTime": 179.40000000002328,
+            "commitTime": 179.60000000009313
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.900000000023283,
+            "baseDuration": 15.399999999906868,
+            "startTime": 473.4000000000233,
+            "commitTime": 476.30000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.399999999906868,
+            "startTime": 481.20000000006985,
+            "commitTime": 482
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 13.79999999993015,
+            "startTime": 1018.3000000000466,
+            "commitTime": 1019
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.7000000000698492,
+            "baseDuration": 14.199999999953434,
+            "startTime": 1134.9000000000233,
+            "commitTime": 1135.7000000000698
+          }
+        ]
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 0,
+      "ready_ms": 988.6345790000014,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 334.274,
+          "duration_ms": 335.736
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 107.80000000004657,
+        "domContentLoaded_ms": 144.70000000006985,
+        "transfer_bytes": 15757,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 160
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.69999999983702,
+            "baseDuration": 15.699999999720603,
+            "startTime": 153.80000000004657,
+            "commitTime": 180.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 15.699999999720603,
+            "startTime": 192.40000000002328,
+            "commitTime": 192.70000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.699999999720603,
+            "startTime": 193.30000000004657,
+            "commitTime": 193.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.299999999930151,
+            "baseDuration": 16.29999999969732,
+            "startTime": 524.2000000000698,
+            "commitTime": 526.5999999999767
+          }
+        ]
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 1,
+      "ready_ms": 486.10472700000173,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 254.418,
+          "duration_ms": 256.436
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 109.70000000006985,
+        "domContentLoaded_ms": 147.40000000002328,
+        "transfer_bytes": 10122,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 17.600000000209548,
+            "baseDuration": 16.700000000186265,
+            "startTime": 154.70000000006985,
+            "commitTime": 181.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 16.700000000186265,
+            "startTime": 190.10000000009313,
+            "commitTime": 190.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 16.700000000186265,
+            "startTime": 194.10000000009313,
+            "commitTime": 194.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.3999999999068677,
+            "baseDuration": 17.000000000116415,
+            "startTime": 446.10000000009313,
+            "commitTime": 448.5
+          }
+        ]
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 2,
+      "ready_ms": 559.247585000001,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 250.834,
+          "duration_ms": 251.935
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 184.90000000002328,
+        "domContentLoaded_ms": 218.30000000004657,
+        "transfer_bytes": 10121,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 236
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.900000000023283,
+            "baseDuration": 16.0999999998603,
+            "startTime": 226.90000000002328,
+            "commitTime": 252.90000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 16.0999999998603,
+            "startTime": 261.70000000006985,
+            "commitTime": 261.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 16.0999999998603,
+            "startTime": 262.80000000004657,
+            "commitTime": 263
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.799999999930151,
+            "baseDuration": 17.0999999998603,
+            "startTime": 511.70000000006985,
+            "commitTime": 514.6000000000931
+          }
+        ]
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 3,
+      "ready_ms": 1058.739697000001,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 321.235,
+          "duration_ms": 323.398
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 174,
+        "domContentLoaded_ms": 209.90000000002328,
+        "transfer_bytes": 15757,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 224
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 17.499999999883585,
+            "baseDuration": 17.099999999743886,
+            "startTime": 216.90000000002328,
+            "commitTime": 243.30000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 17.099999999743886,
+            "startTime": 251.69999999995343,
+            "commitTime": 251.90000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 16.99999999976717,
+            "startTime": 253.09999999997672,
+            "commitTime": 253.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.900000000023283,
+            "baseDuration": 18.19999999983702,
+            "startTime": 573.1999999999534,
+            "commitTime": 576.1999999999534
+          }
+        ]
+      }
+    },
+    {
+      "module": "caja",
+      "repeat": 4,
+      "ready_ms": 471.12810700000045,
+      "refresh_ms": null,
+      "initial_requests": 1,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/cash",
+          "status": 200,
+          "ttfb_ms": 218.169,
+          "duration_ms": 219.986
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 96,
+        "domContentLoaded_ms": 131.5,
+        "transfer_bytes": 10121,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 148
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.600000000093132,
+            "baseDuration": 15.79999999993015,
+            "startTime": 138.89999999990687,
+            "commitTime": 165.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 15.79999999993015,
+            "startTime": 174.09999999997672,
+            "commitTime": 174.39999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.79999999993015,
+            "startTime": 177.89999999990687,
+            "commitTime": 178.09999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.700000000069849,
+            "baseDuration": 17.399999999906868,
+            "startTime": 392.29999999993015,
+            "commitTime": 396.29999999993015
+          }
+        ]
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 0,
+      "ready_ms": 1068.539858,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 339.385,
+          "duration_ms": 340.49
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 318.393,
+          "duration_ms": 319.571
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 165.162,
+          "duration_ms": 169.027
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 178.40000000002328,
+        "domContentLoaded_ms": 231.80000000004657,
+        "transfer_bytes": 24197,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 78,
+            "start": 804.7000000000698
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 220
+          },
+          {
+            "duration": 0,
+            "start": 652
+          },
+          {
+            "duration": 0,
+            "start": 812
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 17.5,
+            "baseDuration": 16.19999999983702,
+            "startTime": 234.59999999997672,
+            "commitTime": 261.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 16.19999999983702,
+            "startTime": 275.30000000004657,
+            "commitTime": 275.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 16.0999999998603,
+            "startTime": 276.0999999999767,
+            "commitTime": 276.30000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.300000000046566,
+            "baseDuration": 15.399999999906868,
+            "startTime": 598.5,
+            "commitTime": 601
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.8000000001629815,
+            "baseDuration": 17.599999999976717,
+            "startTime": 611.0999999999767,
+            "commitTime": 617.3000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7000000000698492,
+            "baseDuration": 18.100000000209548,
+            "startTime": 800.0999999999767,
+            "commitTime": 801.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 20.200000000186265,
+            "startTime": 805.2000000000698,
+            "commitTime": 807.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.5,
+            "baseDuration": 25.9000000001397,
+            "startTime": 809.9000000000233,
+            "commitTime": 817.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 14,
+            "baseDuration": 32.89999999979045,
+            "startTime": 826.9000000000233,
+            "commitTime": 841.2000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.900000000023283,
+            "baseDuration": 28.9000000001397,
+            "startTime": 848.8000000000466,
+            "commitTime": 856.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 15.100000000093132,
+            "baseDuration": 27.300000000046566,
+            "startTime": 863.3000000000466,
+            "commitTime": 878.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 27.300000000046566,
+            "startTime": 882,
+            "commitTime": 883
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 28,
+            "startTime": 885.5999999999767,
+            "commitTime": 918.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 28.599999999976717,
+            "startTime": 920.4000000000233,
+            "commitTime": 921.2000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.6000000000931323,
+            "baseDuration": 30.4000000001397,
+            "startTime": 922.0999999999767,
+            "commitTime": 924.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.7999999998137355,
+            "baseDuration": 34.39999999990687,
+            "startTime": 930.5999999999767,
+            "commitTime": 937.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.900000000023283,
+            "baseDuration": 32.9000000001397,
+            "startTime": 941.0999999999767,
+            "commitTime": 946.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.8999999999068677,
+            "baseDuration": 32.500000000116415,
+            "startTime": 948.5999999999767,
+            "commitTime": 952.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 32.200000000186265,
+            "startTime": 953.7000000000698,
+            "commitTime": 954.9000000000233
+          }
+        ]
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 1,
+      "ready_ms": 1004.3744960000004,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 310.453,
+          "duration_ms": 311.78
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 338.846,
+          "duration_ms": 340.438
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 240.037,
+          "duration_ms": 242.139
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 106.29999999993015,
+        "domContentLoaded_ms": 149.40000000002328,
+        "transfer_bytes": 24200,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 131,
+            "start": 551.9000000000233
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 168
+          },
+          {
+            "duration": 0,
+            "start": 540
+          },
+          {
+            "duration": 0,
+            "start": 788
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.900000000023283,
+            "baseDuration": 18.900000000023283,
+            "startTime": 159.5,
+            "commitTime": 189.09999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.900000000023283,
+            "startTime": 201.09999999997672,
+            "commitTime": 201.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.900000000023283,
+            "startTime": 205.29999999993015,
+            "commitTime": 205.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 7.700000000069849,
+            "baseDuration": 21.5,
+            "startTime": 509.5,
+            "commitTime": 517.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.100000000093132,
+            "baseDuration": 19.30000000016298,
+            "startTime": 540.5999999999767,
+            "commitTime": 545
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.700000000069849,
+            "baseDuration": 21.80000000016298,
+            "startTime": 552.0999999999767,
+            "commitTime": 554.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 10.70000000006985,
+            "baseDuration": 30.100000000093132,
+            "startTime": 558.5,
+            "commitTime": 569.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 17.900000000023283,
+            "baseDuration": 39.200000000419095,
+            "startTime": 583.2999999999302,
+            "commitTime": 602
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 11.300000000046566,
+            "baseDuration": 35.000000000116415,
+            "startTime": 611.1999999999534,
+            "commitTime": 623.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 45.0999999998603,
+            "baseDuration": 69.19999999995343,
+            "startTime": 630.9000000000233,
+            "commitTime": 676.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 1.400000000023283,
+            "baseDuration": 68.5,
+            "startTime": 680.2999999999302,
+            "commitTime": 682.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.5,
+            "baseDuration": 69.70000000006985,
+            "startTime": 775.9000000000233,
+            "commitTime": 777.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 70.30000000016298,
+            "startTime": 781.5,
+            "commitTime": 782.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.699999999953434,
+            "baseDuration": 73.00000000011642,
+            "startTime": 783.4000000000233,
+            "commitTime": 787.1999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.099999999976717,
+            "baseDuration": 77.00000000011642,
+            "startTime": 793.1999999999534,
+            "commitTime": 801
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.300000000046566,
+            "baseDuration": 76,
+            "startTime": 806.6999999999534,
+            "commitTime": 812.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.499999999883585,
+            "baseDuration": 75.69999999983702,
+            "startTime": 816.9000000000233,
+            "commitTime": 821.6999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 75.69999999983702,
+            "startTime": 824,
+            "commitTime": 824.4000000000233
+          }
+        ]
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 2,
+      "ready_ms": 1010.8852160000024,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 307.094,
+          "duration_ms": 308.864
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 348.371,
+          "duration_ms": 351.02
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 244.938,
+          "duration_ms": 248.487
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 111.40000000002328,
+        "domContentLoaded_ms": 156.69999999995343,
+        "transfer_bytes": 24201,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 126,
+            "start": 567
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 176
+          },
+          {
+            "duration": 0,
+            "start": 540
+          },
+          {
+            "duration": 0,
+            "start": 784
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.9000000001397,
+            "baseDuration": 18.400000000023283,
+            "startTime": 165.90000000002328,
+            "commitTime": 195.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.400000000023283,
+            "startTime": 207,
+            "commitTime": 207.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.10000000009313226,
+            "baseDuration": 18.4000000001397,
+            "startTime": 212.19999999995343,
+            "commitTime": 212.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.200000000069849,
+            "baseDuration": 19.20000000030268,
+            "startTime": 511.19999999995343,
+            "commitTime": 516.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.699999999953434,
+            "baseDuration": 19.79999999993015,
+            "startTime": 555,
+            "commitTime": 559.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.3000000001629815,
+            "baseDuration": 23.699999999953434,
+            "startTime": 567.0999999999767,
+            "commitTime": 571.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 16.20000000006985,
+            "baseDuration": 35.80000000016298,
+            "startTime": 578.5,
+            "commitTime": 595.7999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 22.79999999993015,
+            "baseDuration": 43.10000000020955,
+            "startTime": 612.7999999999302,
+            "commitTime": 636.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 14.699999999953434,
+            "baseDuration": 37.30000000051223,
+            "startTime": 648.5999999999767,
+            "commitTime": 663.7999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 8.400000000023283,
+            "baseDuration": 32.00000000046566,
+            "startTime": 679.4000000000233,
+            "commitTime": 688.1999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 1.4999999998835847,
+            "baseDuration": 32.000000000349246,
+            "startTime": 690.5999999999767,
+            "commitTime": 692.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.3000000000465661,
+            "baseDuration": 32.900000000256114,
+            "startTime": 774.5999999999767,
+            "commitTime": 776.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.099999999976717,
+            "baseDuration": 33.70000000030268,
+            "startTime": 779.5,
+            "commitTime": 780.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.700000000069849,
+            "baseDuration": 36.10000000032596,
+            "startTime": 781.7999999999302,
+            "commitTime": 785.7999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.899999999906868,
+            "baseDuration": 40.79999999993015,
+            "startTime": 792.4000000000233,
+            "commitTime": 800.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.699999999953434,
+            "baseDuration": 39.700000000186265,
+            "startTime": 806.9000000000233,
+            "commitTime": 812.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.5,
+            "baseDuration": 39.60000000032596,
+            "startTime": 818.0999999999767,
+            "commitTime": 823.7999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 39.60000000032596,
+            "startTime": 826.0999999999767,
+            "commitTime": 826.5999999999767
+          }
+        ]
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 3,
+      "ready_ms": 995.1018500000027,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 307.93,
+          "duration_ms": 309.136
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 273.31,
+          "duration_ms": 275.122
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 201.088,
+          "duration_ms": 203.067
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 101.79999999993015,
+        "domContentLoaded_ms": 144.29999999993015,
+        "transfer_bytes": 24199,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 77,
+            "start": 726.5
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          },
+          {
+            "duration": 0,
+            "start": 552
+          },
+          {
+            "duration": 0,
+            "start": 816
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 20.699999999953434,
+            "baseDuration": 19.399999999906868,
+            "startTime": 153.59999999997672,
+            "commitTime": 183.59999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 19.399999999906868,
+            "startTime": 194.79999999993015,
+            "commitTime": 195
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 19.399999999906868,
+            "startTime": 199.39999999990687,
+            "commitTime": 199.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.1000000000931323,
+            "baseDuration": 17.899999999906868,
+            "startTime": 466.89999999990687,
+            "commitTime": 468.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 10.20000000006985,
+            "baseDuration": 24.100000000093132,
+            "startTime": 502.89999999990687,
+            "commitTime": 513.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2,
+            "baseDuration": 25.0999999998603,
+            "startTime": 724.0999999999767,
+            "commitTime": 726.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.700000000069849,
+            "baseDuration": 27.699999999953434,
+            "startTime": 729.1999999999534,
+            "commitTime": 732
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.499999999883585,
+            "baseDuration": 32.699999999953434,
+            "startTime": 734.2999999999302,
+            "commitTime": 741.8999999999069
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 12.70000000006985,
+            "baseDuration": 38.900000000256114,
+            "startTime": 751.0999999999767,
+            "commitTime": 764.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.800000000046566,
+            "baseDuration": 35.60000000032596,
+            "startTime": 770.0999999999767,
+            "commitTime": 778.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.000000000116415,
+            "baseDuration": 33.70000000030268,
+            "startTime": 783.6999999999534,
+            "commitTime": 789.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.10000000009313226,
+            "baseDuration": 33.70000000030268,
+            "startTime": 791.1999999999534,
+            "commitTime": 804
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.5,
+            "baseDuration": 34.60000000020955,
+            "startTime": 807,
+            "commitTime": 808.7999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.6999999999534339,
+            "baseDuration": 35.30000000016298,
+            "startTime": 811.0999999999767,
+            "commitTime": 811.8999999999069
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.800000000046566,
+            "baseDuration": 37.30000000016298,
+            "startTime": 812.8999999999069,
+            "commitTime": 815.6999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.399999999906868,
+            "baseDuration": 41.39999999979045,
+            "startTime": 820.5,
+            "commitTime": 828.3999999999069
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.000000000116415,
+            "baseDuration": 40.400000000256114,
+            "startTime": 832.5999999999767,
+            "commitTime": 838.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.9999999998835847,
+            "baseDuration": 39.5,
+            "startTime": 841,
+            "commitTime": 845.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 39.40000000002328,
+            "startTime": 846.3999999999069,
+            "commitTime": 847.5999999999767
+          }
+        ]
+      }
+    },
+    {
+      "module": "finanzas",
+      "repeat": 4,
+      "ready_ms": 1026.0122950000004,
+      "refresh_ms": null,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 361.069,
+          "duration_ms": 363.134
+        },
+        {
+          "endpoint": "/api/finance/catalog",
+          "status": 200,
+          "ttfb_ms": 327.325,
+          "duration_ms": 328.574
+        },
+        {
+          "endpoint": "/api/finance/series",
+          "status": 200,
+          "ttfb_ms": 147.635,
+          "duration_ms": 150.163
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 122.20000000006985,
+        "domContentLoaded_ms": 169.30000000004657,
+        "transfer_bytes": 24201,
+        "js_transfer_bytes": 0,
+        "longTasks": [
+          {
+            "duration": 69,
+            "start": 751
+          }
+        ],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 188
+          },
+          {
+            "duration": 0,
+            "start": 632
+          },
+          {
+            "duration": 0,
+            "start": 756
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.999999999883585,
+            "baseDuration": 18.59999999962747,
+            "startTime": 178.30000000004657,
+            "commitTime": 208.70000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.59999999962747,
+            "startTime": 219,
+            "commitTime": 219.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.499999999650754,
+            "startTime": 219.70000000006985,
+            "commitTime": 219.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 17.699999999720603,
+            "startTime": 547.2000000000698,
+            "commitTime": 549.3000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6.599999999860302,
+            "baseDuration": 19.799999999580905,
+            "startTime": 579.8000000000466,
+            "commitTime": 586.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7999999999301508,
+            "baseDuration": 20.59999999962747,
+            "startTime": 746.2000000000698,
+            "commitTime": 748.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.599999999976717,
+            "baseDuration": 23.099999999511056,
+            "startTime": 751.7000000000698,
+            "commitTime": 754.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 8.399999999906868,
+            "baseDuration": 28.499999999417923,
+            "startTime": 756.5999999999767,
+            "commitTime": 765.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 13.300000000046566,
+            "baseDuration": 34.999999999650754,
+            "startTime": 775.9000000000233,
+            "commitTime": 789.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 8.300000000046566,
+            "baseDuration": 31.899999999441206,
+            "startTime": 796.2000000000698,
+            "commitTime": 804.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.400000000023283,
+            "baseDuration": 29.49999999953434,
+            "startTime": 811.4000000000233,
+            "commitTime": 817.3000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 29.49999999953434,
+            "startTime": 819.7000000000698,
+            "commitTime": 820.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 30.09999999962747,
+            "startTime": 823,
+            "commitTime": 887.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 30.999999999650754,
+            "startTime": 890.8000000000466,
+            "commitTime": 891.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.900000000023283,
+            "baseDuration": 33.099999999743886,
+            "startTime": 892.9000000000233,
+            "commitTime": 895.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.299999999930151,
+            "baseDuration": 37.29999999946449,
+            "startTime": 902.7000000000698,
+            "commitTime": 910.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.099999999743886,
+            "baseDuration": 36.19999999937136,
+            "startTime": 915.0999999999767,
+            "commitTime": 920.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.199999999953434,
+            "baseDuration": 35.299999999580905,
+            "startTime": 923.9000000000233,
+            "commitTime": 928.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.7999999999301508,
+            "baseDuration": 34.99999999953434,
+            "startTime": 929.8000000000466,
+            "commitTime": 931
+          }
+        ]
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 0,
+      "ready_ms": 1018.6489829999991,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 313.172,
+          "duration_ms": 314.372
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 300.213,
+          "duration_ms": 301.566
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 337.418,
+          "duration_ms": 338.953
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 308.218,
+          "duration_ms": 309.303
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 108.70000000006985,
+        "domContentLoaded_ms": 159.20000000006985,
+        "transfer_bytes": 20852,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 188
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 20.499999999883585,
+            "baseDuration": 18.19999999983702,
+            "startTime": 171.20000000006985,
+            "commitTime": 202
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.19999999983702,
+            "startTime": 215.20000000006985,
+            "commitTime": 215.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.19999999983702,
+            "startTime": 216,
+            "commitTime": 216.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 18.5999999998603,
+            "startTime": 514.4000000000233,
+            "commitTime": 516.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 17.5999999998603,
+            "startTime": 524.5,
+            "commitTime": 525.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 18.79999999993015,
+            "startTime": 530.8000000000466,
+            "commitTime": 533
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 18.29999999993015,
+            "startTime": 550.6000000000931,
+            "commitTime": 552.4000000000233
+          }
+        ]
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 1,
+      "ready_ms": 1015.346798999999,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 298.07,
+          "duration_ms": 300.74
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 289.38,
+          "duration_ms": 291.343
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 330.342,
+          "duration_ms": 331.473
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 320.542,
+          "duration_ms": 321.784
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 106.79999999993015,
+        "domContentLoaded_ms": 152.09999999997672,
+        "transfer_bytes": 20846,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 180
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 21.399999999906868,
+            "baseDuration": 20.099999999976717,
+            "startTime": 165.19999999995343,
+            "commitTime": 196.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 20.099999999976717,
+            "startTime": 210.69999999995343,
+            "commitTime": 210.89999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 20.099999999976717,
+            "startTime": 215.69999999995343,
+            "commitTime": 215.89999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 20.29999999993015,
+            "startTime": 497.19999999995343,
+            "commitTime": 500.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 19.400000000023283,
+            "startTime": 504.19999999995343,
+            "commitTime": 505.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.5999999999767169,
+            "baseDuration": 19.400000000023283,
+            "startTime": 530.3999999999069,
+            "commitTime": 531.1999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.099999999976717,
+            "baseDuration": 21.5,
+            "startTime": 549.6999999999534,
+            "commitTime": 553.8999999999069
+          }
+        ]
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 2,
+      "ready_ms": 982.7570820000001,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 284.42,
+          "duration_ms": 286.003
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 305.371,
+          "duration_ms": 306.85
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 327.957,
+          "duration_ms": 329.58
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 314.067,
+          "duration_ms": 315.207
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 99.79999999993015,
+        "domContentLoaded_ms": 142,
+        "transfer_bytes": 20849,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 136
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.999999999883585,
+            "baseDuration": 15.699999999837019,
+            "startTime": 143.79999999993015,
+            "commitTime": 170.39999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 15.699999999837019,
+            "startTime": 183.79999999993015,
+            "commitTime": 185.39999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 15.799999999813735,
+            "startTime": 189,
+            "commitTime": 189.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.5,
+            "baseDuration": 16.69999999983702,
+            "startTime": 463.29999999993015,
+            "commitTime": 466.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7999999998137355,
+            "baseDuration": 15.599999999743886,
+            "startTime": 485.5999999999767,
+            "commitTime": 487.79999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 15.399999999674037,
+            "startTime": 497.69999999995343,
+            "commitTime": 499.39999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 15.899999999790452,
+            "startTime": 508.39999999990687,
+            "commitTime": 510.5999999999767
+          }
+        ]
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 3,
+      "ready_ms": 618.8640090000008,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 336.193,
+          "duration_ms": 338.266
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 338.509,
+          "duration_ms": 340.582
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 311.967,
+          "duration_ms": 313.32
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 296.362,
+          "duration_ms": 297.51
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 102.40000000002328,
+        "domContentLoaded_ms": 144.30000000004657,
+        "transfer_bytes": 14068,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 136
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 16.899999999906868,
+            "baseDuration": 15.899999999906868,
+            "startTime": 147.5,
+            "commitTime": 174.69999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 15.899999999906868,
+            "startTime": 187.5,
+            "commitTime": 187.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 15.79999999993015,
+            "startTime": 188.40000000002328,
+            "commitTime": 188.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.7000000000698492,
+            "baseDuration": 15.000000000116415,
+            "startTime": 482.5,
+            "commitTime": 483.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 16.79999999993015,
+            "startTime": 501.69999999995343,
+            "commitTime": 504.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 16.099999999976717,
+            "startTime": 521.4000000000233,
+            "commitTime": 524
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3,
+            "baseDuration": 16.79999999993015,
+            "startTime": 526.3000000000466,
+            "commitTime": 529.3000000000466
+          }
+        ]
+      }
+    },
+    {
+      "module": "equipo",
+      "repeat": 4,
+      "ready_ms": 1099.5645740000036,
+      "refresh_ms": null,
+      "initial_requests": 4,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/workspace/services",
+          "status": 200,
+          "ttfb_ms": 311.635,
+          "duration_ms": 313.247
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 329.68,
+          "duration_ms": 330.861
+        },
+        {
+          "endpoint": "/api/workspace/staff_branch_assignments",
+          "status": 200,
+          "ttfb_ms": 317.045,
+          "duration_ms": 318.788
+        },
+        {
+          "endpoint": "/api/workspace/daily_availability",
+          "status": 200,
+          "ttfb_ms": 343.001,
+          "duration_ms": 345.714
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 203.5,
+        "domContentLoaded_ms": 251.80000000004657,
+        "transfer_bytes": 20845,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 248
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.300000000046566,
+            "baseDuration": 17.50000000023283,
+            "startTime": 254.5,
+            "commitTime": 285.20000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.10000000009313226,
+            "baseDuration": 17.50000000023283,
+            "startTime": 304.5,
+            "commitTime": 304.70000000006985
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 17.50000000023283,
+            "startTime": 305.80000000004657,
+            "commitTime": 306
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 17.300000000395812,
+            "startTime": 607,
+            "commitTime": 609.2000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.2999999999301508,
+            "baseDuration": 17.100000000325963,
+            "startTime": 615.3000000000466,
+            "commitTime": 616.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.400000000023283,
+            "baseDuration": 16.40000000037253,
+            "startTime": 626,
+            "commitTime": 627.7000000000698
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4,
+            "baseDuration": 17.100000000325963,
+            "startTime": 644,
+            "commitTime": 648.8000000000466
+          }
+        ]
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 0,
+      "ready_ms": 1522.867717999994,
+      "refresh_ms": 386.43915999999444,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 397.554,
+          "duration_ms": 399.029
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 510.064,
+          "duration_ms": 513.736
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 397.332,
+          "duration_ms": 401.331
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 133.932,
+          "duration_ms": 135.094
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 108.40000000002328,
+        "domContentLoaded_ms": 151.59999999997672,
+        "transfer_bytes": 25922,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1547.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1547.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1547.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1547.6999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1547.6999999999534
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 172
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.400000000023283,
+            "baseDuration": 18.400000000023283,
+            "startTime": 162.90000000002328,
+            "commitTime": 192.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.400000000023283,
+            "startTime": 203.5,
+            "commitTime": 203.79999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.400000000023283,
+            "startTime": 207.90000000002328,
+            "commitTime": 208.09999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8999999999068677,
+            "baseDuration": 19.099999999976717,
+            "startTime": 602.0999999999767,
+            "commitTime": 603.1999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 18.700000000186265,
+            "startTime": 617.9000000000233,
+            "commitTime": 619.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 6.100000000093132,
+            "baseDuration": 21.600000000093132,
+            "startTime": 714.4000000000233,
+            "commitTime": 721.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.199999999953434,
+            "baseDuration": 23.5,
+            "startTime": 735.5,
+            "commitTime": 1022
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7000000000698492,
+            "baseDuration": 23.9000000001397,
+            "startTime": 1025.0999999999767,
+            "commitTime": 1027
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.299999999930151,
+            "baseDuration": 26.800000000279397,
+            "startTime": 1028.5999999999767,
+            "commitTime": 1033.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 8.300000000046566,
+            "baseDuration": 30.200000000186265,
+            "startTime": 1037.2999999999302,
+            "commitTime": 1046
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4,
+            "baseDuration": 27.00000000023283,
+            "startTime": 1049.2999999999302,
+            "commitTime": 1053.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.599999999976717,
+            "baseDuration": 27.000000000116415,
+            "startTime": 1056.7999999999302,
+            "commitTime": 1060.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 27.000000000116415,
+            "startTime": 1062.5,
+            "commitTime": 1062.7999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 18.200000000186265,
+            "startTime": 1550.1999999999534,
+            "commitTime": 1551
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2,
+            "baseDuration": 18.900000000256114,
+            "startTime": 1691.1999999999534,
+            "commitTime": 1693.4000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.6999999999534339,
+            "baseDuration": 19.600000000209548,
+            "startTime": 1696.4000000000233,
+            "commitTime": 1697.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 21.00000000023283,
+            "startTime": 1698.2999999999302,
+            "commitTime": 1700.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.699999999953434,
+            "baseDuration": 22.30000000016298,
+            "startTime": 1704.5,
+            "commitTime": 1708.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.299999999930151,
+            "baseDuration": 23.100000000093132,
+            "startTime": 1711.9000000000233,
+            "commitTime": 1715.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.1000000000931323,
+            "baseDuration": 22.90000000037253,
+            "startTime": 1717.7999999999302,
+            "commitTime": 1721
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 22.90000000037253,
+            "startTime": 1722.2999999999302,
+            "commitTime": 1722.5
+          }
+        ]
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 1,
+      "ready_ms": 1031.2792889999982,
+      "refresh_ms": 390.6183119999987,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 365.756,
+          "duration_ms": 368.174
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 456.026,
+          "duration_ms": 457.159
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 271.375,
+          "duration_ms": 273.65
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 132.241,
+          "duration_ms": 133.364
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 116.90000000002328,
+        "domContentLoaded_ms": 161.40000000002328,
+        "transfer_bytes": 25923,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1061.9000000000233
+          },
+          {
+            "duration": 16,
+            "start": 1062
+          },
+          {
+            "duration": 16,
+            "start": 1062
+          },
+          {
+            "duration": 16,
+            "start": 1062.1000000000931
+          },
+          {
+            "duration": 16,
+            "start": 1062.1000000000931
+          },
+          {
+            "duration": 16,
+            "start": 1062.1000000000931
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 184
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 20.099999999976717,
+            "baseDuration": 19.399999999790452,
+            "startTime": 170.90000000002328,
+            "commitTime": 201.80000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 19.399999999790452,
+            "startTime": 214.40000000002328,
+            "commitTime": 214.60000000009313
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 19.399999999790452,
+            "startTime": 220.20000000006985,
+            "commitTime": 220.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 20.399999999790452,
+            "startTime": 485.80000000004657,
+            "commitTime": 488.30000000004657
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 20.699999999953434,
+            "startTime": 577.5,
+            "commitTime": 578.6000000000931
+          },
+          {
+            "phase": "update",
+            "actualDuration": 7.599999999976717,
+            "baseDuration": 23.5,
+            "startTime": 669.9000000000233,
+            "commitTime": 678.6000000000931
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.6000000000931323,
+            "baseDuration": 24.400000000023283,
+            "startTime": 689.5,
+            "commitTime": 978.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 25.79999999993015,
+            "startTime": 981.7000000000698,
+            "commitTime": 983.7000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.800000000046566,
+            "baseDuration": 29.0999999998603,
+            "startTime": 985.3000000000466,
+            "commitTime": 990.2000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 10,
+            "baseDuration": 33.39999999967404,
+            "startTime": 995.6000000000931,
+            "commitTime": 1005.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.799999999930151,
+            "baseDuration": 30.299999999813735,
+            "startTime": 1010.7000000000698,
+            "commitTime": 1015.6000000000931
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.099999999976717,
+            "baseDuration": 29.69999999983702,
+            "startTime": 1020.6000000000931,
+            "commitTime": 1024.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 29.69999999983702,
+            "startTime": 1026.6000000000931,
+            "commitTime": 1026.9000000000233
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 19.29999999993015,
+            "startTime": 1064.3000000000466,
+            "commitTime": 1065.3000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.6000000000931323,
+            "baseDuration": 19.399999999790452,
+            "startTime": 1203.9000000000233,
+            "commitTime": 1205.8000000000466
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 19.899999999906868,
+            "startTime": 1209,
+            "commitTime": 1209.8000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 21.49999999976717,
+            "startTime": 1210.7000000000698,
+            "commitTime": 1213
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.799999999930151,
+            "baseDuration": 22.999999999883585,
+            "startTime": 1217.6000000000931,
+            "commitTime": 1221.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.700000000069849,
+            "baseDuration": 22.699999999720603,
+            "startTime": 1224.4000000000233,
+            "commitTime": 1227.2000000000698
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.700000000069849,
+            "baseDuration": 22.899999999790452,
+            "startTime": 1229.4000000000233,
+            "commitTime": 1232.3000000000466
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 22.899999999790452,
+            "startTime": 1233.4000000000233,
+            "commitTime": 1233.7000000000698
+          }
+        ]
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 2,
+      "ready_ms": 991.0863979999995,
+      "refresh_ms": 401.3905509999968,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 323.772,
+          "duration_ms": 326.226
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 404.978,
+          "duration_ms": 406.454
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 280.276,
+          "duration_ms": 282.107
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 141.14,
+          "duration_ms": 142.367
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 103.59999999997672,
+        "domContentLoaded_ms": 144.29999999993015,
+        "transfer_bytes": 25913,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.4000000000233
+          },
+          {
+            "duration": 24,
+            "start": 1029.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1029.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1029.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1029.5999999999767
+          },
+          {
+            "duration": 24,
+            "start": 1029.5999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 18.899999999906868,
+            "baseDuration": 18.199999999953434,
+            "startTime": 153.59999999997672,
+            "commitTime": 182.79999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.19999999995343387,
+            "baseDuration": 18.199999999953434,
+            "startTime": 193.09999999997672,
+            "commitTime": 193.40000000002328
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.29999999993015,
+            "startTime": 193.90000000002328,
+            "commitTime": 194.09999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.200000000069849,
+            "baseDuration": 22.300000000046566,
+            "startTime": 473.29999999993015,
+            "commitTime": 478.5999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.300000000046566,
+            "baseDuration": 20.600000000093132,
+            "startTime": 519.5999999999767,
+            "commitTime": 523.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.200000000069849,
+            "baseDuration": 19.5,
+            "startTime": 602.5,
+            "commitTime": 607.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.700000000069849,
+            "baseDuration": 24.399999999906868,
+            "startTime": 620.1999999999534,
+            "commitTime": 908.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.599999999976717,
+            "baseDuration": 24.199999999953434,
+            "startTime": 911.5999999999767,
+            "commitTime": 913.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.599999999976717,
+            "baseDuration": 27.5,
+            "startTime": 915.0999999999767,
+            "commitTime": 919.9000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 8.099999999976717,
+            "baseDuration": 30.700000000186265,
+            "startTime": 925.0999999999767,
+            "commitTime": 933.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.300000000046566,
+            "baseDuration": 27.900000000256114,
+            "startTime": 937.1999999999534,
+            "commitTime": 941.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.1000000000931323,
+            "baseDuration": 27.400000000256114,
+            "startTime": 945,
+            "commitTime": 948.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 27.400000000256114,
+            "startTime": 949.9000000000233,
+            "commitTime": 950.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 18,
+            "startTime": 1031.6999999999534,
+            "commitTime": 1032.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.7000000000698492,
+            "baseDuration": 18.400000000023283,
+            "startTime": 1180.5999999999767,
+            "commitTime": 1182.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.8000000000465661,
+            "baseDuration": 18.999999999883585,
+            "startTime": 1185.5999999999767,
+            "commitTime": 1186.4000000000233
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.099999999976717,
+            "baseDuration": 20.400000000023283,
+            "startTime": 1187.4000000000233,
+            "commitTime": 1189.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.800000000046566,
+            "baseDuration": 22.69999999983702,
+            "startTime": 1194.2999999999302,
+            "commitTime": 1199.1999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.299999999930151,
+            "baseDuration": 23,
+            "startTime": 1203.1999999999534,
+            "commitTime": 1207.5999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.400000000023283,
+            "baseDuration": 22.399999999906868,
+            "startTime": 1210.6999999999534,
+            "commitTime": 1214.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 22.399999999906868,
+            "startTime": 1215.4000000000233,
+            "commitTime": 1215.5999999999767
+          }
+        ]
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 3,
+      "ready_ms": 1000.3286959999969,
+      "refresh_ms": 389.42223200000444,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 317.824,
+          "duration_ms": 320.254
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 425.695,
+          "duration_ms": 427.46
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 319.246,
+          "duration_ms": 320.239
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 148.135,
+          "duration_ms": 149.24
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 107.79999999993015,
+        "domContentLoaded_ms": 148.39999999990687,
+        "transfer_bytes": 25916,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.1999999999534
+          },
+          {
+            "duration": 16,
+            "start": 1026.3999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1026.3999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1026.3999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1026.3999999999069
+          },
+          {
+            "duration": 16,
+            "start": 1026.3999999999069
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 172
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.20000000006985,
+            "baseDuration": 18.4000000001397,
+            "startTime": 157.79999999993015,
+            "commitTime": 187.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.4000000001397,
+            "startTime": 200.69999999995343,
+            "commitTime": 201
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.500000000116415,
+            "startTime": 206.5,
+            "commitTime": 206.69999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.8000000000465661,
+            "baseDuration": 19.800000000046566,
+            "startTime": 518.2999999999302,
+            "commitTime": 521.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.6000000000931323,
+            "baseDuration": 19.80000000016298,
+            "startTime": 528.8999999999069,
+            "commitTime": 531.8999999999069
+          },
+          {
+            "phase": "update",
+            "actualDuration": 4.599999999976717,
+            "baseDuration": 19.80000000016298,
+            "startTime": 623.7999999999302,
+            "commitTime": 629.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 3.599999999976717,
+            "baseDuration": 20.900000000256114,
+            "startTime": 641.3999999999069,
+            "commitTime": 929.1999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.900000000023283,
+            "baseDuration": 22.30000000016298,
+            "startTime": 932.5999999999767,
+            "commitTime": 934.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.400000000023283,
+            "baseDuration": 26.29999999993015,
+            "startTime": 936.2999999999302,
+            "commitTime": 941.7999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 9.800000000046566,
+            "baseDuration": 30.199999999720603,
+            "startTime": 947.7999999999302,
+            "commitTime": 958.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.600000000093132,
+            "baseDuration": 26.700000000186265,
+            "startTime": 963.3999999999069,
+            "commitTime": 968.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.099999999976717,
+            "baseDuration": 26.5,
+            "startTime": 973.1999999999534,
+            "commitTime": 977.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 26.5,
+            "startTime": 979.2999999999302,
+            "commitTime": 979.7999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1,
+            "baseDuration": 18.500000000116415,
+            "startTime": 1028.5999999999767,
+            "commitTime": 1029.6999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.699999999953434,
+            "baseDuration": 19.100000000093132,
+            "startTime": 1188.1999999999534,
+            "commitTime": 1191.0999999999767
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.1999999999534339,
+            "baseDuration": 20.100000000093132,
+            "startTime": 1196.0999999999767,
+            "commitTime": 1197.2999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.800000000046566,
+            "baseDuration": 21.900000000256114,
+            "startTime": 1198.3999999999069,
+            "commitTime": 1201.3999999999069
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.599999999976717,
+            "baseDuration": 25.600000000325963,
+            "startTime": 1207.5,
+            "commitTime": 1215.1999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 5.800000000046566,
+            "baseDuration": 25.600000000209548,
+            "startTime": 1221.2999999999302,
+            "commitTime": 1227.5
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 6.100000000093132,
+            "baseDuration": 26.400000000256114,
+            "startTime": 1231.6999999999534,
+            "commitTime": 1238.0999999999767
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.10000000009313226,
+            "baseDuration": 26.400000000256114,
+            "startTime": 1240.3999999999069,
+            "commitTime": 1241
+          }
+        ]
+      }
+    },
+    {
+      "module": "reportes",
+      "repeat": 4,
+      "ready_ms": 1005.4214270000011,
+      "refresh_ms": 395.46240099999704,
+      "initial_requests": 3,
+      "duplicate_requests": 0,
+      "requests": [
+        {
+          "endpoint": "/api/finance/summary",
+          "status": 200,
+          "ttfb_ms": 313.947,
+          "duration_ms": 315.205
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 399.08,
+          "duration_ms": 400.739
+        },
+        {
+          "endpoint": "/api/workspace/staff",
+          "status": 200,
+          "ttfb_ms": 292.019,
+          "duration_ms": 293.421
+        },
+        {
+          "endpoint": "/api/workspace/dashboard",
+          "status": 200,
+          "ttfb_ms": 132.005,
+          "duration_ms": 133.069
+        }
+      ],
+      "browser": {
+        "ttfb_ms": 105.79999999993015,
+        "domContentLoaded_ms": 145.59999999997672,
+        "transfer_bytes": 25922,
+        "js_transfer_bytes": 0,
+        "longTasks": [],
+        "events": [
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5
+          },
+          {
+            "duration": 16,
+            "start": 1040.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1040.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1040.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1040.5999999999767
+          },
+          {
+            "duration": 16,
+            "start": 1040.5999999999767
+          }
+        ],
+        "lcp": [
+          {
+            "duration": 0,
+            "start": 164
+          }
+        ],
+        "profiles": [
+          {
+            "phase": "mount",
+            "actualDuration": 19.699999999953434,
+            "baseDuration": 18.69999999983702,
+            "startTime": 153.69999999995343,
+            "commitTime": 183.59999999997672
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 18.69999999983702,
+            "startTime": 195.79999999993015,
+            "commitTime": 196.19999999995343
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0,
+            "baseDuration": 18.5999999998603,
+            "startTime": 200.59999999997672,
+            "commitTime": 201.29999999993015
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.800000000046566,
+            "baseDuration": 19.399999999790452,
+            "startTime": 488.0999999999767,
+            "commitTime": 491
+          },
+          {
+            "phase": "update",
+            "actualDuration": 1.400000000023283,
+            "baseDuration": 20.199999999720603,
+            "startTime": 508.29999999993015,
+            "commitTime": 509.89999999990687
+          },
+          {
+            "phase": "update",
+            "actualDuration": 5.099999999976717,
+            "baseDuration": 19.999999999883585,
+            "startTime": 594,
+            "commitTime": 600.1999999999534
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.6000000000931323,
+            "baseDuration": 21.599999999976717,
+            "startTime": 612.7999999999302,
+            "commitTime": 900.7999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2,
+            "baseDuration": 23.099999999976717,
+            "startTime": 903.8999999999069,
+            "commitTime": 906.1999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 4.599999999976717,
+            "baseDuration": 26.400000000023283,
+            "startTime": 907.7999999999302,
+            "commitTime": 912.6999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 7.999999999883585,
+            "baseDuration": 29.500000000116415,
+            "startTime": 917.5999999999767,
+            "commitTime": 925.8999999999069
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.700000000069849,
+            "baseDuration": 26.899999999906868,
+            "startTime": 929.0999999999767,
+            "commitTime": 933
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.099999999976717,
+            "baseDuration": 26.300000000046566,
+            "startTime": 935.5999999999767,
+            "commitTime": 938.7999999999302
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0.09999999997671694,
+            "baseDuration": 26.300000000046566,
+            "startTime": 940,
+            "commitTime": 940.2999999999302
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.9000000000232831,
+            "baseDuration": 18.19999999983702,
+            "startTime": 1042.5999999999767,
+            "commitTime": 1043.5
+          },
+          {
+            "phase": "update",
+            "actualDuration": 2.199999999953434,
+            "baseDuration": 19.299999999813735,
+            "startTime": 1181.3999999999069,
+            "commitTime": 1183.8999999999069
+          },
+          {
+            "phase": "update",
+            "actualDuration": 0.7000000000698492,
+            "baseDuration": 19.999999999883585,
+            "startTime": 1186.2999999999302,
+            "commitTime": 1187
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.1000000000931323,
+            "baseDuration": 21.29999999993015,
+            "startTime": 1187.8999999999069,
+            "commitTime": 1190
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 3.300000000046566,
+            "baseDuration": 22.899999999906868,
+            "startTime": 1193.7999999999302,
+            "commitTime": 1197.3999999999069
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.400000000023283,
+            "baseDuration": 22.29999999993015,
+            "startTime": 1200.0999999999767,
+            "commitTime": 1202.6999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 2.800000000046566,
+            "baseDuration": 22.900000000023283,
+            "startTime": 1204.8999999999069,
+            "commitTime": 1207.6999999999534
+          },
+          {
+            "phase": "nested-update",
+            "actualDuration": 0,
+            "baseDuration": 22.900000000023283,
+            "startTime": 1208.7999999999302,
+            "commitTime": 1209
+          }
+        ]
+      }
+    }
+  ],
+  "limits": "Five samples per module: p95/p99 are maxima, exploratory not capacity/SLA. Browser event timings are synthetic, not field INP. No customer response bodies stored. Ordinary production builds do not provide React profile durations."
+}

@@ -22,7 +22,7 @@ Registrar alquiler, servicios, insumos y demás costos en **Finanzas → Gastos*
 
 El resumen depende de los gastos registrados: no adivina alquileres pendientes ni importa pagos históricos. Los salarios registrados sí integran el gasto operativo. Adelantos y retiros personales no se descuentan automáticamente del reparto. Revisar esos movimientos antes de realizar cualquier pago real. El cálculo no ordena transferencias ni crea liquidaciones pagadas. Los filtros son inclusivos por fecha local de la sucursal: una venta totalmente cobrada se reconoce al postear; un pago parcial anterior figura como cobrado en su fecha, sin adelantar esa venta al reparto.
 
-El reparto sigue siendo una estimación. El diseño para registrar distribución aprobada, pagos reales y saldos de socios está en [PARTNER_DISTRIBUTIONS_DESIGN](PARTNER_DISTRIBUTIONS_DESIGN.md); ese registro de pagos todavía no está implementado.
+El resumen sigue siendo una estimación. El registro de distribuciones aprobadas, pagos reales y saldos está implementado en **Finanzas → Distribuciones a socios**, como extensión opt-in. Sin política confirmada por el propietario permanece bloqueado. Preparar o aprobar no registra un pago ni ordena una transferencia. Ver [entrega vigente](1717_INTEGRATION_HANDOFF.md); [PARTNER_DISTRIBUTIONS_DESIGN](PARTNER_DISTRIBUTIONS_DESIGN.md) se conserva como diseño histórico.
 
 La modalidad y sus participantes se protegen después de la primera venta registrada para mantener el significado del historial. No cambiar comisiones históricas ni usar ajustes ficticios para representar un reparto.
 

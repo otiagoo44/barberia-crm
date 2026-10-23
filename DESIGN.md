@@ -1,46 +1,62 @@
 ---
 version: alpha
-name: Barbería OS — Workspace
+name: Barbería OS · Negro y oro
 colors:
-  primary: "#3e4095"
-  on-primary: "#ffffff"
-  canvas: "#fafaf9"
-  surface: "#ffffff"
-  subtle: "#f5f5f8"
-  foreground: "#292a35"
-  muted: "#626573"
-  border: "#e6e6ec"
-  input: "#898b98"
-  link: "#3e4095"
-  success: "#246b44"
-  warning: "#80591c"
-  danger: "#9b332e"
-  chart-primary: "#5154a0"
-  chart-secondary: "#54847e"
-  chart-tertiary: "#a67c36"
-  chart-quaternary: "#85758b"
-  chart-result: "#292a35"
+  primary: "#D7B56D"
+  on-primary: "#171715"
+  canvas: "#F8F6F0"
+  surface: "#FFFFFF"
+  subtle: "#F1EEE6"
+  foreground: "#171715"
+  muted: "#67645E"
+  border: "#E8E3D9"
+  input: "#827A6C"
+  link: "#865D16"
+  sidebar: "#121313"
+  on-sidebar: "#F8F6F0"
+  sidebar-muted: "#BDB9AE"
+  selected: "#30291C"
+  success: "#246B44"
+  warning: "#80591C"
+  danger: "#9B332E"
+  info: "#285C7E"
+  disabled: "#ECE8DF"
+  chart-primary: "#865D16"
+  chart-secondary: "#32746A"
+  chart-tertiary: "#9B6248"
+  chart-quaternary: "#706084"
+  chart-result: "#171715"
 typography:
   heading:
     fontFamily: DM Sans Variable
-    fontSize: 28px
-    fontWeight: 600
+    fontSize: 32px
+    fontWeight: 650
     lineHeight: 1.2
   section:
     fontFamily: DM Sans Variable
-    fontSize: 18px
+    fontSize: 22px
     fontWeight: 600
-    lineHeight: 1.4
+    lineHeight: 1.35
   body:
     fontFamily: DM Sans Variable
-    fontSize: 15px
+    fontSize: 16px
     fontWeight: 400
-    lineHeight: 1.5
+    lineHeight: 1.55
+  control:
+    fontFamily: DM Sans Variable
+    fontSize: 15px
+    fontWeight: 600
+    lineHeight: 1.4
   caption:
     fontFamily: DM Sans Variable
-    fontSize: 12px
+    fontSize: 14px
     fontWeight: 400
     lineHeight: 1.5
+  metric:
+    fontFamily: DM Sans Variable
+    fontSize: 32px
+    fontWeight: 650
+    lineHeight: 1.25
 spacing:
   xs: 4px
   sm: 8px
@@ -48,13 +64,12 @@ spacing:
   lg: 24px
   xl: 32px
 rounded:
-  control: 7px
-  panel: 8px
+  control: 10px
+  panel: 14px
 components:
   button:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
-    rounded: "{rounded.control}"
   body:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.foreground}"
@@ -67,9 +82,21 @@ components:
   subtle-panel:
     backgroundColor: "{colors.subtle}"
     textColor: "{colors.foreground}"
+  sidebar:
+    backgroundColor: "{colors.sidebar}"
+    textColor: "{colors.on-sidebar}"
+  sidebar-secondary:
+    backgroundColor: "{colors.sidebar}"
+    textColor: "{colors.sidebar-muted}"
+  navigation-selected:
+    backgroundColor: "{colors.selected}"
+    textColor: "{colors.primary}"
+  disabled:
+    backgroundColor: "{colors.disabled}"
+    textColor: "{colors.muted}"
   border:
     backgroundColor: "{colors.border}"
-  input-outline:
+  input:
     backgroundColor: "{colors.input}"
   success:
     backgroundColor: "{colors.surface}"
@@ -80,6 +107,9 @@ components:
   error:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.danger}"
+  information:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.info}"
   chart-primary:
     backgroundColor: "{colors.chart-primary}"
   chart-secondary:
@@ -94,36 +124,40 @@ components:
 
 ## Overview
 
-CRM operativo para recepción, profesionales y propietarios. Claro por defecto, información antes que decoración. Diales Taste: variance 2, motion 1, density 7. La autoridad visual es este archivo; `src/app/design-tokens.css` implementa sus colores. El documento anterior se conserva en `docs/design/LEGACY_DARK_DESIGN.md` como historial, sin autoridad sobre la interfaz.
+Herramienta diaria para recepción, profesionales y propietarios. Identidad propia negra/dorada: navegación oscura, contenido cálido luminoso y acciones claras. Diales Taste 4/4/5: composición funcional, movimiento perceptible y densidad media. Este documento es la autoridad canónica; src/app/design-tokens.css implementa los tokens. El PR #3 y docs/design/LEGACY_DARK_DESIGN.md son historia.
 
-Referencias de código verificadas: Twenty `d7499bf4ba11ed8c8a9392e02a42bb12b576e543` (navegación contextual y tabla), Frappe CRM `2c4b488bb858c18935a4ca27fe5fd7922cb45be5` (ContactsListView, Contact, actividades y sidebar) y [Occidental CRM](https://github.com/otiagoo44/ferreteria-crm/tree/e623009abe253838b4c495d7612e7bde3555b6c4) (DESIGN.md, styles.css, tokens.css, AppShell, common, Inquiries y RecordPanel). Inventario preciso en docs/UX_REDESIGN_REPORT.md. Se adaptan superficies continuas, tabla compacta, vistas encima de filtros y panel lateral con pestañas; no se copia código, dominio, metadata, marca ni activos. Awesome Design MD aporta su análisis completo de Notion: sólo geometría y jerarquía. Se descartan sus héroes, paletas y fuentes propietarias. UI UX Pro Max: consulta local CRM internal workspace, diales 2/1/7, UX focus modal keyboard y stack React table filtering state. Se adopta minimalismo funcional; se descartan el hero comercial, Poppins, azul/verde sugeridos y scroll reveal.
+Awesome Design MD: análisis completos de Cal y Linear, adoptando jerarquía, agrupación de vistas y escalas de superficie; se descartan héroes, fuentes propietarias, paletas y marcas. No se copia Occidental/Twenty/Frappe. UI UX Pro Max: dos búsquedas de sistema, foco y stack Next.js; se adopta legibilidad y feedback. Se descartan glass, serif, scroll storytelling y GSAP. La recomendación de deduplicación de RSC no se traslada a efectos cliente sin medir.
 
 ## Colors
 
-Canvas `{colors.canvas}`, superficies `{colors.surface}` y `{colors.subtle}`. Texto `{colors.foreground}`; secundario `{colors.muted}`. El índigo `{colors.link}` identifica acciones de la aplicación. Cada organización conserva su logo y brand_color: `brandStyle` calcula texto sobre marca y un acento oscuro legible sobre blanco. No imponer una identidad no confirmada a 17:17.
+Canvas {colors.canvas}, superficie {colors.surface}, texto {colors.foreground} y secundario {colors.muted}. Sidebar {colors.sidebar} con texto claro. El dorado {colors.primary} tiene texto oscuro; enlaces y foco sobre blanco usan {colors.link}. Verde/rojo/ámbar/azul conservan significados, acompañados de texto.
+
+Logo y color configurables permanecen. brandStyle calcula contraste de botón, enlace y acento sobre sidebar. No reescribir marca almacenada ni datos de 17:17. Dorado como fallback del producto. Hover no reduce contraste mediante opacidad/filtros. Disabled mantiene texto legible y se diferencia de busy con aria-busy.
 
 ## Typography
 
-DM Sans Variable autoalojada desde @fontsource-variable/dm-sans 5.3.0, licencia SIL OFL incluida en el paquete. Inter (SIL OFL) fue evaluada por su legibilidad numérica; se elige DM Sans por su continuidad con Occidental y sus formas más abiertas. Sin fuentes privadas ni solicitudes a Google Fonts. Títulos de 28px, secciones 18px, texto 15px; inputs móviles 16px para evitar zoom involuntario. Números tabulares en importes. Nunca abreviar moneda o período de forma ambigua.
+DM Sans Variable autoalojada, cuerpo 16px, controles 15–16px, tablas 15px y etiquetas 14px. Títulos 28–32px, secciones 22px, cifras 28–36px sin cortar dígitos. Números tabulares para dinero, horarios y métricas. Sin fuentes remotas en producción.
+
+Se elige DM Sans después de comparar el listado real de Clientes con Inter Variable en cinco anchos. Ambas resultaron legibles y sin desborde de página. A 16px, la cadena monetaria ocupó 119px con DM Sans y 127px con Inter; el texto español, 347px y 366px. En escritorio DM Sans dejó visible la acción de la última columna en el mismo ancho; Inter requirió más scroll interno. La revisión a escala real en 390/1440 conservó buena lectura de teléfonos, cifras y etiquetas con DM Sans. Es una decisión de QA visual y densidad, no una prueba humana de velocidad de lectura. Evidencia y límites en FINAL_UX_AUDIT.md. Ambas fuentes OFL; Inter solo para desarrollo/QA.
 
 ## Layout
 
-Sidebar de 232px, grupos por intención y footer de cuenta. Cabecera compacta con organización, pantalla y local. Contenido limitado a 1600px. En móvil, menú modal y accesos inferiores; la sucursal sigue visible. Tablas/calendarios pueden desplazarse dentro de su región, nunca desbordar todo el documento. Espaciado 4/8/16/24/32px.
+Sidebar 264px, agrupada por tarea y rol; local y búsqueda visibles. Contenido hasta 1600px, margen 32px escritorio/16px móvil. Inicio prioriza jornada/acciones; reportes conservan detalle. Modal/drawer mantienen contexto. Tablas extensas con scroll interno etiquetado y teclado. Zoom 200% permite pasar a layout móvil. Escala 4/8/16/24/32px.
 
 ## Elevation & Depth
 
-Superficies planas y bordes discretos. Sombra únicamente en overlays. Sin gradientes, glassmorphism ni fondos oscuros extensos.
+Fondos planos, bordes cálidos, sombra tenue en hover/overlays. Z-index: cabecera 15, toast/búsqueda 40, salto 100; diálogos en top layer nativa. Sin blur ni animaciones continuas. Gráficos diferidos con tabla alternativa.
 
 ## Shapes
 
-Controles `{rounded.control}`; paneles `{rounded.panel}`. Evitar botones en forma de píldora para toda acción. Acciones principales de 44px y foco visible. Los bloques de agenda conservan altura proporcional, incluso los cortos; Lista ofrece una alternativa táctil con controles completos.
+Controles {rounded.control}, paneles {rounded.panel}. Targets normales de al menos 44px; eventos cortos de calendario conservan duración real y vista Lista alternativa. Foco visible fuera de sticky header y navegación inferior.
 
 ## Components
 
-Lucide SVG coherente, iconos decorativos ocultos a lectores. Dialog nativo con nombre, Escape, foco contenido y restitución del foco. Una acción primaria por tarea; secundarias con borde y peligrosas con texto rojo. Tablas con encabezados, filas legibles y región desplazable con teclado. Charts Recharts accesibles más tabla alternativa: no depender de color ni hover. Skeleton, vacío, error y desconocido son estados distintos.
+Botones: hover 160ms, active 110ms/translateY(1px), foco 2px, busy inmediato con texto/indicador. Success solo después de respuesta real. Modal/drawer 200–220ms transform/opacity, Escape, foco contenido y restitución. Tabs/menús/filtros indican estado ARIA. Toast/Notice explican qué ocurrió y próximo paso. Reduced-motion elimina desplazamientos/animación conservando contenido y feedback. Ver MOTION_DESIGN_SYSTEM.md.
 
-Inicio prioriza la jornada y los indicadores; la guía de configuración queda plegada, accesible desde su resumen. Deshabilitar reservas online no significa que el negocio necesite onboarding. Agenda carga franjas y ausencias una vez por rango, con límites explícitos y RLS de la sesión; cada día conserva su escala real. Las tablas financieras y de auditoría permiten foco y desplazamiento con teclado también cuando no contienen acciones.
+Puesta en marcha comprueba cuenta/rol, sucursal, catálogo, profesionales, horarios diarios, medios, reservas y seguridad con fuentes autorizadas. Lo no observable es «Verificación manual», nunca «Listo». No activar booking/distribuciones desde el diagnóstico.
 
 ## Do's and Don'ts
 
-Usar datos autorizados y unidades exactas. Mostrar producción estimada, ventas reconocidas, cobros y resultado por separado. No inventar tendencias sin comparación. No llenar gráficos vacíos con fixtures. Respetar reduced-motion. Mantener personalización de marca y los permisos efectivos en DB. No agregar modo oscuro hasta poder probar todos sus estados.
+Preservar RLS, MFA AAL2, sesión viva, roles, idempotencia, dinero exacto y transacciones. Sin pagos optimistas. Invalidar lecturas tras writes; no mostrar finanzas previas como actuales. No persistir datos comerciales en localStorage. Respetar teclado y reduced-motion. No inventar disponibilidad, precios, alertas entregadas ni backups. No editar la landing ni el contrato público; documentar sincronización visual posterior.

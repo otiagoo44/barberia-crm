@@ -53,7 +53,7 @@ export function DataChart({
         dataKey={horizontal ? undefined : "label"}
         type={horizontal ? "number" : "category"}
         allowDecimals={!!percent}
-        tick={{ fontSize: 11, fill: "var(--muted)" }}
+        tick={{ fontSize: 14, fill: "var(--muted)" }}
         tickLine={false}
         axisLine={false}
         minTickGap={20}
@@ -69,7 +69,7 @@ export function DataChart({
         type={horizontal ? "category" : "number"}
         dataKey={horizontal ? "label" : undefined}
         allowDecimals={!!percent}
-        tick={{ fontSize: 11, fill: "var(--muted)" }}
+        tick={{ fontSize: 14, fill: "var(--muted)" }}
         tickLine={false}
         axisLine={false}
         width={horizontal ? 110 : currency ? 82 : 44}
@@ -94,7 +94,7 @@ export function DataChart({
           borderRadius: 8,
         }}
       />
-      <Legend wrapperStyle={{ fontSize: 12, paddingTop: 12 }} />
+      <Legend wrapperStyle={{ fontSize: 14, paddingTop: 12 }} />
     </>
   );
   return (

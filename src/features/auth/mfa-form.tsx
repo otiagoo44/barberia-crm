@@ -96,8 +96,11 @@ export function MfaForm({
         </h1>
       </div>
       <p className="muted">
-        Usá el código de tu aplicación de autenticación. Los accesos de
-        administración y finanzas requieren esta verificación.
+        {level === "aal2"
+          ? "Tu sesión ya está verificada. Podés continuar o agregar un autenticador de respaldo."
+          : verified.length
+            ? "Abrí la app autenticadora de tu teléfono e ingresá su código de 6 dígitos. Este código no llega por correo ni WhatsApp."
+            : "Para proteger tu cuenta, primero vinculá una app autenticadora de tu teléfono. La usarás para generar el código de acceso."}
       </p>
       {error && !confirmation && <Notice error>{error}</Notice>}
       {level === "aal2" && !enrollment && (
@@ -119,7 +122,7 @@ export function MfaForm({
             </select>
           </Field>
           <CodeField />
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             Verificar y continuar
           </button>
         </form>
@@ -131,6 +134,23 @@ export function MfaForm({
               ? "Agregar un autenticador de respaldo"
               : "Configurar autenticador"}
           </h2>
+          {verified.length === 0 && (
+            <details>
+              <summary>No tengo una app autenticadora</summary>
+              <p className="muted">
+                Instalá Google Authenticator gratis en tu teléfono:{" "}
+                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">
+                  Android
+                </a>{" "}
+                o{" "}
+                <a href="https://apps.apple.com/app/google-authenticator/id388497605">
+                  iPhone
+                </a>
+                . También podés usar Microsoft Authenticator. Después, elegí un
+                nombre abajo y configurá el dispositivo para ver el QR.
+              </p>
+            </details>
+          )}
           <Field label="Nombre del dispositivo">
             <input
               name="name"
@@ -139,7 +159,7 @@ export function MfaForm({
               placeholder="Mi teléfono"
             />
           </Field>
-          <button disabled={busy || failed}>
+          <button aria-busy={!!busy} disabled={busy || failed}>
             <KeyRound size={16} aria-hidden="true" /> Configurar dispositivo
           </button>
         </form>
@@ -147,6 +167,11 @@ export function MfaForm({
       {enrollment && (
         <form className="stack" onSubmit={verify}>
           <h2>Escaneá y confirmá el código</h2>
+          <p className="muted">
+            Abrí la app autenticadora en tu teléfono, tocá Agregar o + y elegí
+            Escanear código QR. Escaneá desde esa app, no desde la cámara
+            normal. Después, ingresá aquí los 6 dígitos que muestra la app.
+          </p>
           <img
             className="mfa-qr"
             src={enrollment.qr}
@@ -156,16 +181,22 @@ export function MfaForm({
           />
           <details>
             <summary>Ingresar la clave manualmente</summary>
+            <p className="muted">
+              Si usás la CRM en el mismo teléfono, elegí Ingresar clave de
+              configuración en tu app autenticadora y pegá esta clave. Usá la
+              opción basada en tiempo.
+            </p>
             <code className="secret-key">{enrollment.secret}</code>
           </details>
           <p className="muted">
             Guardá esta clave en un lugar privado. No la compartas por chat.
           </p>
           <CodeField />
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             Confirmar autenticador
           </button>
           <button
+            aria-busy={!!busy}
             type="button"
             disabled={busy}
             onClick={async () => {
@@ -190,6 +221,7 @@ export function MfaForm({
           <div key={f.id} className="row between wrap">
             <span>{f.name}</span>
             <button
+              aria-busy={!!busy}
               disabled={busy || verified.length < 2}
               onClick={() => {
                 setError("");
@@ -215,6 +247,7 @@ export function MfaForm({
       </details>
       {level === "aal2" && (
         <button
+          aria-busy={!!busy}
           disabled={busy}
           onClick={() => {
             setError("");

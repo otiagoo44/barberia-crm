@@ -11,6 +11,28 @@ export async function productContracts(pool: Pool) {
     passed++;
     console.log(`PASS Product: ${name}`);
   }
+  await check(
+    "new organization brand defaults to gold without changing configured brands",
+    async () => {
+      const column = await pool.query(
+        "select column_default from information_schema.columns where table_schema='public' and table_name='organizations' and column_name='brand_color'",
+      );
+      assert.match(column.rows[0].column_default, /#D7B56D/);
+      await pool.query(
+        "update public.organizations set brand_color='#336699' where id=$1",
+        [f.orgA],
+      );
+      assert.equal(
+        (
+          await pool.query(
+            "select brand_color from public.organizations where id=$1",
+            [f.orgA],
+          )
+        ).rows[0].brand_color,
+        "#336699",
+      );
+    },
+  );
   async function claims(
     user: string,
     level: string,

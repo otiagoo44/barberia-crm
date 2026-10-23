@@ -1,0 +1,250 @@
+[
+  {
+    "module": "login",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "reserva-publica",
+    "width": 390,
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".current"
+            ],
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #111111, background color: #3d7c8c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "module": "login",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "reserva-publica",
+    "width": 1440,
+    "violations": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".current"
+            ],
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #111111, background color: #3d7c8c, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "module": "mfa",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "mfa",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "inicio",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "agenda",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "navegacion",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "clientes",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "cliente-ficha",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "equipo",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "disponibilidad",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "equipo-tabla",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "servicios",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "caja",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "checkout",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "finanzas",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "finanzas-7dias",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "reportes",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "configuracion",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "walk-ins",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "sucursales",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "metas",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "retencion",
+    "width": 390,
+    "violations": []
+  },
+  {
+    "module": "inicio",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "agenda",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "navegacion",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "clientes",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "cliente-ficha",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "equipo",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "disponibilidad",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "equipo-tabla",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "servicios",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "caja",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "checkout",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "finanzas",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "finanzas-7dias",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "reportes",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "configuracion",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "walk-ins",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "sucursales",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "metas",
+    "width": 1440,
+    "violations": []
+  },
+  {
+    "module": "retencion",
+    "width": 1440,
+    "violations": []
+  }
+]

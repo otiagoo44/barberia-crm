@@ -644,7 +644,9 @@ function CustomerDetail({
                       />
                     </Field>
                     {error && <Notice error>{error}</Notice>}
-                    <button disabled={busy}>Guardar nota</button>
+                    <button aria-busy={!!busy} disabled={busy}>
+                      Guardar nota
+                    </button>
                   </form>
                 )}
                 {w.role !== "barber" && (
@@ -662,7 +664,9 @@ function CustomerDetail({
                     <Field label="Detalle de preferencia (opcional para etiqueta)">
                       <input name="value" maxLength={300} />
                     </Field>
-                    <button disabled={busy}>Agregar información</button>
+                    <button aria-busy={!!busy} disabled={busy}>
+                      Agregar información
+                    </button>
                   </form>
                 )}
               </div>
@@ -834,7 +838,7 @@ function CustomerForm({
           <button type="button" onClick={onClose}>
             Cancelar
           </button>
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             {busy ? "Guardando…" : "Guardar cliente"}
           </button>
         </div>

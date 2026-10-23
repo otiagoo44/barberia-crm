@@ -1,106 +1,130 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
+import { formatInTimeZone } from "date-fns-tz";
+import { CircleCheck, CircleAlert, Info } from "lucide-react";
 import { useWorkspace } from "./context";
 import { resourceUrl, useResource } from "@/lib/client";
-import { Notice } from "@/components/ui";
-import type { DataRow, Page } from "@/lib/types";
+import { Notice, Loading, Field } from "@/components/ui";
+import type { SetupStatus } from "@/services/setup-status";
 
-export function LaunchGuide() {
+export function LaunchGuide({ expanded = false }: { expanded?: boolean }) {
   const w = useWorkspace();
-  const settings = useResource<Page<DataRow>>(
-    resourceUrl("organization_settings", { org: w.organization.id }),
+  const [open, setOpen] = useState(expanded);
+  const timezone =
+    w.branches.find((b) => b.id === w.branchId)?.timezone ??
+    w.organization.timezone;
+  const [day, setDay] = useState(
+    formatInTimeZone(new Date(), timezone, "yyyy-MM-dd"),
   );
-  const branch = useResource<Page<DataRow>>(
-    w.branchId
-      ? resourceUrl("branch_settings", {
+  const r = useResource<SetupStatus>(
+    open
+      ? resourceUrl("setup", {
           org: w.organization.id,
           branch: w.branchId,
+          date: day,
         })
       : null,
   );
-  const enabled =
-    settings.data?.items[0]?.booking_enabled &&
-    branch.data?.items[0]?.booking_enabled;
+  const ready = r.data?.checks.filter((c) => c.status === "ready").length ?? 0;
   return (
-    <details className="launch-guide">
+    <details
+      className="launch-guide"
+      open={open}
+      onToggle={(event) => setOpen(event.currentTarget.open)}
+    >
       <summary>
         <span>
-          <strong>Configuración operativa</strong>
-          <small>Equipo, reservas y caja en un solo lugar</small>
+          <strong>Puesta en marcha</strong>
+          <small>Comprobá tu equipo, horarios, cobros y seguridad</small>
         </span>
         <span className="badge">
-          {settings.loading || branch.loading
+          {r.loading
             ? "Consultando…"
-            : enabled
-              ? "Reservas habilitadas"
+            : r.data
+              ? `${ready} de ${r.data.checks.length} comprobaciones listas`
               : "Revisar configuración"}
         </span>
       </summary>
-      <div className="launch-guide-body">
-        {(settings.error || branch.error) && (
-          <Notice error>
-            No pudimos consultar el estado de las reservas. Recargá la página.
-          </Notice>
-        )}
-        <ol className="launch-checklist">
-          <li>
-            <Link href={`/${w.organization.slug}/equipo`}>
-              <strong>1. Equipo y disponibilidad</strong>
-              <span>
-                Asigná servicios a cada barbero y cargá sus horarios y
-                descansos.
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${w.organization.slug}/servicios`}>
-              <strong>2. Servicios y precios</strong>
-              <span>
-                Revisá duración, precio y servicios que necesitan una consulta
-                previa.
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${w.organization.slug}/finanzas`}>
-              <strong>3. Ganancias y medios de pago</strong>
-              <span>
-                Elegí reparto de ganancias o comisiones por servicio y revisá
-                las tarifas de tarjetas antes de cobrar.
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${w.organization.slug}/sucursales`}>
-              <strong>4. Reservas por internet</strong>
-              <span>
-                Revisá horarios del local. Habilitá reservas en la sucursal y en
-                Configuración.
-              </span>
-            </Link>
-          </li>
-        </ol>
-        <div className="launch-actions">
-          <Link className="primary" href={`/${w.organization.slug}/caja`}>
-            Abrir caja
-          </Link>
-          <Link href={`/${w.organization.slug}/configuracion`}>
-            Dar acceso al equipo →
-          </Link>
-          {enabled && (
-            <Link
-              href={`/book/${w.organization.slug}/${w.branches.find((b) => b.id === w.branchId)?.slug ?? ""}`}
-            >
-              Ver página de reservas →
-            </Link>
+      {open && (
+        <div className="launch-guide-body">
+          <div className="setup-summary">
+            <Field label="Día que querés comprobar">
+              <input
+                type="date"
+                value={day}
+                required
+                onChange={(event) => setDay(event.target.value)}
+              />
+            </Field>
+            <button onClick={r.reload} disabled={r.loading}>
+              Volver a comprobar
+            </button>
+          </div>
+          {r.loading && <Loading />}
+          {r.error && (
+            <Notice error>
+              {r.error} <button onClick={r.reload}>Reintentar</button>
+            </Notice>
           )}
+          {r.data && (
+            <>
+              <progress
+                className="setup-progress"
+                aria-label="Comprobaciones operativas listas"
+                value={ready}
+                max={r.data.checks.length}
+              />
+              <ol className="launch-checklist">
+                {r.data.checks.map((check) => (
+                  <li key={check.key}>
+                    <Link
+                      href={
+                        check.module.startsWith("/")
+                          ? check.module
+                          : `/${w.organization.slug}/${check.module || "configuracion"}`
+                      }
+                    >
+                      <strong>{check.label}</strong>
+                      <span className={`setup-status ${check.status}`}>
+                        {check.status === "ready" ? (
+                          <CircleCheck size={18} aria-hidden="true" />
+                        ) : check.status === "pending" ? (
+                          <CircleAlert size={18} aria-hidden="true" />
+                        ) : (
+                          <Info size={18} aria-hidden="true" />
+                        )}
+                        {check.status === "ready"
+                          ? "Comprobado"
+                          : check.status === "pending"
+                            ? "Falta revisar"
+                            : "Verificación manual"}
+                      </span>
+                      <span>{check.detail}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+              <p className="muted">
+                Consultado a las{" "}
+                {new Date(r.data.checked_at).toLocaleTimeString("es-PY", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+                . Este diagnóstico no habilita reservas ni distribuciones.
+                Confirmá SMTP y recuperación por correo, backups, alertas y el
+                piloto con las personas responsables.
+              </p>
+            </>
+          )}
+          <div className="launch-actions" style={{ marginTop: 24 }}>
+            <Link className="primary" href={`/${w.organization.slug}/equipo`}>
+              Configurar equipo y horarios
+            </Link>
+            <Link href={`/${w.organization.slug}/caja`}>Ir a caja →</Link>
+          </div>
         </div>
-        <p className="muted">
-          Una cita completada se cobra desde la agenda. Al terminar el día,
-          contá el efectivo y cerrá la caja. Las comisiones sin una regla
-          confirmada aparecen pendientes de cálculo.
-        </p>
-      </div>
+      )}
     </details>
   );
 }

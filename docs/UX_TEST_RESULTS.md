@@ -1,5 +1,11 @@
 # Cierre verificado del rediseño, 22/10/2026
 
+Revisión posterior al despliegue inicial: los logs mostraron un error esperado de MFA al abrir un enlace directo del workspace. Next renderiza página y layout en paralelo; se agrega a la página la misma redirección de sesión/MFA del layout, antes de cualquier lectura comercial. El E2E comprueba enlaces directos a Inicio, Agenda, Clientes y Caja en AAL1 para cada rol privilegiado, más un enlace anónimo hacia Login. No se cambian RPC, permisos, sesiones ni enforcement. El PR de corrección vuelve a ejecutar la suite completa y capturas.
+
+La primera prueba con el usuario reveló que no estaba claro qué aplicación necesitaba el QR. El primer acceso ahora explica el autenticador, ofrece enlaces oficiales Android/iPhone, distingue el escaneo dentro de la app de la cámara normal y explica la clave manual para usar el mismo teléfono. El E2E de enrolamiento captura esta ayuda a cinco anchos y audita contraste/semántica con axe a 390/1440, antes de generar secretos; no se capturan QR reales de usuarios.
+
+Producción inicial confirmada en `060c47b35dcade2f3929e192158fe028be8fdc4c`, Vercel READY, dominio verificado `barberia-crm-kappa.vercel.app`, Supabase correcto y health/ready 200; worker sin secreto 403. Quince capturas públicas de Login/alta/recuperación aprobaron sin overflow, errores ni violaciones axe. Lighthouse móvil del Login: rendimiento 74, accesibilidad 100, buenas prácticas 100; LCP 2.762 ms, TBT 1.033 ms y CLS 0,0001. Medición sintética desde esta estación compartida: el coste de hidratación sigue siendo una limitación observada; no se presenta como Core Web Vitals aprobado ni como velocidad garantizada de pantallas privadas. La revisión de logs identificó la redirección MFA corregida arriba; el 403 del worker corresponde al smoke negativo intencional. Alertas externas y restore administrado siguen pendientes.
+
 Producto: **9d1738713ebdbdc9decf73273ddb7a0b826bec29**. [CI completa aprobada](https://github.com/otiagoo44/barberia-crm/actions/runs/39817313839): quality, supabase-e2e y visual-baseline. [Resumen verificable](verification/ux/final/summary.json).
 
 ## Parche de seguridad previo a publicación

@@ -21,7 +21,7 @@ try {
     [f.orgA, [f.branches.a1]],
   );
   await pool.query(
-    "update public.organizations set name='Barbería de prueba · QA',currency='PYG',brand_color='#3e4095' where id=$1",
+    "update public.organizations set name='Barbería de prueba · QA',currency='PYG',brand_color='#D7B56D' where id=$1",
     [f.orgA],
   );
   await pool.query(

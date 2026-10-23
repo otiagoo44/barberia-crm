@@ -7,7 +7,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
 import { useResource } from "@/lib/client";
 import { hasCapability } from "@/lib/capabilities";
-import { Field, Notice, Loading, Empty } from "@/components/ui";
+import { Field, Notice, Loading, Empty, Modal } from "@/components/ui";
 import {
   financeUrl,
   money,
@@ -85,7 +85,7 @@ export function FinancialDashboard({
     !compact && branch ? financeUrl("catalog", org, branch, today) : null,
   );
   const cash = useResource<{ session: FinanceRow | null }>(
-    !compact && branch ? financeUrl("cash", org, branch, today) : null,
+    !compact && branch && form ? financeUrl("cash", org, branch, today) : null,
   );
   const own = useResource<Record<string, unknown>>(
     branch && (w.role === "barber" ? w.staffId : staff)
@@ -196,7 +196,11 @@ export function FinancialDashboard({
             />
           </div>
           {w.role !== "barber" && (
-            <div className="tabs">
+            <div
+              className="tabs"
+              role="group"
+              aria-label="Secciones de finanzas"
+            >
               {tabs
                 .filter(
                   ([v]) => !["catalog", "partners"].includes(v) || privileged,
@@ -205,6 +209,7 @@ export function FinancialDashboard({
                   <button
                     key={value}
                     className={tab === value ? "active" : ""}
+                    aria-pressed={tab === value}
                     onClick={() => {
                       setTab(value);
                       setOffset(0);
@@ -347,7 +352,10 @@ export function FinancialDashboard({
             </>
           )}
           {!compact && totals && r.data?.staff && (
-            <StaffFinancialCharts rows={r.data.staff} currency={w.organization.currency} />
+            <StaffFinancialCharts
+              rows={r.data.staff}
+              currency={w.organization.currency}
+            />
           )}
         </>
       ) : tab === "catalog" && catalog.data ? (
@@ -631,19 +639,44 @@ export function FinancialDashboard({
           currency={w.organization.currency}
         />
       )}
-      {form && catalog.data && (
-        <FinanceForm
-          action={form.action}
-          initial={form.initial}
-          catalog={catalog.data}
-          cashSessionId={session}
-          onClose={() => setForm(null)}
-          onSaved={() => {
-            setForm(null);
-            reload();
-          }}
-        />
-      )}
+      {form &&
+        (catalog.loading || cash.loading || catalog.error || cash.error) && (
+          <Modal title="Preparando operación" onClose={() => setForm(null)}>
+            {catalog.error || cash.error ? (
+              <Notice error>
+                {catalog.error || cash.error}{" "}
+                <button
+                  onClick={() => {
+                    catalog.reload();
+                    cash.reload();
+                  }}
+                >
+                  Reintentar
+                </button>
+              </Notice>
+            ) : (
+              <Loading />
+            )}
+          </Modal>
+        )}
+      {form &&
+        catalog.data &&
+        !catalog.loading &&
+        !cash.loading &&
+        !catalog.error &&
+        !cash.error && (
+          <FinanceForm
+            action={form.action}
+            initial={form.initial}
+            catalog={catalog.data}
+            cashSessionId={session}
+            onClose={() => setForm(null)}
+            onSaved={() => {
+              setForm(null);
+              reload();
+            }}
+          />
+        )}
       {importing && catalog.data && (
         <FinanceImport
           catalog={catalog.data}

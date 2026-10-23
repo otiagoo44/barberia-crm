@@ -8,6 +8,7 @@ Revalidación PR #3: [auditoría del 21/10](PR3_RECOVERY_AUDIT_2026_10_21.md) y 
 |---|---|---|---|---|---|---|
 | Organización, branches: lectura | O | B | B | B | B | Denegado |
 | Usuarios, roles, scopes | O administrar | Propio leer | Propio leer | Propio leer | Propio leer | Denegado |
+| Diagnóstico de puesta en marcha (GET setup) | O, sucursal propia; solo estados agregados | Denegado | Denegado | Denegado | Denegado | Denegado |
 | Branding, configuración global, staff, servicios | O administrar | Catálogo/operación B | Catálogo B | Catálogo permitido | Catálogo financiero | Solo onboarding explícito |
 | Horarios, precios locales, asignaciones | O | B administrar | B leer | P leer / editar disponibilidad si habilitado | Sin administración operativa | Denegado |
 | Clientes y búsqueda | O | Clientes pertinentes B | Clientes pertinentes B | Clientes con cita propia en B | Sin directorio de clientes | Denegado |

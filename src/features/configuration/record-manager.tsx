@@ -495,7 +495,7 @@ function RecordEditor({
           <button type="button" onClick={onClose}>
             Cancelar
           </button>
-          <button className="primary" disabled={busy}>
+          <button aria-busy={!!busy} className="primary" disabled={busy}>
             {busy ? "Guardando…" : "Guardar"}
           </button>
         </div>
