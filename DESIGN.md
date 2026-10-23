@@ -156,6 +156,8 @@ Controles {rounded.control}, paneles {rounded.panel}. Targets normales de al men
 
 Botones: hover 160ms, active 110ms/translateY(1px), foco 2px, busy inmediato con texto/indicador. Success solo después de respuesta real. Modal/drawer 200–220ms transform/opacity, Escape, foco contenido y restitución. Tabs/menús/filtros indican estado ARIA. Toast/Notice explican qué ocurrió y próximo paso. Reduced-motion elimina desplazamientos/animación conservando contenido y feedback. Ver MOTION_DESIGN_SYSTEM.md.
 
+La navegación sobre la misma pantalla debe aplicar el destino de la URL sin perder Día/Semana o Calendario/Lista. Cambiar de cliente reinicia la ficha y su historial; cerrar una ficha no la vuelve a abrir por una revalidación. Carga o error de agenda nunca significan «sin citas». En Cobrar, las lecturas fallidas muestran un aviso con reintento, sin ofrecer preparar o registrar otra venta sobre estado desconocido. La confirmación de un POST exitoso permanece visible durante su revalidación; ninguna animación ni lectura posterior convierte un cobro confirmado en pendiente.
+
 Puesta en marcha comprueba cuenta/rol, sucursal, catálogo, profesionales, horarios diarios, medios, reservas y seguridad con fuentes autorizadas. Lo no observable es «Verificación manual», nunca «Listo». No activar booking/distribuciones desde el diagnóstico.
 
 ## Do's and Don'ts

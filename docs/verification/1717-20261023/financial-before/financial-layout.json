@@ -1,0 +1,202 @@
+[
+  {
+    "immediate": {
+      "width": 360,
+      "scroll": 360,
+      "offenders": [
+        {
+          "tag": "TABLE",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "THEAD",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TR",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 452.46875,
+          "width": 126.5
+        },
+        {
+          "tag": "TBODY",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TR",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TD",
+          "css": null,
+          "right": 452.46875,
+          "width": 126.5
+        },
+        {
+          "tag": "TABLE",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        },
+        {
+          "tag": "THEAD",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        },
+        {
+          "tag": "TR",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 437.609375,
+          "width": 111.640625
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 521.03125,
+          "width": 83.421875
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 635.96875,
+          "width": 114.9375
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 739.28125,
+          "width": 103.3125
+        },
+        {
+          "tag": "TBODY",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        }
+      ],
+      "headerBottom": 70,
+      "headerChildBottom": 112,
+      "mainTop": 70
+    },
+    "settled": {
+      "width": 360,
+      "scroll": 360,
+      "offenders": [
+        {
+          "tag": "TABLE",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "THEAD",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TR",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 452.46875,
+          "width": 126.5
+        },
+        {
+          "tag": "TBODY",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TR",
+          "css": null,
+          "right": 452.46875,
+          "width": 414.46875
+        },
+        {
+          "tag": "TD",
+          "css": null,
+          "right": 452.46875,
+          "width": 126.5
+        },
+        {
+          "tag": "TABLE",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        },
+        {
+          "tag": "THEAD",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        },
+        {
+          "tag": "TR",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 437.609375,
+          "width": 111.640625
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 521.03125,
+          "width": 83.421875
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 635.96875,
+          "width": 114.9375
+        },
+        {
+          "tag": "TH",
+          "css": null,
+          "right": 739.28125,
+          "width": 103.3125
+        },
+        {
+          "tag": "TBODY",
+          "css": null,
+          "right": 739.28125,
+          "width": 701.28125
+        }
+      ],
+      "headerBottom": 70,
+      "headerChildBottom": 112,
+      "mainTop": 70
+    }
+  }
+]

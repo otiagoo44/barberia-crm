@@ -1,0 +1,50 @@
+
+> barberia-operating-system@1.0.0 test:e2e
+> playwright test
+
+node.exe : [WebServer] (node:1340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\User\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 1 worker
+
+  -   1 [chromium] › tests\e2e\definitive-ux.spec.ts:23:3 › Definitive workspace with real scoped Auth › setup is live, owner scoped, branch scoped and never activates booking
+  -   2 [chromium] › tests\e2e\definitive-ux.spec.ts:86:3 › Definitive workspace with real scoped Auth › same-page destinations update agenda and customer detail with real scoped reads
+  -   3 [chromium] › tests\e2e\definitive-ux.spec.ts:127:3 › Definitive workspace with real scoped Auth › financial filters hide obsolete totals while loading, transport errors expose no previous totals
+  -   4 [chromium] › tests\e2e\definitive-ux.spec.ts:186:3 › Definitive workspace with real scoped Auth › large financial figures remain complete and readable across target widths
+  -   5 [chromium] › tests\e2e\definitive-ux.spec.ts:239:3 › Definitive workspace with real scoped Auth › motion, 200 percent layout, keyboard, contrast and readable controls across target widths
+(node:16600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   6 [chromium] › tests\e2e\operations.spec.ts:28:1 › Login is responsive, has security headers, keyboard access and no browser errors (3.0s)
+  -   7 [chromium] › tests\e2e\operations.spec.ts:68:3 › Real Supabase Auth and domain flows › Cash UI posts a split checkout, closes a session and keeps reception reports private
+  -   8 [chromium] › tests\e2e\operations.spec.ts:202:3 › Real Supabase Auth and domain flows › Signed sessions enforce tenant, branch, role and anonymous database permissions
+  -   9 [chromium] › tests\e2e\operations.spec.ts:270:3 › Real Supabase Auth and domain flows › Public booking through the browser creates one server-calculated reservation
+  -  10 [chromium] › tests\e2e\operations.spec.ts:295:3 › Real Supabase Auth and domain flows › Internal agenda, walk-ins, customers, retention, goals and reporting render actual data
+  -  11 [chromium] › tests\e2e\permissions.spec.ts:19:3 › HTTP and Data API permission matrix with real Auth › concurrent HTTP financial retries create one expense; malformed upload returns 400
+  -  12 [chromium] › tests\e2e\permissions.spec.ts:83:3 › HTTP and Data API permission matrix with real Auth › branch changes close unsaved financial dialogs and malformed agenda dates recover
+  -  13 [chromium] › tests\e2e\permissions.spec.ts:115:5 › HTTP and Data API permission matrix with real Auth › ownerA: tenant, branch, write, field projection and export denial
+  -  14 [chromium] › tests\e2e\permissions.spec.ts:115:5 › HTTP and Data API permission matrix with real Auth › managerA1: tenant, branch, write, field projection and export denial
+  -  15 [chromium] › tests\e2e\permissions.spec.ts:115:5 › HTTP and Data API permission matrix with real Auth › receptionA: tenant, branch, write, field projection and export denial
+  -  16 [chromium] › tests\e2e\permissions.spec.ts:115:5 › HTTP and Data API permission matrix with real Auth › barberA: tenant, branch, write, field projection and export denial
+  -  17 [chromium] › tests\e2e\permissions.spec.ts:115:5 › HTTP and Data API permission matrix with real Auth › financeA: tenant, branch, write, field projection and export denial
+  -  18 [chromium] › tests\e2e\permissions.spec.ts:115:5 › HTTP and Data API permission matrix with real Auth › platform: tenant, branch, write, field projection and export denial
+  -  19 [chromium] › tests\e2e\permissions.spec.ts:370:3 › HTTP and Data API permission matrix with real Auth › Anon cannot read business HTTP/Data API, mutate or execute privileged RPCs
+  -  20 [chromium] › tests\e2e\revocation.spec.ts:18:5 › Live authorization with real signed Auth sessions › membership revocation denies a waiting HTTP command and stale Data API/RPC access
+  -  21 [chromium] › tests\e2e\revocation.spec.ts:18:5 › Live authorization with real signed Auth sessions › branch revocation denies a waiting HTTP command and stale Data API/RPC access
+  -  22 [chromium] › tests\e2e\revocation.spec.ts:18:5 › Live authorization with real signed Auth sessions › profile revocation denies a waiting HTTP command and stale Data API/RPC access
+  -  23 [chromium] › tests\e2e\revocation.spec.ts:18:5 › Live authorization with real signed Auth sessions › session revocation denies a waiting HTTP command and stale Data API/RPC access
+  -  24 [chromium] › tests\e2e\security-release.spec.ts:10:3 › Real MFA release boundary › AAL1 privileged sessions fail HTTP and direct Data API until TOTP; spoofed headers cannot elevate
+  -  25 [chromium] › tests\e2e\security-release.spec.ts:68:3 › Real MFA release boundary › TOTP enrollment, backup authenticator recovery, retirement and global revocation use actual Auth
+  -  26 [chromium] › tests\e2e\ux-release.spec.ts:11:3 › Daily work and accessible navigation with real Auth › mobile menu traps focus, Escape returns it, and search keyboard shortcut opens actual results
+  -  27 [chromium] › tests\e2e\ux-release.spec.ts:84:3 › Daily work and accessible navigation with real Auth › owner saves explicit daily blocks and a break, inspects actual slots and copies only after confirmation
+  -  28 [chromium] › tests\e2e\ux-release.spec.ts:138:3 › Daily work and accessible navigation with real Auth › reception receives a walk-in, attends, collects a split payment and closes cash; owner reviews the actual sale
+  -  29 [chromium] › tests\e2e\ux-release.spec.ts:343:3 › Daily work and accessible navigation with real Auth › week calendar batches schedules, validates ranges and preserves tenant isolation with real Auth
+  -  30 [chromium] › tests\e2e\ux-release.spec.ts:409:3 › Daily work and accessible navigation with real Auth › report period filters reload the authorized chart and expose keyboard-readable data
+
+  29 skipped
+  1 passed (15.2s)

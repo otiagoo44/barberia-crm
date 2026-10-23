@@ -8,18 +8,25 @@
   "branch": {
     "name": "Luque",
     "slug": "luque",
-    "address": "Cap. Dado esq. Gobernador Irala, Luque, Paraguay"
+    "address": "Cap. Dado esq. Gobernador Irala, Luque",
+    "phone": "+595983402497",
+    "business_hours_confirmed": false
   },
   "staff": [
     {
       "name": "Jonatan",
       "slug": "jonatan",
+      "email": "jonatanramos2005oviedo@gmail.com",
+      "role": "organization_owner",
       "profile_id": null,
       "capabilities": "all_catalog_services"
     },
     {
       "name": "Esteban",
       "slug": "esteban",
+      "email": "estebanras15@gmail.com",
+      "role": "organization_owner",
+      "cash_operations_responsible": true,
       "profile_id": null,
       "capabilities": "all_catalog_services"
     }
@@ -30,28 +37,28 @@
       "code": "cash",
       "type": "cash",
       "percentage_bps": 0,
-      "fixed_amount_minor": 0
+      "fixed_amount_minor": null
     },
     {
       "name": "Transferencia",
       "code": "transfer",
       "type": "bank",
       "percentage_bps": 0,
-      "fixed_amount_minor": 0
+      "fixed_amount_minor": null
     },
     {
       "name": "Débito",
       "code": "debit",
       "type": "card",
-      "percentage_bps": 300,
-      "fixed_amount_minor": 0
+      "percentage_bps": 200,
+      "fixed_amount_minor": null
     },
     {
       "name": "Crédito",
       "code": "credit",
       "type": "card",
       "percentage_bps": 500,
-      "fixed_amount_minor": 0
+      "fixed_amount_minor": null
     }
   ],
   "services": [
@@ -80,7 +87,7 @@
       "duration_minutes": 40,
       "website_category": "cejas",
       "consultation_required": false,
-      "source": "sheet + landing; validate whether standalone or included"
+      "source": "Owner confirmed: independent service"
     },
     {
       "name": "Lavado",
@@ -89,7 +96,7 @@
       "duration_minutes": 10,
       "website_category": "lavado",
       "consultation_required": false,
-      "source": "sheet + landing; confirm combination mode"
+      "source": "Owner confirmed: sold separately; optional paid add-on"
     },
     {
       "name": "Rulos",
@@ -104,28 +111,28 @@
       "name": "Combo rulos y corte",
       "slug": "combo-rulos-y-corte",
       "price_minor": 200000,
-      "duration_minutes": null,
+      "duration_minutes": 120,
       "website_category": "rulos",
       "consultation_required": true,
-      "source": "sheet; duration unconfirmed"
+      "source": "Owner confirmed: total includes haircut; do not add 40 minutes or charge haircut twice"
     },
     {
       "name": "Tinte global",
       "slug": "tinte-global",
       "price_minor": 250000,
-      "duration_minutes": null,
+      "duration_minutes": 150,
       "website_category": "tinte",
       "consultation_required": true,
-      "source": "sheet; reconcile editorial Tinte 200000 and duration"
+      "source": "Owner confirmed price and approximate duration; consultation protection retained"
     },
     {
       "name": "Tinte mechas",
       "slug": "tinte-mechas",
       "price_minor": 180000,
-      "duration_minutes": null,
+      "duration_minutes": 150,
       "website_category": "tinte",
       "consultation_required": true,
-      "source": "sheet; duration unconfirmed"
+      "source": "Owner confirmed price and approximate duration; consultation protection retained"
     }
   ],
   "finance_items": [
@@ -178,23 +185,58 @@
   },
   "advances_deductible": false,
   "unconfirmed": [
-    "Combination modes",
-    "Combo/tinte durations",
+    "Business opening hours and Sunday availability",
+    "Whether Esteban's usual 12:00-12:30 break is mandatory",
+    "POS provider, contractual effective date, fixed charges and VAT treatment",
+    "Definition of recognized income and whether POS reduces distributable profit",
+    "Withdrawals, prior-period losses and final distribution approval",
     "Deduction policy for future advances",
     "Historical rule validity",
-    "Each day: available time blocks entered by owner/staff",
     "SMTP provider",
     "Cloud backups and restore"
   ],
   "profit_sharing": {
     "model": "equal_profit_share",
-    "partners": [
-      "jonatan",
-      "esteban"
-    ],
+    "partners": ["jonatan", "esteban"],
     "equal_share_bps": 5000,
-    "source": "Owner conversation: income minus fixed business costs, equal split",
+    "periodicity": "monthly",
+    "calendar_period": true,
+    "distributions_enabled": false,
+    "recognition_confirmed": false,
+    "source": "Owner confirmed: total generated minus business costs, monthly equal split; accounting recognition pending",
     "historical_payouts_imported": false
   },
-  "availability_mode": "daily"
+  "availability_mode": "weekly_with_exceptions",
+  "booking": { "enabled": false, "lead_minutes": 0 },
+  "pos_activation": {
+    "effective_from": null,
+    "evidence_reference": null,
+    "enabled": false
+  },
+  "weekly_availability": {
+    "jonatan": [
+      { "weekday": 1, "starts_at": "13:00", "ends_at": "21:00" },
+      { "weekday": 2, "starts_at": "13:00", "ends_at": "21:00" },
+      { "weekday": 3, "starts_at": "13:00", "ends_at": "21:00" },
+      { "weekday": 4, "starts_at": "13:00", "ends_at": "21:00" },
+      { "weekday": 5, "starts_at": "13:00", "ends_at": "21:00" },
+      { "weekday": 6, "starts_at": "13:00", "ends_at": "21:00" }
+    ],
+    "esteban": [
+      { "weekday": 1, "starts_at": "09:00", "ends_at": "19:00" },
+      { "weekday": 2, "starts_at": "09:00", "ends_at": "19:00" },
+      { "weekday": 3, "starts_at": "09:00", "ends_at": "13:00" },
+      { "weekday": 4, "starts_at": "09:00", "ends_at": "13:00" },
+      { "weekday": 5, "starts_at": "09:00", "ends_at": "13:00" },
+      { "weekday": 6, "starts_at": "09:00", "ends_at": "19:00" }
+    ]
+  },
+  "usual_break": {
+    "staff_slug": "esteban",
+    "starts_at": "12:00",
+    "ends_at": "12:30",
+    "mandatory_confirmed": false,
+    "conservative_availability_exclusion": true,
+    "exception_warning": "Available day exceptions replace weekly shifts; preserve this break when overriding a day"
+  }
 }

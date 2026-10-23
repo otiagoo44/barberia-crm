@@ -1,0 +1,65 @@
+
+> barberia-operating-system@1.0.0 test:hardening
+> tsx tests/integration/run-hardening.ts
+
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+PASS Hardening: platform flag gives no tenant SELECT, writes, export or business RPC
+PASS Hardening: support requires ticket, exact tenant/branch, platform role and writes audit
+PASS Hardening: platform flag does not elevate an ordinary receptionist membership
+PASS Hardening: owner: object, row, field and export boundaries
+PASS Hardening: manager: object, row, field and export boundaries
+PASS Hardening: reception: object, row, field and export boundaries
+PASS Hardening: barber: object, row, field and export boundaries
+PASS Hardening: finance: object, row, field and export boundaries
+PASS Hardening: foreignOwner: object, row, field and export boundaries
+PASS Hardening: finance scopes survive membership provisioning and reject foreign branches
+PASS Hardening: barber read-model contains only own staff; foreign staff RPC denied
+PASS Hardening: revocation denies a previously authorized actor on the next SQL statement
+PASS Hardening: archived branches retain history and reject new financial movements
+PASS Hardening: direct RPC nulls cannot remove limits or date bounds
+PASS Hardening: 31-day financial idempotency survives cron and concurrent RPC retries
+PASS Hardening: revised preview excludes omitted rows and null/stale confirmation hash fails
+PASS Hardening: failed import rolls back earlier movements, provenance and idempotency together
+PASS Hardening: concurrent reversal creates exactly one refund and preserves net money
+PASS Hardening: worker rejects absent/null/stale leases, claims once, retries to dead
+PASS Hardening: two settlements cannot reserve or pay the same commission twice
+PASS Hardening: native scheduler lock skips concurrent invocations and missing provider remains pending configuration
+PASS Hardening: a financial command queued behind membership revocation fails after the lock
+PASS Hardening: outbox and notifications reject cross-tenant event references even with privileged SQL
+{"suite":"final-hardening","passed":23}

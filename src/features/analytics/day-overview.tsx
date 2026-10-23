@@ -50,9 +50,11 @@ export function DayOverview() {
           <strong>
             {r.loading
               ? "Consultando agenda…"
-              : next
-                ? `${formatInTimeZone(next.starts_at, tz, "HH:mm")} · ${next.customer_name}`
-                : "Sin próximas citas hoy"}
+              : !r.data
+                ? "Agenda sin verificar"
+                : next
+                  ? `${formatInTimeZone(next.starts_at, tz, "HH:mm")} · ${next.customer_name}`
+                  : "Sin próximas citas hoy"}
           </strong>
           <p className="muted">
             {next
@@ -67,7 +69,11 @@ export function DayOverview() {
           </Link>
         )}
       </div>
-      {r.error && <Notice error>{r.error}</Notice>}
+      {r.error && (
+        <Notice error>
+          {r.error} <button onClick={r.reload}>Reintentar</button>
+        </Notice>
+      )}
     </>
   );
 }

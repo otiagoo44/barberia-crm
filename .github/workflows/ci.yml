@@ -75,6 +75,8 @@ jobs:
           fi
       - run: npm run build
         id: product-build
+      - name: Verify isolated component recovery and navigation
+        run: npm run test:ui
       - run: npm run test:e2e
       - name: Capture redesigned product with real Auth
         if: ${{ !cancelled() && steps.product-build.outcome == 'success' }}
@@ -113,6 +115,7 @@ jobs:
             docs/verification/migration-upgrade.json
             docs/verification/ux/after/
             docs/verification/definitive/
+            docs/verification/review-20261023/
           retention-days: 90
       - if: always()
         run: npx supabase stop --no-backup

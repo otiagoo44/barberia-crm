@@ -1,0 +1,50 @@
+{
+  "scope": "Isolated actual React components; synthetic API transport, includes Playwright overhead; not HTTP/cloud/field INP",
+  "initial_gets": 5,
+  "initial_duplicates": 0,
+  "samples": [
+    {
+      "duration_ms": 177.0127,
+      "requests": 2
+    },
+    {
+      "duration_ms": 163.91660000000024,
+      "requests": 2
+    },
+    {
+      "duration_ms": 196.08219999999983,
+      "requests": 2
+    },
+    {
+      "duration_ms": 131.3424,
+      "requests": 2
+    },
+    {
+      "duration_ms": 144.19320000000016,
+      "requests": 2
+    },
+    {
+      "duration_ms": 138.8176000000003,
+      "requests": 2
+    },
+    {
+      "duration_ms": 122.55189999999993,
+      "requests": 2
+    },
+    {
+      "duration_ms": 217.98649999999998,
+      "requests": 2
+    },
+    {
+      "duration_ms": 114.40710000000036,
+      "requests": 2
+    },
+    {
+      "duration_ms": 104.77320000000009,
+      "requests": 2
+    }
+  ],
+  "p50_ms": 138.8176000000003,
+  "p95_ms": 217.98649999999998,
+  "p99_ms": 217.98649999999998
+}

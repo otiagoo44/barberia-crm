@@ -83,6 +83,47 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
   });
 
+  test("same-page destinations update agenda and customer detail with real scoped reads", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    await page.goto("/fixture-a/agenda?date=2026-10-23");
+    await expect(
+      page.getByLabel("Fecha de agenda", { exact: true }),
+    ).toHaveValue("2026-10-23");
+    await page.getByRole("button", { name: "Lista", exact: true }).click();
+    await page.evaluate(() =>
+      history.pushState(null, "", "/fixture-a/agenda?date=2026-10-24"),
+    );
+    await expect(
+      page.getByLabel("Fecha de agenda", { exact: true }),
+    ).toHaveValue("2026-10-24");
+    await expect(
+      page.getByRole("button", { name: "Lista", exact: true }),
+    ).toHaveAttribute("aria-pressed", "true");
+    await page.goto(`/fixture-a/clientes?customer=${f.customers.a1}`);
+    await expect(page.getByRole("dialog")).toBeVisible();
+    const nextRead = page.waitForResponse((response) => {
+      const url = new URL(response.url());
+      return (
+        url.pathname === "/api/workspace/customer" &&
+        url.searchParams.get("id") === f.customers.a2
+      );
+    });
+    await page.evaluate(
+      (id) => history.pushState(null, "", `/fixture-a/clientes?customer=${id}`),
+      f.customers.a2,
+    );
+    const response = await nextRead;
+    expect(response.ok()).toBeTruthy();
+    const detail = await response.json();
+    await expect(
+      page.getByRole("dialog", { name: detail.customer.name, exact: true }),
+    ).toBeVisible();
+  });
+
   test("financial filters hide obsolete totals while loading, transport errors expose no previous totals", async ({
     page,
   }) => {
@@ -169,11 +210,32 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     });
     for (const width of [360, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 1000 });
-      expect(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
-      ).toBeTruthy();
+      // ResponsiveContainer measures through ResizeObserver after viewport
+      // changes. Keep the exact no-overflow condition, await its settled layout.
+      try {
+        await expect
+          .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+          .toBeLessThanOrEqual(width);
+      } catch (error) {
+        await test.info().attach(`financial-layout-${width}`, {
+          contentType: "application/json",
+          body: JSON.stringify(
+            await page.evaluate(() => ({
+              width: innerWidth,
+              scroll: document.documentElement.scrollWidth,
+              offenders: Array.from(document.querySelectorAll("body *"))
+                .map((el) => ({
+                  tag: el.tagName,
+                  css: el.getAttribute("class"),
+                  right: el.getBoundingClientRect().right,
+                }))
+                .filter((el) => el.right > innerWidth + 1)
+                .slice(0, 20),
+            })),
+          ),
+        });
+        throw error;
+      }
       const amounts = await page
         .locator(".kpi strong")
         .evaluateAll((elements) =>

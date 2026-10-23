@@ -1,5 +1,13 @@
 # Entrega de integración para 17:17 — 20/10/2026
 
+## Versión vigente — 23/10/2026
+
+Esta entrega conserva el rediseño y el contrato; incorpora datos confirmados en [CONFIGURACION_CONFIRMADA_1717.md](CONFIGURACION_CONFIRMADA_1717.md). Los turnos ahora son semanales con excepciones; el reparto es mensual 50/50, sin distribuciones definitivas habilitadas. Ambos correos están confirmados y ambos deben conservar organization_owner al vincularse al staff. No interpretar las descripciones anteriores de disponibilidad diaria o periodicidad pendiente como vigentes.
+
+El handoff específico al futuro prompt de `1717barber`, variables públicas, slugs/endpoints y evidencia HTTP está en [HANDOFF_LANDING_1717.md](HANDOFF_LANDING_1717.md). La landing no se modifica. Booking público sigue sin habilitarse desde esta entrega; no se ha reconsultado el inventario privado cloud. El estado exacto de migraciones, acceso, pruebas, PR y deploy se informa en [RELEASE_FINAL_1717.md](RELEASE_FINAL_1717.md).
+
+## Antecedentes del 20/10
+
 Esta revisión trabaja únicamente en `otiagoo44/barberia-crm`. No modifica otra landing, producto o base. El contrato de website se conserva en WEBSITE_INTEGRATION.md; sus afirmaciones sobre inventario cloud son históricas y deben contrastarse con el destino antes de activarlo.
 
 ## Lo que se conserva

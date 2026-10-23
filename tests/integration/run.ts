@@ -6,6 +6,7 @@ import { hardeningContracts } from "./hardening";
 import { productContracts } from "./product-release";
 import { migrationUpgradeContracts } from "./migration-upgrade";
 import { dashboardUpgradeContracts } from "./dashboard-upgrade";
+import { confirmed1717Contracts } from "./confirmed-1717";
 await migrationUpgradeContracts();
 await dashboardUpgradeContracts();
 const db = await isolatedDatabase();
@@ -23,12 +24,18 @@ try {
 } finally {
   await db.stop();
 }
+const confirmedDb = await isolatedDatabase();
+try {
+  await confirmed1717Contracts(confirmedDb.pool);
+} finally {
+  await confirmedDb.stop();
+}
 const financeDb = await isolatedDatabase();
 try {
   console.log(
     JSON.stringify({
       suite: "operational-finance",
-      ...(await financeContracts(financeDb.pool)),
+      ...(await financeContracts(financeDb.pool, 200)),
     }),
   );
 } finally {

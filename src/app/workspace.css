@@ -126,6 +126,8 @@
 }
 .topbar {
   min-height: 72px;
+  height: auto;
+  flex-wrap: wrap;
   background: var(--bg);
   gap: 20px;
   padding-inline: 32px;
@@ -135,6 +137,8 @@
 }
 .global-search {
   max-width: 380px;
+  flex-basis: 220px;
+  min-width: 0;
 }
 .global-search label {
   background: var(--surface);

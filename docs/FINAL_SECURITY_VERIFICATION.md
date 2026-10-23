@@ -1,3 +1,11 @@
+# Revisión del 23/10/2026
+
+Base `99a4532`; correcciones exclusivamente de frontend, tests y documentación. No cambia ningún archivo de `supabase`, `src/app/api`, `src/lib/auth.ts`, `src/proxy.ts`, reserva pública o contrato website. No se añaden migraciones ni se aplican registros a cloud. El modelo de cobro conserva comandos, idempotency keys, importes y autoridad del servidor. El modal bloquea acciones mientras no conoce el cobro/catálogo/caja y presenta reintento ante lecturas fallidas. Success requiere POST exitoso o lectura confirmada del estado posted; nunca un optimistic update.
+
+Esta sesión ejecutó 111 contratos DB (51 seguridad/operación, 19 finanzas, 23 hardening, 18 producto), onboarding/scheduler, upgrades y 23 hardening explícitos adicionales como repetición del bloque. La carga SQL aislada 10/50/100 tenants y escenarios concentrados terminó sin errores. Son PostgreSQL embebido y claims sintéticos, no Auth real. `npm audit --audit-level=high`: cero vulnerabilidades. Solo `.env.example` está versionado; fixtures, secretos, logs y traces locales quedan ignorados.
+
+E2E local: un caso aprobado y 29 omitidos por ausencia de Docker/Supabase Auth. No se certifican MFA cloud, revocación HTTP, disponibilidad real de 17:17 ni advisors mediante estas omisiones. La CI requerida conserva las pruebas reales, agrega la nueva navegación y la suite de componentes; sus resultados deben consultarse en el SHA del PR. Los resultados históricos siguientes no reemplazan esa verificación.
+
 # Verificación de seguridad del candidato
 
 Base: 34 migraciones intactas. La migración `20261022205615_default_product_gold_brand.sql` solo cambia el DEFAULT de brand_color para organizaciones nuevas. Sin UPDATE de filas existentes, grants, policies, funciones financieras ni cambios de historia. No se aplica a cloud desde esta tarea.

@@ -1,5 +1,17 @@
 # Preparar la prueba de 17:17 con Esteban y Jonatan
 
+## Actualización vigente — 23/10/2026
+
+Ya están confirmados ambos correos, roles owner, responsable habitual de caja (Esteban), turnos semanales, precios/duraciones y reparto **mensual**. No volver a solicitar los datos de la tabla histórica de abajo. Ver [datos confirmados y preguntas pendientes](CONFIGURACION_CONFIRMADA_1717.md) y [primer acceso exacto](ONBOARDING_DOS_PROPIETARIOS.md).
+
+Piloto real **no ejecutado**. Antes: Auth/email/MFA de ambos, SMTP/recuperación, UUID/configuración cloud, staging y backup/restore/alertas verificables. Ensayar casos negativos y cobros ficticios solo en Supabase local/staging autorizado; no en producción.
+
+Recorrido con los tres: cada owner accede a 17:17/Luque en computadora y teléfono; Esteban abre caja con conteo real, registra cliente/walk-in, profesional/servicio, inicio/finalización y checkout; realiza un cobro consentido y split, gasto real, conciliación y cierre. Jonatan revisa su agenda, historial/retorno y acceso organizacional. Ambos revisan dashboard, estimación mensual y avisos internos. Registrar SHA, fecha, caso, actor y resultado; no ejecutar pagos de distribución. La reserva pública consentida requiere primero el gate público completo; retries/solapamientos se prueban en staging.
+
+Pendientes comerciales únicamente: pausa obligatoria/horario comercial/domingo, reglas de cancelación/retraso/no-show, evaluación de tintes, contrato POS y definición contable/retiros/pérdidas/aprobación. El correo de Jonatan ya está confirmado. [Checklist de instalador y release](RELEASE_FINAL_1717.md).
+
+## Antecedentes del piloto anterior (pendientes reemplazados arriba)
+
 Guía de entrega del rediseño, 22/10/2026. Acceso previsto: https://barberia-crm-kappa.vercel.app/login. El estado de publicación y su SHA se registran en UX_TEST_RESULTS.md; este documento no certifica por sí solo un despliegue.
 
 ## Lo que necesitás pedirles

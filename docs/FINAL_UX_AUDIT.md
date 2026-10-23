@@ -1,4 +1,10 @@
-# Auditoría de dos pasadas y verificación final
+# Estado de la revisión integrada — 23/10/2026
+
+La base actual es `99a4532637a2902504a994e39464206b1c0c1526`: PR #5 ya integrado. La nueva auditoría y sus límites están en [REVIEW_2026_10_23.md](REVIEW_2026_10_23.md); el inventario inicial actual tiene 390 archivos fuera de las skills y 36 migraciones. Se corrigen navegación de Agenda/Clientes sobre la misma pantalla, selección ARIA, falsos vacíos durante carga/error y recuperación de lecturas de Cobrar. La evidencia de abajo pertenece al 22/10, no a esta ejecución.
+
+La suite aislada nueva reprodujo nueve fallos en la base y aprobó los diez escenarios después de corregirlos, incluyendo su muestreo de requests. Usa componentes reales con transporte y router de prueba; no acredita Auth/RLS. Las cinco anchuras se auditan con axe; se comprueban teclado, Escape, foco y reduced motion. La prueba adicional con URLs en Next y lecturas reales queda en E2E/CI, junto con los escenarios que requieren GoTrue. [Capturas nuevas y procedencia](verification/review-20261023/README.md).
+
+# Auditoría histórica de dos pasadas y verificación final
 
 ## Base y alcance inicial
 

@@ -520,7 +520,8 @@ function ReferenceField({
     field.reference === "staff"
       ? (!ownStaff || row.id === ownStaff) && row.active !== false
       : field.reference === "organization_memberships"
-        ? row.role === "barber" && row.active !== false
+        ? ["barber", "organization_owner"].includes(String(row.role)) &&
+          row.active !== false
         : row.active !== false,
   );
   return (

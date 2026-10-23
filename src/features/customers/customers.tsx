@@ -25,9 +25,14 @@ import {
 export function Customers({ retention = false }: { retention?: boolean }) {
   const w = useWorkspace();
   const searchParams = useSearchParams();
-  const [selected, setSelected] = useState<string | null>(
-    searchParams.get("customer"),
-  );
+  const requestedCustomer = searchParams.get("customer");
+  const [destination, setDestination] = useState(requestedCustomer);
+  const [selected, setSelected] = useState<string | null>(requestedCustomer);
+  // A new URL selects a new record. Closing the same URL stays closed.
+  if (destination !== requestedCustomer) {
+    setDestination(requestedCustomer);
+    setSelected(requestedCustomer);
+  }
   const [editing, setEditing] = useState(false);
   const [tab, setTab] = useState(retention ? "due_soon" : "all");
   const [text, setText] = useState("");
@@ -87,7 +92,11 @@ export function Customers({ retention = false }: { retention?: boolean }) {
         )}
       </div>
       {retention && (
-        <div className="config-tabs">
+        <div
+          className="config-tabs"
+          role="group"
+          aria-label="Seguimiento de clientes"
+        >
           {[
             ["due_soon", "Por volver pronto"],
             ["due", "Le toca volver"],
@@ -96,6 +105,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
             ["maintenance", "Servicios especiales"],
           ].map(([value, label]) => (
             <button
+              aria-pressed={tab === value}
               key={value}
               className={tab === value ? "selected" : ""}
               onClick={() => {
@@ -109,8 +119,13 @@ export function Customers({ retention = false }: { retention?: boolean }) {
         </div>
       )}
       {!retention && w.role !== "barber" && (
-        <div className="config-tabs">
+        <div
+          className="config-tabs"
+          role="group"
+          aria-label="Estado de clientes"
+        >
           <button
+            aria-pressed={tab === "all"}
             className={tab === "all" ? "selected" : ""}
             onClick={() => {
               setTab("all");
@@ -120,6 +135,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
             Activos
           </button>
           <button
+            aria-pressed={tab === "archived"}
             className={tab === "archived" ? "selected" : ""}
             onClick={() => {
               setTab("archived");
@@ -297,6 +313,7 @@ export function Customers({ retention = false }: { retention?: boolean }) {
       </div>
       {selected && (
         <CustomerDetail
+          key={selected}
           id={selected}
           onClose={() => setSelected(null)}
           onChanged={r.reload}
