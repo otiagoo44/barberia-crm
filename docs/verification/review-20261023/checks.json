@@ -97,5 +97,17 @@
     "50/50 policy confirmation",
     "managed restore and alert delivery",
     "operator pilot"
-  ]
+  ],
+  "delivery": {
+    "status": "blocked",
+    "product_commit": "e3a26b72df92a87049c4824dcf7563a43874d930",
+    "src_tree": "e2418f2ea0b044d2a6ac63a64bffe4c1be113c12",
+    "schema_tree": "c49634f7f33584d0953e407f3a50489e8bffe457",
+    "branch": "redesign/final-verification-20261023",
+    "github_write": "403 Resource not accessible by integration",
+    "git_push": "Could not connect to github.com:443",
+    "pr": null,
+    "current_ci": "not_started",
+    "prepared_pr": "docs/REVIEW_PR_2026_10_23.md"
+  }
 }

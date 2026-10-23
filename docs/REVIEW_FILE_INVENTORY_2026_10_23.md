@@ -2,56 +2,6 @@
 
 Base `99a4532637a2902504a994e39464206b1c0c1526`. Comparar con [auditoría actual](REVIEW_2026_10_23.md) e [inventario inicial](verification/review-20261023/inventory-before.json). Imports y hashes recalculados; responsabilidades y riesgos del inventario anterior se heredan cuando corresponde porque los árboles iniciales de producto y esquema son idénticos. Esto no se presenta como una segunda lectura manual íntegra ni como cobertura de cada línea. Los defectos nuevos se limitan a los hallazgos R01–R07.
 
-## tests/ui/fixture.tsx
-
-- Responsabilidad: Monta componentes de producto con workspace sintético en loopback; no incorpora Auth ni acceso a datos reales.
-- Dependencias: react-dom/client, ../../src/features/organizations/context, ../../src/components/shell, ../../src/features/appointments/agenda, ../../src/features/customers/customers, ../../src/features/analytics/day-overview, ../../src/features/finance/checkout, ../../src/features/goals/goals, ../../src/features/configuration/configuration, ./navigation, ../../src/lib/types
-- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
-- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
-- Pruebas relacionadas: npm run test:ui; lint/typecheck.
-- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
-- Procedencia: Archivo nuevo revisado en esta sesión.
-
-## tests/ui/navigation.tsx
-
-- Responsabilidad: Adapter mínimo de navegación solo para pruebas aisladas de componentes.
-- Dependencias: react
-- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
-- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
-- Pruebas relacionadas: npm run test:ui; lint/typecheck.
-- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
-- Procedencia: Archivo nuevo revisado en esta sesión.
-
-## tests/ui/playwright.config.ts
-
-- Responsabilidad: Configura Chromium y servidor aislado independiente del runner de Auth.
-- Dependencias: @playwright/test, node:url, node:path
-- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
-- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
-- Pruebas relacionadas: npm run test:ui; lint/typecheck.
-- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
-- Procedencia: Archivo nuevo revisado en esta sesión.
-
-## tests/ui/review.spec.ts
-
-- Responsabilidad: Reproduce destinos, fallos de lecturas financieras, loading, ARIA, teclado, foco, motion, contraste, zoom y requests.
-- Dependencias: @playwright/test, @axe-core/playwright, node:fs/promises
-- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
-- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
-- Pruebas relacionadas: npm run test:ui; lint/typecheck.
-- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
-- Procedencia: Archivo nuevo revisado en esta sesión.
-
-## tests/ui/server.ts
-
-- Responsabilidad: Compila el harness y sirve JS/CSS/fuente local, exclusivamente en 127.0.0.1:3007; no es un backend ni proxy.
-- Dependencias: esbuild, node:http, node:fs/promises, node:path
-- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
-- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
-- Pruebas relacionadas: npm run test:ui; lint/typecheck.
-- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
-- Procedencia: Archivo nuevo revisado en esta sesión.
-
 ## .env.example
 
 - Responsabilidad: configuración de .env.example.
@@ -1811,6 +1761,56 @@ Base `99a4532637a2902504a994e39464206b1c0c1526`. Comparar con [auditoría actual
 - Pruebas relacionadas: tests/security/contracts.ts.
 - Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
 - Procedencia: Campos de auditoría heredados cuando existen; imports y hash recalculados. Profundidad nueva delimitada en REVIEW_2026_10_23.md.
+
+## tests/ui/fixture.tsx
+
+- Responsabilidad: Monta componentes de producto con workspace sintético en loopback; no incorpora Auth ni acceso a datos reales.
+- Dependencias: react-dom/client, ../../src/features/organizations/context, ../../src/components/shell, ../../src/features/appointments/agenda, ../../src/features/customers/customers, ../../src/features/analytics/day-overview, ../../src/features/finance/checkout, ../../src/features/goals/goals, ../../src/features/configuration/configuration, ./navigation, ../../src/lib/types
+- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
+- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
+- Pruebas relacionadas: npm run test:ui; lint/typecheck.
+- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
+- Procedencia: Archivo nuevo revisado en esta sesión.
+
+## tests/ui/navigation.tsx
+
+- Responsabilidad: Adapter mínimo de navegación solo para pruebas aisladas de componentes.
+- Dependencias: react
+- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
+- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
+- Pruebas relacionadas: npm run test:ui; lint/typecheck.
+- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
+- Procedencia: Archivo nuevo revisado en esta sesión.
+
+## tests/ui/playwright.config.ts
+
+- Responsabilidad: Configura Chromium y servidor aislado independiente del runner de Auth.
+- Dependencias: @playwright/test, node:url, node:path
+- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
+- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
+- Pruebas relacionadas: npm run test:ui; lint/typecheck.
+- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
+- Procedencia: Archivo nuevo revisado en esta sesión.
+
+## tests/ui/review.spec.ts
+
+- Responsabilidad: Reproduce destinos, fallos de lecturas financieras, loading, ARIA, teclado, foco, motion, contraste, zoom y requests.
+- Dependencias: @playwright/test, @axe-core/playwright, node:fs/promises
+- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
+- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
+- Pruebas relacionadas: npm run test:ui; lint/typecheck.
+- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
+- Procedencia: Archivo nuevo revisado en esta sesión.
+
+## tests/ui/server.ts
+
+- Responsabilidad: Compila el harness y sirve JS/CSS/fuente local, exclusivamente en 127.0.0.1:3007; no es un backend ni proxy.
+- Dependencias: esbuild, node:http, node:fs/promises, node:path
+- Riesgos: No confundir transporte sintético con autorización real; loopback obligatorio.
+- Defectos comprobados: Sin nuevo defecto demostrado en esta revisión; no certifica ausencia de defectos.
+- Pruebas relacionadas: npm run test:ui; lint/typecheck.
+- Mejoras / conservación: Conservar salvo cambios de documentación/evidencia indicados en Git.
+- Procedencia: Archivo nuevo revisado en esta sesión.
 
 ## tests/unit/calendar.test.ts
 

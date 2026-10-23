@@ -8,6 +8,8 @@ No se verificaron datos cloud actuales de 17:17 ni se crearon usuarios/sucursale
 
 El texto siguiente registra la aceptación histórica del PR #5 antes de su integración; sus cifras, ramas y gates deben interpretarse en esa fecha.
 
+**Bloqueo de publicación comprobado:** no se pudo publicar la rama ni crear un PR nuevo. GitHub devolvió 403 al escribir contenido y Git HTTPS no conectó a github.com:443. La CI nueva no se ejecutó. [PR preparado y recuperación](REVIEW_PR_2026_10_23.md). Commit de producto local `e3a26b72df92a87049c4824dcf7563a43874d930`; los cambios posteriores son documentación del bloqueo, sin cambios en src/supabase.
+
 # Aceptación histórica de Barbería OS — 22/10/2026
 
 **Candidato aprobado técnicamente en entorno aislado; no habilita producción.** Rama `redesign/black-gold-audit-20261022`, [PR #5](https://github.com/otiagoo44/barberia-crm/pull/5). Incluye las correcciones del PR #4 aún pendientes en main. No hubo merge, deploy, bypass ni apertura de reservas/distribuciones.
