@@ -1,3 +1,9 @@
+# Revisión de estados y navegación — 23/10/2026
+
+Se conserva el sistema CSS nativo y sus tokens, sin añadir bibliotecas de motion. La nueva suite `npm run test:ui` comprueba reduced motion, teclado, restitución del foco y selección accesible. Los errores del modal Cobrar se verifican sobre su superficie renderizada con axe. Las capturas desactivan animaciones solo al tomar la imagen para registrar el estado final; las operaciones conservan feedback inmediato. La confirmación financiera posterior al POST permanece visible durante revalidación y no espera animaciones.
+
+Cambiar la URL en Agenda conserva Calendario/Lista y Día/Semana; cambiar de cliente reinicia su ficha y el historial asociado. Los estados de carga/error no se animan como listas vacías verificadas. [Alcance y evidencia actuales](REVIEW_2026_10_23.md). El sistema documentado a continuación conserva su vigencia.
+
 # Movimiento de Barbería OS
 
 DESIGN.md define identidad y tokens; `src/app/motion.css` implementa el movimiento con CSS nativo. Sin biblioteca adicional.

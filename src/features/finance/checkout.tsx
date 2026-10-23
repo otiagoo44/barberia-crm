@@ -62,6 +62,10 @@ export function CheckoutDialog({
       : null,
   );
   const checkout = fresh.data ?? existing.data;
+  const readError =
+    catalog.error || existing.error || fresh.error || cash.error;
+  const reading =
+    catalog.loading || existing.loading || fresh.loading || cash.loading;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
@@ -157,15 +161,29 @@ export function CheckoutDialog({
     <Modal title="Cobrar" onClose={onClose}>
       <div className="stack">
         {error && <Notice error>{error}</Notice>}
-        {catalog.loading || existing.loading || fresh.loading ? (
-          <Loading />
-        ) : done || checkout?.status === "posted" ? (
+        {done || (!readError && !reading && checkout?.status === "posted") ? (
           <>
             <Notice success>Venta cobrada y registrada.</Notice>
             <button className="primary" onClick={onClose}>
               Volver y ofrecer próximo turno
             </button>
           </>
+        ) : readError ? (
+          <Notice error>
+            No pudimos comprobar el cobro o la caja. {readError}{" "}
+            <button
+              onClick={() => {
+                catalog.reload();
+                existing.reload();
+                fresh.reload();
+                cash.reload();
+              }}
+            >
+              Reintentar
+            </button>
+          </Notice>
+        ) : reading ? (
+          <Loading />
         ) : checkout ? (
           <>
             <div>
@@ -205,6 +223,7 @@ export function CheckoutDialog({
                 />
                 <Field label={amountLabel(w.organization.currency)}>
                   <input
+                    disabled={busy}
                     inputMode="numeric"
                     pattern="[0-9]*"
                     value={p.amount}
@@ -222,6 +241,7 @@ export function CheckoutDialog({
                 </Field>
                 {payments.length > 1 && (
                   <button
+                    disabled={busy}
                     onClick={() =>
                       setPayments((rows) => rows.filter((_, i) => i !== index))
                     }

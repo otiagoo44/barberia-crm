@@ -1,3 +1,13 @@
+# Mediciones de la revisión integrada — 23/10/2026
+
+El rediseño y la optimización SQL ya están en main `99a4532`. Esta revisión no incorpora cambios de backend, índices, caché ni nuevos endpoints. Agenda mantiene cinco GET iniciales sin duplicados y dos por cambio Día/Semana, en diez cambios por fase con componentes reales y transporte sintético. El cambio de URL genera las lecturas que antes faltaban, necesarias para mostrar el destino correcto.
+
+El muestreo inicial local registró p50 159,09 ms y p95/p99 362,14 ms; la ejecución final registró p50 138,82 ms y p95/p99 217,99 ms. Una ejecución intermedia dio p50 222,83 ms y p95/p99 300,70 ms. Incluye sobrecoste Playwright, servidor de fixtures, actividad concurrente de la estación y una muestra pequeña: **no demuestra una mejora de velocidad, TTFB real, SLA ni INP de campo**. Las muestras finales reproducibles quedan en [before](verification/review-20261023/before/interaction-samples.json) y [after](verification/review-20261023/after/interaction-samples.json); tienen precedencia sobre ejecuciones intermedias. Las repeticiones se debieron a correcciones funcionales/QA, no a seleccionar el mejor tiempo.
+
+Los chunks totales del build inicial suman 1.381.794 bytes. El [build final](verification/review-20261023/bundle-after.json) y [baseline](verification/review-20261023/bundle-before.json) permiten comparar el tamaño exacto. Es el conjunto de chunks, incluidos compartidos y diferidos, no el peso descargado por una ruta. Esbuild se declara únicamente como dependencia directa de desarrollo para el harness; ya existía exactamente esa versión como dependencia transitiva de tsx. No añade código al bundle del producto.
+
+La ejecución actual de `test:load` pasa sin errores. Sus percentiles SQL constan en [load-results.json](verification/review-20261023/load-results.json), con plataforma, CPU, muestra y planes. No es una comparación SQL antes/después: no hubo cambio SQL. Las colas p95/p99 de esta estación compartida son elevadas y no se presentan como capacidad cloud ni como mejora. EXPLAIN y comparación HTTP/SQL del rediseño original se conservan debajo con su procedencia histórica; no se atribuyen a esta revisión. React Profiler, HTTP privado y Auth actuales requieren la CI/entorno aislado real.
+
 # Rendimiento medido
 
 ## Método y baseline

@@ -1,4 +1,8 @@
-# Cierre verificado del rediseño, 22/10/2026
+# Estado del 23/10/2026
+
+El PR #5 está integrado en main `99a4532`. [Revisión actual](REVIEW_2026_10_23.md) y [aceptación](RELEASE_ACCEPTANCE.md) distinguen pruebas nuevas, evidencia histórica y gates externos. Esta sesión no verifica un despliegue ni el estado actual de producción.
+
+# Cierre histórico verificado del rediseño, 22/10/2026
 
 Revisión posterior al despliegue inicial: los logs mostraron un error esperado de MFA al abrir un enlace directo del workspace. Next renderiza página y layout en paralelo; se agrega a la página la misma redirección de sesión/MFA del layout, antes de cualquier lectura comercial. El E2E comprueba enlaces directos a Inicio, Agenda, Clientes y Caja en AAL1 para cada rol privilegiado, más un enlace anónimo hacia Login. No se cambian RPC, permisos, sesiones ni enforcement. El PR de corrección vuelve a ejecutar la suite completa y capturas.
 

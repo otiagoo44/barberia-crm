@@ -18,22 +18,38 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
   const tz =
     w.branches.find((b) => b.id === w.branchId)?.timezone ??
     w.organization.timezone;
+  const urlDate = q.get("date");
+  const urlStaff =
+    w.role === "barber" ? (w.staffId ?? "") : (q.get("staff") ?? "");
+  const [destination, setDestination] = useState({
+    date: urlDate,
+    staff: urlStaff,
+  });
   const [requestedDate, setDate] = useState(
-    q.get("date") ?? formatInTimeZone(new Date(), tz, "yyyy-MM-dd"),
+    urlDate ?? formatInTimeZone(new Date(), tz, "yyyy-MM-dd"),
   );
   const selectedDate = validDate.safeParse(requestedDate).success
     ? requestedDate
     : formatInTimeZone(new Date(), tz, "yyyy-MM-dd");
   const [mode, setMode] = useState("day");
   const [layout, setLayout] = useState("time");
-  const [staff, setStaff] = useState(
-    w.role === "barber" ? (w.staffId ?? "") : (q.get("staff") ?? ""),
-  );
+  const [staff, setStaff] = useState(urlStaff);
   const [service, setService] = useState("");
   const [status, setStatus] = useState("");
   const [booking, setBooking] = useState(false);
   const [chosen, setChosen] = useState<Appointment | null>(null);
   const [error, setError] = useState("");
+  // Adjust before committing effects so a same-page destination cannot issue
+  // a read for the previous date/professional. Keep the chosen calendar view.
+  if (destination.date !== urlDate || destination.staff !== urlStaff) {
+    setDestination({ date: urlDate, staff: urlStaff });
+    if (destination.date !== urlDate)
+      setDate(urlDate ?? formatInTimeZone(new Date(), tz, "yyyy-MM-dd"));
+    if (destination.staff !== urlStaff) setStaff(urlStaff);
+    setChosen(null);
+    setBooking(false);
+    setError("");
+  }
   const local = new Date(selectedDate + "T12:00:00");
   const begin =
     mode === "week"
@@ -149,9 +165,12 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
       (!staff || s.id === staff) &&
       assignment.data?.items.some((a) => a.staff_id === s.id && a.active),
   );
-  const days = Array.from({ length: mode === "week" ? 7 : 1 }, (_, i) =>
-    format(addDays(new Date(begin + "T12:00:00"), i), "yyyy-MM-dd"),
-  );
+  const days =
+    r.data && people.data && assignment.data
+      ? Array.from({ length: mode === "week" ? 7 : 1 }, (_, i) =>
+          format(addDays(new Date(begin + "T12:00:00"), i), "yyyy-MM-dd"),
+        )
+      : [];
   columns.sort(
     (a, b) => a.name.localeCompare(b.name, "es") || a.id.localeCompare(b.id),
   );
@@ -178,8 +197,12 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
         )}
       </div>
       <div className="toolbar">
-        <div className="segmented">
+        <div className="segmented" role="group" aria-label="Período de agenda">
           <button
+            aria-pressed={
+              selectedDate === formatInTimeZone(new Date(), tz, "yyyy-MM-dd") &&
+              mode === "day"
+            }
             className={
               selectedDate === formatInTimeZone(new Date(), tz, "yyyy-MM-dd") &&
               mode === "day"
@@ -194,12 +217,14 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
             Hoy
           </button>
           <button
+            aria-pressed={mode === "day"}
             className={mode === "day" ? "selected" : ""}
             onClick={() => setMode("day")}
           >
             Día
           </button>
           <button
+            aria-pressed={mode === "week"}
             className={mode === "week" ? "selected" : ""}
             onClick={() => setMode("week")}
           >
@@ -296,7 +321,30 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
         </div>
         <span className="realtime-state">{live}</span>
       </div>
-      {(r.error || error) && <Notice error>{r.error || error}</Notice>}
+      {(r.error ||
+        people.error ||
+        assignment.error ||
+        catalog.error ||
+        error) && (
+        <Notice error>
+          {r.error ||
+            people.error ||
+            assignment.error ||
+            catalog.error ||
+            error}{" "}
+          <button
+            onClick={() => {
+              r.reload();
+              people.reload();
+              assignment.reload();
+              catalog.reload();
+              setError("");
+            }}
+          >
+            Reintentar
+          </button>
+        </Notice>
+      )}
       {schedule.error && <Notice error>Horarios: {schedule.error}</Notice>}
       {schedule.data?.has_more && (
         <Notice>
@@ -304,7 +352,7 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
           rango completo.
         </Notice>
       )}
-      {r.loading && !r.data && <Loading />}
+      {(r.loading || people.loading || assignment.loading) && <Loading />}
       {schedule.loading && !schedule.data && <Loading />}
       {r.data?.has_more && (
         <Notice>
@@ -312,7 +360,7 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
           por barbero.
         </Notice>
       )}
-      {!columns.length && !people.loading && (
+      {!columns.length && people.data && assignment.data && (
         <Empty title="No hay barberos asignados a este local">
           Asigná el equipo y sus horarios para habilitar la agenda.
         </Empty>

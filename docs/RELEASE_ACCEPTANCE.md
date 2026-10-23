@@ -1,4 +1,14 @@
-# Aceptación de Barbería OS
+# Aceptación de la revisión integrada — 23/10/2026
+
+El PR #5 ya está integrado en main `99a4532637a2902504a994e39464206b1c0c1526`. Esta continuación trabaja en `redesign/final-verification-20261023`, corrige seis grupos de defectos de navegación/estados/reflow y actualiza evidencia sin añadir migraciones. [Auditoría actual](REVIEW_2026_10_23.md), [capturas y resultados](verification/review-20261023/README.md).
+
+Ejecutados localmente: npm ci; audit high sin vulnerabilidades; lint; typecheck; 20 unitarias; 111 contratos DB más onboarding/scheduler/upgrades; 23 hardening; carga sin errores; build; diez pruebas UI aisladas. E2E: un caso aprobado y 29 omitidos por ausencia de Supabase Auth real. Las omisiones no cuentan como aprobadas; la aceptación del nuevo SHA requiere sus checks de CI. Nueve fallos iniciales del producto se reprodujeron antes de corregirlos. Un intento de arrancar el harness falló por cwd y una aserción posterior asumió incorrectamente el rol de input date; se corrigieron los instrumentos sin retirar comprobaciones funcionales.
+
+No se verificaron datos cloud actuales de 17:17 ni se crearon usuarios/sucursales. Siguen pendientes cuentas independientes y MFA, catálogo/duración/rulos, horarios por fecha y descansos, POS, acuerdo 50/50 después de gastos, SMTP/recovery, restore cloud, alertas y piloto. No se habilitan reservas ni distribuciones, no se publica y no se modifica la landing. El estado de main no acredita despliegue o aplicación de las migraciones 35/36 a producción.
+
+El texto siguiente registra la aceptación histórica del PR #5 antes de su integración; sus cifras, ramas y gates deben interpretarse en esa fecha.
+
+# Aceptación histórica de Barbería OS — 22/10/2026
 
 **Candidato aprobado técnicamente en entorno aislado; no habilita producción.** Rama `redesign/black-gold-audit-20261022`, [PR #5](https://github.com/otiagoo44/barberia-crm/pull/5). Incluye las correcciones del PR #4 aún pendientes en main. No hubo merge, deploy, bypass ni apertura de reservas/distribuciones.
 

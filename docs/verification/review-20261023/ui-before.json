@@ -1,0 +1,790 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\htdocs\\tiago-systems\\barberia-crm\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "tests/ui/playwright.config.ts"
+    ],
+    "configFile": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\playwright.config.ts",
+    "rootDir": "C:/htdocs/tiago-systems/barberia-crm/tests/ui",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/htdocs/tiago-systems/barberia-crm/test-results/ui",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/htdocs/tiago-systems/barberia-crm/tests/ui",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui",
+        "snapshotDir": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui",
+        "testIgnore": [],
+        "testMatch": "*.spec.ts",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:3007",
+          "browserName": "chromium",
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:\\htdocs\\tiago-systems\\barberia-crm\\.test-data\\ui-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node --import tsx tests/ui/server.ts",
+      "cwd": "C:\\htdocs\\tiago-systems\\barberia-crm\\",
+      "url": "http://127.0.0.1:3007",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "review.spec.ts",
+      "file": "review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "agenda follows a new URL in place and browser history while preserving its view",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11621,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Fecha de agenda', { exact: true })\nExpected: \u001b[32m\"2026-10-2\u001b[7m4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-10-2\u001b[7m3\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByLabel('Fecha de agenda', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Fecha de agenda', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to <input type=\"date\" value=\"2026-10-23\" aria-label=\"Fecha de agenda\"/>\u001b[22m\n\u001b[2m       - unexpected value \"2026-10-23\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Fecha de agenda', { exact: true })\nExpected: \u001b[32m\"2026-10-2\u001b[7m4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-10-2\u001b[7m3\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByLabel('Fecha de agenda', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Fecha de agenda', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to <input type=\"date\" value=\"2026-10-23\" aria-label=\"Fecha de agenda\"/>\u001b[22m\n\u001b[2m       - unexpected value \"2026-10-23\"\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:49:23",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 23,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   await query(page, \"/fixture-a/agenda?date=2026-10-24&staff=staff-b\");\n  48 |   await capture(page, \"agenda-navigation-1440\");\n> 49 |   await expect(input).toHaveValue(\"2026-10-24\");\n     |                       ^\n  50 |   await expect(page.getByLabel(\"Filtrar por barbero\")).toHaveValue(\"staff-b\");\n  51 |   await expect(page.getByRole(\"button\", { name: \"Lista\", exact: true })).toHaveAttribute(\"aria-pressed\", \"true\");\n  52 |   await page.goBack();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 23,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Fecha de agenda', { exact: true })\nExpected: \u001b[32m\"2026-10-2\u001b[7m4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"2026-10-2\u001b[7m3\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByLabel('Fecha de agenda', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Fecha de agenda', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to <input type=\"date\" value=\"2026-10-23\" aria-label=\"Fecha de agenda\"/>\u001b[22m\n\u001b[2m       - unexpected value \"2026-10-23\"\u001b[22m\n\n\n  47 |   await query(page, \"/fixture-a/agenda?date=2026-10-24&staff=staff-b\");\n  48 |   await capture(page, \"agenda-navigation-1440\");\n> 49 |   await expect(input).toHaveValue(\"2026-10-24\");\n     |                       ^\n  50 |   await expect(page.getByLabel(\"Filtrar por barbero\")).toHaveValue(\"staff-b\");\n  51 |   await expect(page.getByRole(\"button\", { name: \"Lista\", exact: true })).toHaveAttribute(\"aria-pressed\", \"true\");\n  52 |   await page.goBack();\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:49:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:00:36.205Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-agenda-follows-a-ne-78041-y-while-preserving-its-view\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-agenda-follows-a-ne-78041-y-while-preserving-its-view\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-agenda-follows-a-ne-78041-y-while-preserving-its-view\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 23,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-fce3caa441e603f2486e",
+          "file": "review.spec.ts",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "customer destination opens in place after dismissal and resets detail tabs",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8637,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Cliente B · QA', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('dialog', { name: 'Cliente B · QA', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Cliente B · QA', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Cliente B · QA', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('dialog', { name: 'Cliente B · QA', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Cliente B · QA', exact: true })\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:68:24",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 24,
+                      "line": 68
+                    },
+                    "snippet": "  66 |   await capture(page, \"customer-navigation-1440\");\n  67 |   const dialog = page.getByRole(\"dialog\", { name: \"Cliente B · QA\", exact: true });\n> 68 |   await expect(dialog).toBeVisible();\n     |                        ^\n  69 |   await expect(dialog.getByRole(\"tab\", { name: \"Resumen\", exact: true })).toHaveAttribute(\"aria-selected\", \"true\");\n  70 |   await page.keyboard.press(\"Escape\");\n  71 |   await expect(page.getByRole(\"dialog\")).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 24,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Cliente B · QA', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('dialog', { name: 'Cliente B · QA', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Cliente B · QA', exact: true })\u001b[22m\n\n\n  66 |   await capture(page, \"customer-navigation-1440\");\n  67 |   const dialog = page.getByRole(\"dialog\", { name: \"Cliente B · QA\", exact: true });\n> 68 |   await expect(dialog).toBeVisible();\n     |                        ^\n  69 |   await expect(dialog.getByRole(\"tab\", { name: \"Resumen\", exact: true })).toHaveAttribute(\"aria-selected\", \"true\");\n  70 |   await page.keyboard.press(\"Escape\");\n  71 |   await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:68:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:00:52.441Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-customer-destinatio-616fe-ssal-and-resets-detail-tabs\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-customer-destinatio-616fe-ssal-and-resets-detail-tabs\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-customer-destinatio-616fe-ssal-and-resets-detail-tabs\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 24,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-3d9a4116ae7b53258bd1",
+          "file": "review.spec.ts",
+          "line": 61,
+          "column": 1
+        },
+        {
+          "title": "checkout exposes catalog read failures with recovery and no write",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6528,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:88:43",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 43,
+                      "line": 88
+                    },
+                    "snippet": "  86 |     await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n  87 |     await capture(page, `checkout-${resource}-error-390`);\n> 88 |     await expect(page.getByRole(\"alert\")).toContainText(\"Lectura QA no disponible\");\n     |                                           ^\n  89 |     await expect(page.getByRole(\"button\", { name: /Preparar cobro|Cobrar y registrar/ })).toHaveCount(0);\n  90 |     expect(writes).toEqual([]);\n  91 |     fail = false;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 43,
+                        "line": 88
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  86 |     await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n  87 |     await capture(page, `checkout-${resource}-error-390`);\n> 88 |     await expect(page.getByRole(\"alert\")).toContainText(\"Lectura QA no disponible\");\n     |                                           ^\n  89 |     await expect(page.getByRole(\"button\", { name: /Preparar cobro|Cobrar y registrar/ })).toHaveCount(0);\n  90 |     expect(writes).toEqual([]);\n  91 |     fail = false;\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:88:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:01:03.859Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ca-8a43b--with-recovery-and-no-write\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ca-8a43b--with-recovery-and-no-write\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ca-8a43b--with-recovery-and-no-write\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 43,
+                    "line": 88
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-db4fb5ff41bc76b91bd2",
+          "file": "review.spec.ts",
+          "line": 79,
+          "column": 3
+        },
+        {
+          "title": "checkout exposes checkout read failures with recovery and no write",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6464,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:88:43",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 43,
+                      "line": 88
+                    },
+                    "snippet": "  86 |     await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n  87 |     await capture(page, `checkout-${resource}-error-390`);\n> 88 |     await expect(page.getByRole(\"alert\")).toContainText(\"Lectura QA no disponible\");\n     |                                           ^\n  89 |     await expect(page.getByRole(\"button\", { name: /Preparar cobro|Cobrar y registrar/ })).toHaveCount(0);\n  90 |     expect(writes).toEqual([]);\n  91 |     fail = false;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 43,
+                        "line": 88
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  86 |     await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n  87 |     await capture(page, `checkout-${resource}-error-390`);\n> 88 |     await expect(page.getByRole(\"alert\")).toContainText(\"Lectura QA no disponible\");\n     |                                           ^\n  89 |     await expect(page.getByRole(\"button\", { name: /Preparar cobro|Cobrar y registrar/ })).toHaveCount(0);\n  90 |     expect(writes).toEqual([]);\n  91 |     fail = false;\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:88:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:01:12.493Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ch-2f05f--with-recovery-and-no-write\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ch-2f05f--with-recovery-and-no-write\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ch-2f05f--with-recovery-and-no-write\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 43,
+                    "line": 88
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-71ae8ce2315c0a947dba",
+          "file": "review.spec.ts",
+          "line": 79,
+          "column": 3
+        },
+        {
+          "title": "checkout exposes cash read failures with recovery and no write",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6783,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:88:43",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 43,
+                      "line": 88
+                    },
+                    "snippet": "  86 |     await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n  87 |     await capture(page, `checkout-${resource}-error-390`);\n> 88 |     await expect(page.getByRole(\"alert\")).toContainText(\"Lectura QA no disponible\");\n     |                                           ^\n  89 |     await expect(page.getByRole(\"button\", { name: /Preparar cobro|Cobrar y registrar/ })).toHaveCount(0);\n  90 |     expect(writes).toEqual([]);\n  91 |     fail = false;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 43,
+                        "line": 88
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"Lectura QA no disponible\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('alert') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  86 |     await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n  87 |     await capture(page, `checkout-${resource}-error-390`);\n> 88 |     await expect(page.getByRole(\"alert\")).toContainText(\"Lectura QA no disponible\");\n     |                                           ^\n  89 |     await expect(page.getByRole(\"button\", { name: /Preparar cobro|Cobrar y registrar/ })).toHaveCount(0);\n  90 |     expect(writes).toEqual([]);\n  91 |     fail = false;\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:88:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:01:20.913Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ca-d5e2b--with-recovery-and-no-write\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ca-d5e2b--with-recovery-and-no-write\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-exposes-ca-d5e2b--with-recovery-and-no-write\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 43,
+                    "line": 88
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-92fd0a55161238c0994f",
+          "file": "review.spec.ts",
+          "line": 79,
+          "column": 3
+        },
+        {
+          "title": "checkout waits for cash and confirms only a successful POST, even during revalidation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6451,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.loading:visible')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.loading:visible') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.loading:visible')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.loading:visible')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.loading:visible') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.loading:visible')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:104:52",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 52,
+                      "line": 104
+                    },
+                    "snippet": "  102 |   await page.goto(\"/fixture-a/checkout\");\n  103 |   try {\n> 104 |     await expect(page.locator(\".loading:visible\")).toHaveCount(1);\n      |                                                    ^\n  105 |     await expect(page.getByRole(\"button\", { name: \"Cobrar y registrar\", exact: true })).toHaveCount(0);\n  106 |   } finally { releaseCash(); }\n  107 |   await expect(page.getByRole(\"button\", { name: \"Cobrar y registrar\", exact: true })).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 52,
+                        "line": 104
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.loading:visible')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.loading:visible') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.loading:visible')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  102 |   await page.goto(\"/fixture-a/checkout\");\n  103 |   try {\n> 104 |     await expect(page.locator(\".loading:visible\")).toHaveCount(1);\n      |                                                    ^\n  105 |     await expect(page.getByRole(\"button\", { name: \"Cobrar y registrar\", exact: true })).toHaveCount(0);\n  106 |   } finally { releaseCash(); }\n  107 |   await expect(page.getByRole(\"button\", { name: \"Cobrar y registrar\", exact: true })).toBeVisible();\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:104:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:01:30.786Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-waits-for--a90f7-ST-even-during-revalidation\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-waits-for--a90f7-ST-even-during-revalidation\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-checkout-waits-for--a90f7-ST-even-during-revalidation\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 52,
+                    "line": 104
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-284394d212b302f5b87e",
+          "file": "review.spec.ts",
+          "line": 98,
+          "column": 1
+        },
+        {
+          "title": "home does not announce an empty day when its request fails",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8682,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Sin próximas citas hoy', { exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByText('Sin próximas citas hoy', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Sin próximas citas hoy', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Sin próximas citas hoy', { exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByText('Sin próximas citas hoy', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Sin próximas citas hoy', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:132:75",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 75,
+                      "line": 132
+                    },
+                    "snippet": "  130 |   await expect(page.getByRole(\"alert\")).toContainText(\"Agenda QA no disponible\");\n  131 |   await capture(page, \"home-error-1440\");\n> 132 |   await expect(page.getByText(\"Sin próximas citas hoy\", { exact: true })).toHaveCount(0);\n      |                                                                           ^\n  133 |   await expect(page.getByRole(\"button\", { name: \"Reintentar\", exact: true })).toBeVisible();\n  134 | });\n  135 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 75,
+                        "line": 132
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Sin próximas citas hoy', { exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByText('Sin próximas citas hoy', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Sin próximas citas hoy', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  130 |   await expect(page.getByRole(\"alert\")).toContainText(\"Agenda QA no disponible\");\n  131 |   await capture(page, \"home-error-1440\");\n> 132 |   await expect(page.getByText(\"Sin próximas citas hoy\", { exact: true })).toHaveCount(0);\n      |                                                                           ^\n  133 |   await expect(page.getByRole(\"button\", { name: \"Reintentar\", exact: true })).toBeVisible();\n  134 | });\n  135 |\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:132:75"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:01:39.950Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-home-does-not-annou-28d0b--day-when-its-request-fails\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-home-does-not-annou-28d0b--day-when-its-request-fails\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-home-does-not-annou-28d0b--day-when-its-request-fails\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 75,
+                    "line": 132
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-0285951ad2020bc0ef9e",
+          "file": "review.spec.ts",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "calendar list does not invent an empty result during loading",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7977,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Sin reservas en este rango.', { exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByText('Sin reservas en este rango.', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Sin reservas en este rango.', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Sin reservas en este rango.', { exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByText('Sin reservas en este rango.', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Sin reservas en este rango.', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:144:82",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 82,
+                      "line": 144
+                    },
+                    "snippet": "  142 |   try {\n  143 |     await capture(page, \"agenda-loading-1440\");\n> 144 |     await expect(page.getByText(\"Sin reservas en este rango.\", { exact: true })).toHaveCount(0);\n      |                                                                                  ^\n  145 |   } finally { release(); }\n  146 |   await expect(page.getByText(\"Sin reservas en este rango.\", { exact: true })).toBeVisible();\n  147 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 82,
+                        "line": 144
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByText('Sin reservas en este rango.', { exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByText('Sin reservas en este rango.', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Sin reservas en este rango.', { exact: true })\u001b[22m\n\u001b[2m    13 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  142 |   try {\n  143 |     await capture(page, \"agenda-loading-1440\");\n> 144 |     await expect(page.getByText(\"Sin reservas en este rango.\", { exact: true })).toHaveCount(0);\n      |                                                                                  ^\n  145 |   } finally { release(); }\n  146 |   await expect(page.getByText(\"Sin reservas en este rango.\", { exact: true })).toBeVisible();\n  147 | });\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:144:82"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:01:51.654Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-calendar-list-does--85030-empty-result-during-loading\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-calendar-list-does--85030-empty-result-during-loading\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-calendar-list-does--85030-empty-result-during-loading\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 82,
+                    "line": 144
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-c0b9f46a1fc315918341",
+          "file": "review.spec.ts",
+          "line": 136,
+          "column": 1
+        },
+        {
+          "title": "selection, keyboard, reduced motion, contrast and target viewports",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7480,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Día', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('button', { name: 'Día', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Día', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button class=\"selected\">Día</button>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Día', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('button', { name: 'Día', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Día', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button class=\"selected\">Día</button>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:152:72",
+                    "location": {
+                      "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                      "column": 72,
+                      "line": 152
+                    },
+                    "snippet": "  150 |   await page.goto(\"/fixture-a/agenda\");\n  151 |   await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n> 152 |   await expect(page.getByRole(\"button\", { name: \"Día\", exact: true })).toHaveAttribute(\"aria-pressed\", \"true\");\n      |                                                                        ^\n  153 |   await page.getByRole(\"button\", { name: \"Semana\", exact: true }).focus();\n  154 |   await page.keyboard.press(\"Enter\");\n  155 |   await expect(page.getByRole(\"button\", { name: \"Semana\", exact: true })).toHaveAttribute(\"aria-pressed\", \"true\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                        "column": 72,
+                        "line": 152
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'Día', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('button', { name: 'Día', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Día', exact: true })\u001b[22m\n\u001b[2m    12 × locator resolved to <button class=\"selected\">Día</button>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n\n\n  150 |   await page.goto(\"/fixture-a/agenda\");\n  151 |   await expect(page.locator(\".loading:visible\")).toHaveCount(0);\n> 152 |   await expect(page.getByRole(\"button\", { name: \"Día\", exact: true })).toHaveAttribute(\"aria-pressed\", \"true\");\n      |                                                                        ^\n  153 |   await page.getByRole(\"button\", { name: \"Semana\", exact: true }).focus();\n  154 |   await page.keyboard.press(\"Enter\");\n  155 |   await expect(page.getByRole(\"button\", { name: \"Semana\", exact: true })).toHaveAttribute(\"aria-pressed\", \"true\");\n    at C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts:152:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T13:02:06.633Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-selection-keyboard--40c8e-ntrast-and-target-viewports\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-selection-keyboard--40c8e-ntrast-and-target-viewports\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\htdocs\\tiago-systems\\barberia-crm\\test-results\\ui\\review-selection-keyboard--40c8e-ntrast-and-target-viewports\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\htdocs\\tiago-systems\\barberia-crm\\tests\\ui\\review.spec.ts",
+                    "column": 72,
+                    "line": 152
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-a88bacba88f0419f4198",
+          "file": "review.spec.ts",
+          "line": 149,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-23T13:00:16.789Z",
+    "duration": 119361.398,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 9,
+    "flaky": 0
+  }
+}

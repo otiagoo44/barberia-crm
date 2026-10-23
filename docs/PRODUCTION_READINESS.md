@@ -1,4 +1,8 @@
-# Estado actualizado, 22/10/2026
+# Estado actualizado, 23/10/2026
+
+PR #5 integrado en main `99a4532637a2902504a994e39464206b1c0c1526`, confirmado por GitHub. La revisión actual y sus checks se registran en [RELEASE_ACCEPTANCE.md](RELEASE_ACCEPTANCE.md) y [REVIEW_2026_10_23.md](REVIEW_2026_10_23.md). Esta sesión no confirma un despliegue ni el historial cloud actual; los gates comerciales siguen abiertos. El apartado siguiente es histórico.
+
+# Estado histórico, 22/10/2026
 
 Revisión de diseño y rendimiento en curso en PR #5: [aceptación del candidato](RELEASE_ACCEPTANCE.md), [auditoría de dos pasadas](FINAL_UX_AUDIT.md). La evidencia y el rollout narrados debajo pertenecen al producto anterior; no certifican el nuevo rediseño ni autorizan su despliegue. Las nuevas migraciones 35/36 permanecen pendientes de rollout controlado.
 

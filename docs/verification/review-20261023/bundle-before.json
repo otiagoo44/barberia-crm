@@ -1,0 +1,78 @@
+{
+  "scope": "Production chunks, local build; total includes shared and deferred code, not per-route transfer",
+  "bytes": 1381794,
+  "files": [
+    {
+      "path": ".next\\static\\chunks\\0cz1d0mv5g_q7.js",
+      "bytes": 112594
+    },
+    {
+      "path": ".next\\static\\chunks\\0mb7yclxddi2q.js",
+      "bytes": 20750
+    },
+    {
+      "path": ".next\\static\\chunks\\0umf92h1sb77c.js",
+      "bytes": 13822
+    },
+    {
+      "path": ".next\\static\\chunks\\1ik6laidoj_80.js",
+      "bytes": 29252
+    },
+    {
+      "path": ".next\\static\\chunks\\1udzew4buad1q.js",
+      "bytes": 134752
+    },
+    {
+      "path": ".next\\static\\chunks\\1x6obpmlu1_c2.js",
+      "bytes": 5361
+    },
+    {
+      "path": ".next\\static\\chunks\\2-x53hq11c15l.js",
+      "bytes": 162337
+    },
+    {
+      "path": ".next\\static\\chunks\\2khxl0v1q4i6n.js",
+      "bytes": 229820
+    },
+    {
+      "path": ".next\\static\\chunks\\2kzd2bib-2ux6.js",
+      "bytes": 32585
+    },
+    {
+      "path": ".next\\static\\chunks\\2n5qeheznvl4u.js",
+      "bytes": 7820
+    },
+    {
+      "path": ".next\\static\\chunks\\3-gfy-ykv2q81.js",
+      "bytes": 33659
+    },
+    {
+      "path": ".next\\static\\chunks\\31-rm2gbuwmv0.js",
+      "bytes": 499
+    },
+    {
+      "path": ".next\\static\\chunks\\3aihkc9ln4yxm.js",
+      "bytes": 17118
+    },
+    {
+      "path": ".next\\static\\chunks\\3i7bb4yv5vlj-.js",
+      "bytes": 164509
+    },
+    {
+      "path": ".next\\static\\chunks\\3rd8-n_5-mwd8.js",
+      "bytes": 11409
+    },
+    {
+      "path": ".next\\static\\chunks\\3xzmqum69c5fn.js",
+      "bytes": 5308
+    },
+    {
+      "path": ".next\\static\\chunks\\42tfdwero7x-l.js",
+      "bytes": 390169
+    },
+    {
+      "path": ".next\\static\\chunks\\turbopack-3-ry682tkyiqk.js",
+      "bytes": 10030
+    }
+  ]
+}

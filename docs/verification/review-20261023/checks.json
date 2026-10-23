@@ -1,0 +1,101 @@
+{
+  "executed_at": "2026-10-23T13:18:51.221Z",
+  "base": "99a4532637a2902504a994e39464206b1c0c1526",
+  "scope": "Local isolated verification, Windows Node 24.15.0. Not cloud acceptance.",
+  "checks": [
+    {
+      "command": "npm ci --prefer-offline --fetch-retries=0 --fetch-timeout=15000",
+      "status": "passed"
+    },
+    {
+      "command": "npm audit --audit-level=high --fetch-retries=0 --fetch-timeout=15000",
+      "status": "passed",
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run lint",
+      "status": "passed"
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "npm test",
+      "status": "passed",
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm run test:db",
+      "status": "passed",
+      "contracts": 111,
+      "breakdown": {
+        "security_operations": 51,
+        "finance": 19,
+        "hardening": 23,
+        "product": 18
+      },
+      "additional": [
+        "onboarding",
+        "scheduler",
+        "migration upgrade",
+        "dashboard projection equivalence"
+      ]
+    },
+    {
+      "command": "npm run test:hardening",
+      "status": "passed",
+      "passed": 23,
+      "note": "Repeated hardening block already included in DB count"
+    },
+    {
+      "command": "npm run test:load",
+      "status": "passed",
+      "tenants": [
+        10,
+        50,
+        100
+      ],
+      "errors": 0,
+      "note": "Embedded SQL only, shared workstation; percentiles in load-results.json, not cloud or HTTP"
+    },
+    {
+      "command": "npm run build",
+      "status": "passed",
+      "configuration": "Explicit loopback Supabase URL and synthetic publishable key; existing .env.local unchanged"
+    },
+    {
+      "command": "npm run test:e2e",
+      "status": "partial",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 29,
+      "reason": "Docker and real isolated Supabase Auth unavailable; skips are not passes"
+    },
+    {
+      "command": "npm run test:ui",
+      "status": "passed",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Actual components with synthetic router/API; keyboard, reduced motion, errors, revalidation, five widths, CSS zoom 200%, request counts"
+    }
+  ],
+  "new_migrations": [],
+  "production_mutations": false,
+  "landing_changes": false,
+  "external_gates": [
+    "CI with real isolated Supabase/Auth",
+    "cloud advisors and migration inventory",
+    "17:17 actual organization and independent accounts",
+    "MFA cloud and recovery",
+    "SMTP delivery",
+    "confirmed catalog, daily schedules/breaks and POS",
+    "50/50 policy confirmation",
+    "managed restore and alert delivery",
+    "operator pilot"
+  ]
+}

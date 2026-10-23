@@ -89,9 +89,14 @@ export function Configuration({
           <p>Usá los datos y las reglas reales del negocio.</p>
         </div>
       </div>
-      <div className="config-tabs">
+      <div
+        className="config-tabs"
+        role="group"
+        aria-label="Secciones de configuración"
+      >
         {options.map((key) => (
           <button
+            aria-pressed={key === tab}
             className={key === tab ? "selected" : ""}
             onClick={() => setTab(key)}
             key={key}
