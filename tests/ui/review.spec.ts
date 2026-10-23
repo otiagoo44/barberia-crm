@@ -3,7 +3,8 @@ import AxeBuilder from "@axe-core/playwright";
 import { mkdir, writeFile } from "node:fs/promises";
 
 const phase = process.env.REVIEW_PHASE ?? "after";
-const output = `docs/verification/review-20261023/${phase}`;
+const output =
+  process.env.REVIEW_OUTPUT_DIR ?? `docs/verification/review-20261023/${phase}`;
 const empty = { items: [], has_more: false };
 const catalog = {
   payment_methods: [{ id: "bank-qa", name: "Transferencia QA", type: "bank" }],
@@ -49,6 +50,31 @@ async function fixtures(page: Page) {
       };
     if (resource === "calendar_blocks") json = { ...empty, absences: [] };
     if (resource === "catalog") json = catalog;
+    if (resource === "summary")
+      json = {
+        totals: {
+          gross_revenue_minor: "128450000",
+          collected_minor: "9000000000000",
+        },
+        staff: [],
+        methods: [],
+      };
+    if (resource === "series")
+      json = {
+        days: [
+          {
+            date: "2026-10-23",
+            sales: "100",
+            collected: "0",
+            expenses: "0",
+            fees: "0",
+            commissions: "0",
+            result: "100",
+            incomplete: false,
+          },
+        ],
+        expenses: [],
+      };
     if (resource === "cash")
       json = { session: null, pending: [], methods: [], expenses_minor: 0 };
     if (resource === "checkout") json = checkout;
@@ -85,6 +111,62 @@ async function capture(page: Page, name: string) {
 }
 test.beforeEach(async ({ page }) => {
   await fixtures(page);
+});
+
+test("financial layout settles across viewport changes without overflow or header overlap", async ({
+  page,
+}) => {
+  await page.goto("/fixture-a/finanzas");
+  await expect(page.locator(".kpi").first()).toBeVisible();
+  await expect(page.locator(".loading:visible")).toHaveCount(0);
+  await expect(page.locator(".recharts-wrapper").first()).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  const measurements = [];
+  for (const width of [360, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    const measure = () =>
+      page.evaluate(() => ({
+        width: innerWidth,
+        scroll: document.documentElement.scrollWidth,
+        offenders: Array.from(document.querySelectorAll("body *"))
+          .map((el) => ({
+            tag: el.tagName,
+            css: el.getAttribute("class"),
+            right: el.getBoundingClientRect().right,
+            width: el.getBoundingClientRect().width,
+          }))
+          .filter((el) => el.right > innerWidth + 1)
+          .slice(0, 15),
+        headerBottom: document.querySelector(".topbar")!.getBoundingClientRect()
+          .bottom,
+        headerChildBottom: Math.max(
+          ...Array.from(document.querySelector(".topbar")!.children).map(
+            (el) => el.getBoundingClientRect().bottom,
+          ),
+        ),
+        mainTop: document.querySelector("main")!.getBoundingClientRect().top,
+      }));
+    const immediate = await measure();
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
+    const settled = await measure();
+    measurements.push({ immediate, settled });
+    await mkdir(output, { recursive: true });
+    await writeFile(
+      `${output}/financial-layout.json`,
+      JSON.stringify(measurements, null, 2),
+    );
+    await capture(page, `financial-layout-${width}`);
+    expect(settled.scroll, JSON.stringify(settled)).toBeLessThanOrEqual(width);
+    expect(
+      settled.headerChildBottom,
+      JSON.stringify(settled),
+    ).toBeLessThanOrEqual(settled.headerBottom);
+  }
 });
 
 test("calendar requests and synthetic interaction timing remain measurable", async ({

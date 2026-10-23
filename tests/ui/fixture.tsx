@@ -5,6 +5,7 @@ import { Agenda } from "../../src/features/appointments/agenda";
 import { Customers } from "../../src/features/customers/customers";
 import { DayOverview } from "../../src/features/analytics/day-overview";
 import { CheckoutDialog } from "../../src/features/finance/checkout";
+import { FinancialDashboard } from "../../src/features/finance/dashboard";
 import { Goals } from "../../src/features/goals/goals";
 import { Configuration } from "../../src/features/configuration/configuration";
 import { usePathname } from "./navigation";
@@ -39,6 +40,7 @@ function Screen() {
   if (path.endsWith("/agenda")) return <Agenda />;
   if (path.endsWith("/clientes")) return <Customers />;
   if (path.endsWith("/metas")) return <Goals />;
+  if (path.endsWith("/finanzas")) return <FinancialDashboard />;
   if (path.endsWith("/configuracion"))
     return <Configuration module="configuracion" />;
   if (path.endsWith("/checkout"))

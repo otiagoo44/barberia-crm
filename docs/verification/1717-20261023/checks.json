@@ -12,12 +12,13 @@
   "hardening_repeat": { "exit_code": 0, "passed": 23 },
   "load": { "exit_code": 0, "tenants": [10, 50, 100], "errors": 0, "environment": "isolated embedded PostgreSQL" },
   "build": { "exit_code": 0 },
-  "ui": { "exit_code": 0, "passed": 10, "auth": "not exercised; intercepted fixtures" },
+  "ui": { "exit_code": 0, "passed": 11, "auth": "not exercised; intercepted fixtures", "evidence": "ui-final.log" },
   "e2e_local": { "exit_code": 0, "passed": 1, "skipped": 29, "complete_auth_verification": false },
   "production_smoke": { "deployment_sha": "99a4532637a2902504a994e39464206b1c0c1526", "health": 200, "ready": 200, "unauthorized_worker": 403, "catalog": 200, "catalog_branches": 0, "availability": 404, "booking_page": 200, "writes": 0 },
   "cloud_database_writes": 0,
   "cloud_private_inventory_verified": false,
   "cloud_migrations_applied": [],
   "new_migration": "20261023193417_staff_owner_profile_link.sql",
-  "ci": "must inspect final PR head; local skips do not count as approval"
+  "first_ci": { "run_id": 40015699810, "head": "01cb960437fe453ba1a687b4d08ec9aa103477b8", "quality": "success", "visual_baseline": "success", "e2e_passed": 29, "e2e_failed": 1, "followup": "responsive header fixed and exact overflow assertion waits for chart resize" },
+  "ci": "must inspect corrected final PR head; local skips do not count as approval"
 }

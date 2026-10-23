@@ -126,6 +126,7 @@
 }
 .topbar {
   min-height: 72px;
+  height: auto;
   flex-wrap: wrap;
   background: var(--bg);
   gap: 20px;

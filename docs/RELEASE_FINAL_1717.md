@@ -36,7 +36,7 @@ Esteban y Jonatan: correos confirmados, existencia/Auth email/membresía/víncul
 | npm run test:load | 10/50/100 tenants y casos concentrados, cero errores; PostgreSQL local, no SLA cloud |
 | npm run build | Aprobado |
 | npm run test:e2e | **1 aprobado, 29 omitidos** por ausencia de Supabase Auth local; requiere CI real |
-| npm run test:ui | 10 aprobados; UI real con respuestas interceptadas, no Auth real |
+| npm run test:ui | 11 aprobados tras el diagnóstico CI; UI real con respuestas interceptadas, no Auth real |
 | Smoke productivo no destructivo | health/ready 200, jobs sin secreto 403, catalog 200 sin sucursales, availability 404, book 200 |
 
 [Evidencia nueva](verification/1717-20261023/) y [segunda revisión de archivos](verification/1717-20261023/REVIEW.md). No se sobrescribe la evidencia histórica del rediseño. Dos errores iniciales del plan/migración fueron corregidos y se repitió la suite; el harness ahora libera la conexión incluso ante SQL fallido. Las omisiones y los mocks UI no sustituyen Auth real. CI del SHA del PR sigue siendo el gate de merge.
@@ -67,3 +67,11 @@ GitHub fue reconsultado: ruleset `main-quality-and-pr` **25439970 activo**, sin 
 El conector GitHub pudo leer, pero rechazó crear PR con 403 `Resource not accessible by integration`. El canal de Computer Use no estaba disponible. La API estándar creó el PR con la autenticación del proveedor normal de Git que ya había autorizado el push al mismo repositorio; ninguna credencial se imprimió, guardó en un archivo o extrajo de bases de otra aplicación. No se modificaron permisos ni protecciones.
 
 El PR abierto no equivale a merge. Exigir CI del HEAD final, sin errores ni omisiones de Auth, y compatibilidad del runtime actual. Las migraciones/configuración privada cloud y la activación comercial siguen los controles independientes anteriores. El estado remoto definitivo debe consultarse en el PR; no inferirlo de un commit de documentación previo a la finalización de CI.
+
+## Primera CI y corrección de layout
+
+[Run 40015699810](https://github.com/otiagoo44/barberia-crm/actions/runs/40015699810), SHA `01cb960`: quality y visual-baseline aprobados; supabase-e2e falló con **29 E2E aprobados / 1 fallido**. Upgrade, advisors, restore real local, build y diez UI habían aprobado. No se cuentan como aprobadas las mediciones posteriores omitidas por ese fallo.
+
+La prueba de cifras grandes consultaba el ancho inmediatamente después de cambiar viewport. Reproducción con componentes reales y respuestas sintéticas: Recharts medía temporalmente 598 px en viewport 360 y se ajustó a 360 después de ResizeObserver. El E2E conserva la exigencia de ancho exacto, espera su cumplimiento y adjunta diagnóstico si persiste. No se oculta overflow ni se reduce el tamaño mínimo de cifras.
+
+Además, la captura real mostró que la cabecera móvil de altura fija 70 px tenía contenido hasta 112 px y tapaba el main. `height:auto` conserva el wrap del rediseño y reserva el alto real (123 px a 360/390). La nueva regresión comprueba scroll exacto y que los hijos queden dentro de la cabecera en cinco anchos. Once UI aprobados, lint/typecheck/build repetidos; revisión Impeccable y checklist React aplicados. Evidencia antes/después y captura de CI en `verification/1717-20261023/`. El merge requiere la nueva CI del HEAD corregido.

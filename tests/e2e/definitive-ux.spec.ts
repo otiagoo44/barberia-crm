@@ -210,11 +210,32 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     });
     for (const width of [360, 390, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 1000 });
-      expect(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
-      ).toBeTruthy();
+      // ResponsiveContainer measures through ResizeObserver after viewport
+      // changes. Keep the exact no-overflow condition, await its settled layout.
+      try {
+        await expect
+          .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+          .toBeLessThanOrEqual(width);
+      } catch (error) {
+        await test.info().attach(`financial-layout-${width}`, {
+          contentType: "application/json",
+          body: JSON.stringify(
+            await page.evaluate(() => ({
+              width: innerWidth,
+              scroll: document.documentElement.scrollWidth,
+              offenders: Array.from(document.querySelectorAll("body *"))
+                .map((el) => ({
+                  tag: el.tagName,
+                  css: el.getAttribute("class"),
+                  right: el.getBoundingClientRect().right,
+                }))
+                .filter((el) => el.right > innerWidth + 1)
+                .slice(0, 20),
+            })),
+          ),
+        });
+        throw error;
+      }
       const amounts = await page
         .locator(".kpi strong")
         .evaluateAll((elements) =>

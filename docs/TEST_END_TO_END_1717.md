@@ -25,6 +25,8 @@ Se ejecutan npm ci, audit high, lint, typecheck, unit, DB, hardening, carga, bui
 
 Fallo inicial conservado: la migración del vínculo apuntó al wrapper `manage_record`, pero la implementación desde migración 31 está en `manage_record_core(...,boolean)`. El guard abortó sin modificar datos; se corrigió el target y se repiten instalación/upgrade. No se debilitó el guard para hacer pasar una prueba.
 
+La primera CI del PR #6 pasó 29 de 30 E2E y falló en el ancho al redimensionar Finanzas. Se reprodujo la medición transitoria de Recharts y un solapamiento real de cabecera móvil. Se mantiene la aserción exacta esperando el resize y se corrige la altura automática; nueva regresión UI en cinco anchos, 11 UI aprobados. La CI corregida debe aprobar completamente antes del merge; resultados y procedencia en RELEASE_FINAL_1717.md.
+
 ## Piloto real pendiente
 
 Tras cuentas/SMTP/MFA/backup/staging y configuración cloud verificados, ejecutar el recorrido con Esteban, Jonatan y el instalador según PILOTO_ESTEBAN_JONATAN.md. Registrar fecha, SHA, actor, sucursal, casos y resultado. Probar reserva consentida solo después de cerrar gates públicos; usar staging para casos negativos, carreras, fallos y dinero sintético. No declarar el piloto completado por aprobar tests.

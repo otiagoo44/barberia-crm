@@ -1,0 +1,30 @@
+
+> barberia-operating-system@1.0.0 test:ui
+> playwright test --config tests/ui/playwright.config.ts
+
+node.exe : [WebServer] (node:13948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\User\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 1 worker
+
+(node:10764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests\ui\review.spec.ts:116:1 › financial layout settles across viewport changes without overflow or header overlap (4.7s)
+  ✓   2 tests\ui\review.spec.ts:172:1 › calendar requests and synthetic interaction timing remain measurable (3.3s)
+  ✓   3 tests\ui\review.spec.ts:223:1 › agenda follows a new URL in place and browser history while preserving its view (3.0s)
+  ✓   4 tests\ui\review.spec.ts:245:1 › customer destination opens in place after dismissal and resets detail tabs (3.8s)
+  ✓   5 tests\ui\review.spec.ts:274:3 › checkout exposes catalog read failures with recovery and no write (2.6s)
+  ✓   6 tests\ui\review.spec.ts:274:3 › checkout exposes checkout read failures with recovery and no write (2.1s)
+  ✓   7 tests\ui\review.spec.ts:274:3 › checkout exposes cash read failures with recovery and no write (2.2s)
+  ✓   8 tests\ui\review.spec.ts:317:1 › checkout waits for cash and confirms only a successful POST, even during revalidation (1.3s)
+  ✓   9 tests\ui\review.spec.ts:377:1 › home does not announce an empty day when its request fails (1.2s)
+  ✓  10 tests\ui\review.spec.ts:396:1 › calendar list does not invent an empty result during loading (1.4s)
+  ✓  11 tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports (12.5s)
+
+  11 passed (44.8s)
