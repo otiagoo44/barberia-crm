@@ -1,0 +1,61 @@
+# Release de configuración 17:17 — 23/10/2026
+
+## Procedencia
+
+- HEAD al recibir la tarea: `4d2fc0df559f4bca8dbda405c78d9e98c43d6b4f`, árbol limpio.
+- Main aprobado remoto: `99a4532637a2902504a994e39464206b1c0c1526`; PR #5 integrado, ningún PR abierto encontrado.
+- Rama nueva: `release/1717-confirmed-20261023`, creada desde origin/main tras fetch. Se preservaron los dos commits locales de corrección/documentación mediante cherry-pick (`56f03fb`, `204b914`). No se sobrescribió trabajo en curso.
+- Había **36** migraciones locales. Se agrega `20261023193417_staff_owner_profile_link.sql`; las 36 anteriores permanecen intactas.
+
+## Configuración realmente guardada
+
+En el repositorio: correos de ambos owners, turnos semanales, pausa provisional, catálogo completo, 200/500 bps, lead 0, reparto mensual 50/50 y gates deshabilitados. Ver CONFIGURACION_CONFIRMADA_1717.md.
+
+Los scripts preparan SQL revisable y nunca se conectan automáticamente a cloud. `configure-confirmed-1717.mjs` exige cuatro UUID reales distintos, proyecto exacto y fecha local explícita no histórica. Requiere conexión de mantenimiento privilegiada y **contexto auténtico owner/AAL2/sesión viva**; no fabrica claims ni toma el primer owner para suplantarlo. Revalida bajo lock, conserva historia/excepciones/citas, registra versiones de precios y revierte conflictos. No ejecutar el onboarding inicial en cloud.
+
+No se aplicó configuración, DDL, fee, membresía, período, reserva ni movimiento financiero en producción. La prueba local con fixtures se informa aparte. La periodicidad monthly está preparada en el manifiesto; no se insertó una política `confirmed=true` con acuerdos ficticios de pérdidas/aprobación.
+
+## Supabase y usuarios
+
+MCP ya estaba configurado al URL exacto pedido. `codex mcp login supabase` terminó **Successfully logged in**; el gestor MCP de la sesión continúa fallando al refrescar OAuth (`Failed to parse server response`). La CLI Supabase solo lista dos proyectos dentales y niega privilegios al enlazar **tbcfhagteyqufjkmbxzz**. No se eligió otro proyecto ni se extrajeron credenciales de otra aplicación.
+
+Historial remoto actual **no verificable**: el antecedente de 34 migraciones es histórico. Hasta reconsultarlo no se afirma si 35/36 están aplicadas. Migración 37 nueva: pendiente de staging y rollout cloud. No se aplica sin backup, historial real, compatibilidad y rollback revisados.
+
+Esteban y Jonatan: correos confirmados, existencia/Auth email/membresía/vínculo/MFA cloud **no reconsultados**. SMTP y recuperación **no verificados**. Backups/restore cloud, retención/RPO/RTO y recepción de alertas **pendientes**. La documentación histórica describe plan Free sin backups administrados; eso no sustituye una consulta actual del plan.
+
+## Verificación
+
+| Check local | Resultado actual |
+|---|---|
+| npm ci | Aprobado, 260 paquetes instalados |
+| npm audit --audit-level=high | Cero vulnerabilidades |
+| npm run lint / typecheck | Aprobados |
+| npm test | 22 aprobados, cero omitidos |
+| npm run test:db | Aprobado: 51 seguridad/operación + 19 finanzas (débito 2%) + 23 hardening + 18 producto; onboarding/scheduler, upgrades y nuevo bloque 17:17 |
+| npm run test:hardening | 23 aprobados; repetición explícita de ese bloque |
+| npm run test:load | 10/50/100 tenants y casos concentrados, cero errores; PostgreSQL local, no SLA cloud |
+| npm run build | Aprobado |
+| npm run test:e2e | **1 aprobado, 29 omitidos** por ausencia de Supabase Auth local; requiere CI real |
+| npm run test:ui | 10 aprobados; UI real con respuestas interceptadas, no Auth real |
+| Smoke productivo no destructivo | health/ready 200, jobs sin secreto 403, catalog 200 sin sucursales, availability 404, book 200 |
+
+[Evidencia nueva](verification/1717-20261023/) y [segunda revisión de archivos](verification/1717-20261023/REVIEW.md). No se sobrescribe la evidencia histórica del rediseño. Dos errores iniciales del plan/migración fueron corregidos y se repitió la suite; el harness ahora libera la conexión incluso ante SQL fallido. Las omisiones y los mocks UI no sustituyen Auth real. CI del SHA del PR sigue siendo el gate de merge.
+
+## Publicación observada
+
+Vercel: proyecto `prj_5T3VMAuA8qXr3G6zzDSc94pHMpCQ`, equipo `team_fHImRjkE8m0NyoHDOZHtaNH1`. Deployment `dpl_gcTAfoQpcZsFRbgwmocorvCWEQAF`, **READY**, production, commit **99a4532**, alias https://barberia-crm-kappa.vercel.app; URL inmutable https://barberia-r1t5wg25q-ortegatiago733-2656s-projects.vercel.app.
+
+Smoke público: health 200, ready 200 `ready:true`, worker sin secreto 403. Catalog 200 JSON con `branches:[]`; availability Luque 404; book 200 HTML. No POST productivo. No se afirma que el nuevo release esté desplegado. El helper autenticado Vercel devuelve 403 sobre aliases; no se cambian protecciones.
+
+## Instalador: controles restantes
+
+1. Recuperar acceso efectivo al proyecto Supabase exacto (MCP reiniciado y credenciales autorizadas); ejecutar `scripts/inspect-1717.sql` read-only. Registrar UUID de org/Luque/Esteban/Jonatan, 37 versiones esperadas al finalizar y estado real de servicios/reglas/excepciones/flags/cuentas. No copiar datos privados a artifacts públicos.
+2. Proveer staging independiente y secretos propios; ensayar migración 37 y el plan con contexto real autorizado. Obtener backup recuperable y rollback compatibles antes de cualquier DDL productivo. Los cambios de UI son compatibles con el esquema previo: este seguirá rechazando el vínculo owner hasta migrar, sin conceder permisos indebidamente.
+3. Preparar/aplicar el plan solo con esos UUID y fecha local prospectiva; comprobar versiones de precios/auditoría, historia intacta, 18 intervalos, capacidades, excepciones, pausas/cierres y citas previas. Conservar flags cerrados.
+4. Completar registro, email, membresías owner y MFA de ambos según ONBOARDING_DOS_PROPIETARIOS.md; verificar Luque en teléfono/computadora.
+5. Resolver SMTP/remitente/redirects y confirmar entrega/recovery a los dos destinatarios autorizados. Acordar responsable de backup/restore y alertas; ensayar recuperación/recepción.
+6. Obtener evidencia POS (proveedor, vigencia, IVA/cargos). Preparar `prepare-1717-pos.mjs` con fixedAmountMinor explícitos; revisar nueva vigencia y testear split/reversal/conciliación, sin recalcular snapshots previos.
+7. Preguntar únicamente los puntos pendientes de CONFIGURACION_CONFIRMADA_1717.md; registrar definición contable, retiros/pérdidas/aprobación antes de activar monthly. No distribuir ni pagar por cálculo estimado.
+8. Completar piloto real de ambos y registrar evidencia. Habilitar booking solo al cerrar todos sus controles. No hacer la prueba destructiva con datos reales.
+
+GitHub fue reconsultado: ruleset `main-quality-and-pr` **25439970 activo**, sin bypass, PR requerido y checks estrictos `quality`/`supabase-e2e`; sin aprobaciones mínimas, hilos resueltos requeridos. Git permite push de la rama (dry-run aprobado). Se publicará el candidato y se verificará la CI de su SHA; no usar force push ni alterar el ruleset. Ningún bloqueo externo se considera resuelto por la existencia de este documento.

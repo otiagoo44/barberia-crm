@@ -1,0 +1,34 @@
+
+> barberia-operating-system@1.0.0 test
+> tsx --test tests/unit/*.test.ts
+
+✔ calendar retains elapsed duration through DST and midnight; adjacent intervals stay adjacent (13.4462ms)
+✔ TOTP fixture generator matches the RFC SHA1 vector without logging secrets (9.8ms)
+✔ charts preserve unknowns and reject rounded, malformed or unsafe integer money (1.2725ms)
+✔ brand accents retain contrast against light surfaces without altering the brand (2.4658ms)
+✔ International phone normalization preserves tenant-independent identity (3.7259ms)
+✔ External customer input rejects extra tenant IDs and malformed dates (9.9194ms)
+✔ CSV export neutralizes spreadsheet formulas and quotes (1.3357ms)
+✔ Service selection keeps exactly one primary and removes dependent options (2.0557ms)
+✔ Asuncion dates and DST-aware local boundaries resolve to UTC instants (9.1223ms)
+✔ preview refuses production and missing isolation configuration (2.8101ms)
+✔ Vercel build requires complete production configuration without exposing values (1.4929ms)
+✔ import uses structured entities, casing and whitespace normalization (27.4869ms)
+✔ wrong-side amount, ambiguity, negative values and source formulas require review (2.8236ms)
+✔ anonymized XLSX fixture ignores broken derived formulas and retains source row (48.2684ms)
+✔ CSV quoting and export formula injection (1.0069ms)
+✔ import rejects wrong signatures, DTDs, external sheet paths and ZIP expansion (433.3956ms)
+✔ category mapping cannot use another catalog and salaries require a staff identity (11.2645ms)
+✔ 17:17 maintenance plan refuses unverified identities and another project (7.4301ms)
+✔ POS preparation refuses an unknown fixed charge, date or evidence (1.1121ms)
+✔ Public preselection accepts canonical slug only from branch catalog (3.5632ms)
+✔ Query parsing ignores repeated/invalid slugs and forged attribution (7.9755ms)
+✔ worker bearer checks reject missing, incorrect and unequal UTF-8 byte lengths (19.9622ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8500.5396

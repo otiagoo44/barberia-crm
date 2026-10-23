@@ -1,5 +1,21 @@
 # Operación de 17:17
 
+## Procedimiento vigente — 23/10/2026
+
+La [configuración confirmada](CONFIGURACION_CONFIRMADA_1717.md) sustituye la disponibilidad exclusivamente diaria descrita en los antecedentes de abajo. Hay turnos semanales confirmados y excepciones por fecha en el mismo motor. Esteban: L/M/S 09–19 y X/J/V 09–13, con pausa provisional 12–12:30. Jonatan: L–S 13–21. Domingo cerrado para disponibilidad ordinaria hasta confirmación; horario comercial del local pendiente.
+
+Primero completar [acceso de ambos propietarios](ONBOARDING_DOS_PROPIETARIOS.md), MFA, SMTP, respaldo recuperable y piloto. No ejecutar el alta inicial otra vez: reconsultar UUID y actualizar únicamente 17:17/Luque con el plan autorizado. Los scripts preparados no demuestran que se hayan guardado turnos o tarifas en cloud.
+
+Al abrir: Esteban verifica Caja, abre con efectivo real contado, consulta Agenda y las excepciones/ausencias de cada profesional. Para un cambio puntual usa Equipo → Turnos del día; una excepción disponible reemplaza la regla semanal de ese día, por lo que debe conservar explícitamente la pausa de Esteban. No copia una pausa a Jonatan. Una reducción que afecta citas requiere resolverlas primero, sin borrarlas.
+
+Durante el día: encontrar/crear cliente, registrar Sin cita, asignar profesional y servicio, iniciar/completar, abrir Cobrar, revisar importes de servidor, cobrar en uno o varios medios y confirmar la respuesta real. Completar atención no equivale a cobro. Lavado se vende aparte; en checkout puede ser otra línea. El combo Rulos + Corte ya incluye Corte: 120 minutos totales/200000 PYG, sin agregar 40 minutos ni 30000. Rulos y tintes restringidos requieren evaluación.
+
+Al cerrar: registrar gastos reales con su categoría, conciliar efectivo/transferencias/POS, contar efectivo y explicar diferencias antes de confirmar cierre. Débito 2% y crédito 5% están confirmados comercialmente, pero requieren evidencia/vigencia/cargos antes de activar versiones productivas. Los cierres y snapshots pasados no se recalculan.
+
+Revisión mensual: 50/50 entre Esteban y Jonatan. La pantalla actual muestra una estimación según ventas posteadas y costos registrados; no garantiza caja disponible ni paga a socios. Mantener aprobación/pago de distribuciones bloqueados hasta acordar reconocimiento, POS, retiros, pérdidas y aprobador. [Estado y pendientes reales](RELEASE_FINAL_1717.md).
+
+## Antecedentes anteriores al 23/10 (no usar como configuración vigente)
+
 ## Antes de abrir
 
 Jonatan y Esteban hacen todos los servicios del catálogo. Su disponibilidad cambia: se carga por día, sin imponer turnos semanales. Reparten la ganancia en partes iguales después de los gastos del negocio.

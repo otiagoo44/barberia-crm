@@ -4,7 +4,7 @@ import type { Pool } from "pg";
 import { asUser } from "./database";
 import { fixtures } from "./fixtures";
 
-export async function financeContracts(pool: Pool) {
+export async function financeContracts(pool: Pool, debitBps = 300) {
   const f = await fixtures(pool);
   let passed = 0;
   async function test(name: string, fn: () => Promise<void>) {
@@ -34,7 +34,7 @@ export async function financeContracts(pool: Pool) {
   for (const [name, type, bps] of [
     ["cash", "cash", 0],
     ["transfer", "bank", 0],
-    ["debit", "card", 300],
+    ["debit", "card", debitBps],
     ["credit", "card", 500],
   ] as const) {
     methods[name] = (
@@ -135,7 +135,7 @@ export async function financeContracts(pool: Pool) {
     assert.ok(fees.rows.every((r) => Number(r.fee_minor) === 0));
   });
   for (const [method, fee] of [
-    ["debit", 3000],
+    ["debit", debitBps * 10],
     ["credit", 5000],
   ] as const)
     await test(`${method} exact POS snapshot`, async () => {

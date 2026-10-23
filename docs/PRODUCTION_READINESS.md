@@ -1,5 +1,11 @@
 # Estado actualizado, 23/10/2026
 
+Actualización de configuración real: [release 17:17](RELEASE_FINAL_1717.md), [datos confirmados](CONFIGURACION_CONFIRMADA_1717.md), [onboarding de ambos owners](ONBOARDING_DOS_PROPIETARIOS.md). Hay 37 migraciones locales (36 heredadas intactas + vínculo owner/staff); historial cloud actual pendiente por acceso. La migración nueva no aplica DML comercial. La UI conserva compatibilidad con el guard previo, que rechazará el vínculo owner hasta aplicar la migración.
+
+Vercel confirma main `99a4532` READY y los smoke HTTP públicos pasan. El catálogo muestra organización sin sucursales públicas. No se certifican owners/MFA/SMTP, backups/restore/alertas, piloto ni configuración privada de Luque. Correos/turnos/catálogo/duraciones/200–500 bps/mensual ya no son información faltante; aplicación cloud, vigencia POS, cargos/IVA y acuerdos contables siguen pendientes. No abrir reservas ni distribuciones por completar el release técnico.
+
+Los apartados siguientes son evidencia histórica del rediseño, no resultados de la nueva ejecución de configuración.
+
 PR #5 integrado en main `99a4532637a2902504a994e39464206b1c0c1526`, confirmado por GitHub. La revisión actual y sus checks se registran en [RELEASE_ACCEPTANCE.md](RELEASE_ACCEPTANCE.md) y [REVIEW_2026_10_23.md](REVIEW_2026_10_23.md). Esta sesión no confirma un despliegue ni el historial cloud actual; los gates comerciales siguen abiertos. El apartado siguiente es histórico.
 
 # Estado histórico, 22/10/2026

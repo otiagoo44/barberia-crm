@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-23",
+  "initial_head": "4d2fc0df559f4bca8dbda405c78d9e98c43d6b4f",
+  "approved_base": "99a4532637a2902504a994e39464206b1c0c1526",
+  "branch": "release/1717-confirmed-20261023",
+  "npm_ci": { "exit_code": 0 },
+  "npm_audit_high": { "exit_code": 0, "vulnerabilities": 0 },
+  "lint": { "exit_code": 0 },
+  "typecheck": { "exit_code": 0 },
+  "unit": { "exit_code": 0, "passed": 22, "skipped": 0 },
+  "db": { "exit_code": 0, "security_operations": 51, "finance": 19, "hardening": 23, "product": 18, "confirmed_1717": "passed", "onboarding_scheduler_upgrade": "passed", "auth": "synthetic SQL claims only" },
+  "hardening_repeat": { "exit_code": 0, "passed": 23 },
+  "load": { "exit_code": 0, "tenants": [10, 50, 100], "errors": 0, "environment": "isolated embedded PostgreSQL" },
+  "build": { "exit_code": 0 },
+  "ui": { "exit_code": 0, "passed": 10, "auth": "not exercised; intercepted fixtures" },
+  "e2e_local": { "exit_code": 0, "passed": 1, "skipped": 29, "complete_auth_verification": false },
+  "production_smoke": { "deployment_sha": "99a4532637a2902504a994e39464206b1c0c1526", "health": 200, "ready": 200, "unauthorized_worker": 403, "catalog": 200, "catalog_branches": 0, "availability": 404, "booking_page": 200, "writes": 0 },
+  "cloud_database_writes": 0,
+  "cloud_private_inventory_verified": false,
+  "cloud_migrations_applied": [],
+  "new_migration": "20261023193417_staff_owner_profile_link.sql",
+  "ci": "must inspect final PR head; local skips do not count as approval"
+}
