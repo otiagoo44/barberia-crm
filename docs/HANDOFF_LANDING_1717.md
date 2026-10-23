@@ -6,15 +6,15 @@ Origen público del CRM: `https://barberia-crm-kappa.vercel.app`.
 Organización esperada: `1717-barberia`. Sucursal esperada: `luque`.
 Proyecto Supabase autorizado: `tbcfhagteyqufjkmbxzz`; la landing consume el gateway del CRM, no SQL ni RPC privados.
 
-## Variables públicas sugeridas para el futuro prompt
+## Variables públicas existentes del contrato
 
 ```env
-NEXT_PUBLIC_CRM_ORIGIN=https://barberia-crm-kappa.vercel.app
-NEXT_PUBLIC_CRM_ORGANIZATION_SLUG=1717-barberia
-NEXT_PUBLIC_CRM_BRANCH_SLUG=luque
+BARBERIA_OS_PUBLIC_URL=https://barberia-crm-kappa.vercel.app
+BARBERIA_OS_ORGANIZATION_SLUG=1717-barberia
+BARBERIA_OS_BRANCH_SLUG=luque
 ```
 
-Son nombres de integración propuestos, no variables ya guardadas en la landing. No compartir BOOKING_GATEWAY_SECRET, WORKER_SECRET, CRON_SECRET, service_role, credenciales DB ni sesiones de propietarios. Si la landing enlaza el booking alojado no necesita claves Supabase.
+Se conservan los nombres documentados en WEBSITE_INTEGRATION.md; no se afirma que ya estén guardados en la landing. SITE_URL, si existe, corresponde únicamente a su SEO. No compartir BOOKING_GATEWAY_SECRET, WORKER_SECRET, CRON_SECRET, service_role, credenciales DB ni sesiones de propietarios. Si la landing enlaza el booking alojado no necesita claves Supabase.
 
 ## Endpoints
 
@@ -22,6 +22,8 @@ Son nombres de integración propuestos, no variables ya guardadas en la landing.
 - `GET /api/public/availability?organization=1717-barberia&branch=luque&service=corte-de-pelo&date=AAAA-MM-DD` (repetir `service`, `staff` opcional por slug).
 - `POST /api/public/booking`: `{organization,branch,services:[slug],staff:slug|null,starts_at:ISO8601,customer:{name,normalized_phone,email?},key:UUID,website:"",source:"website"}`. Validar el esquema vigente en WEBSITE_INTEGRATION.md; no enviar precios/minutos/IDs internos. Conservar la key en reintentos del mismo payload.
 - `GET /book/1717-barberia/luque?service=corte-de-pelo&source=website` para el flujo alojado.
+
+El POST mantiene la validación **same-origin del CRM**. La integración vigente dirige al booking alojado para que el navegador reserve desde ese origen; no promete POST cross-origin ni requiere abrir CORS, cambiar la validación Origin o entregar secretos a la landing. Cualquier consumo de catálogo desde el servidor de la landing debe conservar el contrato público existente.
 
 No ofrecer éxito hasta recibir respuesta real. Tratar 404/indisponibilidad como cerrado; no fabricar slots a partir de los horarios del prompt. Catálogo/flags y precios/duración son autoridad del servidor. Rulos/Combo requieren consulta; conservar protección de tintes. Un combo no suma otro Corte.
 

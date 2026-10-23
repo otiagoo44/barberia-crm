@@ -1,5 +1,7 @@
 # Contrato real entre 17:17 y Barbería OS
 
+Actualización 23/10/2026: el contrato de endpoints, same-origin, atribución y nombres de variables se conserva. El inventario y pendientes de puesta en marcha narrados al final son históricos; ver [handoff vigente](HANDOFF_LANDING_1717.md), [datos confirmados](CONFIGURACION_CONFIRMADA_1717.md) y [estado real del release](RELEASE_FINAL_1717.md). El HTTP público actual confirma la organización, pero no se reconsultó el inventario privado de Luque. No volver a ejecutar onboarding por las afirmaciones históricas de una base vacía.
+
 17:17 landing → /reservar → booking público de barberia-crm → PostgreSQL/Supabase.
 
 ## Fuente de verdad
