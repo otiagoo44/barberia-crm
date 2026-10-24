@@ -8,6 +8,15 @@ import { migrationUpgradeContracts } from "./migration-upgrade";
 import { dashboardUpgradeContracts } from "./dashboard-upgrade";
 import { confirmed1717Contracts } from "./confirmed-1717";
 import { cashDistributionContracts } from "./cash-distributions";
+import { weeklyScheduleContracts } from "./weekly-schedule";
+import { pilotUpgradeContracts } from "./pilot-upgrade";
+await pilotUpgradeContracts();
+const weeklyDb = await isolatedDatabase();
+try {
+  await weeklyScheduleContracts(weeklyDb.pool);
+} finally {
+  await weeklyDb.stop();
+}
 await migrationUpgradeContracts();
 await dashboardUpgradeContracts();
 const cashPolicyDb = await isolatedDatabase();

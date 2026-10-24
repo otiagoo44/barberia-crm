@@ -269,6 +269,11 @@ export async function confirmed1717Contracts(pool: Pool) {
       effectiveFrom: since,
       evidenceReference: "isolated provider evidence fixture",
       fixedAmountMinor: { debit: 0, credit: 0 },
+      percentageBps: { debit: 220, credit: 520 },
+      rateComponents: {
+        debit: { processing: 200, vat: 20, withholding: 0, other: 0 },
+        credit: { processing: 470, vat: 47, withholding: 3, other: 0 },
+      }, // synthetic fixture only
       vatTreatment: "Isolated fixture: included",
       withholdingTreatment: "Isolated fixture: none",
       otherChargesTreatment: "Isolated fixture: none",
@@ -283,8 +288,8 @@ export async function confirmed1717Contracts(pool: Pool) {
     assert.deepEqual(
       fees.map((r) => [r.code, r.percentage_bps, Number(r.fixed_amount_minor)]),
       [
-        ["credit", 500, 0],
-        ["debit", 200, 0],
+        ["credit", 520, 0],
+        ["debit", 220, 0],
       ],
     );
     assert.ok(fees.every((r) => r.effective_from.toISOString() === since));

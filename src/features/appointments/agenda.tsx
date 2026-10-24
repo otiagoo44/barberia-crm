@@ -257,44 +257,78 @@ export function Agenda({ compact = false }: { compact?: boolean }) {
         >
           →
         </button>
-        {w.role !== "barber" && (
-          <select
-            aria-label="Filtrar por barbero"
-            value={staff}
-            onChange={(e) => setStaff(e.target.value)}
+        <details className="compact-filters">
+          <summary>
+            Filtros
+            {[staff, service, status].filter(Boolean).length
+              ? ` · ${[staff, service, status].filter(Boolean).length}`
+              : ""}
+          </summary>
+          <div className="row wrap">
+            {w.role !== "barber" && (
+              <select
+                aria-label="Filtrar por barbero"
+                value={staff}
+                onChange={(e) => setStaff(e.target.value)}
+              >
+                <option value="">Todos los barberos</option>
+                {people.data?.items.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
+              </select>
+            )}
+            <select
+              aria-label="Filtrar por servicio"
+              value={service}
+              onChange={(e) => setService(e.target.value)}
+            >
+              <option value="">Todos los servicios</option>
+              {catalog.data?.items.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            <select
+              aria-label="Filtrar por estado"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="">Todos los estados</option>
+              {statuses.map((s) => (
+                <option key={s} value={s}>
+                  {statusLabels[s]}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={() => {
+                setStaff("");
+                setService("");
+                setStatus("");
+              }}
+            >
+              Limpiar filtros
+            </button>
+          </div>
+        </details>
+        {[staff, service, status].filter(Boolean).length > 0 && (
+          <button
+            className="badge"
+            onClick={() => {
+              setStaff("");
+              setService("");
+              setStatus("");
+            }}
           >
-            <option value="">Todos los barberos</option>
-            {people.data?.items.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </select>
+            Filtros activos ·{" "}
+            {people.data?.items.find((p) => p.id === staff)?.name ?? ""}{" "}
+            {catalog.data?.items.find((s) => s.id === service)?.name ?? ""}{" "}
+            {statusLabels[status] ?? ""} · Limpiar
+          </button>
         )}
-        <select
-          aria-label="Filtrar por servicio"
-          value={service}
-          onChange={(e) => setService(e.target.value)}
-        >
-          <option value="">Todos los servicios</option>
-          {catalog.data?.items.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.name}
-            </option>
-          ))}
-        </select>
-        <select
-          aria-label="Filtrar por estado"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <option value="">Todos los estados</option>
-          {statuses.map((s) => (
-            <option key={s} value={s}>
-              {statusLabels[s]}
-            </option>
-          ))}
-        </select>
         <button
           onClick={() => {
             r.reload();

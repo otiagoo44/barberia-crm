@@ -74,6 +74,8 @@ export function CheckoutDialog({
   >([{ method: "", amount: "" }]);
   const [item, setItem] = useState("");
   const [manualPrice, setManualPrice] = useState("");
+  const [extraPrice, setExtraPrice] = useState("");
+  const [extraReason, setExtraReason] = useState("");
   const [staff, setStaff] = useState("");
   const [keys] = useState(() => ({
     create: crypto.randomUUID(),
@@ -83,10 +85,21 @@ export function CheckoutDialog({
     setBusy(true);
     setError("");
     try {
-      const selected = catalog.data?.items.find((i) => i.id === item);
+      const isService = item.startsWith("service:");
+      const itemId = item.replace(/^(service|item):/, "");
+      const selected = (
+        isService ? catalog.data?.services : catalog.data?.items
+      )?.find((i) => i.id === itemId);
       if (!appointmentId && !selected)
+        throw new Error("Elegí un servicio o concepto del catálogo.");
+      if (!appointmentId && isService && !staff)
+        throw new Error("Elegí el profesional que realizó el servicio.");
+      if (
+        extraPrice &&
+        (extraReason.trim().length < 3 || integerInput(extraPrice) <= 0)
+      )
         throw new Error(
-          "Elegí un producto, curso u otro ingreso del catálogo.",
+          "Ingresá un importe positivo y el motivo del trabajo adicional acordado con el cliente.",
         );
       const result = await financeCommand(
         org,
@@ -97,7 +110,7 @@ export function CheckoutDialog({
           : {
               lines: [
                 {
-                  item_id: item,
+                  ...(isService ? { service_id: itemId } : { item_id: itemId }),
                   staff_id: staff || null,
                   quantity: 1,
                   ...(selected?.price_minor === null
@@ -107,6 +120,17 @@ export function CheckoutDialog({
                       }
                     : {}),
                 },
+                ...(extraPrice
+                  ? [
+                      {
+                        name: "Trabajo adicional autorizado",
+                        quantity: 1,
+                        staff_id: staff || null,
+                        unit_price_minor: integerInput(extraPrice),
+                        reason: extraReason.trim(),
+                      },
+                    ]
+                  : []),
               ],
             },
         keys.create,
@@ -283,21 +307,34 @@ export function CheckoutDialog({
               </p>
             ) : (
               <>
-                <Field label="Producto, curso u otro ingreso">
+                <Field label="Servicio o concepto">
                   <select
                     value={item}
                     onChange={(e) => setItem(e.target.value)}
                   >
                     <option value="">Elegir concepto</option>
-                    {catalog.data?.items.map((i) => (
-                      <option key={i.id} value={i.id}>
-                        {String(i.name)}
-                      </option>
-                    ))}
+                    <optgroup label="Servicios de esta sucursal">
+                      {catalog.data?.services.map((s) => (
+                        <option key={s.id} value={`service:${s.id}`}>
+                          {String(s.name)} ·{" "}
+                          {money(s.price_minor, w.organization.currency)}
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Productos y otros ingresos">
+                      {catalog.data?.items.map((i) => (
+                        <option key={i.id} value={`item:${i.id}`}>
+                          {String(i.name)}
+                        </option>
+                      ))}
+                    </optgroup>
                   </select>
                 </Field>
-                {catalog.data?.items.find((i) => i.id === item)?.price_minor ===
-                  null && (
+                {(item.startsWith("service:")
+                  ? catalog.data?.services
+                  : catalog.data?.items
+                )?.find((i) => i.id === item.replace(/^(service|item):/, ""))
+                  ?.price_minor === null && (
                   <Field
                     label={`Precio autorizado · ${amountLabel(w.organization.currency)}`}
                   >
@@ -308,7 +345,13 @@ export function CheckoutDialog({
                     />
                   </Field>
                 )}
-                <Field label="Barbero (opcional)">
+                <Field
+                  label={
+                    item.startsWith("service:")
+                      ? "Profesional que atendió"
+                      : "Barbero (opcional)"
+                  }
+                >
                   <select
                     value={staff}
                     onChange={(e) => setStaff(e.target.value)}
@@ -321,6 +364,31 @@ export function CheckoutDialog({
                     ))}
                   </select>
                 </Field>
+                {["organization_owner", "finance"].includes(w.role) && (
+                  <details>
+                    <summary>Trabajo adicional acordado</summary>
+                    <p>
+                      Solo un trabajo adicional real, con precio acordado y
+                      motivo. El precio no cambia por elegir tarjeta.
+                    </p>
+                    <Field
+                      label={`Importe adicional · ${amountLabel(w.organization.currency)}`}
+                    >
+                      <input
+                        inputMode="numeric"
+                        value={extraPrice}
+                        onChange={(e) => setExtraPrice(e.target.value)}
+                      />
+                    </Field>
+                    <Field label="Motivo del trabajo adicional">
+                      <input
+                        maxLength={250}
+                        value={extraReason}
+                        onChange={(e) => setExtraReason(e.target.value)}
+                      />
+                    </Field>
+                  </details>
+                )}
               </>
             )}
             <button

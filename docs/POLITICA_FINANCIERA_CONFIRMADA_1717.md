@@ -6,14 +6,14 @@ Esta página y la respuesta del propietario del 24/10 sustituyen los pendientes 
 
 - Reparto mensual calendario, Esteban/Jonatan 50/50; solamente cobros efectivamente recibidos y gastos pagados registrados.
 - Tarjetas: se reconocen al acreditarse en banco, con conciliación. La captura del terminal no basta.
-- Anticipos de clientes: se incluyen en los cobros. Si jurídicamente son reembolsables, se exige resolver y documentar su elegibilidad antes de distribuir; no se inventa renuncia ni se cambia el pasivo fiscal por un acuerdo informal.
+- Aclaración posterior del propietario el 24/10: **se cobra únicamente después de atender**. No se utilizan anticipos/señas de clientes. Sustituye la respuesta previa sobre anticipos; ya no es una pregunta pendiente para el piloto. Los retiros de propietarios son otra operación.
 - Las pérdidas se recuperan en meses siguientes antes de distribuir ganancias. No hay pagos negativos.
 - Los retiros personales reducen la parte del socio identificado. El exceso queda como anticipo pendiente para meses posteriores; no es un costo operativo ni se asigna al otro socio.
 - Ambos propietarios aprueban independientemente el mismo cálculo, con cuentas distintas, MFA y membresías vigentes. El pago real se registra después.
 
 ## Reconocimiento exacto del nuevo read-model
 
-La política explícita `settled_collections_including_advances` vive en `partner_cash_policies`, vinculada a una versión de `partner_distribution_policies`. Congela UUID de profesionales y UUID de cuentas: cambiar posteriormente un vínculo staff no transfiere la capacidad de aprobación. Para 17:17 exige los correos Auth verificados de Esteban/Jonatan vinculados a sus profesionales y Luque. Ninguna migración lee el JSON comercial para activar un tenant. La configuración empieza deshabilitada y no importa historia.
+La política explícita del motor genérico se denomina `settled_collections_including_advances` en `partner_cash_policies`, vinculada a una versión de `partner_distribution_policies`. Su nombre no significa que 17:17 reciba anticipos: su práctica confirmada es cobrar después del servicio. Cualquier ingreso excepcional anterior requiere clasificación antes de repartir. Congela UUID de profesionales y UUID de cuentas: cambiar posteriormente un vínculo staff no transfiere la capacidad de aprobación. Para 17:17 exige los correos Auth verificados de Esteban/Jonatan vinculados a sus profesionales y Luque. Ninguna migración lee el JSON comercial para activar un tenant. La configuración empieza deshabilitada y no importa historia.
 
 Cada `payment` o devolución se concilia una sola vez en `payment_reconciliations`. Guarda importe bruto del ledger, fecha de cobro original, fecha de elegibilidad, fecha de acreditación, comisión efectiva, impuestos, retenciones, otros cargos, eventual devolución real de comisión, neto y evidencia. Ningún campo desconocido se rellena automáticamente con cero.
 

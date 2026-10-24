@@ -1,6 +1,8 @@
 # Conciliación UPay 17:17 — 24/10/2026
 
-El propietario identifica UPay por la fotografía del terminal y declara débito 2% / crédito 5%. No se recibió la fotografía en esta ejecución ni una liquidación/contrato para verificar comisiones, IVA, retenciones, cargos fijos, alquiler y vigencia. No se sustituye el 5% informado por una tarifa publicada ni se interpreta desconocido como cero.
+La información nueva del propietario y del mensaje de la representante sustituye las tasas anteriores de 2%/5%: **débito 2,2% (220 bps), IVA incluido; crédito 5,2% (520 bps), IVA y retención incluidos**. Según la oferta, sin alquiler ni contrato. No se recibió una liquidación completa que verifique las condiciones actuales, vigencia, cargo fijo, otros cargos o desglose. Una captura informada de G. 29.340 es compatible aritméticamente con G. 30.000 menos 2,2%; no prueba por sí sola que ese fuera su bruto ni todas las condiciones.
+
+El manifiesto registra tasas **propuestas**, con activación false. El preparador exige `percentageBps`, componentes separados `processing/vat/withholding/other` que sumen el total, fijo confirmado, vigencia y referencias. Nunca genera un cero a partir de un valor desconocido. Los componentes numéricos usados en tests son sintéticos y no son las condiciones UPay. La retención queda separada de la comisión comercial en la conciliación real; el fee estimado del pago no sustituye ese desglose.
 
 ## Precio y norma
 
@@ -10,7 +12,7 @@ El propietario informó un corte anunciado de G. 30.000 y cobrado G. 31.000 con 
 
 Venta/checkout y cobro/payment permanecen separados. La regla de fee al cobrar es un snapshot estimado con su vigencia; no cambia la venta. La liquidación conciliada agrega bruto, comisión real, impuestos, retenciones, otros cargos, neto, fechas y referencia en una tabla append-only. No modifica el pago ni las métricas históricas. El reparto por cobros usa exclusivamente ese neto, por lo que no descuenta nuevamente el fee.
 
-Ejemplo conceptual, sin datos productivos: G. 30.000 brutos − G. 600 de comisión real = G. 29.400 antes de otros cargos. La diferencia de G. 600 no desaparece porque UPay la retenga; tampoco se suma como ingreso adicional. Si el banco informa otro neto, la conciliación falla hasta explicar los componentes. Una devolución no presume que UPay devuelve la comisión; un crédito real requiere evidencia y límite contra el costo original.
+Ejemplos aritméticos, sin movimientos productivos: G. 30.000 × 2,2% = G. 660; neto G. 29.340 si no hay otros descuentos. Al 5,2%, descuento total G. 1.560; neto G. 28.440 bajo la misma condición. Se exige el desglose real de comisión/impuestos/retención; el total no se etiqueta íntegramente como comisión. Si el banco informa otro neto, la conciliación queda pendiente hasta explicar los componentes. Una devolución no presume que UPay devuelve la comisión; un crédito real requiere evidencia y límite contra el costo original.
 
 ## Evidencia para el instalador
 

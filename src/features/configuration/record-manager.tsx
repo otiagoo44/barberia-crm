@@ -2,7 +2,8 @@
 import { useState, type FormEvent } from "react";
 import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { useWorkspace } from "@/features/organizations/context";
-import { useResource, resourceUrl, api } from "@/lib/client";
+import { useResource, resourceUrl, api, ApiError } from "@/lib/client";
+import { validateRecord } from "@/lib/record-validation";
 import { definitions, type FieldDefinition } from "./definitions";
 import { Modal, Field, Notice, Empty, Loading } from "@/components/ui";
 import { DataTable } from "@/components/workspace-ui";
@@ -30,6 +31,8 @@ export function RecordManager({
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
+  const [notice, setNotice] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const r = useResource<Page<DataRow>>(
     resourceUrl(entity, {
       org: w.organization.id,
@@ -75,6 +78,7 @@ export function RecordManager({
           )}
       </div>
       {error && <Notice error>{error}</Notice>}
+      {notice && <Notice success>{notice}</Notice>}
       {r.error && <Notice error>{r.error}</Notice>}
       {r.loading && !r.data && <Loading />}
       {r.data && !r.data.items.length && (
@@ -92,6 +96,14 @@ export function RecordManager({
               onChange={(e) => setQuery(e.target.value)}
             />
             {entity === "services" && (
+              <button
+                aria-expanded={filtersOpen}
+                onClick={() => setFiltersOpen(!filtersOpen)}
+              >
+                Filtros{category ? " · 1" : ""}
+              </button>
+            )}
+            {entity === "services" && filtersOpen && (
               <select
                 aria-label="Filtrar categoría de servicio"
                 value={category}
@@ -110,6 +122,11 @@ export function RecordManager({
                     <option key={c}>{c}</option>
                   ))}
               </select>
+            )}
+            {category && (
+              <button className="badge" onClick={() => setCategory("")}>
+                {category} · Limpiar filtro
+              </button>
             )}
             <small>
               {visibleRows.length} registros visibles
@@ -285,6 +302,10 @@ export function RecordManager({
           onClose={() => setEditor(null)}
           onSaved={() => {
             setEditor(null);
+            if (entity === "services")
+              setNotice(
+                "Servicio guardado. Siguiente paso: configurá su precio en Servicios y precios del local y habilitalo en Servicios por barbero.",
+              );
             r.reload();
           }}
         />
@@ -307,6 +328,7 @@ function RecordEditor({
   const def = definitions[entity];
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [allLocations, setAllLocations] = useState(
     (entity === "goals" && !row?.branch_id) ||
       (entity === "staff_time_off" && row?.branch_id === null),
@@ -319,6 +341,7 @@ function RecordEditor({
     e.preventDefault();
     setBusy(true);
     setError("");
+    setFieldErrors({});
     const form = new FormData(e.currentTarget);
     const data: Record<string, Json> = {};
     for (const f of def.fields) {
@@ -349,15 +372,22 @@ function RecordEditor({
         Number(data.target_value) * currencyScale(w.organization.currency),
       );
     try {
+      const validated = validateRecord(entity, data, !row);
+      if (Object.keys(validated.fields).length) {
+        setFieldErrors(validated.fields);
+        setError("Corregí los campos indicados para guardar.");
+        return;
+      }
       await api("/api/workspace/record", {
         org: w.organization.id,
         entity,
         id: row?.id ?? null,
         branch: def.branch && !allLocations ? w.branchId : null,
-        data,
+        data: validated.data,
       });
       onSaved();
     } catch (e) {
+      if (e instanceof ApiError) setFieldErrors(e.fields);
       setError(e instanceof Error ? e.message : "Error");
     } finally {
       setBusy(false);
@@ -414,9 +444,14 @@ function RecordEditor({
                     <input
                       type="checkbox"
                       name={f.key}
+                      aria-label={f.label}
+                      aria-invalid={!!fieldErrors[f.key]}
                       defaultChecked={!!initial}
                     />
                     {f.label}
+                    {fieldErrors[f.key] && (
+                      <small role="alert">{fieldErrors[f.key]}</small>
+                    )}
                   </label>
                 );
               if (f.type === "reference")
@@ -424,6 +459,7 @@ function RecordEditor({
                   <ReferenceField
                     key={f.key}
                     field={f}
+                    error={fieldErrors[f.key]}
                     initial={String(initial)}
                     ownStaff={w.role === "barber" ? w.staffId : null}
                   />
@@ -433,6 +469,11 @@ function RecordEditor({
                   {f.type === "select" ? (
                     <select
                       name={f.key}
+                      aria-label={f.label}
+                      aria-invalid={!!fieldErrors[f.key]}
+                      aria-describedby={
+                        fieldErrors[f.key] ? `error-${f.key}` : undefined
+                      }
                       defaultValue={String(initial)}
                       required={f.required}
                     >
@@ -445,6 +486,11 @@ function RecordEditor({
                   ) : (
                     <input
                       name={f.key}
+                      aria-label={f.label}
+                      aria-invalid={!!fieldErrors[f.key]}
+                      aria-describedby={
+                        fieldErrors[f.key] ? `error-${f.key}` : undefined
+                      }
                       type={
                         f.type === "datetime"
                           ? "datetime-local"
@@ -470,6 +516,11 @@ function RecordEditor({
                       required={f.required}
                       maxLength={f.key === "slug" ? 63 : 1000}
                     />
+                  )}
+                  {fieldErrors[f.key] && (
+                    <small id={`error-${f.key}`} role="alert">
+                      {fieldErrors[f.key]}
+                    </small>
                   )}
                 </Field>
               );
@@ -507,10 +558,12 @@ function ReferenceField({
   field,
   initial,
   ownStaff,
+  error,
 }: {
   field: FieldDefinition;
   initial: string;
   ownStaff: string | null;
+  error?: string;
 }) {
   const w = useWorkspace();
   const r = useResource<Page<DataRow>>(
@@ -528,6 +581,9 @@ function ReferenceField({
     <Field label={field.label}>
       <select
         name={field.key}
+        aria-label={field.label}
+        aria-invalid={!!error}
+        aria-describedby={error ? `error-${field.key}` : undefined}
         defaultValue={ownStaff && field.key === "staff_id" ? ownStaff : initial}
         required={field.required}
       >
@@ -546,6 +602,11 @@ function ReferenceField({
         ))}
       </select>
       {r.error && <small>{r.error}</small>}
+      {error && (
+        <small id={`error-${field.key}`} role="alert">
+          {error}
+        </small>
+      )}
       {r.data?.has_more && (
         <small>
           La lista muestra los primeros 100 registros. Ajustá la selección por

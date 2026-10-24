@@ -3,6 +3,8 @@
   "organizationId": null,
   "effectiveFrom": null,
   "evidenceReference": null,
+  "percentageBps": { "debit": 220, "credit": 520 },
+  "rateComponents": { "debit": null, "credit": null },
   "fixedAmountMinor": { "debit": null, "credit": null },
   "vatTreatment": null,
   "withholdingTreatment": null,

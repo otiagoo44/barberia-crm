@@ -1,10 +1,12 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
+import { operationError } from "./operation-errors";
 export class HttpError extends Error {
   constructor(
     public status: number,
     public code: string,
+    public fields?: Record<string, string>,
   ) {
     super(code);
   }
@@ -71,17 +73,20 @@ export function fail(error: unknown, requestId: string) {
           ? 403
           : code === "23P01"
             ? 409
-            : code.startsWith("22") || code.startsWith("23")
-              ? 400
-              : code === "P0002"
-                ? 404
-                : code === "P0001"
-                  ? 429
-                  : 500;
+            : code === "40001"
+              ? 409
+              : code.startsWith("22") || code.startsWith("23")
+                ? 400
+                : code === "P0002"
+                  ? 404
+                  : code === "P0001"
+                    ? 429
+                    : 500;
   console.error(
     JSON.stringify({ level: "error", request_id: requestId, code, status }),
   );
   const authMessages: Record<string, string> = {
+    invalid_record_fields: "Corregí los campos indicados para guardar.",
     cash_distribution_upgrade_required:
       "Las distribuciones están bloqueadas hasta completar la actualización verificada de la base.",
     mfa_required:
@@ -100,7 +105,9 @@ export function fail(error: unknown, requestId: string) {
     password_update_failed:
       "No se pudo guardar la contraseña. Solicitá un nuevo enlace de recuperación.",
   };
+  const domain = operationError(error);
   const message =
+    domain?.message ??
     authMessages[code] ??
     (
       {
@@ -150,6 +157,16 @@ export function fail(error: unknown, requestId: string) {
             ? "Revisá los datos y el estado de la operación."
             : status === 404
               ? "No encontramos este recurso."
-              : "No pudimos completar la operación. Intentá nuevamente.");
-  return response({ error: message, request_id: requestId }, requestId, status);
+              : `No pudimos completar la operación. Referencia: ${requestId}`);
+  const fields =
+    error instanceof HttpError
+      ? error.fields
+      : domain?.field
+        ? { [domain.field]: message }
+        : undefined;
+  return response(
+    { error: message, fields, request_id: requestId },
+    requestId,
+    status,
+  );
 }

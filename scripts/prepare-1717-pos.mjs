@@ -28,6 +28,24 @@ export function pos1717Sql(options) {
     throw new Error("Provider evidence required");
   for (const method of ["debit", "credit"]) {
     if (
+      !Number.isInteger(options.percentageBps?.[method]) ||
+      options.percentageBps[method] < 0 ||
+      options.percentageBps[method] > 10000
+    )
+      throw new Error(`Verified percentageBps required for ${method}`);
+    const components = options.rateComponents?.[method];
+    if (
+      !components ||
+      ["processing", "vat", "withholding", "other"].some(
+        (k) => !Number.isInteger(components[k]) || components[k] < 0,
+      ) ||
+      Object.values(components).reduce((sum, n) => sum + n, 0) !==
+        options.percentageBps[method]
+    )
+      throw new Error(
+        `Verified rateComponents must reconcile to percentageBps for ${method}`,
+      );
+    if (
       !Number.isSafeInteger(options.fixedAmountMinor?.[method]) ||
       options.fixedAmountMinor[method] < 0 ||
       options.fixedAmountMinor[method] > 9000000000000
@@ -48,8 +66,18 @@ export function pos1717Sql(options) {
   }
   const literal = (value) => "'" + String(value).replaceAll("'", "''") + "'";
   const rates = [
-    { code: "debit", bps: 200, fixed: options.fixedAmountMinor.debit },
-    { code: "credit", bps: 500, fixed: options.fixedAmountMinor.credit },
+    {
+      code: "debit",
+      bps: options.percentageBps.debit,
+      components: options.rateComponents.debit,
+      fixed: options.fixedAmountMinor.debit,
+    },
+    {
+      code: "credit",
+      bps: options.percentageBps.credit,
+      components: options.rateComponents.credit,
+      fixed: options.fixedAmountMinor.credit,
+    },
   ];
   return `begin;
 set local lock_timeout='5s';
@@ -65,13 +93,14 @@ begin
   select * into existing from public.payment_method_fee_rules where organization_id=org and payment_method_id=method_id and effective_from=since and active;
   if existing.id is not null then
     if existing.percentage_bps<>(item->>'bps')::integer or existing.fixed_amount_minor<>(item->>'fixed')::bigint or existing.evidence_reference is distinct from ${literal(options.evidenceReference)} then raise exception 'Different tariff already exists at effective date'; end if;
+    if not exists(select 1 from public.audit_logs where organization_id=org and entity_id=existing.id and action='1717.pos_evidence' and metadata->'rate_components_bps'=item->'components' and metadata->>'vat'=${literal(options.vatTreatment)} and metadata->>'withholding'=${literal(options.withholdingTreatment)} and metadata->>'other_charges'=${literal(options.otherChargesTreatment)}) then raise exception 'Different or missing tariff tax evidence; prepare a new version'; end if;
     continue;
   end if;
   if since<now() then raise exception 'Prospective tariff date required'; end if;
   new_rule_id:=(public.finance_command(org,null,'configure',jsonb_build_object('entity','payment_method_fee_rules','payment_method_id',method_id,
     'percentage_bps',(item->>'bps')::integer,'fixed_amount_minor',(item->>'fixed')::bigint,'effective_from',since,'evidence_reference',${literal(options.evidenceReference)}),gen_random_uuid())->>'id')::uuid;
   perform app_private.record_audit(org,null,'1717.pos_evidence','payment_method_fee_rules',new_rule_id,
-    jsonb_build_object('vat',${literal(options.vatTreatment)},'withholding',${literal(options.withholdingTreatment)},'other_charges',${literal(options.otherChargesTreatment)},'provider','UPay'),gen_random_uuid());
+    jsonb_build_object('vat',${literal(options.vatTreatment)},'withholding',${literal(options.withholdingTreatment)},'other_charges',${literal(options.otherChargesTreatment)},'rate_components_bps',item->'components','total_deduction_bps',item->'bps','provider','UPay'),gen_random_uuid());
  end loop;
 end $pos$;
 commit;

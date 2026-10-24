@@ -112,6 +112,109 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
   });
 
+  test("service validation reaches real SQL with normalized category and field-specific duplicate errors", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const payload = {
+      org: f.orgA,
+      branch: null,
+      entity: "services",
+      id: null,
+      data: {
+        name: "Tinte QA aislado",
+        slug: `tinte-qa-${Date.now()}`,
+        default_duration_minutes: 150,
+        website_category: "otro",
+        composition_mode: "standalone",
+        consultation_required: true,
+        active: true,
+      },
+    };
+    const headers = { Origin: "http://localhost:3000" };
+    const invalid = await page.request.post("/api/workspace/record", {
+      headers,
+      data: {
+        ...payload,
+        data: { ...payload.data, default_duration_minutes: 0 },
+      },
+    });
+    expect(invalid.status()).toBe(400);
+    expect((await invalid.json()).fields.default_duration_minutes).toBeTruthy();
+    const valid = await page.request.post("/api/workspace/record", {
+      headers,
+      data: payload,
+    });
+    expect(valid.ok()).toBeTruthy();
+    expect((await valid.json()).website_category).toBeNull();
+    const duplicate = await page.request.post("/api/workspace/record", {
+      headers,
+      data: payload,
+    });
+    expect(duplicate.status()).toBe(400);
+    expect((await duplicate.json()).fields.slug).toContain("identificador");
+  });
+
+  test("weekly batch uses real Auth and database idempotency with version checks", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const query = new URLSearchParams({ org: f.orgA, branch: f.branches.a1 });
+    const supported = await page.request.get(
+      `/api/workspace/weekly_schedule?${query}`,
+    );
+    expect(supported.ok()).toBeTruthy();
+    expect((await supported.json()).weekly_editor_supported).toBe(true);
+    const loaded = await page.request.get(
+      `/api/workspace/staff_availability_rules?${query}`,
+    );
+    expect(loaded.ok()).toBeTruthy();
+    const list = await loaded.json();
+    expect(list.has_more).toBe(false);
+    const rows = list.items.filter(
+      (r: { staff_id: string; weekday: number }) =>
+        r.staff_id === f.staff.a3 && r.weekday === 1,
+    );
+    const data = {
+      org: f.orgA,
+      branch: f.branches.a1,
+      staff: f.staff.a3,
+      from: new Date(Date.now() + 90 * 86400000).toISOString().slice(0, 10),
+      days: [1],
+      blocks: [
+        { weekday: 1, starts_at: "09:00", ends_at: "12:00" },
+        { weekday: 1, starts_at: "12:30", ends_at: "19:00" },
+      ],
+      expected: rows.map((r: { id: string; updated_at: string }) => ({
+        id: r.id,
+        updated_at: r.updated_at,
+      })),
+      key: crypto.randomUUID(),
+    };
+    const headers = { Origin: "http://localhost:3000" };
+    const first = await page.request.post("/api/workspace/weekly_schedule", {
+      headers,
+      data,
+    });
+    expect(first.ok()).toBeTruthy();
+    const retry = await page.request.post("/api/workspace/weekly_schedule", {
+      headers,
+      data,
+    });
+    expect(retry.ok()).toBeTruthy();
+    expect(await retry.json()).toEqual(await first.json());
+    const stale = await page.request.post("/api/workspace/weekly_schedule", {
+      headers,
+      data: { ...data, key: crypto.randomUUID() },
+    });
+    expect(stale.status()).toBe(409);
+    expect((await stale.json()).error).toContain("Otra persona");
+  });
+
   test("same-page destinations update agenda and customer detail with real scoped reads", async ({
     page,
   }) => {
@@ -157,6 +260,10 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     page,
   }) => {
     await page.goto("/fixture-a/finanzas");
+    await page
+      .locator("summary")
+      .filter({ hasText: "Filtros financieros" })
+      .click();
     await expect(page.locator(".loading:visible")).toHaveCount(0);
     await expect(page.locator(".kpi-grid").first()).toBeVisible();
     const sections = page.getByRole("group", {

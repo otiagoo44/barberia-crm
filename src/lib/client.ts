@@ -13,6 +13,15 @@ import {
 export const ResourceScope = createContext("public");
 const changed = "barberia:resources-changed";
 const revoked = "barberia:session-revoked";
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public fields: Record<string, string> = {},
+    public requestId?: string,
+  ) {
+    super(message);
+  }
+}
 function broadcast(event: string) {
   if (typeof window !== "undefined") window.dispatchEvent(new Event(event));
 }
@@ -44,7 +53,11 @@ export async function api<T>(url: string, body?: unknown): Promise<T> {
   const json = await result.json();
   if (!result.ok) {
     if (result.status === 401 || result.status === 403) broadcast(revoked);
-    throw new Error(json.error ?? "No pudimos completar la operación.");
+    throw new ApiError(
+      json.error ?? "No pudimos completar la operación.",
+      json.fields,
+      json.request_id,
+    );
   }
   if (body !== undefined) broadcast(changed);
   return json as T;

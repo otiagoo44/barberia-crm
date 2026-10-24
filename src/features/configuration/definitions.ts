@@ -99,7 +99,7 @@ export const definitions: Record<string, Definition> = {
         label: "Sección del sitio web (opcional)",
         type: "select",
         options: [
-          ["", "Sin sección"],
+          ["", "Otro / sin sección pública"],
           ["corte", "Corte"],
           ["rulos", "Rulos"],
           ["tinte", "Tintes"],
@@ -107,7 +107,6 @@ export const definitions: Record<string, Definition> = {
           ["infantil", "Infantil"],
           ["cejas", "Perfilado"],
           ["lavado", "Lavado"],
-          ["otro", "Otro"],
         ],
       },
       {
