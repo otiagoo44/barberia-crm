@@ -4,6 +4,8 @@ Proyecto exclusivo `tbcfhagteyqufjkmbxzz`. Organización `db03ca0c-48cc-46d2-bcb
 
 Inspección nueva mediante SQL Editor del dashboard, en transacciones `begin read only`, después de las operaciones manuales del instalador. El conector MCP falló al renovar OAuth. Se ejecutó primero `scripts/inspect-1717.sql`; consultas adicionales comprobaron relaciones y reversiones. No se ejecutó ninguna limpieza.
 
+**Confirmación posterior del usuario:** el cliente `cf6ee03b-fcc7-4074-a137-7eed25f14394` y la atención `e21518ed-3e2d-4862-95f9-20b0e2e2164b` **fueron pruebas ficticias**. Esto resuelve su clasificación. No equivale a aprobación de una cancelación retroactiva, borrado o devolución. La corrección productiva necesita aprobación explícita del impacto y un actor autorizado real; el acceso del navegador al CRM fue denegado.
+
 Las fechas de esta tabla son UTC. No se deduce que un registro sea ficticio por ser reciente.
 
 | Tipo / UUID | Estado y fecha | Dependencias / impacto | Acción propuesta / resultado |
@@ -16,8 +18,8 @@ Las fechas de esta tabla son UTC. No se deduce que un registro sea ficticio por 
 | Pago `687d3982-20ee-4e05-83f9-e19c148e0815` → `50b0f128-2aea-4d44-899e-9e8874cdba2c` | Original + reversión, transferencia | Checkout `4ad01a19…` | Ambos preservados; neto registrado cero |
 | Gasto `88e3e117-9ca1-4844-8de9-76520bab18af` | Operativo G. 15.000; 24/10 19:57, revertido 20:24 | Historial de gasto | Preservado. No repetir reversión |
 | Caja `d2eebc0c-a064-44ee-94bc-7a3f4a99ee0a` | Cerrada 24/10 20:00 | Apertura 19:59 e historial de caja | Preservada; no reabrir para limpiar |
-| Cliente `cf6ee03b-fcc7-4074-a137-7eed25f14394` | Activo; creado 24/10 20:25 | Atención completada y checkout revertido | Pendiente de clasificación del instalador. Si confirma que es ficticio y aprueba el impacto, archivar por la operación autorizada; conservar relaciones |
-| Atención `e21518ed-3e2d-4862-95f9-20b0e2e2164b` | Completada; 24/10 20:30–21:10 | Cliente anterior, Esteban y checkout revertido | Preservada. No inventar una cancelación retroactiva; definir tratamiento operativo después de confirmar que fue prueba |
+| Cliente `cf6ee03b-fcc7-4074-a137-7eed25f14394` | Activo; creado 24/10 20:25; prueba ficticia confirmada | Atención completada y checkout revertido | Propuesta pendiente de aprobación: archivar mediante operación autorizada y dejar nota auditada de la prueba; conservar ID, atención, checkout y todos los movimientos |
+| Atención `e21518ed-3e2d-4862-95f9-20b0e2e2164b` | Completada; 24/10 20:30–21:10; prueba ficticia confirmada | Cliente anterior, Esteban y checkout revertido | Preservar estado/historial. Propuesta: documentar la prueba mediante nota auditada del cliente; no inventar cancelación retroactiva ni reescribir métricas. El reporte del piloto comienza el 26/10; el histórico del 24/10 todavía incluye esta atención |
 | Concepto `46ccf9e9-a7b5-4b1f-9472-c7601ba5b553` | Curso activo, sin precio; creado 19/10 | Dos ventas revertidas | Es un concepto del onboarding inicial, no un duplicado nuevo demostrado. Preservado |
 | Servicio `45c14d3a-7491-49a2-ad8d-1cd0f5b44be5` | Tinte Global, 150 min, consulta previa | Aún sin precio/asociación a Luque | Conservar y completar configuración; no crear otro slug `tinte-global` |
 
@@ -29,4 +31,4 @@ Esteban: `ddeb5177-b559-4e22-a6f2-a1e92bfb52cc`, `9adaa50d-e6a3-43d3-9c93-866e5f
 
 No había excepciones diarias, ausencias ni cierres extraordinarios en esta inspección. No había borradores ni ventas posteadas sin reversión. No había pagos con tarjeta ni distribuciones.
 
-**Balance de esta intervención:** registros anulados por Codex: **0**. Registros financieros ya revertidos: preservados. Cliente y atención: pendientes de clasificación y aprobación explícita antes de corregir. Ninguna devolución bancaria fue ejecutada o afirmada.
+**Balance de esta intervención:** registros anulados por Codex: **0**. Registros financieros ya revertidos: preservados. Cliente y atención: pruebas ficticias confirmadas, con archivo/nota propuestos pero todavía no autorizados ni aplicados. Ninguna devolución bancaria fue ejecutada o afirmada.

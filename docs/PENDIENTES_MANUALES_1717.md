@@ -11,6 +11,8 @@ Objetivo: completar la preparación el sábado 24 y ensayar con ambos propietari
 - UPay comunicó totales propuestos de débito 2,2% (IVA incluido), crédito 5,2% (IVA/retención incluidos); no son todavía tarifas verificadas y activadas. No volver a sumar el IVA incluido ni clasificar toda retención como comisión.
 - Remitente solicitado: `dentalcrmauth@gmail.com`. Staging cloud quedó pendiente por decisión del usuario; se usan pruebas locales aisladas sin crear recursos de pago.
 - Site URL y los dos callbacks productivos ya están correctamente guardados, comprobados en el dashboard. No hace falta volver a cargarlos. SMTP personalizado está deshabilitado: falta configurarlo y probar entrega.
+- El usuario confirmó que el cliente y la atención indicados en el informe fueron pruebas ficticias. Su clasificación está resuelta; queda aprobar y ejecutar el tratamiento auditado, conservando los movimientos ya revertidos.
+- El usuario confirmó que **no existe aún respaldo recuperable externo y solicitó dejarlo pendiente**. No se ejecutan las migraciones productivas mientras falte este requisito.
 
 ## Acciones exactas
 
@@ -27,7 +29,7 @@ Objetivo: completar la preparación el sábado 24 y ensayar con ambos propietari
 | Mantener booking público cerrado; ajustar lead a 0 | Sucursal está cerrada al booking, organización aún tiene flag true y lead 60 | Owner autorizado | Configuración → preferencias y sucursal | Ambos flags false, lead 0. No abrir hasta completar piloto |
 | Términos UPay, vigencia, cargo fijo, otros cargos y desglose real | Oferta/captura no prueba contrato actual ni todos los descuentos | Esteban + representante UPay + contadora | Liquidación real y oferta/condiciones actuales | Evidencia para débito y crédito, bruto/costos/impuestos/retenciones/neto/fecha. Preparador rechaza componentes o cargo fijo desconocidos |
 | Confirmar primer mes y saldo inicial de pérdidas/retiros | No se puede inventar un saldo cero ni abrir repartos con historia incompleta | Ambos propietarios + contadora | Política financiera y comprobantes | Acuerdo registrado. Política actual solo admite apertura sin pérdidas históricas; si las hubiera, mantener bloqueado y preparar incorporación auditada |
-| Clasificar cliente y atención pendientes | No toda operación reciente es ficticia | Instalador | Informe de limpieza, UUID concretos | Confirmación explícita antes de archivar/corregir; ventas y gasto ya revertidos no se revierten otra vez |
+| Aprobar y ejecutar archivo/nota del cliente de prueba confirmado | La clasificación no autoriza una cancelación retroactiva ni borrar historial | Usuario aprueba impacto; actor owner autorizado ejecuta | Informe de limpieza, UUID concretos | Cliente archivado y nota auditada solo después de aprobación y acceso autorizado. Atención e historia preservadas; ventas y gasto ya revertidos no se revierten otra vez |
 | Receptor real de alertas y prueba de entrega | Respuesta HTTP no acredita que alguien recibió una alerta | Instalador / responsable operativo | Monitoreo y canal autorizado | Alerta de prueba técnica recibida, responsable y horario de respuesta documentados |
 | Piloto con ambos propietarios | Ninguna prueba automática sustituye el uso real | Esteban, Jonatan e instalador | CRM desde sus dos equipos | Cliente → atención → cobro real → caja/reportes; comprobar errores y roles sin crear dinero ficticio |
 

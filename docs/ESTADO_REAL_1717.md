@@ -28,6 +28,8 @@ Lectura nueva mediante dashboard Supabase, transacciones `begin read only`; prim
 
 Los movimientos se detallan por UUID, fecha y dependencias en [LIMPIEZA_AUDITADA_1717.md](LIMPIEZA_AUDITADA_1717.md). No se clasificaron todos como ficticios ni se borró historial.
 
+Inspección repetida a las **22:58:59 UTC del 24/10**: siguen 34 migraciones, seis servicios, cinco precios de Luque, diez capacidades, doce reglas semanales, cero reglas de tarjeta y cero políticas. Tres checkouts revertidos, seis movimientos de pago con neto registrado cero, un gasto revertido y ambos correos ausentes. Después el usuario confirmó como ficticios únicamente el cliente y la atención del informe, y confirmó que el respaldo todavía no existe y queda pendiente. No se ejecutó archivo, nota ni otra escritura productiva.
+
 ## B. Código preparado y verificación aislada
 
 Se corrige `otro` → sin sección pública, validación por campo, errores de dependencia en cobros, venta manual de servicios reales, editor semanal transaccional/idempotente, diagnóstico por evidencia y preparación POS versionada. La migración 40 es incremental; las 39 anteriores permanecen intactas. Resultados y publicación se registran en [PRUEBAS_CONFIGURACION_1717.md](PRUEBAS_CONFIGURACION_1717.md).
