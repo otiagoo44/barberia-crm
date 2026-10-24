@@ -256,6 +256,114 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     ).toBeVisible();
   });
 
+  test("credit checkout explains a missing tariff and preserves a real service sale for retry", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const headers = { Origin: "http://localhost:3000" };
+    const command = async (action: string, data: object) => {
+      const r = await page.request.post("/api/finance/command", {
+        headers,
+        data: {
+          org: f.orgA,
+          branch: f.branches.a1,
+          action,
+          data,
+          key: crypto.randomUUID(),
+        },
+      });
+      expect(r.ok(), await r.text()).toBeTruthy();
+      return r.json();
+    };
+    const method = await command("configure", {
+      entity: "payment_methods",
+      name: "Crédito aislado sin tarifa",
+      code: `qa_credit_${Date.now()}`,
+      type: "card",
+    });
+    const query = new URLSearchParams({
+      org: f.orgA,
+      branch: f.branches.a1,
+      from: new Date().toISOString().slice(0, 10),
+      to: new Date().toISOString().slice(0, 10),
+    });
+    const catalog = await (
+      await page.request.get(`/api/finance/catalog?${query}`)
+    ).json();
+    const price = Number(
+      catalog.services.find((s: { id: string }) => s.id === f.services.cut)
+        .price_minor,
+    );
+    await page.goto("/fixture-a/caja");
+    await page
+      .getByRole("button", { name: "Venta sin cita", exact: true })
+      .click();
+    await page
+      .getByRole("combobox", { name: "Servicio o concepto", exact: true })
+      .selectOption(`service:${f.services.cut}`);
+    await page
+      .getByRole("combobox", { name: "Profesional que atendió", exact: true })
+      .selectOption(f.staff.a3);
+    const prepared = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/finance/command") &&
+        r.request().method() === "POST" &&
+        r.request().postDataJSON().action === "create_checkout",
+    );
+    await page
+      .getByRole("button", { name: "Preparar cobro", exact: true })
+      .click();
+    const created = await (await prepared).json();
+    await page
+      .getByRole("combobox", { name: "Medio de pago", exact: true })
+      .selectOption(method.id);
+    await page
+      .getByLabel("Importe en centavos (USD)", { exact: true })
+      .fill(String(price));
+    await page
+      .getByRole("button", { name: "Cobrar y registrar", exact: true })
+      .click();
+    await expect(
+      page.getByText(/No existe tarifa vigente para este método/),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("combobox", { name: "Medio de pago", exact: true }),
+    ).toHaveValue(method.id);
+    await expect(
+      page.getByLabel("Importe en centavos (USD)", { exact: true }),
+    ).toHaveValue(String(price));
+    query.set("id", created.id);
+    const draft = await (
+      await page.request.get(`/api/finance/checkout?${query}`)
+    ).json();
+    expect(draft.status).toBe("draft");
+    expect(draft.payments).toHaveLength(0);
+    expect(Number(draft.total_minor)).toBe(price);
+    await command("configure", {
+      entity: "payment_method_fee_rules",
+      payment_method_id: method.id,
+      percentage_bps: 520,
+      fixed_amount_minor: 0,
+      evidence_reference:
+        "Explicit isolated credit fixture, not UPay production evidence",
+    });
+    await page
+      .getByRole("button", { name: "Cobrar y registrar", exact: true })
+      .click();
+    await expect(
+      page.getByText("Venta cobrada y registrada.", { exact: true }),
+    ).toBeVisible();
+    const paid = await (
+      await page.request.get(`/api/finance/checkout?${query}`)
+    ).json();
+    expect(paid.status).toBe("posted");
+    expect(paid.payments).toHaveLength(1);
+    expect(Number(paid.total_minor)).toBe(price);
+    expect(Number(paid.payments[0].amount_minor)).toBe(price);
+  });
+
   test("financial filters hide obsolete totals while loading, transport errors expose no previous totals", async ({
     page,
   }) => {
