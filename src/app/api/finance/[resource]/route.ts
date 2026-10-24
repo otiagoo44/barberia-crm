@@ -142,6 +142,11 @@ export async function POST(
           resource === "partners"
             ? z.enum([
                 "configure",
+                "configure_cash",
+                "reconcile_payment",
+                "record_payable",
+                "approve_activation",
+                "classify_withdrawal",
                 "prepare",
                 "approve",
                 "pay",
@@ -156,6 +161,28 @@ export async function POST(
       })
       .strict()
       .parse(await readJson(request, 65536));
+    if (resource === "partners") {
+      const organization = await db
+        .from("organizations")
+        .select("slug")
+        .eq("id", p.org)
+        .single();
+      if (organization.error) throw organization.error;
+      if (organization.data.slug === "1717-barberia") {
+        const day = new Date().toISOString().slice(0, 10);
+        const capability = await db.rpc("partner_distributions", {
+          p_org: p.org,
+          p_branch: p.branch,
+          p_from: day,
+          p_to: day,
+        });
+        if (capability.error) throw capability.error;
+        if (capability.data?.cash_schema_version !== 1)
+          throw new HttpError(503, "cash_distribution_upgrade_required");
+        if (p.action === "configure")
+          throw new HttpError(409, "cash_policy_required");
+      }
+    }
     const { data, error } = await db.rpc(
       resource === "partners"
         ? "partner_distribution_command"

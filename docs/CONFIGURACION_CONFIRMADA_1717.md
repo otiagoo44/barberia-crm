@@ -1,4 +1,8 @@
-# Configuración confirmada — 23/10/2026
+# Configuración confirmada — vigente al 24/10/2026
+
+La confirmación del 24/10 sustituye los pendientes antiguos que siguen abajo como antecedente: local lunes a sábado 09–21, domingo cerrado para ambos; pausa Esteban 12–12:30 obligatoria; tolerancia 15 minutos con evaluación manual, sin multas/cancelación automática. Se mantienen los turnos individuales y consulta previa para tintes/rulos. Reparto mensual por cobros (tarjetas al acreditarse, anticipos incluidos con elegibilidad jurídica resuelta), gastos pagados, pérdidas trasladables, retiros descontados de cada socio y dos aprobaciones independientes. UPay identificado por el propietario, 2%/5% informados, contrato/IVA/cargos pendientes. Remitente deseado `dentalcrmauth@gmail.com`; staging no existe. [Política vigente](POLITICA_FINANCIERA_CONFIRMADA_1717.md), [POS y prohibición de recargos](CONCILIACION_UPAY_1717.md), [estado realmente inspeccionado](ACTIVACION_CLOUD_1717.md), [cierre](CIERRE_FINAL_1717_2026_10_24.md).
+
+## Antecedente del 23/10 (no usar sus preguntas como pendientes actuales)
 
 Fuente comercial: instrucciones del instalador y conversación de Esteban del 22/10, 20:58. Esta página sustituye los pendientes antiguos sobre duraciones, reparto semanal/mensual y disponibilidad exclusivamente diaria.
 
@@ -6,24 +10,24 @@ Fuente comercial: instrucciones del instalador y conversación de Esteban del 22
 
 17:17 Barbería, `1717-barberia`, PYG, `America/Asuncion`. Sucursal Luque, `luque`, Cap. Dado esq. Gobernador Irala, Luque; WhatsApp +595983402497. Proyecto autorizado: **tbcfhagteyqufjkmbxzz**. Ningún proyecto dental es sustituto válido.
 
-| Profesional / propietario | Correo confirmado | Rol requerido |
-|---|---|---|
-| Esteban | estebanras15@gmail.com | organization_owner |
-| Jonatan | jonatanramos2005oviedo@gmail.com | organization_owner |
+| Profesional / propietario | Correo confirmado                | Rol requerido      |
+| ------------------------- | -------------------------------- | ------------------ |
+| Esteban                   | estebanras15@gmail.com           | organization_owner |
+| Jonatan                   | jonatanramos2005oviedo@gmail.com | organization_owner |
 
 Cada uno conserva su membresía owner y se vincula a su recurso mediante `staff.profile_id`. Esteban es responsable operativo habitual de caja y cierres, sin privilegios exclusivos inventados. Ambos pueden recibir avisos internos según membresía/sucursal. No se crean contraseñas, cuentas ni invitaciones automáticas ni envíos externos.
 
 ## Horarios y pausa
 
-| Día | Esteban | Jonatan |
-|---|---|---|
-| Lunes | 09:00–19:00 | 13:00–21:00 |
-| Martes | 09:00–19:00 | 13:00–21:00 |
-| Miércoles | 09:00–13:00 | 13:00–21:00 |
-| Jueves | 09:00–13:00 | 13:00–21:00 |
-| Viernes | 09:00–13:00 | 13:00–21:00 |
-| Sábado | 09:00–19:00 | 13:00–21:00 |
-| Domingo | Sin habilitación confirmada | Sin habilitación confirmada |
+| Día       | Esteban                     | Jonatan                     |
+| --------- | --------------------------- | --------------------------- |
+| Lunes     | 09:00–19:00                 | 13:00–21:00                 |
+| Martes    | 09:00–19:00                 | 13:00–21:00                 |
+| Miércoles | 09:00–13:00                 | 13:00–21:00                 |
+| Jueves    | 09:00–13:00                 | 13:00–21:00                 |
+| Viernes   | 09:00–13:00                 | 13:00–21:00                 |
+| Sábado    | 09:00–19:00                 | 13:00–21:00                 |
+| Domingo   | Sin habilitación confirmada | Sin habilitación confirmada |
 
 Pausa habitual de Esteban 12:00–12:30: obligatoriedad pendiente. El plan conservador divide sus reglas semanales en 09:00–12:00 y 12:30–fin del turno. Son 12 intervalos de Esteban y 6 de Jonatan, sin excepciones diarias artificiales. No se resta esa pausa a Jonatan. Los horarios comerciales del local siguen pendientes y **no se cambian** para igualarlos al equipo.
 
@@ -31,16 +35,16 @@ Las excepciones disponibles existentes sustituyen el turno semanal del día: rev
 
 ## Catálogo
 
-| Servicio / slug existente esperado | PYG | Minutos totales | Consulta previa |
-|---|---:|---:|---|
-| Corte de pelo / corte-de-pelo | 30000 | 40 | No nueva restricción; conservar una previa |
-| Barba / barba | 30000 | 40 | No nueva restricción; conservar una previa |
-| Perfilado de cejas / perfilado-de-cejas | 10000 | 40 | Independiente; conservar restricciones previas |
-| Lavado / lavado | 10000 | 10 | Venta independiente; conservar restricciones previas |
-| Rulos / rulos | 180000 | 120 aprox. | Obligatoria |
-| Combo rulos y corte / combo-rulos-y-corte | 200000 | **120 con corte incluido** | Obligatoria |
-| Tinte global / tinte-global | 250000 | 150 aprox. | Protección previa conservada |
-| Tinte mechas / tinte-mechas | 180000 | 150 aprox. | Protección previa conservada |
+| Servicio / slug existente esperado        |    PYG |            Minutos totales | Consulta previa                                      |
+| ----------------------------------------- | -----: | -------------------------: | ---------------------------------------------------- |
+| Corte de pelo / corte-de-pelo             |  30000 |                         40 | No nueva restricción; conservar una previa           |
+| Barba / barba                             |  30000 |                         40 | No nueva restricción; conservar una previa           |
+| Perfilado de cejas / perfilado-de-cejas   |  10000 |                         40 | Independiente; conservar restricciones previas       |
+| Lavado / lavado                           |  10000 |                         10 | Venta independiente; conservar restricciones previas |
+| Rulos / rulos                             | 180000 |                 120 aprox. | Obligatoria                                          |
+| Combo rulos y corte / combo-rulos-y-corte | 200000 | **120 con corte incluido** | Obligatoria                                          |
+| Tinte global / tinte-global               | 250000 |                 150 aprox. | Protección previa conservada                         |
+| Tinte mechas / tinte-mechas               | 180000 |                 150 aprox. | Protección previa conservada                         |
 
 Ambos profesionales realizan todo el catálogo. Rulos requiere evaluar largo e historia de procesos químicos. Tinte global y mechas siguen siendo variantes distintas. El combo es un principal de 120 minutos/200000; agregar otro principal Corte se rechaza por el motor. Lavado se vende como principal independiente: para cobrar Corte + Lavado se usan dos líneas del checkout; no se genera un segundo lavado implícito. El motor de reservas admite un principal por reserva; no se crea un servicio duplicado para sortear esa regla.
 

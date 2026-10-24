@@ -4,4 +4,7 @@ export function pos1717Sql(options: {
   effectiveFrom: string;
   evidenceReference: string;
   fixedAmountMinor: { debit: number; credit: number };
+  vatTreatment: string;
+  withholdingTreatment: string;
+  otherChargesTreatment: string;
 }): string;

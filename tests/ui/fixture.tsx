@@ -6,6 +6,7 @@ import { Customers } from "../../src/features/customers/customers";
 import { DayOverview } from "../../src/features/analytics/day-overview";
 import { CheckoutDialog } from "../../src/features/finance/checkout";
 import { FinancialDashboard } from "../../src/features/finance/dashboard";
+import { PartnerDistributions } from "../../src/features/finance/partner-distributions";
 import { Goals } from "../../src/features/goals/goals";
 import { Configuration } from "../../src/features/configuration/configuration";
 import { usePathname } from "./navigation";
@@ -14,7 +15,9 @@ const workspace: Workspace = {
   organization: {
     id: "org-qa",
     name: "Barbería · QA aislado",
-    slug: "fixture-a",
+    slug: window.location.pathname.endsWith("/cash-distributions")
+      ? "1717-barberia"
+      : "fixture-a",
     timezone: "Etc/UTC",
     currency: "PYG",
     brand_color: "#D7B56D",
@@ -37,6 +40,10 @@ const workspace: Workspace = {
 };
 function Screen() {
   const path = usePathname();
+  if (path.endsWith("/cash-distributions"))
+    return (
+      <PartnerDistributions from="2026-01-01" to="2026-01-31" catalog={null} />
+    );
   if (path.endsWith("/agenda")) return <Agenda />;
   if (path.endsWith("/clientes")) return <Customers />;
   if (path.endsWith("/metas")) return <Goals />;

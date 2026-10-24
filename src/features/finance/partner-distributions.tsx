@@ -31,6 +31,12 @@ type Period = {
   status: string;
   result_minor: string;
   snapshot_hash: string;
+  snapshot?: Record<string, string>;
+  approvals?: {
+    approver_id: string;
+    snapshot_hash: string;
+    approved_at: string;
+  }[];
   allocations: Allocation[];
 };
 type Policy = {
@@ -51,9 +57,12 @@ export function PartnerDistributions({
   catalog: FinanceCatalog | null;
 }) {
   const w = useWorkspace();
-  const r = useResource<{ policy: Policy | null; periods: Period[] }>(
-    financeUrl("partners", w.organization.id, w.branchId, from, to),
-  );
+  const r = useResource<{
+    policy: Policy | null;
+    cash_policy?: { recognition: string };
+    cash_schema_version?: number;
+    periods: Period[];
+  }>(financeUrl("partners", w.organization.id, w.branchId, from, to));
   const cash = useResource<{ session: FinanceRow | null }>(
     financeUrl("cash", w.organization.id, w.branchId, from, to),
   );
@@ -68,6 +77,8 @@ export function PartnerDistributions({
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [method, setMethod] = useState("");
+  const cashPolicyRequired = w.organization.slug === "1717-barberia";
+  const cashPolicy = Boolean(r.data?.cash_policy);
   const tz =
     w.branches.find((b) => b.id === w.branchId)?.timezone ??
     w.organization.timezone;
@@ -101,6 +112,44 @@ export function PartnerDistributions({
         });
       if (form.action === "prepare")
         Object.assign(data, { from: f.get("from"), to: f.get("to") });
+      if (form.action === "configure_cash")
+        Object.assign(data, {
+          confirmed: true,
+          recognition: "settled_collections_including_advances",
+          initial_losses_confirmed_zero:
+            f.get("initial_losses_confirmed_zero") === "on",
+          first_month: f.get("first_month"),
+          reference: f.get("reference"),
+        });
+      if (form.action === "reconcile_payment") {
+        const exact = (name: string) => integerInput(String(f.get(name)));
+        Object.assign(data, {
+          payment: f.get("payment"),
+          eligibility_confirmed: true,
+          eligibility: f.get("eligibility"),
+          eligible_at: fromZonedTime(
+            String(f.get("eligible_at")),
+            tz,
+          ).toISOString(),
+          settled_at: fromZonedTime(
+            String(f.get("settled_at")),
+            tz,
+          ).toISOString(),
+          processing_cost_minor: exact("processing_cost_minor"),
+          processing_credit_minor: exact("processing_credit_minor"),
+          tax_minor: exact("tax_minor"),
+          withholding_minor: exact("withholding_minor"),
+          other_cost_minor: exact("other_cost_minor"),
+          net_minor: String(f.get("net_minor")),
+          reference: f.get("reference"),
+        });
+      }
+      if (form.action === "classify_withdrawal")
+        Object.assign(data, {
+          advance: f.get("advance"),
+          treatment: f.get("treatment"),
+          reference: f.get("reference"),
+        });
       if (form.action === "approve")
         Object.assign(data, {
           reconciled: true,
@@ -151,7 +200,7 @@ export function PartnerDistributions({
         form.action === "pay"
           ? "Pago efectivo registrado."
           : form.action === "approve"
-            ? "Asignación aprobada. Todavía no representa un pago."
+            ? "Tu aprobación fue registrada. Se requieren las dos aprobaciones independientes antes de pagar."
             : "Registro guardado.",
       );
     } catch (e) {
@@ -161,6 +210,9 @@ export function PartnerDistributions({
     }
   }
   const titles: Record<string, string> = {
+    configure_cash: "Confirmar política por cobros",
+    reconcile_payment: "Conciliar cobro o devolución",
+    classify_withdrawal: "Clasificar adelanto de socio",
     configure: "Reglas de distribución",
     prepare: "Preparar distribución",
     approve: "Aprobar asignaciones",
@@ -181,11 +233,47 @@ export function PartnerDistributions({
           </p>
         </div>
         {w.role === "organization_owner" && (
-          <button onClick={() => open("configure")}>Confirmar reglas</button>
+          <button
+            disabled={
+              cashPolicy ||
+              (cashPolicyRequired && r.data?.cash_schema_version !== 1)
+            }
+            onClick={() =>
+              open(cashPolicyRequired ? "configure_cash" : "configure")
+            }
+          >
+            Confirmar reglas
+          </button>
         )}
       </div>
       {message && <Notice success>{message}</Notice>}
       {r.error && <Notice error>{r.error}</Notice>}
+      {cashPolicyRequired && r.data && r.data.cash_schema_version !== 1 && (
+        <Notice>
+          La actualización financiera de la base está pendiente. Las
+          distribuciones de 17:17 permanecen bloqueadas hasta verificar staging,
+          respaldo y migraciones.
+        </Notice>
+      )}
+      {(cashPolicyRequired || cashPolicy) && (
+        <Notice>
+          Reparto mensual por cobros elegibles y gastos pagados, recuperación de
+          pérdidas y retiros descontados de cada socio. Se requieren dos
+          propietarios distintos con MFA. Las tarifas estimadas del POS no
+          sustituyen una liquidación conciliada. Los controles de activación
+          siguen siendo obligatorios.
+        </Notice>
+      )}
+      {cashPolicy && (
+        <button onClick={() => open("classify_withdrawal")}>
+          Clasificar adelanto de socio
+        </button>
+      )}
+      {cashPolicy && (
+        <button onClick={() => open("reconcile_payment")}>
+          Conciliar cobro o devolución
+        </button>
+      )}
       {!r.data?.policy?.enabled && (
         <Notice>
           Registro de distribuciones bloqueado. El propietario debe confirmar
@@ -196,10 +284,16 @@ export function PartnerDistributions({
       {r.data?.policy?.enabled && (
         <div className="row between wrap">
           <p>
-            Regla confirmada: {r.data.policy.periodicity} ·{" "}
-            {r.data.policy.approval_role === "owner"
-              ? "Aprueba propietario"
-              : "Aprueba propietario o finanzas"}
+            Regla confirmada:{" "}
+            {cashPolicy
+              ? "Mensual por cobros conciliados"
+              : r.data.policy.periodicity}{" "}
+            ·{" "}
+            {cashPolicy
+              ? "Aprueban ambos propietarios"
+              : r.data.policy.approval_role === "owner"
+                ? "Aprueba propietario"
+                : "Aprueba propietario o finanzas"}
           </p>
           <button className="primary" onClick={() => open("prepare")}>
             Preparar período
@@ -227,6 +321,34 @@ export function PartnerDistributions({
               Resultado calculado:{" "}
               {money(p.result_minor, w.organization.currency)}
             </p>
+            {cashPolicy && (
+              <>
+                <p>
+                  Aprobaciones registradas: {p.approvals?.length ?? 0}/2. Cada
+                  propietario aprueba con su propia sesión.
+                </p>
+                <dl>
+                  {[
+                    ["Cobros brutos elegibles", "gross_collections_minor"],
+                    ["Neto acreditado", "net_settled_minor"],
+                    ["Gastos pagados", "paid_expenses_minor"],
+                    ["Pérdida anterior", "losses_opening_minor"],
+                    ["Pérdida recuperada", "losses_recovered_minor"],
+                    ["Pérdida pendiente", "losses_remaining_minor"],
+                  ].map(([label, key]) => (
+                    <div key={key}>
+                      <dt>{label}</dt>
+                      <dd>
+                        {money(
+                          p.snapshot?.[key] ?? "0",
+                          w.organization.currency,
+                        )}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </>
+            )}
             <details>
               <summary>Identificador de la evidencia</summary>
               <code className="secret-key">{p.snapshot_hash}</code>
@@ -268,24 +390,29 @@ export function PartnerDistributions({
                             >
                               Registrar pago
                             </button>
-                            <button
-                              disabled={!r.data?.policy?.enabled}
-                              onClick={() =>
-                                open("adjust", { allocation: a.id })
-                              }
-                            >
-                              Ajustar
-                            </button>
-                            {r.data?.policy?.withdrawals_mode ===
-                              "explicit_advance" && (
+                            {!cashPolicy && (
                               <button
+                                disabled={!r.data?.policy?.enabled}
                                 onClick={() =>
-                                  open("apply_withdrawal", { allocation: a.id })
+                                  open("adjust", { allocation: a.id })
                                 }
                               >
-                                Aplicar retiro
+                                Ajustar
                               </button>
                             )}
+                            {!cashPolicy &&
+                              r.data?.policy?.withdrawals_mode ===
+                                "explicit_advance" && (
+                                <button
+                                  onClick={() =>
+                                    open("apply_withdrawal", {
+                                      allocation: a.id,
+                                    })
+                                  }
+                                >
+                                  Aplicar retiro
+                                </button>
+                              )}
                           </div>
                         )}
                       </td>
@@ -296,7 +423,10 @@ export function PartnerDistributions({
             </div>
             {p.status === "draft" && (
               <button
-                disabled={!r.data?.policy?.enabled}
+                disabled={
+                  !r.data?.policy?.enabled ||
+                  p.approvals?.some((a) => a.approver_id === w.profileId)
+                }
                 onClick={() => open("approve", { id: p.id })}
               >
                 Revisar y aprobar
@@ -356,6 +486,111 @@ export function PartnerDistributions({
           onClose={() => !busy && setForm(null)}
         >
           <form onSubmit={submit} className="stack">
+            {form.action === "configure_cash" && (
+              <>
+                <Notice>
+                  Esta política se guarda deshabilitada. Incluye anticipos cuya
+                  elegibilidad esté resuelta y reconoce tarjetas solo al
+                  acreditarse. Confirmá con la contadora el tratamiento de
+                  anticipos reembolsables y el saldo inicial de pérdidas. La
+                  activación requiere un rollout autorizado con evidencia
+                  externa.
+                </Notice>
+                <Field label="Primer mes (primer día)">
+                  <input type="date" name="first_month" required />
+                </Field>
+                <label className="check-label">
+                  <input
+                    type="checkbox"
+                    name="initial_losses_confirmed_zero"
+                    required
+                  />{" "}
+                  Confirmamos que no hay pérdidas anteriores pendientes. Si las
+                  hay, detener y conciliar el saldo inicial.
+                </label>
+              </>
+            )}
+            {form.action === "classify_withdrawal" && (
+              <>
+                <Notice>
+                  Identificá un adelanto real del socio, con su fecha, método y
+                  comprobante originales. No convierte un adelanto laboral en
+                  retiro ni registra otro egreso. El exceso de retiro queda
+                  pendiente para otro mes.
+                </Notice>
+                <Field label="ID del adelanto">
+                  <input name="advance" required />
+                </Field>
+                <Field label="Tratamiento verificado">
+                  <select name="treatment" required>
+                    <option value="">Elegir</option>
+                    <option value="owner_withdrawal">
+                      Retiro personal del socio
+                    </option>
+                    <option value="employee_advance">
+                      Adelanto laboral; no aplicar al reparto
+                    </option>
+                  </select>
+                </Field>
+              </>
+            )}
+            {form.action === "reconcile_payment" && (
+              <>
+                <Notice>
+                  Usá el cobro real del ledger y su evidencia. Los anticipos
+                  entran cuando su tratamiento está resuelto; un anticipo sujeto
+                  a devolución queda bloqueado hasta resolverlo. Para tarjeta,
+                  usá la acreditación bancaria real. Ningún importe se completa
+                  con cero automáticamente.
+                </Notice>
+                <Field label="ID del cobro o devolución">
+                  <input name="payment" required />
+                </Field>
+                <Field label="Clasificación">
+                  <select name="eligibility" required>
+                    <option value="">Elegir clasificación verificada</option>
+                    <option value="earned">Venta cobrada</option>
+                    <option value="advance_resolved">
+                      Anticipo con elegibilidad resuelta
+                    </option>
+                    <option value="refund">Devolución</option>
+                  </select>
+                </Field>
+                <Field label="Fecha de elegibilidad comprobada">
+                  <input type="datetime-local" name="eligible_at" required />
+                </Field>
+                <Field label="Acreditación real">
+                  <input type="datetime-local" name="settled_at" required />
+                </Field>
+                {[
+                  ["Comisión real del procesador", "processing_cost_minor"],
+                  [
+                    "Comisión devuelta por el procesador (solo devolución)",
+                    "processing_credit_minor",
+                  ],
+                  ["Impuestos cobrados en liquidación", "tax_minor"],
+                  ["Retenciones", "withholding_minor"],
+                  ["Otros cargos", "other_cost_minor"],
+                ].map(([label, name]) => (
+                  <Field key={name} label={label}>
+                    <input
+                      name={name}
+                      inputMode="numeric"
+                      pattern="[0-9]+"
+                      required
+                    />
+                  </Field>
+                ))}
+                <Field label="Neto acreditado (negativo para devolución)">
+                  <input
+                    name="net_minor"
+                    inputMode="text"
+                    pattern="-?[0-9]+"
+                    required
+                  />
+                </Field>
+              </>
+            )}
             {form.action === "configure" && (
               <>
                 <Notice>
@@ -442,7 +677,10 @@ export function PartnerDistributions({
                 </Field>
                 <p>
                   Solo períodos finalizados en PYG, con dos socios y tarifas
-                  completas. No estima gastos faltantes ni pérdidas acumuladas.
+                  completas.{" "}
+                  {cashPolicy
+                    ? "Incluye pérdidas anteriores y retiros individuales; los datos incompletos bloquean la propuesta."
+                    : "No estima gastos faltantes ni pérdidas acumuladas."}
                 </p>
               </>
             )}

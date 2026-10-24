@@ -1,4 +1,8 @@
-# Distribuciones a socios: extensión mínima diseñada
+# Distribuciones a socios
+
+Vigente 24/10: el módulo base ya existe desde la migración 29. La extensión de cobros/conciliación/aprobación dual se implementa incrementalmente en la migración 38; no es una tabla de diseño sin código. [Política implementada](POLITICA_FINANCIERA_CONFIRMADA_1717.md), [pruebas](PRUEBAS_DOBLE_APROBACION.md), [estado de publicación y cloud](CIERRE_FINAL_1717_2026_10_24.md). El diseño histórico siguiente explica las decisiones anteriores; no sustituye el reconocimiento por cobros de 17:17 ni habilita aprobación por una sola persona.
+
+## Diseño histórico
 
 Estado: diseño, sin tablas ni pagos implementados. `equal_profit_share` sigue calculando una estimación. No reinterpretar `staff_settlements` de comisiones como pagos a socios.
 

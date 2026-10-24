@@ -1,5 +1,7 @@
 # Primer acceso de Esteban y Jonatan
 
+Actualización 24/10: inspección real del proyecto confirmó que **ninguno de los dos correos existe todavía en Auth**. No hay membresías personales, vínculos ni factores MFA de ellos que dar por aprobados. Remitente elegido: `dentalcrmauth@gmail.com`, todavía sin SMTP/entrega comprobados. [Acciones de configuración y callbacks](ACTIVACION_CLOUD_1717.md). Ambos aprobarán el reparto desde sus propias cuentas; una cuenta no aprueba por la otra. [Política](POLITICA_FINANCIERA_CONFIRMADA_1717.md).
+
 URL del CRM: https://barberia-crm-kappa.vercel.app. Funciona por HTTPS en computadora y teléfono; no se instala un ejecutable. El deployment observado es `99a4532`; el release nuevo debe verificarse por SHA. Tener código desplegado no demuestra que estas dos cuentas existan o tengan MFA.
 
 ## Paso de cada propietario
@@ -16,13 +18,13 @@ La membresía no omite MFA: AAL1 puede necesitar completar `/mfa` antes de ver d
 
 ## Estado de esta entrega
 
-| Control | Esteban | Jonatan |
-|---|---|---|
-| Correo confirmado por instalador | Sí | Sí |
+| Control                                     | Esteban         | Jonatan         |
+| ------------------------------------------- | --------------- | --------------- |
+| Correo confirmado por instalador            | Sí              | Sí              |
 | Existencia / email verificado en Auth cloud | No reconsultado | No reconsultado |
-| Membresía owner real | No reconsultada | No reconsultada |
-| Vínculo staff.profile_id real | No reconsultado | No reconsultado |
-| MFA enrolado/challenge real | No verificado | No verificado |
-| Piloto personal | No ejecutado | No ejecutado |
+| Membresía owner real                        | No reconsultada | No reconsultada |
+| Vínculo staff.profile_id real               | No reconsultado | No reconsultado |
+| MFA enrolado/challenge real                 | No verificado   | No verificado   |
+| Piloto personal                             | No ejecutado    | No ejecutado    |
 
 No se enviaron invitaciones ni se crearon usuarios. `scripts/inspect-1717.sql` consulta solo ambos correos conocidos, membresías, vínculos y cantidad de factores verificados; nunca secretos. No extraer JWT ni autenticadores para completar un informe. El correo de Jonatan dejó de ser un pendiente.

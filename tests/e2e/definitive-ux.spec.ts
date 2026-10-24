@@ -34,7 +34,36 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     const result = await page.request.get(`/api/workspace/setup?${query}`);
     expect(result.ok()).toBeTruthy();
     const status = await result.json();
-    expect(status.checks).toHaveLength(9);
+    expect(
+      status.checks.map((check: { key: string }) => check.key).sort(),
+    ).toEqual(
+      [
+        "account",
+        "permissions",
+        "branch",
+        "services",
+        "professionals",
+        "schedule",
+        "payments",
+        "pos",
+        "booking",
+        "security",
+      ].sort(),
+    );
+    // Weekly rules are authoritative even with no available day exception.
+    expect(
+      status.checks.find((c: { key: string }) => c.key === "schedule").status,
+    ).toBe("ready");
+    expect(
+      status.checks.find((c: { key: string }) => c.key === "schedule").detail,
+    ).toContain("horarios configurados");
+    // Having payment method buttons never certifies processor reconciliation.
+    expect(
+      status.checks.find((c: { key: string }) => c.key === "pos").status,
+    ).toBe("pending");
+    expect(
+      status.checks.find((c: { key: string }) => c.key === "pos").detail,
+    ).toContain("requieren evidencia de conciliación");
     expect(
       status.checks.find((c: { key: string }) => c.key === "security").detail,
     ).toContain("backups y alertas");

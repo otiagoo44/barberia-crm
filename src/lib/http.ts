@@ -82,6 +82,8 @@ export function fail(error: unknown, requestId: string) {
     JSON.stringify({ level: "error", request_id: requestId, code, status }),
   );
   const authMessages: Record<string, string> = {
+    cash_distribution_upgrade_required:
+      "Las distribuciones están bloqueadas hasta completar la actualización verificada de la base.",
     mfa_required:
       "Verificá tu segundo factor en Seguridad de la cuenta para continuar.",
     session_revoked: "La sesión terminó. Volvé a entrar.",
@@ -112,6 +114,18 @@ export function fail(error: unknown, requestId: string) {
           "La caja no tiene efectivo suficiente para este pago.",
         stale_distribution_snapshot:
           "El resultado cambió desde la propuesta. Prepará un nuevo período y revisá sus importes.",
+        stale_distribution_snapshot_prepare_again:
+          "Los datos cambiaron. Prepará otra propuesta; las aprobaciones anteriores no autorizan pagar.",
+        distribution_activation_gates_open:
+          "Las distribuciones siguen deshabilitadas. Faltan los controles externos y la activación de ambos propietarios.",
+        incomplete_distribution_result:
+          "Hay cobros sin conciliar. Completá importes y evidencia antes de preparar el reparto.",
+        dual_approval_required:
+          "Se requieren las aprobaciones de ambos propietarios sobre este cálculo antes de pagar.",
+        cash_policy_required:
+          "17:17 requiere una política explícita por cobros conciliados.",
+        settlement_difference_requires_reconciliation:
+          "El bruto menos comisión, impuestos, retenciones y otros cargos no coincide con el neto. Revisá la liquidación.",
         completed_period_required:
           "Elegí un período finalizado, con fechas válidas y hasta un año.",
         unreconciled_distribution_balance:

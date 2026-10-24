@@ -80,8 +80,9 @@ export async function setupStatus(
       prices,
       people,
       assignments,
-      daily,
+      schedule,
       methods,
+      fees,
       preferences,
       branchPreferences,
       members,
@@ -113,17 +114,22 @@ export async function setupStatus(
         .eq("branch_id", branch)
         .eq("active", true)
         .limit(501),
-      db
-        .from("staff_availability_exceptions")
-        .select("staff_id,available")
-        .eq("organization_id", org)
-        .eq("branch_id", branch)
-        .eq("local_date", day)
-        .eq("available", true)
-        .limit(501),
+      db.rpc("setup_availability", {
+        p_org: org,
+        p_branch: branch,
+        p_day: day,
+      }),
       db
         .from("payment_methods")
         .select("id,type")
+        .eq("organization_id", org)
+        .eq("active", true)
+        .limit(501),
+      db
+        .from("payment_method_fee_rules")
+        .select(
+          "payment_method_id,effective_from,effective_to,evidence_reference",
+        )
         .eq("organization_id", org)
         .eq("active", true)
         .limit(501),
@@ -151,7 +157,6 @@ export async function setupStatus(
       prices,
       people,
       assignments,
-      daily,
       methods,
       preferences,
       branchPreferences,
@@ -164,7 +169,6 @@ export async function setupStatus(
       prices,
       people,
       assignments,
-      daily,
       methods,
       members,
     ].some((r) => (r.data?.length ?? 0) > 500);
@@ -190,8 +194,21 @@ export async function setupStatus(
               ?.default_duration_minutes,
         ) > 0,
     );
-    const scheduled = assigned.filter((s) =>
-      daily.data?.some((d) => d.staff_id === s.id),
+    const scheduleCheck = describeSchedule(
+      schedule.data,
+      Boolean(schedule.error),
+      day,
+    );
+    const now = new Date().toISOString();
+    const cards = methods.data?.filter((m) => m.type === "card") ?? [];
+    const configuredFees = cards.filter((m) =>
+      fees.data?.some(
+        (f) =>
+          f.payment_method_id === m.id &&
+          f.effective_from <= now &&
+          (!f.effective_to || f.effective_to > now) &&
+          f.evidence_reference,
+      ),
     );
     const booking = Boolean(
       preferences.data?.booking_enabled &&
@@ -230,8 +247,7 @@ export async function setupStatus(
       {
         key: "schedule",
         label: "Horarios del día",
-        status: scheduled.length > 0 ? "ready" : "pending",
-        detail: `${scheduled.length} profesionales con bloques disponibles el ${day}. Revisá descansos y ausencias en Equipo; no se inventan turnos semanales.`,
+        ...scheduleCheck,
         module: "equipo",
       },
       {
@@ -239,6 +255,15 @@ export async function setupStatus(
         label: "Métodos de pago",
         status: (methods.data?.length ?? 0) > 0 ? "ready" : "pending",
         detail: `${methods.data?.length ?? 0} métodos activos. Confirmá tarifas POS y efectivo inicial antes de cobrar.`,
+        module: "finanzas",
+      },
+      {
+        key: "pos",
+        label: "Tarifas y conciliación POS",
+        status: fees.error ? "manual" : "pending",
+        detail: fees.error
+          ? "Error al consultar las tarifas. No se verificó su vigencia ni conciliación."
+          : `${configuredFees.length} de ${cards.length} métodos de tarjeta tienen una regla vigente con referencia. Las liquidaciones, IVA, retenciones y cargos requieren evidencia de conciliación; crear un método no completa finanzas.`,
         module: "finanzas",
       },
       {
@@ -281,4 +306,49 @@ export async function setupStatus(
       module: "/mfa",
     });
   return { checked_at: new Date().toISOString(), day, checks };
+}
+
+type ScheduleObservation = {
+  people: {
+    configured: boolean;
+    scheduled_today: boolean;
+    effective: boolean;
+    remaining: boolean;
+  }[];
+};
+export function describeSchedule(
+  data: ScheduleObservation | null,
+  failed: boolean,
+  day: string,
+): Pick<SetupCheck, "status" | "detail"> {
+  if (failed)
+    return {
+      status: "manual",
+      detail:
+        "Error de lectura de disponibilidad. No se pudo verificar el horario efectivo.",
+    };
+  if (!data)
+    return { status: "manual", detail: "Disponibilidad aún no consultada." };
+  const configured = data.people.filter((p) => p.configured).length;
+  const effective = data.people.filter((p) => p.effective).length;
+  const remaining = data.people.filter((p) => p.remaining).length;
+  if (!configured)
+    return {
+      status: "pending",
+      detail:
+        "No hay horarios semanales ni excepciones disponibles configurados para los profesionales activos.",
+    };
+  if (!effective)
+    return {
+      status: "ready",
+      detail: data.people.some((p) => p.scheduled_today)
+        ? `Horarios configurados; el ${day} está bloqueado por cierres, descansos o ausencias.`
+        : `Horarios configurados; el ${day} es un día sin turno. No se abren turnos automáticamente.`,
+    };
+  return {
+    status: "ready",
+    detail: remaining
+      ? `${configured} profesionales con horarios configurados; ${remaining} conservan disponibilidad efectiva el ${day}.`
+      : `Horarios configurados; la disponibilidad del ${day} está agotada por reservas.`,
+  };
 }

@@ -36,6 +36,9 @@ test("POS preparation refuses an unknown fixed charge, date or evidence", () => 
     effectiveFrom: "2026-10-24T09:00:00-03:00",
     evidenceReference: "synthetic provider evidence",
     fixedAmountMinor: { debit: 0, credit: 0 },
+    vatTreatment: "Isolated fixture: included",
+    withholdingTreatment: "Isolated fixture: none",
+    otherChargesTreatment: "Isolated fixture: none",
   };
   assert.throws(
     () => pos1717Sql({ ...options, effectiveFrom: "" }),
