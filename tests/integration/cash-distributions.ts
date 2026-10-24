@@ -364,6 +364,38 @@ export async function cashDistributionContracts(pool: Pool) {
         ).rows[0].n,
         "0",
       );
+      const allocations = (
+        await pool.query(
+          "select id from public.partner_distribution_allocations where period_id=$1 order by id",
+          [february],
+        )
+      ).rows;
+      const payKey = randomUUID();
+      const actualPayment = {
+        allocation: allocations[0].id,
+        amount_minor: 100000,
+        method: bankMethod,
+        occurred_at: new Date().toISOString(),
+        confirmed: true,
+        reference: "Isolated actual owner bank payout",
+      };
+      const paymentId = await command("pay", actualPayment, owner, payKey);
+      await command("pay", { ...actualPayment, allocation: allocations[1].id });
+      await command("close", { id: february });
+      assert.equal(
+        await command("pay", actualPayment, owner, payKey),
+        paymentId,
+      );
+      assert.equal((await read(february)).status, "closed");
+      assert.equal(
+        (
+          await pool.query(
+            "select count(*)::int n from public.partner_distribution_payments where organization_id=$1",
+            [org],
+          )
+        ).rows[0].n,
+        2,
+      );
     },
   );
   const card = await receipt(30000, "2026-03-05T12:00:00Z", cardMethod);

@@ -127,6 +127,41 @@ test("cash distribution requires two real signed AAL2 owners and rejects payment
     expect(
       (await call(second, "approve_activation", { gates })).error,
     ).toBeNull();
+    const method = crypto.randomUUID(),
+      checkout = crypto.randomUUID(),
+      receipt = crypto.randomUUID();
+    // Money is a controlled localhost fixture; reconciliation, approval and payout
+    // below use genuine signed AAL2 requests, never synthetic JWT claims.
+    await pool.query(
+      "insert into public.payment_methods(id,organization_id,name,code,type) values($1,$2,'Isolated bank','real_cash_bank','bank')",
+      [method, org],
+    );
+    await pool.query(
+      "insert into public.checkouts(id,organization_id,branch_id,currency,total_minor,occurred_at) values($1,$2,$3,'PYG',30000,'2026-01-10')",
+      [checkout, org, branch],
+    );
+    await pool.query(
+      "insert into public.payments(id,organization_id,branch_id,checkout_id,payment_method_id,amount_minor,fee_minor,fee_status,method_name_snapshot,method_type_snapshot,occurred_at) values($1,$2,$3,$4,$5,30000,null,'unknown','Isolated bank','bank','2026-01-10')",
+      [receipt, org, branch, checkout, method],
+    );
+    expect(
+      (
+        await call(first, "reconcile_payment", {
+          payment: receipt,
+          eligibility_confirmed: true,
+          eligibility: "earned",
+          eligible_at: "2026-01-10T12:00:00Z",
+          settled_at: "2026-01-10T12:00:00Z",
+          processing_cost_minor: 0,
+          processing_credit_minor: 0,
+          tax_minor: 0,
+          withholding_minor: 0,
+          other_cost_minor: 0,
+          net_minor: "30000",
+          reference: "Isolated bank evidence for genuine Auth test",
+        })
+      ).error,
+    ).toBeNull();
     const prepared = await call(first, "prepare", {
       from: "2026-01-01",
       to: "2026-01-31",
@@ -185,6 +220,23 @@ test("cash distribution requires two real signed AAL2 owners and rejects payment
         )
       ).rows[0].status,
     ).toBe("approved");
+    const payout = await call(first, "pay", {
+      allocation: allocations.rows[0].id,
+      amount_minor: 15000,
+      method,
+      occurred_at: new Date().toISOString(),
+      confirmed: true,
+      reference: "Isolated actual payout after two signed approvals",
+    });
+    expect(payout.error).toBeNull();
+    expect(
+      (
+        await pool.query(
+          "select amount_minor::text from public.partner_distribution_payments where id=$1",
+          [payout.data.id],
+        )
+      ).rows[0].amount_minor,
+    ).toBe("15000");
     expect((await first.auth.signOut({ scope: "local" })).error).toBeNull();
     expect(
       (
