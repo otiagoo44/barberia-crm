@@ -20,7 +20,7 @@ Referencia inicial `65a84d329d1ae6ff1e9be3f2b710f6aac44088c2`. Ninguna prueba cr
 
 Comprobado en esta intervención: **26 unitarios**, **15 pruebas UI**, contratos DB completos (51 seguridad/operación, 19 finanzas, 23 hardening, 18 producto, más onboarding/upgrades/reparto conciliado/17:17 y los contratos nuevos), upgrade desde 34 y guardado semanal con concurrencia/revocación. Carga con 10/50/100 organizaciones y tenant concentrado: **cero errores**. Lint y typecheck aprobados.
 
-La compilación npm tuvo un aborto nativo de libuv en Windows después de compilar. Se repitió el mismo `next build` mediante Node directamente y terminó correctamente, incluido TypeScript. Se conservan ambos logs; la CI ejecuta además el comando npm completo en Ubuntu sobre el HEAD publicado. Esto no se atribuye a un fallo funcional del CRM ni se oculta como prueba aprobada.
+Durante la compilación npm apareció en la consola una aserción nativa de libuv en Windows. El comando terminó con código 0 y su log muestra la compilación, TypeScript y generación de páginas completos. Se repitió `next build` mediante Node directamente y también terminó con código 0. Se conservan ambos logs; la CI ejecuta además el comando npm completo en Ubuntu sobre el HEAD publicado. La aserción observada no se usa como evidencia de una falla funcional ni se presenta como una compilación abortada.
 
 - `npm run lint`, `npm run typecheck`, `npm test`.
 - `npm run test:db`: instalación limpia, upgrades de 27 y 34, contratos de configuración/operación/finanzas/hardening/producto, reparto conciliado y editor semanal.
