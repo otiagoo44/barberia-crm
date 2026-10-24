@@ -41,6 +41,7 @@ jobs:
             docs/verification/definitive/sql-*.json
             docs/verification/load-results.json
             docs/verification/1717-20261024/
+            docs/verification/pilot-20261024/
           retention-days: 90
   supabase-e2e:
     runs-on: ubuntu-latest
@@ -118,6 +119,7 @@ jobs:
             docs/verification/definitive/
             docs/verification/review-20261023/
             docs/verification/1717-20261024/
+            docs/verification/pilot-20261024/
           retention-days: 90
       - if: always()
         run: npx supabase stop --no-backup

@@ -1,0 +1,11 @@
+{
+  "from": 27,
+  "existingTablesCompared": 70,
+  "identicalHistoricalRows": true,
+  "financialRetryPreserved": true,
+  "expectedCashMinor": "10900",
+  "policiesEnabled": 0,
+  "unvalidatedConstraints": 0,
+  "unprotectedBusinessTables": 0,
+  "auth": "SQL fixture; real Auth separately in CI"
+}

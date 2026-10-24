@@ -13,6 +13,7 @@ Lectura nueva mediante dashboard Supabase, transacciones `begin read only`; prim
 | Auth de propietarios | Ambos correos ausentes. Sin membresía personal ni factores MFA comprobados para ellos |
 | URLs Auth | Site URL productiva correcta; exactamente los dos callbacks de confirmación y recuperación documentados, verificados en dashboard |
 | Registro | Alta por email habilitada, confirmación de email obligatoria y sign-in anónimo deshabilitado, verificados en dashboard. No se cambió esta política |
+| MFA del proyecto | TOTP habilitado, hasta diez factores por usuario, límite de sesión AAL1 de quince minutos habilitado. Esto no acredita MFA personal de cuentas que aún no existen |
 | SMTP | SMTP personalizado **deshabilitado** en Authentication → Emails → SMTP Settings; no hay prueba de entrega desde el remitente solicitado |
 | Catálogo | Seis servicios. Cinco originales con precio; Tinte Global ya creado, 150 min, consulta previa, sin precio en Luque. Diez capacidades originales |
 | Horarios manuales | Doce reglas recurrentes cargadas 24/10: seis Jonatan 13–21; seis Esteban con turno correcto pero sin separar su pausa |

@@ -1,0 +1,48 @@
+
+> barberia-operating-system@1.0.0 test:load
+> tsx tests/load/run.ts
+
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+{"organizations":10,"counts":{"organizations":"10","branches":"20","staff":"50","customers":"1000","appointments":"1100"},"metrics":[{"name":"dashboard","samples":100,"concurrency":10,"p50_ms":606.63,"p95_ms":4093.35,"p99_ms":5862.27,"errors":0},{"name":"agenda","samples":100,"concurrency":10,"p50_ms":62.57,"p95_ms":3311.95,"p99_ms":4188.5,"errors":0},{"name":"customer_search","samples":100,"concurrency":10,"p50_ms":55.86,"p95_ms":3151.85,"p99_ms":4211.98,"errors":0},{"name":"retention","samples":100,"concurrency":10,"p50_ms":51.34,"p95_ms":3523.15,"p99_ms":4227.24,"errors":0},{"name":"booking","samples":100,"concurrency":10,"p50_ms":63.72,"p95_ms":4249.28,"p99_ms":5445.23,"errors":0}]}
+{"organizations":50,"counts":{"organizations":"50","branches":"100","staff":"250","customers":"5000","appointments":"5200"},"metrics":[{"name":"dashboard","samples":100,"concurrency":10,"p50_ms":709.89,"p95_ms":2991.51,"p99_ms":4241.08,"errors":0},{"name":"agenda","samples":100,"concurrency":10,"p50_ms":109.5,"p95_ms":2965.54,"p99_ms":3454.16,"errors":0},{"name":"customer_search","samples":100,"concurrency":10,"p50_ms":126.38,"p95_ms":2777.41,"p99_ms":2973.59,"errors":0},{"name":"retention","samples":100,"concurrency":10,"p50_ms":222.64,"p95_ms":3096.07,"p99_ms":3501.19,"errors":0},{"name":"booking","samples":100,"concurrency":10,"p50_ms":75.98,"p95_ms":3276.25,"p99_ms":4026.33,"errors":0}]}
+{"organizations":100,"counts":{"organizations":"100","branches":"200","staff":"500","customers":"10000","appointments":"10300"},"metrics":[{"name":"dashboard","samples":100,"concurrency":10,"p50_ms":934.56,"p95_ms":3735.31,"p99_ms":5912.22,"errors":0},{"name":"agenda","samples":100,"concurrency":10,"p50_ms":133.74,"p95_ms":3214.14,"p99_ms":4281,"errors":0},{"name":"customer_search","samples":100,"concurrency":10,"p50_ms":46.63,"p95_ms":2633.61,"p99_ms":3483.96,"errors":0},{"name":"retention","samples":100,"concurrency":10,"p50_ms":117.11,"p95_ms":3056.83,"p99_ms":4359.01,"errors":0},{"name":"booking","samples":100,"concurrency":10,"p50_ms":66.38,"p95_ms":3363.92,"p99_ms":5066.11,"errors":0}]}
+{"concentrated_organization":true,"metrics":[{"name":"one_tenant_dashboard_366_days","samples":100,"concurrency":10,"p50_ms":1407.42,"p95_ms":2436.77,"p99_ms":2453.6,"errors":0},{"name":"one_tenant_agenda","samples":100,"concurrency":10,"p50_ms":117.05,"p95_ms":304.99,"p99_ms":305.43,"errors":0},{"name":"one_tenant_customer_search","samples":100,"concurrency":10,"p50_ms":114.27,"p95_ms":305.02,"p99_ms":305.19,"errors":0}]}

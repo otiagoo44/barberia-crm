@@ -1,0 +1,54 @@
+
+> barberia-operating-system@1.0.0 prebuild
+> node scripts/validate-deployment.mjs
+
+Local build: Vercel environment check skipped.
+
+> barberia-operating-system@1.0.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+- Environments: .env.local
+✓ Running next.config.ts took 563ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 9.5s
+  Running TypeScript ...
+  Finished TypeScript in 34.5s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/5) ...
+  Generating static pages using 3 workers (1/5) 
+  Generating static pages using 3 workers (2/5) 
+  Generating static pages using 3 workers (3/5) 
+✓ Generating static pages using 3 workers (5/5) in 637ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /[organization]/[module]
+├ ƒ /api/auth/[action]
+├ ƒ /api/auth/mfa/[action]
+├ ƒ /api/export/customers
+├ ƒ /api/finance/[resource]
+├ ƒ /api/finance/import
+├ ƒ /api/health
+├ ƒ /api/health/operations
+├ ƒ /api/health/ready
+├ ƒ /api/jobs
+├ ƒ /api/live
+├ ƒ /api/public/[resource]
+├ ƒ /api/workspace/[resource]
+├ ƒ /auth/callback
+├ ƒ /book/[organization]/[[...branch]]
+├ ○ /icon.svg
+├ ƒ /login
+├ ƒ /mfa
+└ ƒ /reset-password
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

@@ -1,0 +1,34 @@
+
+> barberia-operating-system@1.0.0 test:ui
+> playwright test --config tests/ui/playwright.config.ts
+
+npm.cmd : [WebServer] (node:13596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 2 Carácter: 51
++ ... iew.spec.ts; npm.cmd run test:ui > .test-data/pilot-ui-final.log 2>&1
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 15 tests using 1 worker
+
+(node:8988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests\ui\cash-distributions.spec.ts:4:1 › cash distributions explain missing schema and show the frozen components and independent approvals (5.0s)
+  ✓   2 tests\ui\pilot.spec.ts:4:1 › service creation shows field errors, preserves input and explains price/capability setup (3.1s)
+  ✓   3 tests\ui\pilot.spec.ts:60:1 › weekly editor previews the break, excludes Sunday and posts one batch (4.7s)
+  ✓   4 tests\ui\pilot.spec.ts:122:1 › manual sale offers real services without a fictitious finance item (2.3s)
+  ✓   5 tests\ui\review.spec.ts:116:1 › financial layout settles across viewport changes without overflow or header overlap (5.2s)
+  ✓   6 tests\ui\review.spec.ts:172:1 › calendar requests and synthetic interaction timing remain measurable (2.9s)
+  ✓   7 tests\ui\review.spec.ts:223:1 › agenda follows a new URL in place and browser history while preserving its view (2.5s)
+  ✓   8 tests\ui\review.spec.ts:245:1 › customer destination opens in place after dismissal and resets detail tabs (2.6s)
+  ✓   9 tests\ui\review.spec.ts:274:3 › checkout exposes catalog read failures with recovery and no write (5.4s)
+  ✓  10 tests\ui\review.spec.ts:274:3 › checkout exposes checkout read failures with recovery and no write (3.0s)
+  ✓  11 tests\ui\review.spec.ts:274:3 › checkout exposes cash read failures with recovery and no write (3.2s)
+  ✓  12 tests\ui\review.spec.ts:317:1 › checkout waits for cash and confirms only a successful POST, even during revalidation (1.7s)
+  ✓  13 tests\ui\review.spec.ts:377:1 › home does not announce an empty day when its request fails (1.3s)
+  ✓  14 tests\ui\review.spec.ts:396:1 › calendar list does not invent an empty result during loading (1.7s)
+  ✓  15 tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports (20.2s)
+
+  15 passed (1.2m)

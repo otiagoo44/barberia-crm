@@ -18,6 +18,10 @@ Referencia inicial `65a84d329d1ae6ff1e9be3f2b710f6aac44088c2`. Ninguna prueba cr
 
 ## Ejecución local
 
+Comprobado en esta intervención: **26 unitarios**, **15 pruebas UI**, contratos DB completos (51 seguridad/operación, 19 finanzas, 23 hardening, 18 producto, más onboarding/upgrades/reparto conciliado/17:17 y los contratos nuevos), upgrade desde 34 y guardado semanal con concurrencia/revocación. Carga con 10/50/100 organizaciones y tenant concentrado: **cero errores**. Lint y typecheck aprobados.
+
+La compilación npm tuvo un aborto nativo de libuv en Windows después de compilar. Se repitió el mismo `next build` mediante Node directamente y terminó correctamente, incluido TypeScript. Se conservan ambos logs; la CI ejecuta además el comando npm completo en Ubuntu sobre el HEAD publicado. Esto no se atribuye a un fallo funcional del CRM ni se oculta como prueba aprobada.
+
 - `npm run lint`, `npm run typecheck`, `npm test`.
 - `npm run test:db`: instalación limpia, upgrades de 27 y 34, contratos de configuración/operación/finanzas/hardening/producto, reparto conciliado y editor semanal.
 - `npm run test:hardening`, `npm run test:load`, `npm run build`.
@@ -25,6 +29,8 @@ Referencia inicial `65a84d329d1ae6ff1e9be3f2b710f6aac44088c2`. Ninguna prueba cr
 - E2E con Supabase Auth real, restore y advisors se ejecutan en la CI de GitHub con Docker aislado. Docker no está disponible en este Windows; no se afirma una ejecución local de Auth real.
 
 Los logs de esta intervención se conservan en `docs/verification/pilot-20261024/`. Las corridas de CI y el SHA de despliegue deben asociarse al HEAD aceptado en el PR, no a una corrida vieja de main. Una compilación o una respuesta HTTP 200 no certifica operación comercial.
+
+Publicación y comprobante final: [PR #8](https://github.com/otiagoo44/barberia-crm/pull/8), cuyo estado, SHA, checks y deployment deben comprobarse antes de declarar el merge. Este documento se prepara antes de ese paso y no presenta un PR abierto como fusionado.
 
 ## Gates externos que estos tests no sustituyen
 

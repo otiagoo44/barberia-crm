@@ -488,6 +488,11 @@ test("selection, keyboard, reduced motion, contrast and target viewports", async
   await page.evaluate(() => {
     document.documentElement.style.zoom = "";
   });
+  const customerFilters = page
+    .locator("summary")
+    .filter({ hasText: /^Filtros/ });
+  await customerFilters.focus();
+  await page.keyboard.press("Enter");
   await expect(
     page.getByRole("button", { name: "Activos", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
