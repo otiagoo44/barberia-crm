@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import {mkdir} from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 
 test("service creation shows field errors, preserves input and explains price/capability setup", async ({
   page,
@@ -113,8 +113,12 @@ test("weekly editor previews the break, excludes Sunday and posts one batch", as
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBeTruthy();
-    await mkdir("docs/verification/pilot-20261024",{recursive:true});
-    await page.screenshot({path:`docs/verification/pilot-20261024/weekly-editor-${width}.png`,fullPage:true});
+    await mkdir("docs/verification/pilot-20261024", { recursive: true });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({
+      path: `docs/verification/pilot-20261024/weekly-editor-${width}.png`,
+      fullPage: true,
+    });
   }
   expect(
     (await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze())

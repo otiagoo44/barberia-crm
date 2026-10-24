@@ -315,6 +315,10 @@ try {
         }
       }
       if (module === "finanzas") {
+        const filters = page
+          .locator("summary")
+          .filter({ hasText: "Filtros financieros" });
+        if (await filters.count()) await filters.click();
         const period = page.getByRole("combobox", {
           name: "Período",
           exact: true,

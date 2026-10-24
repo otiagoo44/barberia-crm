@@ -96,6 +96,9 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     date.setUTCDate(date.getUTCDate() + 3);
     const day = date.toISOString().slice(0, 10);
     await page.goto("/fixture-a/equipo");
+    await page
+      .getByRole("button", { name: "Turnos del día", exact: true })
+      .click();
     await page.getByLabel("Día de trabajo").fill(day);
     await page.getByLabel("Profesional del día").selectOption(f.staff.a1);
     await page
