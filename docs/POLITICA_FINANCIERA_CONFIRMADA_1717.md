@@ -13,7 +13,7 @@ Esta página y la respuesta del propietario del 24/10 sustituyen los pendientes 
 
 ## Reconocimiento exacto del nuevo read-model
 
-La política explícita `settled_collections_including_advances` vive en `partner_cash_policies`, vinculada a una versión de `partner_distribution_policies`. Ninguna migración lee el JSON comercial para activar un tenant. La configuración empieza deshabilitada y no importa historia.
+La política explícita `settled_collections_including_advances` vive en `partner_cash_policies`, vinculada a una versión de `partner_distribution_policies`. Congela UUID de profesionales y UUID de cuentas: cambiar posteriormente un vínculo staff no transfiere la capacidad de aprobación. Para 17:17 exige los correos Auth verificados de Esteban/Jonatan vinculados a sus profesionales y Luque. Ninguna migración lee el JSON comercial para activar un tenant. La configuración empieza deshabilitada y no importa historia.
 
 Cada `payment` o devolución se concilia una sola vez en `payment_reconciliations`. Guarda importe bruto del ledger, fecha de cobro original, fecha de elegibilidad, fecha de acreditación, comisión efectiva, impuestos, retenciones, otros cargos, eventual devolución real de comisión, neto y evidencia. Ningún campo desconocido se rellena automáticamente con cero.
 

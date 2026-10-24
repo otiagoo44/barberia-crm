@@ -5,6 +5,7 @@ create table public.partner_cash_policies (
  id uuid primary key default gen_random_uuid(), organization_id uuid not null,
  branch_id uuid not null, policy_id uuid not null, first_month date not null,
  partner_ids uuid[] not null check(cardinality(partner_ids)=2 and partner_ids[1]<>partner_ids[2]),
+ owner_profile_ids uuid[] not null check(cardinality(owner_profile_ids)=2 and owner_profile_ids[1]<>owner_profile_ids[2]),
  recognition text not null check(recognition='settled_collections_including_advances'),
  initial_losses_minor public.money_minor not null check(initial_losses_minor=0),
  created_at timestamptz not null default now(), created_by uuid not null references public.profiles(id),
@@ -153,7 +154,7 @@ begin
  ) a where remaining>0;
  result:=net-paid;
  return jsonb_build_object('recognition','settled_collections_including_advances','policy_id',policy.policy_id,'partners',policy.partner_ids,
- 'receipts',receipts,'paid_expenses',costs,'advances',advances,'loss_origins',losses,'incomplete_receipts',missing,'unclassified_withdrawals',unclassified,
+ 'owner_profile_ids',policy.owner_profile_ids,'receipts',receipts,'paid_expenses',costs,'advances',advances,'loss_origins',losses,'incomplete_receipts',missing,'unclassified_withdrawals',unclassified,
  'gross_collections_minor',gross,'net_settled_minor',net,'paid_expenses_minor',paid,'before_losses_minor',result,
  'losses_opening_minor',carried,'losses_recovered_minor',least(greatest(result,0),carried),
  'losses_remaining_minor',greatest(carried-result,0),'distributable_minor',greatest(result-carried,0),
@@ -168,7 +169,7 @@ create function app_private.partner_distribution_command(p_org uuid,p_branch uui
 language plpgsql security definer set search_path='' as $$
 declare actor uuid; sid uuid; policy public.partner_cash_policies; base public.partner_distribution_policies;
  period public.partner_distribution_periods; payment public.payments; allocation public.partner_distribution_allocations;
- snapshot jsonb; hash text; reply jsonb; v uuid; partners uuid[]; lo date; hi date; tz text; ref text;
+ snapshot jsonb; hash text; reply jsonb; v uuid; partners uuid[]; owners uuid[]; lo date; hi date; tz text; ref text;
  earned timestamptz; settled timestamptz; day date; fee bigint; tax bigint; withholding bigint; other bigint;
  net bigint; credit bigint; remaining bigint; applied bigint; item jsonb; row record;
 begin
@@ -198,15 +199,21 @@ begin
   if cardinality(partners) is distinct from 2 or partners[1]=partners[2] or
   (select count(distinct s.profile_id) from public.staff s join public.organization_memberships m on m.organization_id=s.organization_id and m.profile_id=s.profile_id join public.profiles pr on pr.id=s.profile_id where s.organization_id=p_org and s.id=any(partners) and s.active and pr.active and m.active and m.role='organization_owner')<>2
   then raise exception 'two_linked_owners_required' using errcode='23514';end if;
+  select array_agg(s.profile_id order by array_position(partners,s.id)) into owners from public.staff s where s.organization_id=p_org and s.id=any(partners);
+  if exists(select 1 from public.organizations where id=p_org and slug='1717-barberia') and (
+   not exists(select 1 from public.branches where organization_id=p_org and id=p_branch and slug='luque') or
+   (select count(*) from public.staff s join auth.users u on u.id=s.profile_id where s.organization_id=p_org and s.id=any(partners) and u.email_confirmed_at is not null and
+    ((s.slug='esteban' and lower(u.email)='estebanras15@gmail.com') or (s.slug='jonatan' and lower(u.email)='jonatanramos2005oviedo@gmail.com')))<>2
+  ) then raise exception 'confirmed_1717_owner_identities_required' using errcode='23514';end if;
   if exists(select 1 from public.partner_distribution_periods where organization_id=p_org and branch_id=p_branch)
   then raise exception 'existing_periods_require_migration_review' using errcode='23514';end if;
   insert into public.partner_distribution_policies(organization_id,branch_id,version,enabled,periodicity,approval_role,withdrawals_mode,evidence_reference,losses_reference,created_by)
   select p_org,p_branch,coalesce(max(version),0)+1,false,'monthly','owner','explicit_advance',ref,'Monthly loss recovery; explicit zero opening balance',actor from public.partner_distribution_policies where organization_id=p_org and branch_id=p_branch returning * into base;
-  insert into public.partner_cash_policies(organization_id,branch_id,policy_id,first_month,partner_ids,recognition,initial_losses_minor,created_by)
-  values(p_org,p_branch,base.id,lo,partners,'settled_collections_including_advances',0,actor) returning id into v;
+  insert into public.partner_cash_policies(organization_id,branch_id,policy_id,first_month,partner_ids,owner_profile_ids,recognition,initial_losses_minor,created_by)
+  values(p_org,p_branch,base.id,lo,partners,owners,'settled_collections_including_advances',0,actor) returning id into v;
  elsif p_action='approve_activation' then
   select * into base from public.partner_distribution_policies where organization_id=p_org and id=policy.policy_id;
-  if base.enabled or not exists(select 1 from public.staff where organization_id=p_org and id=any(policy.partner_ids) and profile_id=actor and active) then raise exception 'activation_not_available' using errcode='23514';end if;
+  if base.enabled or not actor=any(policy.owner_profile_ids) or not exists(select 1 from public.staff where organization_id=p_org and id=any(policy.partner_ids) and profile_id=actor and active) then raise exception 'activation_not_available' using errcode='23514';end if;
   foreach ref in array array['owner_accounts','smtp','mfa','pos_contract','policy','staging','backup_restore','alerts','pilot'] loop
    if jsonb_typeof(d->'gates'->ref) is distinct from 'string' or length(btrim(d->'gates'->>ref)) not between 5 and 250 then raise exception 'external_gate_evidence_required' using errcode='23514';end if;
   end loop;
@@ -216,8 +223,8 @@ begin
   if (select count(distinct a.approver_id) from public.partner_cash_activation_approvals a join public.organization_memberships m on m.organization_id=a.organization_id and m.profile_id=a.approver_id and m.active and m.role='organization_owner' join public.staff s on s.organization_id=a.organization_id and s.profile_id=a.approver_id and s.id=any(policy.partner_ids) and s.active where a.organization_id=p_org and a.policy_id=policy.policy_id and a.evidence_hash=hash and exists(select 1 from auth.mfa_factors f where f.user_id=a.approver_id and f.status='verified'))=2 then
    insert into public.partner_distribution_policies(organization_id,branch_id,version,enabled,periodicity,approval_role,withdrawals_mode,evidence_reference,losses_reference,created_by)
    values(p_org,p_branch,base.version+1,true,'monthly','owner','explicit_advance',base.evidence_reference,base.losses_reference,actor) returning * into base;
-   insert into public.partner_cash_policies(organization_id,branch_id,policy_id,first_month,partner_ids,recognition,initial_losses_minor,created_by)
-   values(p_org,p_branch,base.id,policy.first_month,policy.partner_ids,policy.recognition,0,actor);
+   insert into public.partner_cash_policies(organization_id,branch_id,policy_id,first_month,partner_ids,owner_profile_ids,recognition,initial_losses_minor,created_by)
+   values(p_org,p_branch,base.id,policy.first_month,policy.partner_ids,policy.owner_profile_ids,policy.recognition,0,actor);
   end if;
  elsif p_action='classify_withdrawal' then
   if d->>'treatment' not in ('owner_withdrawal','employee_advance') or d->>'treatment' is null or not exists(
@@ -274,7 +281,7 @@ begin
    if hash<>period.snapshot_hash then raise exception 'stale_distribution_snapshot_prepare_again' using errcode='23514';end if;
    if p_action='approve' then
     if period.status<>'draft' or d->>'reconciled' is distinct from 'true' then raise exception 'reconciliation_required' using errcode='23514';end if;
-    if not exists(select 1 from public.staff s where s.organization_id=p_org and s.id=any(policy.partner_ids) and s.profile_id=actor and s.active) then raise exception 'partner_owner_required' using errcode='42501';end if;
+    if not actor=any(policy.owner_profile_ids) or not exists(select 1 from public.staff s where s.organization_id=p_org and s.id=any(policy.partner_ids) and s.profile_id=actor and s.active) then raise exception 'partner_owner_required' using errcode='42501';end if;
     insert into public.partner_period_approvals(organization_id,branch_id,period_id,snapshot_hash,approver_id,session_id,reference)
     values(p_org,p_branch,period.id,hash,actor,sid,ref);
     -- Both identities must STILL be owners with a live, unexpired session and a verified factor.

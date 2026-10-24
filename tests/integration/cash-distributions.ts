@@ -117,6 +117,18 @@ export async function cashDistributionContracts(pool: Pool) {
     reference:
       "Isolated owner agreement: settled receipts including eligible advances",
   };
+  await pool.query(
+    "update public.organizations set slug='1717-barberia' where id=$1",
+    [org],
+  );
+  await assert.rejects(
+    command("configure_cash", configure),
+    /confirmed_1717_owner_identities_required/,
+  );
+  await pool.query(
+    "update public.organizations set slug='cash-policy-a' where id=$1",
+    [org],
+  );
   await command("configure_cash", configure);
   await check(
     "policy is explicitly versioned and initially disabled",
@@ -263,6 +275,26 @@ export async function cashDistributionContracts(pool: Pool) {
       assert.equal((await read(january)).status, "draft");
       await assert.rejects(approve(january), { code: "23505" });
       await assert.rejects(approve(january, f.users.ownerB), { code: "42501" });
+      await pool.query(
+        "update public.organization_memberships set role='organization_owner',all_branches=true where organization_id=$1 and profile_id=$2",
+        [org, f.users.receptionA],
+      );
+      await pool.query("update public.staff set profile_id=$2 where id=$1", [
+        f.staff.a2,
+        f.users.receptionA,
+      ]);
+      await assert.rejects(
+        approve(january, f.users.receptionA),
+        /partner_owner_required/,
+      );
+      await pool.query("update public.staff set profile_id=$2 where id=$1", [
+        f.staff.a2,
+        second,
+      ]);
+      await pool.query(
+        "update public.organization_memberships set role='receptionist' where organization_id=$1 and profile_id=$2",
+        [org, f.users.receptionA],
+      );
       const allocation = (
         await pool.query(
           "select id from public.partner_distribution_allocations where period_id=$1 limit 1",

@@ -12,6 +12,7 @@ Se verificó `get_project_url`: `https://tbcfhagteyqufjkmbxzz.supabase.co`. Prim
 - Esteban staff: `7b161038-cc4c-49ef-8505-6f63a1cb8998`. Jonatan staff: `a66354c2-2bdf-46cb-98e4-fd6389d8fd7c`. Ambos activos, `profile_id=null`.
 - Las dos direcciones confirmadas no existen en Auth; no hay email verificado, membresía personal ni MFA que certificar. Existe otra membresía owner inicial; no se la confundió con ellos ni se la suplantó.
 - Cinco servicios actuales: corte, barba, cejas, lavado y rulos. No figuran todavía combo rulos/corte ni tintes confirmados. Sin reglas semanales ni excepciones. No se afirma que el catálogo/horario nuevo esté guardado.
+- Horario público realmente almacenado: lunes a sábado **08:00–21:00**, sin fila de domingo; todavía difiere del nuevo 09:00–21:00 confirmado. Ambos profesionales tienen asignación activa a Luque. Sin ausencias/cierres, citas ni sesiones de caja. `finance_settings` usa equal_profit_share con los dos staff y adelantos no deducibles; no existe todavía la política nueva de cobros.
 - Cero checkouts, pagos, gastos o períodos de distribución. Ninguna política societaria registrada.
 - Flag organización de booking=true, flag Luque=false: booking efectivo de Luque cerrado. El generador conservador exige revisar/apagar explícitamente el flag de organización con un owner antes de aplicar el plan; no lo cambia silenciosamente.
 - `list_branches`: ninguna rama de Supabase. El usuario confirma que no existe staging.
