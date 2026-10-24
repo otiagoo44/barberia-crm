@@ -172,11 +172,16 @@ export async function confirmed1717Contracts(pool: Pool) {
     assert.deepEqual(
       (
         await client.query(
-          "select * from public.branch_business_hours where organization_id=$1 order by id",
+          "select id,weekday,opens_at::text,closes_at::text from public.branch_business_hours where organization_id=$1 order by id",
           [org],
         )
       ).rows,
-      businessHours,
+      businessHours.map((h) => ({
+        id: h.id,
+        weekday: h.weekday,
+        opens_at: "09:00:00",
+        closes_at: "21:00:00",
+      })),
     );
     const { rows: rules } = await client.query(
       "select staff_id,weekday,starts_at::text,ends_at::text from public.staff_availability_rules where organization_id=$1 and valid_until is null",
@@ -264,6 +269,9 @@ export async function confirmed1717Contracts(pool: Pool) {
       effectiveFrom: since,
       evidenceReference: "isolated provider evidence fixture",
       fixedAmountMinor: { debit: 0, credit: 0 },
+      vatTreatment: "Isolated fixture: included",
+      withholdingTreatment: "Isolated fixture: none",
+      otherChargesTreatment: "Isolated fixture: none",
     });
     await client.query(posSql);
     await client.query(posSql);
@@ -297,6 +305,36 @@ export async function confirmed1717Contracts(pool: Pool) {
     assert.equal(await contains(esteban, "12:30"), true);
     assert.equal(await contains(jonatan, "13:00"), true);
     assert.equal(await contains(jonatan, "12:30"), false);
+    await client.query("begin");
+    try {
+      await client.query(
+        "insert into public.staff_availability_exceptions(organization_id,branch_id,staff_id,local_date,starts_at,ends_at,available,reason) values($1,$2,$3,$4,'09:00','19:00',true,'Isolated override cannot bypass mandatory break')",
+        [org, branch, esteban, day.monday],
+      );
+      assert.equal(await contains(esteban, "12:15"), false);
+      const sunday = (
+        await client.query("select ($1::date-1)::text d", [day.monday])
+      ).rows[0].d;
+      await client.query(
+        "insert into public.staff_availability_exceptions(organization_id,branch_id,staff_id,local_date,starts_at,ends_at,available,reason) values($1,$2,$3,$4,'09:00','19:00',true,'Isolated Sunday override')",
+        [org, branch, jonatan, sunday],
+      );
+      await client.query(
+        "insert into public.branch_closures(organization_id,branch_id,kind,starts_at,ends_at,reason) values($1,$2,'open',($3::date+'09:00'::time) at time zone 'America/Asuncion',($3::date+'19:00'::time) at time zone 'America/Asuncion','Isolated extraordinary opening')",
+        [org, branch, sunday],
+      );
+      assert.equal(
+        (
+          await client.query(
+            "select app_private.effective_availability($1,$2,$3,$4,false,null)='{}'::tstzmultirange blocked",
+            [org, branch, jonatan, sunday],
+          )
+        ).rows[0].blocked,
+        true,
+      );
+    } finally {
+      await client.query("rollback");
+    }
     await client.query(
       "insert into public.staff_availability_exceptions(organization_id,branch_id,staff_id,local_date,starts_at,ends_at,available,reason) values($1,$2,$3,$4,'14:00','15:00',false,'isolated unavailable exception')",
       [org, branch, jonatan, day.monday],
@@ -330,6 +368,6 @@ export async function confirmed1717Contracts(pool: Pool) {
     }
   }
   console.log(
-    "PASS Confirmed 17:17: owner/staff linkage, unauthorized/inactive rejection, AAL2, catalog, combo totals, 18 weekly intervals, break/Sunday, unchanged business hours, idempotency, public/distribution/POS gates",
+    "PASS Confirmed 17:17: owner/staff linkage, unauthorized/inactive rejection, AAL2, catalog, combo totals, 18 weekly intervals, mandatory break/Sunday, confirmed 09-21 public hours, idempotency, public/distribution/POS gates",
   );
 }

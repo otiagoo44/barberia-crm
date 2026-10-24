@@ -1,5 +1,7 @@
 # Finanzas operativas
 
+Actualización 24/10: para 17:17 existe una política explícita de **cobros conciliados**, gastos pagados, pérdidas trasladables, retiros personales y aprobación dual. Ver [política canónica](POLITICA_FINANCIERA_CONFIRMADA_1717.md), [UPay](CONCILIACION_UPAY_1717.md) y [pruebas](PRUEBAS_DOBLE_APROBACION.md). Su activación empieza bloqueada; el motor histórico de ventas y los agregados `gross_revenue`/`collected` de los apartados siguientes conservan su significado para tenants sin esa política. No presentar la estimación histórica de ventas como el nuevo reparto elegible de 17:17.
+
 El módulo está implementado sobre la arquitectura existente; la habilitación del primer negocio depende del onboarding y de los controles de release en VERIFICATION. No es contabilidad fiscal ni un ERP.
 
 ## Fuente de verdad y dinero

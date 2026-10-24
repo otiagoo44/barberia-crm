@@ -78,6 +78,18 @@ begin
  next_data := jsonb_build_object('name','Luque','address',manifest->'branch'->>'address','phone',manifest->'branch'->>'phone');
  select jsonb_build_object('name',name,'address',address,'phone',phone) into old_data from public.branches where id=branch and organization_id=org;
  if old_data is distinct from next_data then perform public.manage_record(org,'branches',branch,branch,next_data); end if;
+ -- Public hours are now explicitly confirmed. Keep record identities and audit
+ -- before/after; do not delete a Sunday or multi-segment plan to force a match.
+ if exists(select 1 from public.branch_business_hours where organization_id=org and branch_id=branch and weekday=0)
+ or exists(select 1 from public.branch_business_hours where organization_id=org and branch_id=branch group by weekday having count(*)>1)
+ then raise exception 'Existing Sunday or segmented business hours require explicit review';end if;
+ for item in select value from jsonb_array_elements(manifest->'branch'->'business_hours'->'weekdays') loop
+  select id,to_jsonb(h) into branch_service_id,old_data from public.branch_business_hours h where organization_id=org and branch_id=branch and weekday=(item::text)::integer;
+  next_data:=jsonb_build_object('weekday',(item::text)::integer,'opens_at','09:00:00','closes_at','21:00:00');
+  if branch_service_id is null or exists(select 1 from jsonb_each(next_data) e where old_data->e.key is distinct from e.value) then
+   perform public.manage_record(org,'branch_business_hours',branch_service_id,branch,next_data);
+  end if;
+ end loop;
  -- Current tariff version, effective at this transaction; previous appointment
  -- and checkout snapshots are immutable. Audit preserves before/after prices.
  for item in select value from jsonb_array_elements(manifest->'services') loop
@@ -106,8 +118,31 @@ begin
        perform public.manage_record(org,'staff_service_capabilities',null,null,jsonb_build_object('staff_id',v_staff_id,'service_id',v_service_id)); end if;
    end loop;
  end loop;
+ for item in select value from jsonb_array_elements(manifest->'expense_categories') where value->>'kind'='operating' loop
+   if not exists(select 1 from public.expense_categories where organization_id=org and code=item->>'code') then
+     perform public.finance_command(org,null,'configure',jsonb_build_object('entity','expense_categories','name',item->>'name','code',item->>'code','kind','operating'),gen_random_uuid());
+   end if;
+ end loop;
+ -- New safeguard schema is mandatory; this is not a fallback to weaker rules.
+ foreach v_staff_id in array array[esteban,jonatan] loop
+   if not exists(select 1 from public.staff_unavailability_rules where organization_id=org and branch_id=branch and staff_id=v_staff_id and weekday=0 and starts_at='00:00'::time and ends_at='24:00'::time and valid_from<=since and valid_until is null) then
+     insert into public.staff_unavailability_rules(organization_id,branch_id,staff_id,weekday,starts_at,ends_at,valid_from,reason,created_by)
+     values(org,branch,v_staff_id,0,'00:00','24:00',since,'Owner-confirmed Sunday closure 2026-10-24',actor);
+     perform app_private.record_audit(org,branch,'1717.sunday_safeguard','staff',v_staff_id,jsonb_build_object('valid_from',since),gen_random_uuid());
+   end if;
+ end loop;
+ for item in select to_jsonb(d) from generate_series(1,6) d loop
+   if not exists(select 1 from public.staff_unavailability_rules where organization_id=org and branch_id=branch and staff_id=esteban and weekday=(item::text)::integer and starts_at='12:00'::time and ends_at='12:30'::time and valid_from<=since and valid_until is null) then
+     insert into public.staff_unavailability_rules(organization_id,branch_id,staff_id,weekday,starts_at,ends_at,valid_from,reason,created_by)
+     values(org,branch,esteban,(item::text)::integer,'12:00','12:30',since,'Owner-confirmed mandatory break 2026-10-24',actor);
+     perform app_private.record_audit(org,branch,'1717.break_safeguard','staff',esteban,jsonb_build_object('weekday',item,'valid_from',since),gen_random_uuid());
+   end if;
+ end loop;
  -- Never delete historical rules, exceptions, closures, absences or bookings.
- -- Split only Esteban's weekly intervals around the provisional usual break.
+ -- Split only Esteban's weekly intervals around the confirmed mandatory break.
+ if exists(select 1 from public.staff_availability_exceptions e where e.organization_id=org and e.branch_id=branch and e.staff_id in(esteban,jonatan) and e.local_date>=since and e.available
+   and (extract(dow from e.local_date)=0 or (e.staff_id=esteban and e.starts_at<'12:30'::time and e.ends_at>'12:00'::time)))
+ then raise exception 'Existing override conflicts with confirmed break or Sunday closure: review without deleting history'; end if;
  foreach v_staff_id in array array[esteban,jonatan] loop
    segments := '[]'::jsonb;
    for shift in select value from jsonb_array_elements(manifest->'weekly_availability'->case when v_staff_id=esteban then 'esteban' else 'jonatan' end) loop
@@ -148,7 +183,7 @@ begin
  if exists(select 1 from public.finance_settings where organization_id=org and
    (remuneration_model<>'equal_profit_share' or not (profit_share_staff_ids @> array[esteban,jonatan] and cardinality(profit_share_staff_ids)=2))) then
    perform public.finance_command(org,null,'configure_settings',jsonb_build_object('remuneration_model','equal_profit_share','profit_share_staff_ids',array[esteban,jonatan]),gen_random_uuid()); end if;
- -- No distribution policy confirmation: losses/recognition/approval remain open.
+ -- Distribution recognition/activation requires explicit versioned RPC policy.
  -- No POS rule: effective date/fixed charge/VAT evidence remains open.
 end $confirmed$;
 commit;

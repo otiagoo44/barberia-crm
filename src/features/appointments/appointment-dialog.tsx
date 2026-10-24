@@ -33,6 +33,9 @@ export function AppointmentDialog({
   const now = useClock();
   const operator = w.role !== "barber";
   const due = new Date(a.starts_at).valueOf() <= now + 30 * 60000;
+  const late =
+    w.organization.slug === "1717-barberia" &&
+    now >= new Date(a.starts_at).valueOf() + 15 * 60000;
   const [operationKeys] = useState<Record<string, string>>(() =>
     Object.fromEntries(
       [
@@ -103,6 +106,13 @@ export function AppointmentDialog({
           {a.staff_name} · {tz}
         </p>
         {error && <Notice error>{error}</Notice>}
+        {late && ["scheduled", "confirmed"].includes(a.status) && (
+          <Notice>
+            Se superaron los 15 minutos de tolerancia. Evaluá la llegada,
+            reprogramación o no-show con el personal. La cita no se cancela ni
+            genera multas automáticamente.
+          </Notice>
+        )}
         <div className="row wrap">
           {operator && a.status === "scheduled" && (
             <button
@@ -120,7 +130,7 @@ export function AppointmentDialog({
               disabled={busy || !due}
               onClick={() => change("checked_in")}
             >
-              Check-in
+              {late ? "Registrar llegada con retraso" : "Check-in"}
             </button>
           )}
           {a.status === "checked_in" && (

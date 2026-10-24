@@ -10,7 +10,13 @@
     "slug": "luque",
     "address": "Cap. Dado esq. Gobernador Irala, Luque",
     "phone": "+595983402497",
-    "business_hours_confirmed": false
+    "business_hours_confirmed": true,
+    "business_hours": {
+      "weekdays": [1, 2, 3, 4, 5, 6],
+      "opens_at": "09:00",
+      "closes_at": "21:00",
+      "sunday_closed": true
+    }
   },
   "staff": [
     {
@@ -148,6 +154,14 @@
     }
   ],
   "expense_categories": [
+    { "name": "Agua", "code": "water", "kind": "operating" },
+    { "name": "Luz", "code": "electricity", "kind": "operating" },
+    { "name": "Insumos", "code": "supplies", "kind": "operating" },
+    {
+      "name": "Otros costos operativos",
+      "code": "other_operating",
+      "kind": "operating"
+    },
     {
       "name": "Alquiler",
       "code": "rent",
@@ -185,11 +199,8 @@
   },
   "advances_deductible": false,
   "unconfirmed": [
-    "Business opening hours and Sunday availability",
-    "Whether Esteban's usual 12:00-12:30 break is mandatory",
-    "POS provider, contractual effective date, fixed charges and VAT treatment",
-    "Definition of recognized income and whether POS reduces distributable profit",
-    "Withdrawals, prior-period losses and final distribution approval",
+    "UPay contractual effective date, fixed charges, VAT and withholding treatment",
+    "Refundable customer advances: legal classification and evidence before distribution",
     "Deduction policy for future advances",
     "Historical rule validity",
     "SMTP provider",
@@ -202,13 +213,31 @@
     "periodicity": "monthly",
     "calendar_period": true,
     "distributions_enabled": false,
-    "recognition_confirmed": false,
-    "source": "Owner confirmed: total generated minus business costs, monthly equal split; accounting recognition pending",
+    "recognition_confirmed": true,
+    "recognition_basis": "eligible_collections",
+    "cards_recognized_on": "bank_accreditation",
+    "customer_advances_included": true,
+    "paid_expenses_only": true,
+    "loss_carry_forward": true,
+    "owner_advances": "deduct_from_own_share_with_carry",
+    "approval": "two_distinct_partner_owners_with_mfa",
+    "source": "Owner confirmed 2026-10-24: collected income including advances; cards only after bank accreditation; paid operating costs, recover losses, individual advances and both owners approve. Refundable advances require eligibility resolution.",
     "historical_payouts_imported": false
   },
   "availability_mode": "weekly_with_exceptions",
-  "booking": { "enabled": false, "lead_minutes": 0 },
+  "booking": {
+    "enabled": false,
+    "lead_minutes": 0,
+    "late_tolerance_minutes": 15,
+    "late_action": "manual_review",
+    "automatic_cancellation": false,
+    "automatic_penalty": false,
+    "rescheduling": "staff_assessment",
+    "special_services": "prior_consultation"
+  },
   "pos_activation": {
+    "provider": "UPay",
+    "card_surcharge_allowed": false,
     "effective_from": null,
     "evidence_reference": null,
     "enabled": false
@@ -235,8 +264,8 @@
     "staff_slug": "esteban",
     "starts_at": "12:00",
     "ends_at": "12:30",
-    "mandatory_confirmed": false,
+    "mandatory_confirmed": true,
     "conservative_availability_exclusion": true,
-    "exception_warning": "Available day exceptions replace weekly shifts; preserve this break when overriding a day"
+    "exception_warning": "Esteban's confirmed 12:00-12:30 break must be preserved in overrides; Sundays closed for both; no automatic extraordinary shifts"
   }
 }

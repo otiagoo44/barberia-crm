@@ -1,4 +1,8 @@
-# Estado actualizado, 23/10/2026
+# Estado actualizado, 24/10/2026
+
+**Activación comercial pendiente.** [Cierre vigente](CIERRE_FINAL_1717_2026_10_24.md), [gates y datos cloud reconsultados](ACTIVACION_CLOUD_1717.md). Cloud tiene 34 migraciones; las 37 iniciales locales más las incrementales de este release no equivalen a un rollout cloud. Staging no existe, ambos propietarios sin cuenta Auth, SMTP/recuperación/MFA, POS, backup/restore cloud, alertas y piloto pendientes. Código nuevo falla cerrado si falta el esquema del reparto; no abre booking ni distribuciones.
+
+## Antecedente del 23/10
 
 Actualización de configuración real: [release 17:17](RELEASE_FINAL_1717.md), [datos confirmados](CONFIGURACION_CONFIRMADA_1717.md), [onboarding de ambos owners](ONBOARDING_DOS_PROPIETARIOS.md). Hay 37 migraciones locales (36 heredadas intactas + vínculo owner/staff); historial cloud actual pendiente por acceso. La migración nueva no aplica DML comercial. La UI conserva compatibilidad con el guard previo, que rechazará el vínculo owner hasta aplicar la migración.
 
@@ -32,16 +36,16 @@ Validación registrada del código: npm ci y audit sin vulnerabilidades, lint/ty
 
 ## Gates externos OPEN
 
-| Gate | Evidencia necesaria para cerrarlo |
-|---|---|
-| SMTP y redirects | Proveedor/remitente real en Supabase, confirmación y recovery entregados a cuenta autorizada, enlaces de un uso y callback exacto. No se inventan credenciales. |
-| MFA cloud | Enrollment real owner/finance/manager/plataforma, autenticador de respaldo independiente, recuperación supervisada ensayada; MFA del proveedor. |
-| Staging | Proyecto y secretos propios, Auth redirects, migrations alineadas y piloto completo sin tocar producción. Preview permanece cerrado si faltan. |
+| Gate                 | Evidencia necesaria para cerrarlo                                                                                                                                           |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SMTP y redirects     | Proveedor/remitente real en Supabase, confirmación y recovery entregados a cuenta autorizada, enlaces de un uso y callback exacto. No se inventan credenciales.             |
+| MFA cloud            | Enrollment real owner/finance/manager/plataforma, autenticador de respaldo independiente, recuperación supervisada ensayada; MFA del proveedor.                             |
+| Staging              | Proyecto y secretos propios, Auth redirects, migrations alineadas y piloto completo sin tocar producción. Preview permanece cerrado si faltan.                              |
 | Backup/restore cloud | Responsable, frecuencia, retención y almacenamiento; copia real restaurada en destino aislado, checks de Auth/RLS/ledger/distribuciones/dedupe y RPO/RTO medidos/aceptados. |
-| Alertas | Responsable y canal reales; consumir monitor privado, alertar 503, dead/lag/leases y API error rate/p95; recepción comprobada con falla controlada en staging. |
-| Política societaria | Acuerdo de periodicidad, retiros, pérdidas previas, gastos pendientes, aprobación/cierre por sucursal y evidencia. Registro nuevo bloqueado hasta confirmación explícita. |
-| Datos y piloto | Precios, duraciones, tarifas POS y disponibilidad real. Clasificar cuatro anomalías históricas; recepción → atención → split → cierre → revisión owner/barbero/finance. |
-| Rollout cloud | Comparar historial real, backup previo, ensayo staging, evidencia CI del SHA, migraciones controladas y smoke. No db reset, seeds ni backfills productivos. |
+| Alertas              | Responsable y canal reales; consumir monitor privado, alertar 503, dead/lag/leases y API error rate/p95; recepción comprobada con falla controlada en staging.              |
+| Política societaria  | Acuerdo de periodicidad, retiros, pérdidas previas, gastos pendientes, aprobación/cierre por sucursal y evidencia. Registro nuevo bloqueado hasta confirmación explícita.   |
+| Datos y piloto       | Precios, duraciones, tarifas POS y disponibilidad real. Clasificar cuatro anomalías históricas; recepción → atención → split → cierre → revisión owner/barbero/finance.     |
+| Rollout cloud        | Comparar historial real, backup previo, ensayo staging, evidencia CI del SHA, migraciones controladas y smoke. No db reset, seeds ni backfills productivos.                 |
 
 ## Rollout y rollback
 

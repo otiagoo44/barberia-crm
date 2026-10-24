@@ -1,4 +1,8 @@
-# Release de configuración 17:17 — 23/10/2026
+# Release de configuración 17:17
+
+Vigente al 24/10: [cierre actual](CIERRE_FINAL_1717_2026_10_24.md), [política confirmada](POLITICA_FINANCIERA_CONFIRMADA_1717.md), [inventario cloud real y activación](ACTIVACION_CLOUD_1717.md). Se recuperó acceso al proyecto exacto; cloud tiene 34 migraciones y ambos propietarios aún no existen en Auth. El horario público se confirmó 09–21 lunes a sábado, pausa fija y domingo cerrado. Los resultados del 23/10 siguientes son históricos y no certifican el candidato del 24/10.
+
+## Antecedente del 23/10
 
 ## Procedencia
 
@@ -25,19 +29,19 @@ Esteban y Jonatan: correos confirmados, existencia/Auth email/membresía/víncul
 
 ## Verificación
 
-| Check local | Resultado actual |
-|---|---|
-| npm ci | Aprobado, 260 paquetes instalados |
-| npm audit --audit-level=high | Cero vulnerabilidades |
-| npm run lint / typecheck | Aprobados |
-| npm test | 22 aprobados, cero omitidos |
-| npm run test:db | Aprobado: 51 seguridad/operación + 19 finanzas (débito 2%) + 23 hardening + 18 producto; onboarding/scheduler, upgrades y nuevo bloque 17:17 |
-| npm run test:hardening | 23 aprobados; repetición explícita de ese bloque |
-| npm run test:load | 10/50/100 tenants y casos concentrados, cero errores; PostgreSQL local, no SLA cloud |
-| npm run build | Aprobado |
-| npm run test:e2e | **1 aprobado, 29 omitidos** por ausencia de Supabase Auth local; requiere CI real |
-| npm run test:ui | 11 aprobados tras el diagnóstico CI; UI real con respuestas interceptadas, no Auth real |
-| Smoke productivo no destructivo | health/ready 200, jobs sin secreto 403, catalog 200 sin sucursales, availability 404, book 200 |
+| Check local                     | Resultado actual                                                                                                                             |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm ci                          | Aprobado, 260 paquetes instalados                                                                                                            |
+| npm audit --audit-level=high    | Cero vulnerabilidades                                                                                                                        |
+| npm run lint / typecheck        | Aprobados                                                                                                                                    |
+| npm test                        | 22 aprobados, cero omitidos                                                                                                                  |
+| npm run test:db                 | Aprobado: 51 seguridad/operación + 19 finanzas (débito 2%) + 23 hardening + 18 producto; onboarding/scheduler, upgrades y nuevo bloque 17:17 |
+| npm run test:hardening          | 23 aprobados; repetición explícita de ese bloque                                                                                             |
+| npm run test:load               | 10/50/100 tenants y casos concentrados, cero errores; PostgreSQL local, no SLA cloud                                                         |
+| npm run build                   | Aprobado                                                                                                                                     |
+| npm run test:e2e                | **1 aprobado, 29 omitidos** por ausencia de Supabase Auth local; requiere CI real                                                            |
+| npm run test:ui                 | 11 aprobados tras el diagnóstico CI; UI real con respuestas interceptadas, no Auth real                                                      |
+| Smoke productivo no destructivo | health/ready 200, jobs sin secreto 403, catalog 200 sin sucursales, availability 404, book 200                                               |
 
 [Evidencia nueva](verification/1717-20261023/) y [segunda revisión de archivos](verification/1717-20261023/REVIEW.md). No se sobrescribe la evidencia histórica del rediseño. Dos errores iniciales del plan/migración fueron corregidos y se repitió la suite; el harness ahora libera la conexión incluso ante SQL fallido. Las omisiones y los mocks UI no sustituyen Auth real. CI del SHA del PR sigue siendo el gate de merge.
 

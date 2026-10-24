@@ -1,3 +1,9 @@
+# Actualización 24/10/2026
+
+Horario público confirmado lunes a sábado 09:00–21:00, domingo cerrado. Pausa obligatoria Esteban 12:00–12:30 y turnos individuales según `config/onboarding/1717.json`. Reservas del mismo día con capacidad, tolerancia 15 minutos evaluada por personal y consulta previa para rulos/tintes. **Todavía no aplicar a `1717barber`**: el catálogo/horario productivo sigue sin guardar y Luque permanece sin booking público. [Inventario cloud](ACTIVACION_CLOUD_1717.md) y [piloto](PILOTO_FINAL_1717.md). Este encabezado sustituye los pendientes antiguos sobre horarios/pausa/domingo; conserva el contrato existente.
+
+---
+
 # Handoff para 1717barber
 
 La landing no se modifica en esta entrega. El contrato existente se conserva.

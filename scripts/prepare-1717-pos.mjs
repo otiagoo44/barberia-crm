@@ -34,6 +34,18 @@ export function pos1717Sql(options) {
     )
       throw new Error(`Confirmed integer fixed charge required for ${method}`);
   }
+  for (const field of [
+    "vatTreatment",
+    "withholdingTreatment",
+    "otherChargesTreatment",
+  ]) {
+    if (
+      typeof options[field] !== "string" ||
+      options[field].trim().length < 5 ||
+      options[field].length > 250
+    )
+      throw new Error(`Verified ${field} required; unknown is not zero`);
+  }
   const literal = (value) => "'" + String(value).replaceAll("'", "''") + "'";
   const rates = [
     { code: "debit", bps: 200, fixed: options.fixedAmountMinor.debit },
@@ -43,7 +55,7 @@ export function pos1717Sql(options) {
 set local lock_timeout='5s';
 do $pos$
 declare org uuid := '${options.organizationId}'; since timestamptz := ${literal(options.effectiveFrom)};
- item jsonb; method_id uuid; existing public.payment_method_fee_rules;
+ item jsonb; method_id uuid; new_rule_id uuid; existing public.payment_method_fee_rules;
 begin
  if not app_private.has_org_role(org,array['organization_owner']) then raise exception 'forbidden' using errcode='42501'; end if;
  perform app_private.lock_organization(org);
@@ -56,8 +68,10 @@ begin
     continue;
   end if;
   if since<now() then raise exception 'Prospective tariff date required'; end if;
-  perform public.finance_command(org,null,'configure',jsonb_build_object('entity','payment_method_fee_rules','payment_method_id',method_id,
-    'percentage_bps',(item->>'bps')::integer,'fixed_amount_minor',(item->>'fixed')::bigint,'effective_from',since,'evidence_reference',${literal(options.evidenceReference)}),gen_random_uuid());
+  new_rule_id:=(public.finance_command(org,null,'configure',jsonb_build_object('entity','payment_method_fee_rules','payment_method_id',method_id,
+    'percentage_bps',(item->>'bps')::integer,'fixed_amount_minor',(item->>'fixed')::bigint,'effective_from',since,'evidence_reference',${literal(options.evidenceReference)}),gen_random_uuid())->>'id')::uuid;
+  perform app_private.record_audit(org,null,'1717.pos_evidence','payment_method_fee_rules',new_rule_id,
+    jsonb_build_object('vat',${literal(options.vatTreatment)},'withholding',${literal(options.withholdingTreatment)},'other_charges',${literal(options.otherChargesTreatment)},'provider','UPay'),gen_random_uuid());
  end loop;
 end $pos$;
 commit;

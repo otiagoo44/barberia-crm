@@ -16,7 +16,19 @@ export function ProfitSharing({ summary }: { summary: ProfitSharingSummary }) {
   return (
     <section className="panel stack" aria-label="Reparto de ganancias">
       <div>
-        <h2>Ganancia a repartir</h2>
+        <h2>
+          {organization.slug === "1717-barberia"
+            ? "Estimación histórica por ventas"
+            : "Ganancia a repartir"}
+        </h2>
+        {organization.slug === "1717-barberia" && (
+          <Notice>
+            El reparto acordado de 17:17 se prepara en Distribuciones con cobros
+            conciliados, gastos pagados, pérdidas y aprobación de ambos
+            propietarios. Esta estimación por ventas no autoriza retiros ni
+            pagos.
+          </Notice>
+        )}
         <p>
           Ventas posteadas del período menos devoluciones, tarifas POS, gastos
           operativos (incluidos salarios) y comisiones de otros barberos.

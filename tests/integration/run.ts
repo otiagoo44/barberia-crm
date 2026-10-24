@@ -7,8 +7,20 @@ import { productContracts } from "./product-release";
 import { migrationUpgradeContracts } from "./migration-upgrade";
 import { dashboardUpgradeContracts } from "./dashboard-upgrade";
 import { confirmed1717Contracts } from "./confirmed-1717";
+import { cashDistributionContracts } from "./cash-distributions";
 await migrationUpgradeContracts();
 await dashboardUpgradeContracts();
+const cashPolicyDb = await isolatedDatabase();
+try {
+  console.log(
+    JSON.stringify({
+      suite: "collected-partner-distributions",
+      ...(await cashDistributionContracts(cashPolicyDb.pool)),
+    }),
+  );
+} finally {
+  await cashPolicyDb.stop();
+}
 const db = await isolatedDatabase();
 try {
   const result = await contracts(db.pool);

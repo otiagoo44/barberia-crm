@@ -3,5 +3,8 @@
   "organizationId": null,
   "effectiveFrom": null,
   "evidenceReference": null,
-  "fixedAmountMinor": { "debit": null, "credit": null }
+  "fixedAmountMinor": { "debit": null, "credit": null },
+  "vatTreatment": null,
+  "withholdingTreatment": null,
+  "otherChargesTreatment": null
 }
