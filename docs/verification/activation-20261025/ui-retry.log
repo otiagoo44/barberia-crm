@@ -8,7 +8,7 @@ En línea: 1 Carácter: 1
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
- 
+
 [WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
 
 Running 15 tests using 1 worker
@@ -32,7 +32,7 @@ Running 15 tests using 1 worker
   ✘  15 tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports (31.8s)
 
 
-  1) tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports 
+  1) tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports
 
     Test timeout of 30000ms exceeded.
 
@@ -51,5 +51,5 @@ Running 15 tests using 1 worker
     ────────────────────────────────────────────────────────────────────────────────────────────────
 
   1 failed
-    tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports 
+    tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports
   14 passed (2.3m)
