@@ -1,0 +1,14 @@
+
+> barberia-operating-system@1.0.0 test:ui
+> playwright test --config tests/ui/playwright.config.ts
+
+node.exe : [WebServer] (node:5356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\User\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+Error: Timed out waiting 60000ms from config.webServer.
+

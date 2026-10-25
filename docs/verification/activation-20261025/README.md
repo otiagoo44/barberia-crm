@@ -1,0 +1,20 @@
+# Evidencia de activación — 25/10/2026
+
+Esta carpeta separa pruebas aisladas de la inspección productiva. No contiene dumps, contraseñas, tokens, códigos MFA ni datos de clientes. El árbol de trabajo estaba limpio en `91defb373e2bedf8864143d735a2f61062795e5d` al comenzar.
+
+- `lint.log`, `typecheck.log`, `unit.log`, `build.log`: aprobados en el candidato inicial; 26 unitarias, sin omisiones.
+- `database.log`: suite completa aprobada en PostgreSQL aislado; upgrade desde 34 conservando ventas/pagos/snapshots, horarios y excepciones. Incluye 51 contratos de seguridad/operaciones, 19 financieros, 23 hardening, 18 producto, 13 de cobros y los bloques de configuración/onboarding/upgrade/editor semanal.
+- `hardening.log`, `load.log`: aprobados; 10/50/100 organizaciones y tenant concentrado, cero errores. Latencias corresponden a esta computadora y concurrencia de pruebas, no son SLA productivo.
+- `ui.log`: primer intento no inició el servidor dentro de 60 segundos durante otras tareas. `ui-retry.log`: 14 aprobadas y un timeout de 30 segundos en la prueba multi-viewport/axe. `ui-targeted.log`: esa misma prueba pasó aislada en 16,7 segundos, sin omitir aserciones; timeout de ejecución ampliado a 120 segundos para el diagnóstico local. La CI conserva sus límites originales.
+- `public-http.json`: GET reales a producción; health/ready se verificaron aparte con `scripts/smoke-production.mjs`. El catálogo es JSON versión 1 pero devuelve `branches: []`; disponibilidad Luque 404 y book 200 HTML. No hubo POST productivo de reserva/cobro. Esto no prueba una reserva.
+- `remote-migration-hashes.json`, `migration-comparison.json`: comparación inicial de bytes; diferencias de finales de línea no equivalen a diferencias SQL.
+- `remote-migration-normalized-hashes.json`, `migration-normalized-comparison.json`: 33/34 coinciden al normalizar CRLF/LF y espacios exteriores, sin alterar escapes SQL. La restante `20261019154027_database_scheduler` difiere únicamente en tres textos con mojibake. Se confirmó en la función cloud activa `app_private.process_job_core`.
+- `notification-encoding.log`: nueva migración 41 comprobada contra la desviación exacta en una base aislada: corrige solo literales, conserva OID/propietario/ACL/seguridad, es idempotente y no cambia instalaciones limpias. No reescribe notificaciones ya guardadas ni el historial de migraciones.
+- `private-backup-local.json`, `private-backup-local.log`: prueba de la herramienta privada con fixtures locales; copia cifrada, rechazo de clave incorrecta/alteración, pg_restore real, conteos/hash de 78 tablas, 130 políticas, permisos/constraints/funciones y denegación sin identidad. **No es una copia de producción ni un ensayo de backup físico administrado.** La entrada Windows se ejecuta con `node --import tsx tests/recovery/private-logical.ts`.
+- `generated/`: resultados y capturas generados por esta ejecución, separados de la evidencia histórica. No se rediseñó el CRM.
+
+GitHub: [CI 40141087518](https://github.com/otiagoo44/barberia-crm/actions/runs/40141087518), SHA `91defb3`, aprobó quality/supabase-e2e/visual-baseline tanto inicialmente como al repetir los tres jobs el 25/10 (attempt 2). El restore GoTrue de esa CI usa fixtures; no demuestra recuperación del proyecto cloud. Los cambios nuevos requieren CI de su propio HEAD antes de merge.
+
+Vercel inicial: `dpl_HSDErZ4opv2QRzt82JqHWvkuRoMv`, target preview, ERROR en prebuild con `preview_database_boundary_not_configured`. Preview tiene solo dos variables de frontera y carece de URL/key/secretos staging. No se apuntó a producción ni se debilitó el validador. El deployment que sirve producción al iniciar fue `dpl_8D5pN13v3XSDhc29QXNrUoHzpTaW`, READY, SHA `65a84d329d1ae6ff1e9be3f2b710f6aac44088c2`.
+
+El usuario dejó inicialmente pendiente el proyecto adicional y después autorizó hasta USD 10/mes si fuera necesario. Se evaluará primero el flujo oficial de candidato **production sin asignar dominios** (`--prod --skip-domain`), distinguido explícitamente de un preview y con las escrituras probadas en aislamiento. No se da por resuelto Vercel ni fusionado el PR hasta observar sus recibos reales.

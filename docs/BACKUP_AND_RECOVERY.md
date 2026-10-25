@@ -1,5 +1,9 @@
 # Backup y recuperación
 
+## Estado vigente de 17:17 — 25/10/2026
+
+Pro y copias físicas disponibles verificados en el proyecto exacto `tbcfhagteyqufjkmbxzz`; última observada 25/10 05:00:36 UTC. Retención Pro: 7 días. No se activó PITR. El estado Free que sigue es histórico y ya no describe el plan actual. La restauración física administrada continúa sin ensayo; la copia lógica real requiere conexión autorizada. Procedimiento, herramientas cifradas, evidencia, responsables y límites en [RECUPERACION_PRIVADA_1717](RECUPERACION_PRIVADA_1717.md). Un ensayo con fixtures no certifica recuperación de datos productivos.
+
 ## Estado
 
 PENDIENTE en el proyecto real: política/retención de copias, PITR si se elige y restore cloud. El plan Free se verificó en el dashboard. Aplicar migrations o pasar un restore local no demuestra que un backup del proyecto real sea recuperable. La primera barbería no debe operar hasta registrar un restore satisfactorio aislado de sus copias reales.

@@ -1,0 +1,541 @@
+
+> barberia-operating-system@1.0.0 test:db
+> tsx tests/integration/run.ts
+
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Upgrade exact cloud baseline 34 to candidate: existing sale, payment, fee snapshots, weekly rules and exceptions unchanged; no tenant policies, reconciliations or approvals seeded
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Weekly schedule: atomic intervals, preserved history, break, idempotency, stale edit, concurrent save, live revocation, tenant isolation, booking rollback and private team diagnostics
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Upgrade: 27 → current, 70 existing tables identical; exact cash, dedupe, RLS and FKs preserved
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Dashboard upgrade: exact owner/manager/barber projections, tenant and reception denies, live owner revocation preserved
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Cash policy: policy is explicitly versioned and initially disabled
+PASS Cash policy: one approval cannot pay, the same identity cannot approve twice, external owner cannot approve
+PASS Cash policy: negative month pays zero and creates one auditable loss origin
+PASS Cash policy: 300000 collected minus 100000 prior loss distributes 100000 per owner
+PASS Cash policy: unknown POS and any settlement difference block the proposal
+PASS Cash policy: cash, card net and draft partial advance count once; unpaid invoices and owner advances are not costs
+PASS Cash policy: later partial balance and refund affect the later month; original processing cost is not refunded or deducted twice
+PASS Cash policy: loss recovery carries the unpaid remainder into consecutive months
+PASS Cash policy: integer PYG rounding retains one guarani; concurrent owners transition once
+PASS Cash policy: material changes invalidate the original snapshot and approval; prepare a fresh proposal
+PASS Cash policy: revocation, AAL1, cross-tenant reads and direct writes remain blocked
+PASS Cash policy: weekly diagnostics uses the authoritative engine and enforces tenant access
+PASS Cash policy: arrival after 15 minutes is manual and audited; in-service cannot become no-show
+{"suite":"collected-partner-distributions","passed":13,"auth":"SQL sessions and MFA fixtures; real Auth tested separately"}
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Tenant A cannot read B and vice versa
+PASS Tenant A cannot modify B through RPC
+PASS Manager A1 cannot see A2
+PASS Reception cannot alter roles
+PASS Inactive membership loses access immediately
+PASS Inactive profile loses access immediately
+PASS Tenant identity cannot mutate even with privileged SQL
+PASS Composite FK rejects cross-tenant references
+PASS Anon cannot read business or private tables
+PASS Browser roles have no direct write grants
+PASS User-editable metadata grants no authorization
+PASS Every application table has RLS; public functions are invoker
+PASS Phone uniqueness is per organization
+PASS Server duration: main 40, included 40, additive 50, override 50, special 120
+PASS Create booking, history, event and jobs atomically
+PASS Barber sees own agenda but no owner audit/configuration
+PASS RPC rejects spoofed organization even with valid appointment ID
+PASS SQL EXCLUDE rejects overlap independently of booking RPC
+PASS Shared staff is protected across branches
+PASS Adjacent intervals are valid
+PASS 100 concurrent requests yield exactly one successful booking
+PASS Two resources permit two simultaneous bookings
+PASS Three resources permit three simultaneous bookings
+PASS 100 retries with one idempotency key yield one record and event
+PASS Reschedule and cancellation are idempotent; cancelled releases capacity
+PASS Exceptional closure and time off reject booking
+PASS Availability edits conflicting with booked appointments roll back
+PASS Public catalog redacts internal IDs and profile IDs
+PASS Public booking works and deduplicates customer without overwriting contact
+PASS Rate limiter rejects excess attempts after committed checks
+PASS Honeypot blocks public booking
+PASS State machine: check-in, start, complete; reverse transition denied
+PASS Walk-in becomes real appointment without duplicate customer
+PASS Customer pagination, detail and timeline obey branch permissions
+PASS Daily queue read and agenda return bounded real data
+PASS Audit history is append-only even for table owner
+PASS Queue leases, notifications, metrics and provider pending status work
+PASS Dashboard, capacity and goals use authorized dimensions
+PASS Platform can onboard independent organization; receptionist cannot
+PASS Membership directory only owner; real identities are scoped
+PASS Completed services schedule maintenance and infer configured return
+PASS Request ID survives booking audit and event correlation
+PASS Currency cannot change after reliable price history
+PASS Reception cannot read owner report aggregates
+PASS Archiving a branch preserves history and prevents new operations
+PASS Platform bootstrap is append-only and hidden from tenant owners
+PASS Archived customers stay scoped and can be explicitly restored
+PASS Website metadata can be configured by owner, not reception
+PASS Consultation service rejects forged public availability and booking
+PASS Website attribution preserves public rules, tenant isolation and idempotency
+PASS Anonymous cannot access attribution ledger or unattributed engine
+{"suite":"postgres-security-and-operations","passed":51,"auth_boundary":"PostgreSQL roles and fixture auth.users; real Supabase Auth not exercised"}
+PASS Profit sharing: equal allocation after costs, exact rounding, losses, no service commission, permissions and history lock
+PASS Onboarding: confirmed owner, idempotency, tenant isolation, no invented schedules/commissions/sales or platform access
+PASS Scheduler: owner-only execution, gateway unchanged, jobs drained without duplicate work
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Confirmed 17:17: owner/staff linkage, unauthorized/inactive rejection, AAL2, catalog, combo totals, 18 weekly intervals, mandatory break/Sunday, confirmed 09-21 public hours, idempotency, public/distribution/POS gates
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Finance: partial payment cannot post and overpayment is rejected
+PASS Finance: concurrent posting succeeds exactly once
+PASS Finance: idempotent retry returns the same payment, zero cash/transfer fee
+PASS Finance: debit exact POS snapshot
+PASS Finance: credit exact POS snapshot
+PASS Finance: rule changes preserve historical fees and commission
+PASS Finance: negative and float money rejected
+PASS Finance: expense, deductible advance and independent salary
+PASS Finance: RLS isolates tenant, branch and own staff; reception has no commissions
+PASS Finance: settlement reserves accrued commission and advance once; salary excluded
+PASS Finance: cash close computes expected amount, requires variance reason, seals once
+PASS Finance: refund reverses original sale and commissions without editing history
+PASS Finance: financial aggregates and exports obey authorization
+PASS Finance: historical preview blocks anomalies; confirmed rows retain provenance and unknown calculations
+PASS Finance: finance role operates finances and cannot grant user/security privileges
+PASS Finance: manual unknown-price sale takes authorized snapshot; atomic split rollback
+PASS Finance: adjustments cannot be allocated twice; cash expense reversal creates compensating movement
+PASS Finance: posted database balance and booking website consultation boundary are enforced
+PASS Finance: posting retries and concurrent commission rule edits produce one consistent snapshot
+{"suite":"operational-finance","passed":19}
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Hardening: platform flag gives no tenant SELECT, writes, export or business RPC
+PASS Hardening: support requires ticket, exact tenant/branch, platform role and writes audit
+PASS Hardening: platform flag does not elevate an ordinary receptionist membership
+PASS Hardening: owner: object, row, field and export boundaries
+PASS Hardening: manager: object, row, field and export boundaries
+PASS Hardening: reception: object, row, field and export boundaries
+PASS Hardening: barber: object, row, field and export boundaries
+PASS Hardening: finance: object, row, field and export boundaries
+PASS Hardening: foreignOwner: object, row, field and export boundaries
+PASS Hardening: finance scopes survive membership provisioning and reject foreign branches
+PASS Hardening: barber read-model contains only own staff; foreign staff RPC denied
+PASS Hardening: revocation denies a previously authorized actor on the next SQL statement
+PASS Hardening: archived branches retain history and reject new financial movements
+PASS Hardening: direct RPC nulls cannot remove limits or date bounds
+PASS Hardening: 31-day financial idempotency survives cron and concurrent RPC retries
+PASS Hardening: revised preview excludes omitted rows and null/stale confirmation hash fails
+PASS Hardening: failed import rolls back earlier movements, provenance and idempotency together
+PASS Hardening: concurrent reversal creates exactly one refund and preserves net money
+PASS Hardening: worker rejects absent/null/stale leases, claims once, retries to dead
+PASS Hardening: two settlements cannot reserve or pay the same commission twice
+PASS Hardening: native scheduler lock skips concurrent invocations and missing provider remains pending configuration
+PASS Hardening: a financial command queued behind membership revocation fails after the lock
+PASS Hardening: outbox and notifications reject cross-tenant event references even with privileged SQL
+{"suite":"final-hardening","passed":23}
+Migration OK: 20261012171437_tenant_core.sql
+Migration OK: 20261012171442_authorization.sql
+Migration OK: 20261012171446_configuration.sql
+Migration OK: 20261012171451_scheduling.sql
+Migration OK: 20261012171456_operations.sql
+Migration OK: 20261012171501_analytics_automation.sql
+Migration OK: 20261012173606_read_models.sql
+Migration OK: 20261012180348_product_hardening.sql
+Migration OK: 20261012181534_final_read_models.sql
+Migration OK: 20261012182755_advisor_foreign_key_indexes.sql
+Migration OK: 20261012183007_reporting_access.sql
+Migration OK: 20261012183207_bounded_read_permissions.sql
+Migration OK: 20261012183541_archived_branch_history.sql
+Migration OK: 20261012183917_platform_admin_audit.sql
+Migration OK: 20261012184839_customer_detail_branding.sql
+Migration OK: 20261012210000_website_booking.sql
+Migration OK: 20261012223818_finance_schema.sql
+Migration OK: 20261012223852_finance_transactions.sql
+Migration OK: 20261012224111_finance_read_import.sql
+Migration OK: 20261012224355_booking_finance_hardening.sql
+Migration OK: 20261015190206_booking_attribution_rls.sql
+Migration OK: 20261015190657_consolidate_financial_audit_policy.sql
+Migration OK: 20261015191802_worker_tick_record_scope.sql
+Migration OK: 20261019154027_database_scheduler.sql
+Migration OK: 20261019213732_profit_sharing.sql
+Migration OK: 20261019220146_enable_database_cron.sql
+Migration OK: 20261019223415_final_authorization_hardening.sql
+Migration OK: 20261021005325_privileged_mfa_sessions.sql
+Migration OK: 20261021005630_partner_distributions.sql
+Migration OK: 20261021010224_reporting_health.sql
+Migration OK: 20261021011210_daily_blocks.sql
+Migration OK: 20261021202056_audit_release_boundaries.sql
+Migration OK: 20261021214500_customer_list_projection.sql
+Migration OK: 20261022162330_ux_reporting_breakdown.sql
+Migration OK: 20261022205615_default_product_gold_brand.sql
+Migration OK: 20261022210809_dashboard_statement_owner_guard.sql
+Migration OK: 20261023193417_staff_owner_profile_link.sql
+Migration OK: 20261024161949_collected_partner_distributions.sql
+Migration OK: 20261024162205_setup_availability_diagnostics.sql
+Migration OK: 20261024214851_weekly_schedule_batch.sql
+PASS Product: new organization brand defaults to gold without changing configured brands
+PASS Product: customer list enriches the authorized page without leaking another branch's history or money
+PASS Product: report categories and current retention preserve branch, staff and tenant scopes
+PASS Product: AAL1 owners, managers and platform have no commercial SELECT, RPC or platform grants
+PASS Product: Auth storage refuses last-factor retirement and serializes concurrent removals
+PASS Product: AAL1 reception operates while enrolled users require MFA, and forged session IDs fail closed
+PASS Product: Revoking a session denies signed-claim DB access immediately and after the tenant lock
+PASS Product: Distribution stays blocked without owner-confirmed policy; operational roles cannot enable or read it
+PASS Product: Prepared 50/50 snapshot retains the odd guaraní and approval records no payment
+PASS Product: Approved intervals cannot overlap and immutable evidence cannot be overwritten
+PASS Product: Concurrent payments cannot exceed adjusted allocation; retries and reversals preserve history
+PASS Product: Cash payments require open session and funds, create one cash entry, and preserve operating profit
+PASS Product: Identified withdrawal applies once without a new expense, and closing requires zero balances
+PASS Product: Partner barber projection contains only their approved assignment and no peer balances
+PASS Product: New policy versions preserve closed-period snapshots, allocations and payments
+PASS Product: Financial graphs separate 101 sales from 101 collected and preserve scope/bounds
+PASS Product: Operational monitor rejects invalid secrets and reports actual scheduler heartbeat
+PASS Product: Daily blocks validate the complete transaction, retain existing bookings and retry without duplicates
+{"suite":"product-release","passed":18}

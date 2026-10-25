@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-25T22:48:11.661Z",
+  "origin": "https://barberia-crm-kappa.vercel.app",
+  "method": "GET only; no production bookings or financial writes",
+  "results": [
+    {
+      "path": "/api/public/catalog?organization=1717-barberia&branch=luque",
+      "status": 200,
+      "type": "application/json",
+      "body": {
+        "name": "17:17 Barbería",
+        "slug": "1717-barberia",
+        "branches": [],
+        "currency": "PYG",
+        "logo_url": null,
+        "brand_color": "#d19900",
+        "website_booking_version": 1
+      }
+    },
+    {
+      "path": "/api/public/availability?organization=1717-barberia&branch=luque&service=corte-de-pelo&date=2026-10-26",
+      "status": 404,
+      "type": "application/json",
+      "body": {
+        "error": "No encontramos este recurso.",
+        "request_id": "24b7db10-1747-4f97-80f8-f2585497a441"
+      }
+    },
+    {
+      "path": "/book/1717-barberia/luque",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/api/health/operations",
+      "status": 403,
+      "type": "application/json",
+      "body": {
+        "error": "forbidden"
+      }
+    }
+  ]
+}

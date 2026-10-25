@@ -10,6 +10,8 @@ import { confirmed1717Contracts } from "./confirmed-1717";
 import { cashDistributionContracts } from "./cash-distributions";
 import { weeklyScheduleContracts } from "./weekly-schedule";
 import { pilotUpgradeContracts } from "./pilot-upgrade";
+import { notificationEncodingContracts } from "./notification-encoding";
+await notificationEncodingContracts();
 await pilotUpgradeContracts();
 const weeklyDb = await isolatedDatabase();
 try {

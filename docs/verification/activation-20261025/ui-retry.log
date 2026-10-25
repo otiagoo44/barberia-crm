@@ -1,0 +1,55 @@
+
+> barberia-operating-system@1.0.0 test:ui
+> playwright test --config tests/ui/playwright.config.ts
+
+node.exe : [WebServer] (node:13328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\User\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([WebServer] (no... env being set.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 15 tests using 1 worker
+
+(node:13272) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests\ui\cash-distributions.spec.ts:4:1 › cash distributions explain missing schema and show the frozen components and independent approvals (15.1s)
+  ✓   2 tests\ui\pilot.spec.ts:5:1 › service creation shows field errors, preserves input and explains price/capability setup (3.8s)
+  ✓   3 tests\ui\pilot.spec.ts:61:1 › weekly editor previews the break, excludes Sunday and posts one batch (5.2s)
+  ✓   4 tests\ui\pilot.spec.ts:129:1 › manual sale offers real services without a fictitious finance item (2.5s)
+  ✓   5 tests\ui\review.spec.ts:116:1 › financial layout settles across viewport changes without overflow or header overlap (4.1s)
+  ✓   6 tests\ui\review.spec.ts:172:1 › calendar requests and synthetic interaction timing remain measurable (3.0s)
+  ✓   7 tests\ui\review.spec.ts:223:1 › agenda follows a new URL in place and browser history while preserving its view (2.0s)
+  ✓   8 tests\ui\review.spec.ts:245:1 › customer destination opens in place after dismissal and resets detail tabs (2.1s)
+  ✓   9 tests\ui\review.spec.ts:274:3 › checkout exposes catalog read failures with recovery and no write (2.9s)
+  ✓  10 tests\ui\review.spec.ts:274:3 › checkout exposes checkout read failures with recovery and no write (3.8s)
+  ✓  11 tests\ui\review.spec.ts:274:3 › checkout exposes cash read failures with recovery and no write (4.6s)
+  ✓  12 tests\ui\review.spec.ts:317:1 › checkout waits for cash and confirms only a successful POST, even during revalidation (2.6s)
+  ✓  13 tests\ui\review.spec.ts:377:1 › home does not announce an empty day when its request fails (2.3s)
+  ✓  14 tests\ui\review.spec.ts:396:1 › calendar list does not invent an empty result during loading (3.2s)
+  ✘  15 tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports (31.8s)
+
+
+  1) tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\ui\review-selection-keyboard--40c8e-ntrast-and-target-viewports\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\ui\review-selection-keyboard--40c8e-ntrast-and-target-viewports\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\ui\review-selection-keyboard--40c8e-ntrast-and-target-viewports\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\ui\review-selection-keyboard--40c8e-ntrast-and-target-viewports\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\ui\review.spec.ts:422:1 › selection, keyboard, reduced motion, contrast and target viewports 
+  14 passed (2.3m)

@@ -1,0 +1,211 @@
+{
+  "project": "tbcfhagteyqufjkmbxzz",
+  "checked_at": "2026-10-25T22:50:00Z",
+  "normalization": "Postgres md5(btrim(array_to_string(statements, E'\\n')))",
+  "migrations": [
+    {
+      "version": "20261012171437",
+      "name": "tenant_core",
+      "statement_md5": "68d81390e5550e647caa783f1cd69a65",
+      "statements": 1
+    },
+    {
+      "version": "20261012171442",
+      "name": "authorization",
+      "statement_md5": "9bc5b5894820ff3ba0a7dd31e9bcbaac",
+      "statements": 1
+    },
+    {
+      "version": "20261012171446",
+      "name": "configuration",
+      "statement_md5": "83661fb82f6d89f6142953b47b5b873c",
+      "statements": 1
+    },
+    {
+      "version": "20261012171451",
+      "name": "scheduling",
+      "statement_md5": "537bf64055b4494cf02a49b51a4ea4c9",
+      "statements": 1
+    },
+    {
+      "version": "20261012171456",
+      "name": "operations",
+      "statement_md5": "657a137aceef8ab46a6b085a5b5f052f",
+      "statements": 1
+    },
+    {
+      "version": "20261012171501",
+      "name": "analytics_automation",
+      "statement_md5": "1a05531c244029758bb630b4946fc0d6",
+      "statements": 1
+    },
+    {
+      "version": "20261012173606",
+      "name": "read_models",
+      "statement_md5": "9f9cf7158070126b7b8c20d6f58db932",
+      "statements": 1
+    },
+    {
+      "version": "20261012180348",
+      "name": "product_hardening",
+      "statement_md5": "0a2ec8518646f710afe37ff1bc655ba7",
+      "statements": 1
+    },
+    {
+      "version": "20261012181534",
+      "name": "final_read_models",
+      "statement_md5": "f5c37e0920b369e191ddd0193dc18ebf",
+      "statements": 1
+    },
+    {
+      "version": "20261012182755",
+      "name": "advisor_foreign_key_indexes",
+      "statement_md5": "d0c94de23c2431a15b2a43242f38c39e",
+      "statements": 1
+    },
+    {
+      "version": "20261012183007",
+      "name": "reporting_access",
+      "statement_md5": "8f5bcbfdb571abdcdf65893f9999000a",
+      "statements": 1
+    },
+    {
+      "version": "20261012183207",
+      "name": "bounded_read_permissions",
+      "statement_md5": "95ac553d122b23b8d837c43195ac99a6",
+      "statements": 1
+    },
+    {
+      "version": "20261012183541",
+      "name": "archived_branch_history",
+      "statement_md5": "73c2dc6785db4072cf9270f02704e7d5",
+      "statements": 1
+    },
+    {
+      "version": "20261012183917",
+      "name": "platform_admin_audit",
+      "statement_md5": "87cd99a13740404177528d0fedf2cf23",
+      "statements": 1
+    },
+    {
+      "version": "20261012184839",
+      "name": "customer_detail_branding",
+      "statement_md5": "86b603ab2e2f51bf8215b15533dd0ba6",
+      "statements": 1
+    },
+    {
+      "version": "20261012210000",
+      "name": "website_booking",
+      "statement_md5": "9f1d5853c7965a62c31c797d2ab37f27",
+      "statements": 1
+    },
+    {
+      "version": "20261012223818",
+      "name": "finance_schema",
+      "statement_md5": "952d77ab5e0b81222442fc08060fdce0",
+      "statements": 1
+    },
+    {
+      "version": "20261012223852",
+      "name": "finance_transactions",
+      "statement_md5": "a4008327ccac868d14f971acbe897a73",
+      "statements": 1
+    },
+    {
+      "version": "20261012224111",
+      "name": "finance_read_import",
+      "statement_md5": "96ce5d7dbc700f22a80e9b8cf7d11862",
+      "statements": 1
+    },
+    {
+      "version": "20261012224355",
+      "name": "booking_finance_hardening",
+      "statement_md5": "081a0d298693e39d0a3656e0aa7037cd",
+      "statements": 1
+    },
+    {
+      "version": "20261015190206",
+      "name": "booking_attribution_rls",
+      "statement_md5": "2f419951c1565962de40229cbae42a4c",
+      "statements": 1
+    },
+    {
+      "version": "20261015190657",
+      "name": "consolidate_financial_audit_policy",
+      "statement_md5": "855e904792f3d5bed9ca33016cf24bdf",
+      "statements": 1
+    },
+    {
+      "version": "20261015191802",
+      "name": "worker_tick_record_scope",
+      "statement_md5": "0c55d96867376db7cb6930d991244d81",
+      "statements": 1
+    },
+    {
+      "version": "20261019154027",
+      "name": "database_scheduler",
+      "statement_md5": "fe5e52667446e82da2c7ea410a198406",
+      "statements": 1
+    },
+    {
+      "version": "20261019213732",
+      "name": "profit_sharing",
+      "statement_md5": "ce5e8dbf1dcffcc5d0a7e3619bb838d2",
+      "statements": 1
+    },
+    {
+      "version": "20261019220146",
+      "name": "enable_database_cron",
+      "statement_md5": "fc1e86f7def2b72cf22ce9fe256e2fc5",
+      "statements": 1
+    },
+    {
+      "version": "20261019223415",
+      "name": "final_authorization_hardening",
+      "statement_md5": "9eade7005a4a160599d0d3bff9ac56f4",
+      "statements": 1
+    },
+    {
+      "version": "20261021005325",
+      "name": "privileged_mfa_sessions",
+      "statement_md5": "fc8ced1b05dfa781560b9a62d6e3009d",
+      "statements": 1
+    },
+    {
+      "version": "20261021005630",
+      "name": "partner_distributions",
+      "statement_md5": "d52af31e6aa9e8dfe091c0e69bf2b38b",
+      "statements": 1
+    },
+    {
+      "version": "20261021010224",
+      "name": "reporting_health",
+      "statement_md5": "1639d2fddc97e40029ee5dba6b8c316f",
+      "statements": 1
+    },
+    {
+      "version": "20261021011210",
+      "name": "daily_blocks",
+      "statement_md5": "4085604c52aaee90849d82b3ce1d2411",
+      "statements": 1
+    },
+    {
+      "version": "20261021202056",
+      "name": "audit_release_boundaries",
+      "statement_md5": "ef5f09ec64ecde0b46a3bc2bebe1dec5",
+      "statements": 1
+    },
+    {
+      "version": "20261021214500",
+      "name": "customer_list_projection",
+      "statement_md5": "a02672b095371159002d49257b0ea943",
+      "statements": 1
+    },
+    {
+      "version": "20261022162330",
+      "name": "ux_reporting_breakdown",
+      "statement_md5": "194dd1e332d795965d534860265cc3ab",
+      "statements": 1
+    }
+  ]
+}

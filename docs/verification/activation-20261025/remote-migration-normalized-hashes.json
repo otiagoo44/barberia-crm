@@ -1,0 +1,177 @@
+{
+  "project": "tbcfhagteyqufjkmbxzz",
+  "checked_at": "2026-10-25T22:53:22.562Z",
+  "normalization": "CRLF to LF; trim outer spaces, tabs and newlines only. SQL string escapes preserved.",
+  "migrations": [
+    {
+      "version": "20261012171437",
+      "name": "tenant_core",
+      "normalized_md5": "c99013c139a6509d2ff09afa06f0d839"
+    },
+    {
+      "version": "20261012171442",
+      "name": "authorization",
+      "normalized_md5": "c127a4e557af3b4c935fbd6ca4965e53"
+    },
+    {
+      "version": "20261012171446",
+      "name": "configuration",
+      "normalized_md5": "3b5478689a7d0e9840ffd82160f544f0"
+    },
+    {
+      "version": "20261012171451",
+      "name": "scheduling",
+      "normalized_md5": "790257312161816e666000597b880936"
+    },
+    {
+      "version": "20261012171456",
+      "name": "operations",
+      "normalized_md5": "c31108040a314f779d93cd5858aa0511"
+    },
+    {
+      "version": "20261012171501",
+      "name": "analytics_automation",
+      "normalized_md5": "12d636d2490f73c8a74f19153c241ed5"
+    },
+    {
+      "version": "20261012173606",
+      "name": "read_models",
+      "normalized_md5": "fb94de38541c780dca81a9f422097b1a"
+    },
+    {
+      "version": "20261012180348",
+      "name": "product_hardening",
+      "normalized_md5": "186aab07ba681c6f3388fb5635bfce2f"
+    },
+    {
+      "version": "20261012181534",
+      "name": "final_read_models",
+      "normalized_md5": "79325f0b3d19d0ac4d98636e8b78e8bb"
+    },
+    {
+      "version": "20261012182755",
+      "name": "advisor_foreign_key_indexes",
+      "normalized_md5": "b30f7931726a7a582859b129e179239f"
+    },
+    {
+      "version": "20261012183007",
+      "name": "reporting_access",
+      "normalized_md5": "031c457c805de56fc24a51c6875d4241"
+    },
+    {
+      "version": "20261012183207",
+      "name": "bounded_read_permissions",
+      "normalized_md5": "45ad4924d1dff33643839771b6cc4964"
+    },
+    {
+      "version": "20261012183541",
+      "name": "archived_branch_history",
+      "normalized_md5": "0b063d5b2713fa824cc3e5a4121338ab"
+    },
+    {
+      "version": "20261012183917",
+      "name": "platform_admin_audit",
+      "normalized_md5": "f74464ec5d9e2400240e80a7192c8ff6"
+    },
+    {
+      "version": "20261012184839",
+      "name": "customer_detail_branding",
+      "normalized_md5": "c050ffccd024f5766bee88d04fcaaa53"
+    },
+    {
+      "version": "20261012210000",
+      "name": "website_booking",
+      "normalized_md5": "0d35eef218b4ec5bf86078f7d497039c"
+    },
+    {
+      "version": "20261012223818",
+      "name": "finance_schema",
+      "normalized_md5": "03f5eb955e973676a36cd9ab39fe5b2e"
+    },
+    {
+      "version": "20261012223852",
+      "name": "finance_transactions",
+      "normalized_md5": "c9a2d08c9d5252aeed6e7875116dbed7"
+    },
+    {
+      "version": "20261012224111",
+      "name": "finance_read_import",
+      "normalized_md5": "381fd07ab30af2309cd095c1b1dd1147"
+    },
+    {
+      "version": "20261012224355",
+      "name": "booking_finance_hardening",
+      "normalized_md5": "2dda011767b59ef0effbb10b591b8c42"
+    },
+    {
+      "version": "20261015190206",
+      "name": "booking_attribution_rls",
+      "normalized_md5": "42c13310664836a6e94b0a186a174363"
+    },
+    {
+      "version": "20261015190657",
+      "name": "consolidate_financial_audit_policy",
+      "normalized_md5": "ac495610a7c1e6ecb1199151fb0a1c19"
+    },
+    {
+      "version": "20261015191802",
+      "name": "worker_tick_record_scope",
+      "normalized_md5": "d45afb54026be128d8dc81d13c804d17"
+    },
+    {
+      "version": "20261019154027",
+      "name": "database_scheduler",
+      "normalized_md5": "fe5e52667446e82da2c7ea410a198406"
+    },
+    {
+      "version": "20261019213732",
+      "name": "profit_sharing",
+      "normalized_md5": "ce5e8dbf1dcffcc5d0a7e3619bb838d2"
+    },
+    {
+      "version": "20261019220146",
+      "name": "enable_database_cron",
+      "normalized_md5": "fc1e86f7def2b72cf22ce9fe256e2fc5"
+    },
+    {
+      "version": "20261019223415",
+      "name": "final_authorization_hardening",
+      "normalized_md5": "381a8274ddf38f379efef197347d370e"
+    },
+    {
+      "version": "20261021005325",
+      "name": "privileged_mfa_sessions",
+      "normalized_md5": "395a2ba6d30fcc5f3867d0924915c732"
+    },
+    {
+      "version": "20261021005630",
+      "name": "partner_distributions",
+      "normalized_md5": "59b5930fbf58eaf549364b66a4611f93"
+    },
+    {
+      "version": "20261021010224",
+      "name": "reporting_health",
+      "normalized_md5": "da306a30bff99dce44bd68331dfea567"
+    },
+    {
+      "version": "20261021011210",
+      "name": "daily_blocks",
+      "normalized_md5": "aed0b2690acc984b716a8adaf935a06f"
+    },
+    {
+      "version": "20261021202056",
+      "name": "audit_release_boundaries",
+      "normalized_md5": "b90645b65e13044818705a3f18c82e9e"
+    },
+    {
+      "version": "20261021214500",
+      "name": "customer_list_projection",
+      "normalized_md5": "c280a665420851b8e094051f0efd297f"
+    },
+    {
+      "version": "20261022162330",
+      "name": "ux_reporting_breakdown",
+      "normalized_md5": "fb7e5ae7274cf5d501bbc9aae5421787"
+    }
+  ]
+}
