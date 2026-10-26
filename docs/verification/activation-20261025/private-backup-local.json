@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-26T00:05:46.025Z",
+  "checked_at": "2026-10-26T00:18:29.347Z",
   "scope": "ISOLATED FIXTURES ONLY; not a copy of production",
   "encryption_roundtrip": true,
   "wrong_password_rejected": true,
@@ -7,8 +7,8 @@
   "legacy_collation_copy_verified": true,
   "mismatched_restore_rejected": true,
   "status": "PASSED",
-  "restore_ms": 24257,
-  "tables_verified": 79,
+  "restore_ms": 14589,
+  "tables_verified": 80,
   "auth_tables_verified": 3,
   "policies_verified": 130,
   "anonymous_and_unscoped_authenticated_denied": true,
@@ -28,7 +28,7 @@
       "20261024214851_weekly_schedule_batch.sql",
       "20261025225428_repair_scheduler_notification_encoding.sql"
     ],
-    "original_tables_content_unchanged": 78,
+    "original_tables_content_unchanged": 79,
     "security": {
       "unprotected": 0,
       "public_definers": 0,

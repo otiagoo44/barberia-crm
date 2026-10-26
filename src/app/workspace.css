@@ -1,4 +1,12 @@
 /* Workspace compositions. Shared controls/typography live in globals.css. */
+.clear-period-filter {
+  white-space: normal;
+  text-align: left;
+  max-width: 100%;
+}
+.clear-period-filter::before {
+  flex-shrink: 0;
+}
 .compact-filters > summary {
   cursor: pointer;
   padding: 10px 14px;

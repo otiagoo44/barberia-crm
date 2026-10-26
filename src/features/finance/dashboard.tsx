@@ -202,7 +202,7 @@ export function FinancialDashboard({
           </details>
           {(from !== today || to !== today) && (
             <button
-              className="badge"
+              className="badge clear-period-filter"
               onClick={() => {
                 range("today");
               }}

@@ -26,7 +26,7 @@ const pgBin = path.resolve(
   "BarberiaOS/tools/postgresql-17.11/pgsql/bin",
 );
 await mkdir(root, { recursive: true });
-const db = await isolatedDatabase(34);
+const db = await isolatedDatabase(34, ["--encoding=UTF8", "--locale=C"]);
 try {
   await db.pool.query(
     "create schema supabase_migrations;create table supabase_migrations.schema_migrations(version text primary key,name text,statements text[])",
@@ -46,6 +46,9 @@ try {
   const f = await fixtures(db.pool);
   await db.pool.query(
     "create sequence public.backup_drill_sequence start 7;select nextval('public.backup_drill_sequence')",
+  );
+  await db.pool.query(
+    "create table public.backup_drill_unicode(value text,at timestamptz default now());alter table public.backup_drill_unicode enable row level security;insert into public.backup_drill_unicode(value) values('Barbería, atención, ñ'),('Unicode ✂️ 💈')",
   );
   const command = async (action: string, data: object) =>
     (

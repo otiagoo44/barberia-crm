@@ -5,7 +5,10 @@ import { createServer } from "node:net";
 import { readFile, readdir, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 
-export async function isolatedDatabase(migrationLimit = Infinity) {
+export async function isolatedDatabase(
+  migrationLimit = Infinity,
+  initdbFlags: string[] = [],
+) {
   if (process.env.TEST_DATABASE_URL)
     throw new Error(
       "Embedded test runner does not accept external database URLs. Use the dedicated staging runner.",
@@ -29,6 +32,7 @@ export async function isolatedDatabase(migrationLimit = Infinity) {
     password,
     port,
     persistent: true,
+    initdbFlags,
     postgresFlags: [
       "-c",
       "listen_addresses=127.0.0.1",

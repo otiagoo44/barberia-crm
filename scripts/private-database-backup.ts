@@ -105,6 +105,7 @@ async function tool(
   for (const name of Object.keys(childEnvironment))
     if (name.startsWith("TASK_BACKUP_")) delete childEnvironment[name];
   childEnvironment.PGCONNECT_TIMEOUT = "15";
+  childEnvironment.PGCLIENTENCODING = "UTF8";
   childEnvironment.PGOPTIONS =
     "-c timezone=UTC -c extra_float_digits=3 -c bytea_output=hex -c intervalstyle=postgres";
   return new Promise<Buffer>((resolve, reject) => {
@@ -160,6 +161,7 @@ async function tool(
 }
 
 async function inventory(client: Client) {
+  await client.query("select set_config('TimeZone','UTC',false)");
   await client.query("set time zone 'UTC'");
   const relations = (
     await client.query(
@@ -433,6 +435,7 @@ export async function exportSnapshot(
       path.join(pgBin, "pg_dump.exe"),
       [
         "--format=custom",
+        "--encoding=UTF8",
         "--no-publications",
         "--no-subscriptions",
         "--snapshot=" + snapshot.snapshot,
@@ -488,6 +491,7 @@ export async function restoreIsolated(
     password,
     port,
     persistent: true,
+    initdbFlags: ["--encoding=UTF8", "--locale=C"],
     postgresFlags: ["-c", "listen_addresses=127.0.0.1"],
     onLog: () => {},
     onError: () => {},
@@ -507,6 +511,10 @@ export async function restoreIsolated(
       database: "postgres",
     });
     await client.connect();
+    assert.equal(
+      (await client.query("show server_encoding")).rows[0].server_encoding,
+      "UTF8",
+    );
     // This is the newly initialized loopback-only cluster, never a supplied URL.
     // Its empty public schema must be recreated by pg_restore with original ACL.
     await client.query("drop schema public");
@@ -569,6 +577,7 @@ export async function restoreIsolated(
           path.join(pgBin, "pg_dump.exe"),
           [
             "--data-only",
+            "--encoding=UTF8",
             "--no-publications",
             "--no-subscriptions",
             ...schemas.map((s) => "--schema=" + s),
@@ -588,13 +597,53 @@ export async function restoreIsolated(
         )
       ).toString("utf8"),
     );
-    if (!isDeepStrictEqual(originalCopy, recoveredCopy))
+    if (!isDeepStrictEqual(originalCopy, recoveredCopy)) {
+      const names = new Set([
+        ...originalCopy.tables.map((t) => t.table),
+        ...recoveredCopy.tables.map((t) => t.table),
+      ]);
+      await writeFile(
+        path.join(root, "last-restore-diagnostic.json"),
+        JSON.stringify(
+          {
+            checked_at: new Date().toISOString(),
+            project,
+            phase: backupPhase,
+            tables: [...names].flatMap((table) => {
+              const source = originalCopy.tables.find((t) => t.table === table);
+              const target = recoveredCopy.tables.find(
+                (t) => t.table === table,
+              );
+              return isDeepStrictEqual(source, target)
+                ? []
+                : [
+                    {
+                      table,
+                      source_rows: source?.rows ?? null,
+                      recovered_rows: target?.rows ?? null,
+                      columns_match: source?.header === target?.header,
+                      content_matches: source?.hash === target?.hash,
+                    },
+                  ];
+            }),
+            sequences_match: isDeepStrictEqual(
+              originalCopy.sequences,
+              recoveredCopy.sequences,
+            ),
+            note: "Counts and equality flags only; no data, hashes or credentials",
+          },
+          null,
+          2,
+        ),
+        { mode: 0o600 },
+      );
       throw Object.assign(
         new Error(
           "Recovered COPY rows or sequence values differ from the encrypted archive",
         ),
         { code: "RESTORED_ROW_DATA_MISMATCH" },
       );
+    }
     backupPhase = "isolated-validation";
     const originalMetadata = canonicalMetadata(
       data.state,
