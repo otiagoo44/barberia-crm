@@ -112,6 +112,109 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await expect(page.locator("main").getByRole("alert")).toHaveCount(0);
   });
 
+  test("service validation reaches real SQL with normalized category and field-specific duplicate errors", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const payload = {
+      org: f.orgA,
+      branch: null,
+      entity: "services",
+      id: null,
+      data: {
+        name: "Tinte QA aislado",
+        slug: `tinte-qa-${Date.now()}`,
+        default_duration_minutes: 150,
+        website_category: "otro",
+        composition_mode: "standalone",
+        consultation_required: true,
+        active: true,
+      },
+    };
+    const headers = { Origin: "http://localhost:3000" };
+    const invalid = await page.request.post("/api/workspace/record", {
+      headers,
+      data: {
+        ...payload,
+        data: { ...payload.data, default_duration_minutes: 0 },
+      },
+    });
+    expect(invalid.status()).toBe(400);
+    expect((await invalid.json()).fields.default_duration_minutes).toBeTruthy();
+    const valid = await page.request.post("/api/workspace/record", {
+      headers,
+      data: payload,
+    });
+    expect(valid.ok()).toBeTruthy();
+    expect((await valid.json()).website_category).toBeNull();
+    const duplicate = await page.request.post("/api/workspace/record", {
+      headers,
+      data: payload,
+    });
+    expect(duplicate.status()).toBe(400);
+    expect((await duplicate.json()).fields.slug).toContain("identificador");
+  });
+
+  test("weekly batch uses real Auth and database idempotency with version checks", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const query = new URLSearchParams({ org: f.orgA, branch: f.branches.a1 });
+    const supported = await page.request.get(
+      `/api/workspace/weekly_schedule?${query}`,
+    );
+    expect(supported.ok()).toBeTruthy();
+    expect((await supported.json()).weekly_editor_supported).toBe(true);
+    const loaded = await page.request.get(
+      `/api/workspace/staff_availability_rules?${query}`,
+    );
+    expect(loaded.ok()).toBeTruthy();
+    const list = await loaded.json();
+    expect(list.has_more).toBe(false);
+    const rows = list.items.filter(
+      (r: { staff_id: string; weekday: number }) =>
+        r.staff_id === f.staff.a3 && r.weekday === 1,
+    );
+    const data = {
+      org: f.orgA,
+      branch: f.branches.a1,
+      staff: f.staff.a3,
+      from: new Date(Date.now() + 90 * 86400000).toISOString().slice(0, 10),
+      days: [1],
+      blocks: [
+        { weekday: 1, starts_at: "09:00", ends_at: "12:00" },
+        { weekday: 1, starts_at: "12:30", ends_at: "19:00" },
+      ],
+      expected: rows.map((r: { id: string; updated_at: string }) => ({
+        id: r.id,
+        updated_at: r.updated_at,
+      })),
+      key: crypto.randomUUID(),
+    };
+    const headers = { Origin: "http://localhost:3000" };
+    const first = await page.request.post("/api/workspace/weekly_schedule", {
+      headers,
+      data,
+    });
+    expect(first.ok()).toBeTruthy();
+    const retry = await page.request.post("/api/workspace/weekly_schedule", {
+      headers,
+      data,
+    });
+    expect(retry.ok()).toBeTruthy();
+    expect(await retry.json()).toEqual(await first.json());
+    const stale = await page.request.post("/api/workspace/weekly_schedule", {
+      headers,
+      data: { ...data, key: crypto.randomUUID() },
+    });
+    expect(stale.status()).toBe(409);
+    expect((await stale.json()).error).toContain("Otra persona");
+  });
+
   test("same-page destinations update agenda and customer detail with real scoped reads", async ({
     page,
   }) => {
@@ -153,10 +256,122 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     ).toBeVisible();
   });
 
+  test("credit checkout explains a missing tariff and preserves a real service sale for retry", async ({
+    page,
+  }) => {
+    const f = JSON.parse(
+      await readFile(".test-data/e2e/fixtures.json", "utf8"),
+    );
+    const headers = { Origin: "http://localhost:3000" };
+    const command = async (action: string, data: object) => {
+      const r = await page.request.post("/api/finance/command", {
+        headers,
+        data: {
+          org: f.orgA,
+          branch: f.branches.a1,
+          action,
+          data,
+          key: crypto.randomUUID(),
+        },
+      });
+      expect(r.ok(), await r.text()).toBeTruthy();
+      return r.json();
+    };
+    const method = await command("configure", {
+      entity: "payment_methods",
+      name: "Crédito aislado sin tarifa",
+      code: `qa_credit_${Date.now()}`,
+      type: "card",
+    });
+    const query = new URLSearchParams({
+      org: f.orgA,
+      branch: f.branches.a1,
+      from: new Date().toISOString().slice(0, 10),
+      to: new Date().toISOString().slice(0, 10),
+    });
+    const catalog = await (
+      await page.request.get(`/api/finance/catalog?${query}`)
+    ).json();
+    const price = Number(
+      catalog.services.find((s: { id: string }) => s.id === f.services.cut)
+        .price_minor,
+    );
+    await page.goto("/fixture-a/caja");
+    await page
+      .getByRole("button", { name: "Venta sin cita", exact: true })
+      .click();
+    await page
+      .getByRole("combobox", { name: "Servicio o concepto", exact: true })
+      .selectOption(`service:${f.services.cut}`);
+    await page
+      .getByRole("combobox", { name: "Profesional que atendió", exact: true })
+      .selectOption(f.staff.a3);
+    const prepared = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/finance/command") &&
+        r.request().method() === "POST" &&
+        r.request().postDataJSON().action === "create_checkout",
+    );
+    await page
+      .getByRole("button", { name: "Preparar cobro", exact: true })
+      .click();
+    const created = await (await prepared).json();
+    await page
+      .getByRole("combobox", { name: "Medio de pago", exact: true })
+      .selectOption(method.id);
+    await page
+      .getByLabel("Importe en centavos (USD)", { exact: true })
+      .fill(String(price));
+    await page
+      .getByRole("button", { name: "Cobrar y registrar", exact: true })
+      .click();
+    await expect(
+      page.getByText(/No existe tarifa vigente para este método/),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("combobox", { name: "Medio de pago", exact: true }),
+    ).toHaveValue(method.id);
+    await expect(
+      page.getByLabel("Importe en centavos (USD)", { exact: true }),
+    ).toHaveValue(String(price));
+    query.set("id", created.id);
+    const draft = await (
+      await page.request.get(`/api/finance/checkout?${query}`)
+    ).json();
+    expect(draft.status).toBe("draft");
+    expect(draft.payments).toHaveLength(0);
+    expect(Number(draft.total_minor)).toBe(price);
+    await command("configure", {
+      entity: "payment_method_fee_rules",
+      payment_method_id: method.id,
+      percentage_bps: 520,
+      fixed_amount_minor: 0,
+      evidence_reference:
+        "Explicit isolated credit fixture, not UPay production evidence",
+    });
+    await page
+      .getByRole("button", { name: "Cobrar y registrar", exact: true })
+      .click();
+    await expect(
+      page.getByText("Venta cobrada y registrada.", { exact: true }),
+    ).toBeVisible();
+    const paid = await (
+      await page.request.get(`/api/finance/checkout?${query}`)
+    ).json();
+    expect(paid.status).toBe("posted");
+    expect(paid.payments).toHaveLength(1);
+    expect(Number(paid.total_minor)).toBe(price);
+    expect(Number(paid.payments[0].amount_minor)).toBe(price);
+  });
+
   test("financial filters hide obsolete totals while loading, transport errors expose no previous totals", async ({
     page,
   }) => {
     await page.goto("/fixture-a/finanzas");
+    await page
+      .locator("summary")
+      .filter({ hasText: "Filtros financieros" })
+      .click();
     await expect(page.locator(".loading:visible")).toHaveCount(0);
     await expect(page.locator(".kpi-grid").first()).toBeVisible();
     const sections = page.getByRole("group", {

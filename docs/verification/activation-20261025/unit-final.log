@@ -1,0 +1,40 @@
+
+> barberia-operating-system@1.0.0 test
+> tsx --test tests/unit/*.test.ts
+
+✔ calendar retains elapsed duration through DST and midnight; adjacent intervals stay adjacent (16.1513ms)
+✔ TOTP fixture generator matches the RFC SHA1 vector without logging secrets (9.6631ms)
+✔ charts preserve unknowns and reject rounded, malformed or unsafe integer money (1.3926ms)
+✔ brand accents retain contrast against light surfaces without altering the brand (2.5814ms)
+✔ International phone normalization preserves tenant-independent identity (4.0143ms)
+✔ External customer input rejects extra tenant IDs and malformed dates (12.3567ms)
+✔ CSV export neutralizes spreadsheet formulas and quotes (0.6298ms)
+✔ Service selection keeps exactly one primary and removes dependent options (2.2879ms)
+✔ Asuncion dates and DST-aware local boundaries resolve to UTC instants (19.1109ms)
+✔ preview refuses production and missing isolation configuration (2.6948ms)
+✔ Vercel build requires complete production configuration without exposing values (1.4501ms)
+✔ import uses structured entities, casing and whitespace normalization (23.0978ms)
+✔ wrong-side amount, ambiguity, negative values and source formulas require review (1.8307ms)
+✔ anonymized XLSX fixture ignores broken derived formulas and retains source row (38.5196ms)
+✔ CSV quoting and export formula injection (0.9396ms)
+✔ import rejects wrong signatures, DTDs, external sheet paths and ZIP expansion (768.8971ms)
+✔ category mapping cannot use another catalog and salaries require a staff identity (1.7485ms)
+✔ 17:17 maintenance plan refuses unverified identities and another project (4.7379ms)
+✔ POS preparation refuses an unknown fixed charge, date or evidence (1.1858ms)
+✔ service creation normalizes the legacy Other category and reports field failures (12.0419ms)
+✔ domain errors remain specific without exposing SQL details (0.6583ms)
+✔ weekly copying splits a confirmed break and never selects Sunday implicitly (5.0842ms)
+✔ POS preparation requires explicit versioned rates rather than old hardcoded estimates (1.7762ms)
+✔ backup verifies COPY content independently of row and table order (4.5494ms)
+✔ backup refuses unhandled data statements and incomplete COPY blocks (10.1366ms)
+✔ Public preselection accepts canonical slug only from branch catalog (3.6526ms)
+✔ Query parsing ignores repeated/invalid slugs and forged attribution (2.4426ms)
+✔ worker bearer checks reject missing, incorrect and unequal UTF-8 byte lengths (2.5434ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16951.7742

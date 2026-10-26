@@ -1,0 +1,17 @@
+{
+  "checked_at": "2026-10-26T20:29:05.556Z",
+  "project": "tbcfhagteyqufjkmbxzz",
+  "actor": "e6046c7c-bcbb-4a21-afe4-485a849148cd",
+  "authentication": "genuine GoTrue sign-in + personal TOTP + verified token claims + live owner membership",
+  "effective_date": "2026-10-26",
+  "status": "PASSED",
+  "readback_at": "2026-10-26T20:32:26.499Z",
+  "verified": {
+    "services": 8,
+    "capabilities": 16,
+    "weekly_intervals": 18,
+    "availability": "Monday/Wednesday/Saturday/Sunday",
+    "financial_history_unchanged": true,
+    "booking": "CLOSED"
+  }
+}

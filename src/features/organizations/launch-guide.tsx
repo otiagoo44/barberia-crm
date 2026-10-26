@@ -101,6 +101,21 @@ export function LaunchGuide({ expanded = false }: { expanded?: boolean }) {
                             : "Verificación manual"}
                       </span>
                       <span>{check.detail}</span>
+                      {check.steps && (
+                        <ul>
+                          {check.steps.map((step) => (
+                            <li key={step.label}>
+                              <strong>{step.label}: </strong>
+                              {step.status === "ready"
+                                ? "Comprobado"
+                                : step.status === "pending"
+                                  ? "Pendiente"
+                                  : "Verificación manual"}
+                              . {step.detail}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </Link>
                   </li>
                 ))}

@@ -47,6 +47,13 @@ export function Cash() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [key, setKey] = useState(() => crypto.randomUUID());
+  const [pendingQuery, setPendingQuery] = useState("");
+  const pendingRows =
+    r.data?.pending.filter((c) =>
+      String(c.customer_name ?? c.description ?? "Venta")
+        .toLocaleLowerCase("es")
+        .includes(pendingQuery.trim().toLocaleLowerCase("es")),
+    ) ?? [];
   const s = r.data?.session;
   const open = s?.status === "open";
   async function submit() {
@@ -184,16 +191,38 @@ export function Cash() {
           </div>
           <div className="panel stack">
             <h2>Pendientes de cobrar</h2>
+            {!!r.data?.pending.length && (
+              <details className="compact-filters">
+                <summary>Filtros{pendingQuery ? " · 1" : ""}</summary>
+                <Field label="Buscar cobro pendiente">
+                  <input
+                    value={pendingQuery}
+                    onChange={(e) => setPendingQuery(e.target.value)}
+                    placeholder="Cliente o concepto…"
+                    maxLength={120}
+                  />
+                </Field>
+              </details>
+            )}
+            {pendingQuery && (
+              <button className="badge" onClick={() => setPendingQuery("")}>
+                Búsqueda: {pendingQuery} · Limpiar filtros
+              </button>
+            )}
             {r.data?.pending.length ? (
-              r.data.pending.map((c) => (
-                <div key={c.id} className="row between">
-                  <span>
-                    {String(c.customer_name ?? c.description ?? "Venta")} ·{" "}
-                    {money(c.total_minor, w.organization.currency)}
-                  </span>
-                  <button onClick={() => setCheckout(c.id)}>Cobrar</button>
-                </div>
-              ))
+              pendingRows.length ? (
+                pendingRows.map((c) => (
+                  <div key={c.id} className="row between">
+                    <span>
+                      {String(c.customer_name ?? c.description ?? "Venta")} ·{" "}
+                      {money(c.total_minor, w.organization.currency)}
+                    </span>
+                    <button onClick={() => setCheckout(c.id)}>Cobrar</button>
+                  </div>
+                ))
+              ) : (
+                <p>No hay cobros que coincidan con el filtro.</p>
+              )
             ) : (
               <p className="muted">
                 No hay checkouts pendientes. Podés preparar el cobro desde una

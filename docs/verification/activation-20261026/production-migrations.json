@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-26T20:19:39.423Z",
+  "project": "tbcfhagteyqufjkmbxzz",
+  "before": 34,
+  "after": 41,
+  "applied": [
+    "20261022205615_default_product_gold_brand.sql",
+    "20261022210809_dashboard_statement_owner_guard.sql",
+    "20261023193417_staff_owner_profile_link.sql",
+    "20261024161949_collected_partner_distributions.sql",
+    "20261024162205_setup_availability_diagnostics.sql",
+    "20261024214851_weekly_schedule_batch.sql",
+    "20261025225428_repair_scheduler_notification_encoding.sql"
+  ],
+  "backup_verified_at": "2026-10-26T19:57:01.501Z",
+  "original_tables_verified": 95,
+  "original_content_unchanged": true,
+  "checks": {
+    "policies": 139,
+    "public_definers": 0,
+    "scheduler_encoding_ok": true,
+    "unprotected_tables": 0,
+    "weekly_rpc": true
+  },
+  "status": "PASSED"
+}

@@ -1,0 +1,187 @@
+{
+  "checked_at": "2026-10-26T20:14:44.791Z",
+  "project": "zdogqqmitpbwjgohwcww",
+  "production_project": "tbcfhagteyqufjkmbxzz",
+  "synthetic_only": true,
+  "clean_install_to": 34,
+  "upgrade_from": 34,
+  "upgrade_to": 41,
+  "original_tables_verified": 95,
+  "original_content_unchanged": true,
+  "genuine_auth_mfa_finance_rpc": true,
+  "migrations": [
+    {
+      "name": "tenant_core",
+      "version": "20261012171437"
+    },
+    {
+      "name": "authorization",
+      "version": "20261012171442"
+    },
+    {
+      "name": "configuration",
+      "version": "20261012171446"
+    },
+    {
+      "name": "scheduling",
+      "version": "20261012171451"
+    },
+    {
+      "name": "operations",
+      "version": "20261012171456"
+    },
+    {
+      "name": "analytics_automation",
+      "version": "20261012171501"
+    },
+    {
+      "name": "read_models",
+      "version": "20261012173606"
+    },
+    {
+      "name": "product_hardening",
+      "version": "20261012180348"
+    },
+    {
+      "name": "final_read_models",
+      "version": "20261012181534"
+    },
+    {
+      "name": "advisor_foreign_key_indexes",
+      "version": "20261012182755"
+    },
+    {
+      "name": "reporting_access",
+      "version": "20261012183007"
+    },
+    {
+      "name": "bounded_read_permissions",
+      "version": "20261012183207"
+    },
+    {
+      "name": "archived_branch_history",
+      "version": "20261012183541"
+    },
+    {
+      "name": "platform_admin_audit",
+      "version": "20261012183917"
+    },
+    {
+      "name": "customer_detail_branding",
+      "version": "20261012184839"
+    },
+    {
+      "name": "website_booking",
+      "version": "20261012210000"
+    },
+    {
+      "name": "finance_schema",
+      "version": "20261012223818"
+    },
+    {
+      "name": "finance_transactions",
+      "version": "20261012223852"
+    },
+    {
+      "name": "finance_read_import",
+      "version": "20261012224111"
+    },
+    {
+      "name": "booking_finance_hardening",
+      "version": "20261012224355"
+    },
+    {
+      "name": "booking_attribution_rls",
+      "version": "20261015190206"
+    },
+    {
+      "name": "consolidate_financial_audit_policy",
+      "version": "20261015190657"
+    },
+    {
+      "name": "worker_tick_record_scope",
+      "version": "20261015191802"
+    },
+    {
+      "name": "database_scheduler",
+      "version": "20261019154027"
+    },
+    {
+      "name": "profit_sharing",
+      "version": "20261019213732"
+    },
+    {
+      "name": "enable_database_cron",
+      "version": "20261019220146"
+    },
+    {
+      "name": "final_authorization_hardening",
+      "version": "20261019223415"
+    },
+    {
+      "name": "privileged_mfa_sessions",
+      "version": "20261021005325"
+    },
+    {
+      "name": "partner_distributions",
+      "version": "20261021005630"
+    },
+    {
+      "name": "reporting_health",
+      "version": "20261021010224"
+    },
+    {
+      "name": "daily_blocks",
+      "version": "20261021011210"
+    },
+    {
+      "name": "audit_release_boundaries",
+      "version": "20261021202056"
+    },
+    {
+      "name": "customer_list_projection",
+      "version": "20261021214500"
+    },
+    {
+      "name": "ux_reporting_breakdown",
+      "version": "20261022162330"
+    },
+    {
+      "name": "default_product_gold_brand",
+      "version": "20261022205615"
+    },
+    {
+      "name": "dashboard_statement_owner_guard",
+      "version": "20261022210809"
+    },
+    {
+      "name": "staff_owner_profile_link",
+      "version": "20261023193417"
+    },
+    {
+      "name": "collected_partner_distributions",
+      "version": "20261024161949"
+    },
+    {
+      "name": "setup_availability_diagnostics",
+      "version": "20261024162205"
+    },
+    {
+      "name": "weekly_schedule_batch",
+      "version": "20261024214851"
+    },
+    {
+      "name": "repair_scheduler_notification_encoding",
+      "version": "20261025225428"
+    }
+  ],
+  "security": [
+    {
+      "policies": 139,
+      "public_definers": 0,
+      "scheduler_encoding_ok": true,
+      "unprotected": 0
+    }
+  ],
+  "status": "PASSED"
+}

@@ -5,7 +5,10 @@ import { createServer } from "node:net";
 import { readFile, readdir, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 
-export async function isolatedDatabase(migrationLimit = Infinity) {
+export async function isolatedDatabase(
+  migrationLimit = Infinity,
+  initdbFlags: string[] = [],
+) {
   if (process.env.TEST_DATABASE_URL)
     throw new Error(
       "Embedded test runner does not accept external database URLs. Use the dedicated staging runner.",
@@ -29,6 +32,7 @@ export async function isolatedDatabase(migrationLimit = Infinity) {
     password,
     port,
     persistent: true,
+    initdbFlags,
     postgresFlags: [
       "-c",
       "listen_addresses=127.0.0.1",
@@ -68,7 +72,7 @@ export async function isolatedDatabase(migrationLimit = Infinity) {
     create role authenticated nologin;
     create role service_role nologin bypassrls;
     create schema auth;
-    create table auth.users(id uuid primary key,email text unique,email_confirmed_at timestamptz default now(),raw_user_meta_data jsonb not null default '{}');
+    create table auth.users(id uuid primary key,email text unique,email_confirmed_at timestamptz default now(),encrypted_password text default 'synthetic-initial-hash',raw_user_meta_data jsonb not null default '{}');
     -- SQL authorization fixtures, deliberately separate from real Supabase Auth E2E.
     create table auth.sessions(id uuid primary key,user_id uuid not null references auth.users(id),not_after timestamptz);
     create table auth.mfa_factors(id uuid primary key,user_id uuid not null references auth.users(id),status text not null);

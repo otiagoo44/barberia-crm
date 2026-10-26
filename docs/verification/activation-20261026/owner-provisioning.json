@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-26T20:50:44.482Z",
+  "project": "tbcfhagteyqufjkmbxzz",
+  "status": "PREPARED_REQUIRES_PERSONAL_CONFIRMATION_MFA_AND_PASSWORD",
+  "owners": [
+    {
+      "active": true,
+      "all_branches": true,
+      "email": "estebanras15@gmail.com",
+      "email_confirmed": false,
+      "id": "494bd1af-bc97-4087-9948-6d10def4dfdd",
+      "must_change_password": true,
+      "platform_admin": false,
+      "role": "organization_owner",
+      "staff": "esteban",
+      "verified_factors": 0
+    },
+    {
+      "active": true,
+      "all_branches": true,
+      "email": "jonatanramos2005oviedo@gmail.com",
+      "email_confirmed": false,
+      "id": "fa7d31b0-fab9-4fc8-8af1-837a6911e92c",
+      "must_change_password": true,
+      "platform_admin": false,
+      "role": "organization_owner",
+      "staff": "jonatan",
+      "verified_factors": 0
+    }
+  ],
+  "temporary_password": "user-supplied; never stored in repository or logs",
+  "emails_sent": 0
+}

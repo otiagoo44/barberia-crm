@@ -168,33 +168,48 @@ export function FinancialDashboard({
               </button>
             )}
           </div>
-          <div className="row wrap">
-            <Field label="Período">
-              <select
-                onChange={(e) => range(e.target.value)}
-                defaultValue="today"
-              >
-                <option value="today">Hoy</option>
-                <option value="7">7 días</option>
-                <option value="30">30 días</option>
-                <option value="week">Semana</option>
-                <option value="month">Mes</option>
-                <option value="custom">Rango personalizado</option>
-              </select>
-            </Field>
-            <DateRangePicker
-              from={from}
-              to={to}
-              onFrom={(value) => {
-                setFrom(value);
-                setOffset(0);
+          <details className="compact-filters">
+            <summary>
+              Filtros financieros · {from} a {to}
+            </summary>
+            <div className="row wrap">
+              <Field label="Período">
+                <select
+                  onChange={(e) => range(e.target.value)}
+                  defaultValue="today"
+                >
+                  <option value="today">Hoy</option>
+                  <option value="7">7 días</option>
+                  <option value="30">30 días</option>
+                  <option value="week">Semana</option>
+                  <option value="month">Mes</option>
+                  <option value="custom">Rango personalizado</option>
+                </select>
+              </Field>
+              <DateRangePicker
+                from={from}
+                to={to}
+                onFrom={(value) => {
+                  setFrom(value);
+                  setOffset(0);
+                }}
+                onTo={(value) => {
+                  setTo(value);
+                  setOffset(0);
+                }}
+              />
+            </div>
+          </details>
+          {(from !== today || to !== today) && (
+            <button
+              className="badge clear-period-filter"
+              onClick={() => {
+                range("today");
               }}
-              onTo={(value) => {
-                setTo(value);
-                setOffset(0);
-              }}
-            />
-          </div>
+            >
+              Período {from} a {to} · Limpiar filtros
+            </button>
+          )}
           {w.role !== "barber" && (
             <div
               className="tabs"

@@ -1,4 +1,12 @@
-# Actualización 24/10/2026
+# Actualización 26/10/2026
+
+El CRM productivo ya tiene catálogo y horarios confirmados cargados; ambos flags de booking siguen false y lead es 0. Staging separado `zdogqqmitpbwjgohwcww` pasó un enlace de landing sintética → booking CRM → reserva ficticia real en staging; no certifica la landing productiva. No se modificó `otiagoo44/1717barber` ni se hicieron reservas ficticias productivas. [Estado y evidencia actuales](ACTIVACION_PRODUCTIVA_1717_20261026.md). Los endpoints públicos siguen cerrados hasta cuentas/MFA, piloto e integración real autorizados.
+
+# Histórico: actualización 25/10/2026
+
+Reconsulta productiva: `GET /api/public/catalog?organization=1717-barberia&branch=luque` devuelve 200 JSON, `website_booking_version: 1`, organización y PYG correctos, pero `branches: []`. Disponibilidad para el 26/10 devuelve 404 JSON y `/book/1717-barberia/luque` 200 HTML. Luque mantiene booking=false. No se hizo POST de reserva en producción y no se considera listo para una prueba pública autorizada hasta completar configuración y gates. [Evidencia HTTP](verification/activation-20261025/public-http.json), [activación y pendientes](ACTIVACION_PRODUCTIVA_1717_20261025.md). No se modificó `otiagoo44/1717barber`.
+
+## Acuerdo confirmado el 24/10
 
 Horario público confirmado lunes a sábado 09:00–21:00, domingo cerrado. Pausa obligatoria Esteban 12:00–12:30 y turnos individuales según `config/onboarding/1717.json`. Reservas del mismo día con capacidad, tolerancia 15 minutos evaluada por personal y consulta previa para rulos/tintes. **Todavía no aplicar a `1717barber`**: el catálogo/horario productivo sigue sin guardar y Luque permanece sin booking público. [Inventario cloud](ACTIVACION_CLOUD_1717.md) y [piloto](PILOTO_FINAL_1717.md). Este encabezado sustituye los pendientes antiguos sobre horarios/pausa/domingo; conserva el contrato existente.
 

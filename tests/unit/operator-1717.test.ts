@@ -36,6 +36,11 @@ test("POS preparation refuses an unknown fixed charge, date or evidence", () => 
     effectiveFrom: "2026-10-24T09:00:00-03:00",
     evidenceReference: "synthetic provider evidence",
     fixedAmountMinor: { debit: 0, credit: 0 },
+    percentageBps: { debit: 220, credit: 520 },
+    rateComponents: {
+      debit: { processing: 200, vat: 20, withholding: 0, other: 0 },
+      credit: { processing: 470, vat: 47, withholding: 3, other: 0 },
+    }, // synthetic, not actual UPay terms
     vatTreatment: "Isolated fixture: included",
     withholdingTreatment: "Isolated fixture: none",
     otherChargesTreatment: "Isolated fixture: none",

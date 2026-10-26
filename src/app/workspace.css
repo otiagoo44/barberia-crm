@@ -1,4 +1,26 @@
 /* Workspace compositions. Shared controls/typography live in globals.css. */
+.clear-period-filter {
+  white-space: normal;
+  text-align: left;
+  max-width: 100%;
+}
+.clear-period-filter::before {
+  flex-shrink: 0;
+}
+.compact-filters > summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  width: fit-content;
+}
+.compact-filters[open] > summary {
+  margin-bottom: 10px;
+}
+.compact-filters > summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
 .saved-views {
   margin: 0 0 20px;
   color: var(--muted);

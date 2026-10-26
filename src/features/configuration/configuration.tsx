@@ -4,6 +4,7 @@ import { useWorkspace } from "@/features/organizations/context";
 import { RecordManager } from "./record-manager";
 import { definitions } from "./definitions";
 import { DailyAvailability } from "./daily-availability";
+import { WeeklyAvailability } from "./weekly-availability";
 import { LaunchGuide } from "@/features/organizations/launch-guide";
 import { useResource, resourceUrl, api } from "@/lib/client";
 import { Field, Notice, Loading } from "@/components/ui";
@@ -34,6 +35,7 @@ export function Configuration({
           ]
         : owner
           ? [
+              "weekly_availability",
               "daily_availability",
               "staff",
               "staff_branch_assignments",
@@ -66,6 +68,7 @@ export function Configuration({
   );
   const labels: Record<string, string> = {
     setup: "Puesta en marcha",
+    weekly_availability: "Editor semanal",
     daily_availability: "Turnos del día",
     memberships: "Usuarios y permisos",
     branding: "Identidad del negocio",
@@ -107,6 +110,8 @@ export function Configuration({
       </div>
       {tab === "setup" ? (
         <LaunchGuide expanded />
+      ) : tab === "weekly_availability" ? (
+        <WeeklyAvailability key={w.branchId} />
       ) : tab === "daily_availability" ? (
         <DailyAvailability
           key={w.branchId}

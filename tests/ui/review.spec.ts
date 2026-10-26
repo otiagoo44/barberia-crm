@@ -121,6 +121,17 @@ test("financial layout settles across viewport changes without overflow or heade
   await expect(page.locator(".loading:visible")).toHaveCount(0);
   await expect(page.locator(".recharts-wrapper").first()).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
+  await page
+    .locator("summary")
+    .filter({ hasText: "Filtros financieros" })
+    .click();
+  await page
+    .getByRole("combobox", { name: "Período", exact: true })
+    .selectOption("7");
+  await expect(
+    page.getByRole("button", { name: /Limpiar filtros/ }),
+  ).toBeVisible();
+  await expect(page.locator(".loading:visible")).toHaveCount(0);
   const measurements = [];
   for (const width of [360, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
@@ -488,6 +499,11 @@ test("selection, keyboard, reduced motion, contrast and target viewports", async
   await page.evaluate(() => {
     document.documentElement.style.zoom = "";
   });
+  const customerFilters = page
+    .locator("summary")
+    .filter({ hasText: /^Filtros/ });
+  await customerFilters.focus();
+  await page.keyboard.press("Enter");
   await expect(
     page.getByRole("button", { name: "Activos", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");

@@ -18,7 +18,12 @@ export default async function MfaPage({
   return (
     <main id="content" className="auth-page">
       <MfaForm
-        next={q.next === "reset-password" ? "/reset-password" : "/"}
+        next={
+          q.next === "reset-password" ||
+          identity.security.password_change_required
+            ? "/reset-password"
+            : "/"
+        }
         level={identity.security.level}
         factors={
           error

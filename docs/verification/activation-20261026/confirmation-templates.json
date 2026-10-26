@@ -1,0 +1,20 @@
+﻿{
+    "checked_at":  "2026-10-26T20:50:09.4611162Z",
+    "projects":  [
+                     {
+                         "project":  "zdogqqmitpbwjgohwcww",
+                         "status":  "NOT_AVAILABLE_FREE_DEFAULT_EMAIL_PROVIDER",
+                         "emails_sent":  0,
+                         "note":  "No SMTP credentials copied; callback was independently verified with a synthetic GoTrue token"
+                     },
+                     {
+                         "project":  "tbcfhagteyqufjkmbxzz",
+                         "confirmation_template":  "server-side token_hash callback, type=email",
+                         "smtp_unchanged":  true,
+                         "password_recovery_template_unchanged":  true,
+                         "emails_sent":  0,
+                         "status":  "PASSED"
+                     }
+                 ],
+    "source":  "https://supabase.com/docs/guides/auth/auth-email-templates"
+}

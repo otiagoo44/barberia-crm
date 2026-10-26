@@ -22,11 +22,14 @@ export const requireIdentity = cache(async function requireIdentity() {
       required: boolean;
       level: string;
       allowed: boolean;
+      password_change_required?: boolean;
     },
   };
 });
 export const requireUser = cache(async function requireUser() {
   const context = await requireIdentity();
+  if (context.security.password_change_required)
+    throw new HttpError(403, "password_change_required");
   if (!context.security.allowed) throw new HttpError(403, "mfa_required");
   return context;
 });

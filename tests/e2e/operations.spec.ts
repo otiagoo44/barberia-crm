@@ -129,7 +129,7 @@ test.describe("Real Supabase Auth and domain flows", () => {
     ).toBeVisible();
     await page.getByRole("button", { name: "Venta sin cita" }).click();
     await page
-      .getByLabel("Producto, curso u otro ingreso")
+      .getByRole("combobox", { name: "Servicio o concepto", exact: true })
       .selectOption({ label: productName });
     await page.getByRole("button", { name: "Preparar cobro" }).click();
     await expect(

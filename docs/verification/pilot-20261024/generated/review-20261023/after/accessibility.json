@@ -1,0 +1,25 @@
+{
+  "scope": "Actual components with synthetic transport; not real Auth",
+  "samples": [
+    {
+      "width": 360,
+      "axe_violations": 0
+    },
+    {
+      "width": 390,
+      "axe_violations": 0
+    },
+    {
+      "width": 768,
+      "axe_violations": 0
+    },
+    {
+      "width": 1024,
+      "axe_violations": 0
+    },
+    {
+      "width": 1440,
+      "axe_violations": 0
+    }
+  ]
+}

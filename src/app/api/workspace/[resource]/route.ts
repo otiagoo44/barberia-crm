@@ -3,6 +3,7 @@ import { requireUser } from "@/lib/auth";
 import { fail, response, readJson, HttpError, correlationId } from "@/lib/http";
 import { uuid, date, slug, customerInput, statuses } from "@/lib/validation";
 import { setupStatus } from "@/services/setup-status";
+import { validateRecord } from "@/lib/record-validation";
 export const dynamic = "force-dynamic";
 const nullableId = uuid.nullable();
 const common = { org: uuid, branch: nullableId };
@@ -129,6 +130,45 @@ export async function POST(
     let name: string;
     let args: Record<string, unknown>;
     switch (resource) {
+      case "weekly_schedule": {
+        const p = z
+          .object({
+            org: uuid,
+            branch: uuid,
+            staff: uuid,
+            from: date,
+            days: z.array(z.number().int().min(0).max(6)).min(1).max(7),
+            blocks: z
+              .array(
+                z
+                  .object({
+                    weekday: z.number().int().min(0).max(6),
+                    starts_at: z.string().regex(/^\d{2}:\d{2}$/),
+                    ends_at: z.string().regex(/^\d{2}:\d{2}$/),
+                  })
+                  .strict(),
+              )
+              .max(42),
+            expected: z
+              .array(z.object({ id: uuid, updated_at: z.string() }).strict())
+              .max(500),
+            key: uuid,
+          })
+          .strict()
+          .parse(raw);
+        name = "save_weekly_schedule";
+        args = {
+          p_org: p.org,
+          p_branch: p.branch,
+          p_staff: p.staff,
+          p_from: p.from,
+          p_days: p.days,
+          p_blocks: p.blocks,
+          p_expected: p.expected,
+          p_key: p.key,
+        };
+        break;
+      }
       case "daily_blocks": {
         const p = z
           .object({
@@ -166,13 +206,16 @@ export async function POST(
       }
       case "record": {
         const p = writes.record.parse(raw);
+        const validated = validateRecord(p.entity, p.data, !p.id);
+        if (Object.keys(validated.fields).length)
+          throw new HttpError(400, "invalid_record_fields", validated.fields);
         name = "manage_record";
         args = {
           p_org: p.org,
           p_entity: p.entity,
           p_id: p.id,
           p_branch: p.branch,
-          p_data: p.data,
+          p_data: validated.data,
         };
         break;
       }
@@ -291,6 +334,8 @@ export async function POST(
         throw new HttpError(404, "not_found");
     }
     const { data, error } = await db.rpc(name, args);
+    if (resource === "weekly_schedule" && error?.code === "PGRST202")
+      throw new HttpError(503, "weekly_schedule_upgrade_required");
     if (error) throw error;
     return response(data, requestId);
   } catch (error) {
@@ -323,14 +368,46 @@ export async function GET(
 ) {
   const requestId = correlationId(request);
   try {
-    const { db } = await requireUser();
+    const { db, user } = await requireUser();
     const { resource } = await params;
     const q = new URL(request.url).searchParams;
     const org = uuid.parse(q.get("org"));
     const branch = q.get("branch") ? uuid.parse(q.get("branch")) : null;
     const staff = q.get("staff") ? uuid.parse(q.get("staff")) : null;
+    if (resource === "weekly_schedule") {
+      if (!branch) throw new HttpError(400, "branch_required");
+      const membership = await db
+        .from("organization_memberships")
+        .select("role")
+        .eq("organization_id", org)
+        .eq("profile_id", user.id)
+        .eq("active", true)
+        .maybeSingle();
+      if (membership.error) throw membership.error;
+      if (membership.data?.role !== "organization_owner")
+        throw new HttpError(403, "owner_required");
+      const local = await db
+        .from("branches")
+        .select("id")
+        .eq("organization_id", org)
+        .eq("id", branch)
+        .maybeSingle();
+      if (local.error) throw local.error;
+      if (!local.data) throw new HttpError(404, "branch_not_found");
+      const result = await db.rpc("setup_team", {
+        p_org: org,
+        p_branch: branch,
+      });
+      if (result.error?.code === "PGRST202")
+        return response({ weekly_editor_supported: false }, requestId);
+      if (result.error) throw result.error;
+      return response(result.data, requestId);
+    }
     if (resource === "setup") {
-      return response(await setupStatus(org, branch, date.parse(q.get("date"))), requestId);
+      return response(
+        await setupStatus(org, branch, date.parse(q.get("date"))),
+        requestId,
+      );
     }
     if (resource === "calendar_blocks") {
       if (!branch) throw new HttpError(400, "branch_required");

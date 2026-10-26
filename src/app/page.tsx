@@ -10,6 +10,8 @@ export default async function Organizations() {
   try {
     context = await requireUser();
   } catch (error) {
+    if (error instanceof HttpError && error.code === "password_change_required")
+      redirect("/reset-password");
     if (error instanceof HttpError && error.code === "mfa_required")
       redirect("/mfa");
     if (error instanceof HttpError && error.status === 401) redirect("/login");

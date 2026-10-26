@@ -1,0 +1,232 @@
+{
+  "project": "tbcfhagteyqufjkmbxzz",
+  "checked_at": "2026-10-25T22:52:04.743Z",
+  "remote_count": 34,
+  "local_count": 40,
+  "results": [
+    {
+      "file": "20261012171437_tenant_core.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012171442_authorization.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012171446_configuration.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012171451_scheduling.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012171456_operations.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012171501_analytics_automation.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012173606_read_models.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012180348_product_hardening.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012181534_final_read_models.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012182755_advisor_foreign_key_indexes.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012183007_reporting_access.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012183207_bounded_read_permissions.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012183541_archived_branch_history.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012183917_platform_admin_audit.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012184839_customer_detail_branding.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261012210000_website_booking.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261012223818_finance_schema.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261012223852_finance_transactions.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261012224111_finance_read_import.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261012224355_booking_finance_hardening.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261015190206_booking_attribution_rls.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261015190657_consolidate_financial_audit_policy.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261015191802_worker_tick_record_scope.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261019154027_database_scheduler.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261019213732_profit_sharing.sql",
+      "state": "MATCH",
+      "matching": [
+        "trim"
+      ]
+    },
+    {
+      "file": "20261019220146_enable_database_cron.sql",
+      "state": "MATCH",
+      "matching": [
+        "trim"
+      ]
+    },
+    {
+      "file": "20261019223415_final_authorization_hardening.sql",
+      "state": "REVIEW_DIVERGENCE",
+      "matching": []
+    },
+    {
+      "file": "20261021005325_privileged_mfa_sessions.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261021005630_partner_distributions.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261021010224_reporting_health.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261021011210_daily_blocks.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261021202056_audit_release_boundaries.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261021214500_customer_list_projection.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    },
+    {
+      "file": "20261022162330_ux_reporting_breakdown.sql",
+      "state": "MATCH",
+      "matching": [
+        "lf",
+        "spaces"
+      ]
+    }
+  ],
+  "pending": [
+    "20261022205615_default_product_gold_brand.sql",
+    "20261022210809_dashboard_statement_owner_guard.sql",
+    "20261023193417_staff_owner_profile_link.sql",
+    "20261024161949_collected_partner_distributions.sql",
+    "20261024162205_setup_availability_diagnostics.sql",
+    "20261024214851_weekly_schedule_batch.sql"
+  ]
+}

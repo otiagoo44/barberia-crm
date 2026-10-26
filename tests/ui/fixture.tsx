@@ -50,6 +50,15 @@ function Screen() {
   if (path.endsWith("/finanzas")) return <FinancialDashboard />;
   if (path.endsWith("/configuracion"))
     return <Configuration module="configuracion" />;
+  if (path.endsWith("/servicios")) return <Configuration module="servicios" />;
+  if (path.endsWith("/equipo")) return <Configuration module="equipo" />;
+  if (path.endsWith("/manual-checkout"))
+    return (
+      <>
+        <h1>Venta manual · QA aislado</h1>
+        <CheckoutDialog branchId="branch-qa" onClose={() => {}} />
+      </>
+    );
   if (path.endsWith("/checkout"))
     return (
       <>

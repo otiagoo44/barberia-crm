@@ -7,6 +7,11 @@ export type SetupCheck = {
   status: "ready" | "pending" | "manual";
   detail: string;
   module: string;
+  steps?: {
+    label: string;
+    status: "ready" | "pending" | "manual";
+    detail: string;
+  }[];
 };
 export type SetupStatus = {
   checked_at: string;
@@ -87,6 +92,9 @@ export async function setupStatus(
       branchPreferences,
       members,
       factors,
+      team,
+      settlements,
+      receipts,
     ] = await Promise.all([
       db
         .from("services")
@@ -128,7 +136,7 @@ export async function setupStatus(
       db
         .from("payment_method_fee_rules")
         .select(
-          "payment_method_id,effective_from,effective_to,evidence_reference",
+          "id,payment_method_id,effective_from,effective_to,evidence_reference",
         )
         .eq("organization_id", org)
         .eq("active", true)
@@ -151,6 +159,19 @@ export async function setupStatus(
         .eq("active", true)
         .limit(501),
       db.auth.mfa.listFactors(),
+      db.rpc("setup_team", { p_org: org, p_branch: branch }),
+      db
+        .from("payment_reconciliations")
+        .select("payment_id,settled_at,evidence_reference")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .limit(501),
+      db
+        .from("payments")
+        .select("id,payment_method_id,fee_rule_id,direction")
+        .eq("organization_id", org)
+        .eq("branch_id", branch)
+        .limit(501),
     ]);
     for (const result of [
       services,
@@ -214,6 +235,58 @@ export async function setupStatus(
       preferences.data?.booking_enabled &&
       branchPreferences.data?.booking_enabled,
     );
+    type TeamPerson = {
+      name: string;
+      assigned: boolean;
+      linked: boolean;
+      membership: boolean;
+      email_confirmed: boolean;
+      capabilities: number;
+      verified_factors: number;
+    };
+    const teamPeople: TeamPerson[] = team.data?.people ?? [];
+    const enabledPeople = teamPeople.filter((p) => p.assigned);
+    const teamReady =
+      !team.error &&
+      enabledPeople.length > 0 &&
+      enabledPeople.every(
+        (p) =>
+          p.linked &&
+          p.membership &&
+          p.email_confirmed &&
+          p.capabilities > 0 &&
+          p.verified_factors >= 2,
+      );
+    const settlementBounded =
+      (settlements.data?.length ?? 0) > 500 ||
+      (receipts.data?.length ?? 0) > 500;
+    const reconciledCards = cards.filter((m) =>
+      receipts.data?.some(
+        (p) =>
+          p.payment_method_id === m.id &&
+          p.direction === 1 &&
+          fees.data?.some(
+            (f) =>
+              f.id === p.fee_rule_id &&
+              f.effective_from <= now &&
+              (!f.effective_to || f.effective_to > now),
+          ) &&
+          settlements.data?.some(
+            (s) =>
+              s.payment_id === p.id &&
+              s.settled_at <= now &&
+              s.evidence_reference,
+          ),
+      ),
+    );
+    const posReady =
+      !fees.error &&
+      !settlements.error &&
+      !receipts.error &&
+      !settlementBounded &&
+      cards.length > 0 &&
+      configuredFees.length === cards.length &&
+      reconciledCards.length === cards.length;
     checks.push(
       {
         key: "branch",
@@ -237,17 +310,61 @@ export async function setupStatus(
       {
         key: "professionals",
         label: "Profesionales",
-        status:
-          assigned.length > 0 && linked.length === assigned.length
-            ? "ready"
-            : "pending",
+        status: team.error ? "manual" : teamReady ? "ready" : "pending",
         detail: `${linked.length} de ${assigned.length} profesionales activos están vinculados a cuentas con membresía activa. Revisá sus servicios y acceso personal.`,
+        steps: team.error
+          ? [
+              {
+                label: "Acceso personal",
+                status: "manual",
+                detail:
+                  "No se pudo comprobar la cuenta y MFA de cada profesional. Puede faltar la migración del diagnóstico.",
+              },
+            ]
+          : teamPeople.map((p) => ({
+              label: p.name,
+              status:
+                p.assigned &&
+                p.linked &&
+                p.membership &&
+                p.email_confirmed &&
+                p.capabilities > 0 &&
+                p.verified_factors >= 2
+                  ? "ready"
+                  : "pending",
+              detail: `Creado · ${p.assigned ? "asignado a sucursal" : "sin asignación"} · ${p.capabilities} servicios habilitados · cuenta ${p.linked ? "vinculada" : "pendiente"} · membresía ${p.membership ? "activa" : "pendiente"} · correo ${p.email_confirmed ? "confirmado" : "pendiente"} · MFA personal ${p.verified_factors}/2 factores.`,
+            })),
         module: "equipo",
       },
       {
         key: "schedule",
         label: "Horarios del día",
         ...scheduleCheck,
+        steps:
+          (!schedule.error &&
+            schedule.data?.people?.map(
+              (p: { staff_id: string; state?: string }) => ({
+                label:
+                  team.data?.people?.find(
+                    (s: { staff_id: string }) => s.staff_id === p.staff_id,
+                  )?.name ?? "Profesional",
+                status: p.state === "not_configured" ? "pending" : "ready",
+                detail:
+                  (
+                    {
+                      not_configured: "No configurado",
+                      available: "Disponibilidad efectiva",
+                      outside_shift: "Fuera de turno",
+                      break: "Descanso obligatorio",
+                      exhausted: "Agotado por reservas",
+                      closed: "Cerrado",
+                      blocked: "Bloqueado por ausencia, cierre o excepción",
+                    } as Record<string, string>
+                  )[p.state ?? ""] ??
+                  "Horarios configurados; actualizar el diagnóstico para ver el estado detallado.",
+              }),
+            )) ||
+          undefined,
         module: "equipo",
       },
       {
@@ -260,19 +377,80 @@ export async function setupStatus(
       {
         key: "pos",
         label: "Tarifas y conciliación POS",
-        status: fees.error ? "manual" : "pending",
+        status:
+          fees.error || settlements.error || receipts.error || settlementBounded
+            ? "manual"
+            : posReady
+              ? "ready"
+              : "pending",
         detail: fees.error
           ? "Error al consultar las tarifas. No se verificó su vigencia ni conciliación."
           : `${configuredFees.length} de ${cards.length} métodos de tarjeta tienen una regla vigente con referencia. Las liquidaciones, IVA, retenciones y cargos requieren evidencia de conciliación; crear un método no completa finanzas.`,
+        steps: [
+          {
+            label: "Métodos de tarjeta",
+            status: cards.length ? "ready" : "pending",
+            detail: `${cards.length} métodos activos.`,
+          },
+          {
+            label: "Tarifas y evidencia",
+            status: fees.error
+              ? "manual"
+              : cards.length > 0 && configuredFees.length === cards.length
+                ? "ready"
+                : "pending",
+            detail: `${configuredFees.length}/${cards.length} con tarifa vigente y referencia; no prueba una liquidación.`,
+          },
+          {
+            label: "Liquidación real conciliada",
+            status:
+              settlements.error || receipts.error || settlementBounded
+                ? "manual"
+                : posReady
+                  ? "ready"
+                  : "pending",
+            detail: `${reconciledCards.length}/${cards.length} métodos con acreditación conciliada para la versión vigente. No se generaron cobros de prueba.`,
+          },
+          {
+            label: "Validación contable externa",
+            status: "manual",
+            detail:
+              "La contadora debe comprobar condiciones, IVA y retenciones. Este diagnóstico no certifica ese control externo.",
+          },
+        ],
         module: "finanzas",
       },
       {
         key: "booking",
         label: "Reservas públicas",
-        status: booking ? "ready" : "manual",
+        status: "manual",
         detail: booking
           ? "Los flags del negocio y del local están habilitados. Aún hace falta probar el enlace con catálogo y horarios reales."
           : "Deshabilitadas por configuración. Es válido operar sin reservas online; habilitalas solo por decisión del propietario.",
+        steps: [
+          {
+            label: "Flags de reservas",
+            status: booking ? "ready" : "pending",
+            detail: booking
+              ? "Ambos flags habilitados."
+              : "Reservas cerradas; conservar durante el piloto.",
+          },
+          {
+            label: "Catálogo y disponibilidad",
+            status:
+              configured.length > 0 && scheduleCheck.status === "ready"
+                ? "ready"
+                : "pending",
+            detail:
+              "Configuración interna comprobada; aún requiere el contrato público y una reserva real autorizada.",
+          },
+          {
+            label: "Contrato público y prueba real",
+            status: "manual",
+            detail:
+              "Comprobar servicios, consulta previa, horario ofrecido y reserva completa durante el piloto antes de activar.",
+          },
+        ],
         module: "sucursales",
       },
     );
@@ -294,6 +472,19 @@ export async function setupStatus(
           ? "Tu sesión superó MFA y tenés al menos dos factores verificados. Correo, recuperación, backups y alertas requieren verificación manual."
           : "Agregá un autenticador de respaldo independiente. Correo, recuperación, backups y alertas requieren verificación manual.",
       module: "/mfa",
+      steps: [
+        {
+          label: "Sesión actual",
+          status: security.allowed && verified >= 2 ? "ready" : "pending",
+          detail: `MFA y ${verified}/2 factores verificados de tu cuenta.`,
+        },
+        {
+          label: "Controles externos",
+          status: "manual",
+          detail:
+            "Entrega SMTP, recuperación independiente, respaldo recuperable y recepción de alertas requieren evidencia externa.",
+        },
+      ],
     });
   }
   if (!checks.some((c) => c.key === "security"))
@@ -314,6 +505,7 @@ type ScheduleObservation = {
     scheduled_today: boolean;
     effective: boolean;
     remaining: boolean;
+    state?: string;
   }[];
 };
 export function describeSchedule(

@@ -9,10 +9,14 @@ export default async function Reset() {
   } catch {
     redirect("/login?link=expired");
   }
-  if (!identity.security.allowed) redirect("/mfa?next=reset-password");
+  if (identity.security.required && identity.security.level !== "aal2")
+    redirect("/mfa?next=reset-password");
   return (
     <main id="content" className="auth-page">
-      <AuthForm reset />
+      <AuthForm
+        reset
+        temporary={!!identity.security.password_change_required}
+      />
     </main>
   );
 }

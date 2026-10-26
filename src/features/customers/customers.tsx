@@ -119,32 +119,49 @@ export function Customers({ retention = false }: { retention?: boolean }) {
         </div>
       )}
       {!retention && w.role !== "barber" && (
-        <div
-          className="config-tabs"
-          role="group"
-          aria-label="Estado de clientes"
+        <details className="compact-filters">
+          <summary>Filtros{tab === "archived" ? " · Archivados" : ""}</summary>
+          <div
+            className="config-tabs"
+            role="group"
+            aria-label="Estado de clientes"
+          >
+            <button
+              aria-pressed={tab === "all"}
+              className={tab === "all" ? "selected" : ""}
+              onClick={() => {
+                setTab("all");
+                setCursor(null);
+              }}
+            >
+              Activos
+            </button>
+            <button
+              aria-pressed={tab === "archived"}
+              className={tab === "archived" ? "selected" : ""}
+              onClick={() => {
+                setTab("archived");
+                setCursor(null);
+              }}
+            >
+              Archivados
+            </button>
+          </div>
+        </details>
+      )}
+      {!retention && (tab === "archived" || text) && (
+        <button
+          className="badge"
+          onClick={() => {
+            setTab("all");
+            setText("");
+            setQuery("");
+            setCursor(null);
+          }}
         >
-          <button
-            aria-pressed={tab === "all"}
-            className={tab === "all" ? "selected" : ""}
-            onClick={() => {
-              setTab("all");
-              setCursor(null);
-            }}
-          >
-            Activos
-          </button>
-          <button
-            aria-pressed={tab === "archived"}
-            className={tab === "archived" ? "selected" : ""}
-            onClick={() => {
-              setTab("archived");
-              setCursor(null);
-            }}
-          >
-            Archivados
-          </button>
-        </div>
+          {tab === "archived" ? "Archivados · " : ""}
+          {text ? `Búsqueda: ${text} · ` : ""}Limpiar filtros
+        </button>
       )}
       <FilterBar label="Buscar y exportar clientes">
         <input
