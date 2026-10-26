@@ -20,7 +20,7 @@ Bitácora de la inspección inicial y controles preparados; **no es un recibo de
 
 [Evidencia verificable](verification/activation-20261025/README.md): pruebas completas aisladas, upgrade, restauración cifrada local, comparación cloud y diagnóstico exacto de Vercel. El PR #8 se conserva como candidato, sin duplicar su editor/servicios/caja ni cambiar identidad visual. El merge requiere los controles del HEAD final, incluidos los de despliegue. No se cambiaron protecciones.
 
-El backup lógico real y su restauración no deben declararse hechos por pasar el ensayo con fixtures. La nueva contraseña PostgreSQL la introduce el usuario en el comando oculto; no se solicita por chat. SMTP se prepara con Gmail y el usuario ingresa y guarda su contraseña de aplicación; la entrega/recuperación se verifican después. El navegador denegó acceso al origen del CRM y no se intentó eludirlo.
+Existen dos copias lógicas cifradas reales en el directorio privado, pero sus primeros ensayos fallaron en la comparación y sus recibos siguen `NOT_TESTED`. No se aplicaron migraciones. El verificador corregido pasó la regresión con fixtures y upgrade 34→41; falta verificar la copia real ingresando localmente la frase original. SMTP se prepara con Gmail y el usuario ingresa y guarda su contraseña de aplicación; la entrega/recuperación se verifican después. El navegador volvió a denegar acceso al origen del CRM mediante una regla guardada/política, aun después de la autorización explícita del usuario; no se intentó eludirla.
 
 ## Operación sin documentación adicional de UPay
 
@@ -31,7 +31,7 @@ La primera acreditación bancaria real y el detalle de la operación permitirán
 ## Próximas intervenciones humanas
 
 1. Guardar SMTP y comprobar correo recibido por `ortegatiago733@gmail.com`; después probar confirmación y recuperación independientes.
-2. Ejecutar `scripts/backup-1717.ps1` ingresando PostgreSQL y frase de cifrado en prompts ocultos. Conservar copia cifrada fuera del equipo y frase en gestor separado; no versionar ninguna.
+2. Ejecutar `powershell -NoProfile -File .\scripts\backup-1717.ps1 -Action Verify` con la frase de cifrado original, para validar la copia ya existente sin reconectar a producción. Conservar luego una copia cifrada fuera del equipo y la frase en gestor separado; no versionar ninguna.
 3. Cada propietario se registra desde `/login` → Crear una cuenta, confirma su propio email y verifica sus autenticadores reales. Después el actor autorizado asigna `organization_owner`, habilita Luque y vincula el staff correcto sin degradar a barber.
 4. Validar una acreditación real de UPay cuando exista y definir destinatario/proveedor de alertas. Destinatario autorizado: `ortegatiago733@gmail.com`; entrega todavía no probada.
 5. Revisar por separado el archivo/nota del cliente ficticio antes de aplicarlos. Realizar el piloto con ambos, sin cobros ficticios productivos.

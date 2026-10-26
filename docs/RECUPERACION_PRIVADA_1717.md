@@ -8,7 +8,7 @@ El dashboard del proyecto muestra organización **Pro** y copias **PHYSICAL**. �
 
 Cobertura: base de datos, incluidos los datos Auth almacenados allí. **No incluye los archivos de Storage**, ni sustituye secretos/configuración externa de SMTP, Vercel o proveedores. No se activó PITR ni se aumentó compute.
 
-No se pulsó Restore: ese flujo puede afectar producción. La restauración de una copia física administrada **no está probada**. El usuario dejó pendiente un segundo proyecto y no autorizó costos adicionales. Un simulacro lógico local no es una restauración física de Supabase.
+No se pulsó Restore: ese flujo puede afectar producción. La restauración de una copia física administrada **no está probada**. El usuario autorizó posteriormente un segundo proyecto de hasta USD 10/mes si fuera necesario; no se creó ni contrató: el candidato de Vercel pudo construirse sin ese recurso. Un simulacro lógico local no es una restauración física de Supabase.
 
 Con respaldo diario puede perderse lo registrado desde la última copia recuperable: aproximadamente hasta 24 horas si cada ejecución funciona, y más si una copia falla o el incidente tarda en detectarse. Comprobar diariamente fecha y estado; no prometer pérdida cero ni un RTO cloud sin medirlo.
 
@@ -32,17 +32,23 @@ Pide la contraseña PostgreSQL actual y una frase de cifrado de al menos 20 cara
 
 El script lee solamente la identidad verificada de 17:17/Luque, exporta, cifra, vuelve a descifrar el archivo y restaura automáticamente en un cluster temporal que escucha **solo en 127.0.0.1**, con contraseña aleatoria. No acepta una URL de destino remoto. No invoca notificaciones, cron o integraciones. Compara todas las filas por conteo/hash, políticas, permisos efectivos, propietarios, restricciones y seguridad/cuerpo de las funciones. También comprueba que sesiones anónimas o autenticadas sin identidad no puedan leer clientes. Detiene el cluster y elimina su directorio privado después del ensayo.
 
-El recibo `.receipt.json` solo indica `PASSED` al terminar todas esas verificaciones. Una copia creada con restore `NOT_TESTED` no habilita migraciones. Una excepción no debe interpretarse como éxito. La prueba Auth se limita a datos/tablas recuperados; no certifica login GoTrue, entrega SMTP, Realtime ni recuperación de infraestructura administrada.
+El verificador compara además las filas COPY y los valores de secuencias del archivo original contra una nueva exportación de la restauración. Ordena los conjuntos de metadatos independientemente de la colación Linux/Windows. Las nuevas copias usan también hashes con colación C; para archivos anteriores, la prueba independiente de filas reemplaza solamente el hash que dependía de la colación. No se omiten conteos, datos, RLS ni permisos. Una diferencia produce un diagnóstico privado con nombres de objetos/campos, sin filas ni credenciales.
+
+Después prueba las migraciones pendientes sobre esa misma copia local y comprueba que los datos originales Auth/comerciales permanecen idénticos, el historial alcanza 41, RLS sigue activo y las RPC esperadas existen. No conecta este paso a producción.
+
+El recibo `.receipt.json` solo indica `PASSED` al terminar todas esas verificaciones. Una copia creada con restore `NOT_TESTED` no habilita migraciones. Una excepción no debe interpretarse como éxito. La prueba Auth se limita a datos/tablas recuperados; no certifica login GoTrue, entrega SMTP, Realtime ni recuperación de infraestructura administrada. Una recuperación hacia otro proyecto también requiere tratar las claves de cifrado de plataforma conforme a la documentación vigente de Supabase; recuperar tablas no acredita que secretos/MFA cifrados funcionen en ese destino.
 
 Para repetir el ensayo de un archivo ya creado:
 
 ```powershell
-powershell -NoProfile -File .\scripts\backup-1717.ps1 -Action Verify -BackupFile 'RUTA_ABSOLUTA_DEL_ARCHIVO.bkos'
+powershell -NoProfile -File .\scripts\backup-1717.ps1 -Action Verify
 ```
 
 Herramientas preparadas en `%LOCALAPPDATA%\BarberiaOS\tools`: binarios del archivo oficial EDB `postgresql-17.11-5-windows-x64-binaries.zip`, SHA-256 `80379b2c04d51c30225532e0ae04509899141e9957ed096fe749d7fd9df8f82f`, CA Supabase `prod-ca-2021.crt` y bundle CA de Mozilla verificado contra su checksum publicado. No se instaló un servicio PostgreSQL ni Docker.
 
-**Estado productivo:** la copia lógica real sigue pendiente de conexión autorizada. El ensayo automatizado registrado en `verification/activation-20261025/private-backup-local.json` usa exclusivamente fixtures locales; no debe llamarse restore de producción.
+Sin `-BackupFile` se verifica el `.bkos` más reciente del directorio privado. Este paso pide solamente la frase de cifrado original y no abre una conexión productiva.
+
+**Estado productivo observado:** se crearon dos archivos cifrados reales de 2.650.229 bytes, con snapshots del 25/10/2026 23:32:36.861 y 23:36:57.365 UTC. Sus primeros ensayos terminaron con `ERR_ASSERTION` y recibo `NOT_TESTED`; no habilitan migraciones. Está pendiente repetir Verify con el verificador corregido. El ensayo automatizado registrado en `verification/activation-20261025/private-backup-local.json` pasó con 79 tablas, 130 políticas, verificación de secuencias y upgrade aislado 34→41; usa exclusivamente fixtures locales y no debe llamarse restore de producción.
 
 Una copia local no protege de la pérdida completa de la computadora. Después de un respaldo real aprobado, copiar **el ciphertext** a almacenamiento privado independiente y guardar la frase en un gestor distinto; definir acceso y retención con los propietarios. No subirlo al repositorio, Vercel ni una carpeta pública. No se configuró todavía esa segunda ubicación ni una tarea automática de copia lógica.
 

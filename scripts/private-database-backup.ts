@@ -16,7 +16,8 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { createServer } from "node:net";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { isDeepStrictEqual } from "node:util";
 import assert from "node:assert/strict";
 import EmbeddedPostgres from "embedded-postgres";
 import { Client } from "pg";
@@ -29,6 +30,7 @@ const schemas = [
   "supabase_migrations",
 ];
 const project = "tbcfhagteyqufjkmbxzz";
+let backupPhase = "initializing";
 const identifier = (s: string) => '"' + s.replaceAll('"', '""') + '"';
 const digest = (b: Buffer) => createHash("sha256").update(b).digest("hex");
 
@@ -103,6 +105,8 @@ async function tool(
   for (const name of Object.keys(childEnvironment))
     if (name.startsWith("TASK_BACKUP_")) delete childEnvironment[name];
   childEnvironment.PGCONNECT_TIMEOUT = "15";
+  childEnvironment.PGOPTIONS =
+    "-c timezone=UTC -c extra_float_digits=3 -c bytea_output=hex -c intervalstyle=postgres";
   return new Promise<Buffer>((resolve, reject) => {
     const child = spawn(bin, args, {
       env: childEnvironment,
@@ -122,7 +126,7 @@ async function tool(
       env.TASK_BACKUP_FIXTURE_DIAGNOSTICS === "1" && env.PGHOST === "127.0.0.1";
     let stderr = "";
     child.stderr.on("data", (bytes: Buffer) => {
-      if (diagnostics) stderr += bytes.toString("utf8");
+      if (stderr.length < 32768) stderr += bytes.toString("utf8");
     });
     child.stdin.on("error", () => {});
     child.on("error", () =>
@@ -132,7 +136,23 @@ async function tool(
       if (code === 0) resolve(Buffer.concat(output));
       else {
         if (diagnostics) console.error(stderr);
-        reject(new Error(`PostgreSQL tool exited ${code}; output suppressed`));
+        const safeCode = /password authentication failed/i.test(stderr)
+          ? "DB_AUTH_FAILED"
+          : /permission denied/i.test(stderr)
+            ? "DB_PERMISSION_DENIED"
+            : /certificate|SSL error/i.test(stderr)
+              ? "DB_TLS_FAILED"
+              : /server version mismatch|aborting because of server version/i.test(
+                    stderr,
+                  )
+                ? "DB_VERSION_MISMATCH"
+                : "POSTGRES_TOOL_FAILED";
+        reject(
+          Object.assign(
+            new Error(`PostgreSQL tool exited ${code}; output suppressed`),
+            { code: safeCode },
+          ),
+        );
       }
     });
     child.stdin.end(input);
@@ -151,7 +171,7 @@ async function inventory(client: Client) {
   for (const r of relations) {
     const check = (
       await client.query(
-        `select count(*)::text rows,md5(coalesce(string_agg(to_jsonb(t)::text,chr(10) order by to_jsonb(t)::text),'')) content_hash from ${identifier(r.schema)}.${identifier(r.name)} t`,
+        `select count(*)::text rows,md5(coalesce(string_agg(to_jsonb(t)::text,chr(10) order by to_jsonb(t)::text collate "C"),'')) content_hash from ${identifier(r.schema)}.${identifier(r.name)} t`,
       )
     ).rows[0];
     tables.push({ ...r, ...check });
@@ -196,11 +216,198 @@ async function inventory(client: Client) {
   };
 }
 
+// COPY text escapes literal tabs/newlines in values. Compare row multisets from
+// the original pg_dump archive and a fresh dump of the recovered database, using
+// JS byte-independent ordering rather than Linux/Windows database collation.
+// Plain data remains in memory and is never written to logs or a plaintext file.
+export function fingerprintDumpData(sql: string) {
+  const tables: {
+    table: string;
+    header: string;
+    rows: number;
+    hash: string;
+  }[] = [];
+  const sequences: string[] = [];
+  let active: { header: string; rows: string[] } | undefined;
+  for (const line of sql.replaceAll("\r\n", "\n").split("\n")) {
+    if (active) {
+      if (line === "\\.") {
+        const table = active.header.slice(5, active.header.indexOf(" ("));
+        assert.ok(
+          !tables.some((t) => t.table === table),
+          "Duplicate COPY table in archive",
+        );
+        tables.push({
+          table,
+          header: active.header,
+          rows: active.rows.length,
+          hash: digest(Buffer.from(active.rows.sort().join("\n"))),
+        });
+        active = undefined;
+      } else active.rows.push(line);
+      continue;
+    }
+    if (/^COPY .+ \(.+\) FROM stdin;$/.test(line)) {
+      active = { header: line, rows: [] };
+      continue;
+    }
+    if (/^SELECT pg_catalog\.setval\(.+\);$/.test(line)) {
+      sequences.push(line);
+      continue;
+    }
+    if (
+      !line.trim() ||
+      line.startsWith("--") ||
+      /^SET .+;$/.test(line) ||
+      /^SELECT pg_catalog\.set_config\('search_path', '', false\);$/.test(
+        line,
+      ) ||
+      /^\\(?:un)?restrict [A-Za-z0-9]+$/.test(line)
+    )
+      continue;
+    throw Object.assign(
+      new Error("Unsupported data statement; verification refuses to omit it"),
+      { code: "UNSUPPORTED_DUMP_DATA_STATEMENT" },
+    );
+  }
+  assert.equal(active, undefined, "Unterminated COPY block");
+  return {
+    tables: tables.sort((a, b) =>
+      a.table < b.table ? -1 : a.table > b.table ? 1 : 0,
+    ),
+    sequences: sequences.sort(),
+  };
+}
+
+function canonicalMetadata(
+  state: Record<string, Record<string, unknown>[]>,
+  includeContentHash: boolean,
+) {
+  return Object.fromEntries(
+    Object.entries(state).map(([section, rows]) => [
+      section,
+      rows
+        .map((row) => {
+          const normalized = { ...row };
+          if (section === "tables" && !includeContentHash)
+            delete normalized.content_hash;
+          for (const key of ["acl", "roles"])
+            if (Array.isArray(normalized[key]))
+              normalized[key] = [...(normalized[key] as unknown[])].sort();
+          return normalized;
+        })
+        .sort((a, b) =>
+          JSON.stringify(a) < JSON.stringify(b)
+            ? -1
+            : JSON.stringify(a) > JSON.stringify(b)
+              ? 1
+              : 0,
+        ),
+    ]),
+  );
+}
+
+async function upgradeRestoredCopy(client: Client) {
+  backupPhase = "isolated-upgrade";
+  const exists = (
+    await client.query(
+      "select to_regclass('supabase_migrations.schema_migrations') is not null present",
+    )
+  ).rows[0].present;
+  if (!exists)
+    return {
+      status: "NOT_TESTED",
+      reason: "No source migration ledger in this fixture",
+    };
+  const directory = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../supabase/migrations",
+  );
+  const files = (await readdir(directory))
+    .filter((f) => /^\d{14}_[a-z0-9_]+\.sql$/.test(f))
+    .sort();
+  const history = (
+    await client.query(
+      "select version,name from supabase_migrations.schema_migrations order by version",
+    )
+  ).rows;
+  if (
+    !history.length ||
+    history.some((r, i) => files[i] !== `${r.version}_${r.name}.sql`)
+  )
+    throw Object.assign(
+      new Error("Restored migration history differs from the release prefix"),
+      { code: "MIGRATION_HISTORY_DIVERGENCE" },
+    );
+  const before = (await inventory(client)).tables.filter(
+    (t) => t.schema !== "supabase_migrations",
+  );
+  const applied: string[] = [];
+  for (const file of files.slice(history.length)) {
+    const sql = await readFile(path.join(directory, file), "utf8");
+    await client.query("begin");
+    try {
+      await client.query(
+        "set local lock_timeout='5s';set local statement_timeout='60s'",
+      );
+      await client.query(sql);
+      await client.query(
+        "insert into supabase_migrations.schema_migrations(version,name,statements) values($1,$2,$3)",
+        [file.slice(0, 14), file.slice(15, -4), [sql]],
+      );
+      await client.query("commit");
+      applied.push(file);
+    } catch (error) {
+      await client.query("rollback");
+      throw error;
+    }
+  }
+  const after = await inventory(client);
+  for (const table of before) {
+    const row = after.tables.find(
+      (t) => t.schema === table.schema && t.name === table.name,
+    );
+    assert.ok(row);
+    assert.equal(row.rows, table.rows);
+    assert.equal(
+      row.content_hash,
+      table.content_hash,
+      "Upgrade must preserve every original business/Auth row",
+    );
+  }
+  const security = (
+    await client.query(
+      "select (select count(*)::int from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r' and not c.relrowsecurity) unprotected,(select count(*)::int from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.prokind='f' and p.prosecdef) public_definers,to_regprocedure('public.save_weekly_schedule(uuid,uuid,uuid,date,integer[],jsonb,jsonb,uuid)') is not null weekly_rpc,to_regprocedure('public.setup_team(uuid,uuid)') is not null team_rpc",
+    )
+  ).rows[0];
+  assert.equal(security.unprotected, 0);
+  assert.equal(security.public_definers, 0);
+  assert.equal(security.weekly_rpc, true);
+  assert.equal(security.team_rpc, true);
+  assert.equal(
+    (
+      await client.query(
+        "select count(*)::int n from supabase_migrations.schema_migrations",
+      )
+    ).rows[0].n,
+    files.length,
+  );
+  return {
+    status: "PASSED",
+    from: history.length,
+    to: files.length,
+    applied,
+    original_tables_content_unchanged: before.length,
+    security,
+  };
+}
+
 export async function exportSnapshot(
   client: Client,
   pgBin: string,
   pgEnv: NodeJS.ProcessEnv,
 ) {
+  backupPhase = "source-snapshot";
   await client.query("begin isolation level repeatable read read only");
   try {
     const snapshot = (
@@ -208,6 +415,7 @@ export async function exportSnapshot(
         "select pg_export_snapshot() snapshot,clock_timestamp() at",
       )
     ).rows[0];
+    backupPhase = "source-inventory";
     const state = await inventory(client);
     const roles = (
       await client.query(
@@ -220,6 +428,7 @@ export async function exportSnapshot(
         [schemas],
       )
     ).rows;
+    backupPhase = "source-pg-dump";
     const dump = await tool(
       path.join(pgBin, "pg_dump.exe"),
       [
@@ -237,6 +446,7 @@ export async function exportSnapshot(
       JSON.stringify({
         version: 1,
         project,
+        content_hash_order: "C",
         taken_at: snapshot.at,
         state,
         roles,
@@ -256,6 +466,7 @@ export async function restoreIsolated(
   pgBin: string,
   privateRoot: string,
 ) {
+  backupPhase = "isolated-restore";
   const data = JSON.parse(bundle.toString("utf8"));
   assert.equal(data.project, project);
   const dump = Buffer.from(data.dump, "base64");
@@ -339,12 +550,124 @@ export async function restoreIsolated(
         );
       }
     }
+    backupPhase = "isolated-validation";
     const recovered = await inventory(client);
-    assert.deepEqual(
-      recovered,
-      data.state,
-      "Restored counts, content, RLS, ACL, constraints and routine security must match the same source snapshot",
+    backupPhase = "isolated-row-content";
+    const originalCopy = fingerprintDumpData(
+      (
+        await tool(
+          path.join(pgBin, "pg_restore.exe"),
+          ["--data-only", "--file=-"],
+          process.env,
+          dump,
+        )
+      ).toString("utf8"),
     );
+    const recoveredCopy = fingerprintDumpData(
+      (
+        await tool(
+          path.join(pgBin, "pg_dump.exe"),
+          [
+            "--data-only",
+            "--no-publications",
+            "--no-subscriptions",
+            ...schemas.map((s) => "--schema=" + s),
+            ...data.extensions.map(
+              (e: { extname: string }) => "--extension=" + e.extname,
+            ),
+          ],
+          {
+            ...process.env,
+            PGHOST: "127.0.0.1",
+            PGPORT: String(port),
+            PGUSER: "postgres",
+            PGPASSWORD: password,
+            PGDATABASE: "postgres",
+            PGSSLMODE: "disable",
+          },
+        )
+      ).toString("utf8"),
+    );
+    if (!isDeepStrictEqual(originalCopy, recoveredCopy))
+      throw Object.assign(
+        new Error(
+          "Recovered COPY rows or sequence values differ from the encrypted archive",
+        ),
+        { code: "RESTORED_ROW_DATA_MISMATCH" },
+      );
+    backupPhase = "isolated-validation";
+    const originalMetadata = canonicalMetadata(
+      data.state,
+      data.content_hash_order === "C",
+    );
+    const recoveredMetadata = canonicalMetadata(
+      recovered,
+      data.content_hash_order === "C",
+    );
+    const differences = [];
+    for (const section of Object.keys(originalMetadata)) {
+      if (
+        isDeepStrictEqual(recoveredMetadata[section], originalMetadata[section])
+      )
+        continue;
+      const rows = recoveredMetadata[section] as Record<string, unknown>[];
+      const originals = originalMetadata[section] as Record<string, unknown>[];
+      const key = (row: Record<string, unknown>) =>
+        section === "tables"
+          ? `${row.schema}.${row.name}`
+          : section === "routines"
+            ? `${row.schema}.${row.proname}(${row.args})`
+            : section === "constraints"
+              ? `${row.schema}.${row.table_name}.${row.conname}`
+              : section === "policies"
+                ? `${row.schemaname}.${row.tablename}.${row.policyname}`
+                : section === "schemaPermissions"
+                  ? String(row.nspname)
+                  : `${row.schema}.${row.grantee}.${row.privilege}.${row.grantable}`;
+      const changed = [];
+      for (const original of originals) {
+        const found = rows.find((row) => key(row) === key(original));
+        if (!isDeepStrictEqual(found, original))
+          changed.push({
+            object: key(original),
+            fields: found
+              ? Object.keys(original).filter(
+                  (field) => !isDeepStrictEqual(found[field], original[field]),
+                )
+              : ["missing"],
+          });
+      }
+      for (const row of rows)
+        if (!originals.some((original) => key(row) === key(original)))
+          changed.push({ object: key(row), fields: ["unexpected"] });
+      differences.push({
+        section,
+        source_count: originals.length,
+        recovered_count: rows.length,
+        changed: changed.slice(0, 30),
+      });
+    }
+    if (differences.length) {
+      await writeFile(
+        path.join(root, "last-restore-diagnostic.json"),
+        JSON.stringify(
+          {
+            checked_at: new Date().toISOString(),
+            project,
+            phase: backupPhase,
+            differences,
+            note: "Object names and differing metadata fields only; no rows, hashes, SQL bodies or credentials",
+          },
+          null,
+          2,
+        ),
+        { mode: 0o600 },
+      );
+      throw Object.assign(
+        new Error("Restored state mismatch; safe diagnostic saved privately"),
+        { code: "RESTORE_STATE_MISMATCH" },
+      );
+    }
     for (const role of ["anon", "authenticated"]) {
       await client.query("begin");
       try {
@@ -361,6 +684,7 @@ export async function restoreIsolated(
         await client.query("rollback");
       }
     }
+    const isolated_upgrade = await upgradeRestoredCopy(client);
     return {
       status: "PASSED",
       restore_ms: Math.round(performance.now() - start),
@@ -369,6 +693,10 @@ export async function restoreIsolated(
         .length,
       policies_verified: recovered.policies.length,
       anonymous_and_unscoped_authenticated_denied: true,
+      row_content_verified_against_archive: true,
+      sequence_values_verified: originalCopy.sequences.length,
+      portable_source_checksums: data.content_hash_order === "C",
+      isolated_upgrade,
       auth_api_login: "NOT_TESTED",
       managed_physical_restore: "NOT_TESTED",
       destination: "localhost only; no outgoing integrations executed",
@@ -406,7 +734,10 @@ async function main() {
   const pgBin = process.env.TASK_BACKUP_PG_BIN!;
   assert.ok((await readdir(pgBin)).includes("pg_dump.exe"));
   const passphrase = process.env.TASK_BACKUP_PASSPHRASE!;
-  assert.ok(passphrase?.length >= 20);
+  if (!passphrase || passphrase.length < 20)
+    throw Object.assign(new Error("Backup passphrase too short"), {
+      code: "BACKUP_PASSPHRASE_TOO_SHORT",
+    });
   let file = process.env.TASK_BACKUP_FILE;
   let bundle: Buffer;
   if (process.env.TASK_BACKUP_ACTION === "Verify") {
@@ -434,7 +765,9 @@ async function main() {
       ssl: { rejectUnauthorized: true, ca: await readFile(caFile, "utf8") },
     });
     try {
+      backupPhase = "source-connect";
       await client.connect();
+      backupPhase = "source-identity";
       const target = await client.query(
         "select o.id from public.organizations o join public.branches b on b.organization_id=o.id where o.id='db03ca0c-48cc-46d2-bcbe-86c6ba8525d4' and o.slug='1717-barberia' and b.id='1c10857c-c9da-442a-a1cb-46edd114832d' and b.slug='luque'",
       );
@@ -456,6 +789,7 @@ async function main() {
       root,
       "1717-" + new Date().toISOString().replaceAll(":", "-") + ".bkos",
     );
+    backupPhase = "encrypt-backup";
     const encrypted = encryptBackup(bundle, passphrase);
     await writeFile(file, encrypted, { flag: "wx", mode: 0o600 });
     assert.deepEqual(decryptBackup(await readFile(file), passphrase), bundle);
@@ -490,7 +824,15 @@ if (
 ) {
   try {
     await main();
-  } catch {
+  } catch (error) {
+    const code = (error as { code?: string }).code;
+    console.error(
+      JSON.stringify({
+        status: "NOT_APPROVED",
+        phase: backupPhase,
+        code: code && /^[A-Z0-9_]+$/.test(code) ? code : "UNCLASSIFIED",
+      }),
+    );
     console.error(
       "Respaldo/restauración NO aprobados. Credenciales y errores SQL privados no se imprimen. No aplicar migraciones.",
     );

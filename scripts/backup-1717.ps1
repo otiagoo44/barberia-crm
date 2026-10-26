@@ -1,4 +1,4 @@
-param(
+﻿param(
   [ValidateSet('Backup','Verify')][string]$Action = 'Backup',
   [string]$BackupFile,
   [string]$PgBin = "$env:LOCALAPPDATA/BarberiaOS/tools/postgresql-17.11/pgsql/bin"
@@ -19,6 +19,11 @@ function Read-TaskSecret([string]$Prompt) {
   finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($taskPointer); $taskSecure.Dispose() }
 }
 try {
+  if ($Action -eq 'Verify' -and -not $BackupFile) {
+    $taskLatest = Get-ChildItem -LiteralPath $taskRoot -Filter '*.bkos' | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $taskLatest) { throw 'No hay un archivo cifrado para verificar' }
+    $BackupFile = $taskLatest.FullName
+  }
   $env:TASK_BACKUP_ACTION = $Action
   $env:TASK_BACKUP_ROOT = $taskRoot
   $env:TASK_BACKUP_PG_BIN = (Resolve-Path -LiteralPath $PgBin).Path

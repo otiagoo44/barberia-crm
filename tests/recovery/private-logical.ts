@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { isolatedDatabase, asUser } from "../integration/database";
 import { fixtures } from "../integration/fixtures";
@@ -28,7 +28,25 @@ const pgBin = path.resolve(
 await mkdir(root, { recursive: true });
 const db = await isolatedDatabase(34);
 try {
+  await db.pool.query(
+    "create schema supabase_migrations;create table supabase_migrations.schema_migrations(version text primary key,name text,statements text[])",
+  );
+  for (const file of (await readdir("supabase/migrations"))
+    .filter((f) => f.endsWith(".sql"))
+    .sort()
+    .slice(0, 34))
+    await db.pool.query(
+      "insert into supabase_migrations.schema_migrations values($1,$2,$3)",
+      [
+        file.slice(0, 14),
+        file.slice(15, -4),
+        [await readFile(path.join("supabase/migrations", file), "utf8")],
+      ],
+    );
   const f = await fixtures(db.pool);
+  await db.pool.query(
+    "create sequence public.backup_drill_sequence start 7;select nextval('public.backup_drill_sequence')",
+  );
   const command = async (action: string, data: object) =>
     (
       await asUser<{ r: { id: string } }>(
@@ -95,12 +113,31 @@ try {
     pgBin,
     root,
   );
+  const legacy = JSON.parse(bundle.toString("utf8"));
+  delete legacy.content_hash_order;
+  for (const table of legacy.state.tables)
+    table.content_hash = "legacy_database_collation_dependent";
+  const legacyRestored = await restoreIsolated(
+    Buffer.from(JSON.stringify(legacy)),
+    pgBin,
+    root,
+  );
+  assert.equal(legacyRestored.portable_source_checksums, false);
+  assert.equal(legacyRestored.row_content_verified_against_archive, true);
+  assert.equal(legacyRestored.isolated_upgrade.status, "PASSED");
+  legacy.state.tables[0].rows = "999999";
+  await assert.rejects(
+    () => restoreIsolated(Buffer.from(JSON.stringify(legacy)), pgBin, root),
+    { code: "RESTORE_STATE_MISMATCH" },
+  );
   const result = {
     checked_at: new Date().toISOString(),
     scope: "ISOLATED FIXTURES ONLY; not a copy of production",
     encryption_roundtrip: true,
     wrong_password_rejected: true,
     tampering_rejected: true,
+    legacy_collation_copy_verified: true,
+    mismatched_restore_rejected: true,
     ...restored,
   };
   await writeFile(
