@@ -1,0 +1,107 @@
+{
+  "checked_at": "2026-10-26T20:26:02.699Z",
+  "project": "zdogqqmitpbwjgohwcww",
+  "app": "http://localhost:3008",
+  "synthetic_only": true,
+  "checks": [
+    {
+      "flow": "genuine GoTrue password + MFA through application HTTP",
+      "status": "PASSED"
+    },
+    {
+      "flow": "create service in browser, edit through authorized application API",
+      "status": "PASSED"
+    },
+    {
+      "flow": "weekly schedule transaction with real concurrency versions and break",
+      "status": "PASSED"
+    },
+    {
+      "flow": "create/edit customer; walk-in → assigned appointment → completed service",
+      "status": "PASSED"
+    },
+    {
+      "flow": "cash checkout/payment",
+      "status": "PASSED",
+      "rates": "synthetic fixture only"
+    },
+    {
+      "flow": "transfer checkout/payment",
+      "status": "PASSED",
+      "rates": "synthetic fixture only"
+    },
+    {
+      "flow": "debit without fee evidence",
+      "status": "BLOCKED_AS_DESIGNED",
+      "production_action": "PENDING_EVIDENCE; no zero fee fabricated"
+    },
+    {
+      "flow": "debit checkout/payment",
+      "status": "PASSED",
+      "rates": "synthetic fixture only"
+    },
+    {
+      "flow": "credit without fee evidence",
+      "status": "BLOCKED_AS_DESIGNED",
+      "production_action": "PENDING_EVIDENCE; no zero fee fabricated"
+    },
+    {
+      "flow": "credit checkout/payment",
+      "status": "PASSED",
+      "rates": "synthetic fixture only"
+    },
+    {
+      "flow": "expense and cash close with exact cash balance",
+      "status": "PASSED"
+    },
+    {
+      "flow": "inicio renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "agenda renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "clientes renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "equipo renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "servicios renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "caja renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "finanzas renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "reportes renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "configuracion renders real staging data",
+      "status": "PASSED"
+    },
+    {
+      "flow": "real-data mobile finance filters",
+      "status": "PASSED"
+    },
+    {
+      "flow": "synthetic landing link → staging hosted booking → actual reservation",
+      "status": "PASSED",
+      "live_landing": "NOT_TESTED"
+    }
+  ],
+  "browserErrors": [],
+  "status": "PASSED",
+  "email_delivery": "NOT_TESTED: synthetic .invalid fixture users",
+  "production_booking": "CLOSED; no production writes"
+}

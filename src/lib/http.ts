@@ -91,6 +91,10 @@ export function fail(error: unknown, requestId: string) {
       "Las distribuciones están bloqueadas hasta completar la actualización verificada de la base.",
     mfa_required:
       "Verificá tu segundo factor en Seguridad de la cuenta para continuar.",
+    password_change_required:
+      "Cambiá tu contraseña temporal antes de ingresar a la barbería.",
+    email_confirmation_required:
+      "Confirmá tu correo antes de entrar. Podés solicitar otro mensaje de confirmación.",
     session_revoked: "La sesión terminó. Volvé a entrar.",
     mfa_failed:
       "No se pudo verificar el código. Revisá tu autenticador e intentá nuevamente.",

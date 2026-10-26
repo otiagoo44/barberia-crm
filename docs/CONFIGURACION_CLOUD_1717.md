@@ -1,51 +1,53 @@
 # Configuración cloud de 17:17
 
+> **Actualización 26/10:** producción `tbcfhagteyqufjkmbxzz` y staging Free `zdogqqmitpbwjgohwcww` están en 41 migraciones. Backup/restore real y upgrade aislado aprobados antes de aplicar producción. Plan confirmado ejecutado con sesión owner AAL2 auténtica; SMTP existente conservado y recuperación confirmada por el usuario. [Recibos y límites actuales](ACTIVACION_PRODUCTIVA_1717_20261026.md). La matriz/observaciones del 24/10 que siguen son históricas; no volver a aplicar sus versiones.
+
 Inspección nueva 24/10/2026. Ref exclusivo `tbcfhagteyqufjkmbxzz`. Cloud tiene **34** migraciones; este candidato tiene **40**. No se aplicaron migraciones ni datos productivos durante esta intervención.
 
 ## Matriz completa de migraciones
 
-| Migración | Local | Cloud | Dependencias | Riesgo | Acción |
-|---|---|---|---|---|---|
-| 1. `20261012171437_tenant_core.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 2. `20261012171442_authorization.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 3. `20261012171446_configuration.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 4. `20261012171451_scheduling.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 5. `20261012171456_operations.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 6. `20261012171501_analytics_automation.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 7. `20261012173606_read_models.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 8. `20261012180348_product_hardening.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 9. `20261012181534_final_read_models.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 10. `20261012182755_advisor_foreign_key_indexes.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 11. `20261012183007_reporting_access.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 12. `20261012183207_bounded_read_permissions.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 13. `20261012183541_archived_branch_history.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 14. `20261012183917_platform_admin_audit.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 15. `20261012184839_customer_detail_branding.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 16. `20261012210000_website_booking.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 17. `20261012223818_finance_schema.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 18. `20261012223852_finance_transactions.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 19. `20261012224111_finance_read_import.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 20. `20261012224355_booking_finance_hardening.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 21. `20261015190206_booking_attribution_rls.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 22. `20261015190657_consolidate_financial_audit_policy.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 23. `20261015191802_worker_tick_record_scope.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 24. `20261019154027_database_scheduler.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 25. `20261019213732_profit_sharing.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 26. `20261019220146_enable_database_cron.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 27. `20261019223415_final_authorization_hardening.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 28. `20261021005325_privileged_mfa_sessions.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 29. `20261021005630_partner_distributions.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 30. `20261021010224_reporting_health.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 31. `20261021011210_daily_blocks.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 32. `20261021202056_audit_release_boundaries.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 33. `20261021214500_customer_list_projection.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 34. `20261022162330_ux_reporting_breakdown.sql` | Sí | Sí, verificado 24/10 | Migraciones previas del historial | Histórica; no modificar | Preservar |
-| 35. `20261022205615_default_product_gold_brand.sql` | Sí | No | Tema gold por defecto; no financiero | Bajo; revisar identidad existente | Preparada; NO aplicada, requiere backup/upgrade |
-| 36. `20261022210809_dashboard_statement_owner_guard.sql` | Sí | No | Dashboard y permisos owner | Bajo; guard de autorización | Preparada; NO aplicada, requiere backup/upgrade |
-| 37. `20261023193417_staff_owner_profile_link.sql` | Sí | No | Core manage_record extraído en migración 31 | Medio; vínculo real owner/staff, sin asignación automática | Preparada; NO aplicada, requiere backup/upgrade |
-| 38. `20261024161949_collected_partner_distributions.sql` | Sí | No | Ledger financiero y partner distributions previos | Alto; nuevas tablas/RPC, RLS, conciliación y aprobaciones | Preparada; NO aplicada, requiere backup/upgrade |
-| 39. `20261024162205_setup_availability_diagnostics.sql` | Sí | No | Motor autoritativo de disponibilidad | Medio; diagnóstico y descansos explícitos, sin datos del tenant | Preparada; NO aplicada, requiere backup/upgrade |
-| 40. `20261024214851_weekly_schedule_batch.sql` | Sí | No | Migraciones 31, 37 y 39 | Medio; editor semanal con locks, historial y diagnóstico owner | Preparada; NO aplicada, requiere backup/upgrade |
+| Migración                                                   | Local | Cloud                | Dependencias                                      | Riesgo                                                          | Acción                                          |
+| ----------------------------------------------------------- | ----- | -------------------- | ------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| 1. `20261012171437_tenant_core.sql`                         | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 2. `20261012171442_authorization.sql`                       | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 3. `20261012171446_configuration.sql`                       | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 4. `20261012171451_scheduling.sql`                          | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 5. `20261012171456_operations.sql`                          | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 6. `20261012171501_analytics_automation.sql`                | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 7. `20261012173606_read_models.sql`                         | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 8. `20261012180348_product_hardening.sql`                   | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 9. `20261012181534_final_read_models.sql`                   | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 10. `20261012182755_advisor_foreign_key_indexes.sql`        | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 11. `20261012183007_reporting_access.sql`                   | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 12. `20261012183207_bounded_read_permissions.sql`           | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 13. `20261012183541_archived_branch_history.sql`            | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 14. `20261012183917_platform_admin_audit.sql`               | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 15. `20261012184839_customer_detail_branding.sql`           | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 16. `20261012210000_website_booking.sql`                    | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 17. `20261012223818_finance_schema.sql`                     | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 18. `20261012223852_finance_transactions.sql`               | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 19. `20261012224111_finance_read_import.sql`                | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 20. `20261012224355_booking_finance_hardening.sql`          | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 21. `20261015190206_booking_attribution_rls.sql`            | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 22. `20261015190657_consolidate_financial_audit_policy.sql` | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 23. `20261015191802_worker_tick_record_scope.sql`           | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 24. `20261019154027_database_scheduler.sql`                 | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 25. `20261019213732_profit_sharing.sql`                     | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 26. `20261019220146_enable_database_cron.sql`               | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 27. `20261019223415_final_authorization_hardening.sql`      | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 28. `20261021005325_privileged_mfa_sessions.sql`            | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 29. `20261021005630_partner_distributions.sql`              | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 30. `20261021010224_reporting_health.sql`                   | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 31. `20261021011210_daily_blocks.sql`                       | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 32. `20261021202056_audit_release_boundaries.sql`           | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 33. `20261021214500_customer_list_projection.sql`           | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 34. `20261022162330_ux_reporting_breakdown.sql`             | Sí    | Sí, verificado 24/10 | Migraciones previas del historial                 | Histórica; no modificar                                         | Preservar                                       |
+| 35. `20261022205615_default_product_gold_brand.sql`         | Sí    | No                   | Tema gold por defecto; no financiero              | Bajo; revisar identidad existente                               | Preparada; NO aplicada, requiere backup/upgrade |
+| 36. `20261022210809_dashboard_statement_owner_guard.sql`    | Sí    | No                   | Dashboard y permisos owner                        | Bajo; guard de autorización                                     | Preparada; NO aplicada, requiere backup/upgrade |
+| 37. `20261023193417_staff_owner_profile_link.sql`           | Sí    | No                   | Core manage_record extraído en migración 31       | Medio; vínculo real owner/staff, sin asignación automática      | Preparada; NO aplicada, requiere backup/upgrade |
+| 38. `20261024161949_collected_partner_distributions.sql`    | Sí    | No                   | Ledger financiero y partner distributions previos | Alto; nuevas tablas/RPC, RLS, conciliación y aprobaciones       | Preparada; NO aplicada, requiere backup/upgrade |
+| 39. `20261024162205_setup_availability_diagnostics.sql`     | Sí    | No                   | Motor autoritativo de disponibilidad              | Medio; diagnóstico y descansos explícitos, sin datos del tenant | Preparada; NO aplicada, requiere backup/upgrade |
+| 40. `20261024214851_weekly_schedule_batch.sql`              | Sí    | No                   | Migraciones 31, 37 y 39                           | Medio; editor semanal con locks, historial y diagnóstico owner  | Preparada; NO aplicada, requiere backup/upgrade |
 
 ## Orden de operación
 

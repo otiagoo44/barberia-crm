@@ -2,9 +2,15 @@
 import { useState, type FormEvent } from "react";
 import { api } from "@/lib/client";
 import { Field, Notice } from "@/components/ui";
-export function AuthForm({ reset = false }: { reset?: boolean }) {
+export function AuthForm({
+  reset = false,
+  temporary = false,
+}: {
+  reset?: boolean;
+  temporary?: boolean;
+}) {
   const [mode, setMode] = useState<
-    "signin" | "signup" | "recover" | "password"
+    "signin" | "signup" | "recover" | "confirm" | "password"
   >(reset ? "password" : "signin");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -18,7 +24,8 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
     try {
       const payload: Record<string, unknown> = {};
       if (mode !== "password") payload.email = form.get("email");
-      if (mode !== "recover") payload.password = form.get("password");
+      if (mode !== "recover" && mode !== "confirm")
+        payload.password = form.get("password");
       if (mode === "signup") payload.name = form.get("name");
       const result = await api<{ message?: string }>(
         `/api/auth/${mode}`,
@@ -40,18 +47,24 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
           ? "Tu negocio, en orden."
           : mode === "signup"
             ? "Creá tu cuenta"
-            : mode === "recover"
-              ? "Recuperar acceso"
-              : "Nueva contraseña"}
+            : mode === "confirm"
+              ? "Confirmar tu correo"
+              : mode === "recover"
+                ? "Recuperar acceso"
+                : "Nueva contraseña"}
       </h1>
       <p className="muted">
         {mode === "signin"
           ? "Entrá para organizar el día, atender a tus clientes y ver cómo va tu barbería."
           : mode === "signup"
             ? "Después de confirmar tu correo, el propietario podrá asignarte acceso."
-            : mode === "recover"
-              ? "Ingresá tu correo y te enviaremos un enlace para recuperar el acceso."
-              : "Usá una contraseña de al menos 12 caracteres."}
+            : mode === "confirm"
+              ? "Pedí un nuevo mensaje y confirmá tu propia dirección de correo."
+              : mode === "recover"
+                ? "Ingresá tu correo y te enviaremos un enlace para recuperar el acceso."
+                : temporary
+                  ? "Tu cuenta usa una contraseña temporal. Verificá tu autenticador y elegí una contraseña propia de al menos 12 caracteres para poder ingresar."
+                  : "Usá una contraseña de al menos 12 caracteres."}
       </p>
       <form onSubmit={submit} className="stack">
         {mode === "signup" && (
@@ -70,7 +83,7 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
             />
           </Field>
         )}
-        {mode !== "recover" && (
+        {mode !== "recover" && mode !== "confirm" && (
           <Field label="Contraseña">
             <input
               type="password"
@@ -93,7 +106,7 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
               ? "Entrar"
               : mode === "signup"
                 ? "Crear cuenta"
-                : mode === "recover"
+                : mode === "recover" || mode === "confirm"
                   ? "Enviar instrucciones"
                   : "Guardar contraseña"}
         </button>
@@ -109,6 +122,11 @@ export function AuthForm({ reset = false }: { reset?: boolean }) {
           >
             {mode === "signin" ? "Crear una cuenta" : "Volver a entrar"}
           </button>
+          {mode === "signin" && (
+            <button onClick={() => setMode("confirm")}>
+              Reenviar confirmación
+            </button>
+          )}
           {mode === "signin" && (
             <button onClick={() => setMode("recover")}>
               Olvidé mi contraseña

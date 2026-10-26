@@ -1,5 +1,7 @@
 # Respaldo y recuperación de 17:17 — 25/10/2026
 
+> **Actualización 26/10/2026:** backup Pro físico 26/10 05:00:37.345 UTC `COMPLETED`. La copia lógica real del snapshot 25/10 23:36:57.365 UTC pasó Verify a las 19:57:01.501 UTC: 103 tablas, 27 Auth, 130 políticas y upgrade aislado 34→41. El recibo privado es `PASSED`; la otra copia anterior sigue `NOT_TESTED`. No se restauró el backup físico. Producción ya avanzó a 41 con integridad comprobada. La copia cifrada externa sigue pendiente. [Estado actual](ACTIVACION_PRODUCTIVA_1717_20261026.md). Las observaciones de pendiente del 25/10 que siguen son históricas.
+
 Proyecto exclusivo: `tbcfhagteyqufjkmbxzz`. No usar credenciales o datos de los proyectos dentales que lista otra sesión de la CLI.
 
 ## Copia administrada comprobada

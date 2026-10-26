@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-26T20:34:37.454Z",
+  "project": "tbcfhagteyqufjkmbxzz",
+  "managed": {
+    "latest": {
+      "id": 2073479768,
+      "inserted_at": "2026-10-26T05:00:37.345Z",
+      "is_physical_backup": true,
+      "status": "COMPLETED"
+    },
+    "pitr_enabled": false,
+    "physical_restore": "NOT_TESTED"
+  },
+  "logical": {
+    "checked_at": "2026-10-26T19:57:01.501Z",
+    "source_snapshot": "2026-10-25T23:36:57.365Z",
+    "restore": {
+      "status": "PASSED",
+      "restore_ms": 28427,
+      "tables_verified": 103,
+      "auth_tables_verified": 27,
+      "policies_verified": 130,
+      "anonymous_and_unscoped_authenticated_denied": true,
+      "row_content_verified_against_archive": true,
+      "sequence_values_verified": 1,
+      "portable_source_checksums": false,
+      "isolated_upgrade": {
+        "status": "PASSED",
+        "from": 34,
+        "to": 41,
+        "applied": [
+          "20261022205615_default_product_gold_brand.sql",
+          "20261022210809_dashboard_statement_owner_guard.sql",
+          "20261023193417_staff_owner_profile_link.sql",
+          "20261024161949_collected_partner_distributions.sql",
+          "20261024162205_setup_availability_diagnostics.sql",
+          "20261024214851_weekly_schedule_batch.sql",
+          "20261025225428_repair_scheduler_notification_encoding.sql"
+        ],
+        "original_tables_content_unchanged": 102,
+        "security": {
+          "unprotected": 0,
+          "public_definers": 0,
+          "weekly_rpc": true,
+          "team_rpc": true
+        }
+      },
+      "auth_api_login": "NOT_TESTED",
+      "managed_physical_restore": "NOT_TESTED",
+      "destination": "localhost only; no outgoing integrations executed"
+    }
+  },
+  "offsite_copy": "PENDING_USER_PRIVATE_DESTINATION",
+  "private_files": "outside Git; no ciphertext or passphrase in this report"
+}

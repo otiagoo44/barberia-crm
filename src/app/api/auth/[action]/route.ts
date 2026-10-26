@@ -31,7 +31,13 @@ export async function POST(
         .strict()
         .parse(raw);
       const { data: signedIn, error } = await db.auth.signInWithPassword(p);
-      if (error) throw new HttpError(400, "invalid_credentials");
+      if (error)
+        throw new HttpError(
+          400,
+          error.code === "email_not_confirmed"
+            ? "email_confirmation_required"
+            : "invalid_credentials",
+        );
       const { data: profile } = await db
         .from("profiles")
         .select("active")
@@ -66,6 +72,24 @@ export async function POST(
           ok: true,
           message:
             "Revisá tu correo para confirmar la cuenta. Luego el propietario podrá darte acceso.",
+        },
+        id,
+      );
+    }
+    if (action === "confirm") {
+      const p = z.object({ email: z.email() }).strict().parse(raw);
+      await db.auth.resend({
+        type: "signup",
+        email: p.email,
+        options: {
+          emailRedirectTo: `${process.env.APP_URL}/auth/callback`,
+        },
+      });
+      return response(
+        {
+          ok: true,
+          message:
+            "Si falta confirmar esa cuenta, recibirás un nuevo mensaje. Abrí el enlace de tu correo para continuar.",
         },
         id,
       );

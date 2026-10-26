@@ -1,0 +1,75 @@
+{
+  "checked_at": "2026-10-26T20:34:00.088Z",
+  "target": "preview",
+  "branch": "release/1717-pilot-configuration-20261024",
+  "project_ref": "zdogqqmitpbwjgohwcww",
+  "production_ref": "tbcfhagteyqufjkmbxzz",
+  "variables": [
+    {
+      "key": "NEXT_PUBLIC_SUPABASE_URL",
+      "type": "plain",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+      "type": "plain",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "SUPABASE_ENVIRONMENT",
+      "type": "plain",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "PRODUCTION_SUPABASE_PROJECT_REF",
+      "type": "plain",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "APP_URL",
+      "type": "plain",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "BOOKING_GATEWAY_SECRET",
+      "type": "sensitive",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "WORKER_SECRET",
+      "type": "sensitive",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    },
+    {
+      "key": "CRON_SECRET",
+      "type": "sensitive",
+      "target": [
+        "preview"
+      ],
+      "gitBranch": "release/1717-pilot-configuration-20261024"
+    }
+  ],
+  "secrets": "new independent staging secrets; no production credentials",
+  "status": "PASSED"
+}

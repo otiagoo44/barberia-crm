@@ -1,5 +1,7 @@
 # Activación de 17:17 — inspección del 25/10/2026
 
+> **Histórico.** La continuación del 26/10 verificó la copia lógica real, preparó staging Free, aplicó 35–41 y ejecutó el plan con el owner/MFA real. SMTP/recuperación fueron confirmados por el usuario. Consultar [estado del 26/10](ACTIVACION_PRODUCTIVA_1717_20261026.md), que sustituye estos pendientes antiguos.
+
 Bitácora de la inspección inicial y controles preparados; **no es un recibo de activación comercial**. Proyecto autorizado confirmado por MCP y dashboard: `tbcfhagteyqufjkmbxzz`. Organización `db03ca0c-48cc-46d2-bcbe-86c6ba8525d4`, sucursal Luque `1c10857c-c9da-442a-a1cb-46edd114832d`. PYG, America/Asuncion, identidad preservada.
 
 ## Hechos productivos reconsultados

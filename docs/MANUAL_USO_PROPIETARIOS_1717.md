@@ -4,11 +4,12 @@ CRM: https://barberia-crm-kappa.vercel.app. Cada uno usa su cuenta; nunca compar
 
 ## Primer acceso
 
-1. Abrí [Iniciar sesión](https://barberia-crm-kappa.vercel.app/login) y elegí **Crear una cuenta**. El registro está dentro de `/login`, no en una ruta `/signup` separada.
-2. Esteban usa `estebanras15@gmail.com`; Jonatan `jonatanramos2005oviedo@gmail.com`. Cada uno elige su contraseña y confirma el mensaje recibido.
-3. El instalador verifica la identidad, asigna **Propietario** en 17:17 y vincula la cuenta con el profesional correcto. Si el correo no llega, no creen otra cuenta: revisen spam y SMTP con el instalador.
-4. Entrá en **Seguridad de la cuenta** (`/mfa`), agregá y verificá tu autenticador y un segundo autenticador de respaldo independiente. Guardá la recuperación de manera privada.
-5. Elegí **17:17 Barbería → Luque**. Comprobá Agenda, Clientes, Caja y Finanzas desde tu propio equipo. Si no aparecen, revisar membresía y sucursal; no quitar MFA.
+1. Las dos cuentas ya fueron creadas el 26/10, ambas como **Propietario**, con Luque y su profesional correcto. No creen otra cuenta.
+2. Esteban usa `estebanras15@gmail.com`; Jonatan `jonatanramos2005oviedo@gmail.com`. Abrí [Iniciar sesión](https://barberia-crm-kappa.vercel.app/login) → **Reenviar confirmación**, ingresá tu propio correo y abrí el mensaje recibido. Si no llega, revisá spam con el instalador; no autoconfirmar desde el administrador.
+3. Entrá con la contraseña temporal que el instalador indicó privadamente. El sistema bloquea el acceso al negocio hasta reemplazarla; no queda guardada en esta guía ni en el repositorio.
+4. El primer acceso te dirige a configurar y verificar tu autenticador personal. Después, **Nueva contraseña** exige una contraseña propia de al menos 12 caracteres y rechaza reutilizar la temporal. No compartas códigos ni contraseña. La temporal anterior dejará de servir.
+5. En **Seguridad de la cuenta** (`/mfa`), agregá y verificá también un segundo autenticador de respaldo independiente. Guardá la recuperación de manera privada.
+6. Elegí **17:17 Barbería → Luque**. Comprobá Agenda, Clientes, Caja y Finanzas desde tu propio equipo. Si no aparecen, revisar membresía y sucursal; no quitar MFA.
 
 ## Clientes y atención sin reserva
 

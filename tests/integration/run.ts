@@ -11,6 +11,13 @@ import { cashDistributionContracts } from "./cash-distributions";
 import { weeklyScheduleContracts } from "./weekly-schedule";
 import { pilotUpgradeContracts } from "./pilot-upgrade";
 import { notificationEncodingContracts } from "./notification-encoding";
+import { initialPasswordContracts } from "./initial-password";
+const passwordDb = await isolatedDatabase();
+try {
+  await initialPasswordContracts(passwordDb.pool);
+} finally {
+  await passwordDb.stop();
+}
 await notificationEncodingContracts();
 await pilotUpgradeContracts();
 const weeklyDb = await isolatedDatabase();

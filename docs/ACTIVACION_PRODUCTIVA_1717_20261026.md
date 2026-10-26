@@ -1,0 +1,37 @@
+# Activación 17:17 — 26/10/2026
+
+Continuación del PR #8, sin reiniciar el desarrollo. Producción exclusiva `tbcfhagteyqufjkmbxzz`; staging Free autorizado `zdogqqmitpbwjgohwcww`, organización `dssswtqzfawltxptvegg`. No se copiaron datos productivos identificables a staging.
+
+## Controles completados
+
+- Backup Pro físico del **26/10/2026 05:00:37.345 UTC**, `COMPLETED`, PITR deshabilitado. No se accionó Restore. Los archivos de Storage y la configuración externa requieren cobertura separada.
+- Copia lógica real del snapshot **25/10/2026 23:36:57.365 UTC**: recibo privado `PASSED` el **26/10 19:57:01.501 UTC**. Restauración exclusivamente local: 103 tablas, 27 tablas Auth, 130 políticas, filas y secuencias verificadas; upgrade aislado 34→41 conservando 102 tablas originales. El backup físico administrado no fue restaurado.
+- Staging: instalación limpia 0→34 y upgrade 34→41, conservando el contenido de 95 tablas. Auth, MFA y ledger previos al upgrade son ficticios. El cron de staging quedó desprogramado para evitar tareas automáticas de las fixtures; cron productivo permanece activo.
+- Producción: **34→41**, únicamente las siete migraciones pendientes, con lectura del historial tras cada una. Se conservaron las filas originales de 95 tablas públicas/Auth. Ver [recibo](verification/activation-20261026/production-migrations.json). RLS: cero tablas públicas desprotegidas; cero funciones definer públicas; 139 políticas. Scheduler corregido y ejecuciones posteriores `succeeded`.
+- SMTP existente conservado: Gmail 465, remitente `dentalcrmauth@gmail.com`; confirmación automática deshabilitada. El usuario confirmó recepción y recuperación de contraseña con MFA en su navegador. Esta confirmación es humana; no se inspeccionó su bandeja ni se guardaron enlaces/códigos.
+- Preview recibe solo la URL/clave publicable de staging y tres secretos nuevos e independientes. Origen/callbacks propios de la rama; producción conserva su dominio. Fronteras y Deployment Protection intactos. El primer candidato corregido `c14cdc6950514f539a54d9dd8307e0a1af3c8480` quedó READY (`dpl_FfpB6Gp5RgMSysu6Ss8wQsmDVfXV`) y `/api/health/ready` devolvió 200 con acceso oficial autenticado.
+- CI del primer candidato corregido: [40393798491](https://github.com/otiagoo44/barberia-crm/actions/runs/40393798491) `SUCCESS`. El error anterior era un desborde reproducible del botón de limpiar el período financiero a 360 px; se corrigió el wrapping y se amplió la regresión, sin debilitar aserciones ni timeouts.
+- Local: lint, TypeScript, 28 unitarias, contratos DB, hardening, carga, build y 15 UI aprobados. Staging: [22 comprobaciones](verification/activation-20261026/staging-browser/results.json) con Auth/MFA reales y datos ficticios: servicios, editor semanal, clientes, atención sin cita, caja, efectivo, transferencia, tarjetas con tarifas sintéticas, gastos y reportes. Una landing **sintética** enlazó al booking del CRM y registró una reserva real en staging. No certifica el deployment de la landing productiva.
+
+## Configuración productiva
+
+**Ampliación posterior solicitada por el usuario:** se agregó y ensayó la migración prospectiva 42 `20261026203759_require_initial_password_change.sql`, luego aplicada a staging y producción (ambos en **42**). La tabla privada del cambio obligatorio y el trigger Auth no guardan contraseñas ni hashes; solo un cambio real de contraseña en GoTrue libera el gate. RLS y RPC niegan negocio incluso con AAL2 mientras siga pendiente; confirmar correo, editar metadata o completar MFA no lo libera. [Prueba real en staging](verification/activation-20261026/initial-password-e2e.json), [upgrade productivo sin cambios en 95 tablas originales](verification/activation-20261026/initial-password-production.json).
+
+Las cuentas de Esteban y Jonatan fueron creadas a pedido, con la clave temporal suministrada por el usuario sin guardarla en Git/logs; ambas `organization_owner`, activas, con todas las sucursales y vínculo a su staff correcto. No se autoconfirmaron sus correos, no se configuró MFA en su nombre y no se otorgó `platform_admin`. [Recibo](verification/activation-20261026/owner-provisioning.json). No se enviaron mensajes a terceros: cada uno solicita su correo desde **Reenviar confirmación**. La plantilla productiva de confirmación usa el callback SSR con `token_hash`; SMTP y recuperación anteriores permanecen intactos. En Free con correo predeterminado no se permite personalizar la plantilla; no se contrataron recursos ni se copiaron credenciales SMTP a staging.
+
+El usuario ejecutó `scripts/apply-confirmed-1717.ps1 -Action Apply` con contraseña y TOTP personales. La herramienta inició una sesión GoTrue real, verificó el token AAL2 y la membresía owner activa; pasó sus claims auténticos sin inventar sub/aal/session_id. Aplicó el plan existente en una transacción. No se tomaron cookies del navegador ni se guardaron contraseñas/códigos.
+
+El recibo inicial requiere relectura; el resultado autoritativo queda en [configuración comprobada](verification/activation-20261026/production-configuration.json) y [recibo de aplicación](verification/activation-20261026/operational-apply.json). Ocho servicios/precios Luque, dieciséis capacidades y dieciocho intervalos vigentes; Tinte Global conserva UUID. Se preservan las seis reglas antiguas de Esteban como historia y las seis reglas ya correctas de Jonatan. Local 09–21 lunes–sábado, pausa de Esteban 12–12:30, domingo cerrado; ambos flags de booking false y lead 0.
+
+La verificación posterior compara las tablas comerciales/financieras contra sus fingerprints privados anteriores. No se crearon cobros, gastos, reservas ni reversiones ficticias en producción. No se repitieron reversiones del 24/10 ni se archivó el cliente de prueba sin aprobación específica.
+
+## Límites de operación
+
+- Las cuentas y permisos owner de Esteban y Jonatan ya están preparados. Cada uno debe solicitar/confirmar su propio correo, configurar MFA y sustituir obligatoriamente la clave temporal. No se los sustituye por la cuenta del instalador. [Guía](MANUAL_USO_PROPIETARIOS_1717.md).
+- Efectivo/transferencia tienen reglas cero existentes y el flujo se probó en staging. No se hizo un cobro productivo de prueba.
+- Débito/crédito sin regla vigente son rechazados por `fee_rule_required`; el esquema ordinario actual **no admite registrar ese cobro con costo pendiente**. Los importes desconocidos de importación no habilitan esa ruta. En staging se comprobó el rechazo y después el cobro con reglas explícitamente sintéticas. En producción siguen pendientes de evidencia; no se inventó fijo cero, comisión conciliada ni recargo. Los 220/520 bps son propuestas totales, sin IVA adicional.
+- Reparto definitivo cerrado: conciliación, política, saldos iniciales y doble aprobación/MFA personal siguen pendientes. No hay transferencias bancarias automáticas.
+- Guardar además el ciphertext fuera de esta computadora, con la frase en un gestor separado. La copia externa y el piloto supervisado con ambos propietarios siguen siendo acciones humanas.
+- Booking productivo cerrado. La landing real `otiagoo44/1717barber` no fue modificada. Su apertura requiere validar la integración real y consentimiento de los propietarios.
+
+El merge/publicación técnica requiere los checks del **HEAD final**, no solo los del primer candidato `c14cdc6`. La URL pública debe verificarse por alias después del merge; un candidato production sin dominio no acredita publicación.
