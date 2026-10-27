@@ -166,25 +166,21 @@ export async function weeklyScheduleContracts(pool: Pool) {
       name: code,
       type: "card",
     });
-    const sale = await command("create_checkout", {
+    let sale = await command("create_checkout", {
       lines: [
         { service_id: f.services.cut, staff_id: f.staff.a1, quantity: 1 },
       ],
     });
     const payment = { payment_method_id: method, amount_minor: 30000 };
-    await assert.rejects(
-      command("post_checkout", { id: sale, payments: [payment] }),
-      /fee_rule_required/,
-    );
-    assert.equal(
-      (
-        await pool.query(
-          "select count(*)::int n from public.payments where checkout_id=$1",
-          [sale],
-        )
-      ).rows[0].n,
-      0,
-    );
+    await command("post_checkout", { id: sale, payments: [payment] });
+    const pending = (
+      await pool.query(
+        "select fee_minor,fee_status from public.payments where checkout_id=$1",
+        [sale],
+      )
+    ).rows[0];
+    assert.equal(pending.fee_minor, null);
+    assert.equal(pending.fee_status, "unknown");
     await command("configure", {
       entity: "payment_method_fee_rules",
       payment_method_id: method,
@@ -192,6 +188,11 @@ export async function weeklyScheduleContracts(pool: Pool) {
       fixed_amount_minor: 0,
       evidence_reference:
         "Synthetic total deduction test; components are not actual UPay terms",
+    });
+    sale = await command("create_checkout", {
+      lines: [
+        { service_id: f.services.cut, staff_id: f.staff.a1, quantity: 1 },
+      ],
     });
     await command("post_checkout", { id: sale, payments: [payment] });
     const paid = (

@@ -256,7 +256,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     ).toBeVisible();
   });
 
-  test("credit checkout explains a missing tariff and preserves a real service sale for retry", async ({
+  test("credit checkout records a missing tariff as unknown without surcharge or retrospective rewriting", async ({
     page,
   }) => {
     const f = JSON.parse(
@@ -322,39 +322,14 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     await page
       .getByLabel("Importe en centavos (USD)", { exact: true })
       .fill(String(price));
-    await page
-      .getByRole("button", { name: "Cobrar y registrar", exact: true })
-      .click();
-    await expect(
-      page.getByText(/No existe tarifa vigente para este método/),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("combobox", { name: "Medio de pago", exact: true }),
-    ).toHaveValue(method.id);
-    await expect(
-      page.getByLabel("Importe en centavos (USD)", { exact: true }),
-    ).toHaveValue(String(price));
-    query.set("id", created.id);
-    const draft = await (
-      await page.request.get(`/api/finance/checkout?${query}`)
-    ).json();
-    expect(draft.status).toBe("draft");
-    expect(draft.payments).toHaveLength(0);
-    expect(Number(draft.total_minor)).toBe(price);
-    await command("configure", {
-      entity: "payment_method_fee_rules",
-      payment_method_id: method.id,
-      percentage_bps: 520,
-      fixed_amount_minor: 0,
-      evidence_reference:
-        "Explicit isolated credit fixture, not UPay production evidence",
-    });
+    await expect(page.getByText(/Si falta la tarifa POS/)).toBeVisible();
     await page
       .getByRole("button", { name: "Cobrar y registrar", exact: true })
       .click();
     await expect(
       page.getByText("Venta cobrada y registrada.", { exact: true }),
     ).toBeVisible();
+    query.set("id", created.id);
     const paid = await (
       await page.request.get(`/api/finance/checkout?${query}`)
     ).json();
@@ -362,12 +337,44 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     expect(paid.payments).toHaveLength(1);
     expect(Number(paid.total_minor)).toBe(price);
     expect(Number(paid.payments[0].amount_minor)).toBe(price);
+    expect(paid.payments[0].fee_status).toBe("unknown");
+    expect(paid.payments[0].fee_minor).toBeNull();
+    await command("configure", {
+      entity: "payment_method_fee_rules",
+      payment_method_id: method.id,
+      percentage_bps: 520,
+      fixed_amount_minor: 0,
+      evidence_reference:
+        "Explicit isolated fixture; not UPay production evidence",
+    });
+    const unchanged = await (
+      await page.request.get(`/api/finance/checkout?${query}`)
+    ).json();
+    expect(unchanged.payments).toEqual(paid.payments);
+    const next = await command("create_checkout", {
+      lines: [
+        { service_id: f.services.cut, staff_id: f.staff.a3, quantity: 1 },
+      ],
+    });
+    await command("post_checkout", {
+      id: next.id,
+      payments: [{ payment_method_id: method.id, amount_minor: price }],
+    });
+    query.set("id", next.id);
+    const configured = await (
+      await page.request.get(`/api/finance/checkout?${query}`)
+    ).json();
+    expect(Number(configured.payments[0].fee_minor)).toBe(
+      Math.floor((price * 520) / 10000 + 0.5),
+    );
+    expect(Number(configured.total_minor)).toBe(price);
   });
 
   test("financial filters hide obsolete totals while loading, transport errors expose no previous totals", async ({
     page,
   }) => {
     await page.goto("/fixture-a/finanzas");
+    await page.getByRole("button", { name: "Resumen", exact: true }).click();
     await page
       .locator("summary")
       .filter({ hasText: "Filtros financieros" })

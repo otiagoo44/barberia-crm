@@ -3,6 +3,8 @@ import { requireUser } from "@/lib/auth";
 import { correlationId, fail, response, readJson, HttpError } from "@/lib/http";
 import { uuid } from "@/lib/validation";
 import { hasCapability } from "@/lib/capabilities";
+import { confirmedImportCorrections } from "@/features/finance/confirmed-import";
+import { importCorrectionsSchema } from "@/features/finance/import-validation";
 import {
   MAX_IMPORT_UPLOAD_BYTES,
   MAX_IMPORT_JSON_BYTES,
@@ -15,6 +17,7 @@ import {
   sourceHash,
   type ImportCatalog,
   type ImportMapping,
+  type ImportCorrections,
 } from "@/features/finance/import-parser";
 export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
@@ -40,6 +43,7 @@ export async function POST(request: Request) {
           .regex(/^[a-f0-9]{64}$/)
           .optional(),
         dry_run: z.boolean().optional(),
+        corrections: importCorrectionsSchema.optional(),
       })
       .strict()
       .parse(await readJson(request, MAX_IMPORT_JSON_BYTES));
@@ -102,17 +106,31 @@ export async function POST(request: Request) {
     } catch {
       throw new HttpError(400, "invalid_import_file");
     }
+    const hash = sourceHash(bytes);
+    const { data: organization, error: organizationError } = await db
+      .from("organizations")
+      .select("slug")
+      .eq("id", p.org)
+      .single();
+    if (organizationError) throw organizationError;
+    const corrections = confirmedImportCorrections(
+      organization.slug,
+      hash,
+      (p.corrections ?? {}) as ImportCorrections,
+    );
     const rows = normalizeRows(
       parsed,
       catalog as ImportCatalog,
       (p.mapping ?? {}) as ImportMapping,
       p.excluded_rows ?? [],
+      corrections,
     );
     const preview = {
       source_file: filename.replace(/^.*[\\/]/, ""),
-      source_sha256: sourceHash(bytes),
+      source_sha256: hash,
       mapping: p.mapping ?? {},
       rows,
+      corrections,
     };
     if (p.dry_run) return response({ ...preview, dry_run: true }, id);
     const { data, error } = await db.rpc("finance_import", {

@@ -341,6 +341,9 @@ try {
         await capture("finanzas-7dias", width);
         if (phase === "after") {
           await page
+            .getByRole("button", { name: "Resumen", exact: true })
+            .click();
+          await page
             .getByRole("button", { name: "Ticket promedio", exact: true })
             .click();
           await capture("equipo-ticket", width);

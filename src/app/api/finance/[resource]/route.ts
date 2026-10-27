@@ -8,6 +8,7 @@ const views = z.enum([
   "checkout",
   "cash",
   "summary",
+  "daybook",
   "movements",
   "expenses",
   "settlements",
@@ -15,6 +16,7 @@ const views = z.enum([
   "staff",
 ]);
 const actions = z.enum([
+  "record_income",
   "configure",
   "configure_settings",
   "create_checkout",

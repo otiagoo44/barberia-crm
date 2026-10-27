@@ -284,6 +284,18 @@ export function CheckoutDialog({
             >
               Dividir pago
             </button>
+            {payments.some(
+              (p) =>
+                catalog.data?.payment_methods.find(
+                  (m) =>
+                    m.id === (p.method || catalog.data?.payment_methods[0]?.id),
+                )?.type === "card",
+            ) && (
+              <p className="muted">
+                Si falta la tarifa POS, el cobro se registra con costo
+                pendiente. No se agrega un recargo al cliente.
+              </p>
+            )}
             <button
               aria-busy={!!busy}
               className="primary"

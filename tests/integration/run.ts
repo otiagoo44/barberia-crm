@@ -12,6 +12,8 @@ import { weeklyScheduleContracts } from "./weekly-schedule";
 import { pilotUpgradeContracts } from "./pilot-upgrade";
 import { notificationEncodingContracts } from "./notification-encoding";
 import { initialPasswordContracts } from "./initial-password";
+import { daybookUpgradeContracts } from "./daybook";
+await daybookUpgradeContracts();
 const passwordDb = await isolatedDatabase();
 try {
   await initialPasswordContracts(passwordDb.pool);

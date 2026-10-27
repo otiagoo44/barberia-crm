@@ -1,6 +1,7 @@
 /* global document, innerWidth */
 import assert from "node:assert/strict";
 import { randomUUID, createHmac } from "node:crypto";
+import { URLSearchParams } from "node:url";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { chromium, expect } from "@playwright/test";
 const project = "zdogqqmitpbwjgohwcww";
@@ -213,13 +214,13 @@ try {
     await command("open_cash_session", { opening_amount_minor: 1000 })
   ).id;
   for (const code of ["cash", "transfer", "debit", "credit"]) {
-    const checkout = (
+    let checkout = (
       await command("create_checkout", {
         lines: [{ item_id: item, quantity: 1 }],
       })
     ).id;
     if (["debit", "credit"].includes(code)) {
-      const rejected = await page.request.post(base + "/api/finance/command", {
+      const pending = await page.request.post(base + "/api/finance/command", {
         headers,
         data: {
           org: f.orgA,
@@ -234,14 +235,28 @@ try {
           key: randomUUID(),
         },
       });
-      assert.equal(
-        rejected.ok(),
-        false,
-        "Unknown ordinary card fees must remain explicitly blocked in this schema",
+      assert.ok(
+        pending.ok(),
+        "Cards can be recorded with an explicit pending cost",
       );
+      const pendingCheckout = await (
+        await page.request.get(
+          base +
+            "/api/finance/checkout?" +
+            new URLSearchParams({
+              org: f.orgA,
+              branch: f.branches.a1,
+              id: checkout,
+              from: new Date().toISOString().slice(0, 10),
+              to: new Date().toISOString().slice(0, 10),
+            }),
+        )
+      ).json();
+      assert.equal(pendingCheckout.payments[0].fee_minor, null);
+      assert.equal(pendingCheckout.payments[0].fee_status, "unknown");
       checks.push({
         flow: code + " without fee evidence",
-        status: "BLOCKED_AS_DESIGNED",
+        status: "PASSED_WITH_PENDING_COST",
         production_action: "PENDING_EVIDENCE; no zero fee fabricated",
       });
       await command("configure", {
@@ -252,6 +267,11 @@ try {
         evidence_reference:
           "Synthetic test values only; not UPay contractual evidence",
       });
+      checkout = (
+        await command("create_checkout", {
+          lines: [{ item_id: item, quantity: 1 }],
+        })
+      ).id;
     }
     await command("post_checkout", {
       id: checkout,

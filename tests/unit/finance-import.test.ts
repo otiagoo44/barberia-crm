@@ -9,6 +9,12 @@ import {
   type ImportCatalog,
 } from "../../src/features/finance/import-parser";
 import { csvCell } from "../../src/lib/validation";
+import { confirmedImportCorrections } from "../../src/features/finance/confirmed-import";
+import { importCorrectionsSchema } from "../../src/features/finance/import-validation";
+import {
+  importFingerprint,
+  importTotals,
+} from "../../src/features/finance/import-review";
 const catalog: ImportCatalog = {
   staff: [{ id: "staff-a", name: "Barber A" }],
   services: [{ id: "service-a", name: "Corte de pelo" }],
@@ -23,6 +29,84 @@ const row = (values: string[], source_row = 2) => ({
   source_sheet: "Registro Diario",
   source_row,
   cells: values.map((value) => ({ value })),
+});
+
+test("reviewed corrections preserve source values and require a reason", () => {
+  assert.deepEqual(
+    importCorrectionsSchema.parse({
+      "110": { cells: { "4": "ingreso" }, reason: "Owner confirmation" },
+    }),
+    { "110": { cells: { "4": "ingreso" }, reason: "Owner confirmation" } },
+  );
+  assert.equal(
+    importCorrectionsSchema.safeParse({
+      "110": { cells: { "8": "not an original column" }, reason: "Invalid" },
+    }).success,
+    false,
+  );
+  const original = row(
+    [
+      "2026-04-06",
+      "Barber A",
+      "",
+      "Corte de pelo",
+      "egreso",
+      "40000",
+      "",
+      "Efectivo",
+    ],
+    110,
+  );
+  const corrections = {
+    "110": { cells: { "4": "ingreso" }, reason: "Confirmed by owner" },
+  } as const;
+  const [reviewed] = normalizeRows([original], catalog, {}, [], corrections);
+  assert.equal(reviewed.review_status, "READY");
+  assert.equal(reviewed.raw_values[4].value, "egreso");
+  assert.equal(reviewed.normalized.type, "income");
+  assert.equal(reviewed.normalized.review_reason, "Confirmed by owner");
+  assert.equal(
+    normalizeRows([original], catalog, {}, [], {
+      "110": { ...corrections["110"], reason: "" },
+    })[0].review_status,
+    "NEEDS_REVIEW",
+  );
+  assert.equal(importTotals([reviewed]).income, "40000");
+  assert.equal(
+    importTotals([{ ...reviewed, review_status: "EXCLUDED" }]).income,
+    "0",
+  );
+  assert.equal(
+    importFingerprint([reviewed]),
+    importFingerprint([
+      {
+        ...reviewed,
+        normalized: Object.fromEntries(
+          Object.entries(reviewed.normalized).reverse(),
+        ),
+      },
+    ]),
+  );
+});
+
+test("1717 owner confirmations apply only to the exact file and organization", () => {
+  const hash =
+    "cda0fd0f0b7d708a7cea2213f089af12f19bf86eec308ee751e155939312d991";
+  assert.equal(
+    Object.keys(confirmedImportCorrections("1717-barberia", hash)).length,
+    4,
+  );
+  assert.deepEqual(confirmedImportCorrections("another-tenant", hash), {});
+  assert.deepEqual(
+    confirmedImportCorrections("1717-barberia", "f".repeat(64)),
+    {},
+  );
+  assert.equal(
+    confirmedImportCorrections("1717-barberia", hash, {
+      "110": { cells: { "4": "egreso" }, reason: "Revised" },
+    })["110"].cells["4"],
+    "egreso",
+  );
 });
 test("import uses structured entities, casing and whitespace normalization", () => {
   const r = normalizeRows(

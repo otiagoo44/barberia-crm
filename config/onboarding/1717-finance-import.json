@@ -1,0 +1,23 @@
+{
+  "organization_slug": "1717-barberia",
+  "source_sha256": "cda0fd0f0b7d708a7cea2213f089af12f19bf86eec308ee751e155939312d991",
+  "confirmed_on": "2026-10-26",
+  "corrections": {
+    "110": {
+      "cells": { "4": "ingreso" },
+      "reason": "El propietario confirmó que era un ingreso."
+    },
+    "194": {
+      "cells": { "7": "Transferencia" },
+      "reason": "El propietario confirmó el medio de pago: transferencia."
+    },
+    "330": {
+      "cells": { "7": "Transferencia" },
+      "reason": "El propietario confirmó el medio de pago: transferencia."
+    },
+    "463": {
+      "cells": { "3": "servicios" },
+      "reason": "El propietario confirmó el concepto: servicios."
+    }
+  }
+}

@@ -17,6 +17,15 @@ export type ImportMapping = Partial<
   >
 >;
 export type SourceCell = { value: string; formula?: string; error?: boolean };
+export type ImportCorrections = Record<
+  string,
+  {
+    cells: Partial<
+      Record<"0" | "1" | "2" | "3" | "4" | "5" | "6" | "7", string>
+    >;
+    reason: string;
+  }
+>;
 export type SourceRow = {
   source_sheet: string;
   source_row: number;
@@ -74,20 +83,29 @@ export function normalizeRows(
   catalog: ImportCatalog,
   mapping: ImportMapping = {},
   excluded: number[] = [],
+  corrections: ImportCorrections = {},
 ): PreviewRow[] {
   return rows
     .filter((row) =>
       row.cells.slice(1, 8).some((c) => c.value.trim() || c.formula),
     )
     .map((row) => {
-      const cells = Array.from(
+      const original = Array.from(
         { length: 8 },
         (_, i) => row.cells[i] ?? { value: "" },
       );
+      const correction = corrections[String(row.source_row)];
+      const cells = original.map((cell, index) => {
+        const replacement =
+          correction?.cells[String(index) as keyof typeof correction.cells];
+        return replacement === undefined ? cell : { value: replacement };
+      });
       const values = cells.map((c) => c.value.trim());
       const [date, barber, person, concept, type, income, expense, method] =
         values;
       const anomalies: string[] = [];
+      if (correction && correction.reason.trim().length < 3)
+        anomalies.push("REVIEW_REASON_REQUIRED");
       if (
         cells.some(
           (c) =>
@@ -143,7 +161,7 @@ export function normalizeRows(
       return {
         source_sheet: row.source_sheet,
         source_row: row.source_row,
-        raw_values: cells,
+        raw_values: original,
         normalized: {
           date: occurred,
           type: movement,
@@ -156,6 +174,12 @@ export function normalizeRows(
           person_label: person,
           concept,
           amount_minor: amount,
+          ...(correction
+            ? {
+                review_reason: correction.reason.trim(),
+                corrected_fields: JSON.stringify(correction.cells),
+              }
+            : {}),
         },
         anomalies,
         review_status: excluded.includes(row.source_row)

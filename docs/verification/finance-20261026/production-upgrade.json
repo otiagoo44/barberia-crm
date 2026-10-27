@@ -1,0 +1,14 @@
+{
+    "project":  "tbcfhagteyqufjkmbxzz",
+    "before":  42,
+    "after":  43,
+    "applied":  "20261026212415_simple_finance_daybook.sql",
+    "original_financial_rows_unchanged":  true,
+    "auth_user_count_unchanged":  true,
+    "bookings_unchanged":  true,
+    "booking_enabled":  false,
+    "unprotected_tables":  0,
+    "public_definers":  0,
+    "backup_restore":  "PASSED",
+    "checked_at":  "2026-10-27T01:06:57.6790517Z"
+}
