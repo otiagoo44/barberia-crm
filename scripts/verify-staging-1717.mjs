@@ -1,6 +1,7 @@
 /* global document, innerWidth */
 import assert from "node:assert/strict";
 import { randomUUID, createHmac } from "node:crypto";
+import { URLSearchParams } from "node:url";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { chromium, expect } from "@playwright/test";
 const project = "zdogqqmitpbwjgohwcww";
