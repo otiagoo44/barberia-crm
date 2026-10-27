@@ -368,6 +368,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     page,
   }) => {
     await page.goto("/fixture-a/finanzas");
+    await page.getByRole("button", { name: "Resumen", exact: true }).click();
     await page
       .locator("summary")
       .filter({ hasText: "Filtros financieros" })

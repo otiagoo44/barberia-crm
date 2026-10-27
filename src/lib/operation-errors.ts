@@ -5,6 +5,20 @@ export function operationError(
   if (!error || typeof error !== "object") return;
   const e = error as { message?: string; code?: string; details?: string };
   const known: Record<string, { message: string; field?: string }> = {
+    price_change_reason_required: {
+      message: "Indicá el motivo del precio diferente al catálogo.",
+      field: "reason",
+    },
+    invalid_income: {
+      message: "Elegí un concepto e ingresá un importe mayor que cero.",
+    },
+    source_already_imported: {
+      message: "Este archivo ya fue importado. No se duplicaron movimientos.",
+    },
+    preview_changed: {
+      message:
+        "La revisión cambió. Volvé a analizar el archivo antes de confirmar.",
+    },
     authorized_adjustment_required: {
       message:
         "Un propietario o Finanzas debe indicar el motivo del ajuste de precio autorizado.",

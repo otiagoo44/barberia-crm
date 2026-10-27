@@ -1,5 +1,22 @@
 # Importación histórica de 17:17
 
+Actualización 26/10/2026: el usuario confirmó las cuatro correcciones del archivo exacto: fila 110 ingreso; filas 194 y 330 transferencia; fila 463 servicios. La revisión alcanza **539 filas listas, cero pendientes**, ingresos **Gs. 20.167.000**, egresos **Gs. 4.121.000**, saldo **Gs. 16.046.000 antes de comisiones**. Es una simulación local, sin importar el histórico a producción. El catálogo productivo fue consultado en lectura y contiene los servicios, conceptos, profesionales, categorías y medios necesarios.
+
+El sistema aplica esas correcciones únicamente al SHA256 y organización indicados en `config/onboarding/1717-finance-import.json`. Conserva valores originales, corrección, motivo y hash de revisión. El archivo privado y sus clientes no se suben a Git ni a staging.
+
+## Uso actual
+
+1. Google Sheets → descargar como Microsoft Excel (.xlsx).
+2. Finanzas → **Importar Excel / Sheets** → elegir archivo → **Analizar archivo**. No guarda movimientos.
+3. Revisar totales y filas. Las correcciones adicionales se hacen dentro del importador, con motivo; actualizar la revisión antes de continuar.
+4. **Confirmar importación** guarda la revisión y registra sus filas en una transacción. Si cambió el catálogo o el contenido revisado, exige revisar otra vez. El mismo archivo no se importa dos veces.
+
+Finanzas abre en **Registro diario**: un ingreso cobrado se guarda con concepto, barbero, importe y medio de pago en una operación; un gasto usa categoría, descripción, importe y medio. Los cobros de agenda siguen registrándose desde la atención para evitar duplicarlos. El saldo por medio distingue ingresos, egresos, devoluciones y costos POS pendientes. Los filtros permiten día, semana, mes y rango. Liquidaciones y configuración quedan en un panel desplegable.
+
+La conciliación y la doble aprobación siguen correspondiendo al reparto definitivo, no al registro diario. Tarjetas sin tarifa pueden cobrarse con costo NULL/pendiente; no se inventan comisiones, IVA, recargos ni liquidaciones bancarias. El saldo antes de POS sigue disponible aunque falte ese costo. Caja conserva apertura y control de efectivo.
+
+Los apartados siguientes conservan la inspección histórica previa a la confirmación de las cuatro filas.
+
 Archivo analizado: `C:/Users/User/Downloads/Barberia 17_17.xlsx`, SHA256 `cda0fd0f0b7d708a7cea2213f089af12f19bf86eec308ee751e155939312d991`. La copia nombrada `(1)` no estaba disponible en el workspace. Se utilizó esta copia, que contiene las cuatro áreas indicadas; confirmar que es la versión histórica definitiva antes de importar. El original y los nombres de clientes no se incorporan al repositorio.
 
 ## Mapping
@@ -27,11 +44,6 @@ Comisión barbero por servicio en Configuración: Jonatan/Esteban, valores cero.
 
 Verificación del 19/10/2026 durante hardening: el archivo disponible conserva el SHA256 indicado arriba. No se importó a cloud. La interfaz y API aceptan hasta **2 MiB** por archivo y **3 MiB** de JSON (base64 incluido), dentro del límite de 4,5 MB de Vercel Functions. El analizador CLI XLSX mantiene su límite local de 8 MiB; no implica que la API admita 8 MiB. Una previsualización revisada excluye con trazabilidad las filas omitidas; confirmar exige su hash actual no nulo. El contenido no se guarda en Git.
 
-1. Onboard organización/branch/catalog/staff/métodos/categorías; confirmar IDs y reglas históricas con evidencia.
-2. Finanzas → Importar histórico → archivo XLSX/CSV; empezar con **Solo simulación**.
-3. Revisar filas y mapping. Nunca mapear ambiguos por parecido. Corregir el archivo con evidencia o excluir anomalías explícitamente; revalidar.
-4. Desactivar simulación y guardar preview. Aún no crea ventas ni egresos.
-5. Confirmar solo cuando no queda NEEDS_REVIEW. RPC compara preview_hash, importa filas READY en una transacción, conserva exclusiones y audita. Misma fuente SHA no se importa dos veces.
-6. Comparar sumas de fuentes por fecha/método; revisar unknown y trazabilidad. No comparar contra resúmenes hardcodeados o resultados de fórmulas rotas.
+La organización y el catálogo de 17:17 ya existen; no volver a crearlos. El flujo vigente está en **Uso actual**. Comparar las sumas por fecha y medio con los movimientos originales, no con resultados guardados de fórmulas rotas.
 
-Dry-run CLI, sin conexión a DB: `npx tsx scripts/finance-dry-run.ts "C:/Users/User/Downloads/Barberia 17_17.xlsx"`. Sus IDs `diagnostic-only-*` nunca se usan como IDs reales ni se escriben en DB. La API usa catálogo autorizado de la branch, límites de tamaño/expansión ZIP y XML sin DTD/entidades; no ejecuta macros ni fórmulas. Tests emplean fixture anónimo creado en memoria.
+Dry-run CLI, sin conexión a DB: `npx tsx scripts/finance-dry-run.ts "C:/Users/User/Downloads/Barberia 17_17.xlsx" --confirmed-1717`. Sus IDs `diagnostic-only-*` nunca se usan como IDs reales ni se escriben en DB. La API usa catálogo autorizado de la branch, límites de tamaño/expansión ZIP y XML sin DTD/entidades; no ejecuta macros ni fórmulas. Tests emplean fixture sintético creado en memoria.

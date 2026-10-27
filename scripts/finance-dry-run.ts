@@ -5,6 +5,8 @@ import {
   sourceHash,
   type ImportCatalog,
 } from "../src/features/finance/import-parser";
+import { confirmedImportCorrections } from "../src/features/finance/confirmed-import";
+import { importTotals } from "../src/features/finance/import-review";
 const file = process.argv[2];
 if (!file)
   throw new Error(
@@ -44,7 +46,10 @@ const catalog: ImportCatalog = {
           : "operating",
   })),
 };
-const preview = normalizeRows(parseXlsx(bytes), catalog);
+const corrections = process.argv.includes("--confirmed-1717")
+  ? confirmedImportCorrections("1717-barberia", sourceHash(bytes))
+  : {};
+const preview = normalizeRows(parseXlsx(bytes), catalog, {}, [], corrections);
 const anomalies: Record<string, number[]> = {};
 for (const row of preview)
   for (const anomaly of row.anomalies)
@@ -61,6 +66,8 @@ console.log(
       needs_review: preview.filter((r) => r.review_status === "NEEDS_REVIEW")
         .length,
       anomalies,
+      owner_confirmed_corrections: Object.keys(corrections).map(Number),
+      totals_before_commissions: importTotals(preview),
       historical_rules:
         "not inferred; runtime import requires actual entity IDs and historical rules",
     },

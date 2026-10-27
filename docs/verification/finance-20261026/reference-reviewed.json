@@ -1,0 +1,22 @@
+{
+  "dry_run": true,
+  "database_writes": 0,
+  "source_sha256": "cda0fd0f0b7d708a7cea2213f089af12f19bf86eec308ee751e155939312d991",
+  "source_sheet": "Registro Diario",
+  "source_rows": 539,
+  "ready": 539,
+  "needs_review": 0,
+  "anomalies": {},
+  "owner_confirmed_corrections": [
+    110,
+    194,
+    330,
+    463
+  ],
+  "totals_before_commissions": {
+    "income": "20167000",
+    "expense": "4121000",
+    "balance": "16046000"
+  },
+  "historical_rules": "not inferred; runtime import requires actual entity IDs and historical rules"
+}

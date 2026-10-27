@@ -16,6 +16,7 @@ import {
 } from "./client";
 import { FinanceForm } from "./forms";
 import { FinanceImport } from "./import-ui";
+import { Daybook } from "./daybook";
 import { FinancialCharts } from "./financial-charts";
 import { StaffFinancialCharts } from "./staff-charts";
 import { PartnerDistributions } from "./partner-distributions";
@@ -33,6 +34,7 @@ type Summary = {
   staff_only?: boolean;
 };
 const tabs = [
+  ["daybook", "Registro diario"],
   ["summary", "Resumen"],
   ["movements", "Movimientos"],
   ["expenses", "Gastos"],
@@ -61,7 +63,9 @@ export function FinancialDashboard({
       w.organization.timezone,
     "yyyy-MM-dd",
   );
-  const [tab, setTab] = useState<string>("summary");
+  const [tab, setTab] = useState<string>(
+    compact || w.role === "barber" ? "summary" : "daybook",
+  );
   const [from, setFrom] = useState(today);
   const [to, setTo] = useState(today);
   const [query, setQuery] = useState("");
@@ -70,11 +74,13 @@ export function FinancialDashboard({
     action: string;
     initial?: Record<string, unknown>;
   } | null>(null);
-  const [importing, setImporting] = useState(false);
+  const [importCatalog, setImportCatalog] = useState<FinanceCatalog | null>(
+    null,
+  );
   const [staff, setStaff] = useState("");
   const privileged = hasCapability(w.role, "finance.configure");
   const r = useResource<Summary & { items?: FinanceRow[] }>(
-    branch && tab !== "partners"
+    branch && tab !== "partners" && tab !== "daybook"
       ? financeUrl(tab, org, branch, periodFrom ?? from, periodTo ?? to, {
           q: query,
           offset: String(offset),
@@ -144,6 +150,22 @@ export function FinancialDashboard({
     ["net_revenue_minor", "Ingresos después de POS"],
     ["operating_result_minor", "Resultado operativo"],
   ] as const;
+  function sectionButton([value, label]: readonly [string, string]) {
+    return (
+      <button
+        key={value}
+        className={tab === value ? "active" : ""}
+        aria-pressed={tab === value}
+        onClick={() => {
+          setTab(value);
+          setOffset(0);
+          setQuery("");
+        }}
+      >
+        {label}
+      </button>
+    );
+  }
   return (
     <section className="stack">
       {compact && (
@@ -163,8 +185,11 @@ export function FinancialDashboard({
               </p>
             </div>
             {privileged && (
-              <button onClick={() => setImporting(true)}>
-                Importar histórico
+              <button
+                disabled={!catalog.data}
+                onClick={() => setImportCatalog(catalog.data)}
+              >
+                Importar Excel / Sheets
               </button>
             )}
           </div>
@@ -212,28 +237,34 @@ export function FinancialDashboard({
           )}
           {w.role !== "barber" && (
             <div
-              className="tabs"
+              className="stack"
               role="group"
               aria-label="Secciones de finanzas"
             >
-              {tabs
-                .filter(
-                  ([v]) => !["catalog", "partners"].includes(v) || privileged,
-                )
-                .map(([value, label]) => (
-                  <button
-                    key={value}
-                    className={tab === value ? "active" : ""}
-                    aria-pressed={tab === value}
-                    onClick={() => {
-                      setTab(value);
-                      setOffset(0);
-                      setQuery("");
-                    }}
-                  >
-                    {label}
-                  </button>
-                ))}
+              <div className="tabs">
+                {tabs
+                  .filter(([v]) =>
+                    ["daybook", "summary", "movements", "expenses"].includes(v),
+                  )
+                  .map(sectionButton)}
+              </div>
+              <details className="compact-filters">
+                <summary>Liquidaciones, cierres y configuración</summary>
+                <div className="tabs">
+                  {tabs
+                    .filter(
+                      ([v]) =>
+                        ![
+                          "daybook",
+                          "summary",
+                          "movements",
+                          "expenses",
+                        ].includes(v) &&
+                        (!["catalog", "partners"].includes(v) || privileged),
+                    )
+                    .map(sectionButton)}
+                </div>
+              </details>
             </div>
           )}
         </>
@@ -242,6 +273,14 @@ export function FinancialDashboard({
         <Loading />
       ) : r.error ? (
         <Notice error>{r.error}</Notice>
+      ) : tab === "daybook" ? (
+        <Daybook
+          key={`${branch}:${from}:${to}`}
+          from={from}
+          to={to}
+          catalog={catalog.data}
+          onSaved={reload}
+        />
       ) : tab === "partners" ? (
         <PartnerDistributions from={from} to={to} catalog={catalog.data} />
       ) : tab === "summary" ? (
@@ -594,7 +633,7 @@ export function FinancialDashboard({
           </div>
         </>
       )}
-      {!compact && catalog.data && (
+      {!compact && tab !== "daybook" && catalog.data && (
         <>
           <h2>{w.role === "barber" ? "Mi comisión" : "Números por barbero"}</h2>
           {w.role !== "barber" && (
@@ -692,10 +731,11 @@ export function FinancialDashboard({
             }}
           />
         )}
-      {importing && catalog.data && (
+      {importCatalog && (
         <FinanceImport
-          catalog={catalog.data}
-          onClose={() => setImporting(false)}
+          key={branch}
+          catalog={importCatalog}
+          onClose={() => setImportCatalog(null)}
           onImported={reload}
         />
       )}

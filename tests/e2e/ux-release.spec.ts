@@ -329,6 +329,7 @@ test.describe("Daily work and accessible navigation with real Auth", () => {
     });
     await verifyRequest(page.request, "ownerA");
     await page.goto(`${workspace}/finanzas`);
+    await page.getByRole("button", { name: "Resumen", exact: true }).click();
     await expect(
       page.getByRole("heading", { name: "Ventas y dinero cobrado" }),
     ).toBeVisible();

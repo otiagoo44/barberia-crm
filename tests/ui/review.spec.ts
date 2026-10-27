@@ -117,6 +117,7 @@ test("financial layout settles across viewport changes without overflow or heade
   page,
 }) => {
   await page.goto("/fixture-a/finanzas");
+  await page.getByRole("button", { name: "Resumen", exact: true }).click();
   await expect(page.locator(".kpi").first()).toBeVisible();
   await expect(page.locator(".loading:visible")).toHaveCount(0);
   await expect(page.locator(".recharts-wrapper").first()).toBeVisible();
