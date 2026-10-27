@@ -2,6 +2,8 @@
 
 Continuación del PR #8, sin reiniciar el desarrollo. Producción exclusiva `tbcfhagteyqufjkmbxzz`; staging Free autorizado `zdogqqmitpbwjgohwcww`, organización `dssswtqzfawltxptvegg`. No se copiaron datos productivos identificables a staging.
 
+Actualización financiera posterior, PR #9: ambos proyectos tienen **43 migraciones**. Upgrade 42→43 y pruebas con Auth/MFA en staging aprobados; las filas financieras, cuentas y reservas productivas permanecen iguales. [Registro diario e importación revisada de Sheets](FINANCE_IMPORT_1717.md). [Recibo de actualización](verification/finance-20261026/production-upgrade.json).
+
 ## Controles completados
 
 - Backup Pro físico del **26/10/2026 05:00:37.345 UTC**, `COMPLETED`, PITR deshabilitado. No se accionó Restore. Los archivos de Storage y la configuración externa requieren cobertura separada.
@@ -29,7 +31,7 @@ La verificación posterior compara las tablas comerciales/financieras contra sus
 
 - Las cuentas y permisos owner de Esteban y Jonatan ya están preparados. Cada uno debe solicitar/confirmar su propio correo, configurar MFA y sustituir obligatoriamente la clave temporal. No se los sustituye por la cuenta del instalador. [Guía](MANUAL_USO_PROPIETARIOS_1717.md).
 - Efectivo/transferencia tienen reglas cero existentes y el flujo se probó en staging. No se hizo un cobro productivo de prueba.
-- Débito/crédito sin regla vigente son rechazados por `fee_rule_required`; el esquema ordinario actual **no admite registrar ese cobro con costo pendiente**. Los importes desconocidos de importación no habilitan esa ruta. En staging se comprobó el rechazo y después el cobro con reglas explícitamente sintéticas. En producción siguen pendientes de evidencia; no se inventó fijo cero, comisión conciliada ni recargo. Los 220/520 bps son propuestas totales, sin IVA adicional.
+- Desde la migración 43, débito/crédito sin tarifa pueden registrar el cobro con **costo pendiente en NULL**. El registro diario conserva ingresos y egresos disponibles; los costos faltantes no se convierten en cero y el reparto definitivo sigue bloqueado. Se probó en staging con datos ficticios. Las tarifas productivas siguen pendientes de evidencia; no se inventaron comisiones conciliadas ni recargos. Los 220/520 bps son propuestas totales, sin IVA adicional.
 - Reparto definitivo cerrado: conciliación, política, saldos iniciales y doble aprobación/MFA personal siguen pendientes. No hay transferencias bancarias automáticas.
 - Guardar además el ciphertext fuera de esta computadora, con la frase en un gestor separado. La copia externa y el piloto supervisado con ambos propietarios siguen siendo acciones humanas.
 - Booking productivo cerrado. La landing real `otiagoo44/1717barber` no fue modificada. Su apertura requiere validar la integración real y consentimiento de los propietarios.
