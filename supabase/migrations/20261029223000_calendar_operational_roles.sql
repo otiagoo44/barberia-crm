@@ -12,5 +12,6 @@ begin
  definition:=pg_get_functiondef('app_private.calendar_worker(text,text,jsonb)'::regprocedure);
  if position('m.active and' in definition)=0 then raise exception 'calendar_worker_guard_inventory_mismatch'; end if;
  definition:=replace(definition,'m.active and','m.active and m.role in (''organization_owner'',''manager'',''receptionist'',''barber'') and');
+ definition:=replace(definition,'and m.active)','and m.active and m.role in (''organization_owner'',''manager'',''receptionist'',''barber''))');
  execute definition;
 end $roles$;
