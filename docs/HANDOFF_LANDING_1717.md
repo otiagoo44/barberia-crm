@@ -1,4 +1,8 @@
-# Actualización 26/10/2026
+# Actualización 29/10/2026
+
+La integración pública está activa y existe una reserva real del usuario verificada en base y observada en Agenda. Se agregó el aviso manual por WhatsApp después de confirmar, usando el teléfono público de la sucursal. Estado vigente, pruebas, carpetas locales y acciones personales: [cierre del 29/10](ESTADO_LANDING_1717_20261029.md). Los encabezados siguientes conservan estados históricos y no instruyen a repetir onboarding ni cerrar flags activos.
+
+# Histórico: actualización 26/10/2026
 
 El CRM productivo ya tiene catálogo y horarios confirmados cargados; ambos flags de booking siguen false y lead es 0. Staging separado `zdogqqmitpbwjgohwcww` pasó un enlace de landing sintética → booking CRM → reserva ficticia real en staging; no certifica la landing productiva. No se modificó `otiagoo44/1717barber` ni se hicieron reservas ficticias productivas. [Estado y evidencia actuales](ACTIVACION_PRODUCTIVA_1717_20261026.md). Los endpoints públicos siguen cerrados hasta cuentas/MFA, piloto e integración real autorizados.
 

@@ -1,5 +1,7 @@
 # Contrato real entre 17:17 y Barbería OS
 
+**Estado vigente 29/10:** integración pública activa, reserva real del usuario comprobada y aviso manual por WhatsApp después de confirmar. [Cierre y pruebas](ESTADO_LANDING_1717_20261029.md). El botón utiliza `branches[].phone`; no cambia el contrato de booking, no envía mensajes automáticamente y no incluye contacto del cliente en su mensaje. Los estados de activación narrados más abajo son históricos.
+
 Actualización 23/10/2026: el contrato de endpoints, same-origin, atribución y nombres de variables se conserva. El inventario y pendientes de puesta en marcha narrados al final son históricos; ver [handoff vigente](HANDOFF_LANDING_1717.md), [datos confirmados](CONFIGURACION_CONFIRMADA_1717.md) y [estado real del release](RELEASE_FINAL_1717.md). El HTTP público actual confirma la organización, pero no se reconsultó el inventario privado de Luque. No volver a ejecutar onboarding por las afirmaciones históricas de una base vacía.
 
 17:17 landing → /reservar → booking público de barberia-crm → PostgreSQL/Supabase.

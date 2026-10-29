@@ -7,6 +7,7 @@ import { Field, Notice, Empty, Loading } from "@/components/ui";
 import { ServicePicker } from "@/features/services/service-picker";
 import { brandStyle } from "@/lib/branding";
 import { preselectedServices, directlyBookable } from "@/lib/public-booking";
+import { bookingWhatsAppUrl } from "@/lib/booking-whatsapp";
 type PublicService = {
   slug: string;
   name: string;
@@ -21,6 +22,7 @@ type PublicBranch = {
   name: string;
   timezone: string;
   address: string;
+  phone?: string | null;
   services: PublicService[];
   staff: { slug: string; name: string; services: string[] }[];
 };
@@ -65,6 +67,7 @@ export function PublicBooking({
     starts_at: string;
     ends_at: string;
     duration_minutes: number;
+    whatsappUrl: string | null;
   } | null>(null);
   const b = catalog.data?.branches.find(
     (b) => b.slug === (branch || catalog.data?.branches[0]?.slug),
@@ -117,6 +120,23 @@ export function PublicBooking({
         <small>
           Guardá esta referencia. Para modificar tu turno, contactá al local.
         </small>
+        {confirmed.whatsappUrl && (
+          <>
+            <a
+              className="button primary"
+              href={confirmed.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
+            >
+              Avisar por WhatsApp
+            </a>
+            <small>
+              Tu turno ya está registrado. Se abrirá un mensaje preparado para el
+              local; vos decidís enviarlo.
+            </small>
+          </>
+        )}
         <button onClick={() => window.location.reload()}>
           Volver a reservar
         </button>
@@ -152,7 +172,20 @@ export function PublicBooking({
         website: String(form.get("website") ?? ""),
         source,
       });
-      setConfirmed(result);
+      setConfirmed({
+        ...result,
+        whatsappUrl: bookingWhatsAppUrl({
+          phone: b!.phone,
+          organization: catalog.data!.name,
+          branch: b!.name,
+          timezone: b!.timezone,
+          reference: result.reference,
+          startsAt: result.starts_at,
+          durationMinutes: result.duration_minutes,
+          services: services.map((slug) => b!.services.find((s) => s.slug === slug)!.name),
+          requestedStaff: b!.staff.find((s) => s.slug === staff)?.name,
+        }),
+      });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Error");
     } finally {

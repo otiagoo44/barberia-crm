@@ -1,0 +1,360 @@
+{
+  "mode": "Production Next build with intercepted public API fixtures; database rules verified separately in isolated PostgreSQL. No production bookings.",
+  "cases": [
+    {
+      "width": 390,
+      "query": "source=website",
+      "selected": []
+    },
+    {
+      "width": 390,
+      "query": "service=cut&source=website",
+      "selected": [
+        "cut"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "service=design&source=website",
+      "selected": [
+        "cut",
+        "design"
+      ]
+    },
+    {
+      "width": 390,
+      "query": "service=missing&source=website",
+      "selected": []
+    },
+    {
+      "width": 390,
+      "query": "service=curl&source=website",
+      "selected": []
+    },
+    {
+      "width": 390,
+      "query": "service=cut&service=curl&source=internal",
+      "selected": []
+    },
+    {
+      "width": 1440,
+      "query": "source=website",
+      "selected": []
+    },
+    {
+      "width": 1440,
+      "query": "service=cut&source=website",
+      "selected": [
+        "cut"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "service=design&source=website",
+      "selected": [
+        "cut",
+        "design"
+      ]
+    },
+    {
+      "width": 1440,
+      "query": "service=missing&source=website",
+      "selected": []
+    },
+    {
+      "width": 1440,
+      "query": "service=curl&source=website",
+      "selected": []
+    },
+    {
+      "width": 1440,
+      "query": "service=cut&service=curl&source=internal",
+      "selected": []
+    },
+    {
+      "width": 390,
+      "confirmation": "success",
+      "bookingRequests": 1,
+      "autoMessage": false
+    },
+    {
+      "width": 390,
+      "confirmation": "no-phone",
+      "bookingRequests": 1,
+      "autoMessage": false
+    },
+    {
+      "width": 390,
+      "confirmation": "conflict",
+      "bookingRequests": 1,
+      "autoMessage": false
+    },
+    {
+      "width": 1440,
+      "confirmation": "success",
+      "bookingRequests": 1,
+      "autoMessage": false
+    },
+    {
+      "width": 1440,
+      "confirmation": "no-phone",
+      "bookingRequests": 1,
+      "autoMessage": false
+    },
+    {
+      "width": 1440,
+      "confirmation": "conflict",
+      "bookingRequests": 1,
+      "autoMessage": false
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut",
+        "design"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut",
+        "design"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/booking",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/booking",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/booking",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/booking",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/booking",
+      "services": []
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/catalog",
+      "services": []
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/availability",
+      "services": [
+        "cut"
+      ]
+    },
+    {
+      "path": "/api/public/booking",
+      "services": []
+    }
+  ],
+  "bookingBodyKeys": [
+    "organization",
+    "branch",
+    "services",
+    "staff",
+    "starts_at",
+    "customer",
+    "key",
+    "website",
+    "source"
+  ],
+  "passed": true
+}
