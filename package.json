@@ -31,6 +31,7 @@
     "date-fns-tz": "3.2.0",
     "fast-xml-parser": "5.11.2",
     "fflate": "0.8.3",
+    "google-auth-library": "11.3.2",
     "lucide-react": "1.60.0",
     "next": "16.4.2",
     "react": "19.3.0",

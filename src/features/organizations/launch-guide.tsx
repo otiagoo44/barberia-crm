@@ -27,6 +27,8 @@ export function LaunchGuide({ expanded = false }: { expanded?: boolean }) {
       : null,
   );
   const ready = r.data?.checks.filter((c) => c.status === "ready").length ?? 0;
+  const pending = r.data?.checks.filter((c) => c.status === "pending").length ?? 0;
+  const manual = r.data?.checks.filter((c) => c.status === "manual").length ?? 0;
   return (
     <details
       className="launch-guide"
@@ -42,7 +44,7 @@ export function LaunchGuide({ expanded = false }: { expanded?: boolean }) {
           {r.loading
             ? "Consultando…"
             : r.data
-              ? `${ready} de ${r.data.checks.length} comprobaciones listas`
+              ? `${ready} comprobadas · ${pending} ${pending === 1 ? "pendiente" : "pendientes"} · ${manual} ${manual === 1 ? "manual" : "manuales"}`
               : "Revisar configuración"}
         </span>
       </summary>
@@ -127,8 +129,8 @@ export function LaunchGuide({ expanded = false }: { expanded?: boolean }) {
                   minute: "2-digit",
                 })}
                 . Este diagnóstico no habilita reservas ni distribuciones.
-                Confirmá SMTP y recuperación por correo, backups, alertas y el
-                piloto con las personas responsables.
+                Las comprobaciones manuales necesitan evidencia externa y no
+                significan que la configuración esté incompleta.
               </p>
             </>
           )}

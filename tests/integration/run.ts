@@ -1,4 +1,5 @@
 import { isolatedDatabase } from "./database";
+import { googleCalendarContracts } from "./google-calendar";
 import { contracts } from "../security/contracts";
 import { financeContracts } from "./finance";
 import { onboardingContracts } from "./onboarding";
@@ -13,6 +14,8 @@ import { pilotUpgradeContracts } from "./pilot-upgrade";
 import { notificationEncodingContracts } from "./notification-encoding";
 import { initialPasswordContracts } from "./initial-password";
 import { daybookUpgradeContracts } from "./daybook";
+const calendarDb = await isolatedDatabase();
+try { await googleCalendarContracts(calendarDb.pool); } finally { await calendarDb.stop(); }
 await daybookUpgradeContracts();
 const passwordDb = await isolatedDatabase();
 try {

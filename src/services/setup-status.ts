@@ -1,6 +1,7 @@
 import "server-only";
 import { requireUser } from "@/lib/auth";
 import { HttpError } from "@/lib/http";
+import { observePublicBooking, professionalConfigured, professionalAccessReady, type SetupTeamPerson } from "@/lib/setup-readiness";
 export type SetupCheck = {
   key: string;
   label: string;
@@ -74,7 +75,7 @@ export async function setupStatus(
   } else {
     const local = await db
       .from("branches")
-      .select("id,active")
+      .select("id,active,slug")
       .eq("organization_id", org)
       .eq("id", branch)
       .maybeSingle();
@@ -235,28 +236,20 @@ export async function setupStatus(
       preferences.data?.booking_enabled &&
       branchPreferences.data?.booking_enabled,
     );
-    type TeamPerson = {
-      name: string;
-      assigned: boolean;
-      linked: boolean;
-      membership: boolean;
-      email_confirmed: boolean;
-      capabilities: number;
-      verified_factors: number;
-    };
-    const teamPeople: TeamPerson[] = team.data?.people ?? [];
+    const teamPeople: SetupTeamPerson[] = team.data?.people ?? [];
     const enabledPeople = teamPeople.filter((p) => p.assigned);
     const teamReady =
       !team.error &&
       enabledPeople.length > 0 &&
-      enabledPeople.every(
-        (p) =>
-          p.linked &&
-          p.membership &&
-          p.email_confirmed &&
-          p.capabilities > 0 &&
-          p.verified_factors >= 2,
-      );
+      enabledPeople.every(professionalConfigured);
+    const [organization, publicAppointments] = await Promise.all([
+      db.from("organizations").select("slug").eq("id", org).maybeSingle(),
+      db.from("appointments").select("id").eq("organization_id", org).eq("branch_id", branch).eq("source", "public").limit(1),
+    ]);
+    const publicObservation = booking && organization.data && process.env.APP_URL
+      ? await observePublicBooking(process.env.APP_URL, organization.data.slug, local.data.slug, day)
+      : { catalog: false, availability: false, failed: Boolean(booking) };
+    const publicEvidence = !publicAppointments.error && Boolean(publicAppointments.data?.length);
     const settlementBounded =
       (settlements.data?.length ?? 0) > 500 ||
       (receipts.data?.length ?? 0) > 500;
@@ -311,7 +304,7 @@ export async function setupStatus(
         key: "professionals",
         label: "Profesionales",
         status: team.error ? "manual" : teamReady ? "ready" : "pending",
-        detail: `${linked.length} de ${assigned.length} profesionales activos están vinculados a cuentas con membresía activa. Revisá sus servicios y acceso personal.`,
+        detail: `${enabledPeople.filter(professionalConfigured).length} de ${assigned.length} profesionales activos están asignados y tienen servicios habilitados. ${linked.length} cuentas vinculadas. El acceso personal se comprueba por separado.`,
         steps: team.error
           ? [
               {
@@ -321,20 +314,22 @@ export async function setupStatus(
                   "No se pudo comprobar la cuenta y MFA de cada profesional. Puede faltar la migración del diagnóstico.",
               },
             ]
-          : teamPeople.map((p) => ({
+          : enabledPeople.map((p) => ({
               label: p.name,
               status:
-                p.assigned &&
-                p.linked &&
-                p.membership &&
-                p.email_confirmed &&
-                p.capabilities > 0 &&
-                p.verified_factors >= 2
+                professionalConfigured(p)
                   ? "ready"
                   : "pending",
-              detail: `Creado · ${p.assigned ? "asignado a sucursal" : "sin asignación"} · ${p.capabilities} servicios habilitados · cuenta ${p.linked ? "vinculada" : "pendiente"} · membresía ${p.membership ? "activa" : "pendiente"} · correo ${p.email_confirmed ? "confirmado" : "pendiente"} · MFA personal ${p.verified_factors}/2 factores.`,
+              detail: `Asignado a esta sucursal · ${p.capabilities} servicios habilitados.`,
             })),
         module: "equipo",
+      },
+      {
+        key: "team_access", label: "Acceso personal del equipo", module: "equipo",
+        status: team.error ? "manual" : enabledPeople.length > 0 && enabledPeople.every(professionalAccessReady) ? "ready" : "pending",
+        detail: "Cada profesional confirma su correo, cambia la contraseña inicial y verifica MFA desde su propia cuenta.",
+        steps: enabledPeople.map(p => ({ label: p.name, status: professionalAccessReady(p) ? "ready" : "pending",
+          detail: `Cuenta ${p.linked ? "vinculada" : "pendiente"} · membresía ${p.membership ? "activa" : "pendiente"} · correo ${p.email_confirmed ? "confirmado" : "pendiente"} · contraseña inicial ${p.password_change_required === false ? "sustituida" : "por comprobar"} · ${p.mfa_required === false ? "MFA opcional para su rol" : `${p.verified_factors} factor(es) MFA verificado(s)`}.` })),
       },
       {
         key: "schedule",
@@ -423,9 +418,9 @@ export async function setupStatus(
       {
         key: "booking",
         label: "Reservas públicas",
-        status: "manual",
+        status: !booking ? "pending" : publicObservation.failed || publicAppointments.error ? "manual" : publicObservation.catalog && publicObservation.availability && publicEvidence ? "ready" : "pending",
         detail: booking
-          ? "Los flags del negocio y del local están habilitados. Aún hace falta probar el enlace con catálogo y horarios reales."
+          ? publicObservation.catalog && publicObservation.availability && publicEvidence ? "Reservas habilitadas, catálogo y disponibilidad públicos comprobados. Ya existe una reserva pública registrada en esta sucursal." : "Reservas habilitadas. Revisá el resultado actual de cada comprobación del enlace público."
           : "Deshabilitadas por configuración. Es válido operar sin reservas online; habilitalas solo por decisión del propietario.",
         steps: [
           {
@@ -438,17 +433,17 @@ export async function setupStatus(
           {
             label: "Catálogo y disponibilidad",
             status:
-              configured.length > 0 && scheduleCheck.status === "ready"
+              publicObservation.failed ? "manual" : publicObservation.catalog && publicObservation.availability
                 ? "ready"
                 : "pending",
             detail:
-              "Configuración interna comprobada; aún requiere el contrato público y una reserva real autorizada.",
+              "Lectura actual del contrato JSON y la disponibilidad pública. Un día cerrado o sin cupos puede devolver una lista vacía válida.",
           },
           {
-            label: "Contrato público y prueba real",
-            status: "manual",
+            label: "Reserva pública registrada",
+            status: publicAppointments.error ? "manual" : publicEvidence ? "ready" : "pending",
             detail:
-              "Comprobar servicios, consulta previa, horario ofrecido y reserva completa durante el piloto antes de activar.",
+              publicEvidence ? "Hay una cita creada por el booking público y vinculada a su cliente en esta sucursal." : "Todavía no se encontró una cita pública. Comprobar con una visita real autorizada; no crear datos ficticios en producción.",
           },
         ],
         module: "sucursales",
@@ -466,17 +461,19 @@ export async function setupStatus(
     checks.push({
       key: "security",
       label: "Seguridad",
-      status: security.allowed && verified >= 2 ? "ready" : "pending",
+      status: security.allowed && verified >= 1 ? "ready" : "pending",
       detail:
-        verified >= 2
-          ? "Tu sesión superó MFA y tenés al menos dos factores verificados. Correo, recuperación, backups y alertas requieren verificación manual."
-          : "Agregá un autenticador de respaldo independiente. Correo, recuperación, backups y alertas requieren verificación manual.",
+        security.allowed && verified >= 1 ? "Tu sesión superó el control de seguridad y tenés MFA verificado. El respaldo y los controles externos se comprueban por separado." : "Tu cuenta todavía necesita verificar MFA.",
       module: "/mfa",
       steps: [
         {
           label: "Sesión actual",
-          status: security.allowed && verified >= 2 ? "ready" : "pending",
-          detail: `MFA y ${verified}/2 factores verificados de tu cuenta.`,
+          status: security.allowed && verified >= 1 ? "ready" : "pending",
+          detail: `Sesión verificada y ${verified} factor(es) MFA registrado(s).`,
+        },
+        {
+          label: "Autenticador de respaldo", status: verified >= 2 ? "ready" : "manual",
+          detail: verified >= 2 ? "Hay un segundo factor verificado. Conservá su respaldo recuperable fuera del dispositivo habitual." : "No hay un segundo factor verificado. Comprobá tu recuperación independiente; este diagnóstico no la presume.",
         },
         {
           label: "Controles externos",

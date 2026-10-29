@@ -86,6 +86,7 @@ export function fail(error: unknown, requestId: string) {
     JSON.stringify({ level: "error", request_id: requestId, code, status }),
   );
   const authMessages: Record<string, string> = {
+    calendar_not_configured: "El negocio todavía debe completar la conexión con Google. Tus reservas siguen guardadas en el CRM.",
     invalid_record_fields: "Corregí los campos indicados para guardar.",
     cash_distribution_upgrade_required:
       "Las distribuciones están bloqueadas hasta completar la actualización verificada de la base.",

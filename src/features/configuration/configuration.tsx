@@ -6,6 +6,7 @@ import { definitions } from "./definitions";
 import { DailyAvailability } from "./daily-availability";
 import { WeeklyAvailability } from "./weekly-availability";
 import { LaunchGuide } from "@/features/organizations/launch-guide";
+import { GoogleCalendar } from "./google-calendar";
 import { useResource, resourceUrl, api } from "@/lib/client";
 import { Field, Notice, Loading } from "@/components/ui";
 import { roleLabels } from "@/lib/validation";
@@ -92,6 +93,7 @@ export function Configuration({
           <p>Usá los datos y las reglas reales del negocio.</p>
         </div>
       </div>
+      {module === "equipo" && <GoogleCalendar />}
       <div
         className="config-tabs"
         role="group"
