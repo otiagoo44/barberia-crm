@@ -236,6 +236,8 @@ export async function googleCalendarContracts(pool: Pool) {
   assert.ok(
     team.people.every((p) => typeof p.password_change_required === "boolean"),
   );
+  await pool.query("update public.organization_memberships set role='finance' where organization_id=$1 and profile_id=$2",[f.orgA,actor]);
+  await assert.rejects(user("begin",{state_hash:createHash('sha256').update(randomUUID()).digest('hex'),verifier_cipher:'v'.repeat(80)}),{code:'42501'});
   console.log(
     "PASS Calendar SQL: user/tenant isolation, one-use OAuth, private tokens, queue leases, revisions, retries, reassignment, cancellation, revoked consent and setup diagnostics",
   );
