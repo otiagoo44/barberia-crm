@@ -67,7 +67,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
     ).toContain("requieren evidencia de conciliación");
     expect(
       JSON.stringify(status.checks.find((c: { key: string }) => c.key === "security").steps),
-    ).toContain("backups y alertas");
+    ).toContain("respaldo recuperable y recepción de alertas");
     expect(
       status.checks.find((c: { key: string }) => c.key === "professionals").detail,
     ).toContain("El acceso personal se comprueba por separado");
