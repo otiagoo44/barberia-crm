@@ -43,6 +43,7 @@ test.describe("Definitive workspace with real scoped Auth", () => {
         "branch",
         "services",
         "professionals",
+        "team_access",
         "schedule",
         "payments",
         "pos",
@@ -65,8 +66,11 @@ test.describe("Definitive workspace with real scoped Auth", () => {
       status.checks.find((c: { key: string }) => c.key === "pos").detail,
     ).toContain("requieren evidencia de conciliación");
     expect(
-      status.checks.find((c: { key: string }) => c.key === "security").detail,
+      JSON.stringify(status.checks.find((c: { key: string }) => c.key === "security").steps),
     ).toContain("backups y alertas");
+    expect(
+      status.checks.find((c: { key: string }) => c.key === "professionals").detail,
+    ).toContain("El acceso personal se comprueba por separado");
     expect(JSON.stringify(status)).not.toContain(f.users.ownerA);
     query.set("branch", f.branches.b1);
     expect(
