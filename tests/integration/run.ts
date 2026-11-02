@@ -1,4 +1,7 @@
 import { isolatedDatabase } from "./database";
+import {publicConfirmationContracts} from "./public-confirmation";
+const confirmationDb=await isolatedDatabase();
+try {await publicConfirmationContracts(confirmationDb.pool);} finally {await confirmationDb.stop();}
 import { googleCalendarContracts } from "./google-calendar";
 import { contracts } from "../security/contracts";
 import { financeContracts } from "./finance";
