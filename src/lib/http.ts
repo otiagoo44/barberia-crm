@@ -18,11 +18,12 @@ export function correlationId(request: Request): string {
 export async function readJson(
   request: Request,
   maxBytes = 16384,
+  allowedOrigins?: ReadonlySet<string>,
 ): Promise<unknown> {
   const origin = request.headers.get("origin");
   const allowed = new URL(process.env.APP_URL ?? "http://localhost:3000")
     .origin;
-  if (origin !== allowed) throw new HttpError(403, "origin_rejected");
+  if (origin !== allowed && (!origin || !allowedOrigins?.has(origin))) throw new HttpError(403, "origin_rejected");
   if (!request.headers.get("content-type")?.includes("application/json"))
     throw new HttpError(415, "invalid_content_type");
   const reader = request.body?.getReader();
